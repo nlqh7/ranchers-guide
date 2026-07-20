@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Ranchers Animal Database — Products, Cycles & Sell Prices</title>
+  <meta name="description" content="Searchable, sortable animal database for The Ranchers: products, production cycle, sell price, and profit per day. Demo-based entries, updated with confirmed numbers at the July 31, 2026 Early Access launch.">
+  <link rel="canonical" href="https://ranchersguide.gg/database/animals.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Ranchers Guide">
+  <meta property="og:title" content="The Ranchers Animal Database — Products, Cycles & Sell Prices">
+  <meta property="og:description" content="Every ranch animal in The Ranchers with its products, production cycle, and value — searchable and sortable.">
+  <meta property="og:url" content="https://ranchersguide.gg/database/animals.html">
+  <meta property="og:image" content="https://ranchersguide.gg/assets/img/og-cover.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a class="logo" href="../index.html">
+        <span class="logo-mark"><img src="../assets/img/logo.png" alt="" width="34" height="34"></span>
+        <span>The Ranchers Guide<small>Unofficial fan resource</small></span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+      <ul class="nav-links">
+        <li><a href="../guides/beginners-guide.html">Beginner's Guide</a></li>
+        <li><a href="../guides/money-making.html">Money Making</a></li>
+        <li><a href="../guides/multiplayer-coop.html">Co-op</a></li>
+        <li><a href="crops.html">Crops</a></li>
+        <li><a class="active" href="animals.html">Animals</a></li>
+        <li><a class="nav-cta" href="../tools/profit-calculator.html">Profit Calculator</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article class="article" style="max-width: 980px;">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> / Database / Animals</nav>
+      <h1>The Ranchers Animal Database</h1>
+      <p class="meta">Last updated: pre-launch · Data status: demo-based placeholders</p>
+
+      <figure class="page-banner"><img src="../assets/img/db-animals.jpg" alt="The Ranchers gameplay screenshot: cows grazing outside the red barn"></figure>
+
+      <div class="notice">
+        <strong>Pre-launch note:</strong> Based on the free demo and official dev updates — we'll update with confirmed numbers within hours of the July 31 Early Access launch. Entries below are <span class="tag pending">demo data, pending launch confirmation</span>; exact animal rosters, products, and prices will be verified in-game on day one.
+      </div>
+
+      <p class="lead">Search by animal or product, filter by category, and click any column header to sort. <strong>Profit/day</strong> here means (product price × products per cycle − upkeep per cycle) ÷ cycle days, per animal. New to ranch economics? Read the <a href="../guides/money-making.html">money-making guide</a> first.</p>
+
+      <div class="table-tools">
+        <label class="visually-hidden" for="animal-search">Search animals</label>
+        <input type="search" id="animal-search" placeholder="Search animals or products… (e.g. milk, chicken)" data-table-search="animals-table">
+        <label class="visually-hidden" for="animal-category">Filter by category</label>
+        <select id="animal-category" data-table-filter="animals-table">
+          <option value="">All categories</option>
+          <option value="poultry">Poultry</option>
+          <option value="dairy">Dairy</option>
+          <option value="livestock">Livestock</option>
+        </select>
+        <span class="tag" data-table-count="animals-table">– entries</span>
+      </div>
+
+      <div class="data-table-wrap">
+        <table class="data-table" id="animals-table">
+          <thead>
+            <tr>
+              <th data-sortable>Animal <span class="sort-arrow"></span></th>
+              <th data-sortable>Product <span class="sort-arrow"></span></th>
+              <th data-sortable>Cycle (days) <span class="sort-arrow"></span></th>
+              <th data-sortable>Products/cycle <span class="sort-arrow"></span></th>
+              <th data-sortable>Sell price <span class="sort-arrow"></span></th>
+              <th data-sortable>Profit/day <span class="sort-arrow"></span></th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-category="poultry">
+              <td>Chicken</td><td>Eggs</td>
+              <td data-sort="1">1</td><td data-sort="1">1</td><td data-sort="25">25 g</td><td data-sort="18">18.00 g</td>
+              <td><span class="tag pending">demo data</span></td>
+            </tr>
+            <tr data-category="dairy">
+              <td>Cow</td><td>Milk</td>
+              <td data-sort="1">1</td><td data-sort="1">1</td><td data-sort="60">60 g</td><td data-sort="42">42.00 g</td>
+              <td><span class="tag pending">demo data</span></td>
+            </tr>
+            <tr data-category="dairy">
+              <td>Goat</td><td>Goat milk</td>
+              <td data-sort="2">2</td><td data-sort="1">1</td><td data-sort="90">90 g</td><td data-sort="35">35.00 g</td>
+              <td><span class="tag pending">demo data</span></td>
+            </tr>
+            <tr data-category="livestock">
+              <td>Sheep</td><td>Wool</td>
+              <td data-sort="3">3</td><td data-sort="1">1</td><td data-sort="140">140 g</td><td data-sort="38.33">38.33 g</td>
+              <td><span class="tag pending">demo data</span></td>
+            </tr>
+            <tr data-category="livestock">
+              <td>Pig</td><td>Truffles</td>
+              <td data-sort="3">3</td><td data-sort="1">1</td><td data-sort="180">180 g</td><td data-sort="50">50.00 g</td>
+              <td><span class="tag pending">demo data</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="notice info">
+        <strong>Reminder:</strong> animals only profit when upkeep is covered. Buy livestock once your <a href="crops.html">crop income</a> comfortably covers feed — the exact break-even math is built into the <a href="../tools/profit-calculator.html">profit calculator</a>.
+      </div>
+
+      <h2>How to use this table</h2>
+      <ul>
+        <li><strong>Poultry</strong> is the classic entry point: cheap animals, daily products, fast feedback.</li>
+        <li><strong>Dairy</strong> trades higher startup cost for steady, higher-value goods — and dairy products are prime candidates for processing if The Ranchers ships artisan machines.</li>
+        <li><strong>Livestock</strong> with multi-day cycles tends to top the profit/day charts in the mid-game, once you can afford the wait.</li>
+      </ul>
+      <p>Planning a co-op barn? The <a href="../guides/multiplayer-coop.html">co-op guide</a> shows how to assign a dedicated barn lead. Building your first ranch? Start with the <a href="../guides/beginners-guide.html">beginner's guide</a>.</p>
+
+      <!-- Ad slot placeholder
+      <div class="ad-slot">Advertisement</div>
+      -->
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>The Ranchers Guide</h4>
+          <p>An unofficial, fan-made guide hub for The Ranchers — the open-world ranch life sim from RedPilz Studio, published by Trophy Games, entering Steam Early Access on July 31, 2026.</p>
+          <p class="disclaimer">Unofficial fan-made guide. The Ranchers game images &copy; RedPilz Studio / Trophy Games. Not affiliated with or endorsed by the developers.</p>
+        </div>
+        <nav aria-label="Footer guides">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../guides/beginners-guide.html">Beginner's Guide</a></li>
+            <li><a href="../guides/money-making.html">Money Making</a></li>
+            <li><a href="../guides/multiplayer-coop.html">Multiplayer & Co-op</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Footer databases and tools">
+          <h4>Data & Tools</h4>
+          <ul>
+            <li><a href="crops.html">Crop Database</a></li>
+            <li><a href="animals.html">Animal Database</a></li>
+            <li><a href="../tools/profit-calculator.html">Profit Calculator</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> ranchersguide.gg — fan-made, unofficial.</span>
+        <span>Data based on the free demo & official dev updates; verified at launch.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/database.js" defer></script>
+</body>
+</html>

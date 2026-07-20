@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Ranchers Profit Calculator — Compare Crops & Animals by Profit/Day</title>
+  <meta name="description" content="Free profit calculator for The Ranchers: enter any crop or animal's prices, costs, and cycle to rank them by profit per in-game day. Plan your Early Access ranch economy before launch on July 31, 2026.">
+  <link rel="canonical" href="https://ranchersguide.gg/tools/profit-calculator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Ranchers Guide">
+  <meta property="og:title" content="The Ranchers Profit Calculator — Compare Crops & Animals by Profit/Day">
+  <meta property="og:description" content="Enter crop or animal numbers, rank them by profit per in-game day, and plan your ranch economy.">
+  <meta property="og:url" content="https://ranchersguide.gg/tools/profit-calculator.html">
+  <meta property="og:image" content="https://ranchersguide.gg/assets/img/og-cover.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a class="logo" href="../index.html">
+        <span class="logo-mark"><img src="../assets/img/logo.png" alt="" width="34" height="34"></span>
+        <span>The Ranchers Guide<small>Unofficial fan resource</small></span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+      <ul class="nav-links">
+        <li><a href="../guides/beginners-guide.html">Beginner's Guide</a></li>
+        <li><a href="../guides/money-making.html">Money Making</a></li>
+        <li><a href="../guides/multiplayer-coop.html">Co-op</a></li>
+        <li><a href="../database/crops.html">Crops</a></li>
+        <li><a href="../database/animals.html">Animals</a></li>
+        <li><a class="nav-cta active" href="profit-calculator.html">Profit Calculator</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container section">
+      <nav class="breadcrumb" aria-label="Breadcrumb" style="font-size:0.82rem;color:var(--brown-500);"><a href="../index.html">Home</a> / Tools / Profit Calculator</nav>
+      <h1>Ranch Profit Calculator</h1>
+
+      <figure class="page-banner"><img src="../assets/img/calc.jpg" alt="The Ranchers gameplay screenshot: the town's shop street seen from above"></figure>
+      <p class="lead" style="max-width:720px;">Enter any crop or animal's numbers and instantly rank your options by <strong>profit per in-game day</strong> — the single metric that decides what to plant and raise. Entries are saved in your browser, so your list is waiting when you come back. The theory behind the math is in the <a href="../guides/money-making.html">money-making guide</a>.</p>
+
+      <div class="notice">
+        <strong>Pre-launch note:</strong> Based on the free demo and official dev updates — we'll update our databases with confirmed numbers within hours of the July 31 Early Access launch. This tool is game-agnostic: the moment you learn a real price in-game, enter it here and it just works.
+      </div>
+
+      <div class="calc-layout">
+        <!-- Input panel -->
+        <form class="calc-panel" id="calc-form">
+          <h3>Add an entry</h3>
+
+          <div class="calc-field">
+            <label for="calc-type">Type</label>
+            <select id="calc-type" name="type">
+              <option value="crop">Crop</option>
+              <option value="animal">Animal</option>
+            </select>
+          </div>
+
+          <div class="calc-field">
+            <label for="calc-name">Name</label>
+            <input type="text" id="calc-name" name="name" placeholder="e.g. Corn, Daisy the cow" maxlength="60">
+          </div>
+
+          <div class="calc-row">
+            <div class="calc-field">
+              <label id="sell-label" for="calc-sell">Sell price (per item)</label>
+              <input type="number" id="calc-sell" name="sellPrice" min="0" step="any" placeholder="0" required>
+            </div>
+            <div class="calc-field">
+              <label id="yield-label" for="calc-yield">Harvest yield (items per plot)</label>
+              <input type="number" id="calc-yield" name="yieldAmount" min="0" step="any" placeholder="1" required>
+            </div>
+          </div>
+
+          <div class="calc-row">
+            <div class="calc-field">
+              <label id="seed-label" for="calc-seed">Seed cost (per plot)</label>
+              <input type="number" id="calc-seed" name="seedCost" min="0" step="any" placeholder="0" required>
+            </div>
+            <div class="calc-field">
+              <label id="units-label" for="calc-units">Number of plots</label>
+              <input type="number" id="calc-units" name="units" min="1" step="1" value="1" required>
+            </div>
+          </div>
+
+          <div class="calc-field" data-when="crop">
+            <label for="calc-growth">Growth time (days)</label>
+            <input type="number" id="calc-growth" name="growthDays" min="1" step="1" placeholder="e.g. 6">
+          </div>
+
+          <div class="calc-field" data-when="animal" style="display:none;">
+            <label for="calc-cycle">Production cycle (days per product batch)</label>
+            <input type="number" id="calc-cycle" name="cycleDays" min="1" step="1" placeholder="e.g. 1">
+          </div>
+
+          <button class="btn" type="submit" style="width:100%;">Add & Rank</button>
+          <button class="btn btn-outline" type="button" id="calc-clear" style="width:100%;margin-top:10px;">Clear all entries</button>
+        </form>
+
+        <!-- Results panel -->
+        <div class="calc-results" id="calc-results" aria-live="polite">
+          <div class="calc-empty">
+            <div class="big"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9C12 6 10 4 7.5 4 7.5 6.5 9.5 9 12 9z"/><path d="M12 9c0-3 2-5 4.5-5C16.5 6.5 14.5 9 12 9z"/><path d="M12 14c-2.8 0-5-2-5-4.8C9.8 9.2 12 11.2 12 14z"/><path d="M12 14c2.8 0 5-2 5-4.8C14.2 9.2 12 11.2 12 14z"/><path d="M12 19c-2.8 0-5-2-5-4.8C9.8 14.2 12 16.2 12 19z"/><path d="M12 19c2.8 0 5-2 5-4.8C14.2 14.2 12 16.2 12 19z"/></svg></div>
+            <p>Add your first crop or animal on the left.<br>Entries are ranked by profit per in-game day.</p>
+          </div>
+        </div>
+      </div>
+
+      <article class="article" style="max-width:780px;padding-left:0;padding-right:0;">
+        <h2>How the math works</h2>
+        <ul>
+          <li><strong>Crops:</strong> profit/day = (sell price × yield − seed cost) ÷ growth days, multiplied by your number of plots.</li>
+          <li><strong>Animals:</strong> profit/day = (product price × products per cycle − feed/upkeep per cycle) ÷ cycle days, multiplied by herd size.</li>
+          <li>Entries are ranked highest to lowest; the leader gets a gold frame. Negative results (costs exceed revenue) are flagged in red.</li>
+        </ul>
+        <h2>Tips for launch day</h2>
+        <ul>
+          <li>Enter each seed you can buy on day one and sort by profit/day before planting anything.</li>
+          <li>Re-enter prices whenever you unlock a new selling point — prices often differ, and travel time matters.</li>
+          <li>Cross-check your winners against the season column in the <a href="../database/crops.html">crop database</a> so you don't plant out of season.</li>
+          <li>Playing with friends? Share your ranked list and split roles using the <a href="../guides/multiplayer-coop.html">co-op guide</a>.</li>
+        </ul>
+      </article>
+
+      <!-- Ad slot placeholder
+      <div class="ad-slot">Advertisement</div>
+      -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>The Ranchers Guide</h4>
+          <p>An unofficial, fan-made guide hub for The Ranchers — the open-world ranch life sim from RedPilz Studio, published by Trophy Games, entering Steam Early Access on July 31, 2026.</p>
+          <p class="disclaimer">Unofficial fan-made guide. The Ranchers game images &copy; RedPilz Studio / Trophy Games. Not affiliated with or endorsed by the developers.</p>
+        </div>
+        <nav aria-label="Footer guides">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../guides/beginners-guide.html">Beginner's Guide</a></li>
+            <li><a href="../guides/money-making.html">Money Making</a></li>
+            <li><a href="../guides/multiplayer-coop.html">Multiplayer & Co-op</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Footer databases and tools">
+          <h4>Data & Tools</h4>
+          <ul>
+            <li><a href="../database/crops.html">Crop Database</a></li>
+            <li><a href="../database/animals.html">Animal Database</a></li>
+            <li><a href="profit-calculator.html">Profit Calculator</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> ranchersguide.gg — fan-made, unofficial.</span>
+        <span>Data based on the free demo & official dev updates; verified at launch.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/calculator.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Ranchers Crop Database — Seasons, Growth, Prices & Profit/Day</title>
+  <meta name="description" content="Searchable, sortable crop database for The Ranchers: season, growth days, sell price, and profit per day. Demo-based entries, updated with confirmed numbers at the July 31, 2026 Early Access launch.">
+  <link rel="canonical" href="https://ranchersguide.gg/database/crops.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Ranchers Guide">
+  <meta property="og:title" content="The Ranchers Crop Database — Seasons, Growth, Prices & Profit/Day">
+  <meta property="og:description" content="Every crop in The Ranchers with season, growth time, sell price, and profit per day — searchable and sortable.">
+  <meta property="og:url" content="https://ranchersguide.gg/database/crops.html">
+  <meta property="og:image" content="https://ranchersguide.gg/assets/img/og-cover.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a class="logo" href="../index.html">
+        <span class="logo-mark"><img src="../assets/img/logo.png" alt="" width="34" height="34"></span>
+        <span>The Ranchers Guide<small>Unofficial fan resource</small></span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+      <ul class="nav-links">
+        <li><a href="../guides/beginners-guide.html">Beginner's Guide</a></li>
+        <li><a href="../guides/money-making.html">Money Making</a></li>
+        <li><a href="../guides/multiplayer-coop.html">Co-op</a></li>
+        <li><a class="active" href="crops.html">Crops</a></li>
+        <li><a href="animals.html">Animals</a></li>
+        <li><a class="nav-cta" href="../tools/profit-calculator.html">Profit Calculator</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article class="article" style="max-width: 980px;">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> / Database / Crops</nav>
+      <h1>The Ranchers Crop Database</h1>
+      <p class="meta">Last updated: pre-launch · Data status: demo-based placeholders</p>
+
+      <figure class="page-banner"><img src="../assets/img/db-crops.jpg" alt="The Ranchers gameplay screenshot: a greenhouse and neat vegetable garden rows"></figure>
+
+      <div class="notice">
+        <strong>Pre-launch note:</strong> Based on the free demo and official dev updates — we'll update with confirmed numbers within hours of the July 31 Early Access launch. Entries below are <span class="tag pending">demo data, pending launch confirmation</span> and exist so you can search, sort, and compare from day one. Do not treat the numbers as final.
+      </div>
+
+      <p class="lead">Search by name, filter by season, and click any column header to sort. <strong>Profit/day</strong> is (sell price − seed cost) ÷ growth days — the metric that actually decides what to plant. Learn why in the <a href="../guides/money-making.html">money-making guide</a>.</p>
+
+      <div class="table-tools">
+        <label class="visually-hidden" for="crop-search">Search crops</label>
+        <input type="search" id="crop-search" placeholder="Search crops… (e.g. corn, spring)" data-table-search="crops-table">
+        <label class="visually-hidden" for="crop-season">Filter by season</label>
+        <select id="crop-season" data-table-filter="crops-table">
+          <option value="">All seasons</option>
+          <option value="spring">Spring</option>
+          <option value="summer">Summer</option>
+          <option value="fall">Fall</option>
+          <option value="winter">Winter</option>
+        </select>
+        <span class="tag" data-table-count="crops-table">– entries</span>
+      </div>
+
+      <div class="data-table-wrap">
+        <table class="data-table" id="crops-table">
+          <thead>
+            <tr>
+              <th data-sortable>Crop <span class="sort-arrow"></span></th>
+              <th data-sortable>Season <span class="sort-arrow"></span></th>
+              <th data-sortable>Growth (days) <span class="sort-arrow"></span></th>
+              <th data-sortable>Seed cost <span class="sort-arrow"></span></th>
+              <th data-sortable>Sell price <span class="sort-arrow"></span></th>
+              <th data-sortable>Profit/day <span class="sort-arrow"></span></th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-season="spring">
+              <td>Potato</td><td><span class="tag season-spring">Spring</span></td>
+              <td data-sort="6">6</td><td data-sort="20">20 g</td><td data-sort="45">45 g</td><td data-sort="4.17">4.17 g</td>
+              <td><span class="tag pending">demo data</span></td>
+            </tr>
+            <tr data-season="spring">
+              <td>Carrot</td><td><span class="tag season-spring">Spring</span></td>
+              <td data-sort="4">4</td><td data-sort="12">12 g</td><td data-sort="26">26 g</td><td data-sort="3.50">3.50 g</td>
+              <td><span class="tag pending">demo data</span></td>
+            </tr>
+            <tr data-season="spring">
+              <td>Lettuce</td><td><span class="tag season-spring">Spring</span></td>
+              <td data-sort="3">3</td><td data-sort="8">8 g</td><td data-sort="18">18 g</td><td data-sort="3.33">3.33 g</td>
+              <td><span class="tag pending">demo data</span></td>
+            </tr>
+            <tr data-season="summer">
+              <td>Tomato</td><td><span class="tag season-summer">Summer</span></td>
+              <td data-sort="5">5</td><td data-sort="18">18 g</td><td data-sort="42">42 g</td><td data-sort="4.80">4.80 g</td>
+              <td><span class="tag pending">demo data</span></td>
+            </tr>
+            <tr data-season="summer">
+              <td>Corn</td><td><span class="tag season-summer">Summer</span></td>
+              <td data-sort="8">8</td><td data-sort="30">30 g</td><td data-sort="85">85 g</td><td data-sort="6.88">6.88 g</td>
+              <td><span class="tag pending">demo data</span></td>
+            </tr>
+            <tr data-season="summer">
+              <td>Watermelon</td><td><span class="tag season-summer">Summer</span></td>
+              <td data-sort="10">10</td><td data-sort="45">45 g</td><td data-sort="120">120 g</td><td data-sort="7.50">7.50 g</td>
+              <td><span class="tag pending">demo data</span></td>
+            </tr>
+            <tr data-season="fall">
+              <td>Pumpkin</td><td><span class="tag season-fall">Fall</span></td>
+              <td data-sort="9">9</td><td data-sort="40">40 g</td><td data-sort="110">110 g</td><td data-sort="7.78">7.78 g</td>
+              <td><span class="tag pending">demo data</span></td>
+            </tr>
+            <tr data-season="fall">
+              <td>Cabbage</td><td><span class="tag season-fall">Fall</span></td>
+              <td data-sort="6">6</td><td data-sort="22">22 g</td><td data-sort="52">52 g</td><td data-sort="5.00">5.00 g</td>
+              <td><span class="tag pending">demo data</span></td>
+            </tr>
+            <tr data-season="winter">
+              <td>Wheat</td><td><span class="tag season-winter">Winter</span></td>
+              <td data-sort="7">7</td><td data-sort="15">15 g</td><td data-sort="38">38 g</td><td data-sort="3.29">3.29 g</td>
+              <td><span class="tag pending">demo data</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="notice info">
+        <strong>How we compute profit/day:</strong> (sell price − seed cost) ÷ growth days, per plot. Multi-harvest and regrowable crops will get their own columns once confirmed in Early Access. Want to compare your own in-game numbers right now? Use the <a href="../tools/profit-calculator.html">profit calculator</a>.
+      </div>
+
+      <h2>Reading the table</h2>
+      <ul>
+        <li><strong>Fast crops</strong> (short growth, modest price) win the first week — they compound quickly and keep cash flowing.</li>
+        <li><strong>Slow crops</strong> win on paper profit/day once you have enough plots running in parallel.</li>
+        <li><strong>Season is law.</strong> Sort by season at the start of each in-game month and plant only what's in window.</li>
+      </ul>
+      <p>Pair this with the <a href="animals.html">animal database</a> to plan your whole ranch economy, and read the <a href="../guides/beginners-guide.html">beginner's guide</a> if this is your first season.</p>
+
+      <!-- Ad slot placeholder
+      <div class="ad-slot">Advertisement</div>
+      -->
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>The Ranchers Guide</h4>
+          <p>An unofficial, fan-made guide hub for The Ranchers — the open-world ranch life sim from RedPilz Studio, published by Trophy Games, entering Steam Early Access on July 31, 2026.</p>
+          <p class="disclaimer">Unofficial fan-made guide. The Ranchers game images &copy; RedPilz Studio / Trophy Games. Not affiliated with or endorsed by the developers.</p>
+        </div>
+        <nav aria-label="Footer guides">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../guides/beginners-guide.html">Beginner's Guide</a></li>
+            <li><a href="../guides/money-making.html">Money Making</a></li>
+            <li><a href="../guides/multiplayer-coop.html">Multiplayer & Co-op</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Footer databases and tools">
+          <h4>Data & Tools</h4>
+          <ul>
+            <li><a href="crops.html">Crop Database</a></li>
+            <li><a href="animals.html">Animal Database</a></li>
+            <li><a href="../tools/profit-calculator.html">Profit Calculator</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> ranchersguide.gg — fan-made, unofficial.</span>
+        <span>Data based on the free demo & official dev updates; verified at launch.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/database.js" defer></script>
+</body>
+</html>
