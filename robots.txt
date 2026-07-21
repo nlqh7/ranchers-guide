@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ranchersguide.gg/sitemap.xml
+Sitemap: https://theranchersguide.com/sitemap.xml

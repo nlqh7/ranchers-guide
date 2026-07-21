@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ranchersguide.gg/</loc>
+    <loc>https://theranchersguide.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://ranchersguide.gg/guides/beginners-guide.html</loc>
+    <loc>https://theranchersguide.com/guides/beginners-guide.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://ranchersguide.gg/guides/money-making.html</loc>
+    <loc>https://theranchersguide.com/guides/money-making.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://ranchersguide.gg/guides/multiplayer-coop.html</loc>
+    <loc>https://theranchersguide.com/guides/multiplayer-coop.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ranchersguide.gg/database/crops.html</loc>
+    <loc>https://theranchersguide.com/database/crops.html</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://ranchersguide.gg/database/animals.html</loc>
+    <loc>https://theranchersguide.com/database/animals.html</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://ranchersguide.gg/tools/profit-calculator.html</loc>
+    <loc>https://theranchersguide.com/tools/profit-calculator.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
