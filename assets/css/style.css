@@ -154,7 +154,8 @@ li { margin: 0.3em 0; }
 }
 .nav-links a.nav-cta:hover { background: var(--green-700); }
 
-@media (min-width: 860px) {
+@media (min-width: 1040px) {
+  .nav-inner { flex-wrap: nowrap; }
   .nav-toggle { display: none; }
   .nav-links {
     display: flex;
