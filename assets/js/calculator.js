@@ -45,7 +45,7 @@
   function typeFields() {
     var isCrop = form.type.value === "crop";
     document.querySelectorAll("[data-when]").forEach(function (el) {
-      el.style.display = el.getAttribute("data-when") === isCrop ? "" : "none";
+      el.style.display = el.getAttribute("data-when") === form.type.value ? "" : "none";
     });
     document.getElementById("seed-label").textContent = isCrop
       ? "Seed cost (per plot)"

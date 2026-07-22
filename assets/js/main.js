@@ -12,11 +12,11 @@
     });
   }
 
-  /* Countdown to Early Access launch: July 31, 2026 (Steam release day) */
+  /* Countdown to Early Access launch: July 30, 2026 (Steam release day) */
   var cdRoot = document.getElementById("countdown");
   if (cdRoot) {
-    // Launch day — time unknown, use 17:00 UTC (typical Steam daily release window).
-    var target = Date.UTC(2026, 6, 31, 17, 0, 0);
+    // Public launch window: July 30, 2026 at 10:00 AM PT / 17:00 UTC.
+    var target = Date.UTC(2026, 6, 30, 17, 0, 0);
     var fields = {
       days: cdRoot.querySelector('[data-cd="days"] .cd-num'),
       hours: cdRoot.querySelector('[data-cd="hours"] .cd-num'),
