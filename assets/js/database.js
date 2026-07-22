@@ -11,6 +11,10 @@
     var filter = document.querySelector('[data-table-filter="' + tableId + '"]');
     var countEl = document.querySelector('[data-table-count="' + tableId + '"]');
     var sortState = { col: -1, dir: 1 };
+    var params = new URLSearchParams(window.location.search);
+    var initialQuery = params.get("q");
+
+    if (search && initialQuery) search.value = initialQuery;
 
     function applyView() {
       var q = search ? search.value.trim().toLowerCase() : "";

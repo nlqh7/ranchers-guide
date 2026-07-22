@@ -29,7 +29,7 @@
       var now = Date.now();
       var diff = target - now;
       if (diff <= 0) {
-        cdRoot.innerHTML = '<p class="countdown-note">The Ranchers Early Access is live on Steam — guides are being updated right now!</p>';
+        cdRoot.innerHTML = '<p class="countdown-note">The Ranchers Early Access is live on Steam — check the guide pages for confirmed launch updates.</p>';
         return;
       }
       var s = Math.floor(diff / 1000);
@@ -44,16 +44,6 @@
     }
     tick();
     setInterval(tick, 1000);
-  }
-
-  /* Newsletter placeholder */
-  var nl = document.querySelector("form.newsletter-form");
-  if (nl) {
-    nl.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var note = nl.querySelector(".fine");
-      if (note) note.textContent = "Thanks! Our launch-day newsletter opens closer to release — check back soon.";
-    });
   }
 
   /* Footer year */
