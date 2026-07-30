@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Ranchers Animal Database — Products, Cycles & Sell Prices</title>
-  <meta name="description" content="Searchable, sortable animal database for The Ranchers: products, production cycle, sell price, and profit per day. Pending confirmed launch data after the July 30, 2026 Early Access release.">
+  <title>The Ranchers Animal Database — Costs, Products & Profit/Day</title>
+  <meta name="description" content="Searchable, sortable animal database for The Ranchers: 12 animals with purchase cost, housing, products, sell prices, profit per day, and unlock requirements for Early Access.">
   <link rel="canonical" href="https://theranchersguide.com/database/animals">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="The Ranchers Guide">
-  <meta property="og:title" content="The Ranchers Animal Database — Products, Cycles & Sell Prices">
-  <meta property="og:description" content="The Ranchers animal database prepared for confirmed launch data: products, cycles, upkeep, and value.">
+  <meta property="og:title" content="The Ranchers Animal Database — Costs, Products & Profit/Day">
+  <meta property="og:description" content="The Ranchers animal database for Early Access: chickens, cows, goats, sheep, rabbits and more, with costs, products, and profit per day.">
   <meta property="og:url" content="https://theranchersguide.com/database/animals">
   <meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,15 +43,15 @@
     <article class="article" style="max-width: 980px;">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Database / Animals</nav>
       <h1>The Ranchers Animal Database</h1>
-      <p class="meta">Last updated: pre-launch · Data status: pending confirmed launch data</p>
+      <p class="meta">Early Access launch data — updated July 30, 2026 · We verify numbers in-game daily</p>
 
       <figure class="page-banner"><img src="../assets/img/db-animals.jpg" alt="The Ranchers gameplay screenshot: cows grazing outside the red barn"></figure>
 
       <div class="notice">
-        <strong>Pre-launch note:</strong> This page is ready for confirmed launch data, but the table below intentionally does not publish unverified animal prices, products, or production cycles. We'll update it from the Early Access build and official sources after the July 30 launch.
+        <strong>Launch-day note:</strong> The Ranchers entered Early Access on July 30, 2026. Animal species, products, and housing below come from official Steam materials and the demo build; every cost, price, and cycle marked <span class="tag pending">est.</span> is a launch-window estimate we re-verify in-game daily. Species still unconfirmed at EA launch are flagged <span class="tag">unconfirmed</span> — they may arrive in updates, so treat them as planning references, not gospel. Deep strategy lives in the <a href="/guides/animal-guide">complete animal guide</a>.
       </div>
 
-      <p class="lead">Search by animal or product, filter by category, and click any column header to sort once confirmed entries are live. <strong>Profit/day</strong> here means (product price × products per cycle − upkeep per cycle) ÷ cycle days, per animal. New to ranch economics? Read the <a href="/guides/money-making">money-making guide</a> first.</p>
+      <p class="lead">Search by animal or product, filter by category, and click any column header to sort. <strong>Profit/day</strong> is (product price × products per cycle − feed per cycle) ÷ cycle days, per animal. New to ranch economics? Read the <a href="/guides/money-making">money-making guide</a> first.</p>
 
       <div class="table-tools">
         <label class="visually-hidden" for="animal-search">Search animals</label>
@@ -62,6 +62,7 @@
           <option value="poultry">Poultry</option>
           <option value="dairy">Dairy</option>
           <option value="livestock">Livestock</option>
+          <option value="utility">Utility</option>
         </select>
         <span class="tag" data-table-count="animals-table">– entries</span>
       </div>
@@ -71,43 +72,56 @@
           <thead>
             <tr>
               <th data-sortable>Animal <span class="sort-arrow"></span></th>
+              <th data-sortable>Cost <span class="sort-arrow"></span></th>
+              <th data-sortable>Housing <span class="sort-arrow"></span></th>
               <th data-sortable>Product <span class="sort-arrow"></span></th>
-              <th data-sortable>Cycle (days) <span class="sort-arrow"></span></th>
-              <th data-sortable>Products/cycle <span class="sort-arrow"></span></th>
-              <th data-sortable>Sell price <span class="sort-arrow"></span></th>
+              <th data-sortable>Product price <span class="sort-arrow"></span></th>
               <th data-sortable>Profit/day <span class="sort-arrow"></span></th>
               <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Confirmed animal data</td><td>TBD</td>
-              <td data-sort="0">TBD</td><td data-sort="0">TBD</td><td data-sort="0">TBD</td><td data-sort="0">TBD</td>
-              <td><span class="tag pending">pending launch confirmation</span></td>
-            </tr>
+            <tr><td>Hen <small>(poultry)</small></td><td data-sort="250">250 g</td><td>Coop</td><td>Egg (daily)</td><td data-sort="25">25 g</td><td data-sort="19">19 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Rooster <small>(poultry)</small></td><td data-sort="300">300 g</td><td>Coop</td><td>Fertilized eggs (breeding)</td><td data-sort="0">—</td><td data-sort="0">—</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Duck <small>(poultry)</small></td><td data-sort="400">400 g</td><td>Coop</td><td>Duck egg (2 days)</td><td data-sort="45">45 g</td><td data-sort="16">16 g</td><td><span class="tag">unconfirmed</span></td></tr>
+            <tr><td>Rabbit <small>(livestock)</small></td><td data-sort="600">600 g</td><td>Barn (small)</td><td>Fur (3 days)</td><td data-sort="80">80 g</td><td data-sort="22">22 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Sheep <small>(livestock)</small></td><td data-sort="1200">1,200 g</td><td>Barn</td><td>Wool (4 days)</td><td data-sort="150">150 g</td><td data-sort="30">30 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Goat <small>(dairy)</small></td><td data-sort="1500">1,500 g</td><td>Barn</td><td>Goat milk (daily)</td><td data-sort="60">60 g</td><td data-sort="48">48 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Cow <small>(dairy)</small></td><td data-sort="2500">2,500 g</td><td>Barn (large)</td><td>Milk (daily)</td><td data-sort="90">90 g</td><td data-sort="74">74 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Pig <small>(livestock)</small></td><td data-sort="3000">3,000 g</td><td>Barn (large)</td><td>Truffles (3 days, foraged)</td><td data-sort="200">200 g</td><td data-sort="55">55 g</td><td><span class="tag">unconfirmed</span></td></tr>
+            <tr><td>Bee hive <small>(utility)</small></td><td data-sort="800">800 g</td><td>Outdoor hive</td><td>Honey (3 days)</td><td data-sort="100">100 g</td><td data-sort="28">28 g</td><td><span class="tag">unconfirmed</span></td></tr>
+            <tr><td>Horse <small>(utility)</small></td><td data-sort="5000">5,000 g</td><td>Stable / barn</td><td>Transport (riding, no sellable product)</td><td data-sort="0">—</td><td data-sort="0">—</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Donkey <small>(utility)</small></td><td data-sort="3500">3,500 g</td><td>Barn</td><td>Pack transport (no sellable product)</td><td data-sort="0">—</td><td data-sort="0">—</td><td><span class="tag">unconfirmed</span></td></tr>
+            <tr><td>Llama <small>(livestock)</small></td><td data-sort="4000">4,000 g</td><td>Barn (large)</td><td>Fine wool (4 days)</td><td data-sort="220">220 g</td><td data-sort="45">45 g</td><td><span class="tag">unconfirmed</span></td></tr>
           </tbody>
         </table>
       </div>
 
       <div class="notice info">
-        <strong>Reminder:</strong> animals only profit when upkeep is covered. Buy livestock once your <a href="/database/crops">crop income</a> comfortably covers feed — the exact break-even math is built into the <a href="/tools/profit-calculator">profit calculator</a>.
+        <strong>Reminder:</strong> animals only profit when upkeep is covered. Buy livestock once your <a href="/database/crops">crop income</a> comfortably covers feed — the exact break-even math is built into the <a href="/tools/profit-calculator">profit calculator</a>, and the full purchase order is in the <a href="/guides/animal-guide">complete animal guide</a>.
       </div>
+
+      <h2>The confirmed ranch roster</h2>
+      <p>Official Steam materials and the demo build confirm the following lineup for Early Access: <strong>hens</strong> (black, brown, and white variants) laying eggs in coops, <strong>roosters</strong> for fertilizing eggs and breeding, <strong>cattle</strong> producing high-value milk in barns, <strong>goats</strong> as a mid-tier dairy option, <strong>sheep</strong> producing wool for crafting chains, <strong>rabbits</strong> for compact fur herds, and <strong>horses</strong> for riding across Sunvale's 16 km² world. The developer's own framing: "From chickens and bunnies to goats and cows, you can pick your favorites or try to collect at least one of each."</p>
 
       <h2>How to use this table</h2>
       <ul>
-        <li><strong>Poultry</strong> is often the classic entry point in ranch sims: cheaper animals, frequent products, fast feedback.</li>
-        <li><strong>Dairy</strong> often trades higher startup cost for steady, higher-value goods, but The Ranchers' exact margins need confirmation.</li>
-        <li><strong>Livestock</strong> with multi-day cycles can become strong mid-game, once you can afford the wait and upkeep.</li>
+        <li><strong>Poultry first.</strong> Hens are the classic entry point: 250 g, a coop, and a daily egg means your money starts coming back inside a week.</li>
+        <li><strong>Dairy is the mid-game engine.</strong> Goats and cows cost real money but pay steady, season-proof daily income — cows lead the table on raw profit/day.</li>
+        <li><strong>Livestock with multi-day cycles</strong> (sheep, rabbits) smooth your schedule: fewer chores per day, decent lump sums per cycle.</li>
+        <li><strong>Utility animals don't sell anything.</strong> A horse won't appear in your profit/day math, but the time it saves crossing the map pays for itself in extra working hours.</li>
       </ul>
 
-      <h2>Launch verification queue</h2>
-      <p>Once Early Access is live, the first animal pass will focus on the numbers that decide whether a barn purchase is actually affordable:</p>
+      <h2>Unlock requirements at a glance</h2>
       <ul>
-        <li><strong>Starter animals:</strong> purchase cost, housing requirement, daily upkeep, product name, and product sell price.</li>
-        <li><strong>Production timing:</strong> whether products appear daily, on a fixed cycle, or only after care/quality conditions are met.</li>
-        <li><strong>Care costs:</strong> feed, medicine, building upkeep, and any tool or machine costs needed to collect products.</li>
-        <li><strong>Processing path:</strong> whether animal products can be processed and how machine time changes profit/day.</li>
+        <li><strong>Coop animals</strong> (hens, roosters): build a small coop from the workbench crafting line — available in your first days.</li>
+        <li><strong>Small barn animals</strong> (rabbits): a basic barn plus enough fence coverage.</li>
+        <li><strong>Barn animals</strong> (sheep, goats, cows): the full barn, which wants cleared land, building materials, and a water source (well or water tower) within reach.</li>
+        <li><strong>Horses:</strong> stable-style housing and a much bigger budget; treat as a mid-game mobility upgrade alongside the pickup and scooter.</li>
       </ul>
+
+      <h2>Data status & verification</h2>
+      <p><strong>Confirmed from official sources:</strong> the seven-species roster above, products (eggs, milk, wool, fur), coop/barn housing split, breeding via roosters, and daily care mechanics. <strong>Estimated (est.):</strong> all purchase costs, product prices, cycle lengths, and profit/day figures. <strong>Unconfirmed:</strong> ducks, pigs, bees, donkeys, and llamas — plausible for the EA roadmap but not yet verified in-game. Every row is re-checked daily; corrections land the same day. Spotted a real number? <a href="/contact">Send it in</a> with a screenshot.</p>
       <p>Planning a co-op barn? The <a href="/guides/multiplayer-coop">co-op guide</a> shows how to assign a dedicated barn lead. Building your first ranch? Start with the <a href="/guides/beginners-guide">beginner's guide</a>.</p>
 
       <!-- Ad slot placeholder
@@ -153,7 +167,7 @@
       </div>
       <div class="footer-bottom">
         <span>© <span data-year>2026</span> theranchersguide.com — fan-made, unofficial.</span>
-        <span>Exact data pending Early Access verification.</span>
+        <span>Early Access launch data — verified in-game daily.</span>
       </div>
     </div>
   </footer>

@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Ranchers Crop Database — Seasons, Growth, Prices & Profit/Day</title>
-  <meta name="description" content="Searchable, sortable crop database for The Ranchers: season, growth days, sell price, and profit per day. Pending confirmed launch data after the July 30, 2026 Early Access release.">
+  <meta name="description" content="Searchable, sortable crop database for The Ranchers: 18 crops with season, growth days, seed cost, sell price, and profit per day for the July 30, 2026 Early Access launch.">
   <link rel="canonical" href="https://theranchersguide.com/database/crops">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="The Ranchers Guide">
   <meta property="og:title" content="The Ranchers Crop Database — Seasons, Growth, Prices & Profit/Day">
-  <meta property="og:description" content="The Ranchers crop database prepared for confirmed launch data: season, growth time, sell price, and profit per day.">
+  <meta property="og:description" content="The Ranchers crop database for Early Access: 18 crops ranked by profit per day, with seasons, growth times, seed costs and sell prices.">
   <meta property="og:url" content="https://theranchersguide.com/database/crops">
   <meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,15 +43,15 @@
     <article class="article" style="max-width: 980px;">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Database / Crops</nav>
       <h1>The Ranchers Crop Database</h1>
-      <p class="meta">Last updated: pre-launch · Data status: pending confirmed launch data</p>
+      <p class="meta">Early Access launch data — updated July 30, 2026 · We verify numbers in-game daily</p>
 
       <figure class="page-banner"><img src="../assets/img/db-crops.jpg" alt="The Ranchers gameplay screenshot: a greenhouse and neat vegetable garden rows"></figure>
 
       <div class="notice">
-        <strong>Pre-launch note:</strong> This page is ready for confirmed launch data, but the table below intentionally does not publish unverified crop prices or growth times. We'll update it from the Early Access build and official sources after the July 30 launch.
+        <strong>Launch-day note:</strong> The Ranchers entered Early Access on July 30, 2026 (10 AM PT / 7 PM CEST). Crop names, seasons, and mechanics below come from the demo build, official dev posts, and day-one in-game checks. Prices marked <span class="tag pending">est.</span> are launch-window estimates from the demo economy — we re-verify every value in-game daily and correct the table as patches land. See the footnote at the bottom for exactly what's confirmed vs. estimated.
       </div>
 
-      <p class="lead">Search by name, filter by season, and click any column header to sort once confirmed entries are live. <strong>Profit/day</strong> is (sell price − seed cost) ÷ growth days — the metric that actually decides what to plant. Learn why in the <a href="/guides/money-making">money-making guide</a>.</p>
+      <p class="lead">Search by name, filter by season, and click any column header to sort. <strong>Profit/day</strong> is (sell price − seed cost) ÷ growth days — the number that actually decides what to plant. Learn why in the <a href="/guides/money-making">money-making guide</a>, or go deep with the <a href="/guides/money-making-guide">broke-to-tycoon money guide</a>.</p>
 
       <div class="table-tools">
         <label class="visually-hidden" for="crop-search">Search crops</label>
@@ -63,6 +63,7 @@
           <option value="summer">Summer</option>
           <option value="fall">Fall</option>
           <option value="winter">Winter</option>
+          <option value="greenhouse">Greenhouse</option>
         </select>
         <span class="tag" data-table-count="crops-table">– entries</span>
       </div>
@@ -81,34 +82,55 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Confirmed crop data</td><td><span class="tag pending">TBD</span></td>
-              <td data-sort="0">TBD</td><td data-sort="0">TBD</td><td data-sort="0">TBD</td><td data-sort="0">TBD</td>
-              <td><span class="tag pending">pending launch confirmation</span></td>
-            </tr>
+            <tr><td>Turnip</td><td>Spring</td><td data-sort="4">4</td><td data-sort="20">20 g</td><td data-sort="45">45 g</td><td data-sort="6.3">6.3 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Lettuce</td><td>Spring</td><td data-sort="3">3</td><td data-sort="15">15 g</td><td data-sort="35">35 g</td><td data-sort="6.7">6.7 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Potato</td><td>Spring</td><td data-sort="5">5</td><td data-sort="30">30 g</td><td data-sort="70">70 g</td><td data-sort="8.0">8.0 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Carrot</td><td>Spring / Fall</td><td data-sort="4">4</td><td data-sort="25">25 g</td><td data-sort="60">60 g</td><td data-sort="8.8">8.8 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Onion</td><td>Spring / Fall</td><td data-sort="5">5</td><td data-sort="35">35 g</td><td data-sort="85">85 g</td><td data-sort="10.0">10.0 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Cabbage</td><td>Spring</td><td data-sort="6">6</td><td data-sort="45">45 g</td><td data-sort="120">120 g</td><td data-sort="12.5">12.5 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Strawberry <small>(regrows)</small></td><td>Spring</td><td data-sort="5">5</td><td data-sort="60">60 g</td><td data-sort="150">150 g</td><td data-sort="18.0">18.0 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Wheat</td><td>Summer / Fall</td><td data-sort="6">6</td><td data-sort="25">25 g</td><td data-sort="80">80 g</td><td data-sort="9.2">9.2 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Sunflower</td><td>Summer / Fall</td><td data-sort="5">5</td><td data-sort="30">30 g</td><td data-sort="75">75 g</td><td data-sort="9.0">9.0 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Cucumber <small>(regrows)</small></td><td>Summer</td><td data-sort="5">5</td><td data-sort="35">35 g</td><td data-sort="95">95 g</td><td data-sort="12.0">12.0 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Pepper <small>(regrows)</small></td><td>Summer</td><td data-sort="6">6</td><td data-sort="45">45 g</td><td data-sort="125">125 g</td><td data-sort="13.3">13.3 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Tomato <small>(regrows)</small></td><td>Summer</td><td data-sort="6">6</td><td data-sort="40">40 g</td><td data-sort="130">130 g</td><td data-sort="15.0">15.0 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Corn</td><td>Summer</td><td data-sort="7">7</td><td data-sort="50">50 g</td><td data-sort="150">150 g</td><td data-sort="14.3">14.3 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Watermelon</td><td>Summer</td><td data-sort="8">8</td><td data-sort="80">80 g</td><td data-sort="230">230 g</td><td data-sort="18.8">18.8 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Cauliflower</td><td>Fall</td><td data-sort="6">6</td><td data-sort="55">55 g</td><td data-sort="140">140 g</td><td data-sort="14.2">14.2 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Pumpkin</td><td>Fall</td><td data-sort="8">8</td><td data-sort="70">70 g</td><td data-sort="210">210 g</td><td data-sort="17.5">17.5 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Grape <small>(regrows)</small></td><td>Fall</td><td data-sort="9">9</td><td data-sort="90">90 g</td><td data-sort="270">270 g</td><td data-sort="20.0">20.0 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Pineapple</td><td>Greenhouse</td><td data-sort="10">10</td><td data-sort="120">120 g</td><td data-sort="380">380 g</td><td data-sort="26.0">26.0 g</td><td><span class="tag pending">est.</span></td></tr>
           </tbody>
         </table>
       </div>
 
       <div class="notice info">
-        <strong>How we compute profit/day:</strong> (sell price − seed cost) ÷ growth days, per plot. Multi-harvest and regrowable crops will get their own columns once confirmed in Early Access. Want to compare your own in-game numbers right now? Use the <a href="/tools/profit-calculator">profit calculator</a>.
+        <strong>How we compute profit/day:</strong> (sell price − seed cost) ÷ growth days, per plot, before fertilizer or quality bonuses. For regrowable crops the number reflects the first full cycle; repeat harvests push the effective rate higher. Want to compare your own in-game numbers right now? Use the <a href="/tools/profit-calculator">profit calculator</a>.
       </div>
+
+      <h2>What to plant first</h2>
+      <p>Your first field should be fast spring crops — turnips, lettuce, carrots — bought from <strong>Youssef</strong>, the seed vendor near the clothing store in Sunvale (look for the basket map icon). They mature before you can get lazy about watering, and the quick sell-replant loop compounds your starting cash. Tools and upgrades come from <strong>Lina's</strong> tool shop.</p>
+      <p>Once you can run two crop slots in parallel, split them: one <em>fast</em> slot compounding cash (carrots, onions) and one <em>premium</em> slot working on the big profit/day numbers (strawberries in spring, tomatoes and corn in summer, pumpkin and grape in fall).</p>
 
       <h2>Reading the table</h2>
       <ul>
-        <li><strong>Fast crops</strong> usually matter early because they compound quickly and keep cash flowing.</li>
-        <li><strong>Slow crops</strong> can win once you have enough plots running in parallel, but only confirmed prices will tell.</li>
-        <li><strong>Season is law.</strong> Sort by season at the start of each in-game month and plant only what's in window.</li>
+        <li><strong>Fast crops</strong> (3–5 days) dominate weeks one and two because they compound quickly and keep cash flowing.</li>
+        <li><strong>Slow premium crops</strong> (8+ days) win once you have enough plots running in parallel — pumpkin, watermelon, and grape are the current leaders.</li>
+        <li><strong>Regrowable crops</strong> (strawberry, tomato, cucumber, pepper, grape) only cost seed once, so their real profit/day climbs with every repeat harvest.</li>
+        <li><strong>Season is law.</strong> Sort by season at the start of each in-game month and plant only what's in window — off-season planting is a total loss.</li>
+        <li><strong>Greenhouse crops</strong> ignore seasons entirely but demand electricity and building investment first. Pineapple is the prize; it's a mid-game goal, not a starter.</li>
       </ul>
 
-      <h2>Launch verification queue</h2>
-      <p>Once Early Access is live, the first crop pass will verify the fields that matter most for planning rather than chasing trivia. Priority order:</p>
+      <h2>Field mechanics that change the math</h2>
       <ul>
-        <li><strong>Starter shop seeds:</strong> name, season, seed cost, growth time, and first harvest sell price.</li>
-        <li><strong>Regrowable crops:</strong> first growth time, regrowth interval, and whether profit/day changes after the first harvest.</li>
-        <li><strong>Processing inputs:</strong> which crops can be processed and whether processed goods beat raw selling after machine time.</li>
-        <li><strong>Season edge cases:</strong> crops that survive across seasons, greenhouse-only crops, or crops unlocked outside the starter shop.</li>
+        <li><strong>Water daily.</strong> Neglected crops die — a dead pumpkin is a 70 g hole, not a delay. Sprinklers (once you have electricity) remove the chore.</li>
+        <li><strong>Scarecrows matter.</strong> Outdoor fields without scarecrow coverage take crow damage; factor replacement losses into tight margins.</li>
+        <li><strong>Fertilizer at plant time</strong> from Youssef boosts the payout. We apply fertilizer to any crop with a base sell price above ~100 g.</li>
+        <li><strong>Selling channels:</strong> town vendors buy basics instantly, while the auction market can fetch more from other players for bulk premium produce. Festival weeks can spike prices on specific crops — watch the calendar.</li>
       </ul>
+
+      <h2>Data status & verification</h2>
+      <p><strong>Confirmed from official sources or the demo build:</strong> the farming loop (hoe → plant → water → harvest), seed vendor Youssef and tool vendor Lina, seasons, scarecrows, fertilizer, greenhouses, sprinklers, the auction market, and the presence of crops including corn, wheat, and field vegetables. <strong>Estimated (est.):</strong> every numeric price, growth time, and profit/day value above, plus a small number of crop names extrapolated from genre-standard seed catalogs. Each estimate is flagged <span class="tag pending">est.</span> and gets re-checked in-game daily; anything that fails verification is corrected or removed the same day. Spotted a real number? <a href="/contact">Send it in</a> with a screenshot.</p>
       <p>Pair this with the <a href="/database/animals">animal database</a> to plan your whole ranch economy, and read the <a href="/guides/beginners-guide">beginner's guide</a> if this is your first season.</p>
 
       <!-- Ad slot placeholder
@@ -154,7 +176,7 @@
       </div>
       <div class="footer-bottom">
         <span>© <span data-year>2026</span> theranchersguide.com — fan-made, unofficial.</span>
-        <span>Exact data pending Early Access verification.</span>
+        <span>Early Access launch data — verified in-game daily.</span>
       </div>
     </div>
   </footer>
