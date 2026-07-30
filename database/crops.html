@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Ranchers Crop Database — Seasons, Growth, Prices & Profit/Day</title>
-  <meta name="description" content="Searchable, sortable crop database for The Ranchers: 18 crops with season, growth days, seed cost, sell price, and profit per day for the July 30, 2026 Early Access launch.">
+  <title>The Ranchers Crop Database — Confirmed Systems & Data Tracker</title>
+  <meta name="description" content="A source-backed crop data tracker for The Ranchers, covering confirmed farming systems, unknown launch values, and a repeatable method for measuring crop profit.">
   <link rel="canonical" href="https://theranchersguide.com/database/crops">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="The Ranchers Guide">
-  <meta property="og:title" content="The Ranchers Crop Database — Seasons, Growth, Prices & Profit/Day">
-  <meta property="og:description" content="The Ranchers crop database for Early Access: 18 crops ranked by profit per day, with seasons, growth times, seed costs and sell prices.">
+  <meta property="og:title" content="The Ranchers Crop Database — Confirmed Systems & Data Tracker">
+  <meta property="og:description" content="Officially documented crop systems, a launch verification queue, and a transparent method for measuring profit per day.">
   <meta property="og:url" content="https://theranchersguide.com/database/crops">
   <meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,27 +43,24 @@
     <article class="article" style="max-width: 980px;">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Database / Crops</nav>
       <h1>The Ranchers Crop Database</h1>
-      <p class="meta">Early Access launch data — updated July 30, 2026 · We verify numbers in-game daily</p>
+      <p class="meta">Source audit updated July 30, 2026 · Unknown values stay blank until directly observed</p>
 
       <figure class="page-banner"><img src="../assets/img/db-crops.jpg" alt="The Ranchers gameplay screenshot: a greenhouse and neat vegetable garden rows"></figure>
 
       <div class="notice">
-        <strong>Launch-day note:</strong> The Ranchers entered Early Access on July 30, 2026 (10 AM PT / 7 PM CEST). Crop names, seasons, and mechanics below come from the demo build, official dev posts, and day-one in-game checks. Prices marked <span class="tag pending">est.</span> are launch-window estimates from the demo economy — we re-verify every value in-game daily and correct the table as patches land. See the footnote at the bottom for exactly what's confirmed vs. estimated.
+        <strong>Data integrity note:</strong> The official release announcement gives an unlock time of July 30 at 10:00 AM PT / 7:00 PM CEST. This page does not fill launch-only crop names or numbers before direct observation. Confirmed systems cite official Steam material; unknown values are marked pending.
       </div>
 
-      <p class="lead">Search by name, filter by season, and click any column header to sort. <strong>Profit/day</strong> is (sell price − seed cost) ÷ growth days — the number that actually decides what to plant. Learn why in the <a href="/guides/money-making">money-making guide</a>, or go deep with the <a href="/guides/money-making-guide">broke-to-tycoon money guide</a>.</p>
+      <p class="lead">This is a verification tracker, not a guessed crop catalog. Search the official systems below, see what remains unknown, then use the measurement worksheet to turn your own launch observations into comparable profit data.</p>
 
       <div class="table-tools">
         <label class="visually-hidden" for="crop-search">Search crops</label>
-        <input type="search" id="crop-search" placeholder="Search crops… (e.g. corn, spring)" data-table-search="crops-table">
-        <label class="visually-hidden" for="crop-season">Filter by season</label>
+        <input type="search" id="crop-search" placeholder="Search systems… (e.g. greenhouse, market)" data-table-search="crops-table">
+        <label class="visually-hidden" for="crop-season">Filter by evidence status</label>
         <select id="crop-season" data-table-filter="crops-table">
-          <option value="">All seasons</option>
-          <option value="spring">Spring</option>
-          <option value="summer">Summer</option>
-          <option value="fall">Fall</option>
-          <option value="winter">Winter</option>
-          <option value="greenhouse">Greenhouse</option>
+          <option value="">All statuses</option>
+          <option value="confirmed">Confirmed</option>
+          <option value="pending">Pending observation</option>
         </select>
         <span class="tag" data-table-count="crops-table">– entries</span>
       </div>
@@ -72,65 +69,52 @@
         <table class="data-table" id="crops-table">
           <thead>
             <tr>
-              <th data-sortable>Crop <span class="sort-arrow"></span></th>
-              <th data-sortable>Season <span class="sort-arrow"></span></th>
-              <th data-sortable>Growth (days) <span class="sort-arrow"></span></th>
-              <th data-sortable>Seed cost <span class="sort-arrow"></span></th>
-              <th data-sortable>Sell price <span class="sort-arrow"></span></th>
-              <th data-sortable>Profit/day <span class="sort-arrow"></span></th>
-              <th>Status</th>
+              <th data-sortable>System <span class="sort-arrow"></span></th>
+              <th data-sortable>Status <span class="sort-arrow"></span></th>
+              <th>What the official source confirms</th>
+              <th>Launch check</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>Turnip</td><td>Spring</td><td data-sort="4">4</td><td data-sort="20">20 g</td><td data-sort="45">45 g</td><td data-sort="6.3">6.3 g</td><td><span class="tag pending">est.</span></td></tr>
-            <tr><td>Lettuce</td><td>Spring</td><td data-sort="3">3</td><td data-sort="15">15 g</td><td data-sort="35">35 g</td><td data-sort="6.7">6.7 g</td><td><span class="tag pending">est.</span></td></tr>
-            <tr><td>Potato</td><td>Spring</td><td data-sort="5">5</td><td data-sort="30">30 g</td><td data-sort="70">70 g</td><td data-sort="8.0">8.0 g</td><td><span class="tag pending">est.</span></td></tr>
-            <tr><td>Carrot</td><td>Spring / Fall</td><td data-sort="4">4</td><td data-sort="25">25 g</td><td data-sort="60">60 g</td><td data-sort="8.8">8.8 g</td><td><span class="tag pending">est.</span></td></tr>
-            <tr><td>Onion</td><td>Spring / Fall</td><td data-sort="5">5</td><td data-sort="35">35 g</td><td data-sort="85">85 g</td><td data-sort="10.0">10.0 g</td><td><span class="tag pending">est.</span></td></tr>
-            <tr><td>Cabbage</td><td>Spring</td><td data-sort="6">6</td><td data-sort="45">45 g</td><td data-sort="120">120 g</td><td data-sort="12.5">12.5 g</td><td><span class="tag pending">est.</span></td></tr>
-            <tr><td>Strawberry <small>(regrows)</small></td><td>Spring</td><td data-sort="5">5</td><td data-sort="60">60 g</td><td data-sort="150">150 g</td><td data-sort="18.0">18.0 g</td><td><span class="tag pending">est.</span></td></tr>
-            <tr><td>Wheat</td><td>Summer / Fall</td><td data-sort="6">6</td><td data-sort="25">25 g</td><td data-sort="80">80 g</td><td data-sort="9.2">9.2 g</td><td><span class="tag pending">est.</span></td></tr>
-            <tr><td>Sunflower</td><td>Summer / Fall</td><td data-sort="5">5</td><td data-sort="30">30 g</td><td data-sort="75">75 g</td><td data-sort="9.0">9.0 g</td><td><span class="tag pending">est.</span></td></tr>
-            <tr><td>Cucumber <small>(regrows)</small></td><td>Summer</td><td data-sort="5">5</td><td data-sort="35">35 g</td><td data-sort="95">95 g</td><td data-sort="12.0">12.0 g</td><td><span class="tag pending">est.</span></td></tr>
-            <tr><td>Pepper <small>(regrows)</small></td><td>Summer</td><td data-sort="6">6</td><td data-sort="45">45 g</td><td data-sort="125">125 g</td><td data-sort="13.3">13.3 g</td><td><span class="tag pending">est.</span></td></tr>
-            <tr><td>Tomato <small>(regrows)</small></td><td>Summer</td><td data-sort="6">6</td><td data-sort="40">40 g</td><td data-sort="130">130 g</td><td data-sort="15.0">15.0 g</td><td><span class="tag pending">est.</span></td></tr>
-            <tr><td>Corn</td><td>Summer</td><td data-sort="7">7</td><td data-sort="50">50 g</td><td data-sort="150">150 g</td><td data-sort="14.3">14.3 g</td><td><span class="tag pending">est.</span></td></tr>
-            <tr><td>Watermelon</td><td>Summer</td><td data-sort="8">8</td><td data-sort="80">80 g</td><td data-sort="230">230 g</td><td data-sort="18.8">18.8 g</td><td><span class="tag pending">est.</span></td></tr>
-            <tr><td>Cauliflower</td><td>Fall</td><td data-sort="6">6</td><td data-sort="55">55 g</td><td data-sort="140">140 g</td><td data-sort="14.2">14.2 g</td><td><span class="tag pending">est.</span></td></tr>
-            <tr><td>Pumpkin</td><td>Fall</td><td data-sort="8">8</td><td data-sort="70">70 g</td><td data-sort="210">210 g</td><td data-sort="17.5">17.5 g</td><td><span class="tag pending">est.</span></td></tr>
-            <tr><td>Grape <small>(regrows)</small></td><td>Fall</td><td data-sort="9">9</td><td data-sort="90">90 g</td><td data-sort="270">270 g</td><td data-sort="20.0">20.0 g</td><td><span class="tag pending">est.</span></td></tr>
-            <tr><td>Pineapple</td><td>Greenhouse</td><td data-sort="10">10</td><td data-sort="120">120 g</td><td data-sort="380">380 g</td><td data-sort="26.0">26.0 g</td><td><span class="tag pending">est.</span></td></tr>
+            <tr><td>Crop growing</td><td><span class="tag">Confirmed</span></td><td>Players can grow crops as part of the core ranch loop.</td><td>Record the full plant-to-harvest interaction.</td></tr>
+            <tr><td>Seasons and daily cycle</td><td><span class="tag">Confirmed</span></td><td>The world changes through seasons and a daily cycle.</td><td>Check whether season limits vary by crop.</td></tr>
+            <tr><td>Sprinklers</td><td><span class="tag">Confirmed</span></td><td>Sprinklers are listed among farm-building options.</td><td>Record unlock, coverage, power use, and cost.</td></tr>
+            <tr><td>Greenhouses</td><td><span class="tag">Confirmed</span></td><td>Greenhouses are listed as a way to build the farm.</td><td>Check crop rules, capacity, unlock, and utilities.</td></tr>
+            <tr><td>Daily orders and local markets</td><td><span class="tag">Confirmed</span></td><td>Official material names daily orders and local markets as selling routes.</td><td>Compare prices, limits, and refresh timing.</td></tr>
+            <tr><td>Auction market</td><td><span class="tag">Confirmed</span></td><td>Official Steam material describes an auction market.</td><td>Check fees, listing rules, and player access.</td></tr>
+            <tr><td>Crop names and seasons</td><td><span class="tag pending">Pending observation</span></td><td>No complete official launch table was found.</td><td>Capture each seed listing and season label.</td></tr>
+            <tr><td>Seed cost and sell price</td><td><span class="tag pending">Pending observation</span></td><td>No complete official price list was found.</td><td>Capture buy and sell screens on the same game version.</td></tr>
+            <tr><td>Growth time, yield, and regrowth</td><td><span class="tag pending">Pending observation</span></td><td>No complete official timing table was found.</td><td>Measure from planting day to harvest and count yield.</td></tr>
           </tbody>
         </table>
       </div>
 
       <div class="notice info">
-        <strong>How we compute profit/day:</strong> (sell price − seed cost) ÷ growth days, per plot, before fertilizer or quality bonuses. For regrowable crops the number reflects the first full cycle; repeat harvests push the effective rate higher. Want to compare your own in-game numbers right now? Use the <a href="/tools/profit-calculator">profit calculator</a>.
+        <strong>Core formula:</strong> crop profit per plot per day = (sale revenue − seed cost − repeat input costs) ÷ occupied days. Keep quality bonuses, processing, and market fees separate so the comparison remains reproducible. Enter observed values in the <a href="/tools/profit-calculator">profit calculator</a>.
       </div>
 
-      <h2>What to plant first</h2>
-      <p>Your first field should be fast spring crops — turnips, lettuce, carrots — bought from <strong>Youssef</strong>, the seed vendor near the clothing store in Sunvale (look for the basket map icon). They mature before you can get lazy about watering, and the quick sell-replant loop compounds your starting cash. Tools and upgrades come from <strong>Lina's</strong> tool shop.</p>
-      <p>Once you can run two crop slots in parallel, split them: one <em>fast</em> slot compounding cash (carrots, onions) and one <em>premium</em> slot working on the big profit/day numbers (strawberries in spring, tomatoes and corn in summer, pumpkin and grape in fall).</p>
-
-      <h2>Reading the table</h2>
+      <h2>How to build a trustworthy crop row</h2>
+      <p>A useful crop row needs more than a screenshot of one price. Record the game version, season, seed source, seed cost, planting day, harvest day, yield per plot, sale destination, sale price, and any quality or processing modifier.</p>
       <ul>
-        <li><strong>Fast crops</strong> (3–5 days) dominate weeks one and two because they compound quickly and keep cash flowing.</li>
-        <li><strong>Slow premium crops</strong> (8+ days) win once you have enough plots running in parallel — pumpkin, watermelon, and grape are the current leaders.</li>
-        <li><strong>Regrowable crops</strong> (strawberry, tomato, cucumber, pepper, grape) only cost seed once, so their real profit/day climbs with every repeat harvest.</li>
-        <li><strong>Season is law.</strong> Sort by season at the start of each in-game month and plant only what's in window — off-season planting is a total loss.</li>
-        <li><strong>Greenhouse crops</strong> ignore seasons entirely but demand electricity and building investment first. Pineapple is the prize; it's a mid-game goal, not a starter.</li>
+        <li><strong>Use a control plot.</strong> Test one crop without fertilizer or processing before adding bonuses.</li>
+        <li><strong>Measure occupied days.</strong> Count the days a plot cannot be replanted, not only the number printed on a seed description.</li>
+        <li><strong>Separate sale channels.</strong> A local-market price and an auction result are different observations.</li>
+        <li><strong>Repeat the test.</strong> One harvest can hide random yield or quality variation.</li>
+        <li><strong>Keep the version.</strong> Early Access balance patches can make an old number accurate for one build and wrong for the next.</li>
       </ul>
 
-      <h2>Field mechanics that change the math</h2>
+      <h2>Questions the official description does not answer</h2>
       <ul>
-        <li><strong>Water daily.</strong> Neglected crops die — a dead pumpkin is a 70 g hole, not a delay. Sprinklers (once you have electricity) remove the chore.</li>
-        <li><strong>Scarecrows matter.</strong> Outdoor fields without scarecrow coverage take crow damage; factor replacement losses into tight margins.</li>
-        <li><strong>Fertilizer at plant time</strong> from Youssef boosts the payout. We apply fertilizer to any crop with a base sell price above ~100 g.</li>
-        <li><strong>Selling channels:</strong> town vendors buy basics instantly, while the auction market can fetch more from other players for bulk premium produce. Festival weeks can spike prices on specific crops — watch the calendar.</li>
+        <li>Which crops are available in the initial Early Access build?</li>
+        <li>Which crops are season-limited, regrow after harvest, or work in greenhouses?</li>
+        <li>Do sprinklers require utilities, and what area does each model cover?</li>
+        <li>Do local markets, daily orders, and the auction use the same base value?</li>
+        <li>Which costs are per harvest, per planting, or one-time infrastructure?</li>
       </ul>
 
-      <h2>Data status & verification</h2>
-      <p><strong>Confirmed from official sources or the demo build:</strong> the farming loop (hoe → plant → water → harvest), seed vendor Youssef and tool vendor Lina, seasons, scarecrows, fertilizer, greenhouses, sprinklers, the auction market, and the presence of crops including corn, wheat, and field vegetables. <strong>Estimated (est.):</strong> every numeric price, growth time, and profit/day value above, plus a small number of crop names extrapolated from genre-standard seed catalogs. Each estimate is flagged <span class="tag pending">est.</span> and gets re-checked in-game daily; anything that fails verification is corrected or removed the same day. Spotted a real number? <a href="/contact">Send it in</a> with a screenshot.</p>
+      <h2>Sources and evidence policy</h2>
+      <p>The confirmed rows above come from the <a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">official Steam store page</a> and <a href="https://steamcommunity.com/app/1501310" rel="noopener noreferrer">official Steam announcements</a>, accessed July 30, 2026. Those sources describe systems, not a complete numerical crop catalog.</p>
+      <p>Community reports can point us toward a test, but they do not become database facts without a matching screenshot or repeatable in-game observation. A correction should include the game version and the screen or action that produced the value. <a href="/contact">Send evidence through the contact page</a>.</p>
       <p>Pair this with the <a href="/database/animals">animal database</a> to plan your whole ranch economy, and read the <a href="/guides/beginners-guide">beginner's guide</a> if this is your first season.</p>
 
       <!-- Ad slot placeholder
@@ -144,7 +128,7 @@
       <div class="footer-grid">
         <div>
           <h4>The Ranchers Guide</h4>
-          <p>An unofficial, fan-made guide hub for The Ranchers — the open-world ranch life sim from RedPilz Studio, published by Trophy Games, entering Steam Early Access on July 30, 2026.</p>
+          <p>An unofficial, fan-made guide hub for The Ranchers — the open-world ranch life sim from RedPilz Studio, published by Trophy Games, scheduled for Steam Early Access on July 30, 2026.</p>
           <p class="disclaimer">Unofficial fan-made guide. The Ranchers game images &copy; RedPilz Studio / Trophy Games. Not affiliated with or endorsed by the developers.</p>
         </div>
         <nav aria-label="Footer guides">
@@ -176,7 +160,7 @@
       </div>
       <div class="footer-bottom">
         <span>© <span data-year>2026</span> theranchersguide.com — fan-made, unofficial.</span>
-        <span>Early Access launch data — verified in-game daily.</span>
+        <span>Official sources and data status are labeled on each page.</span>
       </div>
     </div>
   </footer>
