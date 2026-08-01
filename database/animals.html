@@ -9,7 +9,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="The Ranchers Guide">
   <meta property="og:title" content="The Ranchers Animal Database — Confirmed Roster & Data Tracker">
-  <meta property="og:description" content="The officially named animals, confirmed ranch systems, and a transparent queue for launch-only costs and production data.">
+  <meta property="og:description" content="Officially named animals, confirmed live-build systems, and a transparent queue for costs and production data that still need evidence.">
   <meta property="og:url" content="https://theranchersguide.com/database/animals">
   <meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260801-3">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -29,12 +29,12 @@
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
       <ul class="nav-links">
-        <li><a href="/guides/release-time-checklist">Release</a></li>
+        <li><a href="/guides/release-time-checklist">Status</a></li>
         <li><a href="/guides/beginners-guide">Beginner</a></li>
         <li><a href="/guides/money-making">Money</a></li>
         <li><a href="/guides/multiplayer-coop">Co-op</a></li>
         <li><a class="active" href="/database/crops">Data</a></li>
-        <li><a class="nav-cta" href="/tools/profit-calculator">Calculator</a></li>
+        <li><a class="nav-cta" href="/tools/field-notes">Field Notes</a></li>
       </ul>
     </nav>
   </header>
@@ -43,13 +43,15 @@
     <article class="article" style="max-width: 980px;">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Database / Animals</nav>
       <h1>The Ranchers Animal Database</h1>
-      <p class="meta">Source audit updated July 30, 2026 · Unknown values stay blank until directly observed</p>
+      <p class="meta">Updated for Early Access build 0.8.10.455 · August 1, 2026 · Unknown prices stay blank</p>
 
       <figure class="page-banner"><img src="../assets/img/db-animals.jpg" alt="The Ranchers gameplay screenshot: cows grazing outside the red barn"></figure>
 
       <div class="notice">
-        <strong>Data integrity note:</strong> Official Steam material names chickens, bunnies, goats, and cows. It does not provide a complete launch price, product, or production-cycle table, so those fields remain pending rather than being estimated.
+        <strong>Current-build note:</strong> Official Steam material names chickens, bunnies, goats, and cows and now confirms several animal-management rules. It still does not publish a complete price or production table.
       </div>
+
+      <p>Collect discoveries privately in <a href="/tools/field-notes">Field Notes</a>, then export the versioned record when it is complete enough to verify.</p>
 
       <p class="lead">Search the officially named roster and the systems that still need launch observation. The table separates what the developer has published from the costs, products, care rules, and cycle times that players must measure in the released build.</p>
 
@@ -81,6 +83,10 @@
             <tr><td>Goats</td><td><span class="tag">Confirmed</span></td><td>Official store copy names goats as ranch animals.</td><td>Record housing, care, products, cycle, and cost.</td></tr>
             <tr><td>Cows</td><td><span class="tag">Confirmed</span></td><td>Official store copy names cows as ranch animals.</td><td>Record housing, care, products, cycle, and cost.</td></tr>
             <tr><td>Barns and coops</td><td><span class="tag">Confirmed</span></td><td>Official material shows animal care as part of building a ranch.</td><td>Record each structure's capacity, materials, and unlock.</td></tr>
+            <tr><td>Outdoor map tracking</td><td><span class="tag">Confirmed</span></td><td>Animals are visible on the map while outside a barn or coop.</td><td>Check icon range, ownership, and multiplayer visibility.</td></tr>
+            <tr><td>Luck and newborn quality</td><td><span class="tag">Confirmed</span></td><td>Newborn quality probability is influenced by player luck.</td><td>Record parent quality, luck, and multiple births before comparing.</td></tr>
+            <tr><td>Subway transport</td><td><span class="tag">Confirmed</span></td><td>Attached or roped animals can travel through the subway with players.</td><td>Test supported species and party behavior in co-op.</td></tr>
+            <tr><td>Quest driving skip</td><td><span class="tag">Confirmed</span></td><td>Supported quest skips transport farm animals with the vehicle and passengers.</td><td>Record which quests expose the skip option.</td></tr>
             <tr><td>Animal purchase prices</td><td><span class="tag pending">Pending observation</span></td><td>No complete official price list was found.</td><td>Capture seller, price, requirements, and game version.</td></tr>
             <tr><td>Products and production cycles</td><td><span class="tag pending">Pending observation</span></td><td>No complete official production table was found.</td><td>Measure output, timing, quality, and required interaction.</td></tr>
             <tr><td>Feed and upkeep</td><td><span class="tag pending">Pending observation</span></td><td>No complete official upkeep table was found.</td><td>Record feed cost, frequency, water, and missed-care effects.</td></tr>
@@ -105,7 +111,7 @@
         <li><strong>Repeat before ranking.</strong> A profit comparison needs at least two consistent cycles and the same sale channel.</li>
       </ul>
 
-      <h2>Questions still open at launch</h2>
+      <h2>Questions still open in the current build</h2>
       <ul>
         <li>Are additional species present in the initial Early Access build?</li>
         <li>Which animals use barns, coops, pasture, or another structure?</li>
@@ -115,7 +121,7 @@
       </ul>
 
       <h2>Sources and evidence policy</h2>
-      <p>The confirmed roster comes from the <a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">official Steam store page</a> and the launch context comes from <a href="https://steamcommunity.com/app/1501310" rel="noopener noreferrer">official Steam announcements</a>, accessed July 30, 2026.</p>
+      <p>The confirmed roster comes from the <a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">official Steam store page</a>. Current transport, map, and probability rules come from <a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">official Steam updates</a>, reviewed August 1, 2026.</p>
       <p>Community reports are useful leads, but a database value requires a screenshot or repeatable observation with the game version. We will not add plausible genre-standard animals simply to make the table longer. <a href="/contact">Send a documented correction</a>.</p>
       <p>Planning a co-op barn? The <a href="/guides/multiplayer-coop">co-op guide</a> shows how to assign a dedicated barn lead. Building your first ranch? Start with the <a href="/guides/beginners-guide">beginner's guide</a>.</p>
 
@@ -130,13 +136,13 @@
       <div class="footer-grid">
         <div>
           <h4>The Ranchers Guide</h4>
-          <p>An unofficial, fan-made guide hub for The Ranchers — the open-world ranch life sim from RedPilz Studio, published by Trophy Games, scheduled for Steam Early Access on July 30, 2026.</p>
+          <p>An unofficial, fan-made guide hub for The Ranchers — the open-world ranch life sim from RedPilz Studio, published by Trophy Games, available in Steam Early Access since July 30, 2026.</p>
           <p class="disclaimer">Unofficial fan-made guide. The Ranchers game images &copy; RedPilz Studio / Trophy Games. Not affiliated with or endorsed by the developers.</p>
         </div>
         <nav aria-label="Footer guides">
           <h4>Guides</h4>
           <ul>
-            <li><a href="/guides/release-time-checklist">Release Guide</a></li>
+            <li><a href="/guides/release-time-checklist">Early Access Status</a></li>
             <li><a href="/guides/beginner-mistakes">Beginner Mistakes</a></li>
             <li><a href="/guides/beginners-guide">Beginner's Guide</a></li>
             <li><a href="/guides/money-making">Money Making</a></li>
@@ -148,6 +154,7 @@
           <ul>
             <li><a href="/database/crops">Crop Database</a></li>
             <li><a href="/database/animals">Animal Database</a></li>
+            <li><a href="/tools/field-notes">Field Notes</a></li>
             <li><a href="/tools/profit-calculator">Profit Calculator</a></li>
           </ul>
         </nav>

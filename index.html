@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Ranchers Guide — Guides, Crops, Animals & Profit Calculator</title>
-  <meta name="description" content="The fan-made guide hub for The Ranchers (Steam Early Access, July 30, 2026). Beginner guides, money-making strategies, crop & animal databases, and a profit-per-day calculator for the 1–4 player co-op ranch sim.">
+  <title>The Ranchers Guide — Guides, Field Notes, Data & Tools</title>
+  <meta name="description" content="The fan-made guide hub for The Ranchers Early Access: current version help, beginner and co-op guides, evidence-tracked databases, Field Notes, and a profit calculator.">
   <link rel="canonical" href="https://theranchersguide.com/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="The Ranchers Guide">
-  <meta property="og:title" content="The Ranchers Guide — Guides, Crops, Animals & Profit Calculator">
-  <meta property="og:description" content="Your early-access companion for The Ranchers: beginner guides, money-making strategies, crop & animal databases, and a profit-per-day calculator.">
+  <meta property="og:title" content="The Ranchers Guide — Guides, Field Notes, Data & Tools">
+  <meta property="og:description" content="Build a versioned evidence log, check current Early Access systems, and compare observations without copied or guessed data.">
   <meta property="og:url" content="https://theranchersguide.com/">
   <meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
   <meta name="twitter:card" content="summary_large_image">
@@ -18,14 +18,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon-180.png">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=20260801-3">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "The Ranchers Guide",
     "url": "https://theranchersguide.com/",
-    "description": "Fan-made guide hub for The Ranchers, the open-world ranch life sim launching in Steam Early Access on July 30, 2026.",
+    "description": "Fan-made guide hub for The Ranchers, available in Steam Early Access since July 30, 2026.",
     "potentialAction": {
       "@type": "SearchAction",
       "target": "https://theranchersguide.com/database/crops?q={search_term_string}",
@@ -40,8 +40,8 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "When does The Ranchers release?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The Ranchers launches in Steam Early Access on July 30, 2026. It is developed by RedPilz Studio and published by Trophy Games." }
+        "name": "Is The Ranchers available now?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. The Ranchers launched in Steam Early Access on July 30, 2026. The official first-day hotfix is version 0.8.10.455." }
       },
       {
         "@type": "Question",
@@ -51,7 +51,7 @@
       {
         "@type": "Question",
         "name": "Was there a free demo for The Ranchers?",
-        "acceptedAnswer": { "@type": "Answer", "text": "A free demo was available before launch. The official release announcement schedules Steam Early Access for July 30, 2026 at 10:00 AM PT / 7:00 PM CEST." }
+        "acceptedAnswer": { "@type": "Answer", "text": "A free demo was available before launch. The full Early Access build is now available on Steam." }
       },
       {
         "@type": "Question",
@@ -72,12 +72,12 @@
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
       <ul class="nav-links">
-        <li><a href="/guides/release-time-checklist">Release</a></li>
+        <li><a href="/guides/release-time-checklist">Status</a></li>
         <li><a href="/guides/beginners-guide">Beginner</a></li>
         <li><a href="/guides/money-making">Money</a></li>
         <li><a href="/guides/multiplayer-coop">Co-op</a></li>
         <li><a href="/database/crops">Data</a></li>
-        <li><a class="nav-cta" href="/tools/profit-calculator">Calculator</a></li>
+        <li><a class="nav-cta" href="/tools/field-notes">Field Notes</a></li>
       </ul>
     </nav>
   </header>
@@ -86,21 +86,14 @@
     <!-- Hero -->
     <section class="hero">
       <div class="container">
-        <span class="kicker">Steam Early Access · July 30, 2026</span>
+        <span class="kicker">Available Now · Steam Early Access</span>
         <h1>The Ranchers Guide</h1>
-        <p class="lead">The unofficial companion for RedPilz Studio's open-world ranch life sim. Guides, databases, and tools — ready day one for you and your 1–4 player co-op crew.</p>
-
-        <div class="countdown" id="countdown" aria-label="Countdown to Early Access launch">
-          <div class="cd-box" data-cd="days"><div class="cd-num">–</div><div class="cd-label">Days</div></div>
-          <div class="cd-box" data-cd="hours"><div class="cd-num">–</div><div class="cd-label">Hours</div></div>
-          <div class="cd-box" data-cd="mins"><div class="cd-num">–</div><div class="cd-label">Minutes</div></div>
-          <div class="cd-box" data-cd="secs"><div class="cd-num">–</div><div class="cd-label">Seconds</div></div>
-        </div>
-        <p class="countdown-note">until The Ranchers hits Steam Early Access</p>
+        <p class="lead">Practical help for the live Early Access build: current version status, first-session priorities, co-op requirements, and tools for building evidence-backed data.</p>
+        <p class="countdown-note"><strong>Launch hotfix: version 0.8.10.455 or later.</strong> Solo works offline; co-op requires Steam online. <a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">Official Steam notes</a>.</p>
 
         <p class="mt-2">
-          <a class="btn" href="/guides/beginners-guide">Start with the Beginner's Guide</a>
-          <a class="btn btn-outline" href="/tools/profit-calculator">Open the Profit Calculator</a>
+          <a class="btn" href="/guides/release-time-checklist">Check Version & Known Limits</a>
+          <a class="btn btn-outline" href="/tools/field-notes">Open Field Notes</a>
         </p>
       </div>
     </section>
@@ -109,21 +102,37 @@
     <div class="ad-slot">Advertisement</div>
     -->
 
+    <section class="section research-promo" aria-labelledby="research-promo-title">
+      <div class="container research-promo-inner">
+        <div>
+          <span class="kicker">Original Research Tool</span>
+          <h2 id="research-promo-title">Build data that can be checked</h2>
+          <p>Keep versioned observations in your browser, separate community leads from reproduced findings, and export a backup whenever you need it. Nothing is uploaded automatically.</p>
+          <p><a class="btn" href="/tools/field-notes">Start a Field Notebook</a></p>
+        </div>
+        <ol class="research-steps">
+          <li><strong>Record</strong><span>Build, conditions, action and result.</span></li>
+          <li><strong>Repeat</strong><span>Promote a lead only after another matching test.</span></li>
+          <li><strong>Compare</strong><span>Move complete values into the profit calculator.</span></li>
+        </ol>
+      </div>
+    </section>
+
     <!-- Top guides -->
     <section class="section" id="guides">
       <div class="container">
         <div class="section-head">
-          <span class="kicker">Launch-Day Reading</span>
+          <span class="kicker">Early Access Reading</span>
           <h2>Essential Guides</h2>
-          <p>Source-backed launch guides built from official Steam material and clearly labeled planning advice. Values that require the released build remain blank until they can be observed directly.</p>
+          <p>Start with current build requirements and systems that are actually available. Numerical values still require a versioned screenshot or repeatable in-game observation.</p>
         </div>
         <div class="card-grid cols-3">
           <article class="card">
             <div class="card-img"><img src="assets/img/hero.jpg" alt="The Ranchers gameplay screenshot: ranch buildings, fields, and countryside" loading="lazy"></div>
             <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4M16 2v4"/><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M3.5 9h17"/><path d="M8 13h3M13 13h3M8 16h3"/></svg></div>
-            <h3><a class="stretched" href="/guides/release-time-checklist">Release Time & Launch Checklist</a></h3>
-            <p>The official unlock time, launch preparation, and the first systems and values worth checking after release.</p>
-            <span class="card-link">Plan launch day →</span>
+            <h3><a class="stretched" href="/guides/release-time-checklist">Early Access Status & Hotfix</a></h3>
+            <p>Current build 0.8.10.455, offline and co-op requirements, vehicle recovery, fast travel, current systems, and features still planned.</p>
+            <span class="card-link">Check the current build →</span>
           </article>
           <article class="card">
             <div class="card-img"><img src="assets/img/card-beginner.jpg" alt="The Ranchers gameplay screenshot: a new rancher standing at the start of their farm" loading="lazy"></div>
@@ -187,19 +196,19 @@
         </div>
         <div class="card-grid cols-3">
           <article class="card">
-            <h3>Launch verification queue is ready</h3>
-            <p>The crop and animal databases now show confirmed systems beside the exact prices, cycles, housing rules, and sale conditions that still need direct observation.</p>
-            <span class="tag">Data policy</span>
+            <h3>Hotfix 0.8.10.455 is the baseline</h3>
+            <p>The first official patch fixes Offline Mode loading and some failed friend-session joins. Update both players before troubleshooting co-op.</p>
+            <span class="tag">July 30</span>
           </article>
           <article class="card">
-            <h3>Two source-backed field guides</h3>
-            <p>The <a href="/guides/money-making-guide">economy fieldbook</a> explains repeatable profit testing, while the <a href="/guides/animal-guide">animal guide</a> separates the confirmed roster from launch-only unknowns.</p>
-            <span class="tag">New guides</span>
+            <h3>Transport has rules worth knowing</h3>
+            <p>My Garage recovers damaged vehicles, 17 approved parking locations prevent impound, and 15 subway stations reduce long city trips.</p>
+            <span class="tag">Practical</span>
           </article>
           <article class="card">
-            <h3>Official-source ledger</h3>
-            <p>System-level claims link to official Steam material. Community reports are treated as test leads until a screenshot or repeatable observation supports them.</p>
-            <span class="tag">Sources</span>
+            <h3>Roadmap is not current content</h3>
+            <p>Mines, combat, monsters, wildlife, and hunting are listed by the developer as future updates, not launch features.</p>
+            <span class="tag">Current limits</span>
           </article>
         </div>
       </div>
@@ -213,8 +222,8 @@
           <h2>The Ranchers — Quick Answers</h2>
         </div>
         <details class="faq-item">
-          <summary>When does The Ranchers release?</summary>
-          <div class="faq-body"><p>The Ranchers enters Steam Early Access on July 30, 2026, developed by RedPilz Studio and published by Trophy Games.</p></div>
+          <summary>Is The Ranchers available now?</summary>
+          <div class="faq-body"><p>Yes. It launched in Steam Early Access on July 30, 2026. Update to version 0.8.10.455 or later before troubleshooting Offline Mode or co-op.</p></div>
         </details>
         <details class="faq-item">
           <summary>Is The Ranchers multiplayer?</summary>
@@ -222,7 +231,7 @@
         </details>
         <details class="faq-item">
           <summary>Was there a free demo?</summary>
-          <div class="faq-body"><p>Yes — a free demo was available before launch. The official announcement schedules Early Access for July 30 at 10:00 AM PT / 7:00 PM CEST, which is July 31 at 1:00 AM China Standard Time.</p></div>
+          <div class="faq-body"><p>Yes. A free demo was available before launch. The current Early Access build is now the relevant version for guides and troubleshooting.</p></div>
         </details>
         <details class="faq-item">
           <summary>Is this site official?</summary>
@@ -235,9 +244,9 @@
     <section class="section">
       <div class="container" style="max-width: 780px;">
         <div class="newsletter">
-          <h2>Launch-Week Update Plan</h2>
-          <p>After the official unlock, observations will be added only with a game version and reproducible evidence. Unknown values stay blank; community reports become test leads, not instant facts. Found a mismatch? Send the relevant screen and version through the contact page.</p>
-          <p class="mt-2"><a class="btn" href="/contact">Send a Correction</a></p>
+          <h2>Help Build the Live Database</h2>
+          <p>Record the game version, conditions and exact result while you play. Export selected notes when they are ready to become test leads for the public database.</p>
+          <p class="mt-2"><a class="btn" href="/tools/field-notes">Open Field Notes</a></p>
         </div>
       </div>
     </section>
@@ -252,14 +261,14 @@
       <div class="footer-grid">
         <div>
           <h4>The Ranchers Guide</h4>
-          <p>An unofficial, fan-made guide hub for The Ranchers — the open-world ranch life sim from RedPilz Studio, published by Trophy Games, scheduled for Steam Early Access on July 30, 2026.</p>
+          <p>An unofficial, fan-made guide hub for The Ranchers — the open-world ranch life sim from RedPilz Studio, published by Trophy Games, available in Steam Early Access since July 30, 2026.</p>
           <p class="disclaimer">Unofficial fan-made guide. The Ranchers game images &copy; RedPilz Studio / Trophy Games. Not affiliated with or endorsed by the developers.</p>
           <p class="disclaimer">About this site: theranchersguide.com is an independent, fan-run guide and tools website created by players, for players. All game names, screenshots, artwork and trademarks are the property of their respective owners and are used here for informational and commentary purposes only.</p>
         </div>
         <nav aria-label="Footer guides">
           <h4>Guides</h4>
           <ul>
-            <li><a href="/guides/release-time-checklist">Release Guide</a></li>
+            <li><a href="/guides/release-time-checklist">Early Access Status</a></li>
             <li><a href="/guides/beginner-mistakes">Beginner Mistakes</a></li>
             <li><a href="/guides/beginners-guide">Beginner's Guide</a></li>
             <li><a href="/guides/money-making">Money Making</a></li>
@@ -271,6 +280,7 @@
           <ul>
             <li><a href="/database/crops">Crop Database</a></li>
             <li><a href="/database/animals">Animal Database</a></li>
+            <li><a href="/tools/field-notes">Field Notes</a></li>
             <li><a href="/tools/profit-calculator">Profit Calculator</a></li>
           </ul>
         </nav>

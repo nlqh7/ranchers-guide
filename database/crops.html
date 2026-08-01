@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260801-3">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -29,12 +29,12 @@
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
       <ul class="nav-links">
-        <li><a href="/guides/release-time-checklist">Release</a></li>
+        <li><a href="/guides/release-time-checklist">Status</a></li>
         <li><a href="/guides/beginners-guide">Beginner</a></li>
         <li><a href="/guides/money-making">Money</a></li>
         <li><a href="/guides/multiplayer-coop">Co-op</a></li>
         <li><a class="active" href="/database/crops">Data</a></li>
-        <li><a class="nav-cta" href="/tools/profit-calculator">Calculator</a></li>
+        <li><a class="nav-cta" href="/tools/field-notes">Field Notes</a></li>
       </ul>
     </nav>
   </header>
@@ -43,13 +43,15 @@
     <article class="article" style="max-width: 980px;">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Database / Crops</nav>
       <h1>The Ranchers Crop Database</h1>
-      <p class="meta">Source audit updated July 30, 2026 · Unknown values stay blank until directly observed</p>
+      <p class="meta">Updated for Early Access build 0.8.10.455 · August 1, 2026 · Unknown prices stay blank</p>
 
       <figure class="page-banner"><img src="../assets/img/db-crops.jpg" alt="The Ranchers gameplay screenshot: a greenhouse and neat vegetable garden rows"></figure>
 
       <div class="notice">
-        <strong>Data integrity note:</strong> The official release announcement gives an unlock time of July 30 at 10:00 AM PT / 7:00 PM CEST. This page does not fill launch-only crop names or numbers before direct observation. Confirmed systems cite official Steam material; unknown values are marked pending.
+        <strong>Current-build note:</strong> The Ranchers is live in Early Access. Official notes now confirm several plantation rules, but they still do not publish a complete crop-price table. Numerical fields require versioned in-game evidence.
       </div>
+
+      <p>Collect discoveries privately in <a href="/tools/field-notes">Field Notes</a>, then export the versioned record when it is complete enough to verify.</p>
 
       <p class="lead">This is a verification tracker, not a guessed crop catalog. Search the official systems below, see what remains unknown, then use the measurement worksheet to turn your own launch observations into comparable profit data.</p>
 
@@ -82,6 +84,11 @@
             <tr><td>Greenhouses</td><td><span class="tag">Confirmed</span></td><td>Greenhouses are listed as a way to build the farm.</td><td>Check crop rules, capacity, unlock, and utilities.</td></tr>
             <tr><td>Daily orders and local markets</td><td><span class="tag">Confirmed</span></td><td>Official material names daily orders and local markets as selling routes.</td><td>Compare prices, limits, and refresh timing.</td></tr>
             <tr><td>Auction market</td><td><span class="tag">Confirmed</span></td><td>Official Steam material describes an auction market.</td><td>Check fees, listing rules, and player access.</td></tr>
+            <tr><td>Missed harvest</td><td><span class="tag">Confirmed</span></td><td>Fruit and vegetables are not destroyed if harvesting is delayed.</td><td>Check whether quality or regrowth timing changes.</td></tr>
+            <tr><td>Plant death and seed loss</td><td><span class="tag">Confirmed</span></td><td>Official notes say seeds disappear when the plant dies.</td><td>Record every condition that can kill a plant.</td></tr>
+            <tr><td>Recurring crops</td><td><span class="tag">Confirmed</span></td><td>The plantation system includes a simplified regrow flow.</td><td>Measure first growth and later harvest intervals separately.</td></tr>
+            <tr><td>Luck and fruit count</td><td><span class="tag">Confirmed</span></td><td>Fruit-count probability is influenced by player luck.</td><td>Use repeated harvests; one yield is not a stable average.</td></tr>
+            <tr><td>Plantation auto-harvest</td><td><span class="tag pending">Pending / planned</span></td><td>The developer listed auto-harvesting as a post-demo priority.</td><td>Do not assume it is available until a current build confirms it.</td></tr>
             <tr><td>Crop names and seasons</td><td><span class="tag pending">Pending observation</span></td><td>No complete official launch table was found.</td><td>Capture each seed listing and season label.</td></tr>
             <tr><td>Seed cost and sell price</td><td><span class="tag pending">Pending observation</span></td><td>No complete official price list was found.</td><td>Capture buy and sell screens on the same game version.</td></tr>
             <tr><td>Growth time, yield, and regrowth</td><td><span class="tag pending">Pending observation</span></td><td>No complete official timing table was found.</td><td>Measure from planting day to harvest and count yield.</td></tr>
@@ -103,7 +110,7 @@
         <li><strong>Keep the version.</strong> Early Access balance patches can make an old number accurate for one build and wrong for the next.</li>
       </ul>
 
-      <h2>Questions the official description does not answer</h2>
+      <h2>Questions still open in the current build</h2>
       <ul>
         <li>Which crops are available in the initial Early Access build?</li>
         <li>Which crops are season-limited, regrow after harvest, or work in greenhouses?</li>
@@ -113,7 +120,7 @@
       </ul>
 
       <h2>Sources and evidence policy</h2>
-      <p>The confirmed rows above come from the <a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">official Steam store page</a> and <a href="https://steamcommunity.com/app/1501310" rel="noopener noreferrer">official Steam announcements</a>, accessed July 30, 2026. Those sources describe systems, not a complete numerical crop catalog.</p>
+      <p>The confirmed rows come from the <a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">official Steam store page</a> and <a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">official Steam updates</a>, reviewed August 1, 2026. They describe systems, not a complete numerical crop catalog.</p>
       <p>Community reports can point us toward a test, but they do not become database facts without a matching screenshot or repeatable in-game observation. A correction should include the game version and the screen or action that produced the value. <a href="/contact">Send evidence through the contact page</a>.</p>
       <p>Pair this with the <a href="/database/animals">animal database</a> to plan your whole ranch economy, and read the <a href="/guides/beginners-guide">beginner's guide</a> if this is your first season.</p>
 
@@ -128,13 +135,13 @@
       <div class="footer-grid">
         <div>
           <h4>The Ranchers Guide</h4>
-          <p>An unofficial, fan-made guide hub for The Ranchers — the open-world ranch life sim from RedPilz Studio, published by Trophy Games, scheduled for Steam Early Access on July 30, 2026.</p>
+          <p>An unofficial, fan-made guide hub for The Ranchers — the open-world ranch life sim from RedPilz Studio, published by Trophy Games, available in Steam Early Access since July 30, 2026.</p>
           <p class="disclaimer">Unofficial fan-made guide. The Ranchers game images &copy; RedPilz Studio / Trophy Games. Not affiliated with or endorsed by the developers.</p>
         </div>
         <nav aria-label="Footer guides">
           <h4>Guides</h4>
           <ul>
-            <li><a href="/guides/release-time-checklist">Release Guide</a></li>
+            <li><a href="/guides/release-time-checklist">Early Access Status</a></li>
             <li><a href="/guides/beginner-mistakes">Beginner Mistakes</a></li>
             <li><a href="/guides/beginners-guide">Beginner's Guide</a></li>
             <li><a href="/guides/money-making">Money Making</a></li>
@@ -146,6 +153,7 @@
           <ul>
             <li><a href="/database/crops">Crop Database</a></li>
             <li><a href="/database/animals">Animal Database</a></li>
+            <li><a href="/tools/field-notes">Field Notes</a></li>
             <li><a href="/tools/profit-calculator">Profit Calculator</a></li>
           </ul>
         </nav>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Ranchers Field Notes — Build a Versioned Evidence Log</title>
+  <meta name="description" content="Record versioned The Ranchers observations, separate leads from reproduced findings, search your notes, and export your evidence as JSON or CSV.">
+  <link rel="canonical" href="https://theranchersguide.com/tools/field-notes">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Ranchers Guide">
+  <meta property="og:title" content="The Ranchers Field Notes — Build a Versioned Evidence Log">
+  <meta property="og:description" content="A private, browser-based field notebook for collecting reliable The Ranchers data without copying or guessing.">
+  <meta property="og:url" content="https://theranchersguide.com/tools/field-notes">
+  <meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260801-3">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "The Ranchers Field Notes",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any web browser",
+    "isAccessibleForFree": true,
+    "url": "https://theranchersguide.com/tools/field-notes",
+    "description": "A local evidence notebook for versioned The Ranchers gameplay observations."
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a class="logo" href="/">
+        <span class="logo-mark"><img src="../assets/img/logo.png" alt="" width="34" height="34"></span>
+        <span>The Ranchers Guide<small>Unofficial fan resource</small></span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+      <ul class="nav-links">
+        <li><a href="/guides/release-time-checklist">Status</a></li>
+        <li><a href="/guides/beginners-guide">Beginner</a></li>
+        <li><a href="/guides/money-making">Money</a></li>
+        <li><a href="/guides/multiplayer-coop">Co-op</a></li>
+        <li><a href="/database/crops">Data</a></li>
+        <li><a class="nav-cta active" href="/tools/field-notes">Field Notes</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container section field-notes-page">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Tools / Field Notes</nav>
+      <div class="tool-intro">
+        <div>
+          <span class="kicker">Local Research Tool</span>
+          <h1>The Ranchers Field Notes</h1>
+          <p class="lead">Turn discoveries into versioned evidence. Record what happened, where it happened, and whether it is still a lead or has been reproduced.</p>
+        </div>
+        <figure class="tool-intro-media"><img src="../assets/img/db-crops.jpg" alt="The Ranchers gameplay screenshot showing a greenhouse and crop plots"></figure>
+      </div>
+
+      <div class="notice info">
+        <strong>Your notes stay on this device.</strong> Nothing is uploaded or shared automatically. Export a backup before clearing browser data or switching devices.
+      </div>
+
+      <section class="evidence-key" aria-labelledby="evidence-key-title">
+        <div>
+          <span class="kicker">Evidence Standard</span>
+          <h2 id="evidence-key-title">Four stages, one honest database</h2>
+        </div>
+        <ol>
+          <li><span class="evidence-dot lead"></span><strong>Lead</strong><small>A question or community claim that needs testing.</small></li>
+          <li><span class="evidence-dot observed"></span><strong>Observed</strong><small>Seen once in a named game version.</small></li>
+          <li><span class="evidence-dot reproduced"></span><strong>Reproduced</strong><small>Repeated under the same stated conditions.</small></li>
+          <li><span class="evidence-dot official"></span><strong>Official</strong><small>Supported by a direct developer or store source.</small></li>
+        </ol>
+      </section>
+
+      <div class="field-notes-layout">
+        <form class="field-note-form" id="field-note-form" novalidate>
+          <div class="form-heading">
+            <div>
+              <span class="kicker">New Record</span>
+              <h2 id="field-note-form-title">Add a field note</h2>
+            </div>
+            <button class="icon-btn field-note-cancel" id="field-note-cancel" type="button" hidden>Cancel edit</button>
+          </div>
+
+          <div class="calc-field">
+            <label for="note-title">Short title</label>
+            <input id="note-title" name="title" type="text" maxlength="80" placeholder="e.g. Corn sale price at Central Market" aria-describedby="note-title-error">
+            <span class="field-error" id="note-title-error"></span>
+          </div>
+
+          <div class="form-grid cols-2">
+            <div class="calc-field">
+              <label for="note-type">Topic</label>
+              <select id="note-type" name="type">
+                <option value="crop">Crop</option>
+                <option value="animal">Animal</option>
+                <option value="shop">Shop / price</option>
+                <option value="quest">Quest</option>
+                <option value="transport">Transport</option>
+                <option value="coop">Co-op</option>
+                <option value="bug">Bug / workaround</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="calc-field">
+              <label for="note-version">Game version</label>
+              <input id="note-version" name="version" type="text" maxlength="30" value="0.8.10.455" aria-describedby="note-version-error">
+              <span class="field-error" id="note-version-error"></span>
+            </div>
+          </div>
+
+          <div class="form-grid cols-2">
+            <div class="calc-field">
+              <label for="note-stage">Evidence stage</label>
+              <select id="note-stage" name="stage">
+                <option value="lead">Lead</option>
+                <option value="observed">Observed once</option>
+                <option value="reproduced">Reproduced</option>
+                <option value="official">Official confirmation</option>
+              </select>
+            </div>
+            <div class="calc-field">
+              <label for="note-source">Source type</label>
+              <select id="note-source" name="sourceType">
+                <option value="personal">Personal observation</option>
+                <option value="official">Official source</option>
+                <option value="community">Community lead</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="calc-field">
+            <label for="note-location">Location or conditions <span class="optional">Optional</span></label>
+            <input id="note-location" name="location" type="text" maxlength="100" placeholder="Shop, season, quality, solo/co-op, quest step...">
+          </div>
+
+          <div class="calc-field">
+            <label for="note-finding">What happened?</label>
+            <textarea id="note-finding" name="finding" rows="5" maxlength="800" placeholder="Describe the exact action and result. Include numbers only when you saw them in this version." aria-describedby="note-finding-error"></textarea>
+            <span class="field-error" id="note-finding-error"></span>
+          </div>
+
+          <div class="calc-field">
+            <label for="note-url">Source URL <span class="optional">Required for official claims</span></label>
+            <input id="note-url" name="sourceUrl" type="url" maxlength="500" placeholder="https://..." aria-describedby="note-sourceUrl-error">
+            <span class="field-error" id="note-sourceUrl-error"></span>
+          </div>
+
+          <button class="btn" id="field-note-submit" type="submit">Save field note</button>
+          <p class="form-status" id="field-note-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <section class="field-note-workspace" aria-labelledby="saved-notes-title">
+          <div class="workspace-head">
+            <div>
+              <span class="kicker">Your Evidence</span>
+              <h2 id="saved-notes-title">Saved notes</h2>
+            </div>
+            <div class="file-actions">
+              <button class="btn btn-outline btn-compact" id="export-json" type="button">Export JSON</button>
+              <button class="btn btn-outline btn-compact" id="export-csv" type="button">Export CSV</button>
+              <label class="btn btn-outline btn-compact" for="import-json">Import JSON</label>
+              <input class="visually-hidden" id="import-json" type="file" accept="application/json,.json">
+            </div>
+          </div>
+
+          <div class="field-note-stats" aria-label="Evidence summary">
+            <div><strong id="stat-total">0</strong><span>Total</span></div>
+            <div><strong id="stat-leads">0</strong><span>Leads</span></div>
+            <div><strong id="stat-tested">0</strong><span>Tested</span></div>
+            <div><strong id="stat-official">0</strong><span>Official</span></div>
+          </div>
+
+          <div class="field-note-filters">
+            <div class="calc-field">
+              <label for="notes-search">Search notes</label>
+              <input id="notes-search" type="search" placeholder="Search title, finding, version or location">
+            </div>
+            <div class="calc-field">
+              <label for="notes-type-filter">Topic</label>
+              <select id="notes-type-filter">
+                <option value="">All topics</option>
+                <option value="crop">Crops</option>
+                <option value="animal">Animals</option>
+                <option value="shop">Shops / prices</option>
+                <option value="quest">Quests</option>
+                <option value="transport">Transport</option>
+                <option value="coop">Co-op</option>
+                <option value="bug">Bugs</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="calc-field">
+              <label for="notes-stage-filter">Stage</label>
+              <select id="notes-stage-filter">
+                <option value="">All stages</option>
+                <option value="lead">Lead</option>
+                <option value="observed">Observed</option>
+                <option value="reproduced">Reproduced</option>
+                <option value="official">Official</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="field-note-list" class="field-note-list" aria-live="polite"></div>
+          <button class="text-action destructive" id="clear-field-notes" type="button">Delete all local notes</button>
+        </section>
+      </div>
+
+      <article class="article field-notes-guide">
+        <h2>What makes a useful field note?</h2>
+        <p>A useful record lets another player repeat the same action. Name the build, location, item quality, sale channel, game mode, quest step, and any condition that could change the result.</p>
+        <h3>Good example</h3>
+        <p><strong>Observed once · build 0.8.10.455:</strong> sold one normal-quality item at the named market after recording the buy screen and sale screen. Needs a second observation before publication.</p>
+        <h3>Weak example</h3>
+        <p>“This crop is best.” It has no version, cost, yield, sale channel or reproducible comparison.</p>
+        <p>The <a href="/guides/money-making-guide">Economy Fieldbook</a> explains how to turn several notes into a fair profit comparison. Use the <a href="/tools/profit-calculator">Profit Calculator</a> after the values are complete.</p>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>The Ranchers Guide</h4>
+          <p>An unofficial, fan-made guide hub for The Ranchers — the open-world ranch life sim from RedPilz Studio, published by Trophy Games, available in Steam Early Access since July 30, 2026.</p>
+          <p class="disclaimer">Unofficial fan-made guide. The Ranchers game images &copy; RedPilz Studio / Trophy Games. Not affiliated with or endorsed by the developers.</p>
+        </div>
+        <nav aria-label="Footer guides">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="/guides/release-time-checklist">Early Access Status</a></li>
+            <li><a href="/guides/beginner-mistakes">Beginner Mistakes</a></li>
+            <li><a href="/guides/beginners-guide">Beginner's Guide</a></li>
+            <li><a href="/guides/money-making">Money Making</a></li>
+            <li><a href="/guides/multiplayer-coop">Multiplayer & Co-op</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Footer databases and tools">
+          <h4>Data & Tools</h4>
+          <ul>
+            <li><a href="/database/crops">Crop Database</a></li>
+            <li><a href="/database/animals">Animal Database</a></li>
+            <li><a href="/tools/field-notes">Field Notes</a></li>
+            <li><a href="/tools/profit-calculator">Profit Calculator</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Footer site links">
+          <h4>Site</h4>
+          <ul>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span data-year>2026</span> theranchersguide.com — fan-made, unofficial.</span>
+        <span>Official sources and data status are labeled on each page.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/field-notes-core.js" defer></script>
+  <script src="../assets/js/field-notes.js" defer></script>
+</body>
+</html>

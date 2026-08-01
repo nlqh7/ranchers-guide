@@ -6,15 +6,20 @@ $htmlFiles = Get-ChildItem -Path $repoRoot -Recurse -Filter '*.html' -File |
 $failures = [System.Collections.Generic.List[string]]::new()
 
 $unsupportedPatterns = [ordered]@{
-    'Early Access is live' = 'Do not claim the game is live before the official unlock.'
-    'is live on Steam Early Access' = 'Do not claim the game is live before the official unlock.'
+    'scheduled for Steam Early Access on July 30, 2026' = 'The game has launched; remove stale scheduled-release wording.'
+    'when Early Access goes live' = 'The game has launched; remove pre-release wording.'
+    'after the official unlock' = 'The game has launched; remove pre-release wording.'
+    'until The Ranchers hits Steam Early Access' = 'The game has launched; remove the countdown copy.'
+    'at Early Access launch' = 'The game has launched; replace the future-tense launch promise.'
+    'pre-release planning guide' = 'The game has launched; describe the live Early Access baseline.'
+    'launch-only values remain pending' = 'Use build-specific evidence wording after launch.'
+    'id="countdown"' = 'The launch countdown must not return after release.'
     'launch data updated' = 'Do not label launch data as updated without an evidence record.'
     'verified in-game daily' = 'Do not claim daily verification without a published verification log.'
     'verify (?:numbers|values) in-game daily' = 'Do not claim daily verification without a published verification log.'
     're-verify[^.]*live build' = 'Do not claim launch-build verification before evidence exists.'
     'launch-window estimate' = 'Do not publish guessed launch values as data.'
     're-verified for the Early Access build' = 'Do not claim Early Access verification before evidence exists.'
-    'entered Early Access on July 30' = 'Use the official scheduled release wording until launch is confirmed.'
     're-check(?:ed)? daily' = 'Do not promise a verification cadence that is not documented.'
     'corrections land the same day' = 'Do not promise same-day corrections without an operating record.'
     '<span class="tag pending">est\.</span>' = 'Do not publish invented numeric estimates in data tables.'
@@ -38,6 +43,19 @@ foreach ($relativePath in @('database/crops.html', 'database/animals.html')) {
 
     if ($content -notmatch 'https://store\.steampowered\.com/app/1501310') {
         $failures.Add("${relativePath}: missing a direct official Steam source link.")
+    }
+}
+
+foreach ($relativePath in @('index.html', 'guides/release-time-checklist.html')) {
+    $fullPath = Join-Path $repoRoot $relativePath
+    $content = Get-Content -Raw -LiteralPath $fullPath
+
+    if ($content -notmatch '0\.8\.10\.455') {
+        $failures.Add("${relativePath}: missing the current official launch hotfix version.")
+    }
+
+    if ($content -notmatch 'https://steamcommunity\.com/app/1501310') {
+        $failures.Add("${relativePath}: missing a direct official Steam news source link.")
     }
 }
 

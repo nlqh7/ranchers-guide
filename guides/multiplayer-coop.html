@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260801-3">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -29,12 +29,12 @@
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
       <ul class="nav-links">
-        <li><a href="/guides/release-time-checklist">Release</a></li>
+        <li><a href="/guides/release-time-checklist">Status</a></li>
         <li><a href="/guides/beginners-guide">Beginner</a></li>
         <li><a href="/guides/money-making">Money</a></li>
         <li><a class="active" href="/guides/multiplayer-coop">Co-op</a></li>
         <li><a href="/database/crops">Data</a></li>
-        <li><a class="nav-cta" href="/tools/profit-calculator">Calculator</a></li>
+        <li><a class="nav-cta" href="/tools/field-notes">Field Notes</a></li>
       </ul>
     </nav>
   </header>
@@ -43,12 +43,12 @@
     <article class="article">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Guides / Multiplayer & Co-op</nav>
       <h1>The Ranchers Multiplayer & Co-op Guide: Hosting, Roles, and Shared-Ranch Discipline</h1>
-      <p class="meta">Official feature audit updated July 30, 2026 · Launch-only hosting details remain pending · Reading time: ~13 min</p>
+      <p class="meta">Updated for Early Access hotfix 0.8.10.455 · August 1, 2026 · Reading time: ~13 min</p>
 
       <figure class="page-banner"><img src="../assets/img/card-coop.jpg" alt="The Ranchers gameplay screenshot: players hanging out together at the town sushi bar in co-op mode"></figure>
 
       <div class="notice">
-        <strong>Source boundary:</strong> Official Steam material confirms 1–4 player online co-op. Session permissions, save ownership, reconnect behavior, and launch-build hosting flow still require direct observation. Organizational suggestions below are editorial advice, not claims about hidden game rules.
+        <strong>Launch requirement:</strong> Online co-op supports 1–4 players and requires Steam sign-in plus internet. Update every player to version 0.8.10.455 or later; the first hotfix fixes some failed friend-session joins.
       </div>
 
       <nav class="toc" aria-label="Table of contents">
@@ -64,22 +64,24 @@
       </nav>
 
       <h2 id="hosting">Hosting & joining: setup walkthrough</h2>
-      <p>The Ranchers supports 1–4 player online co-op on one shared ranch. The structure follows the genre's standard host-and-join model; exact menu labels will be confirmed at Early Access launch, but the setup decisions below are the ones that matter regardless of what the buttons are called.</p>
+      <p>The Ranchers supports 1–4 player online co-op. The official launch notes confirm multiplayer-ready quests, while the July 30 hotfix addresses a join failure affecting some friend sessions.</p>
 
       <h3>Before anyone hosts</h3>
       <ol>
-        <li><strong>Pick the host deliberately.</strong> In host-based co-op, the world save lives with the host — progress happens on <em>their</em> ranch, and sessions typically require the host to be online. Choose the player with the most reliable connection, the most predictable schedule, and (ideally) the best hardware.</li>
-        <li><strong>Agree on session windows.</strong> Because progress is tied to the host's world, groups that don't schedule sessions drift apart in-game within a week. Two or three fixed evenings beat "whenever everyone's around."</li>
+        <li><strong>Update together.</strong> Confirm every player is on 0.8.10.455 or later before diagnosing invitations.</li>
+        <li><strong>Sign into Steam.</strong> Offline solo works, but co-op and other online features require an active Steam connection.</li>
+        <li><strong>Pick a session owner deliberately.</strong> Save ownership and transfer behavior should be tested in your build before the group commits to a long shared world.</li>
         <li><strong>Decide the ranch's identity first.</strong> Crop-focused? Animal-heavy? A builder's paradise? Five minutes of alignment before the world is created saves a week of pulling in different directions.</li>
       </ol>
 
       <h3>Hosting the session</h3>
       <ol>
-        <li>The host creates or loads the shared world from the game's multiplayer menu.</li>
-        <li>The host opens the session to friends — expect Steam friends-list invites or an invite option in the in-game menu; we'll document the exact flow at launch.</li>
-        <li>Friends accept and spawn into the host's ranch. Up to four players total, host included.</li>
+        <li>Create or load the intended world and open its multiplayer session.</li>
+        <li>Invite Steam friends only after every client reports the same build.</li>
+        <li>Confirm all players enter the same ranch before spending shared resources or advancing quests.</li>
+        <li>Run one save-and-rejoin test early to learn how the current build preserves guest and world progress.</li>
       </ol>
-      <p>Joining players should expect to work the host's ranch rather than import their own — treat your character's labor as your contribution, and the shared treasury as everyone's.</p>
+      <p>Do not publish assumptions about save ownership, guest inventory, or wallet sharing as facts. Test each behavior in the current build and keep the session owner consistent until the result is clear.</p>
 
       <h2 id="roles">Role splits for 1–4 players</h2>
       <p>The number one co-op failure mode in farming games isn't conflict — it's <em>duplication</em>: two players watering the same field while the animals go unfed. The fix is <strong>zones of ownership</strong>. Each player owns a domain end-to-end; within an in-game week, nobody touches someone else's domain without asking.</p>
@@ -135,14 +137,17 @@
       </ol>
 
       <h2 id="troubleshooting">Troubleshooting: lag, saves, permissions</h2>
-      <p>These are the co-op problems that hit every farming-sim community in week one, with the standard fixes. We'll document The Ranchers' specifics at launch:</p>
+      <p>Use this order before changing saves, reinstalling, or abandoning a world:</p>
       <ul>
-        <li><strong>Rubber-banding or delayed actions:</strong> usually host-side upload bandwidth. The host should close background downloads/streaming, and the player with the best upload should host. Wired beats Wi-Fi for the host in particular.</li>
-        <li><strong>A friend can't join:</strong> verify the session is actually open, both players run the same game version (Early Access patches land fast — update together), and restart the session invite rather than the whole game first.</li>
-        <li><strong>Progress seems lost:</strong> in host-based co-op, the world state lives in the host's save. If the host loads an older save or a different world, "missing" progress isn't missing — it's in another file. Hosts: back up saves before big sessions, especially around Early Access patches.</li>
-        <li><strong>Permission disputes (who can build/sell):</strong> expect host-controlled permission options for visitors, common in the genre; if The Ranchers ships them, set them before the first session, not after the first argument. We'll list exact options at launch.</li>
-        <li><strong>Desync after long sessions:</strong> the universal fix is a periodic full rejoin — have guests drop and reconnect every few hours in marathon sessions.</li>
+        <li><strong>Version:</strong> every player must update to 0.8.10.455 or later.</li>
+        <li><strong>Steam status:</strong> every player must be signed in and online; Offline Mode supports solo, not co-op.</li>
+        <li><strong>Invitation:</strong> close the failed invitation, reopen the session, and send a fresh Steam friend invite.</li>
+        <li><strong>World check:</strong> confirm the intended ranch was loaded before deciding progress is missing.</li>
+        <li><strong>Bug report:</strong> capture the build, session size, host steps, guest steps, and error screen for the official Steam Bug Reports forum.</li>
       </ul>
+
+      <h3>Known launch issue status</h3>
+      <p>The official hotfix says a problem preventing players from joining a friend's session in certain situations has been fixed. That does not prove every connection problem is gone, so version and reproduction details still matter.</p>
 
       <h2 id="faq">Co-op FAQ</h2>
       <details class="faq-item">
@@ -151,11 +156,11 @@
       </details>
       <details class="faq-item">
         <summary>Who should host our co-op world?</summary>
-        <div class="faq-body"><p>The player with the best upload bandwidth and the most reliable schedule — progress lives in the host's save, and sessions typically need the host online.</p></div>
+        <div class="faq-body"><p>Choose one consistent session owner while your group tests save and guest-progress behavior. The official launch notes do not document save transfer, so do not assume the world is portable.</p></div>
       </details>
       <details class="faq-item">
         <summary>Do joining players keep their own ranch?</summary>
-        <div class="faq-body"><p>Expect the genre-standard model where friends join and work the host's ranch rather than importing their own. We'll confirm The Ranchers' exact behavior at Early Access launch.</p></div>
+        <div class="faq-body"><p>The official material reviewed here does not define guest inventory or ranch-import behavior. Test with a short session and rejoin before committing a long-running group save.</p></div>
       </details>
       <details class="faq-item">
         <summary>How do we split work between 4 players?</summary>
@@ -163,7 +168,7 @@
       </details>
       <details class="faq-item">
         <summary>Is there crossplay between PC and console?</summary>
-        <div class="faq-body"><p>Steam lists Cross-Platform Multiplayer as a feature, and The Ranchers is announced for PC and consoles. We're verifying exactly how crossplay behaves in the Early Access build and will update this answer as soon as it's confirmed in-game.</p></div>
+        <div class="faq-body"><p>Steam lists Cross-Platform Multiplayer, but the current supported-platform combinations and account flow should be checked in the live build before planning a mixed-platform group.</p></div>
       </details>
       <details class="faq-item">
         <summary>What's the biggest co-op mistake to avoid?</summary>
@@ -178,6 +183,12 @@
         <li><a href="/tools/profit-calculator">Profit Calculator</a> — agree on money-makers with shared numbers.</li>
       </ul>
 
+      <h2>Official sources</h2>
+      <ul>
+        <li><a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">Official Steam news</a> — launch hotfix 0.8.10.455 and multiplayer-ready quest notes.</li>
+        <li><a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">Official Steam store page</a> — 1–4 player online co-op and platform features.</li>
+      </ul>
+
       <!-- Ad slot placeholder
       <div class="ad-slot">Advertisement</div>
       -->
@@ -189,13 +200,13 @@
       <div class="footer-grid">
         <div>
           <h4>The Ranchers Guide</h4>
-          <p>An unofficial, fan-made guide hub for The Ranchers — the open-world ranch life sim from RedPilz Studio, published by Trophy Games, scheduled for Steam Early Access on July 30, 2026.</p>
+          <p>An unofficial, fan-made guide hub for The Ranchers — the open-world ranch life sim from RedPilz Studio, published by Trophy Games, available in Steam Early Access since July 30, 2026.</p>
           <p class="disclaimer">Unofficial fan-made guide. The Ranchers game images &copy; RedPilz Studio / Trophy Games. Not affiliated with or endorsed by the developers.</p>
         </div>
         <nav aria-label="Footer guides">
           <h4>Guides</h4>
           <ul>
-            <li><a href="/guides/release-time-checklist">Release Guide</a></li>
+            <li><a href="/guides/release-time-checklist">Early Access Status</a></li>
             <li><a href="/guides/beginner-mistakes">Beginner Mistakes</a></li>
             <li><a href="/guides/beginners-guide">Beginner's Guide</a></li>
             <li><a href="/guides/money-making">Money Making</a></li>
@@ -207,6 +218,7 @@
           <ul>
             <li><a href="/database/crops">Crop Database</a></li>
             <li><a href="/database/animals">Animal Database</a></li>
+            <li><a href="/tools/field-notes">Field Notes</a></li>
             <li><a href="/tools/profit-calculator">Profit Calculator</a></li>
           </ul>
         </nav>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Ranchers Profit Calculator — Compare Crops & Animals by Profit/Day</title>
-  <meta name="description" content="Free profit calculator for The Ranchers: enter any crop or animal's prices, costs, and cycle to rank them by profit per in-game day. Plan your Early Access ranch economy before launch on July 30, 2026.">
+  <meta name="description" content="Free profit calculator for The Ranchers Early Access: enter observed crop or animal prices, costs, yield, cycle length, and quantity to rank options by profit per in-game day.">
   <link rel="canonical" href="https://theranchersguide.com/tools/profit-calculator">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="The Ranchers Guide">
@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260801-3">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -29,12 +29,12 @@
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
       <ul class="nav-links">
-        <li><a href="/guides/release-time-checklist">Release</a></li>
+        <li><a href="/guides/release-time-checklist">Status</a></li>
         <li><a href="/guides/beginners-guide">Beginner</a></li>
         <li><a href="/guides/money-making">Money</a></li>
         <li><a href="/guides/multiplayer-coop">Co-op</a></li>
         <li><a href="/database/crops">Data</a></li>
-        <li><a class="nav-cta active" href="/tools/profit-calculator">Calculator</a></li>
+        <li><a class="nav-cta" href="/tools/field-notes">Field Notes</a></li>
       </ul>
     </nav>
   </header>
@@ -48,7 +48,7 @@
       <p class="lead" style="max-width:720px;">Enter any crop or animal's numbers and instantly rank your options by <strong>profit per in-game day</strong> — the single metric that decides what to plant and raise. Entries are saved in your browser, so your list is waiting when you come back. The theory behind the math is in the <a href="/guides/money-making">money-making guide</a>.</p>
 
       <div class="notice">
-        <strong>Pre-launch note:</strong> Exact database values stay pending until the July 30 Early Access build can be verified. This tool is game-agnostic: the moment you learn a real price in-game, enter it here and it just works.
+        <strong>Early Access data rule:</strong> Use values observed in your current game version. Record quality, sale channel, and recurring costs separately; patches can change a correct result without changing the formula.
       </div>
 
       <div class="calc-layout">
@@ -121,12 +121,13 @@
           <li><strong>Animals:</strong> profit/day = (product price × products per cycle − feed/upkeep per cycle) ÷ cycle days, multiplied by herd size.</li>
           <li>Entries are ranked highest to lowest; the leader gets a gold frame. Negative results (costs exceed revenue) are flagged in red.</li>
         </ul>
-        <h2>Tips for launch day</h2>
+        <h2>How to collect comparable inputs</h2>
         <ul>
-          <li>Enter each seed you can buy on day one and sort by profit/day before planting anything.</li>
-          <li>Re-enter prices whenever you unlock a new selling point — prices often differ, and travel time matters.</li>
-          <li>Cross-check your winners against the season column in the <a href="/database/crops">crop database</a> so you don't plant out of season.</li>
-          <li>Playing with friends? Share your ranked list and split roles using the <a href="/guides/multiplayer-coop">co-op guide</a>.</li>
+          <li>Record the game version, item quality, and sale destination with every price.</li>
+          <li>For crops, measure occupied days and yield from an unmodified control plot.</li>
+          <li>For animals, include feed and recurring upkeep for the same production cycle.</li>
+          <li>Re-enter an item after a balance patch or when a new selling channel changes net revenue.</li>
+          <li>Use the <a href="/guides/money-making-guide">economy fieldbook</a> for startup-cost and labor comparisons that this simple ranking does not include.</li>
         </ul>
       </article>
 
@@ -141,13 +142,13 @@
       <div class="footer-grid">
         <div>
           <h4>The Ranchers Guide</h4>
-          <p>An unofficial, fan-made guide hub for The Ranchers — the open-world ranch life sim from RedPilz Studio, published by Trophy Games, scheduled for Steam Early Access on July 30, 2026.</p>
+          <p>An unofficial, fan-made guide hub for The Ranchers — the open-world ranch life sim from RedPilz Studio, published by Trophy Games, available in Steam Early Access since July 30, 2026.</p>
           <p class="disclaimer">Unofficial fan-made guide. The Ranchers game images &copy; RedPilz Studio / Trophy Games. Not affiliated with or endorsed by the developers.</p>
         </div>
         <nav aria-label="Footer guides">
           <h4>Guides</h4>
           <ul>
-            <li><a href="/guides/release-time-checklist">Release Guide</a></li>
+            <li><a href="/guides/release-time-checklist">Early Access Status</a></li>
             <li><a href="/guides/beginner-mistakes">Beginner Mistakes</a></li>
             <li><a href="/guides/beginners-guide">Beginner's Guide</a></li>
             <li><a href="/guides/money-making">Money Making</a></li>
@@ -159,6 +160,7 @@
           <ul>
             <li><a href="/database/crops">Crop Database</a></li>
             <li><a href="/database/animals">Animal Database</a></li>
+            <li><a href="/tools/field-notes">Field Notes</a></li>
             <li><a href="/tools/profit-calculator">Profit Calculator</a></li>
           </ul>
         </nav>
