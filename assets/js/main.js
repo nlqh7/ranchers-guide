@@ -12,6 +12,45 @@
     });
   }
 
+  /* Replace the Search nav link with a compact, progressively enhanced form. */
+  var searchLink = links && links.querySelector('a[href="/search"]');
+  if (searchLink && searchLink.parentElement) {
+    var item = searchLink.parentElement;
+    var form = document.createElement("form");
+    var input = document.createElement("input");
+    var button = document.createElement("button");
+
+    item.classList.add("nav-search-item");
+    form.className = "nav-search-form";
+    form.action = "/search";
+    form.method = "get";
+    form.setAttribute("role", "search");
+
+    input.type = "search";
+    input.name = "q";
+    input.placeholder = "Search guide...";
+    input.autocomplete = "off";
+    input.setAttribute("aria-label", "Search guides, data and tools");
+    if (window.location.pathname === "/search") {
+      input.value = new URLSearchParams(window.location.search).get("q") || "";
+    }
+
+    button.type = "submit";
+    button.setAttribute("aria-label", "Search");
+    button.title = "Search";
+    button.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+
+    form.addEventListener("submit", function (event) {
+      if (!input.value.trim()) {
+        event.preventDefault();
+        input.focus();
+      }
+    });
+
+    form.append(input, button);
+    item.replaceChildren(form);
+  }
+
   /* Footer year */
   var y = document.querySelector("[data-year]");
   if (y) y.textContent = new Date().getFullYear();
