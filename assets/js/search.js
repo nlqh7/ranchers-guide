@@ -18,10 +18,11 @@
     "/contact",
     "/privacy"
   ];
-  var CACHE_KEY = "ranchers-search-index-v2";
+  var CACHE_KEY = "ranchers-search-index-v3";
   var documents = [];
   var form = document.querySelector("[data-search-form]");
   var input = document.querySelector("[data-search-input]");
+  var clearButton = document.querySelector("[data-search-clear]");
   var results = document.querySelector("[data-search-results]");
   var status = document.querySelector("[data-search-status]");
   var suggestions = document.querySelectorAll("[data-search-suggestion]");
@@ -51,7 +52,9 @@
       entries.push({
         id: node.id,
         title: node.dataset.searchTitle || (node.cells && node.cells[0] ? node.cells[0].textContent.trim() : node.id),
-        text: node.textContent.replace(/\s+/g, " ").trim(),
+        text: node.cells
+          ? Array.from(node.cells).map(function (cell) { return cell.textContent.replace(/\s+/g, " ").trim(); }).join(" · ")
+          : node.textContent.replace(/\s+/g, " ").trim(),
         tags: node.dataset.searchTags || "",
         status: node.dataset.searchStatus || "Community data"
       });
@@ -116,6 +119,10 @@
     status.textContent = message;
   }
 
+  function syncClearButton() {
+    if (clearButton) clearButton.hidden = !input.value.trim();
+  }
+
   function resultElement(item) {
     var article = document.createElement("article");
     article.className = "search-result";
@@ -176,9 +183,19 @@
 
   var timer;
   input.addEventListener("input", function () {
+    syncClearButton();
     clearTimeout(timer);
     timer = setTimeout(function () { runSearch(input.value, true); }, 120);
   });
+
+  if (clearButton) {
+    clearButton.addEventListener("click", function () {
+      input.value = "";
+      syncClearButton();
+      runSearch("", true);
+      input.focus();
+    });
+  }
 
   suggestions.forEach(function (button) {
     button.addEventListener("click", function () {
@@ -193,6 +210,7 @@
     documents = index;
     var initial = new URLSearchParams(location.search).get("q") || "";
     input.value = initial;
+    syncClearButton();
     render(initial, false);
   }).catch(function () {
     setStatus("Search could not load. Refresh the page and try again.");

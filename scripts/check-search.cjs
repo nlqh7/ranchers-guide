@@ -76,7 +76,11 @@ assert.ok(pages.length >= 17);
 pages.forEach((file) => {
   assert.match(fs.readFileSync(file, "utf8"), /href="\/search"/, `${path.relative(root, file)} needs a Search link`);
 });
-assert.match(fs.readFileSync(path.join(root, "search.html"), "utf8"), /name="robots" content="noindex,follow"/);
+const searchPage = fs.readFileSync(path.join(root, "search.html"), "utf8");
+assert.match(searchPage, /name="robots" content="noindex,follow"/);
+assert.match(searchPage, /data-search-clear[^>]+aria-label="Clear search"/);
+assert.match(searchPage, /class="site-search-submit"[^>]+aria-label="Search"/);
+assert.match(searchPage, /class="site-search-icon"[^>]+aria-hidden="true"/);
 assert.match(fs.readFileSync(path.join(root, "database", "crops.html"), "utf8"), /id="strawberry-seeds"[^>]+data-search-entry/);
 assert.match(fs.readFileSync(path.join(root, "database", "animals.html"), "utf8"), /id="black-chicken"[^>]+data-search-entry/);
 

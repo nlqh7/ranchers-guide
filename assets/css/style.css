@@ -976,6 +976,7 @@ table.data-table {
 .field-note-meta dd { margin: 0; font-size: 0.82rem; overflow-wrap: anywhere; }
 
 /* ---------- Site search ---------- */
+/* Focus treatment adapted for this brand from Uiverse's plastic-bobcat-37 input (MIT). */
 .search-page { min-height: 70vh; background: #fff; }
 .search-shell { max-width: 860px; }
 .search-shell > h1 { margin: 0.25em 0 0.75em; }
@@ -987,28 +988,68 @@ table.data-table {
 }
 .site-search-control {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 10px;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  min-height: 58px;
+  padding: 4px 4px 4px 15px;
+  border: 2px solid var(--brown-300);
+  border-radius: var(--radius-sm);
+  background: var(--cream-100);
+  box-shadow: 0 3px 0 rgba(79, 50, 31, 0.08);
+  transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+.site-search-control:focus-within {
+  border-color: var(--green-700);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(93, 143, 74, 0.18), 0 4px 0 rgba(79, 50, 31, 0.08);
+}
+.site-search-icon {
+  display: grid;
+  place-items: center;
+  color: var(--brown-500);
 }
 .site-search-control input {
   width: 100%;
   min-width: 0;
-  min-height: 54px;
-  border: 2px solid var(--brown-300);
-  border-radius: var(--radius-sm);
-  padding: 12px 15px;
+  min-height: 48px;
+  border: 0;
+  padding: 10px 12px;
   color: var(--ink);
-  background: var(--cream-100);
+  background: transparent;
   font: inherit;
   font-size: 1.05rem;
 }
 .site-search-control input:focus {
-  outline: 3px solid rgba(93, 143, 74, 0.24);
-  outline-offset: 2px;
-  border-color: var(--green-700);
-  background: #fff;
+  outline: none;
 }
-.site-search-control .btn { min-height: 54px; border-radius: var(--radius-sm); }
+.site-search-control input::-webkit-search-cancel-button { appearance: none; }
+.site-search-clear,
+.site-search-submit {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.site-search-clear {
+  border: 0;
+  background: transparent;
+  color: var(--brown-500);
+}
+.site-search-clear:hover,
+.site-search-clear:focus-visible { background: var(--cream-200); color: var(--brown-900); }
+.site-search-clear[hidden] { display: none; }
+.site-search-submit {
+  border: 1px solid var(--green-700);
+  background: var(--green-700);
+  color: #fff;
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.14);
+}
+.site-search-submit:hover { background: var(--green-500); }
+.site-search-submit:focus-visible,
+.site-search-clear:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 .search-suggestions {
   display: flex;
   align-items: center;
@@ -1062,8 +1103,8 @@ table.data-table {
 .search-empty h2 { margin: 0; font-size: 1.35rem; }
 .search-empty p { color: var(--brown-500); }
 @media (max-width: 559px) {
-  .site-search-control { grid-template-columns: 1fr; }
-  .site-search-control .btn { width: 100%; }
+  .site-search-control { padding-left: 11px; }
+  .site-search-control input { font-size: 1rem; padding-inline: 9px; }
 }
 .field-note-empty {
   padding: 50px 20px;
