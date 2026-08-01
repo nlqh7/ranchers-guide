@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Ranchers Crop Database — Confirmed Systems & Data Tracker</title>
-  <meta name="description" content="A source-backed crop data tracker for The Ranchers, covering confirmed farming systems, unknown launch values, and a repeatable method for measuring crop profit.">
+  <meta name="description" content="Search The Ranchers crop records, seasons, reported prices and growth behavior with source links, build context and clear evidence labels for every community value.">
   <link rel="canonical" href="https://theranchersguide.com/database/crops">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="The Ranchers Guide">
@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
-  <link rel="stylesheet" href="../assets/css/style.css?v=20260801-5">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260802-1">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -44,7 +44,7 @@
     <article class="article" style="max-width: 980px;">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Database / Crops</nav>
       <h1>The Ranchers Crop Database</h1>
-      <p class="meta">Updated for Early Access build 0.8.10.455 · August 1, 2026 · Unknown prices stay blank</p>
+      <p class="meta">Current build 0.8.10.455 · Updated August 2, 2026 · Historical values are labeled</p>
 
       <figure class="page-banner"><img src="../assets/img/db-crops.jpg" alt="The Ranchers gameplay screenshot: a greenhouse and neat vegetable garden rows"></figure>
 
@@ -54,7 +54,66 @@
 
       <p>Collect discoveries privately in <a href="/tools/field-notes">Field Notes</a>, then export the versioned record when it is complete enough to verify.</p>
 
-      <p class="lead">This is a verification tracker, not a guessed crop catalog. Search the official systems below, see what remains unknown, then use the measurement worksheet to turn your own launch observations into comparable profit data.</p>
+      <p class="lead">This living database combines official facts with clearly labeled player research. Search individual crops, inspect the source and build context, and never mistake an old community value for a current-build fact.</p>
+
+      <section class="evidence-ledger" aria-labelledby="community-crop-data">
+        <div class="section-heading-row">
+          <div>
+            <span class="kicker">Community Evidence</span>
+            <h2 id="community-crop-data">Reported crop records</h2>
+          </div>
+          <a class="text-link" href="/contact">Submit a current-build correction</a>
+        </div>
+        <div class="notice warning">
+          <strong>Historical Alpha data:</strong> these values were preserved by players before Early Access. They are useful leads, not current build 0.8.10.455 facts. A row is upgraded only when current-version evidence is available.
+        </div>
+        <div class="table-tools">
+          <label class="visually-hidden" for="crop-record-search">Search reported crops</label>
+          <input type="search" id="crop-record-search" placeholder="Search crop, season, price or behavior..." data-table-search="crop-records-table">
+          <label class="visually-hidden" for="crop-record-status">Filter crop evidence status</label>
+          <select id="crop-record-status" data-table-filter="crop-records-table">
+            <option value="">All evidence</option>
+            <option value="historical">Historical community report</option>
+          </select>
+          <span class="tag" data-table-count="crop-records-table">- entries</span>
+        </div>
+        <div class="data-table-wrap">
+          <table class="data-table evidence-table" id="crop-records-table">
+            <thead>
+              <tr>
+                <th data-sortable>Crop <span class="sort-arrow"></span></th>
+                <th data-sortable>Season <span class="sort-arrow"></span></th>
+                <th data-sortable>Reported seed price <span class="sort-arrow"></span></th>
+                <th>Reported behavior</th>
+                <th>Evidence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="red-lettuce-seeds" data-search-entry data-search-title="Red Lettuce Seeds" data-search-tags="red lettuce spring seed price crop" data-search-status="Historical community report" data-category="historical">
+                <td><a class="entry-anchor" href="#red-lettuce-seeds">Red Lettuce Seeds</a></td><td>Spring</td><td data-sort="18">18C</td><td>Growth time and sale value were not recorded.</td><td><span class="tag historical">Historical lead</span> <a href="https://the-ranchers.fandom.com/wiki/Farmer%27s_Land" rel="noopener noreferrer">Player Wiki</a></td>
+              </tr>
+              <tr id="garlic-seeds" data-search-entry data-search-title="Garlic Seeds" data-search-tags="garlic spring seed price crop" data-search-status="Historical community report" data-category="historical">
+                <td><a class="entry-anchor" href="#garlic-seeds">Garlic Seeds</a></td><td>Spring</td><td data-sort="36">36C</td><td>Growth time and sale value were not recorded.</td><td><span class="tag historical">Historical lead</span> <a href="https://the-ranchers.fandom.com/wiki/Farmer%27s_Land" rel="noopener noreferrer">Player Wiki</a></td>
+              </tr>
+              <tr id="strawberry-seeds" data-search-entry data-search-title="Strawberry Seeds" data-search-tags="strawberry berry berries spring regrow recurring daily fruit yield seed price" data-search-status="Historical community report" data-category="historical">
+                <td><a class="entry-anchor" href="#strawberry-seeds">Strawberry Seeds</a></td><td>Spring</td><td data-sort="38">38C</td><td>Reported to fruit daily after maturity, yielding 10-20 berries per plot; reported sale value 20C.</td><td><span class="tag historical">Historical lead</span> <a href="https://the-ranchers.fandom.com/wiki/Farmer%27s_Land" rel="noopener noreferrer">Player Wiki</a></td>
+              </tr>
+              <tr id="aubergine-seeds" data-search-entry data-search-title="Aubergine Seeds" data-search-tags="aubergine eggplant summer seed price crop" data-search-status="Historical community report" data-category="historical">
+                <td><a class="entry-anchor" href="#aubergine-seeds">Aubergine Seeds</a></td><td>Summer</td><td data-sort="21">21C</td><td>Growth time and sale value were not recorded.</td><td><span class="tag historical">Historical lead</span> <a href="https://the-ranchers.fandom.com/wiki/Farmer%27s_Land" rel="noopener noreferrer">Player Wiki</a></td>
+              </tr>
+              <tr id="corn-seeds" data-search-entry data-search-title="Corn Seeds" data-search-tags="corn maize summer seed price crop" data-search-status="Historical community report" data-category="historical">
+                <td><a class="entry-anchor" href="#corn-seeds">Corn Seeds</a></td><td>Summer</td><td data-sort="54">54C</td><td>Growth time and sale value were not recorded.</td><td><span class="tag historical">Historical lead</span> <a href="https://the-ranchers.fandom.com/wiki/Farmer%27s_Land" rel="noopener noreferrer">Player Wiki</a></td>
+              </tr>
+              <tr id="green-lettuce-seeds" data-search-entry data-search-title="Green Lettuce Seeds" data-search-tags="green lettuce summer seed price crop" data-search-status="Historical community report" data-category="historical">
+                <td><a class="entry-anchor" href="#green-lettuce-seeds">Green Lettuce Seeds</a></td><td>Summer</td><td data-sort="27">27C</td><td>Growth time and sale value were not recorded.</td><td><span class="tag historical">Historical lead</span> <a href="https://the-ranchers.fandom.com/wiki/Farmer%27s_Land" rel="noopener noreferrer">Player Wiki</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="source-note"><strong>Source handling:</strong> names, seasons and reported values were normalized from the community-maintained Farmer's Land page, reviewed August 2, 2026. We link to the original record and do not reproduce its prose or images.</p>
+      </section>
+
+      <h2>Confirmed farming systems</h2>
 
       <div class="table-tools">
         <label class="visually-hidden" for="crop-search">Search crops</label>
@@ -122,7 +181,7 @@
 
       <h2>Sources and evidence policy</h2>
       <p>The confirmed rows come from the <a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">official Steam store page</a> and <a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">official Steam updates</a>, reviewed August 1, 2026. They describe systems, not a complete numerical crop catalog.</p>
-      <p>Community reports can point us toward a test, but they do not become database facts without a matching screenshot or repeatable in-game observation. A correction should include the game version and the screen or action that produced the value. <a href="/contact">Send evidence through the contact page</a>.</p>
+      <p>Community reports can enter the database as labeled leads when their origin and build context are clear. They become corroborated or verified current-build values only after independent matching evidence. A correction should include the game version and the screen or action that produced the value. <a href="/contact">Send evidence through the contact page</a>.</p>
       <p>Pair this with the <a href="/database/animals">animal database</a> to plan your whole ranch economy, and read the <a href="/guides/beginners-guide">beginner's guide</a> if this is your first season.</p>
 
       <!-- Ad slot placeholder
@@ -176,6 +235,6 @@
   </footer>
 
   <script src="../assets/js/main.js" defer></script>
-  <script src="../assets/js/database.js" defer></script>
+  <script src="../assets/js/database.js?v=20260802-1" defer></script>
 </body>
 </html>

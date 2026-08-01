@@ -150,6 +150,29 @@
     return total;
   }
 
+  function entryType(url) {
+    if (url === "/database/crops") return "Crop data";
+    if (url === "/database/animals") return "Animal data";
+    return "Database entry";
+  }
+
+  function expandEntryDocuments(document) {
+    var page = Object.assign({}, document);
+    delete page.entries;
+    var entries = Array.isArray(document && document.entries) ? document.entries : [];
+    return [page].concat(entries.map(function (entry) {
+      var status = entry.status || "Community data";
+      var text = [status, entry.text || ""].filter(Boolean).join(": ");
+      return {
+        title: entry.title || document.title,
+        url: document.url + "#" + entry.id,
+        type: entryType(document.url),
+        description: text,
+        sections: [{ heading: entry.tags || entry.title || "Data", text: text }]
+      };
+    }));
+  }
+
   function searchDocuments(documents, query, limit) {
     var queryTerms = tokens(query);
     if (!queryTerms.length) return [];
@@ -169,6 +192,7 @@
   return {
     normalize: normalize,
     levenshtein: levenshtein,
+    expandEntryDocuments: expandEntryDocuments,
     searchDocuments: searchDocuments,
   };
 });

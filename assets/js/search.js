@@ -18,7 +18,7 @@
     "/contact",
     "/privacy"
   ];
-  var CACHE_KEY = "ranchers-search-index-v1";
+  var CACHE_KEY = "ranchers-search-index-v2";
   var documents = [];
   var form = document.querySelector("[data-search-form]");
   var input = document.querySelector("[data-search-input]");
@@ -45,9 +45,20 @@
     var sections = [];
     var seen = new Set();
     var heading = "Overview";
+    var entries = [];
+
+    parsed.querySelectorAll("[data-search-entry][id]").forEach(function (node) {
+      entries.push({
+        id: node.id,
+        title: node.dataset.searchTitle || (node.cells && node.cells[0] ? node.cells[0].textContent.trim() : node.id),
+        text: node.textContent.replace(/\s+/g, " ").trim(),
+        tags: node.dataset.searchTags || "",
+        status: node.dataset.searchStatus || "Community data"
+      });
+    });
 
     if (main) {
-      main.querySelectorAll("form, script, style, noscript, .ad-slot, .field-note-list").forEach(function (node) {
+      main.querySelectorAll("form, script, style, noscript, .ad-slot, .field-note-list, [data-search-entry]").forEach(function (node) {
         node.remove();
       });
       main.querySelectorAll("h1, h2, h3, p, li, summary, th, td").forEach(function (node) {
@@ -67,14 +78,15 @@
       url: path,
       type: pageType(path),
       description: description ? description.content : "",
-      sections: sections
+      sections: sections,
+      entries: entries
     };
   }
 
   function loadCachedIndex() {
     try {
       var cached = JSON.parse(sessionStorage.getItem(CACHE_KEY));
-      return Array.isArray(cached) && cached.length === PAGE_PATHS.length ? cached : null;
+      return Array.isArray(cached) && cached.length >= PAGE_PATHS.length ? cached : null;
     } catch (_) {
       return null;
     }
@@ -91,7 +103,10 @@
       }).then(function (html) {
         return extractDocument(html, path);
       });
-    })).then(function (index) {
+    })).then(function (pages) {
+      var index = pages.reduce(function (all, page) {
+        return all.concat(RanchersSearch.expandEntryDocuments(page));
+      }, []);
       try { sessionStorage.setItem(CACHE_KEY, JSON.stringify(index)); } catch (_) { /* Search still works without cache. */ }
       return index;
     });

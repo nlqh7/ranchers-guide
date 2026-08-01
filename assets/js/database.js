@@ -23,7 +23,8 @@
       rows.forEach(function (row) {
         var text = row.textContent.toLowerCase();
         var okQ = !q || text.indexOf(q) !== -1;
-        var okF = !f || row.getAttribute("data-season") === f || row.getAttribute("data-category") === f;
+        var rowFilter = row.getAttribute("data-season") || row.getAttribute("data-category") || "";
+        var okF = !f || rowFilter === f || (!rowFilter && text.indexOf(f.toLowerCase()) !== -1);
         var show = okQ && okF;
         row.style.display = show ? "" : "none";
         if (show) visible++;
@@ -68,4 +69,6 @@
 
   initDataTable("crops-table");
   initDataTable("animals-table");
+  initDataTable("crop-records-table");
+  initDataTable("animal-records-table");
 })();

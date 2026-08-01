@@ -608,10 +608,45 @@ table.data-table {
   color: var(--brown-700);
 }
 .tag.pending { background: #fdeec9; color: var(--rust); }
+.tag.historical { background: #e6edf2; color: #35566f; }
 .tag.season-spring { background: #e3f2dc; color: var(--green-700); }
 .tag.season-summer { background: #fdf3d0; color: #8a6a10; }
 .tag.season-fall { background: #f7e2cd; color: var(--rust); }
 .tag.season-winter { background: #e0ecf5; color: #2d5d7d; }
+
+.evidence-ledger {
+  margin: 44px 0;
+  padding-top: 28px;
+  border-top: 3px solid var(--brown-900);
+}
+.section-heading-row {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+}
+.article .section-heading-row h2 {
+  margin: 4px 0 0;
+  padding: 0;
+  border: 0;
+}
+.text-link { font-weight: 800; }
+.source-note {
+  color: var(--brown-500);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+.entry-anchor { font-weight: 800; }
+.evidence-table tr[data-search-entry] { scroll-margin-top: 120px; }
+.evidence-table tr[data-search-entry]:target td {
+  background: #fff0b8;
+  box-shadow: inset 0 2px 0 var(--gold), inset 0 -2px 0 var(--gold);
+}
+
+@media (max-width: 639px) {
+  .section-heading-row { align-items: start; flex-direction: column; gap: 8px; }
+  .evidence-ledger { margin: 36px 0; padding-top: 22px; }
+}
 
 /* ---------- Profit calculator ---------- */
 .calc-layout {

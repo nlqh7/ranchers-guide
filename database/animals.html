@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Ranchers Animal Database — Confirmed Roster & Data Tracker</title>
-  <meta name="description" content="A source-backed animal data tracker for The Ranchers, covering the officially named roster, confirmed ranch systems, unknown values, and a launch verification method.">
+  <meta name="description" content="Search The Ranchers animal records, variants and reported prices with source links, build context and clear evidence labels separating current facts from historical player data.">
   <link rel="canonical" href="https://theranchersguide.com/database/animals">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="The Ranchers Guide">
@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
-  <link rel="stylesheet" href="../assets/css/style.css?v=20260801-5">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260802-1">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -44,7 +44,7 @@
     <article class="article" style="max-width: 980px;">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Database / Animals</nav>
       <h1>The Ranchers Animal Database</h1>
-      <p class="meta">Updated for Early Access build 0.8.10.455 · August 1, 2026 · Unknown prices stay blank</p>
+      <p class="meta">Current build 0.8.10.455 · Updated August 2, 2026 · Historical values are labeled</p>
 
       <figure class="page-banner"><img src="../assets/img/db-animals.jpg" alt="The Ranchers gameplay screenshot: cows grazing outside the red barn"></figure>
 
@@ -54,7 +54,71 @@
 
       <p>Collect discoveries privately in <a href="/tools/field-notes">Field Notes</a>, then export the versioned record when it is complete enough to verify.</p>
 
-      <p class="lead">Search the officially named roster and the systems that still need launch observation. The table separates what the developer has published from the costs, products, care rules, and cycle times that players must measure in the released build.</p>
+      <p class="lead">This living database combines the official roster with clearly labeled player research. Search an individual animal, inspect its source and version context, and help replace historical values with current-build evidence.</p>
+
+      <section class="evidence-ledger" aria-labelledby="community-animal-data">
+        <div class="section-heading-row">
+          <div>
+            <span class="kicker">Community Evidence</span>
+            <h2 id="community-animal-data">Reported animal records</h2>
+          </div>
+          <a class="text-link" href="/contact">Submit a current-build correction</a>
+        </div>
+        <div class="notice warning">
+          <strong>Historical Alpha data:</strong> these prices came from a player-maintained archive and may have changed for Early Access. They are preserved as research leads, not presented as current build 0.8.10.455 prices.
+        </div>
+        <div class="table-tools">
+          <label class="visually-hidden" for="animal-record-search">Search reported animals</label>
+          <input type="search" id="animal-record-search" placeholder="Search animal, variant or reported price..." data-table-search="animal-records-table">
+          <label class="visually-hidden" for="animal-record-status">Filter animal evidence status</label>
+          <select id="animal-record-status" data-table-filter="animal-records-table">
+            <option value="">All evidence</option>
+            <option value="historical">Historical community report</option>
+          </select>
+          <span class="tag" data-table-count="animal-records-table">- entries</span>
+        </div>
+        <div class="data-table-wrap">
+          <table class="data-table evidence-table" id="animal-records-table">
+            <thead>
+              <tr>
+                <th data-sortable>Animal <span class="sort-arrow"></span></th>
+                <th data-sortable>Group <span class="sort-arrow"></span></th>
+                <th data-sortable>Reported purchase price <span class="sort-arrow"></span></th>
+                <th>Evidence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="rooster" data-search-entry data-search-title="Rooster" data-search-tags="rooster chicken poultry coop male price" data-search-status="Historical community report" data-category="historical">
+                <td><a class="entry-anchor" href="#rooster">Rooster</a></td><td>Coop animal</td><td data-sort="1200">1,200C</td><td><span class="tag historical">Historical lead</span> <a href="https://the-ranchers.fandom.com/wiki/Nina%27s_Shop" rel="noopener noreferrer">Player Wiki</a></td>
+              </tr>
+              <tr id="black-chicken" data-search-entry data-search-title="Black Chicken" data-search-tags="black chicken hen poultry coop egg price" data-search-status="Historical community report" data-category="historical">
+                <td><a class="entry-anchor" href="#black-chicken">Black Chicken</a></td><td>Coop animal</td><td data-sort="840">840C</td><td><span class="tag historical">Historical lead</span> <a href="https://the-ranchers.fandom.com/wiki/Nina%27s_Shop" rel="noopener noreferrer">Player Wiki</a></td>
+              </tr>
+              <tr id="white-chicken" data-search-entry data-search-title="White Chicken" data-search-tags="white chicken hen poultry coop egg price" data-search-status="Historical community report" data-category="historical">
+                <td><a class="entry-anchor" href="#white-chicken">White Chicken</a></td><td>Coop animal</td><td data-sort="840">840C</td><td><span class="tag historical">Historical lead</span> <a href="https://the-ranchers.fandom.com/wiki/Nina%27s_Shop" rel="noopener noreferrer">Player Wiki</a></td>
+              </tr>
+              <tr id="brown-chicken" data-search-entry data-search-title="Brown Chicken" data-search-tags="brown chicken hen poultry coop egg price" data-search-status="Historical community report" data-category="historical">
+                <td><a class="entry-anchor" href="#brown-chicken">Brown Chicken</a></td><td>Coop animal</td><td data-sort="840">840C</td><td><span class="tag historical">Historical lead</span> <a href="https://the-ranchers.fandom.com/wiki/Nina%27s_Shop" rel="noopener noreferrer">Player Wiki</a></td>
+              </tr>
+              <tr id="brown-spotted-cow" data-search-entry data-search-title="Brown Spotted Cow" data-search-tags="brown spotted cow cattle barn milk female price" data-search-status="Historical community report" data-category="historical">
+                <td><a class="entry-anchor" href="#brown-spotted-cow">Brown Spotted Cow</a></td><td>Barn animal</td><td data-sort="24000">24,000C</td><td><span class="tag historical">Historical lead</span> <a href="https://the-ranchers.fandom.com/wiki/Nina%27s_Shop" rel="noopener noreferrer">Player Wiki</a></td>
+              </tr>
+              <tr id="black-spotted-cow" data-search-entry data-search-title="Black Spotted Cow" data-search-tags="black spotted cow cattle barn milk female price" data-search-status="Historical community report" data-category="historical">
+                <td><a class="entry-anchor" href="#black-spotted-cow">Black Spotted Cow</a></td><td>Barn animal</td><td data-sort="24000">24,000C</td><td><span class="tag historical">Historical lead</span> <a href="https://the-ranchers.fandom.com/wiki/Nina%27s_Shop" rel="noopener noreferrer">Player Wiki</a></td>
+              </tr>
+              <tr id="brown-spotted-bull" data-search-entry data-search-title="Brown Spotted Bull" data-search-tags="brown spotted bull cattle barn male breeding price" data-search-status="Historical community report" data-category="historical">
+                <td><a class="entry-anchor" href="#brown-spotted-bull">Brown Spotted Bull</a></td><td>Barn animal</td><td data-sort="48000">48,000C</td><td><span class="tag historical">Historical lead</span> <a href="https://the-ranchers.fandom.com/wiki/Nina%27s_Shop" rel="noopener noreferrer">Player Wiki</a></td>
+              </tr>
+              <tr id="black-spotted-bull" data-search-entry data-search-title="Black Spotted Bull" data-search-tags="black spotted bull cattle barn male breeding price" data-search-status="Historical community report" data-category="historical">
+                <td><a class="entry-anchor" href="#black-spotted-bull">Black Spotted Bull</a></td><td>Barn animal</td><td data-sort="48000">48,000C</td><td><span class="tag historical">Historical lead</span> <a href="https://the-ranchers.fandom.com/wiki/Nina%27s_Shop" rel="noopener noreferrer">Player Wiki</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="source-note"><strong>Source handling:</strong> animal names and reported prices were normalized from the community-maintained Nina's Shop page, reviewed August 2, 2026. The source still describes an Alpha build, so every price remains historical until current evidence replaces it.</p>
+      </section>
+
+      <h2>Confirmed animals and systems</h2>
 
       <div class="table-tools">
         <label class="visually-hidden" for="animal-search">Search animals</label>
@@ -123,7 +187,7 @@
 
       <h2>Sources and evidence policy</h2>
       <p>The confirmed roster comes from the <a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">official Steam store page</a>. Current transport, map, and probability rules come from <a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">official Steam updates</a>, reviewed August 1, 2026.</p>
-      <p>Community reports are useful leads, but a database value requires a screenshot or repeatable observation with the game version. We will not add plausible genre-standard animals simply to make the table longer. <a href="/contact">Send a documented correction</a>.</p>
+      <p>Community reports can enter as labeled leads when their origin and build context are clear. They become corroborated or verified current-build values only after independent matching evidence. We will not add plausible genre-standard animals simply to make the table longer. <a href="/contact">Send a documented correction</a>.</p>
       <p>Planning a co-op barn? The <a href="/guides/multiplayer-coop">co-op guide</a> shows how to assign a dedicated barn lead. Building your first ranch? Start with the <a href="/guides/beginners-guide">beginner's guide</a>.</p>
 
       <!-- Ad slot placeholder
@@ -177,6 +241,6 @@
   </footer>
 
   <script src="../assets/js/main.js" defer></script>
-  <script src="../assets/js/database.js" defer></script>
+  <script src="../assets/js/database.js?v=20260802-1" defer></script>
 </body>
 </html>

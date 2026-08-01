@@ -1,7 +1,8 @@
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
-const { searchDocuments } = require("../assets/js/search-core.js");
+const RanchersSearch = require("../assets/js/search-core.js");
+const { searchDocuments } = RanchersSearch;
 
 const documents = [
   {
@@ -40,6 +41,27 @@ const result = searchDocuments(documents, "daily feed")[0];
 assert.match(result.snippet, /daily feed requirements/i);
 assert.ok(result.score > 0);
 
+const expandedDocuments = RanchersSearch.expandEntryDocuments({
+  title: "The Ranchers Crop Database",
+  url: "/database/crops",
+  type: "Database",
+  description: "Source-backed crop data.",
+  sections: [],
+  entries: [
+    {
+      id: "strawberry-seeds",
+      title: "Strawberry Seeds",
+      text: "Historical community report: Spring seed, daily fruit after maturity, 10-20 berries per plot.",
+      tags: "strawberry berry regrow spring",
+      status: "Historical community report"
+    }
+  ]
+});
+const strawberryResult = searchDocuments(expandedDocuments, "strawbery daily fruit")[0];
+assert.equal(strawberryResult.url, "/database/crops#strawberry-seeds");
+assert.equal(strawberryResult.type, "Crop data");
+assert.match(strawberryResult.snippet, /Historical community report/i);
+
 function htmlFiles(directory) {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
     const target = path.join(directory, entry.name);
@@ -55,5 +77,7 @@ pages.forEach((file) => {
   assert.match(fs.readFileSync(file, "utf8"), /href="\/search"/, `${path.relative(root, file)} needs a Search link`);
 });
 assert.match(fs.readFileSync(path.join(root, "search.html"), "utf8"), /name="robots" content="noindex,follow"/);
+assert.match(fs.readFileSync(path.join(root, "database", "crops.html"), "utf8"), /id="strawberry-seeds"[^>]+data-search-entry/);
+assert.match(fs.readFileSync(path.join(root, "database", "animals.html"), "utf8"), /id="black-chicken"[^>]+data-search-entry/);
 
 console.log(`PASS: site search handles fuzzy queries and is linked from ${pages.length} HTML pages.`);
