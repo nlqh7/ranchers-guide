@@ -51,6 +51,41 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://theranchersguide.com/problems</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://theranchersguide.com/problems/offline-mode-loading</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://theranchersguide.com/problems/friend-session-join</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://theranchersguide.com/problems/vehicle-recovery</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://theranchersguide.com/problems/fast-travel-subway</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://theranchersguide.com/problems/failed-quest-replay</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://theranchersguide.com/research</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://theranchersguide.com/tools/profit-calculator</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>

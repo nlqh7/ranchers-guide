@@ -18,7 +18,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon-180.png">
-  <link rel="stylesheet" href="assets/css/style.css?v=20260802-3">
+  <link rel="stylesheet" href="assets/css/style.css?v=20260803-1">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -28,7 +28,7 @@
     "description": "Fan-made guide hub for The Ranchers, available in Steam Early Access since July 30, 2026.",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://theranchersguide.com/database/crops?q={search_term_string}",
+      "target": "https://theranchersguide.com/search?q={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   }
@@ -72,13 +72,12 @@
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
       <ul class="nav-links">
-        <li><a href="/guides/release-time-checklist">Status</a></li>
-        <li><a href="/guides/beginners-guide">Beginner</a></li>
-        <li><a href="/guides/money-making">Money</a></li>
-        <li><a href="/guides/multiplayer-coop">Co-op</a></li>
-        <li><a href="/database/crops">Data</a></li>
+        <li><a href="/guides/beginners-guide">Guides</a></li>
+        <li><a href="/database/crops">Database</a></li>
+        <li><a href="/problems">Problems</a></li>
+        <li><a href="/research">Research</a></li>
         <li><a href="/search">Search</a></li>
-        <li><a class="nav-cta" href="/tools/field-notes">Field Notes</a></li>
+        <li><a class="nav-cta" href="/contribute">Contribute</a></li>
       </ul>
     </nav>
   </header>
@@ -101,7 +100,7 @@
 
           <div class="hero-actions">
             <a class="btn" href="/guides/beginners-guide">Start with the Guide</a>
-            <a class="btn btn-outline" href="/tools/field-notes">Record a Finding</a>
+            <a class="btn btn-outline" href="/problems">Solve a Problem</a>
           </div>
           <p class="hero-source">Player-made and evidence-tracked. <a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">Check official Steam notes</a>.</p>
         </div>
@@ -115,15 +114,15 @@
     <section class="section research-promo" aria-labelledby="research-promo-title">
       <div class="container research-promo-inner">
         <div>
-          <span class="kicker">Original Research Tool</span>
-          <h2 id="research-promo-title">Build data that can be checked</h2>
-          <p>Keep versioned observations in your browser, separate community leads from reproduced findings, and export a backup whenever you need it. Nothing is uploaded automatically.</p>
-          <p><a class="btn" href="/tools/field-notes">Start a Field Notebook</a></p>
+          <span class="kicker">Player Research Hub</span>
+          <h2 id="research-promo-title">Answers with visible evidence</h2>
+          <p>Start with a current-build fix, inspect what supports it, or help test an open question. Unresolved community reports stay in the research queue instead of becoming guessed advice.</p>
+          <p class="button-stack"><a class="btn" href="/problems">Browse Problems</a><a class="btn btn-outline" href="/research">Open Research Queue</a></p>
         </div>
         <ol class="research-steps">
-          <li><strong>Record</strong><span>Build, conditions, action and result.</span></li>
-          <li><strong>Repeat</strong><span>Promote a lead only after another matching test.</span></li>
-          <li><strong>Compare</strong><span>Move complete values into the profit calculator.</span></li>
+          <li><strong>Solve</strong><span>Follow a source-backed answer for the named build.</span></li>
+          <li><strong>Check</strong><span>See whether evidence is official, corroborated or still reported.</span></li>
+          <li><strong>Contribute</strong><span>Send a reproducible observation for manual review.</span></li>
         </ol>
       </div>
     </section>
@@ -311,6 +310,6 @@
     </div>
   </footer>
 
-  <script src="assets/js/main.js?v=20260802-1" defer></script>
+  <script src="assets/js/main.js?v=20260803-1" defer></script>
 </body>
 </html>

@@ -12,13 +12,20 @@
     "/guides/animal-guide",
     "/database/crops",
     "/database/animals",
+    "/problems",
+    "/problems/offline-mode-loading",
+    "/problems/friend-session-join",
+    "/problems/vehicle-recovery",
+    "/problems/fast-travel-subway",
+    "/problems/failed-quest-replay",
+    "/research",
     "/tools/profit-calculator",
     "/tools/field-notes",
     "/about",
     "/contact",
     "/privacy"
   ];
-  var CACHE_KEY = "ranchers-search-index-v3";
+  var CACHE_KEY = "ranchers-search-index-v4";
   var documents = [];
   var form = document.querySelector("[data-search-form]");
   var input = document.querySelector("[data-search-input]");
@@ -34,6 +41,8 @@
   function pageType(path) {
     if (path.indexOf("/guides/") === 0) return "Guide";
     if (path.indexOf("/database/") === 0) return "Database";
+    if (path.indexOf("/problems/") === 0 || path === "/problems") return "Problem";
+    if (path === "/research") return "Research";
     if (path.indexOf("/tools/") === 0) return "Tool";
     if (path === "/") return "Home";
     return "Site";

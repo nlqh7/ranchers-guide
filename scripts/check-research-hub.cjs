@@ -1,0 +1,87 @@
+const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const path = require("node:path");
+
+const root = path.resolve(__dirname, "..");
+const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), "utf8");
+
+const problemPages = [
+  "problems/offline-mode-loading.html",
+  "problems/friend-session-join.html",
+  "problems/vehicle-recovery.html",
+  "problems/fast-travel-subway.html",
+  "problems/failed-quest-replay.html",
+];
+
+const hub = read("problems.html");
+problemPages.forEach((relativePath) => {
+  assert.ok(fs.existsSync(path.join(root, relativePath)), `${relativePath} must exist`);
+  const html = read(relativePath);
+  const route = `/${relativePath.replace(/\.html$/, "")}`;
+  assert.match(html, new RegExp(`<link rel="canonical" href="https://theranchersguide\\.com${route.replaceAll("/", "\\/")}"`));
+  assert.match(html, /data-evidence-status="(?:official|corroborated)"/);
+  assert.match(html, /0\.8\.10\.455/);
+  assert.match(html, /https:\/\/steamcommunity\.com\/app\/1501310/);
+  assert.match(hub, new RegExp(`href="${route.replaceAll("/", "\\/")}"`));
+});
+
+const research = read("research.html");
+assert.match(research, /id="roof-quest"/);
+assert.match(research, /id="furniture-placement"/);
+assert.match(research, /id="power-to-the-bench"/);
+assert.match(research, /Official[\s\S]*Verified[\s\S]*Corroborated[\s\S]*Reported[\s\S]*Historical[\s\S]*Obsolete/);
+
+const contribute = read("contribute.html");
+assert.match(contribute, /name="robots" content="noindex,follow"/);
+assert.doesNotMatch(contribute, /adsbygoogle/);
+assert.match(contribute, /data-contribution-form/);
+
+for (const relativePath of ["404.html", "search.html", "about.html", "contact.html", "privacy.html", "problems.html", "tools/field-notes.html"]) {
+  assert.doesNotMatch(read(relativePath), /adsbygoogle/, `${relativePath} must not request automatic ads`);
+}
+
+const contributionCore = require("../assets/js/contribute-core.js");
+const body = contributionCore.buildSubmissionBody({
+  topic: "Crop data",
+  build: "0.8.10.455",
+  platform: "Windows",
+  finding: "Garlic took five occupied days in a control plot.",
+  method: "Planted after waking and checked once per in-game morning.",
+  source: "Screenshot attached",
+  credit: "RanchTester",
+});
+assert.match(body, /Build: 0\.8\.10\.455/);
+assert.match(body, /Method: Planted after waking/);
+assert.match(body, /Credit: RanchTester/);
+
+const searchScript = read("assets/js/search.js");
+for (const route of [
+  "/problems",
+  "/research",
+  ...problemPages.map((file) => `/${file.replace(/\.html$/, "")}`),
+]) {
+  assert.match(searchScript, new RegExp(`"${route.replaceAll("/", "\\/")}"`));
+}
+assert.match(searchScript, /ranchers-search-index-v4/);
+
+const sitemap = read("sitemap.xml");
+assert.match(sitemap, /https:\/\/theranchersguide\.com\/problems/);
+assert.match(sitemap, /https:\/\/theranchersguide\.com\/research/);
+assert.doesNotMatch(sitemap, /https:\/\/theranchersguide\.com\/contribute/);
+
+function htmlFiles(directory) {
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const target = path.join(directory, entry.name);
+    if (entry.isDirectory() && !entry.name.startsWith(".")) return htmlFiles(target);
+    return entry.isFile() && entry.name.endsWith(".html") ? [target] : [];
+  });
+}
+
+for (const file of htmlFiles(root)) {
+  const html = fs.readFileSync(file, "utf8");
+  assert.match(html, /href="\/problems"/, `${path.relative(root, file)} needs a Problems link`);
+  assert.match(html, /href="\/research"/, `${path.relative(root, file)} needs a Research link`);
+  assert.match(html, /href="\/contribute"/, `${path.relative(root, file)} needs a Contribute link`);
+}
+
+console.log(`PASS: research hub, ${problemPages.length} sourced problem pages, contribution flow and discovery links are complete.`);
