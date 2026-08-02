@@ -29,7 +29,20 @@ const research = read("research.html");
 assert.match(research, /id="roof-quest"/);
 assert.match(research, /id="furniture-placement"/);
 assert.match(research, /id="power-to-the-bench"/);
+assert.match(research, /id="aubergine-regrow"/);
+assert.match(research, /id="chicks-disappear"/);
+assert.match(research, /id="excess-electricity"/);
+assert.match(research, /id="exterior-walls"/);
+assert.match(research, /sharedfiles\/filedetails\/\?id=2883435340/);
 assert.match(research, /Official[\s\S]*Verified[\s\S]*Corroborated[\s\S]*Reported[\s\S]*Historical[\s\S]*Obsolete/);
+
+const earlyAccessStatus = read("guides/release-time-checklist.html");
+assert.match(earlyAccessStatus, /data-evidence-status="official"/);
+assert.match(earlyAccessStatus, /0\.8\.10\.455/);
+assert.match(earlyAccessStatus, /Current version at a glance/);
+assert.match(earlyAccessStatus, /What is still planned/);
+assert.match(earlyAccessStatus, /Launch-week player reports/);
+assert.match(earlyAccessStatus, /reddit\.com\/r\/CozyGamers\/comments\/1vb46yx/);
 
 const contribute = read("contribute.html");
 assert.match(contribute, /name="robots" content="noindex,follow"/);
@@ -58,15 +71,17 @@ const searchScript = read("assets/js/search.js");
 for (const route of [
   "/problems",
   "/research",
+  "/guides/release-time-checklist",
   ...problemPages.map((file) => `/${file.replace(/\.html$/, "")}`),
 ]) {
   assert.match(searchScript, new RegExp(`"${route.replaceAll("/", "\\/")}"`));
 }
-assert.match(searchScript, /ranchers-search-index-v4/);
+assert.match(searchScript, /ranchers-search-index-v5/);
 
 const sitemap = read("sitemap.xml");
 assert.match(sitemap, /https:\/\/theranchersguide\.com\/problems/);
 assert.match(sitemap, /https:\/\/theranchersguide\.com\/research/);
+assert.match(sitemap, /https:\/\/theranchersguide\.com\/guides\/release-time-checklist/);
 assert.doesNotMatch(sitemap, /https:\/\/theranchersguide\.com\/contribute/);
 
 function htmlFiles(directory) {

@@ -25,7 +25,7 @@
     "/contact",
     "/privacy"
   ];
-  var CACHE_KEY = "ranchers-search-index-v4";
+  var CACHE_KEY = "ranchers-search-index-v5";
   var documents = [];
   var form = document.querySelector("[data-search-form]");
   var input = document.querySelector("[data-search-input]");
