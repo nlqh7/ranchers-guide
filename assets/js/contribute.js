@@ -22,6 +22,12 @@
     preview.textContent = window.RanchersContribute.buildSubmissionBody(values());
   }
 
+  var requestedTopic = new URLSearchParams(location.search).get("topic");
+  if (requestedTopic === "map") {
+    var topic = form.elements.topic;
+    if (topic) topic.value = "Shop or location";
+  }
+
   form.addEventListener("input", updatePreview);
   form.addEventListener("submit", function (event) {
     event.preventDefault();

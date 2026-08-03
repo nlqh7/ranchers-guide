@@ -12,6 +12,7 @@
     "/guides/animal-guide",
     "/database/crops",
     "/database/animals",
+    "/map",
     "/problems",
     "/problems/offline-mode-loading",
     "/problems/friend-session-join",
@@ -25,7 +26,7 @@
     "/contact",
     "/privacy"
   ];
-  var CACHE_KEY = "ranchers-search-index-v5";
+  var CACHE_KEY = "ranchers-search-index-v6";
   var documents = [];
   var form = document.querySelector("[data-search-form]");
   var input = document.querySelector("[data-search-input]");
@@ -41,6 +42,7 @@
   function pageType(path) {
     if (path.indexOf("/guides/") === 0) return "Guide";
     if (path.indexOf("/database/") === 0) return "Database";
+    if (path === "/map") return "Map";
     if (path.indexOf("/problems/") === 0 || path === "/problems") return "Problem";
     if (path === "/research") return "Research";
     if (path.indexOf("/tools/") === 0) return "Tool";
@@ -58,9 +60,10 @@
     var entries = [];
 
     parsed.querySelectorAll("[data-search-entry][id]").forEach(function (node) {
+      var entryHeading = node.querySelector("h2, h3");
       entries.push({
         id: node.id,
-        title: node.dataset.searchTitle || (node.cells && node.cells[0] ? node.cells[0].textContent.trim() : node.id),
+        title: node.dataset.searchTitle || (entryHeading ? entryHeading.textContent.trim() : (node.cells && node.cells[0] ? node.cells[0].textContent.trim() : node.id)),
         text: node.cells
           ? Array.from(node.cells).map(function (cell) { return cell.textContent.replace(/\s+/g, " ").trim(); }).join(" · ")
           : node.textContent.replace(/\s+/g, " ").trim(),

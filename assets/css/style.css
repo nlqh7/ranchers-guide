@@ -992,6 +992,87 @@ table.data-table {
   overflow-wrap: anywhere;
 }
 
+/* ---------- Map directory ---------- */
+.map-directory { background: #fff; }
+.map-answer {
+  display: grid;
+  gap: 20px;
+  align-items: center;
+  padding: 0 0 30px;
+  border-bottom: 2px solid var(--cream-300);
+}
+.map-answer h2 { margin: 5px 0 8px; }
+.map-answer p { max-width: 760px; margin: 0; }
+.location-toolbar {
+  display: grid;
+  gap: 14px;
+  margin: 30px 0 14px;
+  padding: 18px;
+  border: 2px solid var(--cream-300);
+  border-radius: 8px;
+  background: var(--cream-100);
+}
+.location-toolbar label {
+  display: grid;
+  gap: 6px;
+  color: var(--brown-700);
+  font-weight: 800;
+}
+.location-toolbar input,
+.location-toolbar select {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 2px solid var(--brown-300);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+}
+.location-toolbar input:focus,
+.location-toolbar select:focus {
+  outline: 3px solid rgba(93, 143, 74, 0.18);
+  border-color: var(--green-700);
+}
+.location-results-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 8px 0 12px;
+  border-bottom: 3px solid var(--brown-900);
+}
+.location-results-head p { margin: 0; color: var(--brown-500); font-size: 0.82rem; font-weight: 800; }
+.location-list { display: grid; }
+.location-list article {
+  display: grid;
+  gap: 18px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--cream-300);
+}
+.location-list article[hidden] { display: none; }
+.location-list h2 { margin: 3px 0 7px; font-size: 1.35rem; }
+.location-list p { margin: 0; color: var(--brown-700); }
+.location-category {
+  color: var(--rust);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.location-use {
+  display: grid;
+  gap: 5px;
+  align-content: start;
+}
+.location-use strong { color: var(--brown-500); font-size: 0.72rem; text-transform: uppercase; }
+.location-use .evidence-badge { justify-self: start; margin-top: 5px; }
+@media (min-width: 760px) {
+  .map-answer { grid-template-columns: minmax(0, 1fr) auto; }
+  .location-toolbar { grid-template-columns: minmax(0, 1fr) 220px; }
+  .location-list article { grid-template-columns: minmax(0, 1.65fr) minmax(220px, 0.6fr); }
+}
+
 @media (min-width: 720px) {
   .knowledge-hero-inner { grid-template-columns: minmax(0, 1.8fr) minmax(300px, 0.8fr); }
   .problem-row { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
