@@ -48,6 +48,15 @@ const contribute = read("contribute.html");
 assert.match(contribute, /name="robots" content="noindex,follow"/);
 assert.doesNotMatch(contribute, /adsbygoogle/);
 assert.match(contribute, /data-contribution-form/);
+assert.match(contribute, /mailto:contribute@theranchersguide\.com/);
+
+const contributionScript = read("assets/js/contribute.js");
+assert.match(contributionScript, /mailto:contribute@theranchersguide\.com/);
+
+const contact = read("contact.html");
+for (const address of ["hello", "corrections", "business"]) {
+  assert.match(contact, new RegExp(`mailto:${address}@theranchersguide\\.com`));
+}
 
 for (const relativePath of ["404.html", "search.html", "about.html", "contact.html", "privacy.html", "problems.html", "tools/field-notes.html"]) {
   assert.doesNotMatch(read(relativePath), /adsbygoogle/, `${relativePath} must not request automatic ads`);

@@ -34,7 +34,7 @@
     if (!form.reportValidity()) return;
     var body = window.RanchersContribute.buildSubmissionBody(values());
     var subject = "Player research: " + (values().topic || "The Ranchers");
-    window.location.href = "mailto:hello@theranchersguide.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    window.location.href = "mailto:contribute@theranchersguide.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
   });
 
   updatePreview();
