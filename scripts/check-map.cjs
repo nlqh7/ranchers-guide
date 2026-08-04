@@ -15,6 +15,42 @@ assert.match(mapPage, /City Hall/);
 assert.match(mapPage, /15 subway stations/);
 assert.match(mapPage, /17 Overnight Parking locations/);
 assert.match(mapPage, /href="\/contribute\?topic=map"/);
+assert.match(mapPage, /data-current-map/);
+assert.match(mapPage, /data-map-region="(?:overview|rural|city)"/);
+assert.match(mapPage, /data-map-zoom="(?:in|out|reset)"/);
+assert.match(mapPage, /data-map-pan="(?:left|right|up|down)"/);
+assert.match(mapPage, /data-map-region="city-north"/);
+assert.match(mapPage, /data-map-region="city-center"/);
+assert.match(mapPage, /data-map-region="east-coast"/);
+assert.match(mapPage, /data-map-inspector/);
+assert.match(mapPage, /Games Station/);
+assert.match(mapPage, /youtube\.com\/watch\?v=GrFiYqWcBK0(?:&amp;|&)t=1695s/);
+assert.match(mapPage, /Player-captured August 2, 2026/i);
+
+for (const image of [
+  "map-current-overview.jpg",
+  "map-city-center.jpg",
+  "map-airport.jpg",
+  "map-city-hall.jpg",
+  "map-leafy-market.jpg",
+]) {
+  assert.ok(fs.existsSync(path.join(root, "assets", "img", image)), `${image} must exist`);
+  assert.match(mapPage, new RegExp(`/assets/img/${image.replace(".", "\\.")}`));
+}
+
+const mapScript = read("assets/js/map.js");
+assert.match(mapScript, /data-map-region/);
+assert.match(mapScript, /data-location-map/);
+assert.match(mapScript, /data-map-zoom/);
+assert.match(mapScript, /data-map-pan/);
+assert.match(mapScript, /data-map-inspector/);
+
+const viewerCore = require("../assets/js/map-viewer-core.js");
+assert.deepEqual(viewerCore.getView("rural"), { scale: 1.6, x: 24, y: 2 });
+assert.deepEqual(viewerCore.getView("city"), { scale: 1.55, x: -25, y: 1 });
+assert.equal(viewerCore.clampZoom(9), 3);
+assert.equal(viewerCore.clampZoom(0.2), 1);
+assert.deepEqual(viewerCore.pan({ scale: 2, x: 0, y: 0 }, "left"), { scale: 2, x: 3.5, y: 0 });
 
 const mapCore = require("../assets/js/map-core.js");
 const locations = [
@@ -30,7 +66,7 @@ assert.deepEqual(mapCore.filterLocations(locations, "casino", "all"), []);
 
 const search = read("assets/js/search.js");
 assert.match(search, /"\/map"/);
-assert.match(search, /ranchers-search-index-v6/);
+assert.match(search, /ranchers-search-index-v8/);
 assert.match(search, /node\.querySelector\("h2, h3"\)/);
 
 const sitemap = read("sitemap.xml");

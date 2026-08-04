@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
-  <link rel="stylesheet" href="/assets/css/style.css?v=20260803-1">
+  <link rel="stylesheet" href="/assets/css/style.css?v=20260803-5">
 </head>
 <body>
   <header class="site-header">
@@ -50,24 +50,70 @@
     </section>
     <section class="section">
       <div class="container">
-        <div class="section-head"><span class="kicker">Start with the symptom</span><h2>Published help</h2><p>Use the page that matches what you see. Early Access changes quickly, so check the build label before following a fix.</p></div>
-        <div class="problem-list">
-          <article class="problem-row"><div><span class="evidence-badge evidence-official">Official</span><h2><a href="/problems/offline-mode-loading">Offline Mode keeps loading or will not start</a></h2><p>Update first, then separate a known launch-build issue from a new save or Steam problem.</p></div><span class="problem-route">Offline</span></article>
-          <article class="problem-row"><div><span class="evidence-badge evidence-corroborated">Corroborated</span><h2><a href="/problems/friend-session-join">A friend cannot join the ranch</a></h2><p>Check build parity, Steam visibility and the in-game travel route in the correct order.</p></div><span class="problem-route">Co-op</span></article>
-          <article class="problem-row"><div><span class="evidence-badge evidence-official">Official</span><h2><a href="/problems/vehicle-recovery">A vehicle is stuck, broken or impounded</a></h2><p>Choose My Garage, Car Pound or a mechanic based on ownership and license status.</p></div><span class="problem-route">Vehicles</span></article>
-          <article class="problem-row"><div><span class="evidence-badge evidence-official">Official</span><h2><a href="/problems/fast-travel-subway">How subway and quest fast travel work</a></h2><p>Know which trips allow a skip and what happens to passengers, vehicles and attached animals.</p></div><span class="problem-route">Travel</span></article>
-          <article class="problem-row"><div><span class="evidence-badge evidence-official">Official</span><h2><a href="/problems/failed-quest-replay">A quest failed or cannot be restarted</a></h2><p>Use the current replay behavior and identify cases that still need a new report.</p></div><span class="problem-route">Quests</span></article>
+        <div class="section-head"><span class="kicker">Start with the symptom</span><h2>Find a fix or tracked report</h2><p>Search plain-language symptoms, then separate published answers from reports that still need reproduction. Early Access changes quickly, so check the evidence label before acting.</p></div>
+        <div class="problem-toolbar">
+          <label for="problem-search">Search symptoms<input id="problem-search" data-problem-search type="search" placeholder="Try missing seeds, roof, join, vehicle..."></label>
+          <fieldset data-problem-filter aria-label="Filter problem status"><legend>Status</legend><button class="active" type="button" data-problem-filter-value="all" aria-pressed="true">All</button><button type="button" data-problem-filter-value="solved" aria-pressed="false">Published fixes</button><button type="button" data-problem-filter-value="reported" aria-pressed="false">Open reports</button></fieldset>
         </div>
+        <div class="problem-results-head"><p><strong data-problem-count>12 results</strong></p><p>“Reported” means a player described it; it does not mean we reproduced it.</p></div>
+
+        <section class="problem-section" aria-labelledby="tracker-title">
+          <div class="section-head"><span class="kicker">At a glance</span><h2 id="tracker-title">Known issues in build 0.8.10.455</h2><p>Every tracked issue in one table with its evidence level and source. Published fixes link to their full guide; open reports link to the research queue or the discussion where they were first described.</p></div>
+          <div class="data-table-wrap">
+          <table>
+            <thead><tr><th>Issue</th><th>Status</th><th>Evidence</th><th>Build</th><th>Source</th></tr></thead>
+            <tbody>
+              <tr><td><a href="/problems/offline-mode-loading">Offline Mode keeps loading or will not start</a></td><td>Published fix</td><td><span class="evidence-badge evidence-official">Official</span></td><td>0.8.10.455+</td><td><a href="/problems/offline-mode-loading">Guide</a></td></tr>
+              <tr><td><a href="/problems/friend-session-join">A friend cannot join the ranch</a></td><td>Published fix</td><td><span class="evidence-badge evidence-corroborated">Corroborated</span></td><td>0.8.10.455+</td><td><a href="/problems/friend-session-join">Guide</a></td></tr>
+              <tr><td><a href="/problems/vehicle-recovery">A vehicle is stuck, broken or impounded</a></td><td>Published fix</td><td><span class="evidence-badge evidence-official">Official</span></td><td>0.8.10.455+</td><td><a href="/problems/vehicle-recovery">Guide</a></td></tr>
+              <tr><td><a href="/problems/fast-travel-subway">How subway and quest fast travel work</a></td><td>Published fix</td><td><span class="evidence-badge evidence-official">Official</span></td><td>0.8.10.455+</td><td><a href="/problems/fast-travel-subway">Guide</a></td></tr>
+              <tr><td><a href="/problems/failed-quest-replay">A quest failed or cannot be restarted</a></td><td>Published fix</td><td><span class="evidence-badge evidence-official">Official</span></td><td>0.8.10.455+</td><td><a href="/problems/failed-quest-replay">Guide</a></td></tr>
+              <tr><td>Seed plots partially disappear overnight</td><td>Open report</td><td><span class="evidence-badge evidence-reported">Single player report</span></td><td>0.8.10.455</td><td><a href="https://steamcommunity.com/app/1501310/discussions/" rel="noopener noreferrer">Steam discussion</a></td></tr>
+              <tr><td>Strawberries disappear before the expected harvest</td><td>Open report</td><td><span class="evidence-badge evidence-reported">Single player report</span></td><td>0.8.10.455</td><td><a href="https://steamcommunity.com/app/1501310/discussions/" rel="noopener noreferrer">Steam discussion</a></td></tr>
+              <tr><td>Exiting a vehicle can drop the player through the map</td><td>Open report</td><td><span class="evidence-badge evidence-reported">Single player report</span></td><td>0.8.10.455</td><td><a href="https://steamcommunity.com/app/1501310/discussions/" rel="noopener noreferrer">Steam discussion</a></td></tr>
+              <tr><td>Roof objective is not recognized</td><td>Open report</td><td><span class="evidence-badge evidence-corroborated">Multiple reports</span></td><td>0.8.10.455</td><td><a href="/research#roof-quest">Research</a></td></tr>
+              <tr><td>Furniture or door-deck placement is blocked</td><td>Open report</td><td><span class="evidence-badge evidence-reported">Player report</span></td><td>0.8.10.455</td><td><a href="/research#furniture-placement">Research</a></td></tr>
+              <tr><td>Power to the Bench does not progress</td><td>Open report</td><td><span class="evidence-badge evidence-reported">Player report</span></td><td>0.8.10.455</td><td><a href="/research#power-to-bench">Research</a></td></tr>
+              <tr><td>Excess electricity cannot be sold as expected</td><td>Open report</td><td><span class="evidence-badge evidence-reported">Needs current test</span></td><td>0.8.10.455</td><td><a href="/research#excess-electricity">Research</a></td></tr>
+            </tbody>
+          </table>
+          </div>
+        </section>
+
+        <section class="problem-section" aria-labelledby="published-help-title">
+          <h2 id="published-help-title">Published help</h2>
+          <div class="problem-list">
+            <article class="problem-row" data-problem-entry data-problem-status="solved" data-problem-keywords="offline loading start steam save update"><div><span class="evidence-badge evidence-official">Official</span><h3><a href="/problems/offline-mode-loading">Offline Mode keeps loading or will not start</a></h3><p>Update first, then separate a known launch-build issue from a new save or Steam problem.</p></div><span class="problem-route">Offline</span></article>
+            <article class="problem-row" data-problem-entry data-problem-status="solved" data-problem-keywords="friend join co-op multiplayer steam visibility session"><div><span class="evidence-badge evidence-corroborated">Corroborated</span><h3><a href="/problems/friend-session-join">A friend cannot join the ranch</a></h3><p>Check build parity, Steam visibility and the in-game travel route in the correct order.</p></div><span class="problem-route">Co-op</span></article>
+            <article class="problem-row" data-problem-entry data-problem-status="solved" data-problem-keywords="vehicle stuck broken impounded car pound garage mechanic"><div><span class="evidence-badge evidence-official">Official</span><h3><a href="/problems/vehicle-recovery">A vehicle is stuck, broken or impounded</a></h3><p>Choose My Garage, Car Pound or a mechanic based on ownership and license status.</p></div><span class="problem-route">Vehicles</span></article>
+            <article class="problem-row" data-problem-entry data-problem-status="solved" data-problem-keywords="subway fast travel skip trip animal passenger"><div><span class="evidence-badge evidence-official">Official</span><h3><a href="/problems/fast-travel-subway">How subway and quest fast travel work</a></h3><p>Know which trips allow a skip and what happens to passengers, vehicles and attached animals.</p></div><span class="problem-route">Travel</span></article>
+            <article class="problem-row" data-problem-entry data-problem-status="solved" data-problem-keywords="quest failed replay restart blocked objective"><div><span class="evidence-badge evidence-official">Official</span><h3><a href="/problems/failed-quest-replay">A quest failed or cannot be restarted</a></h3><p>Use the current replay behavior and identify cases that still need a new report.</p></div><span class="problem-route">Quests</span></article>
+          </div>
+        </section>
+
+        <section class="problem-section" aria-labelledby="open-reports-title">
+          <div class="problem-section-head"><div><span class="kicker">Needs reproduction</span><h2 id="open-reports-title">Open reports</h2></div><a href="/research">View evidence queue</a></div>
+          <div class="problem-open-list">
+            <article data-problem-entry data-problem-status="reported" data-problem-keywords="seed plots disappear missing overnight crop farming"><span class="evidence-badge evidence-reported">Single player report</span><h3>Seed plots partially disappear overnight</h3><p>A launch-week Steam review describes planted plots vanishing after the day transition. We have not reproduced the trigger or confirmed whether the seeds, plots or save state are affected.</p><a href="https://steamcommunity.com/app/1501310/discussions/" rel="noopener noreferrer">Discussion source</a> <a href="/contribute?topic=bug">Submit build, save mode and before/after screenshots</a></article>
+            <article data-problem-entry data-problem-status="reported" data-problem-keywords="strawberry disappear harvest crop farming"><span class="evidence-badge evidence-reported">Single player report</span><h3>Strawberries disappear before the expected harvest</h3><p>A Steam review reports losing strawberries before harvest. Season, crop stage, weather and sleep timing are still unknown.</p><a href="https://steamcommunity.com/app/1501310/discussions/" rel="noopener noreferrer">Discussion source</a> <a href="/contribute?topic=bug">Add a repeatable crop timeline</a></article>
+            <article data-problem-entry data-problem-status="reported" data-problem-keywords="vehicle exit fall through map ground collision"><span class="evidence-badge evidence-reported">Single player report</span><h3>Exiting a vehicle can drop the player through the map</h3><p>A launch-week review reports falling through terrain after leaving a vehicle. Vehicle type, road position and recovery behavior still need a clean reproduction.</p><a href="https://steamcommunity.com/app/1501310/discussions/" rel="noopener noreferrer">Discussion source</a> <a href="/contribute?topic=bug">Send the location and reproduction steps</a></article>
+            <article data-problem-entry data-problem-status="reported" data-problem-keywords="roof objective quest not recognized building"><span class="evidence-badge evidence-corroborated">Multiple reports</span><h3>Roof objective is not recognized</h3><p>Steam discussion reports show players placing several roof variants without the house objective completing. The accepted piece and placement rule remain unverified for the current build.</p><a href="/research#roof-quest">Follow the research question</a></article>
+            <article data-problem-entry data-problem-status="reported" data-problem-keywords="furniture placement house door deck workbench"><span class="evidence-badge evidence-reported">Player report</span><h3>Furniture or door-deck placement is blocked</h3><p>A Steam thread describes furniture placement failing and a translated house objective asking for a piece that was not visible at the workbench.</p><a href="/research#furniture-placement">See what evidence is missing</a></article>
+            <article data-problem-entry data-problem-status="reported" data-problem-keywords="power to the bench electricity quest workbench"><span class="evidence-badge evidence-reported">Player report</span><h3>Power to the Bench does not progress</h3><p>The report is tracked, but the site does not yet have a current-build sequence that proves the required contract, cable or bench state.</p><a href="/research#power-to-bench">Follow the research question</a></article>
+            <article data-problem-entry data-problem-status="reported" data-problem-keywords="excess electricity sell surplus power contract"><span class="evidence-badge evidence-reported">Needs current test</span><h3>Excess electricity cannot be sold as expected</h3><p>Official material says surplus energy can be sold, but current activation conditions, meter behavior and payout timing have not been retained as evidence.</p><a href="/research#excess-electricity">Follow the research question</a> <a href="/contribute?topic=research">Submit a meter sequence</a></article>
+          </div>
+        </section>
+        <div class="search-empty" data-problem-empty hidden><h2>No matching report</h2><p>Try a shorter symptom. If it is still missing, <a href="/contribute?topic=bug">send a build number and reproduction steps</a>.</p></div>
       </div>
     </section>
     <section class="section alt">
       <div class="container split-band">
-        <div><span class="kicker">No reliable answer yet?</span><h2>Do not try random fixes</h2><p>Roof placement, furniture placement and Power to the Bench are tracked as open questions because current-build reproduction is still missing.</p></div>
-        <div class="button-stack"><a class="btn" href="/research">View the research queue</a><a class="btn btn-outline" href="/contribute">Submit evidence</a></div>
+        <div><span class="kicker">Discuss with real players</span><h2>Read the community before guessing</h2><p>The site does not fabricate accounts or anonymous comments. Read the measured <a href="/community">Community Pulse</a>, use Steam Discussions with your existing account, or send evidence for manual review.</p></div>
+        <div class="button-stack"><a class="btn" href="/community">Open Community Pulse</a><a class="btn btn-outline" href="https://steamcommunity.com/app/1501310/discussions/" rel="noopener noreferrer">Open Steam Discussions</a><a class="btn btn-outline" href="mailto:contribute@theranchersguide.com">Email evidence</a></div>
       </div>
     </section>
   </main>
   <footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>The Ranchers Guide</h4><p>Independent, fan-made Early Access help with versioned evidence.</p><p class="disclaimer">Game names and images belong to their respective owners. Not affiliated with RedPilz Studio or Trophy Games.</p></div><nav aria-label="Footer guides"><h4>Help</h4><ul><li><a href="/guides/beginners-guide">Guides</a></li><li><a href="/problems">Problems</a></li><li><a href="/research">Research</a></li></ul></nav><nav aria-label="Footer data"><h4>Data</h4><ul><li><a href="/database/crops">Crops</a></li><li><a href="/database/animals">Animals</a></li><li><a href="/tools/profit-calculator">Calculator</a></li></ul></nav><nav aria-label="Footer site"><h4>Site</h4><ul><li><a href="/search">Search</a></li><li><a href="/contribute">Contribute</a></li><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li><li><a href="/privacy">Privacy</a></li></ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>Official sources and evidence status are labeled.</span></div></div></footer>
-  <script src="/assets/js/main.js?v=20260803-1" defer></script>
+  <script src="/assets/js/main.js?v=20260803-2" defer></script><script src="/assets/js/problems.js?v=20260803-5" defer></script>
 </body>
 </html>

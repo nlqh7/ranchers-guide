@@ -10,6 +10,8 @@
     "/guides/money-making-guide",
     "/guides/multiplayer-coop",
     "/guides/animal-guide",
+    "/guides/electricity-power",
+    "/guides/building-construction",
     "/database/crops",
     "/database/animals",
     "/map",
@@ -19,6 +21,7 @@
     "/problems/vehicle-recovery",
     "/problems/fast-travel-subway",
     "/problems/failed-quest-replay",
+    "/community",
     "/research",
     "/tools/profit-calculator",
     "/tools/field-notes",
@@ -26,7 +29,7 @@
     "/contact",
     "/privacy"
   ];
-  var CACHE_KEY = "ranchers-search-index-v6";
+  var CACHE_KEY = "ranchers-search-index-v8";
   var documents = [];
   var form = document.querySelector("[data-search-form]");
   var input = document.querySelector("[data-search-input]");
@@ -44,6 +47,7 @@
     if (path.indexOf("/database/") === 0) return "Database";
     if (path === "/map") return "Map";
     if (path.indexOf("/problems/") === 0 || path === "/problems") return "Problem";
+    if (path === "/community") return "Community";
     if (path === "/research") return "Research";
     if (path.indexOf("/tools/") === 0) return "Tool";
     if (path === "/") return "Home";
