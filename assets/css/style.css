@@ -1034,7 +1034,8 @@ table.data-table {
 .map-region-tabs button,
 .map-zoom-controls button,
 .map-pan-controls button,
-.location-map-button {
+.location-map-button,
+.map-add-toggle {
   min-height: 44px;
   border: 1px solid var(--brown-300);
   border-radius: 6px;
@@ -1065,12 +1066,15 @@ table.data-table {
   border: 1px solid var(--cream-300);
   background: #dbe7ed;
   isolation: isolate;
+  touch-action: none;
 }
 .map-stage img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  -webkit-user-drag: none;
+  user-select: none;
   transform: translate(var(--map-x, 0), var(--map-y, 0)) scale(var(--map-scale, 1));
   transition: transform 260ms ease;
 }
@@ -1137,6 +1141,112 @@ table.data-table {
   font-weight: 800;
   transform: translateX(-50%);
 }
+.map-pin-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  transform: translate(var(--map-x, 0), var(--map-y, 0)) scale(var(--map-scale, 1));
+  pointer-events: none;
+}
+.map-pin {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  margin: -10px 0 0 -10px;
+  border: 3px solid #fff;
+  border-radius: 50% 50% 50% 0;
+  background: var(--rust);
+  transform: rotate(45deg);
+  cursor: move;
+  pointer-events: auto;
+  touch-action: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+.map-pin::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  transform: translate(-50%, -50%);
+}
+.map-add-toggle.active {
+  border-color: var(--green-700);
+  background: var(--green-700);
+  color: #fff;
+}
+.map-stage.is-placing { cursor: crosshair; }
+.map-pin-submit {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  margin: 16px 0 4px;
+  padding: 18px;
+  border: 1px solid var(--cream-300);
+  border-radius: 8px;
+  background: var(--cream-100);
+}
+.map-pin-submit[hidden] { display: none; }
+.map-pin-submit label { display: grid; gap: 6px; font-weight: 800; }
+.map-pin-submit input,
+.map-pin-submit select,
+.map-pin-submit textarea {
+  font: inherit;
+  padding: 8px 10px;
+  border: 1px solid var(--brown-300);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--brown-700);
+}
+.map-pin-submit textarea { resize: vertical; }
+.map-pin-coords {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--rust);
+}
+.map-pin-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--brown-300);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--brown-700);
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+}
+.map-pin-close:focus-visible { outline: 3px solid rgba(93, 143, 74, 0.3); outline-offset: 2px; }
+.map-construction-badge {
+  position: absolute;
+  z-index: 4;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  max-width: calc(100% - 20px);
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: rgba(45, 35, 25, 0.88);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+.map-construction-badge svg { flex: none; width: 20px; height: 20px; color: var(--rust); }
+.map-construction-badge strong { display: block; font-size: 0.8rem; font-weight: 800; }
+.map-construction-badge span { display: block; margin-top: 1px; font-size: 0.72rem; line-height: 1.3; opacity: 0.85; }
+.map-stage { cursor: grab; }
+.map-stage:active { cursor: grabbing; }
+.map-stage.is-panning img { transition: none; }
 .map-place-shortcuts {
   display: flex;
   gap: 7px;

@@ -15,6 +15,16 @@
   var panButtons = Array.from(document.querySelectorAll("[data-map-pan]"));
   var focusMarker = document.querySelector("[data-map-focus-marker]");
   var focusLabel = document.querySelector("[data-map-focus-label]");
+  var addToggle = document.querySelector("[data-map-add-toggle]");
+  var pinLayer = document.querySelector("[data-map-pin-layer]");
+  var pinForm = document.querySelector("[data-map-pin-form]");
+  var pinName = document.querySelector("[data-map-pin-name]");
+  var pinCategory = document.querySelector("[data-map-pin-category]");
+  var pinNotes = document.querySelector("[data-map-pin-notes]");
+  var pinCoords = document.querySelector("[data-map-pin-coords]");
+  var pinClose = document.querySelector("[data-map-pin-close]");
+  var activePin = null;
+  var placing = false;
   if (!search || !category || !entries.length || !window.RanchersMap) return;
 
   var locations = entries.map(function (entry) {
@@ -59,8 +69,6 @@
     });
     applyMapView();
     setInspector(title, status, copy);
-    if (focusMarker) focusMarker.hidden = !showMarker;
-    if (focusLabel && showMarker) focusLabel.textContent = title;
   }
 
   search.addEventListener("input", render);
@@ -118,6 +126,185 @@
         viewState.scale = window.RanchersMapViewer.clampZoom(viewState.scale - 0.25);
         applyMapView();
       }
+    });
+  }
+
+  function clearPin() {
+    if (activePin && activePin.element && pinLayer && activePin.element.parentNode === pinLayer) {
+      pinLayer.removeChild(activePin.element);
+    }
+    activePin = null;
+  }
+
+  function setPlacing(next) {
+    placing = next;
+    if (addToggle) {
+      addToggle.setAttribute("aria-pressed", next ? "true" : "false");
+      addToggle.classList.toggle("active", next);
+    }
+    if (mapStage) mapStage.classList.toggle("is-placing", next);
+    if (!next) {
+      if (pinForm) pinForm.hidden = true;
+      clearPin();
+    }
+  }
+
+  function updatePinCoords(x, y) {
+    if (pinCoords) pinCoords.textContent = "Map position: " + x + "%, " + y + "%";
+  }
+
+  function placePin(sx, sy) {
+    if (!window.RanchersMapViewer || !pinLayer) return;
+    var point = window.RanchersMapViewer.stageToImage({ sx: sx, sy: sy }, viewState);
+    if (point.x < 0 || point.x > 100 || point.y < 0 || point.y > 100) return;
+    var pin = document.createElement("button");
+    pin.type = "button";
+    pin.className = "map-pin";
+    pin.setAttribute("aria-label", "Submitted location pin, drag to adjust");
+    pin.style.left = point.x + "%";
+    pin.style.top = point.y + "%";
+    pinLayer.appendChild(pin);
+    makeDraggable(pin);
+    activePin = { x: point.x, y: point.y, element: pin };
+    if (pinForm) {
+      pinForm.hidden = false;
+      updatePinCoords(point.x, point.y);
+      if (pinName) pinName.focus();
+    }
+  }
+
+  function makeDraggable(pin) {
+    var dragging = false;
+    pin.addEventListener("pointerdown", function (event) {
+      dragging = true;
+      if (pin.setPointerCapture) pin.setPointerCapture(event.pointerId);
+      event.preventDefault();
+    });
+    pin.addEventListener("pointermove", function (event) {
+      if (!dragging || !mapStage || !window.RanchersMapViewer) return;
+      var rect = mapStage.getBoundingClientRect();
+      var point = window.RanchersMapViewer.stageToImage({
+        sx: (event.clientX - rect.left) / rect.width,
+        sy: (event.clientY - rect.top) / rect.height
+      }, viewState);
+      if (point.x < 0 || point.x > 100 || point.y < 0 || point.y > 100) return;
+      pin.style.left = point.x + "%";
+      pin.style.top = point.y + "%";
+      if (activePin) { activePin.x = point.x; activePin.y = point.y; }
+      updatePinCoords(point.x, point.y);
+    });
+    pin.addEventListener("pointerup", function () { dragging = false; });
+  }
+
+  if (addToggle) {
+    addToggle.addEventListener("click", function () { setPlacing(!placing); });
+  }
+
+  if (pinClose) {
+    pinClose.addEventListener("click", function () { setPlacing(false); });
+  }
+
+  var pointers = new Map();
+  var dragStart = null;
+  var dragMoved = false;
+  var pinchStart = null;
+
+  function stagePointFromClient(clientX, clientY) {
+    var rect = mapStage.getBoundingClientRect();
+    return { sx: (clientX - rect.left) / rect.width, sy: (clientY - rect.top) / rect.height };
+  }
+
+  function isMapControl(target) {
+    return !!target.closest("[data-map-region], [data-map-pan], [data-map-zoom], [data-location-map], .map-pin");
+  }
+
+  if (mapStage) {
+    mapStage.addEventListener("dragstart", function (event) { event.preventDefault(); });
+    mapStage.addEventListener("wheel", function (event) {
+      event.preventDefault();
+      if (!window.RanchersMapViewer) return;
+      var factor = Math.exp(-event.deltaY * 0.0015);
+      var anchor = stagePointFromClient(event.clientX, event.clientY);
+      viewState = window.RanchersMapViewer.zoomAt(viewState, factor, anchor);
+      applyMapView();
+    }, { passive: false });
+
+    mapStage.addEventListener("pointerdown", function (event) {
+      if (isMapControl(event.target)) return;
+      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      if (pointers.size === 1) {
+        dragStart = { x: event.clientX, y: event.clientY, view: { scale: viewState.scale, x: viewState.x, y: viewState.y } };
+        dragMoved = false;
+      } else if (pointers.size === 2) {
+        var pts = Array.from(pointers.values());
+        pinchStart = { dist: Math.max(1, Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y)), view: { scale: viewState.scale, x: viewState.x, y: viewState.y }, cx: (pts[0].x + pts[1].x) / 2, cy: (pts[0].y + pts[1].y) / 2 };
+      }
+      if (mapStage.setPointerCapture) mapStage.setPointerCapture(event.pointerId);
+    });
+
+    mapStage.addEventListener("pointermove", function (event) {
+      if (pointers.has(event.pointerId)) pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      if (!window.RanchersMapViewer) return;
+      if (pointers.size === 2 && pinchStart) {
+        var pts = Array.from(pointers.values());
+        var dist = Math.max(1, Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y));
+        var anchor = stagePointFromClient(pinchStart.cx, pinchStart.cy);
+        viewState = window.RanchersMapViewer.zoomAt(pinchStart.view, dist / pinchStart.dist, anchor);
+        applyMapView();
+        return;
+      }
+      if (pointers.size === 1 && dragStart) {
+        var rect = mapStage.getBoundingClientRect();
+        var dx = (event.clientX - dragStart.x) / rect.width;
+        var dy = (event.clientY - dragStart.y) / rect.height;
+        if (Math.hypot(dx, dy) > 0.02) {
+          dragMoved = true;
+          if (mapStage) mapStage.classList.add("is-panning");
+        }
+        viewState = window.RanchersMapViewer.panBy(dragStart.view, dx, dy);
+        applyMapView();
+      }
+    });
+
+    function endPointer(event) {
+      pointers.delete(event.pointerId);
+      if (pointers.size < 2) pinchStart = null;
+      if (pointers.size === 0 && dragStart) {
+        if (mapStage) mapStage.classList.remove("is-panning");
+        if (placing && !dragMoved) {
+          var rect = mapStage.getBoundingClientRect();
+          placePin((dragStart.x - rect.left) / rect.width, (dragStart.y - rect.top) / rect.height);
+        }
+        dragStart = null;
+      }
+    }
+    mapStage.addEventListener("pointerup", endPointer);
+    mapStage.addEventListener("pointercancel", endPointer);
+  }
+
+  if (pinForm) {
+    pinForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      if (!pinForm.reportValidity() || !activePin) return;
+      var name = pinName ? pinName.value.trim() : "";
+      var category = pinCategory ? pinCategory.value : "";
+      var notes = pinNotes ? pinNotes.value.trim() : "";
+      var body = [
+        "Location: " + name,
+        "Category: " + (category || "Unspecified"),
+        "Map position: " + activePin.x + "%, " + activePin.y + "% (current player map)",
+        "Build: 0.8.10.455",
+        notes ? "Notes: " + notes : "",
+        "",
+        "Attach a current-build screenshot of the map panel or storefront if possible."
+      ].filter(Boolean).join("\n");
+      var subject = "Map location: " + name;
+      window.location.href = "mailto:contribute@theranchersguide.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      pinForm.hidden = true;
+      if (pinName) pinName.value = "";
+      if (pinCategory) pinCategory.value = "";
+      if (pinNotes) pinNotes.value = "";
+      setPlacing(false);
     });
   }
 

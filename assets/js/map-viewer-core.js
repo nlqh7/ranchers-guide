@@ -36,5 +36,38 @@
     return next;
   }
 
-  return { clampZoom: clampZoom, getView: getView, pan: pan };
+  function stageToImage(stagePoint, view) {
+    var scale = clampZoom(view && view.scale);
+    var x = Number(view && view.x) || 0;
+    var y = Number(view && view.y) || 0;
+    var sx = Number(stagePoint && stagePoint.sx) || 0;
+    var sy = Number(stagePoint && stagePoint.sy) || 0;
+    var ix = (sx - 0.5 - x / 100) / scale + 0.5;
+    var iy = (sy - 0.5 - y / 100) / scale + 0.5;
+    return { x: Math.round(ix * 10000) / 100, y: Math.round(iy * 10000) / 100 };
+  }
+
+  function clampXY(view) {
+    view.x = Math.min(45, Math.max(-45, Number(view.x) || 0));
+    view.y = Math.min(30, Math.max(-30, Number(view.y) || 0));
+    return view;
+  }
+
+  function zoomAt(view, factor, anchor) {
+    var scale = clampZoom(view && view.scale);
+    var next = clampZoom(scale * (Number(factor) || 1));
+    var x = Number(view && view.x) || 0;
+    var y = Number(view && view.y) || 0;
+    var sx = Number(anchor && anchor.sx) || 0;
+    var sy = Number(anchor && anchor.sy) || 0;
+    var ix = (sx - 0.5 - x / 100) / scale + 0.5;
+    var iy = (sy - 0.5 - y / 100) / scale + 0.5;
+    return clampXY({ scale: next, x: 100 * ((sx - 0.5) - (ix - 0.5) * next), y: 100 * ((sy - 0.5) - (iy - 0.5) * next) });
+  }
+
+  function panBy(view, dx, dy) {
+    return clampXY({ scale: clampZoom(view && view.scale), x: (Number(view && view.x) || 0) + (Number(dx) || 0) * 100, y: (Number(view && view.y) || 0) + (Number(dy) || 0) * 100 });
+  }
+
+  return { clampZoom: clampZoom, getView: getView, pan: pan, stageToImage: stageToImage, clampXY: clampXY, zoomAt: zoomAt, panBy: panBy };
 });
