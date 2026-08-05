@@ -41,11 +41,11 @@ for (const entry of locationEntries) {
 }
 
 for (const image of [
-  "map-current-overview.jpg",
-  "map-city-center.jpg",
-  "map-airport.jpg",
-  "map-city-hall.jpg",
-  "map-leafy-market.jpg",
+  "map-current-overview.webp",
+  "map-city-center.webp",
+  "map-airport.webp",
+  "map-city-hall.webp",
+  "map-leafy-market.webp",
 ]) {
   assert.ok(fs.existsSync(path.join(root, "assets", "img", image)), `${image} must exist`);
   assert.match(mapPage, new RegExp(`/assets/img/${image.replace(".", "\\.")}`));
