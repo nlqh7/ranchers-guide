@@ -16,6 +16,10 @@
   var focusMarker = document.querySelector("[data-map-focus-marker]");
   var focusLabel = document.querySelector("[data-map-focus-label]");
   var addToggle = document.querySelector("[data-map-add-toggle]");
+  var markerLayer = document.querySelector("[data-map-marker-layer]");
+  var markers = markerLayer ? Array.from(markerLayer.querySelectorAll("[data-marker-category]")) : [];
+  var markerFilterButtons = Array.from(document.querySelectorAll("[data-map-pin-filter]"));
+  var inspectorLink = inspector ? inspector.querySelector("[data-map-inspector-link]") : null;
   var pinLayer = document.querySelector("[data-map-pin-layer]");
   var pinForm = document.querySelector("[data-map-pin-form]");
   var pinName = document.querySelector("[data-map-pin-name]");
@@ -48,6 +52,10 @@
 
   function applyMapView() {
     if (!mapImage) return;
+    var host = mapStage || mapImage;
+    host.style.setProperty("--map-scale", viewState.scale);
+    host.style.setProperty("--map-x", viewState.x + "%");
+    host.style.setProperty("--map-y", viewState.y + "%");
     mapImage.style.setProperty("--map-scale", viewState.scale);
     mapImage.style.setProperty("--map-x", viewState.x + "%");
     mapImage.style.setProperty("--map-y", viewState.y + "%");
@@ -59,7 +67,42 @@
     inspector.querySelector("[data-map-inspector-title]").textContent = title;
     inspector.querySelector("[data-map-inspector-status]").textContent = status;
     inspector.querySelector("[data-map-inspector-copy]").textContent = copy;
+    if (inspectorLink) inspectorLink.hidden = true;
   }
+
+  function selectMarker(marker) {
+    markers.forEach(function (item) { item.classList.toggle("active", item === marker); });
+    if (!inspector) return;
+    inspector.querySelector("[data-map-inspector-title]").textContent = marker.dataset.markerTitle;
+    inspector.querySelector("[data-map-inspector-status]").textContent = "Approximate area — exact pin unverified";
+    inspector.querySelector("[data-map-inspector-copy]").textContent = marker.dataset.markerCopy;
+    if (inspectorLink && marker.dataset.markerTarget) {
+      inspectorLink.hidden = false;
+      inspectorLink.setAttribute("href", marker.dataset.markerTarget);
+      inspectorLink.textContent = "View " + marker.dataset.markerTitle + " in the directory";
+    }
+  }
+
+  markers.forEach(function (marker) {
+    marker.addEventListener("click", function (event) {
+      event.stopPropagation();
+      selectMarker(marker);
+    });
+  });
+
+  markerFilterButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      var filter = button.dataset.mapPinFilter;
+      markerFilterButtons.forEach(function (item) {
+        var active = item === button;
+        item.classList.toggle("active", active);
+        item.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+      markers.forEach(function (marker) {
+        marker.hidden = filter !== "all" && marker.dataset.markerCategory !== filter;
+      });
+    });
+  });
 
   function selectRegion(name, title, status, copy, showMarker) {
     viewState = window.RanchersMapViewer ? window.RanchersMapViewer.getView(name) : { scale: 1, x: 0, y: 0 };
@@ -215,7 +258,7 @@
   }
 
   function isMapControl(target) {
-    return !!target.closest("[data-map-region], [data-map-pan], [data-map-zoom], [data-location-map], .map-pin");
+    return !!target.closest("[data-map-region], [data-map-pan], [data-map-zoom], [data-location-map], [data-map-pin-filter], .map-pin, .map-marker");
   }
 
   if (mapStage) {

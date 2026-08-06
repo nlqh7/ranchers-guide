@@ -30,9 +30,37 @@ assert.match(mapPage, /data-map-pin-close/);
 assert.match(mapPage, /Games Station/);
 assert.match(mapPage, /youtube\.com\/watch\?v=GrFiYqWcBK0(?:&amp;|&)t=1695s/);
 assert.match(mapPage, /Player-captured August 2, 2026/i);
+assert.match(mapPage, /data-map-marker-layer/);
+assert.match(mapPage, /data-marker-category="(?:shopping|services|transport|landmarks)"/);
+assert.match(mapPage, /data-map-pin-filter="all"/);
+assert.match(mapPage, /map-legend/);
+assert.match(mapPage, /Approximate area/);
+assert.match(mapPage, /Lina's Tools/);
+assert.match(mapPage, /Youssef's stand/);
+assert.match(mapPage, /Train station/);
+assert.match(mapPage, /Auction market/);
+assert.match(mapPage, /Cash-In box/);
+assert.match(mapPage, /Bykii terminal/);
+assert.match(mapPage, /Wanglow's Garage/);
+assert.match(mapPage, /dungeon entrances/i);
+assert.match(mapPage, /wild islands/i);
+assert.match(mapPage, /Transit posts/);
+assert.match(mapPage, /reviewed August 6, 2026/);
+assert.match(mapPage, /theranchers\.wiki\/wiki\/map\//);
+assert.match(mapPage, /theranchers\.wiki\/wiki\/npcs\//);
+assert.match(mapPage, /28 entries/);
+
+const approximateMarkers = mapPage.match(/class="map-marker map-marker-[a-z]+"/g) || [];
+assert.ok(approximateMarkers.length >= 12, "map should carry at least 12 approximate area markers");
+for (const category of ["shopping", "services", "transport", "landmarks"]) {
+  assert.ok(
+    new RegExp(`map-marker-${category}`).test(mapPage),
+    `expected at least one ${category} marker`
+  );
+}
 
 const locationEntries = mapPage.match(/<article data-location-entry[\s\S]*?<\/article>/g) || [];
-assert.ok(locationEntries.length >= 18, "map directory should contain at least 18 location entries");
+assert.ok(locationEntries.length >= 28, "map directory should contain at least 28 location entries");
 for (const entry of locationEntries) {
   assert.ok(
     /data-location-map/.test(entry) || /pin-pending/.test(entry) || /evidence-badge/.test(entry),
@@ -64,6 +92,12 @@ assert.match(mapScript, /zoomAt/);
 assert.match(mapScript, /panBy/);
 assert.match(mapScript, /addEventListener\("wheel"/);
 assert.match(mapScript, /data-map-pin-close/);
+assert.match(mapScript, /data-map-marker-layer/);
+assert.match(mapScript, /data-map-pin-filter/);
+assert.match(mapScript, /markerTarget/);
+
+const sitemapForMap = read("sitemap.xml");
+assert.match(sitemapForMap, /<loc>https:\/\/theranchersguide\.com\/map<\/loc>\s*<lastmod>2026-08-06<\/lastmod>/);
 
 const viewerCore = require("../assets/js/map-viewer-core.js");
 assert.deepEqual(viewerCore.getView("rural"), { scale: 1.6, x: 24, y: 2 });
