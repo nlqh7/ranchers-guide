@@ -16,7 +16,7 @@
 
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
-  <link rel="stylesheet" href="../assets/css/style.css?v=20260807-1">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260807-2">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -45,7 +45,7 @@
       <h1>The Ranchers Beginner's Guide: Your First Week on the Ranch</h1>
       <p class="meta">Updated for Early Access hotfix 0.8.10.455 · August 7, 2026 · Reading time: ~16 min</p>
       <div class="evidence-status">
-        <strong>Evidence status:</strong> 9 official system facts · 3 video-observed quest chains · 3 pending current-build checks · reviewed Aug 7, 2026 — <a href="/methodology">How we verify →</a>
+        <strong>Evidence status:</strong> 9 official system facts · 3 video-observed quest chains · 2 video-observed mechanic clues · 3 pending current-build checks · reviewed Aug 7, 2026 — <a href="/methodology">How we verify →</a>
       </div>
 
 
@@ -119,6 +119,12 @@
       </ol>
       <p><strong>Who is Victor?</strong> City Hall dialogue identifies him as <strong>"Victor, Sunvale's Mayor"</strong> <span class="evidence-badge evidence-video">Video-observed</span>, and his NPC profile shows a 5-heart friendship bar. The electricity contract in Power to the Bench is signed with him at City Hall — see the <a href="/guides/electricity-power">electricity &amp; water guide</a>.</p>
 
+      <h3>Two more video-observed mechanic clues</h3>
+      <ul>
+        <li><strong>Tutorials arrive by phone.</strong> Meriam coaches the workbench flow through a phone call — gather the basic materials first, then place the workbench <span class="evidence-badge evidence-video">Video-observed</span> <span title="Observed in Games Station gameplay footage (V0.8.10.455) at 30:55">Games Station, 30:55</span>. Answer your phone; tutorial guidance is pushed to you there, not only through quest markers.</li>
+        <li><strong>Heavy labor drains health, not just time.</strong> In the same playthrough, a Day-7 woodcutting session dropped the player to 40/80 health and began deducting health <span class="evidence-badge evidence-video">Video-observed</span>. The exact threshold and drain rate are unobserved — treat long gathering sessions as a health-cost activity and carry food (the observed Green Salad restores 20 health / 30 energy).</li>
+      </ul>
+
       <h2 id="priorities">Resource priorities: what matters first</h2>
       <p>With limited money, energy, and daylight, the order you invest in things matters more than the things themselves. Our recommended priority stack for the first month:</p>
       <ol>
@@ -152,16 +158,17 @@
       <p>The game supports 1–4 player online co-op. Steam sign-in and internet are required for online features. Both players should run 0.8.10.455 or later because the launch hotfix fixes some failed friend-session joins.</p>
 
       <h2 id="mistakes">The 10 most common beginner mistakes</h2>
+      <p>This list is <strong>editorial strategy</strong> built on the confirmed systems above, not a set of verified mechanics. Where the underlying behavior still needs current-build evidence, the item says so.</p>
       <ol>
-        <li><strong>Buying animals before you can feed them.</strong> The animal, its housing, and its daily upkeep all cost money before it produces anything. Fund livestock from surplus, not hope.</li>
-        <li><strong>Planting out of season.</strong> A crop that misses its season window is dead money. Check the season column in the <a href="/database/crops">crop database</a> every single time.</li>
-        <li><strong>Hoarding harvests.</strong> Produce in a chest earns nothing. Sell, reinvest, repeat.</li>
+        <li><strong>Buying animals before you can feed them.</strong> The animal, its housing, and its daily upkeep are all likely to cost money before it produces anything. Until upkeep costs are observed in your build, fund livestock from surplus, not hope.</li>
+        <li><strong>Planting out of season.</strong> Season limits by crop are not yet fully documented in the current build, so check the seed description before planting across seasons and run a small boundary test before committing your budget.</li>
+        <li><strong>Hoarding harvests.</strong> Produce sitting in a chest is not earning anything; the editorial advice is to sell, reinvest, repeat — though exact spoilage or storage rules need current-build checks.</li>
         <li><strong>Skipping the quests.</strong> The opening quest introduces core locations and mechanics, and failed quests can be replayed with an automatic state reset.</li>
-        <li><strong>Overplanting your watering capacity.</strong> A field you can't water daily is a field that grows slower than a smaller one you can. Scale planting to your morning routine, not your ambition.</li>
+        <li><strong>Overplanting your watering capacity.</strong> Whether under-watered crops grow slower in the current build is unverified; until you have observed the watering rule, scale planting to what your morning routine can actually tend.</li>
         <li><strong>Ignoring travel time.</strong> The distant buyer paying 5% more is usually a worse deal after the round trip. Sell close unless the margin is dramatic.</li>
         <li><strong>Upgrading the wrong tool first.</strong> Upgrade what you use every day, not what looks coolest.</li>
-        <li><strong>Running out of energy at noon.</strong> Budget stamina like money: heavy chores early, light chores late, eat when you can.</li>
-        <li><strong>Neglecting the town.</strong> Relationships compound. Ten minutes a day with NPCs pays off for months.</li>
+        <li><strong>Running out of energy at noon.</strong> Heavy labor has an observed health cost in the current build <span class="evidence-badge evidence-video">Video-observed</span>, so budget stamina like money: heavy chores early, light chores late, eat when you can.</li>
+        <li><strong>Neglecting the town.</strong> Editorial strategy: relationship rewards are not yet documented in the current build, but meeting NPCs early costs little and quests already route through them — Victor (the Mayor) gates the electricity contract <span class="evidence-badge evidence-video">Video-observed</span>.</li>
         <li><strong>Expanding before stabilizing.</strong> One boring, reliable income loop beats three exciting half-built ones. Grow what works until it's automatic, then diversify.</li>
       </ol>
 
@@ -268,6 +275,6 @@
     </div>
   </footer>
 
-  <script src="../assets/js/main.js?v=20260807-1" defer></script>
+  <script src="../assets/js/main.js?v=20260807-2" defer></script>
 </body>
 </html>

@@ -48,7 +48,7 @@ assert.match(mapPage, /Transit posts/);
 assert.match(mapPage, /reviewed August 7, 2026/);
 assert.match(mapPage, /theranchers\.wiki\/wiki\/map\//);
 assert.match(mapPage, /theranchers\.wiki\/wiki\/npcs\//);
-assert.match(mapPage, /28 entries/);
+assert.match(mapPage, /29 entries/);
 
 const approximateMarkers = mapPage.match(/class="map-marker map-marker-[a-z]+"/g) || [];
 assert.ok(approximateMarkers.length >= 12, "map should carry at least 12 approximate area markers");

@@ -16,7 +16,7 @@
 
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
-  <link rel="stylesheet" href="../assets/css/style.css?v=20260807-1">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260807-2">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -45,7 +45,7 @@
       <h1>The Ranchers Electricity & Water Guide</h1>
       <p class="meta">Verified against official Steam store copy · Player reports checked August 4, 2026 · Reading time: ~10 min</p>
       <div class="evidence-status">
-        <strong>Evidence status:</strong> 8 official facts · 2 video-observed utility details · 1 open payout report · reviewed Aug 7, 2026 — <a href="/methodology">How we verify →</a>
+        <strong>Evidence status:</strong> 8 official facts · 3 video-observed utility details · 1 open payout report · reviewed Aug 7, 2026 — <a href="/methodology">How we verify →</a>
       </div>
 
 
@@ -60,6 +60,7 @@
         <ul>
           <li><a href="#official-scope">What the official material confirms</a></li>
           <li><a href="#two-paths">The two ways to power your ranch</a></li>
+          <li><a href="#meter-ui">The meter interface (video-observed)</a></li>
           <li><a href="#selling-surplus">Selling surplus energy and water</a></li>
           <li><a href="#known-reports">Player reports on utilities</a></li>
           <li><a href="#test-protocol">What still needs a current-build test</a></li>
@@ -98,6 +99,15 @@
         </tbody>
       </table>
       <p>Because the numbers are unverified, the practical advice for a first week is the same as everywhere else on this site: <strong>record before you commit</strong>. Note the contract terms and the displayed meter values for one or two days before signing a long contract or building an expensive panel array.</p>
+
+      <h2 id="meter-ui">The meter interface (video-observed)</h2>
+      <p>The smartphone carries an <strong>Electricity meter / Water meter</strong> app with two tabs <span class="evidence-badge evidence-video">Video-observed</span> <span title="Observed in Games Station gameplay footage (V0.8.10.455) at 75:05">Games Station, 75:05</span>. What the Electricity tab showed in the observed playthrough, after the contract was signed:</p>
+      <ul>
+        <li><strong>Electricity contract status: Contract Active</strong> — the contract state is visible in the meter UI, not only in the quest log.</li>
+        <li><strong>Device list:</strong> Workbench ×1, consuming 5 units, with an efficiency value of 0; total consumption shown as 5.</li>
+        <li><strong>"Your ranch's energy efficiency: −5"</strong> — a worked example of a deficit state: with no generation built, the ranch ran at −5, matching the official claim that daily running costs are part of the loop.</li>
+      </ul>
+      <p>This is the first observed instance of the meter UI structure (device list, per-device consumption, total, efficiency summary). What remains unobserved: the unit of consumption, how the −5 efficiency translates into the daily Energy deduction amount, and how generation equipment moves the number positive.</p>
 
       <h2 id="selling-surplus">Selling surplus energy and water</h2>
       <p>Selling surplus is an officially advertised feature, which is why it deserves its own section: the feature exists, but no verified player-written procedure for completing a sale has been reproduced on the current build yet.</p>
@@ -235,6 +245,6 @@
     </div>
   </footer>
 
-  <script src="../assets/js/main.js?v=20260807-1" defer></script>
+  <script src="../assets/js/main.js?v=20260807-2" defer></script>
 </body>
 </html>
