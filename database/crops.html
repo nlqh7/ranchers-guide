@@ -16,7 +16,7 @@
 
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
-  <link rel="stylesheet" href="../assets/css/style.css?v=20260806-2">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260807-1">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -43,9 +43,9 @@
     <article class="article" style="max-width: 980px;">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Database / Crops</nav>
       <h1>The Ranchers Crop Database</h1>
-      <p class="meta">Current build 0.8.10.455 · Updated August 2, 2026 · Historical values are labeled</p>
+      <p class="meta">Current build 0.8.10.455 · Updated August 7, 2026 · Historical values are labeled</p>
       <div class="evidence-status">
-        <strong>Evidence status:</strong> 10 confirmed systems · 6 historical leads · 3 pending rows · reviewed Aug 6, 2026 — <a href="/methodology">How we verify →</a>
+        <strong>Evidence status:</strong> 10 confirmed systems · 4 video-observed shop values · 6 historical leads · 3 pending rows · reviewed Aug 7, 2026 — <a href="/methodology">How we verify →</a>
       </div>
 
 
@@ -116,6 +116,63 @@
         <p class="source-note"><strong>Source handling:</strong> names, seasons and reported values were normalized from the community-maintained Farmer's Land page, reviewed August 2, 2026. We link to the original record and do not reproduce its prose or images.</p>
       </section>
 
+      <section class="evidence-ledger" aria-labelledby="video-crop-data">
+        <div class="section-heading-row">
+          <div>
+            <span class="kicker">Current-Build Evidence</span>
+            <h2 id="video-crop-data">Video-observed shop values (build 0.8.10.455)</h2>
+          </div>
+          <a class="text-link" href="/contact">Submit a current-build correction</a>
+        </div>
+        <p>These rows come from a frame-by-frame review of a public gameplay video on the current Early Access build, inside the Leafy Market "Seed &amp; Fertilizer" tab. Values are shown exactly as displayed on screen; nothing here was measured hands-on by this site.</p>
+        <div class="data-table-wrap">
+          <table class="data-table evidence-table" id="crop-video-table">
+            <thead>
+              <tr>
+                <th data-sortable>Item <span class="sort-arrow"></span></th>
+                <th data-sortable>Observed price <span class="sort-arrow"></span></th>
+                <th>Observed details</th>
+                <th>Evidence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="red-lettuce-seed-observed" data-search-entry data-search-title="Red Lettuce Seed (video-observed)" data-search-tags="red lettuce seed price 48 spring growth 3 days basic" data-search-status="Video-observed" data-category="video">
+                <td><a class="entry-anchor" href="#red-lettuce-seed-observed">Red Lettuce Seed</a></td>
+                <td data-sort="48">48C</td>
+                <td>Season: Spring · Growth time: 3 days · Multi-harvest: none · Quality: Basic.</td>
+                <td><span class="tag evidence-video">Video-observed</span> <span title="Observed in Games Station gameplay footage (V0.8.10.455) at 03:20">Games Station video, 03:20</span></td>
+              </tr>
+              <tr id="strawberry-seed-observed" data-search-entry data-search-title="Strawberry Seed (video-observed)" data-search-tags="strawberry seed price 144 spring growth 7 days multi-harvest every 3 days basic regrow" data-search-status="Video-observed" data-category="video">
+                <td><a class="entry-anchor" href="#strawberry-seed-observed">Strawberry Seed</a></td>
+                <td data-sort="144">144C</td>
+                <td>Season: Spring · Growth time: 7 days · Multi-harvest: every 3 days · Quality: Basic. The purchase dialog separately confirmed 10 seeds = 1,440C.</td>
+                <td><span class="tag evidence-video">Video-observed</span> <span title="Observed in Games Station gameplay footage (V0.8.10.455) at 03:30; 10-seed purchase confirmation at 03:50">Games Station video, 03:30</span></td>
+              </tr>
+              <tr id="garlic-seed-observed" data-search-entry data-search-title="Garlic Seed (seen in shop)" data-search-tags="garlic seed spring shop price not captured" data-search-status="Unverified lead" data-category="video">
+                <td><a class="entry-anchor" href="#garlic-seed-observed">Garlic Seed</a></td>
+                <td>—</td>
+                <td>Seen in the same shop tab; price not yet captured on screen.</td>
+                <td><span class="tag evidence-lead">Unverified lead</span> <span title="Listing visible in Games Station gameplay footage (V0.8.10.455) at 03:20; price not readable">Games Station video, 03:20</span></td>
+              </tr>
+              <tr id="fertilizer-observed" data-search-entry data-search-title="Fertilizer (video-observed)" data-search-tags="fertilizer price 288 rare boost ogm" data-search-status="Video-observed" data-category="video">
+                <td><a class="entry-anchor" href="#fertilizer-observed">Fertilizer</a></td>
+                <td data-sort="288">288C</td>
+                <td>Quality: Rare. Boost Fertilizer and OGM Fertilizer listings also exist in the tab; their prices were not readable on screen.</td>
+                <td><span class="tag evidence-video">Video-observed</span> <span title="Observed in Games Station gameplay footage (V0.8.10.455) at 03:35">Games Station video, 03:35</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="data-conflict">
+          <strong>Conflicting values:</strong> the historical Alpha table above lists Strawberry Seeds at 38C and Red Lettuce Seeds at 18C; current-build 0.8.10.455 video footage shows 144C and 48C respectively. Treat the video-observed values as the current-build baseline; the historical rows stay as leads only.
+        </div>
+
+        <div class="notice info">
+          <strong>Derived analysis (our calculation, not an observed value):</strong> using only the video-observed seed cost and timing, a Strawberry seed amortizes to <strong>144C ÷ 8 harvests = 18C per harvest</strong> across a 30-day Spring (first harvest on day 7, then every 3 days: days 7, 10, 13, 16, 19, 22, 25, 28). The sell price per berry was <strong>not observed</strong>, so profit per day stays open: profit/day = (sell price × yield − 18C amortized seed cost) ÷ 3 once a sale value is captured. For Red Lettuce the framework is (sell price − 48C) ÷ 3 per occupied day, sell price also unobserved. Framework derived from video-observed values; enter your own sale price in the <a href="/tools/profit-calculator">profit calculator</a>.
+        </div>
+      </section>
+
       <h2>Confirmed farming systems</h2>
 
       <div class="table-tools">
@@ -176,7 +233,7 @@
       </ul>
 
       <h2>Sources</h2>
-      <p>Confirmed rows come from the <a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">official Steam store page</a> and <a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">official Steam updates</a>, reviewed August 2026. How leads become verified values: <a href="/methodology">methodology</a>. Corrections with a version and screenshot: <a href="/contact">contact page</a>.</p>
+      <p>Confirmed rows come from the <a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">official Steam store page</a> and <a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">official Steam updates</a>, reviewed August 2026. Video-observed rows come from <a href="https://www.youtube.com/watch?v=GrFiYqWcBK0" rel="noopener noreferrer">Games Station gameplay footage (V0.8.10.455)</a>, reviewed August 7, 2026. How leads become verified values: <a href="/methodology">methodology</a>. Corrections with a version and screenshot: <a href="/contact">contact page</a>.</p>
       <p>Pair this with the <a href="/database/animals">animal database</a> to plan your whole ranch economy, and read the <a href="/guides/beginners-guide">beginner's guide</a> if this is your first season.</p>
 
 
@@ -238,7 +295,7 @@
     </div>
   </footer>
 
-  <script src="../assets/js/main.js?v=20260806-2" defer></script>
-  <script src="../assets/js/database.js?v=20260806-2" defer></script>
+  <script src="../assets/js/main.js?v=20260807-1" defer></script>
+  <script src="../assets/js/database.js?v=20260807-1" defer></script>
 </body>
 </html>

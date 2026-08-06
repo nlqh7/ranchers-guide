@@ -16,7 +16,7 @@
 
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
-  <link rel="stylesheet" href="../assets/css/style.css?v=20260806-2">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260807-1">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -43,10 +43,10 @@
     <article class="article">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Guides / Money Making</nav>
       <h1>The Ranchers Money-Making Guide</h1>
-      <p class="meta">Updated August 6, 2026 · Current baseline: 0.8.10.455 · Reading time: ~14 min</p>
+      <p class="meta">Updated August 7, 2026 · Current baseline: 0.8.10.455 · Reading time: ~14 min</p>
 
       <div class="evidence-status">
-        <strong>Evidence status:</strong> 9 official system facts · 3 community leads · economy values pending current-build measurement · reviewed Aug 6, 2026 — <a href="/methodology">How we verify →</a>
+        <strong>Evidence status:</strong> 9 official system facts · 4 video-observed economy anchors · 3 community leads · reviewed Aug 7, 2026 — <a href="/methodology">How we verify →</a>
       </div>
 
       <figure class="page-banner"><img src="../assets/img/card-money.webp" width="800" height="450" alt="The Ranchers gameplay screenshot: ranchers working a large corn field at harvest"></figure>
@@ -68,6 +68,7 @@
         <strong>In this guide</strong>
         <ul>
           <li><a href="#method">The formulas: profit per day, per minute, payback</a></li>
+          <li><a href="#video-anchors">Video-observed economy anchors</a></li>
           <li><a href="#compare">Comparison table: crops vs. livestock vs. processing vs. active work</a></li>
           <li><a href="#measure">How to measure: the observation sheet</a></li>
           <li><a href="#channels">Selling channels: orders, local markets, auction</a></li>
@@ -91,6 +92,39 @@
       </ul>
       <p>Use two rates, because each answers a different question. <strong>Profit per in-game day</strong> shows how efficiently land, housing, or a machine slot is used. <strong>Profit per active minute</strong> shows how efficiently your own attention is used — two activities can return the same profit per day while one consumes an entire morning. Record travel separately, especially when comparing a local sale with a distant buyer.</p>
       <p>Enter observed values in the <a href="/tools/profit-calculator">profit calculator</a>. Entries stay in your browser, so you can compare your own save without sending gameplay data to us.</p>
+
+      <h2 id="video-anchors">Video-observed economy anchors</h2>
+      <p>The anchors below were captured frame-by-frame from one public playthrough of the current build (Games Station, V0.8.10.455, Spring Year 1 Days 4–8). They are real on-screen values, but they are a <strong>single playthrough observation</strong> — evidence that these numbers exist in the current build, not proof of an optimal route.</p>
+      <div class="data-table-wrap" role="region" aria-label="Video-observed economy anchors" tabindex="0">
+      <table>
+        <thead>
+          <tr><th>Anchor</th><th>Observed value</th><th>Evidence</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Daily settlement ledger structure</strong></td>
+            <td>Income lines: Farming / Foraging / Hunting and fishing / Grocery / Others. Deduction lines: Water and Energy — both shown as "No contract" before any utility contract is signed. The statement also carries Outstanding Personal Bills and Important notices sections.</td>
+            <td><span class="evidence-badge evidence-video">Video-observed</span> <span title="Observed in Games Station gameplay footage (V0.8.10.455) at 15:35">Games Station, 15:35</span></td>
+          </tr>
+          <tr>
+            <td><strong>Worked example: Day 4 settlement</strong></td>
+            <td>Total income 692C, entirely from the Foraging line — an early game run with no farming, hunting/fishing or grocery income booked that day.</td>
+            <td><span class="evidence-badge evidence-video">Video-observed</span> <span title="Observed in Games Station gameplay footage (V0.8.10.455) at 15:35">Games Station, 15:35</span></td>
+          </tr>
+          <tr>
+            <td><strong>Strawberry seed economics</strong></td>
+            <td>Seed price 144C; 7-day first growth, then multi-harvest every 3 days. Sell price per berry was not observed. Seed-cost amortization only: 144C ÷ 8 harvests ≈ 18C per harvest over a 30-day Spring.</td>
+            <td><span class="evidence-badge evidence-video">Video-observed</span> <span title="Observed in Games Station gameplay footage (V0.8.10.455) at 03:30; 10-seed purchase confirmation at 03:50">Games Station, 03:30</span></td>
+          </tr>
+          <tr>
+            <td><strong>Grocery shelf price reference</strong></td>
+            <td>Cow Meat - Medium listed at 672C on the Leafy Market grocery shelf (Basic quality, restores 42 health / 130 energy) — a working reference point for the value of mid-tier animal products.</td>
+            <td><span class="evidence-badge evidence-video">Video-observed</span> <span title="Observed in Games Station gameplay footage (V0.8.10.455) at 03:45">Games Station, 03:45</span></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <p>Two planning consequences, with the single-playthrough caveat attached. First, foraging alone supported roughly 700C per in-game day in this run's first week, which makes it a credible no-capital bridge while a first crop cycle grows — consistent with the active-work advice below. Second, strawberry is a confirmed multi-harvest Spring crop in the current build, so its seed cost should be amortized across repeat harvests, not charged to the first one. Neither observation proves these are the best routes; they prove the mechanics work this way in 0.8.10.455.</p>
 
       <h2 id="compare">Comparison table: crops vs. livestock vs. processing vs. active work</h2>
       <p>Use this table as a test sheet for every activity available in your save. The systems in the left column are officially confirmed <span class="evidence-badge evidence-official">Official</span>; the numerical outcomes are yours to measure.</p>
@@ -171,8 +205,8 @@
 
       <h2 id="recommendations">Recommendations</h2>
       <ol>
-        <li><strong>First days:</strong> fund the ranch with active work that needs no capital (fishing and similar), while your first measured crop cycle grows.</li>
-        <li><strong>First expansion:</strong> buy only what you have already measured — one candidate, one control cycle, one repeat.</li>
+        <li><strong>First days:</strong> fund the ranch with active work that needs no capital (fishing and similar), while your first measured crop cycle grows. In the observed playthrough, foraging alone booked 692C on Day 4 <span class="evidence-badge evidence-video">Video-observed</span> — a working example, not a proven optimum.</li>
+        <li><strong>First expansion:</strong> buy only what you have already measured — one candidate, one control cycle, one repeat. Multi-harvest crops (strawberry confirmed in the current build) spread their seed cost across repeat harvests, so judge them per harvest, not per planting.</li>
         <li><strong>First animal:</strong> after you can cover the animal, its housing share, and a reserve for recurring care without blocking essential progress.</li>
         <li><strong>Processing:</strong> only when the increase over direct-sale input value covers machine cost and processing time.</li>
         <li><strong>Upgrades:</strong> rank them by payback days. If a sprinkler changes active labor but not crop revenue, value it by minutes saved and the extra work those minutes allow.</li>
@@ -186,12 +220,13 @@
         <li>Crops, animals, seasons, markets, auction trading, utilities, energy generation and 1–4 player co-op exist as systems <span class="evidence-badge evidence-official">Official</span> — <a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">Steam store page</a> and <a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">official announcements</a>, reviewed August 2026.</li>
         <li>Recurring crops, persistent unharvested produce, Luck effects on fruit count and newborn quality <span class="evidence-badge evidence-official">Official</span> — official patch notes.</li>
         <li>Surplus-electricity payout behavior unclear <span class="evidence-badge evidence-reported">Unverified lead</span> — single-player report, tracked in the <a href="/research">research queue</a>.</li>
-        <li>All specific prices, growth times and yields: pending current-build measurement — no verified values exist yet on this site.</li>
+        <li>Daily ledger income/deduction structure, the 692C foraging Day-4 example, strawberry seed 144C with 3-day regrowth, and Cow Meat - Medium at 672C <span class="evidence-badge evidence-video">Video-observed</span> — <a href="https://www.youtube.com/watch?v=GrFiYqWcBK0" rel="noopener noreferrer">Games Station gameplay footage (V0.8.10.455)</a>, reviewed August 7, 2026.</li>
+        <li>Most specific prices, growth times and yields remain pending current-build measurement; the video-observed anchors above are the first current-build values on this site.</li>
       </ul>
 
       <h2 id="limits">Known limits</h2>
       <ul>
-        <li>This page contains <strong>no per-item prices</strong>. Early Access balance patches move numbers faster than any static table can track; the <a href="/database/crops">crop</a> and <a href="/database/animals">animal</a> databases hold the current labeled values.</li>
+        <li>This page is still <strong>not a full price table</strong>. A small set of video-observed anchor values is labeled above; everything else lives in the <a href="/database/crops">crop</a> and <a href="/database/animals">animal</a> databases as labeled values.</li>
         <li>The 3-bucket rule and the recommendations are editorial planning methods, not hidden game mechanics.</li>
         <li>Auction results depend on other players, so they cannot be reproduced like a vendor price.</li>
         <li>If two sources give you different numbers for the same item, report both — our <a href="/methodology#conflicts">conflict rule</a> is to show conflicting values side by side, not to silently pick one.</li>
@@ -295,6 +330,6 @@
     </div>
   </footer>
 
-  <script src="../assets/js/main.js?v=20260806-2" defer></script>
+  <script src="../assets/js/main.js?v=20260807-1" defer></script>
 </body>
 </html>
