@@ -27,3 +27,6 @@
 - A visible tab or successful login is not sufficient verification; confirm actual status or metric values before scheduling recurring checks.
 - Before attributing an AdSense or Search Console status to a deployment, compare the dashboard's last-updated time with the commit and deployment times.
 - Do not change `ads.txt` based only on a stale dashboard label; first verify the root-domain file with HTTP, HTTPS, `www`, and Google advertising crawler user agents.
+
+## Publishing Language Rule
+- In this project, when the user says either `提交` or `上传`, complete the full ordinary Git flow: stage the relevant files, commit, and push the current branch without another confirmation pause.
