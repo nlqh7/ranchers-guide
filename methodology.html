@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Methodology — How The Ranchers Guide Verifies Game Data</title>
+  <meta name="description" content="How theranchersguide.com collects and grades The Ranchers gameplay evidence: the five-level evidence scale, the verification workflow, and the rule for displaying conflicting values.">
+  <link rel="canonical" href="https://theranchersguide.com/methodology">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="The Ranchers Guide">
+  <meta property="og:title" content="Methodology — How The Ranchers Guide Verifies Game Data">
+  <meta property="og:description" content="The five-level evidence scale, the verification workflow, and the conflict-display rule used across every guide and database page.">
+  <meta property="og:url" content="https://theranchersguide.com/methodology">
+  <meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon-180.png">
+  <link rel="stylesheet" href="assets/css/style.css?v=20260806-2">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a class="logo" href="/">
+        <span class="logo-mark"><img src="assets/img/logo.png" alt="" width="34" height="34"></span>
+        <span>The Ranchers Guide<small>Unofficial fan resource</small></span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+      <ul class="nav-links">
+        <li><a href="/guides/beginners-guide">Guides</a></li>
+        <li><a href="/database/crops">Database</a></li>
+        <li><a href="/map">Map</a></li>
+        <li><a href="/problems">Problems</a></li>
+        <li><a href="/research">Research</a></li>
+        <li><a href="/search">Search</a></li>
+        <li><a class="nav-cta" href="/contribute">Contribute</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article class="article">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Methodology</nav>
+      <h1>Methodology: How We Verify The Ranchers Data</h1>
+      <p class="meta">Last updated: August 6, 2026 · Applies to game versions 0.8.10–0.8.11</p>
+
+      <p class="lead">The Ranchers is in Early Access and its economy changes between patches. This page is the single reference for how every guide, database row and problem fix on this site is sourced, graded and kept current — so individual pages can show answers instead of repeating policy.</p>
+
+      <h2>The one editorial rule</h2>
+      <p><strong>Never invent numbers.</strong> A longer table is not more useful when its prices or timings are guesses. When a value has not been measured in a named game version, the field stays pending — a short status note, not a paragraph of excuses. Unknown values stay unknown until the evidence below exists.</p>
+
+      <h2 id="scale">The five-level evidence scale</h2>
+      <p>Every build-specific claim on this site carries one of these labels, placed on the specific data row or conclusion it supports — not once per page.</p>
+      <div class="evidence-key">
+        <div><span class="evidence-badge evidence-official">Official</span><p>From an official announcement, patch note, store page, or developer reply.</p></div>
+        <div><span class="evidence-badge evidence-video">Video-observed</span><p>Directly visible in video footage; always cited with the source and a timestamp.</p></div>
+        <div><span class="evidence-badge evidence-community">Community-confirmed</span><p>Two or more independent player reports agree under comparable conditions.</p></div>
+        <div><span class="evidence-badge evidence-tested">Player-tested</span><p>Measured hands-on by a co-op tester in a named build, with retained evidence.</p></div>
+        <div><span class="evidence-badge evidence-lead">Unverified lead</span><p>A single-source clue. Useful as a test lead, not a settled fact.</p></div>
+      </div>
+      <p>Older pages may still show the previous label set (Verified / Corroborated / Reported / Historical / Obsolete). The mapping is: Verified → Player-tested or Video-observed, Corroborated → Community-confirmed, Reported → Unverified lead, Historical and Obsolete stay as-is for pre-Early-Access values and patched-out results.</p>
+
+      <h2>How a report becomes published data</h2>
+      <ol>
+        <li><strong>Collect.</strong> Evidence comes from public gameplay videos, official updates, community reports and tester sessions. A usable report includes the game version, the screen or action that produced the value, and enough context to repeat it.</li>
+        <li><strong>Screen.</strong> We check the report is complete, legally usable and not contradicted by a newer official source.</li>
+        <li><strong>Corroborate.</strong> A second independent matching observation promotes a lead to Community-confirmed.</li>
+        <li><strong>Test.</strong> A retained hands-on reproduction promotes it to Player-tested.</li>
+        <li><strong>Re-check.</strong> A later patch can move any record to Historical or Obsolete. Balance patches can make an old observation obsolete without making it dishonest; when a value changes, the current row shows the newer build.</li>
+      </ol>
+      <p>Crop records include seed cost, occupied days, yield, quality, and sale channel. Animal records include purchase and housing costs, upkeep, production cycle, output, and care conditions. Submit evidence through the <a href="/contribute">contribution form</a> or collect it privately first in <a href="/tools/field-notes">Field Notes</a>.</p>
+
+      <h2 id="conflicts">When sources conflict</h2>
+      <p>When two credible sources give different values for the same thing, we <strong>display both side by side</strong> and say the value is uncertain. We do not silently pick one. Conflicting rows are marked with a <code>data-conflict</code> block:</p>
+      <div class="data-conflict">
+        <strong>Conflicting values:</strong> Version 0.8.10 video footage shows 52 coins, while an older community table lists 48. The current value remains uncertain.
+      </div>
+      <p>A conflict resolves only when current-build evidence at Player-tested or Community-confirmed level settles it. Until then, both values stay visible with their sources and versions.</p>
+
+      <h2>What "pending" means on a page</h2>
+      <p>Pending means the value has not been measured in the current build — nothing more. Pending fields are shown as a short status note or an empty cell, and each content page carries a single evidence-status card at the top summarizing what is verified and what is still open. The <a href="/research">research queue</a> lists the specific open questions and the smallest test that would answer each one.</p>
+
+      <h2>Sources we use</h2>
+      <ul>
+        <li><a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">Official Steam store page</a> and <a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">official Steam announcements</a> — system-level facts and patch notes.</li>
+        <li>Public gameplay videos, cited with channel and timestamp — Video-observed facts.</li>
+        <li>Steam discussions, Reddit and fan wikis — leads and community confirmation, linked rather than copied.</li>
+        <li>Tester sessions in named builds — Player-tested facts.</li>
+      </ul>
+
+      <aside class="author-card" aria-label="About the author">
+        <div class="author-card-id">
+          <strong>Niki</strong>
+          <span>Site editor, The Ranchers Guide</span>
+        </div>
+        <p>Research and editing by Niki, site editor. Gameplay evidence collected from public videos, official updates and community reports. Last reviewed: August 2026. Game version coverage: 0.8.10–0.8.11. <a href="/methodology">How we verify →</a></p>
+      </aside>
+
+      <!-- Ad slot placeholder
+      <div class="ad-slot">Advertisement</div>
+      -->
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>The Ranchers Guide</h4>
+          <p>An unofficial, fan-made guide hub for The Ranchers — the open-world ranch life sim from RedPilz Studio, published by Trophy Games, available in Steam Early Access since July 30, 2026.</p>
+          <p class="disclaimer">Unofficial fan-made guide. The Ranchers game images &copy; RedPilz Studio / Trophy Games. Not affiliated with or endorsed by the developers.</p>
+        </div>
+        <nav aria-label="Footer guides">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="/guides/release-time-checklist">Early Access Status</a></li>
+            <li><a href="/guides/beginner-mistakes">Beginner Mistakes</a></li>
+            <li><a href="/guides/beginners-guide">Beginner's Guide</a></li>
+            <li><a href="/guides/money-making">Money Making</a></li>
+            <li><a href="/guides/multiplayer-coop">Multiplayer & Co-op</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Footer databases and tools">
+          <h4>Data & Tools</h4>
+          <ul>
+            <li><a href="/search">Search</a></li>
+            <li><a href="/database/crops">Crop Database</a></li>
+            <li><a href="/database/animals">Animal Database</a></li>
+            <li><a href="/tools/field-notes">Field Notes</a></li>
+            <li><a href="/tools/profit-calculator">Profit Calculator</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Footer site links">
+          <h4>Site</h4>
+          <ul>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/methodology">Methodology</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> theranchersguide.com — fan-made, unofficial.</span>
+        <span>Official sources and data status are labeled on each page.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js?v=20260806-2" defer></script>
+</body>
+</html>

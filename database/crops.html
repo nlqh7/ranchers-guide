@@ -16,7 +16,7 @@
 
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
-  <link rel="stylesheet" href="../assets/css/style.css?v=20260803-1">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260806-2">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -44,6 +44,10 @@
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Database / Crops</nav>
       <h1>The Ranchers Crop Database</h1>
       <p class="meta">Current build 0.8.10.455 · Updated August 2, 2026 · Historical values are labeled</p>
+      <div class="evidence-status">
+        <strong>Evidence status:</strong> 10 confirmed systems · 6 historical leads · 3 pending rows · reviewed Aug 6, 2026 — <a href="/methodology">How we verify →</a>
+      </div>
+
 
       <figure class="page-banner"><img src="../assets/img/db-crops.webp" width="800" height="450" alt="The Ranchers gameplay screenshot: a greenhouse and neat vegetable garden rows"></figure>
 
@@ -160,14 +164,7 @@
       </div>
 
       <h2>How to build a trustworthy crop row</h2>
-      <p>A useful crop row needs more than a screenshot of one price. Record the game version, season, seed source, seed cost, planting day, harvest day, yield per plot, sale destination, sale price, and any quality or processing modifier.</p>
-      <ul>
-        <li><strong>Use a control plot.</strong> Test one crop without fertilizer or processing before adding bonuses.</li>
-        <li><strong>Measure occupied days.</strong> Count the days a plot cannot be replanted, not only the number printed on a seed description.</li>
-        <li><strong>Separate sale channels.</strong> A local-market price and an auction result are different observations.</li>
-        <li><strong>Repeat the test.</strong> One harvest can hide random yield or quality variation.</li>
-        <li><strong>Keep the version.</strong> Early Access balance patches can make an old number accurate for one build and wrong for the next.</li>
-      </ul>
+      <p>Record the game version, season, seed source, seed cost, planting day, harvest day, yield per plot, sale destination, sale price, and any quality or processing modifier. Use a control plot without bonuses, measure occupied days (not only the printed growth time), separate sale channels, and repeat the test at least once. The full verification workflow is on the <a href="/methodology">methodology page</a>.</p>
 
       <h2>Questions still open in the current build</h2>
       <ul>
@@ -178,11 +175,18 @@
         <li>Which costs are per harvest, per planting, or one-time infrastructure?</li>
       </ul>
 
-      <h2>Sources and evidence policy</h2>
-      <p>The confirmed rows come from the <a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">official Steam store page</a> and <a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">official Steam updates</a>, reviewed August 1, 2026. They describe systems, not a complete numerical crop catalog.</p>
-      <p>Community reports can enter the database as labeled leads when their origin and build context are clear. They become corroborated or verified current-build values only after independent matching evidence. A correction should include the game version and the screen or action that produced the value. <a href="/contact">Send evidence through the contact page</a>.</p>
+      <h2>Sources</h2>
+      <p>Confirmed rows come from the <a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">official Steam store page</a> and <a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">official Steam updates</a>, reviewed August 2026. How leads become verified values: <a href="/methodology">methodology</a>. Corrections with a version and screenshot: <a href="/contact">contact page</a>.</p>
       <p>Pair this with the <a href="/database/animals">animal database</a> to plan your whole ranch economy, and read the <a href="/guides/beginners-guide">beginner's guide</a> if this is your first season.</p>
 
+
+      <aside class="author-card" aria-label="About the author">
+        <div class="author-card-id">
+          <strong>Niki</strong>
+          <span>Site editor, The Ranchers Guide</span>
+        </div>
+        <p>Research and editing by Niki, site editor. Gameplay evidence collected from public videos, official updates and community reports. Last reviewed: August 2026. Game version coverage: 0.8.10–0.8.11. <a href="/methodology">How we verify →</a></p>
+      </aside>
       <!-- Ad slot placeholder
       <div class="ad-slot">Advertisement</div>
       -->
@@ -223,6 +227,7 @@
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>
             <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/methodology">Methodology</a></li>
           </ul>
         </nav>
       </div>
@@ -233,7 +238,7 @@
     </div>
   </footer>
 
-  <script src="../assets/js/main.js?v=20260803-1" defer></script>
-  <script src="../assets/js/database.js?v=20260802-1" defer></script>
+  <script src="../assets/js/main.js?v=20260806-2" defer></script>
+  <script src="../assets/js/database.js?v=20260806-2" defer></script>
 </body>
 </html>

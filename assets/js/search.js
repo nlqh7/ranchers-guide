@@ -7,7 +7,6 @@
     "/guides/beginner-mistakes",
     "/guides/beginners-guide",
     "/guides/money-making",
-    "/guides/money-making-guide",
     "/guides/multiplayer-coop",
     "/guides/animal-guide",
     "/guides/electricity-power",
@@ -25,6 +24,7 @@
     "/research",
     "/tools/profit-calculator",
     "/tools/field-notes",
+    "/methodology",
     "/about",
     "/contact",
     "/privacy"
