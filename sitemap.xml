@@ -45,6 +45,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://theranchersguide.com/guides/roof-quest-stuck</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://theranchersguide.com/guides/gigi-large-egg-quest</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://theranchersguide.com/guides/multiplayer-coop</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
