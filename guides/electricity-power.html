@@ -43,23 +43,23 @@
     <article class="article">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Guides / Electricity & Water</nav>
       <h1>The Ranchers Electricity & Water Guide</h1>
-      <p class="meta">Verified against official Steam store copy · Player reports checked August 4, 2026 · Reading time: ~10 min</p>
+      <p class="meta">Verified against official Steam store copy · Contract terms video-verified August 8, 2026 · Reading time: ~9 min</p>
       <div class="evidence-status">
-        <strong>Evidence status:</strong> 8 official facts · 3 video-observed utility details · 1 open payout report · reviewed Aug 7, 2026 — <a href="/methodology">How we verify →</a>
+        <strong>Evidence status:</strong> 8 official facts · 5 video-observed utility details (contract fee, daily billing, meter UI, billing example) · 1 open payout report · reviewed Aug 8, 2026 — <a href="/methodology">How we verify →</a>
       </div>
 
 
       <figure class="page-banner"><img src="../assets/img/card-money.webp" width="800" height="450" alt="The Ranchers gameplay screenshot: ranchers working a large field with farm infrastructure in view"></figure>
 
       <div class="notice" data-evidence-status="official">
-        <strong>Current status:</strong> Electricity and water are confirmed ranch-management systems in the July 30, 2026 Early Access build (baseline <strong>0.8.10.455</strong>). You can buy them by contract or generate them yourself, and official copy says surplus can be sold back to the village. Exact rates, outputs and payment timing are still unverified and are marked TBD here.
+        <strong>Current status:</strong> Electricity and water are confirmed ranch-management systems in the July 30, 2026 Early Access build (baseline <strong>0.8.10.455</strong>). Contracts exist and surplus power can be sold — and the electricity contract's structure (1,000C sign-up fee, end-of-day billing by consumption) is now video-verified in the current build. Per-unit rates and generation outputs are still unknown and are marked as such.
       </div>
 
       <nav class="toc" aria-label="Table of contents">
         <strong>In this guide</strong>
         <ul>
           <li><a href="#official-scope">What the official material confirms</a></li>
-          <li><a href="#two-paths">The two ways to power your ranch</a></li>
+          <li><a href="#two-paths">The electricity contract: quick answer and steps</a></li>
           <li><a href="#meter-ui">The meter interface (video-observed)</a></li>
           <li><a href="#selling-surplus">Selling surplus energy and water</a></li>
           <li><a href="#known-reports">Player reports on utilities</a></li>
@@ -71,34 +71,18 @@
       <h2 id="official-scope">What the official material confirms</h2>
       <p>The Steam store page describes ranch management as one of the game's core pillars. Within that pillar, official copy explicitly lists utility management: you can sign water and electricity contracts, or build your own supply with water wells, wind turbines and solar panels. Daily running costs are part of the ranch-management loop alongside crafting, trading and skills.</p>
       <p>The same official description says surplus self-generated energy and water can be sold back to the village, turning utilities from a pure cost into a potential income source.</p>
-      <p><strong>What is not confirmed:</strong> contract prices, billing periods, generation rates, well/turbine/panel output, sale prices, and the exact steps that complete a sale. None of those figures are published in the store copy we can cite, so this guide keeps them as <em>TBD pending a versioned in-game observation</em>.</p>
+      <p><strong>What is still not confirmed:</strong> the per-unit electricity rate, water contract terms, generation rates, well/turbine/panel output, surplus sale prices, and the exact steps that complete a surplus sale. The contract structure below is video-verified; those figures stay open pending versioned in-game observation.</p>
 
-      <h2 id="two-paths">The two ways to power your ranch</h2>
-      <p><strong>Video-observed, current build:</strong> the electricity contract is signed in person at City Hall with <strong>Victor, Sunvale's Mayor</strong>, as one step of the "Power to the Bench" quest chain (bank at least 1,000C → visit City Hall → sign the contract → build a workbench → check your ranch's energy usage) <span class="evidence-badge evidence-video">Video-observed</span> <span title="Observed in Games Station gameplay footage (V0.8.10.455), quest active on Day 8">Games Station footage</span>. Before any contract is signed, the daily settlement ledger shows both a Water and an Energy deduction line marked "No contract" <span class="evidence-badge evidence-video">Video-observed</span> <span title="Observed in Games Station gameplay footage (V0.8.10.455) at 15:35">Games Station, 15:35</span> — so the billing categories exist in the UI even while their cost is zero.</p>
-      <p>Official material offers two routes. The right choice for your save depends on numbers that are not yet verified, so treat this as a decision framework rather than a solved recommendation.</p>
-      <table>
-        <thead>
-          <tr><th>Route</th><th>What official copy says</th><th>What is still unverified</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Sign contracts</strong></td>
-            <td>Water and electricity contracts supply your ranch from the village.</td>
-            <td>Contract cost, billing period, whether you can be cut off, and renewal behavior (TBD).</td>
-          </tr>
-          <tr>
-            <td><strong>Build your own</strong></td>
-            <td>Water wells supply water; wind turbines and solar panels supply electricity. These are named in official ranch-infrastructure copy.</td>
-            <td>Build cost, material requirements, daily output, and whether self-built supply can fully cover a ranch (TBD).</td>
-          </tr>
-          <tr>
-            <td><strong>Sell surplus</strong></td>
-            <td>Excess self-generated energy and water can be sold to the village.</td>
-            <td>The exact steps, meter state and payout timing that complete a sale (TBD).</td>
-          </tr>
-        </tbody>
-      </table>
-      <p>Because the numbers are unverified, the practical advice for a first week is the same as everywhere else on this site: <strong>record before you commit</strong>. Note the contract terms and the displayed meter values for one or two days before signing a long contract or building an expensive panel array.</p>
+      <h2 id="two-paths">The electricity contract: quick answer and steps</h2>
+      <p><strong>Quick answer:</strong> to put your ranch on the grid, sign the electricity contract with <strong>Victor, Sunvale's Mayor, at City Hall</strong>. You pay a one-time <strong>commissioning fee of 1,000C</strong>, charged the moment you sign; after that you are <strong>billed at the end of each day based on your ranch's actual consumption</strong>. If your ranch produces energy, <strong>the city can buy your surplus</strong>. <small>Contract and surplus sale confirmed by the current Steam store page; terms observed in EA 0.8.10.455.</small></p>
+      <ol>
+        <li><strong>Have at least 1,000C in your bank</strong> — that is also the opening requirement of the "Power to the Bench" quest, which walks you through this.</li>
+        <li><strong>Go to City Hall and talk to Victor</strong> (the Mayor). His dialogue also offers a water contract and additional land purchases.</li>
+        <li><strong>Sign the electricity contract.</strong> The 1,000C fee is deducted immediately (observed: funds dropped 2,916C → 1,916C on signing).</li>
+        <li><strong>Check each day's settlement screen</strong> — consumption is billed there on the Energy line — and watch the <strong>Electricity meter app</strong> on your phone for per-device usage.</li>
+      </ol>
+      <p><strong>Observed billing example:</strong> a ranch with one Workbench (5 consumption units) settled one day at <strong>Energy −15C</strong> <small>Observed in EA 0.8.10.455</small>. That is a single observation, not a rate table — the per-unit price is not published anywhere we can cite, so do not multiply it out.</p>
+      <p><strong>Water:</strong> a water contract option exists in Victor's dialogue, but it was not signed in the observed playthrough — terms stay unknown for now. <strong>Self-built supply</strong> (water wells, wind turbines, solar panels) is officially confirmed as the alternative route; build costs and daily outputs are still unverified, so record your own numbers before skipping the contract.</p>
 
       <h2 id="meter-ui">The meter interface (video-observed)</h2>
       <p>The smartphone carries an <strong>Electricity meter / Water meter</strong> app with two tabs <span class="evidence-badge evidence-video">Video-observed</span> <span title="Observed in Games Station gameplay footage (V0.8.10.455) at 75:05">Games Station, 75:05</span>. What the Electricity tab showed in the observed playthrough, after the contract was signed:</p>
@@ -107,10 +91,10 @@
         <li><strong>Device list:</strong> Workbench ×1, consuming 5 units, with an efficiency value of 0; total consumption shown as 5.</li>
         <li><strong>"Your ranch's energy efficiency: −5"</strong> — a worked example of a deficit state: with no generation built, the ranch ran at −5, matching the official claim that daily running costs are part of the loop.</li>
       </ul>
-      <p>This is the first observed instance of the meter UI structure (device list, per-device consumption, total, efficiency summary). What remains unobserved: the unit of consumption, how the −5 efficiency translates into the daily Energy deduction amount, and how generation equipment moves the number positive.</p>
+      <p>This is the first observed instance of the meter UI structure (device list, per-device consumption, total, efficiency summary). One billing data point now exists: the same ranch settled that day at Energy −15C (see the contract section above). What remains unobserved: the per-unit rate and how generation equipment moves the number positive.</p>
 
       <h2 id="selling-surplus">Selling surplus energy and water</h2>
-      <p>Selling surplus is an officially advertised feature, which is why it deserves its own section: the feature exists, but no verified player-written procedure for completing a sale has been reproduced on the current build yet.</p>
+      <p>The mechanism is real: the official store copy advertises surplus sales, and Victor's contract dialogue confirms <strong>"if your ranch produces energy, the city can also buy your surplus"</strong> <small>Observed in EA 0.8.10.455</small>. What is still missing is the practical procedure — the sale price, and the exact meter state and steps that turn surplus into a payout have not been reproduced on the current build.</p>
       <p>If you plan to rely on utility income, test the flow with a small system first and keep evidence. Record the meter reading before you go to sleep, what the next-day statement shows, and whether any payment actually arrives.</p>
       <p>If a sale does not pay out, that is already a tracked open question — see <a href="#known-reports">player reports below</a> and the <a href="/research#excess-electricity">excess-electricity research entry</a>.</p>
 
@@ -163,7 +147,7 @@
       </details>
       <details class="faq-item">
         <summary>When are utility bills charged?</summary>
-        <div class="faq-body"><p>Unverified. Contract terms and billing periods have not been retained as evidence on the current build. Note the date and amount of the first charge in your save.</p></div>
+        <div class="faq-body"><p>Electricity is billed at the end of each day based on your ranch's actual consumption, per the contract dialogue observed in build 0.8.10.455. The per-unit rate is not published, so record the date and amount of your own first few charges.</p></div>
       </details>
       <details class="faq-item">
         <summary>Are electricity and water in the launch build?</summary>
@@ -176,9 +160,9 @@
         <li><a href="https://ranchers.game/" rel="noopener noreferrer">Official The Ranchers website</a> — publisher-developed feature overview.</li>
         <li><a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">Official Steam news</a> — dated development and update notes.</li>
         <li><a href="https://steamcommunity.com/app/1501310" rel="noopener noreferrer">Steam community hub</a> — the source of the launch-week utility reports.</li>
-        <li><a href="https://www.youtube.com/watch?v=GrFiYqWcBK0" rel="noopener noreferrer">Games Station gameplay footage (V0.8.10.455)</a> — source of the video-observed contract and ledger details, reviewed August 7, 2026.</li>
+        <li><a href="https://www.youtube.com/watch?v=GrFiYqWcBK0" rel="noopener noreferrer">Games Station gameplay footage (V0.8.10.455)</a> — source of the video-observed contract terms (66:21–66:41, 1,000C commissioning fee and end-of-day consumption billing), the signing deduction, the meter UI (75:05), and the Day-8 Energy −15C settlement example (76:14–76:24), reviewed August 7–8, 2026.</li>
       </ul>
-      <p>Community wording is summarized rather than copied. Reports remain dated and attributed; unsupported fixes are not published as facts. Exact rates and outputs are TBD until a versioned in-game observation exists.</p>
+      <p>Community wording is summarized rather than copied. Reports remain dated and attributed; unsupported fixes are not published as facts. Per-unit rates and generation outputs remain open until a versioned in-game observation exists.</p>
 
       <h2>Related guides</h2>
       <ul>
