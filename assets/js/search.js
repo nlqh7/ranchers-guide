@@ -13,6 +13,7 @@
     "/guides/building-construction",
     "/guides/roof-quest-stuck",
     "/guides/gigi-large-egg-quest",
+    "/guides/controls-camera-settings",
     "/database/crops",
     "/database/animals",
     "/map",
@@ -31,7 +32,7 @@
     "/contact",
     "/privacy"
   ];
-  var CACHE_KEY = "ranchers-search-index-v9";
+  var CACHE_KEY = "ranchers-search-index-v10";
   var documents = [];
   var form = document.querySelector("[data-search-form]");
   var input = document.querySelector("[data-search-input]");

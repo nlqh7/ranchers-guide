@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Ranchers Controls & Camera Settings Guide</title>
+  <meta name="description" content="The Ranchers controls and camera settings explained: right-mouse camera rotation, left-mouse tool actions, one-button hammer placement, ESC menu, every camera recenter and zoom option with its default, QWERTZ support, and motion-sickness tips.">
+  <link rel="canonical" href="https://theranchersguide.com/guides/controls-camera-settings">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="The Ranchers Guide">
+  <meta property="og:title" content="The Ranchers Controls & Camera Settings Guide">
+  <meta property="og:description" content="Every officially documented control change and camera setting with its default value, plus editorial recommendations and motion-sickness tips.">
+  <meta property="og:url" content="https://theranchersguide.com/guides/controls-camera-settings">
+  <meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260807-2">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a class="logo" href="/">
+        <span class="logo-mark"><img src="../assets/img/logo.png" alt="" width="34" height="34"></span>
+        <span>The Ranchers Guide<small>Unofficial fan resource</small></span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+      <ul class="nav-links">
+        <li><a href="/guides/beginners-guide">Guides</a></li>
+        <li><a href="/database/crops">Database</a></li>
+        <li><a href="/map">Map</a></li>
+        <li><a href="/problems">Problems</a></li>
+        <li><a href="/research">Research</a></li>
+        <li><a href="/search">Search</a></li>
+        <li><a class="nav-cta" href="/contribute">Contribute</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article class="article">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Guides / Controls &amp; Camera Settings</nav>
+      <h1>The Ranchers Controls &amp; Camera Settings Guide</h1>
+      <p class="meta">Updated for Early Access 0.8.10.x (August 2026) · August 7, 2026 · Reading time: ~6 min</p>
+      <div class="evidence-status">
+        <strong>Evidence status:</strong> controls and camera defaults from official update notes · recommendations marked editorial · reviewed Aug 7, 2026 — <a href="/methodology">How we verify →</a>
+      </div>
+
+      <section class="answer-box">
+        <h2>Answer first</h2>
+        <p>The Ranchers controls were simplified in an official update: <strong>Right Mouse Button rotates the camera, Left Mouse Button performs all primary tool actions, and building placement with the Hammer now needs only one button</strong>. Open the menu with <strong>ESC</strong> — Game Settings, including the full Camera Settings section, are accessible directly from it. Every default value and its source update is listed below.</p>
+      </section>
+
+      <nav class="toc" aria-label="Table of contents">
+        <strong>In this guide</strong>
+        <ul>
+          <li><a href="#quick">Controls quick reference</a></li>
+          <li><a href="#camera">Camera settings, one by one</a></li>
+          <li><a href="#building">Building controls</a></li>
+          <li><a href="#motion">Motion sickness: settings that help</a></li>
+          <li><a href="#faq">Controls FAQ</a></li>
+        </ul>
+      </nav>
+
+      <h2 id="quick">Controls quick reference</h2>
+      <p><span class="evidence-badge evidence-official">Official</span> The mappings below come from the official "Next Fest Update – Controls, Camera &amp; QoL Improvements" notes (Feb 2026 update, demo-era) — recheck against the current EA build, because the developers have continued to iterate on controls since the demo.</p>
+      <table>
+        <thead><tr><th>Input</th><th>Function</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Right Mouse Button</strong></td><td>Rotate the camera</td><td><span class="evidence-badge evidence-official">Official</span> (Feb 2026 update, demo-era); recheck against the current EA build</td></tr>
+          <tr><td><strong>Left Mouse Button</strong></td><td>All primary tool actions (axe, pickaxe, etc.)</td><td><span class="evidence-badge evidence-official">Official</span> (Feb 2026 update, demo-era); recheck against the current EA build</td></tr>
+          <tr><td><strong>ESC</strong></td><td>Opens and closes the menu; Game Settings are accessible directly from the ESC menu</td><td><span class="evidence-badge evidence-official">Official</span> (Feb 2026 update, demo-era); recheck against the current EA build</td></tr>
+          <tr><td><strong>Hammer (one button)</strong></td><td>Place or edit blueprints — simplified from two buttons to one</td><td><span class="evidence-badge evidence-official">Official</span> (Feb 2026 update, demo-era); recheck against the current EA build</td></tr>
+          <tr><td><strong>Long-range weapons (one button)</strong></td><td>Aiming simplified to a single button</td><td><span class="evidence-badge evidence-official">Official</span> (Feb 2026 update, demo-era); recheck against the current EA build</td></tr>
+          <tr><td><strong>Keyboard</strong></td><td>Secondary items (Torch, etc.) are mapped to keyboard inputs</td><td><span class="evidence-badge evidence-official">Official</span> (Feb 2026 update, demo-era); recheck against the current EA build</td></tr>
+          <tr><td><strong>T</strong></td><td>Opens the phone, including the quest journal</td><td><span class="evidence-badge evidence-corroborated">Corroborated by players</span> — the support team's own workaround for stuck quest trackers starts with "press T" (<a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364412800/" rel="noopener noreferrer">Steam discussion</a>, Aug 4, 2026)</td></tr>
+        </tbody>
+      </table>
+      <p>Two solo-play behaviors worth knowing from the same official update: <strong>the game pauses in solo mode while you use the Feedback App or Settings App</strong>, and there is a Gameplay setting to adjust Phone Call text speed <span class="evidence-badge evidence-official">Official</span> (Feb 2026 update, demo-era); recheck against the current EA build.</p>
+      <p>Keyboard layouts: <strong>QWERTZ layout support</strong> (Germany, Austria, etc.) was added in the same update <span class="evidence-badge evidence-official">Official</span> (Feb 2026 update, demo-era); recheck against the current EA build.</p>
+
+      <h2 id="camera">Camera settings, one by one</h2>
+      <p><span class="evidence-badge evidence-official">Official</span> A dedicated Camera Settings section was added in the Feb 2026 update (demo-era); recheck against the current EA build. The same update also reduced camera acceleration and deceleration to remove the "snapping" effect, making movement smoother and more predictable. The settings and their official defaults:</p>
+      <table>
+        <thead><tr><th>Setting</th><th>Official default</th><th>What it does</th><th>Our suggestion <span class="evidence-badge evidence-reported">Editorial</span></th></tr></thead>
+        <tbody>
+          <tr><td><strong>Camera Movement Speed</strong></td><td>Not stated</td><td>How fast the camera turns with your input</td><td>Start at default; raise it only if the camera feels like it lags behind your mouse</td></tr>
+          <tr><td><strong>Camera Zoom Speed</strong></td><td>Not stated</td><td>How fast zoom responds</td><td>Leave at default unless zooming feels jumpy while driving</td></tr>
+          <tr><td><strong>Automatic Camera Recenter – On Foot</strong></td><td><strong>Disabled</strong></td><td>When enabled, the camera automatically rotates to align with the player's direction, without manual input</td><td>Keep it off if you like full manual control; try enabling it if you find yourself constantly dragging the camera while walking</td></tr>
+          <tr><td><strong>Automatic Camera Recenter – In Vehicle</strong></td><td><strong>Enabled</strong></td><td>Same auto-alignment while driving</td><td>The default-on behavior suits most driving; disable it only if you prefer to watch the ranch while cruising</td></tr>
+          <tr><td><strong>Automatic Camera Recentering Latency</strong></td><td><strong>0.5 s</strong></td><td>Controls how quickly the camera realigns — lower value = faster recentering. The official notes say this setting helps with motion sickness</td><td>If the game makes you queasy, this is the first slider to experiment with — see <a href="#motion">motion sickness</a> below</td></tr>
+          <tr><td><strong>Auto Reset Camera Zoom</strong></td><td><strong>Disabled</strong></td><td>When enabled, zoom adjusts automatically depending on context; when disabled, zoom remains stable while driving</td><td>Keep it off (the default) for a stable frame while driving; enable it only if you want automatic zoom changes between contexts</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="building">Building controls</h2>
+      <p><span class="evidence-badge evidence-official">Official</span> (Feb 2026 update, demo-era); recheck against the current EA build. Two options were added for builders:</p>
+      <ul>
+        <li><strong>Auto Equip Hammer after placement — default ON.</strong> The Hammer stays in your hands after placing a blueprint, so chaining multiple placements does not require re-equipping.</li>
+        <li><strong>Auto Re-Equip Same Blueprint after placement — default OFF.</strong> Enable this if you are placing many copies of the same piece.</li>
+      </ul>
+      <p>The same update added clearer error messages when placing blueprints — for unpurchased farm parcels, unauthorized zones or interiors, collisions or failed placement requirements, and exceeding City Hall building height limits. If placement fails, read the message before assuming a bug; see the <a href="/guides/building-construction">Building &amp; Placement Guide</a> and the <a href="/guides/roof-quest-stuck">roof quest troubleshooting page</a> for the most common blockers.</p>
+
+      <h2 id="motion">Motion sickness: settings that help</h2>
+      <p><span class="evidence-badge evidence-reported">Editorial</span> The suggestions in this section are our editorial recommendations, built on the official settings above — they are not official prescriptions.</p>
+      <ul>
+        <li><strong>Adjust Automatic Camera Recentering Latency first.</strong> The official notes explicitly say this setting (default 0.5 s) helps with motion sickness — a lower value recenters the camera faster.</li>
+        <li><strong>Keep Auto Reset Camera Zoom disabled</strong> (the default) so the frame stays stable while driving instead of zooming on context changes.</li>
+        <li><strong>Decide on recentering deliberately.</strong> If automatic camera movement bothers you, disable Automatic Camera Recenter – In Vehicle; if fighting the camera manually is what tires you, enable the on-foot recenter instead.</li>
+        <li><strong>Lower Camera Movement Speed</strong> if fast panning is what triggers discomfort — the post-update camera already has reduced acceleration and deceleration, so small slider changes go a long way.</li>
+      </ul>
+
+      <h2 id="faq">Controls FAQ</h2>
+      <details class="faq-item">
+        <summary>How do I rotate the camera in The Ranchers?</summary>
+        <div class="faq-body"><p>Hold the Right Mouse Button, per the official control simplification update (Feb 2026, demo-era — recheck against the current EA build). All primary tool actions moved to the Left Mouse Button at the same time.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Where are the camera settings?</summary>
+        <div class="faq-body"><p>Open the menu with ESC — Game Settings are accessible directly from the ESC menu — and look for the dedicated Camera Settings section added in the Feb 2026 update (demo-era; recheck against the current EA build).</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Does the game pause when I open Settings?</summary>
+        <div class="faq-body"><p>In solo mode, yes — the official notes say the game pauses while you use the Feedback App or Settings App (Feb 2026 update, demo-era; recheck against the current EA build). Do not rely on pausing in a co-op session.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Is there QWERTZ keyboard support?</summary>
+        <div class="faq-body"><p>Yes — QWERTZ layout support (Germany, Austria, etc.) was added in the official Feb 2026 update (demo-era; recheck against the current EA build).</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>The camera keeps swinging back while I drive. Can I stop it?</summary>
+        <div class="faq-body"><p>That is Automatic Camera Recenter – In Vehicle, which is enabled by default. Disable it in Camera Settings, or raise the recentering latency (default 0.5 s) so it kicks in more slowly.</p></div>
+      </details>
+
+      <h2>Related guides</h2>
+      <ul>
+        <li><a href="/guides/beginners-guide">Beginner's Guide</a> — a day-by-day first-week roadmap that assumes these default controls.</li>
+        <li><a href="/guides/roof-quest-stuck">Roof Quest Stuck</a> — includes the phone quest journal (T) workaround and workbench UI tips.</li>
+        <li><a href="/guides/multiplayer-coop">Multiplayer &amp; Co-op</a> — hosting, joining and dividing work with friends.</li>
+      </ul>
+
+      <aside class="author-card" aria-label="About the author">
+        <div class="author-card-id">
+          <strong>Niki</strong>
+          <span>Site editor, The Ranchers Guide</span>
+        </div>
+        <p>Research and editing by Niki, site editor. Gameplay evidence collected from public videos, official updates and community reports. Last reviewed: August 2026. Game version coverage: 0.8.10.x. <a href="/methodology">How we verify →</a></p>
+      </aside>
+</article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>The Ranchers Guide</h4>
+          <p>An unofficial, fan-made guide hub for The Ranchers — the open-world ranch life sim from RedPilz Studio, published by Trophy Games, available in Steam Early Access since July 30, 2026.</p>
+          <p class="disclaimer">Unofficial fan-made guide. The Ranchers game images &copy; RedPilz Studio / Trophy Games. Not affiliated with or endorsed by the developers.</p>
+        </div>
+        <nav aria-label="Footer guides">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="/guides/release-time-checklist">Early Access Status</a></li>
+            <li><a href="/guides/beginner-mistakes">Beginner Mistakes</a></li>
+            <li><a href="/guides/beginners-guide">Beginner's Guide</a></li>
+            <li><a href="/guides/money-making">Money Making</a></li>
+            <li><a href="/guides/multiplayer-coop">Multiplayer & Co-op</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Footer databases and tools">
+          <h4>Data & Tools</h4>
+          <ul>
+            <li><a href="/search">Search</a></li>
+            <li><a href="/database/crops">Crop Database</a></li>
+            <li><a href="/database/animals">Animal Database</a></li>
+            <li><a href="/tools/field-notes">Field Notes</a></li>
+            <li><a href="/tools/profit-calculator">Profit Calculator</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Footer site links">
+          <h4>Site</h4>
+          <ul>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/methodology">Methodology</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> theranchersguide.com — fan-made, unofficial.</span>
+        <span>Official sources and data status are labeled on each page.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js?v=20260807-2" defer></script>
+</body>
+</html>
