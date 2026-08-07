@@ -43,9 +43,9 @@
     <article class="article">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Guides / Animal Guide</nav>
       <h1>The Ranchers Animal Guide: Confirmed Roster & Launch Checklist</h1>
-      <p class="meta">Source audit updated July 30, 2026 · Reading time: ~10 min</p>
+      <p class="meta">Source audit updated August 7, 2026 · Reading time: ~11 min</p>
       <div class="evidence-status">
-        <strong>Evidence status:</strong> 6 official roster facts · 8 historical price leads · reviewed Aug 6, 2026 — <a href="/methodology">How we verify →</a>
+        <strong>Evidence status:</strong> 6 official roster facts · 6 official husbandry mechanics · 8 historical price leads · reviewed Aug 7, 2026 — <a href="/methodology">How we verify →</a>
       </div>
 
 
@@ -63,7 +63,7 @@
           <li><a href="#dairy">Goats and cows</a></li>
           <li><a href="#livestock">Bunnies</a></li>
           <li><a href="#utility">Housing and care checks</a></li>
-          <li><a href="#breeding">Breeding: an open question</a></li>
+          <li><a href="#breeding">Breeding: partially confirmed</a></li>
           <li><a href="#order">Launch verification order</a></li>
           <li><a href="#faq">Animal guide FAQ</a></li>
         </ul>
@@ -75,6 +75,20 @@
       <p>The <a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">official Steam store page</a> says players can care for animals and specifically names chickens, bunnies, goats, and cows. Official screenshots and descriptions also establish ranch construction as a core activity.</p>
       <p>That is enough to prepare a useful test plan. It is not enough to claim exact prices, daily products, barn capacity, breeding rules, or a best purchase order. Those questions stay open until they can be reproduced in the released build.</p>
 
+      <h3>Core husbandry mechanics (official Ranching v2 update)</h3>
+      <p><span class="evidence-badge evidence-official">Official</span> The official <a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">"Ranching v2" update notes</a> (final alpha-stage update, released ahead of the 0.8.10.x Early Access build) confirm the following mechanics as shipped systems:</p>
+      <ul>
+        <li><strong>Species-specific diets.</strong> A new livestock feeding system gives each species its own unique diet — feed that works for one species is not assumed to work for another.</li>
+        <li><strong>Pregnancy for mammals.</strong> Mammal animals reproduce through a pregnancy mechanic.</li>
+        <li><strong>Egg hatching for oviparous animals.</strong> Egg-laying species use a separate egg-hatching mechanic.</li>
+        <li><strong>Animal sickness.</strong> Animals can become ill — sickness is a real mechanic, not flavor text.</li>
+        <li><strong>Outdoor raising without a barn or coop — with consequences.</strong> All livestock can be raised outdoors, which means animals are viable early before you can afford housing, but the official notes warn that "there will be consequences with time."</li>
+      </ul>
+      <p>These are official mechanic statements, not measured values: what each species eats, how long pregnancy or hatching takes, and exactly what the outdoor consequences are still need current-build observation.</p>
+
+      <h3>Getting hay (officially confirmed)</h3>
+      <p><span class="evidence-badge evidence-official">Official</span> The same Ranching v2 update confirms one hay source directly: <strong>wild grass produces hay regardless of its growth stage</strong>. You do not need to wait for wild grass to mature before cutting it for hay — any growth stage yields it.</p>
+
       <h2 id="poultry">Chickens</h2>
       <p>Chickens are confirmed by name. At launch, the first useful checks are where they are acquired, what structure accepts them, whether variants are cosmetic or mechanical, and which interactions affect output.</p>
       <p><span class="evidence-badge evidence-community">Community-confirmed</span> <strong>Quest-linked care findings (current build):</strong> while solving the <a href="/guides/gigi-large-egg-quest">Gigi large-egg quest</a>, multiple players converged on the same chicken-care rules:</p>
@@ -85,7 +99,6 @@
         <li><strong>Sickness → vet immediately</strong>; check health daily.</li>
         <li><span class="evidence-badge evidence-lead">Unverified lead</span> <strong>Coop door delivery bug:</strong> one detailed report says chickens handed in at the coop door vanish from the stock count; carry and deposit them inside the coop instead.</li>
       </ul>
-      <p><span class="evidence-badge evidence-reported">Single report</span> <strong>Getting hay:</strong> in a <a href="https://steamcommunity.com/app/1501310/discussions/0/587308261888261182/" rel="noopener noreferrer">Steam discussion</a> (Aug 5, 2026), player Tila answered the hay question with "chop bushes or loot crates and barrels on the NPC farms" — and the thread author, Zechpreller, confirmed it worked. A single player solution with the asker's confirmation, so treat it as the best current route rather than a documented mechanic.</p>
       <p>These are community-reported care findings tied to one quest line, not a full production model — egg sale prices and cycle economics remain pending and are not estimated here. For a clean production test, record the purchase screen and housing screen first. Then observe feed and water use, the exact time between products, output quantity and quality, the sale channel, and the result of one deliberately missed care cycle.</p>
 
       <h2 id="dairy">Goats and cows</h2>
@@ -100,8 +113,8 @@
       <p>Housing can dominate the real cost of an animal. For each structure, record its recipe or price, unlock requirement, capacity, utility needs, outdoor-space rules, upgrade path, and whether multiple species can share it.</p>
       <p>Care time matters as much as feed cost. Time one normal morning with a single animal, then repeat with a larger group. This reveals whether interactions batch, whether equipment automates them, and where co-op division of labor provides a real advantage.</p>
 
-      <h2 id="breeding">Breeding: an open question</h2>
-      <p>The reviewed official store description does not define the full breeding system. A launch test should check which species breed, whether sex or relationship values matter, how long the process takes, what capacity is required, and whether offspring inherit traits.</p>
+      <h2 id="breeding">Breeding: partially confirmed, economics still open</h2>
+      <p>Breeding exists and splits by reproduction type: mammals use a <strong>pregnancy</strong> mechanic and oviparous species use an <strong>egg-hatching</strong> mechanic <span class="evidence-badge evidence-official">Official</span> (Ranching v2 update notes). The official notes also tie newborn quality probability to player luck. What remains unmeasured is the full rule set — prerequisites, timing, capacity requirements, and whether offspring inherit traits.</p>
       <p>Breeding is not automatically free expansion. Lost products, feed during growth, housing capacity, and player time all belong in the comparison with direct purchase.</p>
 
       <h2 id="order">Launch verification order</h2>

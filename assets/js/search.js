@@ -13,6 +13,7 @@
     "/guides/building-construction",
     "/guides/roof-quest-stuck",
     "/guides/gigi-large-egg-quest",
+    "/guides/police-wanted-levels",
     "/guides/controls-camera-settings",
     "/database/crops",
     "/database/animals",
