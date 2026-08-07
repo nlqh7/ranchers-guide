@@ -11,6 +11,7 @@
   var inspector = document.querySelector("[data-map-inspector]");
   var regionButtons = Array.from(document.querySelectorAll("[data-map-region]:not([data-location-map])"));
   var locationButtons = Array.from(document.querySelectorAll("[data-location-map]"));
+  var markerFocusButtons = Array.from(document.querySelectorAll("[data-marker-focus]"));
   var zoomButtons = Array.from(document.querySelectorAll("[data-map-zoom]"));
   var panButtons = Array.from(document.querySelectorAll("[data-map-pan]"));
   var focusMarker = document.querySelector("[data-map-focus-marker]");
@@ -126,6 +127,21 @@
   locationButtons.forEach(function (button) {
     button.addEventListener("click", function () {
       selectRegion(button.dataset.mapRegion, button.dataset.mapTitle, button.dataset.mapStatus, button.dataset.mapCopy, true);
+      if (mapStage) mapStage.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  });
+
+  markerFocusButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      if (!window.RanchersMapViewer) return;
+      var title = button.dataset.markerFocus;
+      var marker = markers.filter(function (item) { return item.dataset.markerTitle === title; })[0];
+      if (!marker) return;
+      var mx = parseFloat(marker.style.getPropertyValue("--mx"));
+      var my = parseFloat(marker.style.getPropertyValue("--my"));
+      viewState = window.RanchersMapViewer.focus(mx, my, 2.2);
+      applyMapView();
+      selectMarker(marker);
       if (mapStage) mapStage.scrollIntoView({ behavior: "smooth", block: "center" });
     });
   });

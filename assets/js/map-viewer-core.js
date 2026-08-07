@@ -69,5 +69,10 @@
     return clampXY({ scale: clampZoom(view && view.scale), x: (Number(view && view.x) || 0) + (Number(dx) || 0) * 100, y: (Number(view && view.y) || 0) + (Number(dy) || 0) * 100 });
   }
 
-  return { clampZoom: clampZoom, getView: getView, pan: pan, stageToImage: stageToImage, clampXY: clampXY, zoomAt: zoomAt, panBy: panBy };
+  function focus(mx, my, scale) {
+    var s = clampZoom(scale);
+    return clampXY({ scale: s, x: 100 * s * (0.5 - (Number(mx) || 0) / 100), y: 100 * s * (0.5 - (Number(my) || 0) / 100) });
+  }
+
+  return { clampZoom: clampZoom, getView: getView, pan: pan, stageToImage: stageToImage, clampXY: clampXY, zoomAt: zoomAt, panBy: panBy, focus: focus };
 });
