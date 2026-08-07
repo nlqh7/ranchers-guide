@@ -61,7 +61,8 @@
           <li><a href="#official-scope">What the official material confirms</a></li>
           <li><a href="#two-paths">The electricity contract: quick answer and steps</a></li>
           <li><a href="#meter-ui">The meter interface (video-observed)</a></li>
-          <li><a href="#selling-surplus">Selling surplus energy and water</a></li>
+          <li><a href="#selling-surplus">Selling surplus energy</a></li>
+          <li><a href="#solar-quest">Solar panel quest not completing?</a></li>
           <li><a href="#known-reports">Player reports on utilities</a></li>
           <li><a href="#test-protocol">What still needs a current-build test</a></li>
           <li><a href="#faq">Electricity & water FAQ</a></li>
@@ -93,10 +94,17 @@
       </ul>
       <p>This is the first observed instance of the meter UI structure (device list, per-device consumption, total, efficiency summary). One billing data point now exists: the same ranch settled that day at Energy −15C (see the contract section above). What remains unobserved: the per-unit rate and how generation equipment moves the number positive.</p>
 
-      <h2 id="selling-surplus">Selling surplus energy and water</h2>
-      <p>The mechanism is real: the official store copy advertises surplus sales, and Victor's contract dialogue confirms <strong>"if your ranch produces energy, the city can also buy your surplus"</strong> <small>Observed in EA 0.8.10.455</small>. What is still missing is the practical procedure — the sale price, and the exact meter state and steps that turn surplus into a payout have not been reproduced on the current build.</p>
-      <p>If you plan to rely on utility income, test the flow with a small system first and keep evidence. Record the meter reading before you go to sleep, what the next-day statement shows, and whether any payment actually arrives.</p>
-      <p>If a sale does not pay out, that is already a tracked open question — see <a href="#known-reports">player reports below</a> and the <a href="/research#excess-electricity">excess-electricity research entry</a>.</p>
+      <h2 id="selling-surplus">Selling surplus energy</h2>
+      <p><strong>Quick answer:</strong> you do not sell power to anyone by hand — once you have <strong>signed the electricity contract</strong>, any surplus your ranch generates is <strong>automatically converted in the end-of-day settlement</strong>: the Energy line flips from a negative charge to a positive income. If your settlement shows no surplus income, the usual cause is simply that no contract is signed yet. <small>Multiple player reports; contract dialogue confirms the city buys surplus. Observed in EA 0.8.10.455.</small></p>
+      <ul>
+        <li><strong>Reported rates:</strong> one player reports buying at 2C per unit and surplus selling back at 1C (buy 3C / sell 1C later in their save). <strong>Single-source numbers</strong> — they may vary or change with patches.</li>
+        <li><strong>One unresolved case:</strong> a player reports a +5 surplus day that still charged 33C — possibly a threshold or a bug; the community has no conclusion yet. If this hits you, record the meter and settlement screens and report it.</li>
+      </ul>
+      <p>Water surplus follows the same officially advertised idea, but the water contract was not signed in the observed playthrough, so water-sale behavior stays unknown.</p>
+
+      <h2 id="solar-quest">Solar panel quest not completing?</h2>
+      <p><strong>Quick answer:</strong> the quest wants the <strong>basic ground solar panel</strong> — the one in the (left-middle) ground slot of the shop list. The <strong>roof solar panel does not count</strong>, even though it works and pays you daily. Buy and place <strong>one ground panel</strong> and the quest completes. <small>Multiple player reports, mutually confirmed; the quest wording is misleading.</small></p>
+      <p>If a ground panel is placed and it still will not advance, use the standard stuck-quest sequence: press <strong>T</strong> to check the phone quest journal, sleep to the next day, then restart the game.</p>
 
       <h2 id="known-reports">Player reports on utilities</h2>
       <p>These are reports, not reproduced facts. Each one is a lead that still needs a repeatable current-build test before it becomes guide data.</p>
@@ -143,7 +151,7 @@
       </details>
       <details class="faq-item">
         <summary>How do I sell surplus electricity?</summary>
-        <div class="faq-body"><p>The feature is officially advertised, but no verified sale procedure has been reproduced yet. Record the contract state, meter readings and next-day statement, and check the <a href="/research#excess-electricity">excess-electricity open study</a> before assuming your save is bugged.</p></div>
+        <div class="faq-body"><p>Sign the electricity contract with Victor at City Hall, then generate more than you consume — surplus converts automatically in the end-of-day settlement (the Energy line turns positive). No NPC visit or item sale is involved. One unresolved player report shows a surplus day still being charged, so keep your own screenshots if you rely on this income.</p></div>
       </details>
       <details class="faq-item">
         <summary>When are utility bills charged?</summary>
