@@ -34,7 +34,7 @@ assert.match(research, /id="chicks-disappear"/);
 assert.match(research, /id="excess-electricity"/);
 assert.match(research, /id="exterior-walls"/);
 assert.match(research, /sharedfiles\/filedetails\/\?id=2883435340/);
-assert.match(research, /Official[\s\S]*Verified[\s\S]*Corroborated[\s\S]*Reported[\s\S]*Historical[\s\S]*Obsolete/);
+assert.match(research, /Official[\s\S]*Video-observed[\s\S]*Community-confirmed[\s\S]*Player-tested[\s\S]*Unverified lead[\s\S]*Historical[\s\S]*Obsolete/);
 
 const earlyAccessStatus = read("guides/release-time-checklist.html");
 assert.match(earlyAccessStatus, /data-evidence-status="official"/);
