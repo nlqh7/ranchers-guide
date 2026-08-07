@@ -75,7 +75,8 @@
     markers.forEach(function (item) { item.classList.toggle("active", item === marker); });
     if (!inspector) return;
     inspector.querySelector("[data-map-inspector-title]").textContent = marker.dataset.markerTitle;
-    inspector.querySelector("[data-map-inspector-status]").textContent = "Approximate area — exact pin unverified";
+    var confidence = marker.dataset.markerConfidence || "Approximate";
+    inspector.querySelector("[data-map-inspector-status]").textContent = "Location confidence: " + confidence + " — pin is an estimate, not a verified coordinate";
     inspector.querySelector("[data-map-inspector-copy]").textContent = marker.dataset.markerCopy;
     if (inspectorLink && marker.dataset.markerTarget) {
       inspectorLink.hidden = false;
