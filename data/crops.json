@@ -1,0 +1,341 @@
+{
+  "meta": {
+    "page": "database/crops.html",
+    "lastUpdated": "2026-08-08",
+    "build": "0.8.10.455",
+    "evidenceLevels": ["official", "video-observed", "community-confirmed", "player-tested", "unverified-lead"],
+    "validityValues": ["current", "historical", "obsolete", "unknown"]
+  },
+  "sources": {
+    "store-page": {
+      "kind": "store-page",
+      "title": "The Ranchers — official Steam store page",
+      "url": "https://store.steampowered.com/app/1501310/The_Ranchers/",
+      "author": "RedPilz Studio / Trophy Games",
+      "date": "2026-08",
+      "build": "0.8.10.x"
+    },
+    "steam-news-hub": {
+      "kind": "official-news",
+      "title": "The Ranchers — official Steam updates hub",
+      "url": "https://steamcommunity.com/app/1501310/allnews/",
+      "author": "RedPilz Studio / Trophy Games",
+      "date": "2026-08",
+      "build": "0.8.10.x"
+    },
+    "ranching-v2-notes": {
+      "kind": "official-news",
+      "title": "The Ranchers, Ranching v2 update! (official Steam announcement)",
+      "url": "https://steamcommunity.com/games/1501310/announcements/detail/6839319551984984308",
+      "author": "Ethan (official)",
+      "date": "2023-06-27",
+      "build": "alpha-2023"
+    },
+    "games-station-video": {
+      "kind": "local-video",
+      "title": "Games Station gameplay footage V0.8.10.455 (local archive: games-station.mp4, seed tab 03:15–03:50, CashIn 59:41–59:57)",
+      "url": null,
+      "type": "local-video",
+      "author": "Games Station",
+      "date": "2026-08-07",
+      "build": "0.8.10.455"
+    },
+    "farmers-land-fandom": {
+      "kind": "wiki",
+      "title": "Farmer's Land — community-maintained player wiki page (Alpha build)",
+      "url": "https://the-ranchers.fandom.com/wiki/Farmer%27s_Land",
+      "author": "Player Wiki contributors",
+      "date": "2026-08-02",
+      "build": "alpha"
+    },
+    "thread-fertilizer-bug": {
+      "kind": "steam-thread",
+      "title": "Steam thread \"Furtilizer not worth it\" (Seansniper27; Jennoula, official)",
+      "url": null,
+      "author": "Seansniper27 / Jennoula",
+      "date": "2026-08-04",
+      "build": "0.8.10.x"
+    },
+    "thread-ogm": {
+      "kind": "steam-thread",
+      "title": "Steam thread \"OGM\" (gamingmarcel20; Jennoula, official)",
+      "url": null,
+      "author": "gamingmarcel20 / Jennoula",
+      "date": "2026-08-04",
+      "build": "0.8.10.x"
+    },
+    "thread-hay": {
+      "kind": "steam-thread",
+      "title": "Steam thread \"where can i find hay\" (Tila)",
+      "url": null,
+      "author": "Tila",
+      "date": "2026-08-05",
+      "build": "0.8.10.x"
+    },
+    "community-scan-archive": {
+      "kind": "community-scan",
+      "title": "Community discussion scan archive (local file: community-scan-2026-08-08.md, 90 topics scanned, 44 read)",
+      "url": null,
+      "type": "local-archive",
+      "author": "Site editor",
+      "date": "2026-08-08",
+      "build": "0.8.10.x"
+    }
+  },
+  "crops": [
+    {
+      "id": "red-lettuce",
+      "name": "Red Lettuce",
+      "category": "vegetable",
+      "summary": "The cheapest video-confirmed seed in the current build: 48C, Spring, 3 days, single harvest. Sell price per head is still unobserved.",
+      "searchTags": "red lettuce salad vegetable spring seed price grow harvest food sell buy",
+      "fields": [
+        {
+          "key": "seed",
+          "label": "Seed source & price",
+          "facts": [
+            { "text": "Red Lettuce Seed is sold in the Leafy Market \"Seed & Fertilizer\" tab at 48C (Basic quality).", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["games-station-video"] },
+            { "text": "The historical Alpha record listed Red Lettuce Seeds at 18C — superseded by the current-build 48C observation; kept as a lead only.", "evidenceLevel": "unverified-lead", "build": "alpha", "validity": "historical", "sourceIds": ["farmers-land-fandom"] }
+          ]
+        },
+        {
+          "key": "growth",
+          "label": "Growth & harvest",
+          "facts": [
+            { "text": "Season: Spring · Growth time: 3 days · Multi-harvest: none (one harvest per planting).", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["games-station-video"] }
+          ]
+        },
+        {
+          "key": "sell",
+          "label": "Sell price (player) vs retail",
+          "facts": [
+            { "text": "Player sell price per head: unknown. Crop income settles as one combined Farming total in the daily settlement, so per-crop sell prices cannot be read off the settlement screen and none is published here.", "evidenceLevel": "unverified-lead", "build": null, "validity": "unknown", "sourceIds": ["games-station-video"] },
+            { "text": "Theoretical framework only (not an observed outcome): profit per occupied day = (sell price − 48C) ÷ 3 once a sell price is captured.", "evidenceLevel": "unverified-lead", "build": "0.8.10.455", "validity": "current", "sourceIds": ["games-station-video"] }
+          ]
+        }
+      ],
+      "historical": { "season": "Spring", "seedPrice": { "display": "18C", "sort": 18 }, "behavior": "Growth time and sale value were not recorded.", "tags": "red lettuce spring seed price crop" },
+      "videoRow": { "price": { "display": "48C", "sort": 48 }, "details": "Season: Spring · Growth time: 3 days · Multi-harvest: none · Quality: Basic.", "timestamp": "03:20", "status": "Video-observed", "tags": "red lettuce seed price 48 spring growth 3 days basic" },
+      "lastUpdated": "2026-08-08"
+    },
+    {
+      "id": "strawberry",
+      "name": "Strawberry",
+      "category": "fruit",
+      "summary": "The first video-confirmed regrow crop: 144C seed, Spring, 7 days to first harvest, then fruit every 3 days. Berry sell price is unobserved — the 18C-per-harvest figure is a cost-allocation model, not revenue.",
+      "searchTags": "strawberry berry berries fruit spring regrow recurring seed price grow harvest sell buy",
+      "fields": [
+        {
+          "key": "seed",
+          "label": "Seed source & price",
+          "facts": [
+            { "text": "Strawberry Seed is sold in the Leafy Market \"Seed & Fertilizer\" tab at 144C (Basic quality); the purchase dialog separately confirmed 10 seeds = 1,440C.", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["games-station-video"] },
+            { "text": "The historical Alpha record listed Strawberry Seeds at 38C — superseded by the current-build 144C observation; kept as a lead only.", "evidenceLevel": "unverified-lead", "build": "alpha", "validity": "historical", "sourceIds": ["farmers-land-fandom"] }
+          ]
+        },
+        {
+          "key": "growth",
+          "label": "Growth & regrow",
+          "facts": [
+            { "text": "Season: Spring · Growth time: 7 days · Multi-harvest: every 3 days (regrows after the first harvest).", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["games-station-video"] },
+            { "text": "The historical Alpha record claimed daily fruiting after maturity with 10-20 berries per plot and a 20C sale value — Alpha data, not confirmed in the current build.", "evidenceLevel": "unverified-lead", "build": "alpha", "validity": "historical", "sourceIds": ["farmers-land-fandom"] }
+          ]
+        },
+        {
+          "key": "sell",
+          "label": "Sell price (player) vs retail",
+          "facts": [
+            { "text": "Player sell price per berry: unknown — never observed on screen, and the daily settlement does not break crop income down per crop.", "evidenceLevel": "unverified-lead", "build": null, "validity": "unknown", "sourceIds": ["games-station-video"] },
+            { "text": "Theoretical model (our derivation, not an observed outcome): seed-cost allocation ≈ 18C per harvest, assuming eight harvests in a full 30-day Spring (day 7, then days 10, 13, 16, 19, 22, 25, 28) with no missed regrowth, no season-boundary loss and no plant death. Profit/day = (sell price × yield − allocated seed cost) ÷ 3 — open until a sell price is captured.", "evidenceLevel": "unverified-lead", "build": "0.8.10.455", "validity": "current", "sourceIds": ["games-station-video"] }
+          ]
+        }
+      ],
+      "historical": { "season": "Spring", "seedPrice": { "display": "38C", "sort": 38 }, "behavior": "Reported to fruit daily after maturity, yielding 10-20 berries per plot; reported sale value 20C.", "tags": "strawberry berry berries spring regrow recurring daily fruit yield seed price" },
+      "videoRow": { "price": { "display": "144C", "sort": 144 }, "details": "Season: Spring · Growth time: 7 days · Multi-harvest: every 3 days · Quality: Basic. The purchase dialog separately confirmed 10 seeds = 1,440C.", "timestamp": "03:30", "status": "Video-observed", "tags": "strawberry seed price 144 spring growth 7 days multi-harvest every 3 days basic regrow" },
+      "lastUpdated": "2026-08-08"
+    },
+    {
+      "id": "garlic",
+      "name": "Garlic",
+      "category": "vegetable",
+      "summary": "The 31C figure seen on screen is the retail price of the harvested product, not the seed. The seed listing exists but its price was never captured.",
+      "searchTags": "garlic vegetable spring seed price grow harvest sell buy retail",
+      "fields": [
+        {
+          "key": "seed",
+          "label": "Seed source & price",
+          "facts": [
+            { "text": "Garlic Seed appears in the same Leafy Market seed tab, but its price was never readable on screen.", "evidenceLevel": "unverified-lead", "build": "0.8.10.455", "validity": "current", "sourceIds": ["games-station-video"] },
+            { "text": "The historical Alpha record listed Garlic Seeds at 36C (Spring).", "evidenceLevel": "unverified-lead", "build": "alpha", "validity": "historical", "sourceIds": ["farmers-land-fandom"] }
+          ]
+        },
+        {
+          "key": "sell",
+          "label": "Sell price (player) vs retail",
+          "facts": [
+            { "text": "Garlic (the harvested product, not the seed) retails at 31C in the Leafy Market Vegetables tab, restoring 15 HP / 50 energy. This is a shop purchase price — what a rancher earns for selling garlic is unobserved.", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["games-station-video"] }
+          ]
+        }
+      ],
+      "historical": { "season": "Spring", "seedPrice": { "display": "36C", "sort": 36 }, "behavior": "Growth time and sale value were not recorded.", "tags": "garlic spring seed price crop" },
+      "videoRow": { "price": null, "details": "Seen in the same shop tab; price not yet captured on screen.", "timestamp": "03:20", "status": "Unverified lead", "tags": "garlic seed spring shop price not captured" },
+      "lastUpdated": "2026-08-08"
+    },
+    {
+      "id": "aubergine",
+      "name": "Aubergine",
+      "category": "vegetable",
+      "summary": "Historical Alpha record only — no current-build evidence yet.",
+      "searchTags": "aubergine eggplant vegetable summer seed price crop grow sell buy",
+      "fields": [
+        {
+          "key": "seed",
+          "label": "Seed source & price",
+          "facts": [
+            { "text": "The historical Alpha record listed Aubergine Seeds at 21C (Summer). No current-build observation exists.", "evidenceLevel": "unverified-lead", "build": "alpha", "validity": "historical", "sourceIds": ["farmers-land-fandom"] }
+          ]
+        }
+      ],
+      "historical": { "season": "Summer", "seedPrice": { "display": "21C", "sort": 21 }, "behavior": "Growth time and sale value were not recorded.", "tags": "aubergine eggplant summer seed price crop" },
+      "videoRow": null,
+      "lastUpdated": "2026-08-08"
+    },
+    {
+      "id": "corn",
+      "name": "Corn",
+      "category": "vegetable",
+      "summary": "Historical Alpha record only — no current-build evidence yet.",
+      "searchTags": "corn maize vegetable summer seed price crop grow sell buy",
+      "fields": [
+        {
+          "key": "seed",
+          "label": "Seed source & price",
+          "facts": [
+            { "text": "The historical Alpha record listed Corn Seeds at 54C (Summer). No current-build observation exists.", "evidenceLevel": "unverified-lead", "build": "alpha", "validity": "historical", "sourceIds": ["farmers-land-fandom"] }
+          ]
+        }
+      ],
+      "historical": { "season": "Summer", "seedPrice": { "display": "54C", "sort": 54 }, "behavior": "Growth time and sale value were not recorded.", "tags": "corn maize summer seed price crop" },
+      "videoRow": null,
+      "lastUpdated": "2026-08-08"
+    },
+    {
+      "id": "green-lettuce",
+      "name": "Green Lettuce",
+      "category": "vegetable",
+      "summary": "Historical Alpha record only — no current-build evidence yet.",
+      "searchTags": "green lettuce salad vegetable summer seed price crop grow sell buy",
+      "fields": [
+        {
+          "key": "seed",
+          "label": "Seed source & price",
+          "facts": [
+            { "text": "The historical Alpha record listed Green Lettuce Seeds at 27C (Summer). No current-build observation exists.", "evidenceLevel": "unverified-lead", "build": "alpha", "validity": "historical", "sourceIds": ["farmers-land-fandom"] }
+          ]
+        }
+      ],
+      "historical": { "season": "Summer", "seedPrice": { "display": "27C", "sort": 27 }, "behavior": "Growth time and sale value were not recorded.", "tags": "green lettuce summer seed price crop" },
+      "videoRow": null,
+      "lastUpdated": "2026-08-08"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "fertilizer",
+      "name": "Fertilizer",
+      "summary": "Officially flagged as miscalculating in the current build — the official advice is to avoid investing until it is fixed.",
+      "searchTags": "fertilizer ogm boost price bonus yield rare legendary bug",
+      "fields": [
+        {
+          "key": "price",
+          "label": "Shop price",
+          "facts": [
+            { "text": "Fertilizer retails at 288C (Rare quality) in the Leafy Market \"Seed & Fertilizer\" tab.", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["games-station-video"] }
+          ]
+        },
+        {
+          "key": "effect",
+          "label": "Effect & the calculation bug",
+          "facts": [
+            { "text": "Official warning: fertilizer \"is not currently calculating correctly\", it is being looked into, and players should avoid investing in fertilizer until it is adjusted.", "evidenceLevel": "official", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-fertilizer-bug"] },
+            { "text": "One player's test matches the warning: roughly 8,000C of Legendary fertilizer (covering 8 of 24 plots) added about 79C of sales on a salad harvest.", "evidenceLevel": "unverified-lead", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-fertilizer-bug"] },
+            { "text": "A second player reported selling 20 onions with 20 OGM and 40 onions with 40 OGM for the same 21,000C — consistent with the official bug warning, single report.", "evidenceLevel": "unverified-lead", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-ogm"] }
+          ]
+        }
+      ],
+      "videoRow": { "price": { "display": "288C", "sort": 288 }, "details": "Quality: Rare. OGM Fertilizer: 1,080C, Legendary (03:21). Boost Fertilizer also exists in the tab; its price was never opened on screen.", "timestamp": "03:35", "status": "Video-observed", "tags": "fertilizer price 288 rare boost ogm" },
+      "lastUpdated": "2026-08-08"
+    },
+    {
+      "id": "ogm-fertilizer",
+      "name": "OGM Fertilizer",
+      "summary": "Premium Legendary tier seen on the shop shelf at 1,080C. Same calculation-bug warning applies as for regular fertilizer.",
+      "searchTags": "ogm fertilizer legendary price bonus premium",
+      "fields": [
+        {
+          "key": "price",
+          "label": "Shop price",
+          "facts": [
+            { "text": "OGM Fertilizer retails at 1,080C (Legendary) — shop detail panel showed Health 6/6, Consumed energy 1/540, and no description text.", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["games-station-video"] }
+          ]
+        }
+      ],
+      "lastUpdated": "2026-08-08"
+    },
+    {
+      "id": "boost-fertilizer",
+      "name": "Boost Fertilizer",
+      "summary": "Name confirmed on the shelf; its price and details were never opened on screen.",
+      "searchTags": "boost fertilizer price bonus",
+      "fields": [
+        {
+          "key": "price",
+          "label": "Shop price",
+          "facts": [
+            { "text": "Boost Fertilizer exists in the same shop tab, but its detail panel was never opened — price and description unknown.", "evidenceLevel": "unverified-lead", "build": null, "validity": "unknown", "sourceIds": ["games-station-video"] }
+          ]
+        }
+      ],
+      "lastUpdated": "2026-08-08"
+    },
+    {
+      "id": "hay",
+      "name": "Hay",
+      "summary": "Not a planted crop — wild grass produces it, and it doubles as chicken feed (see the animal database).",
+      "searchTags": "hay wild grass chicken feed bushes crates barrels",
+      "fields": [
+        {
+          "key": "source",
+          "label": "How to get hay",
+          "facts": [
+            { "text": "Wild grass produces hay regardless of its growth stage.", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["ranching-v2-notes"] },
+            { "text": "Players report getting hay by chopping bushes or looting crates and barrels on NPC farms.", "evidenceLevel": "unverified-lead", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-hay"] },
+            { "text": "Hay is the chicken feed — chickens pick grains out of hay/straw piles. Feeding details live in the animal database.", "evidenceLevel": "official", "build": "0.8.10.x", "validity": "current", "sourceIds": ["community-scan-archive"] }
+          ]
+        }
+      ],
+      "lastUpdated": "2026-08-08"
+    }
+  ],
+  "cashin": [
+    { "text": "Harvested crops are sold through the CashIn Export Storage Chest by the Cargo/helipad area on the ranch.", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["games-station-video"] },
+    { "text": "Depositing pays nothing immediately — the income lands as one combined Farming total in that day's settlement, so per-crop sell prices cannot be read off the settlement screen and none are published here yet.", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["games-station-video"] }
+  ],
+  "confirmedSystems": [
+    { "name": "Crop growing", "status": "confirmed", "confirms": "Players can grow crops as part of the core ranch loop.", "check": "Record the full plant-to-harvest interaction." },
+    { "name": "Seasons and daily cycle", "status": "confirmed", "confirms": "The world changes through seasons and a daily cycle.", "check": "Check whether season limits vary by crop." },
+    { "name": "Sprinklers", "status": "confirmed", "confirms": "Sprinklers are listed among farm-building options.", "check": "Record unlock, coverage, power use, and cost." },
+    { "name": "Greenhouses", "status": "confirmed", "confirms": "Greenhouses are listed as a way to build the farm.", "check": "Check crop rules, capacity, unlock, and utilities." },
+    { "name": "Daily orders and local markets", "status": "confirmed", "confirms": "Official material names daily orders and local markets as selling routes.", "check": "Compare prices, limits, and refresh timing." },
+    { "name": "Auction market", "status": "confirmed", "confirms": "Official Steam material describes an auction market.", "check": "Check fees, listing rules, and player access." },
+    { "name": "Missed harvest", "status": "confirmed", "confirms": "Fruit and vegetables are not destroyed if harvesting is delayed.", "check": "Check whether quality or regrowth timing changes." },
+    { "name": "Plant death and seed loss", "status": "confirmed", "confirms": "Official notes say seeds disappear when the plant dies.", "check": "Record every condition that can kill a plant." },
+    { "name": "Recurring crops", "status": "confirmed", "confirms": "The plantation system includes a simplified regrow flow.", "check": "Measure first growth and later harvest intervals separately." },
+    { "name": "Luck and fruit count", "status": "confirmed", "confirms": "Fruit-count probability is influenced by player luck.", "check": "Use repeated harvests; one yield is not a stable average." },
+    { "name": "Bulk buying and selling", "status": "confirmed", "confirms": "Official notes say all shops support bulk buying, and items can be sold in bulk to shop managers.", "check": "Confirm per-shop limits and whether bulk affects price." },
+    { "name": "Plantation auto-harvest", "status": "pending", "confirms": "The developer listed auto-harvesting as a post-demo priority.", "check": "Do not assume it is available until a current build confirms it." },
+    { "name": "Crop names and seasons", "status": "pending", "confirms": "No complete official launch table was found.", "check": "Capture each seed listing and season label." },
+    { "name": "Seed cost and sell price", "status": "pending", "confirms": "No complete official price list was found.", "check": "Capture buy and sell screens on the same game version." },
+    { "name": "Growth time, yield, and regrowth", "status": "pending", "confirms": "No complete official timing table was found.", "check": "Measure from planting day to harvest and count yield." }
+  ]
+}
