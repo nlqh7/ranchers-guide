@@ -12,9 +12,16 @@ const html = fs.readFileSync(path.join(root, "database", "animals.html"), "utf8"
 
 const LEVELS = new Set(data.meta.evidenceLevels);
 const VALIDITY = new Set(data.meta.validityValues);
+const SOURCE_KINDS = new Set(["official-news", "steam-thread", "local-video", "wiki", "local-archive", "community-scan", "store-page"]);
 const SOURCE_IDS = new Set(Object.keys(data.sources));
 assert.ok(LEVELS.size === 5 && VALIDITY.size === 4, "meta must enumerate evidence levels and validity values");
 assert.ok(Array.isArray(data.species) && data.species.length >= 4, "expected at least 4 species");
+
+for (const [id, src] of Object.entries(data.sources)) {
+  assert.ok(SOURCE_KINDS.has(src.kind), `source ${id}: kind must be one of ${[...SOURCE_KINDS].join("/")}, got ${src.kind}`);
+  assert.ok(src.title && src.date, `source ${id}: title and date are required`);
+  assert.ok("url" in src && "build" in src, `source ${id}: url (may be null) and build fields are required`);
+}
 
 function checkFact(fact, where) {
   assert.ok(LEVELS.has(fact.evidenceLevel), `${where}: bad evidenceLevel ${fact.evidenceLevel}`);
@@ -33,6 +40,10 @@ for (const animal of data.species) {
   }
 }
 for (const s of data.sharedSystems) checkFact(s, "sharedSystems");
+
+/* Fact-count sanity with tolerance — do not hardcode an exact number. */
+const factCount = data.species.reduce((n, a) => n + a.fields.reduce((m, f) => m + f.facts.length, 0), 0) + data.sharedSystems.length;
+assert.ok(factCount >= 50, `expected at least 50 facts, got ${factCount}`);
 
 /* Chicken is the reference species: every core field must be populated. */
 const chicken = data.species.find((a) => a.id === "chicken");
