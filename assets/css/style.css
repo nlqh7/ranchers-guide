@@ -954,6 +954,9 @@ table.data-table {
   line-height: 1.6;
 }
 .entry-anchor { font-weight: 800; }
+.animal-profile { scroll-margin-top: 120px; }
+.fact-historical { color: #7a6a5c; }
+.fact-source { color: var(--brown-500); font-size: 0.78rem; }
 .evidence-table tr[data-search-entry] { scroll-margin-top: 120px; }
 .evidence-table tr[data-search-entry]:target td {
   background: #fff0b8;
