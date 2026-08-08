@@ -17,6 +17,7 @@
 - After changes, run a local reference check for relative `href` and `src` links.
 - Internal page links must use the same extensionless root-relative routes as canonical URLs and `sitemap.xml`; never link users or crawlers to `.html` redirect URLs.
 - Run `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/check-internal-links.ps1` after changing HTML navigation or page URLs.
+- After any content edit, re-run `node scripts/build-search-index.cjs` so the prebuilt `search-index.json` stays in sync with the pages.
 
 ## Launch Data Rule
 - The Ranchers Early Access date must be kept consistent across metadata, visible copy, FAQ schema, countdown logic, README, and outreach documents.

@@ -17,7 +17,7 @@
 
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon-180.png">
-  <link rel="stylesheet" href="assets/css/style.css?v=20260806-2">
+  <link rel="stylesheet" href="assets/css/style.css?v=20260808-1">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -72,7 +72,7 @@
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
       <ul class="nav-links">
         <li><a href="/guides/beginners-guide">Guides</a></li>
-        <li><a href="/database/crops">Database</a></li>
+        <li><a href="/database">Database</a></li>
         <li><a href="/map">Map</a></li>
         <li><a href="/problems">Problems</a></li>
         <li><a href="/research">Research</a></li>
@@ -90,18 +90,22 @@
           <span class="hero-eyebrow">Unofficial Early Access companion</span>
           <h1><span>The Ranchers</span> <strong>Guide</strong></h1>
           <p class="hero-promise">Build your ranch with fewer guesses.</p>
-          <p class="lead">Current-version guides, co-op help and player research tools for The Ranchers.</p>
+          <p class="lead">Search current-version answers for items, quests, locations, systems and problems.</p>
 
-          <dl class="hero-status" aria-label="Current guide coverage">
-            <div><dt>Live build</dt><dd>0.8.10.455+</dd></div>
-            <div><dt>Co-op</dt><dd>1–4 players</dd></div>
-            <div><dt>Data policy</dt><dd>Versioned evidence</dd></div>
-          </dl>
-
-          <div class="hero-actions">
-            <a class="btn" href="/guides/beginners-guide">Start with the Guide</a>
-            <a class="btn btn-outline" href="/problems">Solve a Problem</a>
-          </div>
+          <form class="hero-search" action="/search" method="get" role="search">
+            <label for="hero-search-query">Search the knowledge base</label>
+            <div class="hero-search-control">
+              <svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <input id="hero-search-query" name="q" type="search" placeholder="What do you need help with?" autocomplete="off">
+              <button type="submit">Search</button>
+            </div>
+          </form>
+          <nav class="hero-query-links" aria-label="Popular answers">
+            <a href="/search?q=where+do+I+get+hay">Get hay</a>
+            <a href="/search?q=Gigi+large+eggs">Gigi quest</a>
+            <a href="/search?q=my+car+was+impounded">Lost car</a>
+            <a href="/database">Browse all</a>
+          </nav>
           <p class="hero-source">Independent and evidence-tracked. <a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">Check official Steam notes</a>.</p>
         </div>
       </div>
@@ -336,6 +340,6 @@
     </div>
   </footer>
 
-  <script src="assets/js/main.js?v=20260806-2" defer></script>
+  <script src="assets/js/main.js?v=20260808-2" defer></script>
 </body>
 </html>

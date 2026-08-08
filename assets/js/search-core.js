@@ -20,6 +20,26 @@
     return Array.from(new Set(normalize(value).split(/\s+/).filter(Boolean)));
   }
 
+  var QUERY_STOP_WORDS = new Set([
+    "a", "an", "are", "at", "buy", "can", "do", "does", "find", "for", "get",
+    "how", "i", "in", "is", "me", "my", "of", "please", "the", "to", "was", "were", "where", "with"
+  ]);
+
+  var QUERY_ALIASES = {
+    hens: "chicken",
+    hen: "chicken",
+    poultry: "chicken",
+    car: "vehicle",
+    cars: "vehicle",
+    veggies: "crop",
+    vegetables: "crop"
+  };
+
+  function queryTokens(value) {
+    var meaningful = tokens(value).filter(function (token) { return !QUERY_STOP_WORDS.has(token); });
+    return Array.from(new Set(meaningful.map(function (token) { return QUERY_ALIASES[token] || token; })));
+  }
+
   function levenshtein(left, right) {
     if (left === right) return 0;
     if (!left.length) return right.length;
@@ -125,6 +145,7 @@
 
   function scoreDocument(document, query, queryTerms) {
     var title = document.title || "";
+    var parentTitle = document.parentTitle || "";
     var description = document.description || "";
     var sections = document.sections || [];
     var total = 0;
@@ -136,6 +157,7 @@
       }, 0);
       var termScore = Math.max(
         fieldScore(title, term, 70),
+        fieldScore(parentTitle, term, 54),
         fieldScore(description, term, 42),
         sectionScore
       );
@@ -156,11 +178,48 @@
     return "Database entry";
   }
 
+  function answerType(type) {
+    if (type === "Guide") return "Guide answer";
+    if (type === "Problem") return "Problem answer";
+    if (type === "Map") return "Location answer";
+    if (type === "Database") return "Database answer";
+    return "Direct answer";
+  }
+
+  function sectionDocuments(document) {
+    if (document.sectionAnswers === false) return [];
+    var grouped = new Map();
+    (document.sections || []).forEach(function (section) {
+      if (!section.id) return;
+      var key = section.id + "::" + (section.heading || document.title);
+      if (!grouped.has(key)) {
+        grouped.set(key, {
+          id: section.id,
+          heading: section.heading || document.title,
+          texts: []
+        });
+      }
+      grouped.get(key).texts.push(section.text || "");
+    });
+
+    return Array.from(grouped.values()).map(function (section) {
+      var text = section.texts.join(" ").replace(/\s+/g, " ").trim();
+      return {
+        title: section.heading,
+        parentTitle: document.title,
+        url: document.url + "#" + section.id,
+        type: answerType(document.type),
+        description: text,
+        sections: [{ heading: section.heading, text: text }]
+      };
+    });
+  }
+
   function expandEntryDocuments(document) {
     var page = Object.assign({}, document);
     delete page.entries;
     var entries = Array.isArray(document && document.entries) ? document.entries : [];
-    return [page].concat(entries.map(function (entry) {
+    return [page].concat(sectionDocuments(document), entries.map(function (entry) {
       var status = entry.status || "Community data";
       var text = [status, entry.text || ""].filter(Boolean).join(": ");
       return {
@@ -174,7 +233,7 @@
   }
 
   function searchDocuments(documents, query, limit) {
-    var queryTerms = tokens(query);
+    var queryTerms = queryTokens(query);
     if (!queryTerms.length) return [];
 
     return (documents || []).map(function (document) {
@@ -192,6 +251,8 @@
   return {
     normalize: normalize,
     levenshtein: levenshtein,
+    queryTokens: queryTokens,
+    sectionDocuments: sectionDocuments,
     expandEntryDocuments: expandEntryDocuments,
     searchDocuments: searchDocuments,
   };

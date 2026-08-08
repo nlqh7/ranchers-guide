@@ -15,6 +15,7 @@
     "/guides/gigi-large-egg-quest",
     "/guides/police-wanted-levels",
     "/guides/controls-camera-settings",
+    "/database",
     "/database/crops",
     "/database/animals",
     "/map",
@@ -33,7 +34,7 @@
     "/contact",
     "/privacy"
   ];
-  var CACHE_KEY = "ranchers-search-index-v10";
+  var CACHE_KEY = "ranchers-search-index-v14";
   var documents = [];
   var form = document.querySelector("[data-search-form]");
   var input = document.querySelector("[data-search-input]");
@@ -48,6 +49,7 @@
 
   function pageType(path) {
     if (path.indexOf("/guides/") === 0) return "Guide";
+    if (path === "/database") return "Knowledge Base";
     if (path.indexOf("/database/") === 0) return "Database";
     if (path === "/map") return "Map";
     if (path.indexOf("/problems/") === 0 || path === "/problems") return "Problem";
@@ -65,6 +67,7 @@
     var sections = [];
     var seen = new Set();
     var heading = "Overview";
+    var headingId = "";
     var entries = [];
 
     parsed.querySelectorAll("[data-search-entry][id]").forEach(function (node) {
@@ -88,11 +91,13 @@
         var text = node.textContent.replace(/\s+/g, " ").trim();
         if (/^H[1-3]$/.test(node.tagName)) {
           heading = text || heading;
+          if (node.id) headingId = node.id;
+          else if (node.tagName !== "H3") headingId = "";
           return;
         }
         if (text.length < 18 || seen.has(text)) return;
         seen.add(text);
-        sections.push({ heading: heading, text: text.slice(0, 520) });
+        sections.push({ id: headingId, heading: heading, text: text.slice(0, 520) });
       });
     }
 
@@ -100,6 +105,7 @@
       title: cleanTitle(parsed.title),
       url: path,
       type: pageType(path),
+      sectionAnswers: ["/", "/database", "/problems", "/research"].indexOf(path) === -1,
       description: description ? description.content : "",
       sections: sections,
       entries: entries
@@ -119,17 +125,31 @@
     var cached = loadCachedIndex();
     if (cached) return Promise.resolve(cached);
 
-    return Promise.all(PAGE_PATHS.map(function (path) {
-      return fetch(path, { credentials: "same-origin" }).then(function (response) {
-        if (!response.ok) throw new Error(path + " returned " + response.status);
-        return response.text();
-      }).then(function (html) {
-        return extractDocument(html, path);
+    function buildLiveIndex() {
+      return Promise.all(PAGE_PATHS.map(function (path) {
+        return fetch(path, { credentials: "same-origin" }).then(function (response) {
+          if (!response.ok) throw new Error(path + " returned " + response.status);
+          return response.text();
+        }).then(function (html) {
+          return extractDocument(html, path);
+        });
+      })).then(function (pages) {
+        return pages.reduce(function (all, page) {
+          return all.concat(RanchersSearch.expandEntryDocuments(page));
+        }, []);
       });
-    })).then(function (pages) {
-      var index = pages.reduce(function (all, page) {
-        return all.concat(RanchersSearch.expandEntryDocuments(page));
-      }, []);
+    }
+
+    /* Prefer the prebuilt index (scripts/build-search-index.cjs); fall back to live fetching. */
+    return fetch("/search-index.json", { credentials: "same-origin" }).then(function (response) {
+      if (!response.ok) throw new Error("search-index.json returned " + response.status);
+      return response.json();
+    }).then(function (index) {
+      if (!Array.isArray(index) || index.length < PAGE_PATHS.length) throw new Error("search-index.json is incomplete");
+      return index;
+    }).catch(function () {
+      return buildLiveIndex();
+    }).then(function (index) {
       try { sessionStorage.setItem(CACHE_KEY, JSON.stringify(index)); } catch (_) { /* Search still works without cache. */ }
       return index;
     });
@@ -149,7 +169,7 @@
 
     var meta = document.createElement("p");
     meta.className = "search-result-type";
-    meta.textContent = item.type;
+    meta.textContent = item.parentTitle ? item.type + " · " + item.parentTitle : item.type;
 
     var heading = document.createElement("h2");
     var link = document.createElement("a");
@@ -163,7 +183,7 @@
 
     var path = document.createElement("span");
     path.className = "search-result-path";
-    path.textContent = item.url;
+    path.textContent = item.url.indexOf("#") === -1 ? "Open page" : "Jump to answer";
 
     article.append(meta, heading, snippet, path);
     return article;
@@ -185,7 +205,7 @@
     if (!matches.length) {
       var empty = document.createElement("div");
       empty.className = "search-empty";
-      empty.innerHTML = "<h2>No matching guide yet</h2><p>Try a shorter term or check the spelling.</p>";
+      empty.innerHTML = '<h2>No matching answer yet</h2><p>Try the item or quest name on its own, <a href="/database">browse the knowledge base</a>, or <a href="/contribute">send the missing question</a>.</p>';
       results.appendChild(empty);
     }
     if (updateUrl) history.replaceState(null, "", "/search?q=" + encodeURIComponent(trimmed));

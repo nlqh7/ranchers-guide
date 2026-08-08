@@ -12,9 +12,13 @@
     });
   }
 
-  /* Replace the Search nav link with a compact, progressively enhanced form. */
+  /* Replace the Search nav link with a compact, progressively enhanced form.
+     Skip it on pages whose first screen already has a large search box
+     (home hero search, knowledge-base search) — the plain link stays there. */
+  var cleanPath = window.location.pathname.replace(/\/index\.html$/, "").replace(/(.)\/$/, "$1") || "/";
+  var pageHasMainSearch = cleanPath === "/" || cleanPath === "/database";
   var searchLink = links && links.querySelector('a[href="/search"]');
-  if (searchLink && searchLink.parentElement) {
+  if (searchLink && searchLink.parentElement && !pageHasMainSearch) {
     var item = searchLink.parentElement;
     var form = document.createElement("form");
     var input = document.createElement("input");
@@ -54,4 +58,21 @@
   /* Footer year */
   var y = document.querySelector("[data-year]");
   if (y) y.textContent = new Date().getFullYear();
+
+  /* Re-apply answer anchors after deferred scripts and browser scroll restoration. */
+  function jumpToHashTarget() {
+    if (!window.location.hash) return;
+    var id;
+    try {
+      id = decodeURIComponent(window.location.hash.slice(1));
+    } catch (_) {
+      id = window.location.hash.slice(1);
+    }
+    var target = document.getElementById(id);
+    if (target) target.scrollIntoView({ block: "start" });
+  }
+
+  window.setTimeout(jumpToHashTarget, 0);
+  window.addEventListener("load", jumpToHashTarget);
+  window.addEventListener("hashchange", jumpToHashTarget);
 })();

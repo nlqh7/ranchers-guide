@@ -37,6 +37,59 @@ assert.equal(searchDocuments(documents, "coop save")[0].url, "/guides/multiplaye
 assert.equal(searchDocuments(documents, "seed yield")[0].url, "/database/crops");
 assert.deepEqual(searchDocuments(documents, "spaceship laser"), []);
 
+const naturalLanguageDocuments = [
+  {
+    title: "Building and Construction Guide",
+    url: "/guides/building-construction",
+    type: "Guide",
+    description: "Materials, blueprints and placement help.",
+    sections: [
+      { id: "materials", heading: "Materials: charcoal and zirconite", text: "Zirconite is sold by Meriam at City Hall." },
+    ],
+  },
+  {
+    title: "Animal Guide",
+    url: "/guides/animal-guide",
+    type: "Guide",
+    description: "Feed and care for chickens.",
+    sections: [
+      { id: "feed", heading: "Feed and hay", text: "Chickens eat hay from the trough inside the coop." },
+    ],
+  },
+];
+
+assert.equal(searchDocuments(naturalLanguageDocuments, "where can I buy zirconite")[0].url, "/guides/building-construction");
+assert.equal(searchDocuments(naturalLanguageDocuments, "how do I get hay for my hens")[0].url, "/guides/animal-guide");
+
+const answerDocuments = RanchersSearch.expandEntryDocuments(naturalLanguageDocuments[0]);
+const zirconiteAnswer = searchDocuments(answerDocuments, "where can I buy zirconite")[0];
+assert.equal(zirconiteAnswer.url, "/guides/building-construction#materials");
+assert.equal(zirconiteAnswer.type, "Guide answer");
+assert.match(zirconiteAnswer.title, /charcoal and zirconite/i);
+
+const questVsGeneral = RanchersSearch.expandEntryDocuments({
+  title: "Gigi Quest Walkthrough",
+  url: "/guides/gigi",
+  type: "Guide",
+  description: "Quest help.",
+  sections: [{ id: "eggs", heading: "Step 1: getting 2 large eggs", text: "Hand the eggs to Gigi." }]
+}).concat(RanchersSearch.expandEntryDocuments({
+  title: "Animal Guide",
+  url: "/guides/animals",
+  type: "Guide",
+  description: "Animal care.",
+  sections: [{ id: "eggs", heading: "Eggs and large eggs", text: "Large eggs are used in the Gigi quest." }]
+}));
+assert.equal(searchDocuments(questVsGeneral, "Gigi large eggs")[0].url, "/guides/gigi#eggs");
+assert.deepEqual(RanchersSearch.queryTokens("where was my car impounded"), ["vehicle", "impounded"]);
+assert.deepEqual(RanchersSearch.sectionDocuments({
+  title: "Problems directory",
+  url: "/problems",
+  type: "Problem",
+  sectionAnswers: false,
+  sections: [{ id: "vehicles", heading: "Vehicle problems", text: "Impounded cars." }]
+}), []);
+
 const result = searchDocuments(documents, "daily feed")[0];
 assert.match(result.snippet, /daily feed requirements/i);
 assert.ok(result.score > 0);
@@ -77,6 +130,8 @@ pages.forEach((file) => {
   assert.match(fs.readFileSync(file, "utf8"), /href="\/search"/, `${path.relative(root, file)} needs a Search link`);
 });
 const searchPage = fs.readFileSync(path.join(root, "search.html"), "utf8");
+const homePage = fs.readFileSync(path.join(root, "index.html"), "utf8");
+const knowledgeBasePage = fs.readFileSync(path.join(root, "database", "index.html"), "utf8");
 const sharedScript = fs.readFileSync(path.join(root, "assets", "js", "main.js"), "utf8");
 assert.match(searchPage, /name="robots" content="noindex,follow"/);
 assert.match(searchPage, /data-search-clear[^>]+aria-label="Clear search"/);
@@ -85,6 +140,20 @@ assert.match(searchPage, /class="site-search-icon"[^>]+aria-hidden="true"/);
 assert.match(sharedScript, /className = "nav-search-form"/);
 assert.match(sharedScript, /form\.action = "\/search"/);
 assert.match(sharedScript, /input\.name = "q"/);
+assert.match(sharedScript, /target\.scrollIntoView\(\{ block: "start" \}\)/);
+assert.match(homePage, /class="hero-search"[^>]+action="\/search"/);
+assert.match(knowledgeBasePage, /<h1>The Ranchers Knowledge Base<\/h1>/);
+assert.match(knowledgeBasePage, /href="\/guides\/animal-guide#feeding"/);
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /"\/database"/);
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /search-index\.json/);
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "main.js"), "utf8"), /pageHasMainSearch/);
+
+/* Prebuilt search index (scripts/build-search-index.cjs — re-run after content edits). */
+const prebuiltIndex = JSON.parse(fs.readFileSync(path.join(root, "search-index.json"), "utf8"));
+assert.ok(Array.isArray(prebuiltIndex) && prebuiltIndex.length >= pages.length, "search-index.json must cover every page");
+const zirconiteHit = searchDocuments(prebuiltIndex, "where can I buy zirconite")[0];
+assert.equal(zirconiteHit.url, "/guides/building-construction#materials");
+assert.equal(zirconiteHit.type, "Guide answer");
 assert.match(fs.readFileSync(path.join(root, "database", "crops.html"), "utf8"), /id="strawberry-seeds"[^>]+data-search-entry/);
 assert.match(fs.readFileSync(path.join(root, "database", "animals.html"), "utf8"), /id="black-chicken"[^>]+data-search-entry/);
 
