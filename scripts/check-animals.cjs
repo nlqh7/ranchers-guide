@@ -11,19 +11,28 @@ const data = JSON.parse(fs.readFileSync(path.join(root, "data", "animals.json"),
 const html = fs.readFileSync(path.join(root, "database", "animals.html"), "utf8");
 
 const LEVELS = new Set(data.meta.evidenceLevels);
-assert.ok(LEVELS.size >= 7, "meta.evidenceLevels must enumerate all evidence levels");
+const VALIDITY = new Set(data.meta.validityValues);
+const SOURCE_IDS = new Set(Object.keys(data.sources));
+assert.ok(LEVELS.size === 5 && VALIDITY.size === 4, "meta must enumerate evidence levels and validity values");
 assert.ok(Array.isArray(data.species) && data.species.length >= 4, "expected at least 4 species");
+
+function checkFact(fact, where) {
+  assert.ok(LEVELS.has(fact.evidenceLevel), `${where}: bad evidenceLevel ${fact.evidenceLevel}`);
+  assert.ok(VALIDITY.has(fact.validity), `${where}: bad validity ${fact.validity}`);
+  assert.ok("build" in fact, `${where}: build field required (may be null)`);
+  assert.ok(fact.text, `${where}: fact needs text`);
+  assert.ok(Array.isArray(fact.sourceIds) && fact.sourceIds.length > 0, `${where}: fact needs sourceIds`);
+  for (const id of fact.sourceIds) assert.ok(SOURCE_IDS.has(id), `${where}: unknown source id ${id}`);
+}
 
 for (const animal of data.species) {
   assert.ok(animal.id && animal.name && animal.lastUpdated, `species missing id/name/lastUpdated: ${animal.id}`);
   assert.match(html, new RegExp(`id="${animal.id}" data-search-entry`), `generated page must expose #${animal.id} anchor`);
   for (const field of animal.fields) {
-    for (const fact of field.facts) {
-      assert.ok(LEVELS.has(fact.evidence), `${animal.id}/${field.key}: bad evidence level ${fact.evidence}`);
-      assert.ok(fact.text && fact.source, `${animal.id}/${field.key}: fact needs text and source`);
-    }
+    for (const fact of field.facts) checkFact(fact, `${animal.id}/${field.key}`);
   }
 }
+for (const s of data.sharedSystems) checkFact(s, "sharedSystems");
 
 /* Chicken is the reference species: every core field must be populated. */
 const chicken = data.species.find((a) => a.id === "chicken");
@@ -34,8 +43,9 @@ for (const key of ["acquisition", "housing", "feed", "water", "products", "breed
 
 /* Non-chicken species must mark unverified fields with labeled facts, not invented values. */
 for (const animal of data.species.filter((a) => a.id !== "chicken")) {
-  const levels = new Set(animal.fields.flatMap((f) => f.facts.map((fact) => fact.evidence)));
-  assert.ok(levels.has("unknown") || levels.has("official-pre-ea") || levels.has("reported-single-source"), `${animal.id} must label unverified data`);
+  const markers = new Set(animal.fields.flatMap((f) => f.facts.map((fact) => `${fact.evidenceLevel}:${fact.validity}`)));
+  const labeled = [...markers].some((m) => m.endsWith(":unknown") || m.endsWith(":historical") || m.startsWith("unverified-lead"));
+  assert.ok(labeled, `${animal.id} must label unverified data`);
 }
 
 /* The generated file must be byte-identical to a fresh render. */

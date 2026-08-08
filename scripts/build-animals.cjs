@@ -15,30 +15,42 @@ const path = require("node:path");
 const root = path.resolve(__dirname, "..");
 const data = JSON.parse(fs.readFileSync(path.join(root, "data", "animals.json"), "utf8"));
 
-const EVIDENCE_BADGES = {
-  "official-current-ea": '<span class="tag evidence-official">Official</span>',
-  "official-pre-ea": '<span class="tag evidence-official">Official · pre-EA documented</span>',
-  "video-observed-0.8.10.455": '<span class="tag evidence-video">Video-observed</span>',
-  "corroborated": '<span class="tag evidence-community">Community-confirmed</span>',
-  "reported-single-source": '<span class="tag evidence-lead">Single-source</span>',
-  "historical": '<span class="tag historical">Historical</span>',
-  "unknown": '<span class="tag pending">Unknown</span>',
-};
-const HISTORICAL_LEVELS = new Set(["official-pre-ea", "historical"]);
-
 function escapeHtml(text) {
   return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-function badge(level) {
-  const b = EVIDENCE_BADGES[level];
-  if (!b) throw new Error(`Unknown evidence level: ${level}`);
+const LEVEL_BADGES = {
+  "official": '<span class="tag evidence-official">Official</span>',
+  "video-observed": '<span class="tag evidence-video">Video-observed</span>',
+  "community-confirmed": '<span class="tag evidence-community">Community-confirmed</span>',
+  "player-tested": '<span class="tag evidence-tested">Player-tested</span>',
+  "unverified-lead": '<span class="tag evidence-lead">Single-source</span>',
+};
+
+function badge(fact) {
+  if (fact.validity === "unknown") return '<span class="tag pending">Unknown</span>';
+  if (fact.validity === "historical" || fact.validity === "obsolete") {
+    if (fact.evidenceLevel === "official") return '<span class="tag evidence-official">Official · pre-EA documented</span>';
+    return '<span class="tag historical">Historical</span>';
+  }
+  const b = LEVEL_BADGES[fact.evidenceLevel];
+  if (!b) throw new Error(`Unknown evidence level: ${fact.evidenceLevel}`);
   return b;
 }
 
+function renderSources(sourceIds) {
+  const parts = sourceIds.map((id) => {
+    const src = data.sources[id];
+    if (!src) throw new Error(`Unknown source id: ${id}`);
+    const label = escapeHtml(src.title);
+    return src.url ? `<a href="${escapeHtml(src.url)}" rel="noopener noreferrer">${label}</a>` : label;
+  });
+  return `<span class="fact-source">${parts.join(" · ")}</span>`;
+}
+
 function renderFact(fact) {
-  const cls = HISTORICAL_LEVELS.has(fact.evidence) ? ' class="fact-historical"' : "";
-  return `          <li${cls}>${escapeHtml(fact.text)} ${badge(fact.evidence)} <span class="fact-source">${escapeHtml(fact.source)}</span></li>`;
+  const cls = fact.validity === "historical" || fact.validity === "obsolete" ? ' class="fact-historical"' : "";
+  return `          <li${cls}>${escapeHtml(fact.text)} ${badge(fact)} ${renderSources(fact.sourceIds)}</li>`;
 }
 
 function renderSpecies(animal) {
@@ -78,12 +90,15 @@ function renderHistoricalTable(species) {
 function renderVideoProducts(products) {
   return products.map((p) => {
     const note = p.note ? ` <strong>${escapeHtml(p.name)}: ${escapeHtml(p.note)}</strong>` : escapeHtml(p.name);
-    return `          <li>${note} ${p.note ? badge(p.evidence) : ""}</li>`;
+    return `          <li>${note} ${p.note ? badge({ evidenceLevel: "video-observed", validity: "current" }) : ""}</li>`;
   }).join("\n");
 }
 
 function renderSharedSystems(systems) {
-  return systems.map((s) => `          <li>${escapeHtml(s.text)} ${badge(s.evidence)}</li>`).join("\n");
+  return systems.map((s) => {
+    const cls = s.validity === "historical" || s.validity === "obsolete" ? ' class="fact-historical"' : "";
+    return `          <li${cls}>${escapeHtml(s.text)} ${badge(s)}</li>`;
+  }).join("\n");
 }
 
 function renderRoster(rows) {

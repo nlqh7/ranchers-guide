@@ -3,15 +3,187 @@
     "page": "database/animals.html",
     "lastUpdated": "2026-08-08",
     "build": "0.8.10.455",
-    "evidenceLevels": [
-      "official-current-ea",
-      "official-pre-ea",
-      "video-observed-0.8.10.455",
-      "corroborated",
-      "reported-single-source",
-      "historical",
-      "unknown"
-    ]
+    "evidenceLevels": ["official", "video-observed", "community-confirmed", "player-tested", "unverified-lead"],
+    "validityValues": ["current", "historical", "obsolete", "unknown"]
+  },
+  "sources": {
+    "store-page": {
+      "title": "The Ranchers — official Steam store page",
+      "url": "https://store.steampowered.com/app/1501310/The_Ranchers/",
+      "author": "RedPilz Studio / Trophy Games",
+      "date": null,
+      "build": "0.8.10.x"
+    },
+    "ranching-v2-notes": {
+      "title": "The Ranchers, Ranching v2 update! (official Steam announcement)",
+      "url": "https://steamcommunity.com/games/1501310/announcements/detail/6839319551984984308",
+      "author": "Ethan (official)",
+      "date": "2023-06-27",
+      "build": "alpha-2023"
+    },
+    "games-station-video": {
+      "title": "Games Station gameplay footage V0.8.10.455 (local archive: games-station.mp4, shelf scan 03:15–03:45)",
+      "url": null,
+      "type": "local-video",
+      "author": "Games Station",
+      "date": "2026-08-07",
+      "build": "0.8.10.455"
+    },
+    "ninas-shop-fandom": {
+      "title": "Nina's Shop — community-maintained player wiki page (Alpha build)",
+      "url": "https://the-ranchers.fandom.com/wiki/Nina%27s_Shop",
+      "author": "Player Wiki contributors",
+      "date": "2026-08-02",
+      "build": "alpha"
+    },
+    "thread-coop-mission": {
+      "title": "Steam thread \"Chicken coop mission\" (DJM, Yakiwi)",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587307906418973975/",
+      "author": "Devils Titan / DJM / Yakiwi",
+      "date": "2026-08-02",
+      "build": "0.8.10.x"
+    },
+    "thread-gigi-eggs": {
+      "title": "Steam thread on the Gigi egg quest (DJM, Bobthekiller and others)",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587308167364362187/",
+      "author": "DJM / Bobthekiller",
+      "date": "2026-08-04",
+      "build": "0.8.10.x"
+    },
+    "thread-chicken-care": {
+      "title": "Steam thread on chicken care (Fight or Flight Gamer, maxitubby)",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587308167364422260/",
+      "author": "Fight or Flight Gamer / maxitubby",
+      "date": "2026-08-05",
+      "build": "0.8.10.x"
+    },
+    "thread-coop-door-bug": {
+      "title": "Steam thread on the coop-door chicken delivery bug (Big Grizzly)",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587308167364381340/",
+      "author": "Big Grizzly",
+      "date": "2026-08-04",
+      "build": "0.8.10.x"
+    },
+    "thread-chicken-feed": {
+      "title": "Steam thread \"Chicken Feed\" (Jennoula, official)",
+      "url": null,
+      "author": "Jennoula",
+      "date": "2026-08",
+      "build": "0.8.10.x"
+    },
+    "thread-food-water-reserves": {
+      "title": "Steam thread \"Food and water reserves\" (Mancer, Jennoula)",
+      "url": null,
+      "author": "Mancer / Jennoula",
+      "date": "2026-08",
+      "build": "0.8.10.x"
+    },
+    "thread-about-chickens": {
+      "title": "Steam thread \"About the chickens\" (Jennoula, official)",
+      "url": null,
+      "author": "Jennoula",
+      "date": "2026-08",
+      "build": "0.8.10.x"
+    },
+    "thread-egg-hatching": {
+      "title": "Steam thread \"Egg Hatching Question\" (Jennoula, official; SUwUMaBUwU)",
+      "url": null,
+      "author": "Jennoula / SUwUMaBUwU",
+      "date": "2026-08",
+      "build": "0.8.10.x"
+    },
+    "thread-cant-sell-roosters": {
+      "title": "Steam thread \"Can't sell roosters\" (Jennoula, official)",
+      "url": null,
+      "author": "Jennoula",
+      "date": "2026-08",
+      "build": "0.8.10.x"
+    },
+    "thread-heater-mount": {
+      "title": "Steam thread \"How to add the heater\" (maxitubby)",
+      "url": null,
+      "author": "maxitubby",
+      "date": "2026-08",
+      "build": "0.8.10.x"
+    },
+    "thread-huehnerstall-bug": {
+      "title": "Steam thread \"Hühnerstall Bug\" (Kartesk, Jennoula)",
+      "url": null,
+      "author": "Kartesk / Jennoula",
+      "date": "2026-08",
+      "build": "0.8.10.x"
+    },
+    "thread-vet-cure": {
+      "title": "Steam thread \"how to cure at the vet?\" (Seansniper27, maxitubby)",
+      "url": null,
+      "author": "Seansniper27 / maxitubby",
+      "date": "2026-08",
+      "build": "0.8.10.x"
+    },
+    "thread-auto-feeding-kit": {
+      "title": "Steam thread \"Does the automatic barn feeding kit work?\" (gamingmarcel20, Jennoula)",
+      "url": null,
+      "author": "gamingmarcel20 / Jennoula",
+      "date": "2026-08",
+      "build": "0.8.10.x"
+    },
+    "thread-silos": {
+      "title": "Steam thread \"Silos\" (maxitubby, Jennoula)",
+      "url": null,
+      "author": "maxitubby / Jennoula",
+      "date": "2026-08",
+      "build": "0.8.10.x"
+    },
+    "thread-watertower": {
+      "title": "Steam thread \"Watertower problem\" (Akhenatom, Mancer, Jennoula)",
+      "url": null,
+      "author": "Akhenatom / Mancer / Jennoula",
+      "date": "2026-08",
+      "build": "0.8.10.x"
+    },
+    "thread-livestock-profit": {
+      "title": "Steam thread \"Livestock profit\" (Numinex, BeBeForever16)",
+      "url": null,
+      "author": "Numinex / BeBeForever16",
+      "date": "2026-08",
+      "build": "0.8.10.x"
+    },
+    "thread-hay": {
+      "title": "Steam thread \"where can i find hay\" (Tila)",
+      "url": null,
+      "author": "Tila",
+      "date": "2026-08",
+      "build": "0.8.10.x"
+    },
+    "thread-animals-dying": {
+      "title": "Steam thread \"Animals keep dying\" (multiple players)",
+      "url": null,
+      "author": "Multiple players",
+      "date": "2026-08",
+      "build": "0.8.10.x"
+    },
+    "thread-chicken-fix": {
+      "title": "Steam thread \"A temp chicken issue fix!\" (LittleGhost and others)",
+      "url": null,
+      "author": "LittleGhost et al.",
+      "date": "2026-08",
+      "build": "0.8.10.x"
+    },
+    "thread-beginner-questions": {
+      "title": "Steam thread \"beginner_questions\" (Kapone; official reply cut off)",
+      "url": null,
+      "author": "Kapone",
+      "date": "2026-08",
+      "build": "0.8.10.x"
+    },
+    "community-scan-archive": {
+      "title": "Community discussion scan archive (local file: community-scan-2026-08-08.md, 90 topics scanned, 44 read)",
+      "url": null,
+      "type": "local-archive",
+      "author": "Site editor",
+      "date": "2026-08-08",
+      "build": "0.8.10.x"
+    }
   },
   "species": [
     {
@@ -26,295 +198,112 @@
           "key": "acquisition",
           "label": "Buying & bringing home",
           "facts": [
-            {
-              "text": "Buy chickens from Angela, the chicken seller NPC. After purchase they do not enter your backpack — they appear in the small fenced field behind her house. Grab them manually: carry them home one by one on foot, or load them into a car boot.",
-              "evidence": "corroborated",
-              "source": "Steam thread \"Chicken coop mission\" (DJM + Yakiwi), community scan 2026-08-08"
-            },
-            {
-              "text": "The coop mission itself is not bugged — the post-purchase prompt is just easy to miss.",
-              "evidence": "corroborated",
-              "source": "Same thread, OP confirmation"
-            },
-            {
-              "text": "Exact chicken purchase price is unverified. One player reported about 4,000+C for four chickens; treat as a lead only.",
-              "evidence": "reported-single-source",
-              "source": "Steam discussion indirect report, community scan 2026-08-08"
-            }
+            { "text": "Buy chickens from Angela, the chicken seller NPC. After purchase they do not enter your backpack — they appear in the small fenced field behind her house. Grab them manually: carry them home one by one on foot, or load them into a car boot.", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-coop-mission"] },
+            { "text": "In every documented case the coop-mission stuck point came from missing the post-purchase prompt; other bugs in this mission cannot be ruled out.", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-coop-mission", "community-scan-archive"] },
+            { "text": "Exact chicken purchase price is unverified. One player reported about 4,000+C for four chickens; treat as a lead only.", "evidenceLevel": "unverified-lead", "build": "0.8.10.x", "validity": "current", "sourceIds": ["community-scan-archive"] }
           ]
         },
         {
           "key": "housing",
           "label": "Housing & heater",
           "facts": [
-            {
-              "text": "Chickens live in a coop. The heater and AC must be the coop/barn versions bought from Angela — the house decoration heater/AC sold at City Hall does nothing for coops.",
-              "evidence": "official-current-ea",
-              "source": "Jennoula (official), Steam thread \"Can't sell roosters\""
-            },
-            {
-              "text": "Mount the coop heater on the outside of the coop exterior wall.",
-              "evidence": "corroborated",
-              "source": "Steam threads \"How to add the heater\" (maxitubby) and \"Hühnerstall Bug\" (Kartesk)"
-            },
-            {
-              "text": "A fenced outdoor roaming area matters: chickens that can roam outside in an enclosed area get the chance to lay large eggs.",
-              "evidence": "official-current-ea",
-              "source": "Jennoula, Steam thread \"About the chickens\""
-            },
-            {
-              "text": "Chicks exist as the early growth stage of chickens; 2 additional rooster variations were added.",
-              "evidence": "official-pre-ea",
-              "source": "Ranching v2 update notes (pre-EA)"
-            }
+            { "text": "Chickens live in a coop. The heater and AC must be the coop/barn versions bought from Angela — the house decoration heater/AC sold at City Hall does nothing for coops.", "evidenceLevel": "official", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-cant-sell-roosters"] },
+            { "text": "Mount the coop heater on the outside of the coop exterior wall.", "evidenceLevel": "player-tested", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-heater-mount", "thread-huehnerstall-bug"] },
+            { "text": "A fenced outdoor roaming area matters: chickens that can roam outside in an enclosed area get the chance to lay large eggs.", "evidenceLevel": "official", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-about-chickens"] },
+            { "text": "Chicks exist as the early growth stage of chickens; 2 additional rooster variations were added.", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["ranching-v2-notes"] }
           ]
         },
         {
           "key": "feed",
           "label": "Feeding",
           "facts": [
-            {
-              "text": "Chickens eat hay — they pick the grains out of hay/straw piles.",
-              "evidence": "official-current-ea",
-              "source": "Jennoula, Steam thread \"Chicken Feed\""
-            },
-            {
-              "text": "Two ways to feed: hold hay near the animal to hand-feed (raises the food reserve bar in its info tab), or fill the trough inside the coop and animals eat by themselves once every morning, covering the whole day.",
-              "evidence": "official-current-ea",
-              "source": "Jennoula, Steam thread \"Food and water reserves\""
-            },
-            {
-              "text": "Only the interior trough needs filling: animals eat and drink inside before leaving in the morning, so outdoor troughs are optional while the door is open.",
-              "evidence": "official-current-ea",
-              "source": "Jennoula, Steam thread \"About the chickens\""
-            },
-            {
-              "text": "Hay comes from cutting bushes or looting crates and barrels on NPC farms.",
-              "evidence": "reported-single-source",
-              "source": "Steam thread \"where can i find hay\" (Tila)"
-            }
+            { "text": "Chickens eat hay — they pick the grains out of hay/straw piles.", "evidenceLevel": "official", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-chicken-feed"] },
+            { "text": "Two ways to feed: hold hay near the animal to hand-feed (raises the food reserve bar in its info tab), or fill the trough and animals eat by themselves once every morning, covering the whole day.", "evidenceLevel": "official", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-food-water-reserves"] },
+            { "text": "General daily care: only the trough inside the coop needs filling — animals eat and drink inside before leaving in the morning, so outdoor troughs stay optional while the door is open.", "evidenceLevel": "official", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-about-chickens"] },
+            { "text": "Hay comes from cutting bushes or looting crates and barrels on NPC farms.", "evidenceLevel": "unverified-lead", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-hay"] }
           ]
         },
         {
           "key": "water",
           "label": "Water",
           "facts": [
-            {
-              "text": "Water is supplied through a trough; hand-feeding does not work for water — the water reserve bar only refills from a trough.",
-              "evidence": "official-current-ea",
-              "source": "Jennoula, Steam thread \"Food and water reserves\""
-            },
-            {
-              "text": "For automated water, a water tower alone is not enough — you must sign a water contract with the mayor at City Hall, then the tower refills on its own.",
-              "evidence": "corroborated",
-              "source": "Steam thread \"Watertower problem\" (Akhenatom + Jennoula); video evidence-log #48 shows Victor's \"Subscribe to a water contract\" dialogue option"
-            }
+            { "text": "Water is supplied through a trough; hand-feeding does not work for water — the water reserve bar only refills from a trough.", "evidenceLevel": "official", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-food-water-reserves"] },
+            { "text": "For automated water, a water tower alone is not enough — you must sign a water contract with the mayor at City Hall, then the tower refills on its own.", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-watertower", "games-station-video"] }
           ]
         },
         {
           "key": "products",
           "label": "Eggs & meat",
           "facts": [
-            {
-              "text": "Adult chickens with every need and satisfaction maxed start laying. Egg size (S/M/L) and whether an egg is fertile are RNG; hover an egg to check fertility. Large eggs are the rarest and require maxed needs plus happiness.",
-              "evidence": "official-current-ea",
-              "source": "Jennoula, Steam thread \"Egg Hatching Question\""
-            },
-            {
-              "text": "Chicken Egg - Small retails at 60C on the Leafy Market shelf. This is a shop purchase price, not what your eggs sell for.",
-              "evidence": "video-observed-0.8.10.455",
-              "source": "Games Station footage 03:15, evidence-log #44"
-            },
-            {
-              "text": "Chicken Breast and Chicken Leg exist as current-build shop items, confirming the meat path for culled chickens.",
-              "evidence": "video-observed-0.8.10.455",
-              "source": "Games Station footage 03:45, shelf listing"
-            },
-            {
-              "text": "Meat, milk and eggs are species-specific items.",
-              "evidence": "official-pre-ea",
-              "source": "Ranching v2 update notes (pre-EA)"
-            }
+            { "text": "Adult chickens with every need and satisfaction maxed start laying. Egg size (S/M/L) and whether an egg is fertile are RNG; hover an egg to check fertility. Large eggs are the rarest and require maxed needs plus happiness.", "evidenceLevel": "official", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-egg-hatching"] },
+            { "text": "Chicken Egg - Small retails at 60C on the Leafy Market shelf. This is a shop purchase price, not what your eggs sell for.", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["games-station-video"] },
+            { "text": "Chicken Breast and Chicken Leg exist as current-build shop items, confirming the meat path for culled chickens.", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["games-station-video"] },
+            { "text": "Meat, milk and eggs are species-specific items.", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["ranching-v2-notes"] }
           ]
         },
         {
           "key": "breeding",
           "label": "Breeding & hatching",
           "facts": [
-            {
-              "text": "An egg-hatching mechanic for oviparous animals is documented.",
-              "evidence": "official-pre-ea",
-              "source": "Ranching v2 update notes (pre-EA)"
-            },
-            {
-              "text": "Large eggs arrived only around the 4th-5th batch for one player — pure RNG; daily petting raises the animal rating and large eggs became noticeably more frequent.",
-              "evidence": "corroborated",
-              "source": "SUwUMaBUwU + DJM, two independent reports, community scan 2026-08-08"
-            }
+            { "text": "An egg-hatching mechanic for oviparous animals is documented.", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["ranching-v2-notes"] },
+            { "text": "Large eggs arrived only around the 4th-5th batch for one player — pure RNG; daily petting raises the animal rating and large eggs became noticeably more frequent.", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-egg-hatching", "thread-gigi-eggs"] }
           ]
         },
         {
           "key": "sickness",
           "label": "Sickness & the vet",
           "facts": [
-            {
-              "text": "An animal sickness mechanic exists; the heater prevents temperature sickness but cannot cure an already sick animal.",
-              "evidence": "official-current-ea",
-              "source": "Jennoula, Steam thread \"Can't sell roosters\"; sickness mechanic from Ranching v2 notes"
-            },
-            {
-              "text": "Take sick chickens to the veterinarian. The vet only treats animals that are actually sick — a famished (starving) animal is turned away.",
-              "evidence": "reported-single-source",
-              "source": "Steam thread \"how to cure at the vet?\" (maxitubby)"
-            },
-            {
-              "text": "A famished chicken recovers by the next morning if you bring it back to the coop and feed it manually.",
-              "evidence": "reported-single-source",
-              "source": "Same thread, OP Seansniper27 self-test"
-            },
-            {
-              "text": "Vet treatment cost is unpublished — nobody in the scanned threads gave a figure.",
-              "evidence": "unknown",
-              "source": "Community scan 2026-08-08, open question"
-            },
-            {
-              "text": "There is no sickness notification system; check animals manually each day.",
-              "evidence": "reported-single-source",
-              "source": "speedY suggestion thread; no official commitment"
-            }
+            { "text": "An animal sickness mechanic exists; the heater prevents temperature sickness but cannot cure an already sick animal.", "evidenceLevel": "official", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-cant-sell-roosters", "ranching-v2-notes"] },
+            { "text": "Take sick chickens to the veterinarian. The vet only treats animals that are actually sick — a famished (starving) animal is turned away.", "evidenceLevel": "unverified-lead", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-vet-cure"] },
+            { "text": "A famished chicken recovers by the next morning if you bring it back to the coop and feed it manually.", "evidenceLevel": "player-tested", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-vet-cure"] },
+            { "text": "Vet treatment cost is unpublished — nobody in the scanned threads gave a figure.", "evidenceLevel": "unverified-lead", "build": null, "validity": "unknown", "sourceIds": ["community-scan-archive"] },
+            { "text": "There is no sickness notification system; check animals manually each day.", "evidenceLevel": "unverified-lead", "build": "0.8.10.x", "validity": "current", "sourceIds": ["community-scan-archive"] }
           ]
         },
         {
           "key": "automation",
           "label": "Feed automation chain",
           "facts": [
-            {
-              "text": "Full chain: mount an Auto-Feeding Kit on the coop, build a Silo inside its range and load hay, build a Water Tower (its link radius is much smaller than the silo's), sign the water contract with the mayor, then pick food/water type on the coop trough and flip the switch — a green light confirms a correct setup.",
-              "evidence": "official-current-ea",
-              "source": "Jennoula across threads \"Does the automatic barn feeding kit work?\", \"Silos\", \"Watertower problem\""
-            },
-            {
-              "text": "Hovering buildings with the hammer equipped shows linkage; a silo displays how many auto-feeders connect to it, and linking happens automatically.",
-              "evidence": "reported-single-source",
-              "source": "maxitubby, Steam thread \"Silos\""
-            },
-            {
-              "text": "The water meter is on the phone, or on the wall at the far right end past the ranch gate.",
-              "evidence": "reported-single-source",
-              "source": "maxitubby, community scan 2026-08-08"
-            },
-            {
-              "text": "Most \"auto feeder does nothing\" reports trace back to a missing water contract or the water tower sitting outside link radius.",
-              "evidence": "corroborated",
-              "source": "gamingmarcel20 report + official reply chain, community scan 2026-08-08"
-            }
+            { "text": "Full chain: mount an Auto-Feeding Kit on the coop, build a Silo inside its range and load hay, build a Water Tower (its link radius is much smaller than the silo's), sign the water contract with the mayor, then pick food/water type on the coop trough and flip the switch — a green light confirms a correct setup.", "evidenceLevel": "official", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-auto-feeding-kit", "thread-silos", "thread-watertower"] },
+            { "text": "Hovering buildings with the hammer equipped shows linkage; a silo displays how many auto-feeders connect to it, and linking happens automatically.", "evidenceLevel": "player-tested", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-silos"] },
+            { "text": "The water meter is on the phone, or on the wall at the far right end past the ranch gate.", "evidenceLevel": "player-tested", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-watertower"] },
+            { "text": "Most \"auto feeder does nothing\" reports trace back to a missing water contract or the water tower sitting outside link radius.", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-auto-feeding-kit", "community-scan-archive"] }
           ]
         },
         {
           "key": "quests",
           "label": "Quests",
           "facts": [
-            {
-              "text": "The Gigi large-egg quest needs large eggs: pet chickens daily to raise their rating, keep food and water available inside and outside, and use the Angela heater — two large eggs are needed before the delivery point appears.",
-              "evidence": "corroborated",
-              "source": "Multiple player reports + evidence-log #30 (DJM/Bobthekiller); see the Gigi quest walkthrough"
-            },
-            {
-              "text": "The chicken coop mission has no bug — bought chickens wait in the field behind Angela's house.",
-              "evidence": "corroborated",
-              "source": "Steam thread \"Chicken coop mission\""
-            }
+            { "text": "The Gigi large-egg quest needs large eggs: pet chickens daily to raise their rating and use the Angela heater. Two large eggs are needed before the delivery point appears.", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-gigi-eggs"] },
+            { "text": "Quest-period care is stricter than daily care: while working the Gigi quest, players report needing food and water available both inside and outside the barn/coop — outside the quest, the interior trough alone is enough.", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-chicken-care", "thread-about-chickens"] },
+            { "text": "The chicken coop mission has no confirmed bug — bought chickens wait in the field behind Angela's house, and documented stuck cases trace back to the missed prompt.", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-coop-mission"] }
           ]
         },
         {
           "key": "bugs",
           "label": "Disappearing-chicken checklist",
           "facts": [
-            {
-              "text": "Coop-door delivery bug: chickens submitted at the coop door enter the stock count but vanish or get stuck inside the coop's exterior wall. Walk physically inside the coop before dropping them; if one is stuck, remove all chickens and demolish the coop to drop it out.",
-              "evidence": "corroborated",
-              "source": "Big Grizzly + multiple confirmations, threads \"A temp chicken issue fix!\" / \"Hühnerstall Bug\""
-            },
-            {
-              "text": "Check linking first: walking near the door should show a stock counter like 0/6 over the dark floor area — no counter means the coop is not linked.",
-              "evidence": "official-current-ea",
-              "source": "Jennoula, thread \"Hühnerstall Bug\""
-            },
-            {
-              "text": "No fence plus an open door lets chickens wander off for good.",
-              "evidence": "corroborated",
-              "source": "Skallnir + others, community scan 2026-08-08"
-            },
-            {
-              "text": "Without the Angela heater/AC, chickens die from heat or cold stress.",
-              "evidence": "corroborated",
-              "source": "Multiple cases in \"Animals keep dying\", community scan 2026-08-08"
-            },
-            {
-              "text": "Reloading the save sometimes respawns a vanished chicken.",
-              "evidence": "reported-single-source",
-              "source": "LittleGhost, community scan 2026-08-08"
-            }
+            { "text": "Coop-door delivery bug: chickens submitted at the coop door enter the stock count but vanish or get stuck inside the coop's exterior wall. Walk physically inside the coop before dropping them; if one is stuck, remove all chickens and demolish the coop to drop it out.", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-coop-door-bug", "thread-huehnerstall-bug"] },
+            { "text": "Check linking first: walking near the door should show a stock counter like 0/6 over the dark floor area — no counter means the coop is not linked.", "evidenceLevel": "official", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-huehnerstall-bug"] },
+            { "text": "No fence plus an open door lets chickens wander off for good.", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["community-scan-archive"] },
+            { "text": "Without the Angela heater/AC, chickens die from heat or cold stress.", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-animals-dying"] },
+            { "text": "Reloading the save sometimes respawns a vanished chicken.", "evidenceLevel": "unverified-lead", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-chicken-fix"] }
           ]
         },
         {
           "key": "selling",
           "label": "Selling & profit",
           "facts": [
-            {
-              "text": "Selling live animals is not implemented. The official recommendation for surplus chickens and roosters is to dispatch them with an axe, pickaxe or weapon and sell the meat. The animal must be placed on the ground first — tools do not work while carrying it (that is intended, not a bug).",
-              "evidence": "official-current-ea",
-              "source": "Jennoula, Steam thread \"Can't sell roosters\""
-            },
-            {
-              "text": "One detailed profit report values an adult (10+ days) Legendary chicken at roughly 24,000C in meat (1× 9,000 meat + 2× 500 legs + 8× 1,750 breasts), with Legendary eggs at S 250 / M 375 / L 590; a second player puts an ordinary mature chicken at 5,000+C of meat. Single-source numbers — meat out-earning eggs is the corroborated direction, the figures are not.",
-              "evidence": "reported-single-source",
-              "source": "Numinex + BeBeForever16, Steam thread \"Livestock profit\", community scan 2026-08-08"
-            }
+            { "text": "Selling live animals is not implemented. The official recommendation for surplus chickens and roosters is to dispatch them with an axe, pickaxe or weapon and sell the meat. The animal must be placed on the ground first — tools do not work while carrying it (that is intended, not a bug).", "evidenceLevel": "official", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-cant-sell-roosters"] },
+            { "text": "One detailed profit report values an adult (10+ days) Legendary chicken at roughly 24,000C in meat (1× 9,000 meat + 2× 500 legs + 8× 1,750 breasts), with Legendary eggs at S 250 / M 375 / L 590; a second player puts an ordinary mature chicken at 5,000+C of meat. Single-source numbers — meat out-earning eggs is the corroborated direction, the figures are not.", "evidenceLevel": "unverified-lead", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-livestock-profit"] }
           ]
         }
       ],
       "variants": [
-        {
-          "id": "rooster",
-          "name": "Rooster",
-          "group": "Coop animal",
-          "historicalPrice": {
-            "display": "1,200C",
-            "sort": 1200
-          },
-          "tags": "rooster chicken poultry coop male price"
-        },
-        {
-          "id": "black-chicken",
-          "name": "Black Chicken",
-          "group": "Coop animal",
-          "historicalPrice": {
-            "display": "840C",
-            "sort": 840
-          },
-          "tags": "black chicken hen poultry coop egg price"
-        },
-        {
-          "id": "white-chicken",
-          "name": "White Chicken",
-          "group": "Coop animal",
-          "historicalPrice": {
-            "display": "840C",
-            "sort": 840
-          },
-          "tags": "white chicken hen poultry coop egg price"
-        },
-        {
-          "id": "brown-chicken",
-          "name": "Brown Chicken",
-          "group": "Coop animal",
-          "historicalPrice": {
-            "display": "840C",
-            "sort": 840
-          },
-          "tags": "brown chicken hen poultry coop egg price"
-        }
+        { "id": "rooster", "name": "Rooster", "group": "Coop animal", "historicalPrice": { "display": "1,200C", "sort": 1200 }, "tags": "rooster chicken poultry coop male price" },
+        { "id": "black-chicken", "name": "Black Chicken", "group": "Coop animal", "historicalPrice": { "display": "840C", "sort": 840 }, "tags": "black chicken hen poultry coop egg price" },
+        { "id": "white-chicken", "name": "White Chicken", "group": "Coop animal", "historicalPrice": { "display": "840C", "sort": 840 }, "tags": "white chicken hen poultry coop egg price" },
+        { "id": "brown-chicken", "name": "Brown Chicken", "group": "Coop animal", "historicalPrice": { "display": "840C", "sort": 840 }, "tags": "brown chicken hen poultry coop egg price" }
       ],
       "lastUpdated": "2026-08-08"
     },
@@ -330,147 +319,67 @@
           "key": "acquisition",
           "label": "Buying",
           "facts": [
-            {
-              "text": "Cows are named as ranch animals in official material, but no seller, price or requirement has been verified in the current build.",
-              "evidence": "unknown",
-              "source": "Pending current-build observation"
-            }
+            { "text": "Cows are named as ranch animals in official material, but no seller, price or requirement has been verified in the current build.", "evidenceLevel": "unverified-lead", "build": null, "validity": "unknown", "sourceIds": ["store-page", "community-scan-archive"] }
           ]
         },
         {
           "key": "housing",
           "label": "Housing",
           "facts": [
-            {
-              "text": "Three barn types with exclusive interiors exist, and livestock can be raised fully outdoors without a barn — with consequences over time.",
-              "evidence": "official-pre-ea",
-              "source": "Ranching v2 update notes (pre-EA)"
-            },
-            {
-              "text": "Current-build barn capacity, cost and unlock requirements are unverified.",
-              "evidence": "unknown",
-              "source": "Pending current-build observation"
-            }
+            { "text": "Three barn types with exclusive interiors exist, and livestock can be raised fully outdoors without a barn — with consequences over time.", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["ranching-v2-notes"] },
+            { "text": "Current-build barn capacity, cost and unlock requirements are unverified.", "evidenceLevel": "unverified-lead", "build": null, "validity": "unknown", "sourceIds": ["community-scan-archive"] }
           ]
         },
         {
           "key": "feed",
           "label": "Feeding",
           "facts": [
-            {
-              "text": "Each species has its own unique diet under the livestock feeding system; the cow diet has not been confirmed in the current build.",
-              "evidence": "official-pre-ea",
-              "source": "Ranching v2 update notes (pre-EA)"
-            }
+            { "text": "Each species has its own unique diet under the livestock feeding system; the cow diet has not been confirmed in the current build.", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["ranching-v2-notes"] }
           ]
         },
         {
           "key": "products",
           "label": "Milk & meat",
           "facts": [
-            {
-              "text": "Cow Milk - Small and Cow Meat - Small appear on current-build Leafy Market shelves — the items exist; how a raised cow produces them is unmeasured.",
-              "evidence": "video-observed-0.8.10.455",
-              "source": "Games Station footage 03:45, shelf listing"
-            },
-            {
-              "text": "Cow Meat - Medium retails at 672C (Basic quality, restores 42 health / 130 energy). Shop shelf price, not a ranch sell price.",
-              "evidence": "video-observed-0.8.10.455",
-              "source": "Games Station footage, shop detail panel"
-            },
-            {
-              "text": "Meat and milk are species-specific items.",
-              "evidence": "official-pre-ea",
-              "source": "Ranching v2 update notes (pre-EA)"
-            }
+            { "text": "Cow Milk - Small and Cow Meat - Small appear on current-build Leafy Market shelves — the items exist; how a raised cow produces them is unmeasured.", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["games-station-video"] },
+            { "text": "Cow Meat - Medium retails at 672C (Basic quality, restores 42 health / 130 energy). Shop shelf price, not a ranch sell price.", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["games-station-video"] },
+            { "text": "Meat and milk are species-specific items.", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["ranching-v2-notes"] }
           ]
         },
         {
           "key": "breeding",
           "label": "Breeding",
           "facts": [
-            {
-              "text": "A pregnancy mechanic for mammal animals is documented, and calves exist as the early growth stage for cows and bulls. Newborn quality probability is influenced by player luck.",
-              "evidence": "official-pre-ea",
-              "source": "Ranching v2 update notes (pre-EA); luck rule from official Steam material"
-            }
+            { "text": "A pregnancy mechanic for mammal animals is documented, and calves exist as the early growth stage for cows and bulls. Newborn quality probability is influenced by player luck.", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["ranching-v2-notes", "store-page"] }
           ]
         },
         {
           "key": "sickness",
           "label": "Sickness",
           "facts": [
-            {
-              "text": "The animal sickness mechanic applies to livestock generally; cow-specific treatment flow is unverified in the current build.",
-              "evidence": "official-pre-ea",
-              "source": "Ranching v2 update notes (pre-EA)"
-            }
+            { "text": "The animal sickness mechanic applies to livestock generally; cow-specific treatment flow is unverified in the current build.", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["ranching-v2-notes"] }
           ]
         },
         {
           "key": "automation",
           "label": "Automation",
           "facts": [
-            {
-              "text": "The same Feature Kit chain (Auto-Feeding Kit + Silo + Water Tower + water contract) is documented for barns as well as coops.",
-              "evidence": "official-pre-ea",
-              "source": "Ranching v2 update notes (pre-EA)"
-            }
+            { "text": "The same Feature Kit chain (Auto-Feeding Kit + Silo + Water Tower + water contract) is documented for barns as well as coops.", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["ranching-v2-notes"] }
           ]
         },
         {
           "key": "selling",
           "label": "Selling",
           "facts": [
-            {
-              "text": "Selling live animals is not implemented; the meat path is the current disposal route.",
-              "evidence": "official-current-ea",
-              "source": "Jennoula, Steam thread \"Can't sell roosters\" (general livestock answer)"
-            }
+            { "text": "Selling live animals is not implemented; the meat path is the current disposal route.", "evidenceLevel": "official", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-cant-sell-roosters"] }
           ]
         }
       ],
       "variants": [
-        {
-          "id": "brown-spotted-cow",
-          "name": "Brown Spotted Cow",
-          "group": "Barn animal",
-          "historicalPrice": {
-            "display": "24,000C",
-            "sort": 24000
-          },
-          "tags": "brown spotted cow cattle barn milk female price"
-        },
-        {
-          "id": "black-spotted-cow",
-          "name": "Black Spotted Cow",
-          "group": "Barn animal",
-          "historicalPrice": {
-            "display": "24,000C",
-            "sort": 24000
-          },
-          "tags": "black spotted cow cattle barn milk female price"
-        },
-        {
-          "id": "brown-spotted-bull",
-          "name": "Brown Spotted Bull",
-          "group": "Barn animal",
-          "historicalPrice": {
-            "display": "48,000C",
-            "sort": 48000
-          },
-          "tags": "brown spotted bull cattle barn male breeding price"
-        },
-        {
-          "id": "black-spotted-bull",
-          "name": "Black Spotted Bull",
-          "group": "Barn animal",
-          "historicalPrice": {
-            "display": "48,000C",
-            "sort": 48000
-          },
-          "tags": "black spotted bull cattle barn male breeding price"
-        }
+        { "id": "brown-spotted-cow", "name": "Brown Spotted Cow", "group": "Barn animal", "historicalPrice": { "display": "24,000C", "sort": 24000 }, "tags": "brown spotted cow cattle barn milk female price" },
+        { "id": "black-spotted-cow", "name": "Black Spotted Cow", "group": "Barn animal", "historicalPrice": { "display": "24,000C", "sort": 24000 }, "tags": "black spotted cow cattle barn milk female price" },
+        { "id": "brown-spotted-bull", "name": "Brown Spotted Bull", "group": "Barn animal", "historicalPrice": { "display": "48,000C", "sort": 48000 }, "tags": "brown spotted bull cattle barn male breeding price" },
+        { "id": "black-spotted-bull", "name": "Black Spotted Bull", "group": "Barn animal", "historicalPrice": { "display": "48,000C", "sort": 48000 }, "tags": "black spotted bull cattle barn male breeding price" }
       ],
       "lastUpdated": "2026-08-08"
     },
@@ -486,33 +395,21 @@
           "key": "acquisition",
           "label": "Buying",
           "facts": [
-            {
-              "text": "Goats are named as ranch animals in official store copy; seller, price and requirements are unverified.",
-              "evidence": "unknown",
-              "source": "Pending current-build observation"
-            }
+            { "text": "Goats are named as ranch animals in official store copy; seller, price and requirements are unverified.", "evidenceLevel": "unverified-lead", "build": null, "validity": "unknown", "sourceIds": ["store-page"] }
           ]
         },
         {
           "key": "feed",
           "label": "Feeding",
           "facts": [
-            {
-              "text": "Species-unique diets are documented, but the goat diet is unconfirmed in the current build.",
-              "evidence": "official-pre-ea",
-              "source": "Ranching v2 update notes (pre-EA)"
-            }
+            { "text": "Species-unique diets are documented, but the goat diet is unconfirmed in the current build.", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["ranching-v2-notes"] }
           ]
         },
         {
           "key": "breeding",
           "label": "Breeding",
           "facts": [
-            {
-              "text": "As a mammal, goats fall under the documented pregnancy mechanic; current-build behavior unverified.",
-              "evidence": "official-pre-ea",
-              "source": "Ranching v2 update notes (pre-EA)"
-            }
+            { "text": "As a mammal, goats fall under the documented pregnancy mechanic; current-build behavior unverified.", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["ranching-v2-notes"] }
           ]
         }
       ],
@@ -531,22 +428,14 @@
           "key": "acquisition",
           "label": "Buying",
           "facts": [
-            {
-              "text": "Bunnies are named as ranch animals in official store copy; seller, price and requirements are unverified.",
-              "evidence": "unknown",
-              "source": "Pending current-build observation"
-            }
+            { "text": "Bunnies are named as ranch animals in official store copy; seller, price and requirements are unverified.", "evidenceLevel": "unverified-lead", "build": null, "validity": "unknown", "sourceIds": ["store-page"] }
           ]
         },
         {
           "key": "feed",
           "label": "Feeding",
           "facts": [
-            {
-              "text": "One player guessed rabbits eat lettuce/salad greens and that hay does not work — the official reply in that thread was cut off, so the rabbit diet stays unconfirmed.",
-              "evidence": "reported-single-source",
-              "source": "Kapone, community scan 2026-08-08 (open question)"
-            }
+            { "text": "One player guessed rabbits eat lettuce/salad greens and that hay does not work — the official reply in that thread was cut off, so the rabbit diet stays unconfirmed.", "evidenceLevel": "unverified-lead", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-beginner-questions", "community-scan-archive"] }
           ]
         }
       ],
@@ -555,142 +444,33 @@
     }
   ],
   "sharedSystems": [
-    {
-      "text": "Auto-Feeding Kit — feeds your animals automatically.",
-      "evidence": "official-pre-ea",
-      "source": "Ranching v2 update notes"
-    },
-    {
-      "text": "Air Conditioning Kit — prevents animals from becoming ill by keeping them warm in winter and cool in summer.",
-      "evidence": "official-pre-ea",
-      "source": "Ranching v2 update notes"
-    },
-    {
-      "text": "Silos and Water Towers — supply buildings; combining Feature Kits with Silos and Water Towers automates whole-livestock feeding.",
-      "evidence": "official-pre-ea",
-      "source": "Ranching v2 update notes"
-    },
-    {
-      "text": "Troughs — craftable feeding stations for animals outside the barn/coop or raised fully outdoors.",
-      "evidence": "official-pre-ea",
-      "source": "Ranching v2 update notes"
-    },
-    {
-      "text": "Linkage system — buildings and feature kits link to each other; hover with the hammer equipped to see connections. Barn and coop doors can be opened or closed at will, with benefits and consequences.",
-      "evidence": "official-pre-ea",
-      "source": "Ranching v2 update notes"
-    },
-    {
-      "text": "In the current build the water contract with the mayor is required before a water tower fills, and the tower's link radius is smaller than a silo's.",
-      "evidence": "corroborated",
-      "source": "Steam threads \"Watertower problem\" / \"Silos\", community scan 2026-08-08"
-    }
+    { "text": "Auto-Feeding Kit — feeds your animals automatically.", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["ranching-v2-notes"] },
+    { "text": "Air Conditioning Kit — prevents animals from becoming ill by keeping them warm in winter and cool in summer.", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["ranching-v2-notes"] },
+    { "text": "Silos and Water Towers — supply buildings; combining Feature Kits with Silos and Water Towers automates whole-livestock feeding.", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["ranching-v2-notes"] },
+    { "text": "Troughs — craftable feeding stations for animals outside the barn/coop or raised fully outdoors.", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["ranching-v2-notes"] },
+    { "text": "Linkage system — buildings and feature kits link to each other; hover with the hammer equipped to see connections. Barn and coop doors can be opened or closed at will, with benefits and consequences.", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["ranching-v2-notes"] },
+    { "text": "In the current build the water contract with the mayor is required before a water tower fills, and the tower's link radius is smaller than a silo's.", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["thread-watertower", "thread-silos"] }
   ],
   "videoObservedProducts": [
-    {
-      "name": "Chicken Egg - Small",
-      "note": "60C retail purchase price",
-      "evidence": "video-observed-0.8.10.455"
-    },
-    {
-      "name": "Cow Milk - Small",
-      "note": "",
-      "evidence": "video-observed-0.8.10.455"
-    },
-    {
-      "name": "Chicken Breast · Chicken Leg",
-      "note": "",
-      "evidence": "video-observed-0.8.10.455"
-    },
-    {
-      "name": "Cow Meat - Small",
-      "note": "",
-      "evidence": "video-observed-0.8.10.455"
-    },
-    {
-      "name": "Cow Meat - Medium",
-      "note": "672C retail purchase price — Basic quality, restores 42 health / 130 energy",
-      "evidence": "video-observed-0.8.10.455"
-    }
+    { "name": "Chicken Egg - Small", "note": "60C retail purchase price", "sourceIds": ["games-station-video"] },
+    { "name": "Cow Milk - Small", "note": "", "sourceIds": ["games-station-video"] },
+    { "name": "Chicken Breast · Chicken Leg", "note": "", "sourceIds": ["games-station-video"] },
+    { "name": "Cow Meat - Small", "note": "", "sourceIds": ["games-station-video"] },
+    { "name": "Cow Meat - Medium", "note": "672C retail purchase price — Basic quality, restores 42 health / 130 energy", "sourceIds": ["games-station-video"] }
   ],
   "confirmedRoster": [
-    {
-      "name": "Chickens",
-      "status": "confirmed",
-      "confirms": "Official store copy names chickens as ranch animals.",
-      "check": "Record variants, housing, care, products, cycle, and cost."
-    },
-    {
-      "name": "Bunnies",
-      "status": "confirmed",
-      "confirms": "Official store copy names bunnies as ranch animals.",
-      "check": "Record housing, care, products, cycle, and cost."
-    },
-    {
-      "name": "Goats",
-      "status": "confirmed",
-      "confirms": "Official store copy names goats as ranch animals.",
-      "check": "Record housing, care, products, cycle, and cost."
-    },
-    {
-      "name": "Cows",
-      "status": "confirmed",
-      "confirms": "Official store copy names cows as ranch animals.",
-      "check": "Record housing, care, products, cycle, and cost."
-    },
-    {
-      "name": "Barns and coops",
-      "status": "confirmed",
-      "confirms": "Official material shows animal care as part of building a ranch.",
-      "check": "Record each structure's capacity, materials, and unlock."
-    },
-    {
-      "name": "Outdoor map tracking",
-      "status": "confirmed",
-      "confirms": "Animals are visible on the map while outside a barn or coop.",
-      "check": "Check icon range, ownership, and multiplayer visibility."
-    },
-    {
-      "name": "Luck and newborn quality",
-      "status": "confirmed",
-      "confirms": "Newborn quality probability is influenced by player luck.",
-      "check": "Record parent quality, luck, and multiple births before comparing."
-    },
-    {
-      "name": "Subway transport",
-      "status": "confirmed",
-      "confirms": "Attached or roped animals can travel through the subway with players.",
-      "check": "Test supported species and party behavior in co-op."
-    },
-    {
-      "name": "Quest driving skip",
-      "status": "confirmed",
-      "confirms": "Supported quest skips transport farm animals with the vehicle and passengers.",
-      "check": "Record which quests expose the skip option."
-    },
-    {
-      "name": "Animal purchase prices",
-      "status": "pending",
-      "confirms": "No complete official price list was found.",
-      "check": "Capture seller, price, requirements, and game version."
-    },
-    {
-      "name": "Products and production cycles",
-      "status": "pending",
-      "confirms": "No complete official production table was found.",
-      "check": "Measure output, timing, quality, and required interaction."
-    },
-    {
-      "name": "Feed and upkeep",
-      "status": "pending",
-      "confirms": "No complete official upkeep table was found.",
-      "check": "Record feed cost, frequency, water, and missed-care effects."
-    },
-    {
-      "name": "Breeding rules",
-      "status": "pending",
-      "confirms": "The reviewed official store copy does not define the full rule set.",
-      "check": "Test prerequisites, timing, capacity, and offspring rules."
-    }
+    { "name": "Chickens", "status": "confirmed", "confirms": "Official store copy names chickens as ranch animals.", "check": "Record variants, housing, care, products, cycle, and cost." },
+    { "name": "Bunnies", "status": "confirmed", "confirms": "Official store copy names bunnies as ranch animals.", "check": "Record housing, care, products, cycle, and cost." },
+    { "name": "Goats", "status": "confirmed", "confirms": "Official store copy names goats as ranch animals.", "check": "Record housing, care, products, cycle, and cost." },
+    { "name": "Cows", "status": "confirmed", "confirms": "Official store copy names cows as ranch animals.", "check": "Record housing, care, products, cycle, and cost." },
+    { "name": "Barns and coops", "status": "confirmed", "confirms": "Official material shows animal care as part of building a ranch.", "check": "Record each structure's capacity, materials, and unlock." },
+    { "name": "Outdoor map tracking", "status": "confirmed", "confirms": "Animals are visible on the map while outside a barn or coop.", "check": "Check icon range, ownership, and multiplayer visibility." },
+    { "name": "Luck and newborn quality", "status": "confirmed", "confirms": "Newborn quality probability is influenced by player luck.", "check": "Record parent quality, luck, and multiple births before comparing." },
+    { "name": "Subway transport", "status": "confirmed", "confirms": "Attached or roped animals can travel through the subway with players.", "check": "Test supported species and party behavior in co-op." },
+    { "name": "Quest driving skip", "status": "confirmed", "confirms": "Supported quest skips transport farm animals with the vehicle and passengers.", "check": "Record which quests expose the skip option." },
+    { "name": "Animal purchase prices", "status": "pending", "confirms": "No complete official price list was found.", "check": "Capture seller, price, requirements, and game version." },
+    { "name": "Products and production cycles", "status": "pending", "confirms": "No complete official production table was found.", "check": "Measure output, timing, quality, and required interaction." },
+    { "name": "Feed and upkeep", "status": "pending", "confirms": "No complete official upkeep table was found.", "check": "Record feed cost, frequency, water, and missed-care effects." },
+    { "name": "Breeding rules", "status": "pending", "confirms": "The reviewed official store copy does not define the full rule set.", "check": "Test prerequisites, timing, capacity, and offspring rules." }
   ]
 }
