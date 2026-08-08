@@ -20,7 +20,7 @@ const PAGE_PATHS = Array.from(pagePathsBlock[1].matchAll(/"([^"]+)"/g), (match) 
 
 function routeToFile(route) {
   if (route === "/") return "index.html";
-  if (route === "/database") return "database/index.html";
+  if (route === "/database") return "database.html";
   return `${route.replace(/^\//, "")}.html`;
 }
 
@@ -151,7 +151,21 @@ for (const route of PAGE_PATHS) {
 
 const index = documents.reduce((all, doc) => all.concat(RanchersSearch.expandEntryDocuments(doc)), []);
 const output = path.join(root, "search-index.json");
-fs.writeFileSync(output, JSON.stringify(index), "utf8");
+const serialized = JSON.stringify(index);
 
-const stats = fs.statSync(output);
-console.log(`Wrote search-index.json: ${index.length} searchable documents from ${documents.length} pages (${(stats.size / 1024).toFixed(1)} KB).`);
+if (process.argv.includes("--check")) {
+  /* Drift guard: fail if the committed index is not byte-identical to a fresh build. */
+  if (!fs.existsSync(output)) {
+    console.error("FAIL: search-index.json is missing. Run: node scripts/build-search-index.cjs");
+    process.exit(1);
+  }
+  if (fs.readFileSync(output, "utf8") !== serialized) {
+    console.error("FAIL: search-index.json is out of sync with the HTML pages. Re-run: node scripts/build-search-index.cjs");
+    process.exit(1);
+  }
+  console.log(`PASS: search-index.json is in sync (${index.length} documents from ${documents.length} pages).`);
+} else {
+  fs.writeFileSync(output, serialized, "utf8");
+  const stats = fs.statSync(output);
+  console.log(`Wrote search-index.json: ${index.length} searchable documents from ${documents.length} pages (${(stats.size / 1024).toFixed(1)} KB).`);
+}

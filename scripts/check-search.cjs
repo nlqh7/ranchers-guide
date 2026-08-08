@@ -131,7 +131,7 @@ pages.forEach((file) => {
 });
 const searchPage = fs.readFileSync(path.join(root, "search.html"), "utf8");
 const homePage = fs.readFileSync(path.join(root, "index.html"), "utf8");
-const knowledgeBasePage = fs.readFileSync(path.join(root, "database", "index.html"), "utf8");
+const knowledgeBasePage = fs.readFileSync(path.join(root, "database.html"), "utf8");
 const sharedScript = fs.readFileSync(path.join(root, "assets", "js", "main.js"), "utf8");
 assert.match(searchPage, /name="robots" content="noindex,follow"/);
 assert.match(searchPage, /data-search-clear[^>]+aria-label="Clear search"/);
@@ -151,6 +151,9 @@ assert.match(fs.readFileSync(path.join(root, "assets", "js", "main.js"), "utf8")
 /* Prebuilt search index (scripts/build-search-index.cjs — re-run after content edits). */
 const prebuiltIndex = JSON.parse(fs.readFileSync(path.join(root, "search-index.json"), "utf8"));
 assert.ok(Array.isArray(prebuiltIndex) && prebuiltIndex.length >= pages.length, "search-index.json must cover every page");
+/* Drift guard: the committed index must be byte-identical to a fresh build. */
+const drift = require("node:child_process").spawnSync(process.execPath, [path.join(root, "scripts", "build-search-index.cjs"), "--check"], { cwd: root, encoding: "utf8" });
+assert.equal(drift.status, 0, `search-index.json drift detected — re-run node scripts/build-search-index.cjs\n${drift.stdout}${drift.stderr}`);
 const zirconiteHit = searchDocuments(prebuiltIndex, "where can I buy zirconite")[0];
 assert.equal(zirconiteHit.url, "/guides/building-construction#materials");
 assert.equal(zirconiteHit.type, "Guide answer");
