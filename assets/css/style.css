@@ -1564,7 +1564,28 @@ table.data-table {
 .map-legend-services { background: #315b83; }
 .map-legend-transport { background: #b3552e; }
 .map-legend-landmarks { background: #6b4d8f; }
-.map-legend-note { flex-basis: 100%; font-weight: 600; opacity: 0.85; }
+.map-confidence {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.75fr) minmax(0, 2fr);
+  gap: 14px 22px;
+  align-items: start;
+  margin-top: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--brown-200);
+  color: var(--brown-700);
+}
+.map-confidence p { margin: 0; }
+.map-confidence p strong { display: block; font-size: 0.86rem; }
+.map-confidence p span { display: block; margin-top: 2px; font-size: 0.75rem; line-height: 1.45; opacity: 0.82; }
+.map-confidence dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px 18px;
+  margin: 0;
+}
+.map-confidence dl div { min-width: 0; }
+.map-confidence dt { font-size: 0.76rem; font-weight: 800; color: var(--brown-800); }
+.map-confidence dd { margin: 1px 0 0; font-size: 0.72rem; line-height: 1.35; opacity: 0.78; }
 .map-add-toggle.active {
   border-color: var(--green-700);
   background: var(--green-700);
@@ -1617,24 +1638,6 @@ table.data-table {
   cursor: pointer;
 }
 .map-pin-close:focus-visible { outline: 3px solid rgba(93, 143, 74, 0.3); outline-offset: 2px; }
-.map-construction-badge {
-  position: absolute;
-  z-index: 4;
-  top: 10px;
-  left: 10px;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  max-width: calc(100% - 20px);
-  padding: 9px 12px;
-  border-radius: 8px;
-  background: rgba(45, 35, 25, 0.88);
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-.map-construction-badge svg { flex: none; width: 20px; height: 20px; color: var(--rust); }
-.map-construction-badge strong { display: block; font-size: 0.8rem; font-weight: 800; }
-.map-construction-badge span { display: block; margin-top: 1px; font-size: 0.72rem; line-height: 1.3; opacity: 0.85; }
 .map-stage { cursor: grab; }
 .map-stage:active { cursor: grabbing; }
 .map-stage.is-panning .map-canvas { transition: none; }
@@ -1829,6 +1832,8 @@ table.data-table {
   .map-zone span { font-size: 0.68rem; }
   .map-view-actions { width: 100%; justify-content: space-between; }
   .map-stage { aspect-ratio: 4 / 3; }
+  .map-confidence { grid-template-columns: 1fr; }
+  .map-confidence dl { grid-template-columns: 1fr; gap: 7px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

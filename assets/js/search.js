@@ -37,6 +37,11 @@
   var ZH_PAGE_PATHS = [
     "/zh/",
     "/zh/guides/beginners-guide",
+    "/zh/guides/animal-guide",
+    "/zh/guides/gigi-large-egg-quest",
+    "/zh/guides/roof-quest-stuck",
+    "/zh/guides/money-making",
+    "/zh/problems/vehicle-recovery",
     "/zh/database",
     "/zh/database/crops",
     "/zh/database/animals",

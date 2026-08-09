@@ -7,6 +7,10 @@ const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), "u
 
 const mapPage = read("map.html");
 const chineseMapPage = read("zh/map.html");
+const sharedStyles = read("assets/css/style.css");
+assert.doesNotMatch(mapPage, /map-construction-badge/, "verification copy must not cover the map image");
+assert.doesNotMatch(chineseMapPage, /map-construction-badge/, "Chinese verification copy must not cover the map image");
+assert.doesNotMatch(sharedStyles, /\.map-construction-badge/, "removed map overlay must not leave dead styles");
 assert.match(mapPage, /<link rel="canonical" href="https:\/\/theranchersguide\.com\/map">/);
 assert.match(mapPage, /data-location-search/);
 assert.match(mapPage, /data-location-category/);
@@ -35,6 +39,8 @@ assert.match(mapPage, /data-map-marker-layer/);
 assert.match(mapPage, /data-marker-category="(?:shopping|services|transport|landmarks)"/);
 assert.match(mapPage, /data-map-pin-filter="all"/);
 assert.match(mapPage, /map-legend/);
+assert.match(mapPage, /class="map-confidence"/);
+assert.doesNotMatch(mapPage, /map-legend-note/, "confidence copy must not be packed into the pin legend");
 assert.match(mapPage, /Approximate area/);
 assert.match(mapPage, /Lina's Tools/);
 assert.match(mapPage, /Youssef's stand/);
@@ -65,6 +71,7 @@ for (const pattern of [
   /data-map-pin-form/,
   /data-map-marker-layer/,
   /data-map-pin-filter="all"/,
+  /class="map-confidence"/,
   /assets\/js\/map-core\.js/,
   /assets\/js\/map-viewer-core\.js/,
   /assets\/js\/map\.js/,

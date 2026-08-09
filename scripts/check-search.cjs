@@ -188,9 +188,18 @@ assert.match(fs.readFileSync(path.join(root, "database", "animals.html"), "utf8"
 
 const chineseIndex = JSON.parse(fs.readFileSync(path.join(root, "zh", "search-index.json"), "utf8"));
 const missingChickenResults = searchDocuments(chineseIndex, "鸡消失");
-assert.equal(missingChickenResults[0].url, "/zh/problems#animals");
+assert.equal(missingChickenResults[0].url, "/zh/guides/animal-guide#troubleshooting");
+assert.ok(missingChickenResults.some((result) => result.url === "/zh/problems#animals"));
 assert.ok(missingChickenResults.some((result) => result.url === "/zh/database/animals#missing"));
 assert.equal(searchDocuments(chineseIndex, "草莓多久成熟")[0].url, "/zh/database/crops#strawberry");
 assert.equal(searchDocuments(chineseIndex, "种子商店在哪里")[0].url, "/zh/map#leafy-market");
+
+/* The five translated core guides must rank for the community phrases they answer. */
+assert.equal(searchDocuments(chineseIndex, "鸡不下蛋")[0].url, "/zh/guides/animal-guide#eggs");
+assert.equal(searchDocuments(chineseIndex, "大蛋")[0].url, "/zh/guides/gigi-large-egg-quest#eggs");
+assert.equal(searchDocuments(chineseIndex, "警星")[0].url, "/zh/guides/gigi-large-egg-quest#police");
+assert.equal(searchDocuments(chineseIndex, "卖车")[0].url, "/zh/problems/vehicle-recovery#selling");
+assert.ok(searchDocuments(chineseIndex, "屋顶")[0].url.startsWith("/zh/guides/roof-quest-stuck"));
+assert.ok(searchDocuments(chineseIndex, "CashIn").some((result) => result.url === "/zh/guides/money-making#cashin"));
 
 console.log(`PASS: site search handles fuzzy queries and is linked from ${pages.length} HTML pages.`);

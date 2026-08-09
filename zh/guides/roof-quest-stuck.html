@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Ranchers 屋顶任务卡住？中文修复指南</title>
+  <meta name="description" content="The Ranchers 屋顶建造任务卡住的中文解决方案：官方确认的任务追踪器问题、工作台图纸找不到的滚动 UI 坑、门和屋顶缺口的处理，逐条标注证据。">
+  <link rel="canonical" href="https://theranchersguide.com/zh/guides/roof-quest-stuck">
+  <link rel="alternate" hreflang="en" href="https://theranchersguide.com/guides/roof-quest-stuck"><link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/guides/roof-quest-stuck"><link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/guides/roof-quest-stuck">
+  <meta property="og:type" content="article"><meta property="og:title" content="The Ranchers 屋顶任务卡住修复指南"><meta property="og:description" content="官方确认的追踪器问题与玩家验证的解法。"><meta property="og:url" content="https://theranchersguide.com/zh/guides/roof-quest-stuck"><meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260809-i18n7"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header"><nav class="nav-inner" aria-label="主导航"><a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide<small>非官方中文玩家指南</small></span></a><button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button><ul class="nav-links"><li><a class="active" href="/zh/guides/beginners-guide">新手</a></li><li><a href="/zh/database">知识库</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li><li><a href="/zh/search">搜索</a></li><li><a class="nav-cta" href="/contribute">投稿</a></li></ul></nav></header>
+  <main><article class="article">
+    <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / 攻略 / 屋顶任务卡住</nav><h1>The Ranchers 屋顶任务卡住？验证有效的建造任务解法</h1><p class="meta">2026-08-07 更新 · Early Access 0.8.10.x · 阅读约 7 分钟</p>
+    <div class="evidence-status"><strong>证据状态：</strong>1 项官方确认的已知问题 · 2 个多人印证解法 · 2 份单人报告（已标注）· 2026-08-07 复核 — <a href="/methodology">我们如何验证 (EN) →</a></div>
+
+    <p>如果你盖好屋顶后任务就是不完成，不是你一个人——这是 2026 年 8 月第一周 Steam 讨论区报告最多的问题之一，英语、德语、俄语玩家都在发，甚至有人更早就卡在放楼梯的第一步（<a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364412800/" rel="noopener noreferrer">Tutorial build roof</a>，08-04；Whitebear，08-02；Campingqueen769，08-03）。</p>
+
+    <section class="answer-box">
+      <h2>先说结论</h2>
+      <p>任务追踪器卡住是<strong>官方确认的已知问题</strong> <span class="evidence-badge evidence-official">官方</span>。按顺序做三件事：</p>
+      <ol>
+        <li><strong>按 T</strong> 看手机里的任务日志——下一步目标可能已经列在那里，哪怕屏幕上的追踪器看着卡住了，你可以继续玩。</li>
+        <li><strong>睡到第二天。</strong></li>
+        <li><strong>重启游戏客户端</strong>（先存档，再完全退出重开）。</li>
+      </ol>
+      <p>如果你真正的问题是<em>找不到</em>屋顶、门或床的图纸，那是另一回事——一个滚动 UI 的坑——见下文 <a href="#symptom-b">症状 B</a>。</p>
+    </section>
+
+    <nav class="toc" aria-label="页面目录"><strong>本指南内容</strong><ul>
+      <li><a href="#symptom-a">症状 A：屋顶盖好了，任务不完成</a></li>
+      <li><a href="#symptom-b">症状 B：工作台没有屋顶、门、床图纸</a></li>
+      <li><a href="#symptom-c">症状 C：门造不了</a></li>
+      <li><a href="#symptom-d">症状 D：屋顶中间有洞</a></li>
+      <li><a href="#flow">排查流程</a></li>
+      <li><a href="#faq">屋顶任务常见问题</a></li>
+    </ul></nav>
+
+    <section id="symptom-a" data-search-entry data-search-title="屋顶盖好任务不完成" data-search-tags="屋顶任务 卡住 追踪器 按T 任务日志 睡觉 重启"><h2>症状 A：屋顶盖好了，任务不完成（追踪器卡住）</h2>
+      <p><span class="evidence-badge evidence-official">官方</span> <span class="evidence-badge evidence-corroborated">多人印证</span></p>
+      <p>这是官方确认的情况。管理员/客服 Jennoula 在 <a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364412800/" rel="noopener noreferrer">"Tutorial build roof"</a>（2026-08-04）确认"任务追踪器有时会卡住是一个已知问题"，并给出了目前几乎对所有玩家都有效的解法：</p>
+      <ol>
+        <li><strong>按 T</strong>，看下一步目标是否出现在手机任务日志里。屏幕上的追踪器可能还是卡着，但任务可以照常往下做。</li>
+        <li><strong>睡到第二天</strong>——有时能让追踪器重新动起来。</li>
+        <li><strong>重启游戏客户端。</strong></li>
+      </ol>
+      <p>开发者还在查追踪器卡住的原因，但期间你应该能继续推进。</p>
+      <p>两名独立玩家在 <a href="https://steamcommunity.com/app/1501310/discussions/0/587307906419039915/" rel="noopener noreferrer">"Cant finish Roof quest...?"</a>（08-03）印证了重启/重登路线：X-C0brA-X 存档后重启游戏，重启后任务显示完成；KnottyBoy 通过手机日志做任务步骤，然后完全退出再登录，屏幕上的任务就过了。</p>
+    </section>
+
+    <section id="symptom-b" data-search-entry data-search-title="工作台找不到屋顶门床图纸" data-search-tags="图纸 蓝图 工作台 找不到 滚动 屋顶 床 门"><h2>症状 B：工作台没有屋顶、门、床图纸（滚动 UI 坑）</h2>
+      <p><span class="evidence-badge evidence-corroborated">多人印证</span></p>
+      <p>先别认定游戏坏了，看看你滚到哪了。在 <a href="https://steamcommunity.com/app/1501310/discussions/0/587307906419002181/" rel="noopener noreferrer">"Missing roof"</a>（08-02）里，SUwUMaBUwU 指出屋顶和床在建筑页签列表很靠右的位置——用鼠标滚轮慢慢滚，滚过头会翻到家具页签。Minay 之前重启过、甚至开了新档都没用，确认慢慢滚滚轮后看到了屋顶和床。</p>
+      <p>另一组独立玩家在 <a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364406835/" rel="noopener noreferrer">"No door plan at workbench"</a>（08-04）报告了同类问题：rllewis3 发现工作台页面可以用鼠标左键来回拖动，拖出了看似消失的图纸；帖子作者 jw62157 意识到点顶部箭头键会滑动选项，但经常把一些图纸藏在一直展开的左侧面板后面。</p>
+      <p><strong>实用结论：</strong>用慢速滚轮或左键拖动来翻工作台列表，慎点顶部箭头按钮——它们可能让图纸藏在侧面板后面。</p>
+    </section>
+
+    <section id="symptom-c" data-search-entry data-search-title="门造不了" data-search-tags="门 外门 内门 墙洞 造门"><h2>症状 C：门造不了</h2>
+      <p><span class="evidence-badge evidence-reported">单一线索</span></p>
+      <p>玩家 Earth Hunter（在 <a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364406835/" rel="noopener noreferrer">"No door plan at workbench"</a>，08-04）报告：图纸列表里有<strong>两种门——外门和内门</strong>，而且还需要<strong>一堵带门洞的墙</strong>门才装得上。这是单一社区报告，未经官方确认，但符合建造系统的墙体开洞逻辑，报 bug 之前值得先查一下。</p>
+    </section>
+
+    <section id="symptom-d" data-search-entry data-search-title="屋顶中间有洞" data-search-tags="屋顶 洞 Roof Cap 边缘 瓦片"><h2>症状 D：屋顶中间有洞（Roof Cap Lvl 2）</h2>
+      <p><span class="evidence-badge evidence-reported">单一线索</span> <em>未验证</em></p>
+      <p>一些玩家用 Roof Cap Lvl 2 填中间的洞，然后纠结这样算不算。玩家 bucfanjoe（在 <a href="https://steamcommunity.com/app/1501310/discussions/0/587307906419039915/" rel="noopener noreferrer">"Cant finish Roof quest...?"</a>，08-03）报告：自己的建筑中间有洞也过了屋顶这步，<strong>只要外边缘都铺了屋顶瓦片</strong>——但他不确定 Lvl 2 顶盖算不算数，并补充墙洞里装好实际的门窗可能有影响。当作单一未验证报告看待：如果症状 A 的解法都失败，把墙洞补齐、屋顶边缘铺满是合理的下一步尝试，不是已证实的解法。</p>
+    </section>
+
+    <section id="flow" data-search-entry data-search-title="屋顶任务排查流程" data-search-tags="排查 流程 清单 屋顶任务"><h2>排查流程（本站整合清单）</h2>
+      <p>按顺序过——每一步排除上面一种症状：</p>
+      <ol>
+        <li><strong>图纸本身找得到吗？</strong>工作台刷不出屋顶/门/床图纸，先修 UI：慢速滚轮、左键拖动、小心顶部箭头把图纸藏进侧面板（<a href="#symptom-b">症状 B</a>）。</li>
+        <li><strong>建筑真的完工了吗？</strong>墙放好了、有带门洞的墙装门、分清了外门内门（<a href="#symptom-c">症状 C</a>）、所有外边缘都铺了屋顶瓦片（<a href="#symptom-d">症状 D</a>）。</li>
+        <li><strong>是追踪器卡住吗？</strong>建筑完工但任务不推进 → 按 T 查手机任务日志，睡到第二天，再重启客户端（<a href="#symptom-a">症状 A</a>，官方确认的已知问题）。</li>
+        <li><strong>三步都过了还卡？</strong>带上版本号和截图去 Steam 讨论区报告——开发者正在积极调查追踪器问题。</li>
+      </ol>
+    </section>
+
+    <h2 id="faq">屋顶任务常见问题</h2>
+    <details class="faq-item">
+      <summary>我完全按图示盖的屋顶，任务为什么不完成？</summary>
+      <div class="faq-body"><p>最可能是任务追踪器卡住了——Early Access 里官方确认的已知问题。按 T 查手机任务日志（下一步可能已经在里面），睡到第二天，或重启客户端。按客服说法，这些解法目前几乎对每个人都有效。</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>工作台里没有屋顶和床图纸，存档坏了吗？</summary>
+      <div class="faq-body"><p>大概率没有。多个"找不到"屋顶、床、门的玩家实际是踩了滚动 UI 的坑：图纸在建筑页签很靠右，快速滚动会冲过头翻到家具页签，顶部箭头按钮还会把图纸藏进左侧面板后面。用滚轮慢滚或左键拖动翻页。</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>Roof Cap Lvl 2 中间留洞会卡任务吗？</summary>
+      <div class="faq-body"><p>未知。一名玩家报告中间有洞也推进了，只要外边缘有屋顶瓦片，但他不确定 Lvl 2 顶盖算不算——单一未验证报告。如果官方的追踪器解法都失败，把屋顶边缘铺满、墙洞装上门窗是合理的下一步尝试。</p></div>
+    </details>
+
+    <h2>相关攻略</h2>
+    <ul>
+      <li><a href="/guides/building-construction">建造与摆放指南 (EN)</a>——建造范围、图纸和摆放报告。</li>
+      <li><a href="/zh/guides/beginners-guide">新手指南</a>——含教程任务的第一周逐日路线。</li>
+      <li><a href="/problems/failed-quest-replay">重接失败的任务 (EN)</a>——任务不是卡住而是失败时怎么办。</li>
+    </ul>
+
+    <aside class="author-card" aria-label="关于作者">
+      <div class="author-card-id"><strong>Niki</strong><span>本站编辑，The Ranchers Guide</span></div>
+      <p>由本站编辑 Niki 调研和编辑。玩法证据来自公开视频、官方更新和社区报告。最近复核：2026 年 8 月。覆盖版本：0.8.10.x。<a href="/methodology">我们如何验证 (EN) →</a></p>
+    </aside>
+  </article></main>
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>证据等级与版本标注与英文页一致</span></div></div></footer><script src="/assets/js/main.js?v=20260809-i18n7" defer></script>
+</body></html>

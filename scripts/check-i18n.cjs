@@ -12,6 +12,11 @@ const pairs = [
   ["map.html", "zh/map.html", "/map", "/zh/map"],
   ["problems.html", "zh/problems.html", "/problems", "/zh/problems"],
   ["search.html", "zh/search.html", "/search", "/zh/search"],
+  ["guides/animal-guide.html", "zh/guides/animal-guide.html", "/guides/animal-guide", "/zh/guides/animal-guide"],
+  ["guides/gigi-large-egg-quest.html", "zh/guides/gigi-large-egg-quest.html", "/guides/gigi-large-egg-quest", "/zh/guides/gigi-large-egg-quest"],
+  ["guides/roof-quest-stuck.html", "zh/guides/roof-quest-stuck.html", "/guides/roof-quest-stuck", "/zh/guides/roof-quest-stuck"],
+  ["guides/money-making.html", "zh/guides/money-making.html", "/guides/money-making", "/zh/guides/money-making"],
+  ["problems/vehicle-recovery.html", "zh/problems/vehicle-recovery.html", "/problems/vehicle-recovery", "/zh/problems/vehicle-recovery"],
 ];
 
 function read(relative) {

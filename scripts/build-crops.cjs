@@ -140,7 +140,7 @@ const html = `<!DOCTYPE html>
 
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
-  <link rel="stylesheet" href="../assets/css/style.css?v=20260809-i18n6">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260809-i18n7">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -387,7 +387,7 @@ ${renderRoster(data.confirmedSystems)}
     </div>
   </footer>
 
-  <script src="../assets/js/main.js?v=20260809-i18n6" defer></script>
+  <script src="../assets/js/main.js?v=20260809-i18n7" defer></script>
   <script src="../assets/js/database.js?v=20260807-2" defer></script>
 </body>
 </html>
@@ -458,7 +458,7 @@ const zhHtml = `<!DOCTYPE html>
   <link rel="canonical" href="https://theranchersguide.com/zh/database/crops">
   <link rel="alternate" hreflang="en" href="https://theranchersguide.com/database/crops"><link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/database/crops"><link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/database/crops">
   <meta property="og:type" content="website"><meta property="og:title" content="The Ranchers 中文作物数据库"><meta property="og:description" content="当前版本种子与生长数据。"><meta property="og:url" content="https://theranchersguide.com/zh/database/crops"><meta property="og:image" content="https://theranchersguide.com/assets/img/db-crops.jpg">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260809-i18n6"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260809-i18n7"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
   <header class="site-header"><nav class="nav-inner" aria-label="主导航"><a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide<small>非官方中文玩家指南</small></span></a><button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button><ul class="nav-links"><li><a href="/zh/guides/beginners-guide">新手</a></li><li><a class="active" href="/zh/database">知识库</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li><li><a href="/zh/search">搜索</a></li><li><a class="nav-cta" href="/contribute">投稿</a></li></ul></nav></header>
@@ -470,7 +470,7 @@ const zhHtml = `<!DOCTYPE html>
 ${zhBodyParts.join("\n")}
     ${zhRelated}
   </article></main>
-  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>购买价、零售价、出售收入严格分开</span></div></div></footer><script src="/assets/js/main.js?v=20260809-i18n6" defer></script>
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>购买价、零售价、出售收入严格分开</span></div></div></footer><script src="/assets/js/main.js?v=20260809-i18n7" defer></script>
 </body></html>
 `;
 

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Ranchers 中文赚钱指南 | 日利润公式、CashIn 与出售渠道</title>
+  <meta name="description" content="The Ranchers 当前版本中文赚钱指南：日利润与分钟利润公式、视频观测的经济锚点、CashIn 箱子出售流程、渠道对比、回本天数和三桶再投资法。">
+  <link rel="canonical" href="https://theranchersguide.com/zh/guides/money-making">
+  <link rel="alternate" hreflang="en" href="https://theranchersguide.com/guides/money-making"><link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/guides/money-making"><link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/guides/money-making">
+  <meta property="og:type" content="article"><meta property="og:title" content="The Ranchers 中文赚钱指南"><meta property="og:description" content="用可复测的方法赚钱，而不是背价格表。"><meta property="og:url" content="https://theranchersguide.com/zh/guides/money-making"><meta property="og:image" content="https://theranchersguide.com/assets/img/card-money.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260809-i18n7"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header"><nav class="nav-inner" aria-label="主导航"><a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide<small>非官方中文玩家指南</small></span></a><button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button><ul class="nav-links"><li><a class="active" href="/zh/guides/beginners-guide">新手</a></li><li><a href="/zh/database">知识库</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li><li><a href="/zh/search">搜索</a></li><li><a class="nav-cta" href="/contribute">投稿</a></li></ul></nav></header>
+  <main><article class="article">
+    <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / 攻略 / 赚钱指南</nav><h1>The Ranchers 赚钱指南</h1><p class="meta">2026-08-07 更新 · 当前基线 0.8.10.455 · 阅读约 14 分钟</p>
+    <div class="evidence-status"><strong>证据状态：</strong>9 项官方系统事实 · 8 个视频观测经济锚点 · 3 条社区线索 · 2026-08-08 复核 — <a href="/methodology">我们如何验证 (EN) →</a></div>
+
+    <figure class="page-banner"><img src="/assets/img/card-money.webp" width="800" height="450" alt="The Ranchers 收获季大片玉米地里的牧场主"></figure>
+
+    <section class="answer-box" aria-labelledby="direct-answer">
+      <h2 id="direct-answer">直接回答</h2>
+      <p><strong>当前 Early Access 版本还没有经过验证的单一"最赚"路线——凡是没有绑定具体版本证据的报价都要谨慎对待。</strong>（本页价格都绑定了版本名、来源和时间点。）不管补丁怎么变，现在就能用的原则：</p>
+      <ul>
+        <li><strong>用每个游戏日的利润和每个主动分钟的利润评价每件事</strong>，永远别看单件售价。公式在下面。</li>
+        <li><strong>先保住重复当前生产循环的成本，再谈其他开销</strong>——种子、饲料和费用优先于扩张。</li>
+        <li><strong>钓鱼等主动劳动不需要地和种子</strong>，所以第一个作物周期还在长的时候，靠它们养开局。</li>
+        <li><strong>拿同一件东西测试各出售渠道（每日订单、本地市场、拍卖）</strong>，别先认定哪个一定给得多。</li>
+        <li><strong>用回本天数评价升级</strong>，不看标价或宣传的加成。</li>
+      </ul>
+      <p>这之后的部分讲方法、要填的表格，以及每条说法到底是官方确认、实测观测还是仍然悬而未决。</p>
+    </section>
+
+    <nav class="toc" aria-label="页面目录"><strong>本指南内容</strong><ul>
+      <li><a href="#method">公式：日利润、分钟利润、回本</a></li>
+      <li><a href="#video-anchors">视频观测的经济锚点</a></li>
+      <li><a href="#compare">对比表：作物 vs 养殖 vs 加工 vs 主动劳动</a></li>
+      <li><a href="#measure">怎么测：观测表</a></li>
+      <li><a href="#channels">出售渠道：订单、本地市场、拍卖</a></li>
+      <li><a href="#cashin">怎么卖作物：CashIn 箱子</a></li>
+      <li><a href="#energy">卖电收入：多余电力</a></li>
+      <li><a href="#reinvest">再投资节奏：三桶法</a></li>
+      <li><a href="#seasonal">换季现金规划</a></li>
+      <li><a href="#coop">联机赚钱</a></li>
+      <li><a href="#recommendations">建议</a></li>
+      <li><a href="#evidence">证据与版本</a></li>
+      <li><a href="#limits">已知限制</a></li>
+      <li><a href="#faq">赚钱常见问题</a></li>
+    </ul></nav>
+
+    <section id="method" data-search-entry data-search-title="日利润、分钟利润与回本公式" data-search-tags="公式 日利润 分钟利润 回本天数 计算"><h2>公式：日利润、分钟利润、回本</h2>
+      <p>全站通用的三个公式：</p>
+      <ul>
+        <li><strong>作物：</strong>每地块每日利润 =（售价 × 产量 − 种子成本）÷ 生长天数</li>
+        <li><strong>动物：</strong>每只每日利润 =（产物价格 × 每周期产物数 − 每周期饲料/养护）÷ 周期天数</li>
+        <li><strong>升级：</strong>回本天数 = 总启动成本 ÷ 每天多出的净利润</li>
+      </ul>
+      <p>两个速率都要用，因为它们回答不同的问题。<strong>每个游戏日的利润</strong>反映地、住所或机器栏位用得有多高效。<strong>每个主动分钟的利润</strong>反映你自己的注意力用得有多高效——两件事日利润相同，其中一件可能吃掉你一整个上午。跑图时间单独记，特别是对比本地出售和远处买家的时候。</p>
+      <p>把观测值填进<a href="/tools/profit-calculator">利润计算器 (EN)</a>。数据只留在你浏览器里，对比自己的存档不用把游戏数据发给我们。</p>
+    </section>
+
+    <section id="video-anchors" data-search-entry data-search-title="视频观测的经济锚点" data-search-tags="视频观测 结算 采集 692C 草莓 144C 牛肉 672C 左轮"><h2>视频观测的经济锚点</h2>
+      <p>下面的锚点来自对当前版本一个公开实况的逐帧核对（Games Station，V0.8.10.455，第 1 年春季第 4–8 天）。它们是真实的屏幕数值，但只是<strong>单次实况观测</strong>——证明这些数字在当前版本存在，不证明这就是最优路线。</p>
+      <div class="data-table-wrap" role="region" aria-label="视频观测的经济锚点" tabindex="0">
+      <table>
+        <thead><tr><th>锚点</th><th>观测值</th><th>证据</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>每日结算账本结构</strong></td>
+            <td>收入行：Farming（务农）/ Foraging（采集）/ Hunting and fishing（打猎钓鱼）/ Grocery（杂货）/ Others（其他）。扣款行：Water 和 Energy——没签公用事业合同前都显示 "No contract"。账单里还有 Outstanding Personal Bills（未付个人账单）和 Important notices（重要通知）两个区块。</td>
+            <td><span class="evidence-badge evidence-video">视频观测</span> <span title="Games Station 实况（V0.8.10.455）15:35 处观测">Games Station, 15:35</span></td>
+          </tr>
+          <tr>
+            <td><strong>实例：第 4 天 → 第 6 天采集收入</strong></td>
+            <td>第 4 天总收入 692C，全部来自采集行——当天这个开局没有务农、打猎钓鱼或杂货收入。到第 6 天，同一账本显示采集 1,272C（其他类别仍为 0），即这次实况中采集收入两个游戏日大约翻倍。</td>
+            <td><span class="evidence-badge evidence-video">视频观测</span> <span title="Games Station 实况（V0.8.10.455）15:35（第 4 天）与第 6 天结算画面">Games Station, 15:35</span></td>
+          </tr>
+          <tr>
+            <td><strong>草莓种子经济</strong></td>
+            <td>种子 144C；首次生长 7 天，之后每 3 天再收。单颗草莓售价未观测到。只有理论种子成本分摊：每次收获 18C——假设完整 30 天春季收八次、无漏收——不是实测结果。</td>
+            <td><span class="evidence-badge evidence-video">视频观测</span> <span title="Games Station 实况（V0.8.10.455）03:30；03:50 确认 10 颗种子 1,440C">Games Station, 03:30</span></td>
+          </tr>
+          <tr>
+            <td><strong>杂货货架价格参考</strong></td>
+            <td>Cow Meat - Medium（中号牛肉）在 Leafy Market 杂货货架的零售购买价 672C（基础品质，恢复 42 生命 / 130 能量）——这是中级动物产品"买来吃"的参考价，不是牧场主卖出的收入。同一货架区 Green Salad（绿沙拉）零售购买价 70C（基础，恢复 20 生命 / 30 能量）。这两样的玩家出售价都未知。</td>
+            <td><span class="evidence-badge evidence-video">视频观测</span> <span title="Games Station 实况（V0.8.10.455）03:45（牛肉）与 03:25（绿沙拉）">Games Station, 03:25</span></td>
+          </tr>
+          <tr>
+            <td><strong>武器价格上限参考</strong></td>
+            <td>Revolver（左轮）在 Leafy Market "Weaponry (Temporary)" 页签的零售购买价 1,776C（基础，3/3 弹匣，带伤害/射速条）。AK-45 Advanced 和 Devil Kiss - Cartridge 有上架，但价格画面没读清。这锚定的是战斗装备"买"要花多少——和转卖价值无关。</td>
+            <td><span class="evidence-badge evidence-video">视频观测</span> <span title="Games Station 实况（V0.8.10.455）03:22">Games Station, 03:22</span></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <p>两个规划上的推论，都带"单次实况"的保留。第一，这次实况里采集第 4 天入账 692C、第 6 天 1,272C——单次 session 的例子，不是稳定日入——但这仍然说明零成本的采集可以作为第一个作物周期长成前的过渡，与下面的主动劳动建议一致。第二，草莓是当前版本确认的多收春季作物，种子成本应分摊到多次收获，而不是全算在第一次上。这两条观测不证明哪条路线最好；它们证明 0.8.10.455 里机制就是这样运转的。</p>
+    </section>
+
+    <section id="compare" data-search-entry data-search-title="作物养殖加工主动劳动对比" data-search-tags="对比 作物 养殖 加工 钓鱼 主动劳动"><h2>对比表：作物 vs 养殖 vs 加工 vs 主动劳动</h2>
+      <p>把这张表当作你存档里每项活动的测试表。左列的系统都是官方确认的 <span class="evidence-badge evidence-official">官方</span>；数值结果由你自己测。</p>
+      <div class="data-table-wrap" role="region" aria-label="收入活动对比" tabindex="0">
+      <table>
+        <thead><tr><th>记录项</th><th>作物</th><th>养殖</th><th>加工</th><th>其他主动劳动</th></tr></thead>
+        <tbody>
+          <tr><td><strong>投入</strong></td><td>种子和必需耗材</td><td>动物、住所、饲料和工具</td><td>机器加原料价值</td><td>工具、费用和消耗品</td></tr>
+          <tr><td><strong>产出</strong></td><td>产量 × 观测售价</td><td>产物 × 观测售价</td><td>加工品售价</td><td>总出售额或任务奖励</td></tr>
+          <tr><td><strong>耗时</strong></td><td>播种到收获或再收</td><td>购买到每次收取</td><td>投料到收取</td><td>开始到到账</td></tr>
+          <tr><td><strong>主动劳动</strong></td><td>种、养、收、跑图</td><td>照料、收取、跑图</td><td>装、卸、跑图</td><td>全部主动分钟</td></tr>
+          <tr><td><strong>背景</strong></td><td>季节、品质、运气 Luck</td><td>物种、品质、运气 Luck</td><td>原料品质、批量</td><td>地点、路线、条件</td></tr>
+          <tr><td><strong>结果</strong></td><td colspan="4">每个游戏日和每个主动分钟的净利润</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <h3>作物：测一个完整周期</h3>
+      <p>记录种子成本、播种日期、首次收获、再收间隔、产量、品质和出售额。官方说明确认了多收作物、未收作物会一直挂在植株上、运气 Luck 影响果实数量 <span class="evidence-badge evidence-official">官方</span>，所以收一次不足以排出可靠名次。如果作物会再收，把首次收获和后续收获分开算，因为种子成本的分摊方式不同。</p>
+      <h3>养殖：算进全部前期投入</h3>
+      <p>别拿产物收入和作物利润直接比，而忽略了动物本身、住所、饲料和照料时间。官方说明提到运气 Luck 会影响新生幼崽品质 <span class="evidence-badge evidence-official">官方</span>，所以繁殖结果也要多次观测后才能支撑建议。</p>
+      <h3>加工：和原料直接卖出的价值比</h3>
+      <p>任何配方，先减掉原料直接卖出能拿到的钱，再算机器成本、批量和加工时间。最终售价更高不自动等于回报更好。</p>
+      <h3>主动劳动：测整条路线</h3>
+      <p><span class="evidence-badge evidence-official">官方</span> 有一条路线可以直接划掉：<strong>当前不能卖车赚钱</strong>——偷来的车也一样——不过开发者说这个选项在计划中（见<a href="/zh/problems/vehicle-recovery#selling">卖车部分</a>）。</p>
+      <figure class="page-banner"><img src="/assets/img/guide-fishing.webp" width="800" height="450" alt="The Ranchers 海边木码头旁游泳的角色" loading="lazy"><figcaption style="font-size:0.85rem;color:var(--brown-500);padding:8px 4px 0;">海边和码头——钓鱼不要地不要种子，只要时间。</figcaption></figure>
+      <p>钓鱼或你版本里其他主动任务：离开牧场时开始计时，卖完停止。跑图、整理背包和失败尝试都算进去。这样和那些你干别的事时还在产出的活计对比才公平。</p>
+    </section>
+
+    <section id="measure" data-search-entry data-search-title="怎么测：观测表" data-search-tags="观测 记录 测量 对照 表格"><h2>怎么测：观测表</h2>
+      <p>每项活动、物品、动物或建筑起一行。每行标注来源类型：官方描述、直接观测或社区线索。只有带版本的直接观测才能填具体数值。</p>
+      <ul>
+        <li><strong>背景：</strong>游戏版本、观测日期、单人还是联机、季节、难度设置（如果有）。</li>
+        <li><strong>投入：</strong>购买成本、重复材料、公用事业、饲料、种子、市场费用和必需建筑分摊。</li>
+        <li><strong>产出：</strong>数量、品质、基础售价、出售渠道和任何加工步骤。</li>
+        <li><strong>时间：</strong>游戏内周期长度、主动分钟、跑图时间和被产能卡住的时间。</li>
+        <li><strong>证据：</strong>截图、短视频，或其他玩家能照做的完整步骤。</li>
+      </ul>
+      <p>未知字段留空。0 代表测出来是 0；空白代表还没测。这个区分能防止不完整数据变成假排名。作物从对照地块开始、不带任何可选加成；动物至少测两个完整周期再给产物排名；漏照料的对照测试放到单独存档里，免得污染基线。</p>
+    </section>
+
+    <section id="channels" data-search-entry data-search-title="出售渠道：订单、本地市场、拍卖" data-search-tags="渠道 订单 市场 拍卖 手续费 对比"><h2>出售渠道：订单、本地市场、拍卖</h2>
+      <p>官方资料描述了每日订单、本地市场和拍卖市场 <span class="evidence-badge evidence-official">官方</span>，但没保证哪个渠道永远给得多。用同一件物品、同一品质、同一数量、同一版本对比：</p>
+      <ul>
+        <li>记录总价、手续费、数量限制、交付要求和付款延迟。</li>
+        <li>跑图和菜单操作时间算进主动劳动。</li>
+        <li>把保底报价和看玩家脸色的拍卖结果分开。</li>
+        <li>时效性强的观测要重复几次，再谈稳定的价格规律。</li>
+      </ul>
+    </section>
+
+    <section id="cashin" data-search-entry data-search-title="怎么卖作物：CashIn 箱子" data-search-tags="cashin 卖作物 出售 箱子 结算 farming 停机坪 cargo"><h2>怎么卖作物：CashIn 箱子</h2>
+      <p><strong>快速回答：</strong>收获通过牧场 Cargo/停机坪水泥区旁边的 <strong>CashIn Export Storage Chest</strong> 出售。<strong>存进去当下不给钱</strong>——钱在当天结算时到账，记在 <strong>Farming</strong> 行。<small>EA 0.8.10.455 观测。</small></p>
+      <ol>
+        <li><strong>收获并搬运</strong>作物到 Cargo/停机坪区域的 CashIn 箱子。</li>
+        <li><strong>转移进箱子</strong>——这时钱包不会变，这是正常的，不是 bug。</li>
+        <li><strong>睡觉，看结算画面。</strong>作物收入显示为一个合并的 Farming 总额（观测实例：第 8 天，Farming +1,534）。</li>
+      </ol>
+      <p>去到处比价之前，有两个后果要知道。第一，结算<strong>不会把 Farming 行拆到每种作物</strong>，所以从结算画面读不出单作物售价——这就是本站至今不发布单作物售价的原因。第二，如果你存了作物"没收到钱"，先看第二天早晨的结算，再怀疑 bug。</p>
+      <p>还有一个可能的渠道：市政厅建筑师 Meriam 有 <strong>"Sell items"</strong> 对话选项。观测的实况里没用过它，当作未验证线索，不是已确认商店。<small>EA 0.8.10.455 观测。</small></p>
+      <p class="source-note">地图条目：<a href="/map#cash-in-box">Sunvale 地图上的 Cash-In 箱子 (EN)</a>。</p>
+    </section>
+
+    <section id="energy" data-search-entry data-search-title="卖电收入：多余电力" data-search-tags="电 卖电 太阳能 风力 水井 公用事业"><h2>卖电收入：多余电力</h2>
+      <p>官方 Steam 描述说玩家可以用水井、风力发电机和太阳能板，并能出售多余电力 <span class="evidence-badge evidence-official">官方</span>。评估这个系统要记录：设备成本、分时间和天气的产出、牧场自用、出售费率、维护和电网限制。</p>
+      <p>只有多余部分算收入。被喷淋、建筑或其他设备用掉的电是省下的开支或运营收益，不是第二次出售。两类收益分开记，避免重复计算。玩家关于多余电力结算不明的报告仍悬而未决 <span class="evidence-badge evidence-reported">单一线索</span>——见<a href="/research#excess-electricity">研究队列 (EN)</a>和<a href="/guides/electricity-power">电力指南 (EN)</a>。</p>
+    </section>
+
+    <section id="reinvest" data-search-entry data-search-title="再投资节奏：三桶法" data-search-tags="再投资 预算 三桶 运营 扩张 储备"><h2>再投资节奏：三桶法</h2>
+      <p>这是本站的编辑性预算方法，不是游戏内规则。把每笔像样的收入分成三桶：</p>
+      <ol>
+        <li><strong>运营：</strong>已验证的、重复当前循环所需的成本。</li>
+        <li><strong>扩张：</strong>成本和收益都已经核对过的一项升级。</li>
+        <li><strong>储备：</strong>前两桶之后剩下的钱，留给失误、任务和补丁意外。</li>
+      </ol>
+      <p>用实际成本，不用固定百分比。下一个循环要 600，就先保 600。只有剩下的部分才轮到扩张。</p>
+    </section>
+
+    <section id="seasonal" data-search-entry data-search-title="换季现金规划" data-search-tags="季节 换季 种子 边界测试 储存"><h2>换季现金规划</h2>
+      <p>季节系统是宣传过的 <span class="evidence-badge evidence-official">官方</span>，但作物的具体行为必须在当前版本验证。换季之前：</p>
+      <ul>
+        <li><strong>读种子说明。</strong>记下它标注的季节和生长时长。</li>
+        <li><strong>做一次边界测试。</strong>观察已种下的作物在换季时会发生什么。</li>
+        <li><strong>留对照样本。</strong>和季节稳定期内的同一种作物对比。</li>
+        <li><strong>推迟大额假设。</strong>当前版本确认储存和换季行为之前，不要提前囤货或清库存。</li>
+      </ul>
+    </section>
+
+    <section id="coop" data-search-entry data-search-title="联机赚钱：分工" data-search-tags="联机 coop 多人 分工 记账"><h2>联机赚钱：经济分工</h2>
+      <p>联机支持 1–4 人 <span class="evidence-badge evidence-official">官方</span>，所以小队可以并行测试任务。同一条路线先单人测一次、再带人测一次，别直接认定产出线性翻倍；跑图、共用工具和重复劳动会吃掉表面收益。</p>
+      <p>记总玩家分钟，而不是墙上时钟时间。四个人快速做完一件事，合计人力可能还是更多。事先说好谁记购买和出售：一本账防止同一笔开销记两次。完整联机流程见<a href="/guides/multiplayer-coop">联机指南 (EN)</a>。</p>
+    </section>
+
+    <section id="recommendations" data-search-entry data-search-title="赚钱建议" data-search-tags="建议 开局 扩张 第一只动物 储备"><h2>建议</h2>
+      <ol>
+        <li><strong>开局几天：</strong>靠不需要本金的主动劳动（钓鱼之类）养牧场，同时第一个测好的作物周期在长。观测的实况里，采集第 4 天入账 692C、第 6 天 1,272C <span class="evidence-badge evidence-video">视频观测</span>——单次 session 的例子，不是稳定日入，也不是已证最优。</li>
+        <li><strong>第一次扩张：</strong>只买已经测过的东西——一个候选、一个对照周期、一次复测。多收作物（当前版本确认草莓）把种子成本摊到多次收获，所以按每次收获评判，不按每次播种。</li>
+        <li><strong>第一只动物：</strong>在不影响关键进度的前提下，能覆盖动物本身、住所分摊和持续照料储备之后。</li>
+        <li><strong>加工：</strong>只有当比原料直卖多出的部分盖得住机器成本和加工时间。</li>
+        <li><strong>升级：</strong>按回本天数排。如果一个喷淋只改变主动劳动、不改变作物收入，就按省下的分钟和这些分钟能多干的活来估值。</li>
+        <li><strong>现金储备：</strong>至少留够已验证的、重复当前生产循环的成本，外加一笔应对已知任务、饲料或维修开销的缓冲。</li>
+      </ol>
+      <p>每条建议背后都是同一份五步测试：固定版本、季节、品质和渠道选一个候选；跑一个对照周期，记下每笔投入、产出、经过的天数和主动分钟；复测一次；改一个变量；按每天和每主动分钟的净结果对比。</p>
+    </section>
+
+    <section id="evidence" data-search-entry data-search-title="证据与版本" data-search-tags="证据 版本 0.8.10.455 来源"><h2>证据与版本</h2>
+      <p>基线版本：<strong>0.8.10.455</strong>；覆盖 0.8.10.x。下面的标签沿用本站的<a href="/methodology">五级证据标准 (EN)</a>。</p>
+      <ul class="evidence-list">
+        <li>作物、动物、季节、市场、拍卖交易、公用事业、发电和 1–4 人联机作为系统存在 <span class="evidence-badge evidence-official">官方</span>——<a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">Steam 商店页</a>与<a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">官方公告</a>，2026 年 8 月复核。</li>
+        <li>多收作物、未收作物挂株、运气 Luck 影响果实数量和新生幼崽品质 <span class="evidence-badge evidence-official">官方</span>——官方补丁说明。</li>
+        <li>多余电力结算行为不明 <span class="evidence-badge evidence-reported">单一线索</span>——单人玩家报告，在<a href="/research">研究队列 (EN)</a>跟踪。</li>
+        <li>每日账本收入/扣款结构、采集第 4 天（692C）→ 第 6 天（1,272C）序列、草莓种子 144C 且 3 天再收、中号牛肉 672C、绿沙拉 70C、左轮 1,776C <span class="evidence-badge evidence-video">视频观测</span>——<a href="https://www.youtube.com/watch?v=GrFiYqWcBK0" rel="noopener noreferrer">Games Station 实况（V0.8.10.455）</a>，2026-08-07 复核。</li>
+        <li>CashIn Export Storage Chest 位置和存入流程、款项进入结算 Farming 行（第 8 天实例：Farming +1,534）、不按作物拆分、Meriam 未使用的 "Sell items" 选项 <span class="evidence-badge evidence-video">视频观测</span>——同一段 Games Station 实况（V0.8.10.455），59:41–59:57 和 76:14–76:24，2026-08-08 复核。</li>
+        <li>绝大多数具体价格、生长时间和产量仍待当前版本实测；上面的视频观测锚点是本站第一批当前版本数值。</li>
+      </ul>
+    </section>
+
+    <section id="limits" data-search-entry data-search-title="已知限制" data-search-tags="限制 局限 价格表 拍卖"><h2>已知限制</h2>
+      <ul>
+        <li>本页仍然<strong>不是完整价格表</strong>。少量视频观测锚点已在上面标注；其余数值以带标签的形式放在<a href="/zh/database/crops">作物</a>和<a href="/zh/database/animals">动物</a>数据库里。</li>
+        <li>三桶法和建议部分是编辑性规划方法，不是隐藏游戏机制。</li>
+        <li>拍卖结果取决于其他玩家，没法像商店价格那样复现。</li>
+        <li>如果两个来源对同一物品给出不同数字，把两个都报给我们——本站的<a href="/methodology#conflicts">冲突规则 (EN)</a>是并排展示冲突值，而不是悄悄选一个。</li>
+      </ul>
+      <p>可复现的观测请通过<a href="/contact">联系页 (EN)</a>提交。附上版本号和截图，结果核实之后才会变成公开数据。</p>
+    </section>
+
+    <h2 id="faq">赚钱常见问题</h2>
+    <details class="faq-item">
+      <summary>The Ranchers 开局最快的赚钱方式是什么？</summary>
+      <div class="faq-body"><p>用不需要地和种子的主动劳动（钓鱼是经典路线）供养第一个测好的作物周期，扩张之前先保住运营现金。当前版本没有验证过的通用最优解。</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>作物和动物哪个更赚？</summary>
+      <div class="faq-body"><p>把一个完整作物周期和动物的购买、住所、饲料、照料时间及产物周期放在一起比。答案会随进度、品质、运气 Luck 和补丁变化。</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>加工值得做吗？</summary>
+      <div class="faq-body"><p>只有当比原料直卖多出的部分盖得住机器成本和加工时间。先用同一原料品质和同一渠道测一个配方，再扩大。</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>卖给商店还是拍卖市场？</summary>
+      <div class="faq-body"><p>同一件东西在每个可用渠道各测一次。对比扣掉手续费的净价、数量限制、交付工作量、付款延迟和找到买家的可靠程度。</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>什么时候买第一只动物？</summary>
+      <div class="faq-body"><p>在不影响关键进度的前提下，能覆盖动物本身、住所分摊和持续照料储备之后。按观测到的成本决定，不按日历上的固定日期。</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>联机会怎么改变赚钱路线？</summary>
+      <div class="faq-body"><p>联机可以并行干活，但收益取决于分配规则、共用工具、跑图和协调。同一件事对比经过时间和总玩家分钟。</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>在哪里对比实际的作物和动物数值？</summary>
+      <div class="faq-body"><p><a href="/zh/database/crops">作物</a>和<a href="/zh/database/animals">动物</a>数据库把官方事实和待测量字段分开。<a href="/tools/profit-calculator">利润计算器 (EN)</a>给你自己观测的值排名。</p></div>
+    </details>
+
+    <h2>相关攻略</h2>
+    <ul>
+      <li><a href="/zh/guides/beginners-guide">新手指南</a>——这套经济体系赖以起步的第一周逐日路线。</li>
+      <li><a href="/guides/multiplayer-coop">联机指南 (EN)</a>——怎么在小队里拆分经济。</li>
+      <li><a href="/zh/database/animals">动物数据库</a>——每种牧场动物的产物、周期和价值。</li>
+      <li><a href="/tools/profit-calculator">利润计算器 (EN)</a>——按日利润给你自己的发现排名。</li>
+    </ul>
+
+    <aside class="author-card" aria-label="关于作者">
+      <div class="author-card-id"><strong>Niki</strong><span>本站编辑，The Ranchers Guide</span></div>
+      <p>由本站编辑 Niki 调研和编辑。玩法证据来自公开视频、官方更新和社区报告。最近复核：2026 年 8 月。覆盖版本：0.8.10.x。<a href="/methodology">我们如何验证 (EN) →</a></p>
+    </aside>
+  </article></main>
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>购买价、零售价、出售收入严格分开</span></div></div></footer><script src="/assets/js/main.js?v=20260809-i18n7" defer></script>
+</body></html>

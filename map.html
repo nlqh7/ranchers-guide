@@ -12,7 +12,7 @@
   <meta property="og:type" content="article"><meta property="og:site_name" content="The Ranchers Guide"><meta property="og:title" content="The Ranchers Map & Sunvale Location Finder"><meta property="og:description" content="A searchable, source-graded directory for shops, transport and landmarks in Sunvale."><meta property="og:url" content="https://theranchersguide.com/map"><meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
 
 
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260809-i18n6">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260809-i18n7">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -42,10 +42,6 @@
               <img data-map-image src="/assets/img/map-current-overview.webp" alt="Current The Ranchers map showing the western rural district and eastern Sunvale city connected by bridges" width="1152" height="720" draggable="false">
               <button class="map-zone map-zone-rural" type="button" data-map-region="rural" data-map-title="Western rural district" data-map-status="Current map area verified" data-map-copy="The western side contains ranch parcels, curving country roads, livestock markers and the main route toward the city bridges." aria-label="Focus western rural district"><span>Rural west</span></button>
               <button class="map-zone map-zone-city" type="button" data-map-region="city" data-map-title="Eastern city district" data-map-status="Current map area verified" data-map-copy="The eastern grid contains the highest concentration of shops, services, subway stops, parking and civic landmarks." aria-label="Focus eastern city district"><span>City east</span></button>
-              <div class="map-construction-badge" role="note" aria-label="Map location verification in progress">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 18a1 1 0 0 0 .9 1.5h14.2A1 1 0 0 0 20 18L12 3z"/><path d="M12 8v3"/><path d="M12 14h.01"/></svg>
-                <div><strong>Location verification in progress</strong><span>Pins show approximate areas from official/fan-wiki sources; exact coordinates still being verified.</span></div>
-              </div>
               <div class="map-marker-layer" data-map-marker-layer aria-label="Approximate location pins">
                 <button class="map-marker map-marker-services" type="button" style="--mx:72%;--my:46%" data-marker-category="services" data-marker-title="City Hall" data-marker-confidence="Approximate" data-marker-copy="Civic district building for land purchases and advanced blueprints; officially placed in the city center." data-marker-target="#city-hall" aria-label="Approximate area: City Hall"><span>City Hall</span></button>
                 <button class="map-marker map-marker-shopping" type="button" style="--mx:70%;--my:38%" data-marker-category="shopping" data-marker-title="Leafy Market" data-marker-confidence="Approximate" data-marker-copy="Grocery chain with seeds and farming supplies; official material shows multiple city-center branches." data-marker-target="#leafy-market" aria-label="Approximate area: Leafy Market"><span>Leafy Market</span></button>
@@ -88,8 +84,16 @@
               <li><span class="map-legend-dot map-legend-services"></span>Services</li>
               <li><span class="map-legend-dot map-legend-transport"></span>Transport</li>
               <li><span class="map-legend-dot map-legend-landmarks"></span>Landmarks</li>
-              <li class="map-legend-note">All pins are approximate areas from official or fan-wiki sources — not exact coordinates.</li><li class="map-legend-note">Location confidence — <strong>Approximate</strong>: area known, pin estimated · <strong>Region only</strong>: broad zone only · <strong>Unverified</strong>: name sourced, position unverified · <strong>Planned</strong>: officially upcoming, not confirmed in the current build.</li>
             </ul>
+            <div class="map-confidence" aria-label="Location confidence levels">
+              <p><strong>Pin accuracy</strong><span>Guide pins narrow the search area; they are not exact in-game coordinates.</span></p>
+              <dl>
+                <div><dt>Approximate</dt><dd>Known area, estimated pin</dd></div>
+                <div><dt>Region only</dt><dd>Broad zone only</dd></div>
+                <div><dt>Unverified</dt><dd>Name sourced, position open</dd></div>
+                <div><dt>Planned</dt><dd>Upcoming, not in this build</dd></div>
+              </dl>
+            </div>
           </div>
           <aside class="map-inspector" data-map-inspector aria-live="polite"><span data-map-inspector-status>Current player capture</span><h3 data-map-inspector-title>Full Sunvale overview</h3><p data-map-inspector-copy>West is the rural ranch district; east is the dense city grid. Bridges across the central waterway connect the two halves.</p><dl><div><dt>Legend retained</dt><dd>Mission, player, landmark, livestock, threat</dd></div><div><dt>Verified structure</dt><dd>Rural west + city east + bridge network</dd></div><div><dt>Still needed</dt><dd>Named pin screenshots from the current build</dd></div></dl><a class="btn" data-map-inspector-link href="#" hidden>View directory entry</a><a class="btn btn-outline" href="/contribute?topic=map">Submit a named pin</a></aside>
         </div>
@@ -157,6 +161,6 @@
       </aside></div></section>
   </main>
   <footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>The Ranchers Guide</h4><p>Independent, fan-made Early Access help with versioned evidence.</p><p class="disclaimer">Not affiliated with RedPilz Studio or Trophy Games.</p></div><nav aria-label="Footer guides"><h4>Help</h4><ul><li><a href="/guides/beginners-guide">Guides</a></li><li><a href="/map">Map</a></li><li><a href="/problems">Problems</a></li><li><a href="/research">Research</a></li></ul></nav><nav aria-label="Footer data"><h4>Data</h4><ul><li><a href="/database/crops">Crops</a></li><li><a href="/database/animals">Animals</a></li><li><a href="/tools/field-notes">Field Notes</a></li></ul></nav><nav aria-label="Footer site"><h4>Site</h4><ul><li><a href="/search">Search</a></li><li><a href="/contribute">Contribute</a></li><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/methodology">Methodology</a></li></ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>Unknown pin details stay unknown.</span></div></div></footer>
-  <script src="/assets/js/main.js?v=20260809-i18n6" defer></script><script src="/assets/js/map-core.js?v=20260807-2" defer></script><script src="/assets/js/map-viewer-core.js?v=20260807-3" defer></script><script src="/assets/js/map.js?v=20260809-i18n6" defer></script>
+  <script src="/assets/js/main.js?v=20260809-i18n7" defer></script><script src="/assets/js/map-core.js?v=20260807-2" defer></script><script src="/assets/js/map-viewer-core.js?v=20260807-3" defer></script><script src="/assets/js/map.js?v=20260809-i18n7" defer></script>
 </body>
 </html>
