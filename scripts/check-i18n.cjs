@@ -86,4 +86,16 @@ for (const route of [
   assert.match(chineseProblems, new RegExp(`href="${escaped(route)}`), `Chinese problem center must expose ${route}`);
 }
 
+const chineseHome = read("zh/index.html");
+for (const route of [
+  "/zh/guides/animal-guide",
+  "/zh/guides/gigi-large-egg-quest",
+  "/zh/guides/roof-quest-stuck",
+  "/zh/guides/money-making",
+  "/zh/guides/police-wanted-levels",
+  "/zh/problems/vehicle-recovery",
+]) {
+  assert.match(chineseHome, new RegExp(`href="${escaped(route)}`), `Chinese home must expose ${route}`);
+}
+
 console.log(`PASS: ${pairs.length} English/Chinese page pairs expose reciprocal language metadata and isolated search.`);
