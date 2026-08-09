@@ -23,7 +23,7 @@
   function fmt(n) {
     if (!isFinite(n)) return "—";
     var rounded = Math.round(n * 100) / 100;
-    return rounded.toLocaleString("en-US", { maximumFractionDigits: 2 }) + " g";
+    return rounded.toLocaleString("en-US", { maximumFractionDigits: 2 }) + "C";
   }
 
   /* Compute profit-per-day for one entry.

@@ -99,19 +99,25 @@
     });
   });
 
+  function applyMarkerFilter(filter) {
+    if (markerLayer) markerLayer.hidden = filter === "none";
+    markerFilterButtons.forEach(function (button) {
+      var active = button.dataset.mapPinFilter === filter;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+    markers.forEach(function (marker) {
+      marker.hidden = filter === "none" || (filter !== "all" && marker.dataset.markerCategory !== filter);
+      if (marker.hidden) marker.classList.remove("active");
+    });
+  }
+
   markerFilterButtons.forEach(function (button) {
     button.addEventListener("click", function () {
-      var filter = button.dataset.mapPinFilter;
-      markerFilterButtons.forEach(function (item) {
-        var active = item === button;
-        item.classList.toggle("active", active);
-        item.setAttribute("aria-pressed", active ? "true" : "false");
-      });
-      markers.forEach(function (marker) {
-        marker.hidden = filter !== "all" && marker.dataset.markerCategory !== filter;
-      });
+      applyMarkerFilter(button.dataset.mapPinFilter);
     });
   });
+  applyMarkerFilter("none");
 
   function selectRegion(name, title, status, copy, showMarker) {
     viewState = window.RanchersMapViewer ? window.RanchersMapViewer.getView(name) : { scale: 1, x: 0, y: 0 };
@@ -149,7 +155,8 @@
       if (!marker) return;
       var mx = parseFloat(marker.style.getPropertyValue("--mx"));
       var my = parseFloat(marker.style.getPropertyValue("--my"));
-      viewState = window.RanchersMapViewer.focus(mx, my, 2.2);
+      applyMarkerFilter(marker.dataset.markerCategory);
+      viewState = window.RanchersMapViewer.focus(mx, my, 2.6);
       applyMapView();
       selectMarker(marker);
       if (mapStage) mapStage.scrollIntoView({ behavior: "smooth", block: "center" });

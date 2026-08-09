@@ -1,9 +1,16 @@
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
+const { spawnSync } = require("node:child_process");
 
 const root = path.resolve(__dirname, "..");
 const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), "utf8");
+
+for (const script of ["build-locations.cjs", "check-locations-data.cjs"]) {
+  const args = script === "build-locations.cjs" ? [path.join(root, "scripts", script), "--check"] : [path.join(root, "scripts", script)];
+  const result = spawnSync(process.execPath, args, { cwd: root, encoding: "utf8" });
+  assert.equal(result.status, 0, `${script} failed:\n${result.stdout}${result.stderr}`);
+}
 
 const mapPage = read("map.html");
 const chineseMapPage = read("zh/map.html");
@@ -11,6 +18,8 @@ const sharedStyles = read("assets/css/style.css");
 assert.doesNotMatch(mapPage, /map-construction-badge/, "verification copy must not cover the map image");
 assert.doesNotMatch(chineseMapPage, /map-construction-badge/, "Chinese verification copy must not cover the map image");
 assert.doesNotMatch(sharedStyles, /\.map-construction-badge/, "removed map overlay must not leave dead styles");
+assert.match(sharedStyles, /\[hidden\]\s*\{\s*display:\s*none\s*!important;/, "hidden UI must stay hidden when component display rules apply");
+assert.match(sharedStyles, /\.map-pin-controls button\s*\{[\s\S]*?min-height:\s*44px;/, "map filters need touch-sized controls");
 assert.match(mapPage, /<link rel="canonical" href="https:\/\/theranchersguide\.com\/map">/);
 assert.match(mapPage, /data-location-search/);
 assert.match(mapPage, /data-location-category/);
@@ -38,6 +47,8 @@ assert.match(mapPage, /Player-captured August 2, 2026/i);
 assert.match(mapPage, /data-map-marker-layer/);
 assert.match(mapPage, /data-marker-category="(?:shopping|services|transport|landmarks)"/);
 assert.match(mapPage, /data-map-pin-filter="all"/);
+assert.match(mapPage, /class="active"[^>]*data-map-pin-filter="none"[^>]*aria-pressed="true"/, "guide pins should be off by default");
+assert.match(mapPage, /data-map-marker-layer[^>]*hidden/, "guide pin layer should not cover the source map by default");
 assert.match(mapPage, /map-legend/);
 assert.match(mapPage, /class="map-confidence"/);
 assert.doesNotMatch(mapPage, /map-legend-note/, "confidence copy must not be packed into the pin legend");
@@ -71,6 +82,7 @@ for (const pattern of [
   /data-map-pin-form/,
   /data-map-marker-layer/,
   /data-map-pin-filter="all"/,
+  /data-map-pin-filter="none"/,
   /class="map-confidence"/,
   /assets\/js\/map-core\.js/,
   /assets\/js\/map-viewer-core\.js/,
@@ -125,6 +137,8 @@ assert.match(mapScript, /addEventListener\("wheel"/);
 assert.match(mapScript, /data-map-pin-close/);
 assert.match(mapScript, /data-map-marker-layer/);
 assert.match(mapScript, /data-map-pin-filter/);
+assert.match(mapScript, /applyMarkerFilter\("none"\)/, "map script should initialize the guide-pin layer as off");
+assert.match(mapScript, /applyMarkerFilter\(marker\.dataset\.markerCategory\)/, "directory shortcuts should reveal the selected marker category");
 assert.match(mapScript, /markerTarget/);
 
 const sitemapForMap = read("sitemap.xml");

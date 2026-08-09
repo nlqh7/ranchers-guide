@@ -220,6 +220,7 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+[hidden] { display: none !important; }
 
 html { scroll-behavior: smooth; }
 
@@ -781,9 +782,19 @@ figure img { border-radius: var(--radius); }
 .card h3 { margin: 0 0 8px; }
 .card p { color: var(--brown-700); font-size: 0.95rem; flex: 1; }
 .card .card-link {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 44px;
   font-weight: 800;
   color: var(--green-700);
   margin-top: 12px;
+  text-decoration: none;
+}
+.card .card-link:hover { text-decoration: underline; }
+.card .card-link:focus-visible {
+  outline: 3px solid rgba(93, 143, 74, 0.45);
+  outline-offset: 3px;
 }
 .card a.stretched { text-decoration: none; color: inherit; }
 
@@ -1533,7 +1544,7 @@ table.data-table {
   background: #fff;
   color: var(--brown-700);
   cursor: pointer;
-  min-height: 32px;
+  min-height: 44px;
 }
 .map-pin-controls button.active {
   border-color: var(--green-700);

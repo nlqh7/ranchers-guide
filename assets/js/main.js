@@ -2,6 +2,30 @@
 (function () {
   "use strict";
 
+  function activeNavHref(pathname, isChinese) {
+    var clean = String(pathname || "/").replace(/\/index\.html$/, "").replace(/(.)\/$/, "$1") || "/";
+    if (isChinese) {
+      if (clean.indexOf("/zh/guides/") === 0) return "/zh/guides/beginners-guide";
+      if (clean === "/zh/database" || clean.indexOf("/zh/database/") === 0) return "/zh/database";
+      if (clean === "/zh/map") return "/zh/map";
+      if (clean === "/zh/problems" || clean.indexOf("/zh/problems/") === 0) return "/zh/problems";
+      if (clean === "/zh/search") return "/zh/search";
+      return "";
+    }
+
+    if (clean.indexOf("/guides/") === 0) return "/guides/beginners-guide";
+    if (clean === "/database" || clean.indexOf("/database/") === 0 || clean.indexOf("/tools/") === 0) return "/database";
+    if (clean === "/map") return "/map";
+    if (clean === "/problems" || clean.indexOf("/problems/") === 0) return "/problems";
+    if (clean === "/research" || clean === "/community") return "/research";
+    if (clean === "/search") return "/search";
+    if (clean === "/contribute") return "/contribute";
+    return "";
+  }
+
+  if (typeof module !== "undefined" && module.exports) module.exports = { activeNavHref: activeNavHref };
+  if (typeof document === "undefined" || typeof window === "undefined") return;
+
   /* Mobile nav toggle */
   var toggle = document.querySelector(".nav-toggle");
   var links = document.querySelector(".nav-links");
@@ -18,6 +42,21 @@
   var isChinese = document.documentElement.lang.toLowerCase() === "zh-cn" || cleanPath.indexOf("/zh") === 0;
   var searchRoute = isChinese ? "/zh/search" : "/search";
   var pageHasMainSearch = ["/", "/database", "/search", "/zh", "/zh/database", "/zh/search"].indexOf(cleanPath) !== -1;
+
+  /* Normalize section highlighting so every page gives the same location cue. */
+  if (links) {
+    links.querySelectorAll("a.active, a[aria-current]").forEach(function (link) {
+      link.classList.remove("active");
+      link.removeAttribute("aria-current");
+    });
+    var activeHref = activeNavHref(cleanPath, isChinese);
+    var activeLink = activeHref ? links.querySelector('a[href="' + activeHref + '"]') : null;
+    if (activeLink) {
+      activeLink.classList.add("active");
+      activeLink.setAttribute("aria-current", "page");
+    }
+  }
+
   var searchLink = links && links.querySelector('a[href="' + searchRoute + '"]');
   if (searchLink && searchLink.parentElement) {
     if (pageHasMainSearch) {
