@@ -54,14 +54,9 @@ assert.ok(chineseIndex.length >= pairs.length - 1, "Chinese search index must co
 assert.ok(chineseIndex.every((entry) => entry.url.startsWith("/zh/")), "Chinese index must not mix English URLs");
 
 const sharedNavigation = read("assets/js/main.js");
-assert.match(sharedNavigation, /className = "language-switch"/, "two-language sites should use a direct, polished language switch");
-assert.match(sharedNavigation, /dataset\.languageSwitch/, "language switch needs a stable behavior hook");
-assert.match(sharedNavigation, /中文/);
-assert.match(sharedNavigation, /English/);
-assert.doesNotMatch(sharedNavigation, /language-menu-popover/, "two available languages do not need a dropdown menu");
+assert.doesNotMatch(sharedNavigation, /language-switch/, "language switch UI is intentionally hidden until localization expands");
 
 const sharedStyles = read("assets/css/style.css");
-assert.match(sharedStyles, /\.language-switch/);
-assert.match(sharedStyles, /\.language-switch-globe/);
+assert.doesNotMatch(sharedStyles, /\.language-switch/, "hidden language switch must not leave dead component styles");
 
 console.log(`PASS: ${pairs.length} English/Chinese page pairs expose reciprocal language metadata and isolated search.`);

@@ -12,79 +12,52 @@
     });
   }
 
-  /* Replace the Search nav link with the same compact form on every page. */
+  /* Keep one search entry per viewport: primary-search pages use their main
+     search, while content pages get the compact header form. */
   var cleanPath = window.location.pathname.replace(/\/index\.html$/, "").replace(/(.)\/$/, "$1") || "/";
   var isChinese = document.documentElement.lang.toLowerCase() === "zh-cn" || cleanPath.indexOf("/zh") === 0;
   var searchRoute = isChinese ? "/zh/search" : "/search";
+  var pageHasMainSearch = ["/", "/database", "/search", "/zh", "/zh/database", "/zh/search"].indexOf(cleanPath) !== -1;
   var searchLink = links && links.querySelector('a[href="' + searchRoute + '"]');
   if (searchLink && searchLink.parentElement) {
-    var item = searchLink.parentElement;
-    var form = document.createElement("form");
-    var input = document.createElement("input");
-    var button = document.createElement("button");
+    if (pageHasMainSearch) {
+      searchLink.parentElement.remove();
+    } else {
+      var item = searchLink.parentElement;
+      var form = document.createElement("form");
+      var input = document.createElement("input");
+      var button = document.createElement("button");
 
-    item.classList.add("nav-search-item");
-    form.className = "nav-search-form";
-    form.action = searchRoute;
-    form.method = "get";
-    form.setAttribute("role", "search");
+      item.classList.add("nav-search-item");
+      form.className = "nav-search-form";
+      form.action = searchRoute;
+      form.method = "get";
+      form.setAttribute("role", "search");
 
-    input.type = "search";
-    input.name = "q";
-    input.placeholder = isChinese ? "搜索指南..." : "Search guide...";
-    input.autocomplete = "off";
-    input.setAttribute("aria-label", isChinese ? "搜索指南、数据和工具" : "Search guides, data and tools");
-    if (cleanPath === searchRoute) {
-      input.value = new URLSearchParams(window.location.search).get("q") || "";
-    }
-
-    button.type = "submit";
-    button.setAttribute("aria-label", isChinese ? "搜索" : "Search");
-    button.title = isChinese ? "搜索" : "Search";
-    button.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
-
-    form.addEventListener("submit", function (event) {
-      if (!input.value.trim()) {
-        event.preventDefault();
-        input.focus();
+      input.type = "search";
+      input.name = "q";
+      input.placeholder = isChinese ? "搜索指南..." : "Search guide...";
+      input.autocomplete = "off";
+      input.setAttribute("aria-label", isChinese ? "搜索指南、数据和工具" : "Search guides, data and tools");
+      if (cleanPath === searchRoute) {
+        input.value = new URLSearchParams(window.location.search).get("q") || "";
       }
-    });
 
-    form.append(input, button);
-    item.replaceChildren(form);
-  }
+      button.type = "submit";
+      button.setAttribute("aria-label", isChinese ? "搜索" : "Search");
+      button.title = isChinese ? "搜索" : "Search";
+      button.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
 
-  /* With two supported languages, one direct switch is clearer than a menu.
-     Core localized pages map one-to-one; English-only pages use the Chinese hub. */
-  if (links && !links.querySelector("[data-language-switch]")) {
-    var localizedPairs = {
-      "/": "/zh/",
-      "/database": "/zh/database",
-      "/guides/beginners-guide": "/zh/guides/beginners-guide",
-      "/database/animals": "/zh/database/animals",
-      "/database/crops": "/zh/database/crops",
-      "/map": "/zh/map",
-      "/problems": "/zh/problems",
-      "/search": "/zh/search"
-    };
-    var languageItem = document.createElement("li");
-    var languageLink = document.createElement("a");
-    var englishPath = isChinese ? cleanPath.replace(/^\/zh(?=\/|$)/, "") || "/" : cleanPath;
-    var chinesePath = localizedPairs[englishPath] || "/zh/";
-    var globeIcon = '<svg class="language-switch-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>';
+      form.addEventListener("submit", function (event) {
+        if (!input.value.trim()) {
+          event.preventDefault();
+          input.focus();
+        }
+      });
 
-    languageItem.className = "language-switch-item";
-    languageLink.className = "language-switch";
-    languageLink.dataset.languageSwitch = "";
-    languageLink.href = isChinese ? englishPath : chinesePath;
-    languageLink.hreflang = isChinese ? "en" : "zh-CN";
-    languageLink.lang = isChinese ? "en" : "zh-CN";
-    languageLink.innerHTML = globeIcon + "<span>" + (isChinese ? "English" : "中文") + "</span>";
-    languageLink.setAttribute("aria-label", isChinese ? "Switch to English" : "切换到简体中文");
-    languageLink.title = isChinese ? "Switch to English" : "切换到简体中文";
-
-    languageItem.appendChild(languageLink);
-    links.insertBefore(languageItem, links.lastElementChild);
+      form.append(input, button);
+      item.replaceChildren(form);
+    }
   }
 
   /* Footer year */
