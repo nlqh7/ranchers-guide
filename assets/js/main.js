@@ -12,15 +12,12 @@
     });
   }
 
-  /* Replace the Search nav link with a compact, progressively enhanced form.
-     Skip it on pages whose first screen already has a large search box
-     (home hero search, knowledge-base search, full search page) — the plain link stays there. */
+  /* Replace the Search nav link with the same compact form on every page. */
   var cleanPath = window.location.pathname.replace(/\/index\.html$/, "").replace(/(.)\/$/, "$1") || "/";
   var isChinese = document.documentElement.lang.toLowerCase() === "zh-cn" || cleanPath.indexOf("/zh") === 0;
   var searchRoute = isChinese ? "/zh/search" : "/search";
-  var pageHasMainSearch = ["/", "/database", "/search", "/zh", "/zh/database", "/zh/search"].indexOf(cleanPath) !== -1;
   var searchLink = links && links.querySelector('a[href="' + searchRoute + '"]');
-  if (searchLink && searchLink.parentElement && !pageHasMainSearch) {
+  if (searchLink && searchLink.parentElement) {
     var item = searchLink.parentElement;
     var form = document.createElement("form");
     var input = document.createElement("input");
@@ -57,9 +54,9 @@
     item.replaceChildren(form);
   }
 
-  /* Keep one predictable language menu on every page. Core localized pages
-     map one-to-one; English-only pages fall back to the Chinese home hub. */
-  if (links && !links.querySelector("[data-language-menu]")) {
+  /* With two supported languages, one direct switch is clearer than a menu.
+     Core localized pages map one-to-one; English-only pages use the Chinese hub. */
+  if (links && !links.querySelector("[data-language-switch]")) {
     var localizedPairs = {
       "/": "/zh/",
       "/database": "/zh/database",
@@ -71,53 +68,23 @@
       "/search": "/zh/search"
     };
     var languageItem = document.createElement("li");
-    var languageMenu = document.createElement("details");
-    var languageSummary = document.createElement("summary");
-    var languagePopover = document.createElement("div");
-    var currentLanguage = document.createElement("span");
-    var alternateLanguage = document.createElement("a");
+    var languageLink = document.createElement("a");
     var englishPath = isChinese ? cleanPath.replace(/^\/zh(?=\/|$)/, "") || "/" : cleanPath;
     var chinesePath = localizedPairs[englishPath] || "/zh/";
-    var globeIcon = '<svg class="language-menu-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>';
-    var chevronIcon = '<svg class="language-menu-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg>';
-    var checkIcon = '<svg class="language-menu-check" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>';
+    var globeIcon = '<svg class="language-switch-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>';
 
-    languageItem.className = "language-menu-item";
-    languageMenu.className = "language-menu";
-    languageMenu.dataset.languageMenu = "";
-    languageSummary.className = "language-menu-summary";
-    languageSummary.setAttribute("aria-label", isChinese ? "当前语言：简体中文" : "Current language: English");
-    languageSummary.innerHTML = globeIcon + '<span class="language-menu-current">' + (isChinese ? "简体中文" : "English") + "</span>" + chevronIcon;
-    languagePopover.className = "language-menu-popover";
-    languagePopover.setAttribute("aria-label", isChinese ? "选择语言" : "Choose language");
+    languageItem.className = "language-switch-item";
+    languageLink.className = "language-switch";
+    languageLink.dataset.languageSwitch = "";
+    languageLink.href = isChinese ? englishPath : chinesePath;
+    languageLink.hreflang = isChinese ? "en" : "zh-CN";
+    languageLink.lang = isChinese ? "en" : "zh-CN";
+    languageLink.innerHTML = globeIcon + "<span>" + (isChinese ? "English" : "中文") + "</span>";
+    languageLink.setAttribute("aria-label", isChinese ? "Switch to English" : "切换到简体中文");
+    languageLink.title = isChinese ? "Switch to English" : "切换到简体中文";
 
-    currentLanguage.className = "language-menu-option is-current";
-    currentLanguage.lang = isChinese ? "zh-CN" : "en";
-    currentLanguage.setAttribute("aria-current", "page");
-    currentLanguage.innerHTML = '<span>' + (isChinese ? "简体中文" : "English") + "</span>" + checkIcon;
-
-    alternateLanguage.className = "language-menu-option";
-    alternateLanguage.href = isChinese ? englishPath : chinesePath;
-    alternateLanguage.hreflang = isChinese ? "en" : "zh-CN";
-    alternateLanguage.lang = isChinese ? "en" : "zh-CN";
-    alternateLanguage.textContent = isChinese ? "English" : "简体中文";
-    alternateLanguage.setAttribute("aria-label", isChinese ? "Switch to English" : "切换到简体中文");
-
-    if (isChinese) languagePopover.append(alternateLanguage, currentLanguage);
-    else languagePopover.append(currentLanguage, alternateLanguage);
-    languageMenu.append(languageSummary, languagePopover);
-    languageItem.appendChild(languageMenu);
+    languageItem.appendChild(languageLink);
     links.insertBefore(languageItem, links.lastElementChild);
-
-    document.addEventListener("click", function (event) {
-      if (languageMenu.open && !languageMenu.contains(event.target)) languageMenu.open = false;
-    });
-    languageMenu.addEventListener("keydown", function (event) {
-      if (event.key === "Escape") {
-        languageMenu.open = false;
-        languageSummary.focus();
-      }
-    });
   }
 
   /* Footer year */

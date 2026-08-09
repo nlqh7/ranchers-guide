@@ -269,7 +269,7 @@ li { margin: 0.3em 0; }
 }
 
 .nav-inner {
-  max-width: var(--maxw);
+  max-width: 1280px;
   margin: 0 auto;
   padding: 12px 20px;
   display: flex;
@@ -349,13 +349,11 @@ li { margin: 0.3em 0; }
   color: #fff;
 }
 .nav-links a.nav-cta:hover { background: #2e5426; }
-.language-menu-item { position: relative; width: 100%; }
-.language-menu { width: 100%; }
-.language-menu summary { list-style: none; }
-.language-menu summary::-webkit-details-marker { display: none; }
-.language-menu-summary {
+.language-switch-item { width: 100%; }
+.nav-links a.language-switch {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   min-height: 44px;
   padding: 8px 12px;
@@ -364,14 +362,13 @@ li { margin: 0.3em 0; }
   background: #fff;
   color: var(--brown-700);
   font-weight: 800;
+  white-space: nowrap;
   cursor: pointer;
   transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
 }
-.language-menu-summary:hover { border-color: var(--green-700); background: var(--cream-100); }
-.language-menu-summary:focus-visible { outline: 3px solid rgba(93, 143, 74, 0.28); outline-offset: 2px; }
-.language-menu-globe,
-.language-menu-chevron,
-.language-menu-check {
+.nav-links a.language-switch:hover { border-color: var(--green-700); background: var(--cream-100); text-decoration: none; }
+.nav-links a.language-switch:focus-visible { outline: 3px solid rgba(93, 143, 74, 0.28); outline-offset: 2px; }
+.language-switch-globe {
   width: 18px;
   height: 18px;
   flex: 0 0 auto;
@@ -381,30 +378,6 @@ li { margin: 0.3em 0; }
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.language-menu-chevron { width: 16px; margin-left: auto; transition: transform 180ms ease; }
-.language-menu[open] .language-menu-chevron { transform: rotate(180deg); }
-.language-menu-popover {
-  display: grid;
-  gap: 4px;
-  margin-top: 6px;
-  padding: 6px;
-  border: 1px solid var(--cream-300);
-  border-radius: var(--radius-sm);
-  background: #fff;
-}
-.nav-links .language-menu-option {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 44px;
-  padding: 9px 11px;
-  border-radius: 5px;
-  color: var(--brown-700);
-  font-weight: 750;
-}
-.nav-links .language-menu-option:hover { background: var(--cream-100); color: var(--green-700); }
-.language-menu-option.is-current { background: var(--cream-200); color: var(--green-700); }
-.language-menu-check { color: var(--green-700); }
 
 .nav-search-item { width: 100%; }
 .nav-search-form {
@@ -448,7 +421,7 @@ li { margin: 0.3em 0; }
 .nav-search-form button:hover { background: var(--green-700); }
 .nav-search-form button:focus-visible { outline: 3px solid var(--gold); outline-offset: -4px; }
 
-@media (min-width: 1040px) {
+@media (min-width: 1180px) {
   .nav-inner { flex-wrap: nowrap; }
   .nav-toggle { display: none; }
   .nav-links {
@@ -460,19 +433,9 @@ li { margin: 0.3em 0; }
     margin: 0;
   }
   .nav-links a { padding: 8px 13px; }
-  .language-menu-item { width: auto; }
-  .language-menu { width: auto; }
-  .language-menu-summary { min-width: 126px; }
-  .language-menu-popover {
-    position: absolute;
-    z-index: 40;
-    top: calc(100% + 2px);
-    right: 0;
-    width: 200px;
-    margin-top: 0;
-    box-shadow: 0 12px 28px rgba(50, 39, 28, 0.16);
-  }
-  .nav-search-item { width: 176px; }
+  .language-switch-item { width: auto; }
+  .nav-links a.language-switch { min-width: 88px; }
+  .nav-search-item { width: 168px; }
   .nav-search-form { min-height: 42px; }
 }
 
@@ -931,6 +894,7 @@ figure img { border-radius: var(--radius); }
 /* ---------- Data tables (database pages) ---------- */
 .table-tools {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 12px;
   margin: 18px 0;
@@ -2368,6 +2332,14 @@ table.data-table {
   color: var(--brown-700);
   font-size: 0.82rem;
   font-weight: 800;
+}
+.table-tools [data-table-count] {
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  min-height: 28px;
+  border-radius: 4px;
+  white-space: nowrap;
 }
 .knowledge-search-control {
   border-color: var(--brown-300);

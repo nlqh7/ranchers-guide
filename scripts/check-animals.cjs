@@ -9,6 +9,7 @@ const { spawnSync } = require("node:child_process");
 const root = path.resolve(__dirname, "..");
 const data = JSON.parse(fs.readFileSync(path.join(root, "data", "animals.json"), "utf8"));
 const html = fs.readFileSync(path.join(root, "database", "animals.html"), "utf8");
+const sharedStyles = fs.readFileSync(path.join(root, "assets", "css", "style.css"), "utf8");
 
 const LEVELS = new Set(data.meta.evidenceLevels);
 const VALIDITY = new Set(data.meta.validityValues);
@@ -16,6 +17,8 @@ const SOURCE_KINDS = new Set(["official-news", "steam-thread", "local-video", "w
 const SOURCE_IDS = new Set(Object.keys(data.sources));
 assert.ok(LEVELS.size === 5 && VALIDITY.size === 4, "meta must enumerate evidence levels and validity values");
 assert.ok(Array.isArray(data.species) && data.species.length >= 4, "expected at least 4 species");
+assert.match(sharedStyles, /\.table-tools\s*\{[^}]*align-items:\s*center/s, "table controls must vertically center count badges");
+assert.match(sharedStyles, /\.table-tools \[data-table-count\][^{]*\{[^}]*border-radius:\s*(?:4px|var\(--radius-sm\))/s, "table counts must stay compact, not stretch into pills");
 
 for (const [id, src] of Object.entries(data.sources)) {
   assert.ok(SOURCE_KINDS.has(src.kind), `source ${id}: kind must be one of ${[...SOURCE_KINDS].join("/")}, got ${src.kind}`);

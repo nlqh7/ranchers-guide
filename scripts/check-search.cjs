@@ -165,13 +165,13 @@ assert.match(sharedScript, /className = "nav-search-form"/);
 assert.match(sharedScript, /var searchRoute = isChinese \? "\/zh\/search" : "\/search"/);
 assert.match(sharedScript, /form\.action = searchRoute/);
 assert.match(sharedScript, /input\.name = "q"/);
+assert.doesNotMatch(sharedScript, /pageHasMainSearch/, "header search must use the same control on every page");
 assert.match(sharedScript, /target\.scrollIntoView\(\{ block: "start" \}\)/);
 assert.match(homePage, /class="hero-search"[^>]+action="\/search"/);
 assert.match(knowledgeBasePage, /<h1>The Ranchers Knowledge Base<\/h1>/);
 assert.match(knowledgeBasePage, /href="\/guides\/animal-guide#feeding"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /"\/database"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /search-index\.json/);
-assert.match(sharedScript, /pageHasMainSearch = \["\/", "\/database", "\/search", "\/zh", "\/zh\/database", "\/zh\/search"\]/);
 
 /* Prebuilt search index (scripts/build-search-index.cjs — re-run after content edits). */
 const prebuiltIndex = JSON.parse(fs.readFileSync(path.join(root, "search-index.json"), "utf8"));
