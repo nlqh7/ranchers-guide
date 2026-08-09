@@ -97,7 +97,7 @@ assert.match(mapScript, /data-map-pin-filter/);
 assert.match(mapScript, /markerTarget/);
 
 const sitemapForMap = read("sitemap.xml");
-assert.match(sitemapForMap, /<loc>https:\/\/theranchersguide\.com\/map<\/loc>\s*<lastmod>2026-08-07<\/lastmod>/);
+assert.match(sitemapForMap, /<loc>https:\/\/theranchersguide\.com\/map<\/loc>[\s\S]*?<lastmod>2026-08-07<\/lastmod>/);
 
 const viewerCore = require("../assets/js/map-viewer-core.js");
 assert.deepEqual(viewerCore.getView("rural"), { scale: 1.6, x: 24, y: 2 });
@@ -128,7 +128,8 @@ assert.deepEqual(mapCore.filterLocations(locations, "casino", "all"), []);
 
 const search = read("assets/js/search.js");
 assert.match(search, /"\/map"/);
-assert.match(search, /ranchers-search-index-v14/);
+assert.match(search, /ranchers-search-index-v15/);
+assert.match(search, /ranchers-search-index-zh-v1/);
 assert.match(search, /node\.querySelector\("h2, h3"\)/);
 
 const sitemap = read("sitemap.xml");
@@ -147,7 +148,9 @@ function htmlFiles(directory) {
 }
 
 for (const file of htmlFiles(root)) {
-  assert.match(fs.readFileSync(file, "utf8"), /href="\/map"/, `${path.relative(root, file)} needs a Map link`);
+  const relative = path.relative(root, file);
+  const expectedMapRoute = relative.startsWith(`zh${path.sep}`) ? /href="\/zh\/map"/ : /href="\/map"/;
+  assert.match(fs.readFileSync(file, "utf8"), expectedMapRoute, `${relative} needs a locale-matched Map link`);
 }
 
 console.log("PASS: searchable map directory, contribution path, site search and discovery links are complete.");

@@ -12,14 +12,19 @@ const path = require("node:path");
 const root = path.resolve(__dirname, "..");
 const RanchersSearch = require("../assets/js/search-core.js");
 
-/* PAGE_PATHS is the single source of truth in assets/js/search.js. */
+/* Locale page lists are the single source of truth in assets/js/search.js. */
 const searchJs = fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8");
-const pagePathsBlock = searchJs.match(/PAGE_PATHS = \[([\s\S]*?)\];/);
-if (!pagePathsBlock) throw new Error("PAGE_PATHS not found in assets/js/search.js");
-const PAGE_PATHS = Array.from(pagePathsBlock[1].matchAll(/"([^"]+)"/g), (match) => match[1]);
+function readPagePaths(name) {
+  const block = searchJs.match(new RegExp(`${name} = \\[([\\s\\S]*?)\\];`));
+  if (!block) throw new Error(`${name} not found in assets/js/search.js`);
+  return Array.from(block[1].matchAll(/"([^"]+)"/g), (match) => match[1]);
+}
+const EN_PAGE_PATHS = readPagePaths("EN_PAGE_PATHS");
+const ZH_PAGE_PATHS = readPagePaths("ZH_PAGE_PATHS");
 
 function routeToFile(route) {
   if (route === "/") return "index.html";
+  if (route === "/zh/") return "zh/index.html";
   if (route === "/database") return "database.html";
   return `${route.replace(/^\//, "")}.html`;
 }
@@ -46,6 +51,15 @@ function cleanTitle(title) {
 }
 
 function pageType(route) {
+  if (route.indexOf("/zh/") === 0) {
+    if (route.indexOf("/zh/guides/") === 0) return "攻略";
+    if (route === "/zh/database") return "知识库";
+    if (route.indexOf("/zh/database/") === 0) return "数据库";
+    if (route === "/zh/map") return "地图";
+    if (route === "/zh/problems") return "问题排查";
+    if (route === "/zh/") return "首页";
+    return "站点";
+  }
   if (route.indexOf("/guides/") === 0) return "Guide";
   if (route === "/database") return "Knowledge Base";
   if (route.indexOf("/database/") === 0) return "Database";
@@ -141,31 +155,29 @@ function extractDocument(html, route) {
   };
 }
 
-const documents = [];
-for (const route of PAGE_PATHS) {
-  const file = routeToFile(route);
-  const absolute = path.join(root, file);
-  if (!fs.existsSync(absolute)) throw new Error(`Missing page for route ${route}: ${file}`);
-  documents.push(extractDocument(fs.readFileSync(absolute, "utf8"), route));
-}
-
-const index = documents.reduce((all, doc) => all.concat(RanchersSearch.expandEntryDocuments(doc)), []);
-const output = path.join(root, "search-index.json");
-const serialized = JSON.stringify(index);
-
-if (process.argv.includes("--check")) {
-  /* Drift guard: fail if the committed index is not byte-identical to a fresh build. */
-  if (!fs.existsSync(output)) {
-    console.error("FAIL: search-index.json is missing. Run: node scripts/build-search-index.cjs");
-    process.exit(1);
+function buildLocale(pagePaths, outputRelative) {
+  const documents = pagePaths.map((route) => {
+    const file = routeToFile(route);
+    const absolute = path.join(root, file);
+    if (!fs.existsSync(absolute)) throw new Error(`Missing page for route ${route}: ${file}`);
+    return extractDocument(fs.readFileSync(absolute, "utf8"), route);
+  });
+  const index = documents.reduce((all, doc) => all.concat(RanchersSearch.expandEntryDocuments(doc)), []);
+  const output = path.join(root, outputRelative);
+  const serialized = JSON.stringify(index);
+  if (process.argv.includes("--check")) {
+    if (!fs.existsSync(output) || fs.readFileSync(output, "utf8") !== serialized) {
+      console.error(`FAIL: ${outputRelative} is missing or out of sync. Re-run: node scripts/build-search-index.cjs`);
+      process.exitCode = 1;
+      return;
+    }
+    console.log(`PASS: ${outputRelative} is in sync (${index.length} documents from ${documents.length} pages).`);
+    return;
   }
-  if (fs.readFileSync(output, "utf8") !== serialized) {
-    console.error("FAIL: search-index.json is out of sync with the HTML pages. Re-run: node scripts/build-search-index.cjs");
-    process.exit(1);
-  }
-  console.log(`PASS: search-index.json is in sync (${index.length} documents from ${documents.length} pages).`);
-} else {
+  fs.mkdirSync(path.dirname(output), { recursive: true });
   fs.writeFileSync(output, serialized, "utf8");
-  const stats = fs.statSync(output);
-  console.log(`Wrote search-index.json: ${index.length} searchable documents from ${documents.length} pages (${(stats.size / 1024).toFixed(1)} KB).`);
+  console.log(`Wrote ${outputRelative}: ${index.length} documents from ${documents.length} pages (${(Buffer.byteLength(serialized) / 1024).toFixed(1)} KB).`);
 }
+
+buildLocale(EN_PAGE_PATHS, "search-index.json");
+buildLocale(ZH_PAGE_PATHS, "zh/search-index.json");

@@ -85,7 +85,8 @@ for (const route of [
 ]) {
   assert.match(searchScript, new RegExp(`"${route.replaceAll("/", "\\/")}"`));
 }
-assert.match(searchScript, /ranchers-search-index-v14/);
+assert.match(searchScript, /ranchers-search-index-v15/);
+assert.match(searchScript, /ranchers-search-index-zh-v1/);
 
 const sitemap = read("sitemap.xml");
 assert.match(sitemap, /https:\/\/theranchersguide\.com\/problems/);
@@ -103,9 +104,11 @@ function htmlFiles(directory) {
 
 for (const file of htmlFiles(root)) {
   const html = fs.readFileSync(file, "utf8");
-  assert.match(html, /href="\/problems"/, `${path.relative(root, file)} needs a Problems link`);
-  assert.match(html, /href="\/research"/, `${path.relative(root, file)} needs a Research link`);
-  assert.match(html, /href="\/contribute"/, `${path.relative(root, file)} needs a Contribute link`);
+  const relative = path.relative(root, file);
+  const isChinese = relative.startsWith(`zh${path.sep}`);
+  assert.match(html, isChinese ? /href="\/zh\/problems"/ : /href="\/problems"/, `${relative} needs a locale-matched Problems link`);
+  if (!isChinese) assert.match(html, /href="\/research"/, `${relative} needs a Research link`);
+  assert.match(html, /href="\/contribute(?:"|\?)/, `${relative} needs a Contribute link`);
 }
 
 console.log(`PASS: research hub, ${problemPages.length} sourced problem pages, contribution flow and discovery links are complete.`);

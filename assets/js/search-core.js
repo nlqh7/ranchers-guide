@@ -12,7 +12,8 @@
       .normalize("NFKD")
       .replace(/[\u0300-\u036f]/g, "")
       .replace(/([a-z0-9])[-–—]([a-z0-9])/g, "$1$2")
-      .replace(/[^a-z0-9]+/g, " ")
+      .replace(/([\u3400-\u9fff])/g, " $1 ")
+      .replace(/[^\p{L}\p{N}]+/gu, " ")
       .trim();
   }
 
@@ -22,7 +23,8 @@
 
   var QUERY_STOP_WORDS = new Set([
     "a", "an", "are", "at", "buy", "can", "do", "does", "find", "for", "get",
-    "how", "i", "in", "is", "me", "my", "of", "please", "the", "to", "was", "were", "where", "with"
+    "how", "i", "in", "is", "me", "my", "of", "please", "the", "to", "was", "were", "where", "with",
+    "为", "什", "么", "怎", "样", "如", "何", "哪", "里", "在", "多", "久", "的", "了", "是", "要", "能", "可", "以", "我", "被"
   ]);
 
   var QUERY_ALIASES = {
@@ -173,12 +175,18 @@
   }
 
   function entryType(url) {
+    if (url === "/zh/database/crops") return "作物数据";
+    if (url === "/zh/database/animals") return "动物数据";
     if (url === "/database/crops") return "Crop data";
     if (url === "/database/animals") return "Animal data";
     return "Database entry";
   }
 
   function answerType(type) {
+    if (type === "攻略") return "攻略答案";
+    if (type === "问题排查") return "排查答案";
+    if (type === "地图") return "地点答案";
+    if (type === "数据库") return "数据库答案";
     if (type === "Guide") return "Guide answer";
     if (type === "Problem") return "Problem answer";
     if (type === "Map") return "Location answer";

@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  var PAGE_PATHS = [
+  var EN_PAGE_PATHS = [
     "/",
     "/guides/release-time-checklist",
     "/guides/beginner-mistakes",
@@ -34,7 +34,19 @@
     "/contact",
     "/privacy"
   ];
-  var CACHE_KEY = "ranchers-search-index-v14";
+  var ZH_PAGE_PATHS = [
+    "/zh/",
+    "/zh/guides/beginners-guide",
+    "/zh/database",
+    "/zh/database/crops",
+    "/zh/database/animals",
+    "/zh/map",
+    "/zh/problems"
+  ];
+  var IS_ZH = document.documentElement.lang.toLowerCase() === "zh-cn";
+  var PAGE_PATHS = IS_ZH ? ZH_PAGE_PATHS : EN_PAGE_PATHS;
+  var SEARCH_ROUTE = IS_ZH ? "/zh/search" : "/search";
+  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v1" : "ranchers-search-index-v15";
   var documents = [];
   var form = document.querySelector("[data-search-form]");
   var input = document.querySelector("[data-search-input]");
@@ -44,10 +56,19 @@
   var suggestions = document.querySelectorAll("[data-search-suggestion]");
 
   function cleanTitle(title) {
-    return String(title || "").replace(/\s*[|—]\s*The Ranchers Guide\s*$/i, "").trim();
+    return String(title || "").replace(/\s*[|—]\s*(?:The Ranchers Guide|牧场主指南)\s*$/i, "").trim();
   }
 
   function pageType(path) {
+    if (path.indexOf("/zh/") === 0) {
+      if (path.indexOf("/zh/guides/") === 0) return "攻略";
+      if (path === "/zh/database") return "知识库";
+      if (path.indexOf("/zh/database/") === 0) return "数据库";
+      if (path === "/zh/map") return "地图";
+      if (path === "/zh/problems") return "问题排查";
+      if (path === "/zh/") return "首页";
+      return "站点";
+    }
     if (path.indexOf("/guides/") === 0) return "Guide";
     if (path === "/database") return "Knowledge Base";
     if (path.indexOf("/database/") === 0) return "Database";
@@ -66,7 +87,7 @@
     var description = parsed.querySelector('meta[name="description"]');
     var sections = [];
     var seen = new Set();
-    var heading = "Overview";
+    var heading = IS_ZH ? "概览" : "Overview";
     var headingId = "";
     var entries = [];
 
@@ -79,7 +100,7 @@
           ? Array.from(node.cells).map(function (cell) { return cell.textContent.replace(/\s+/g, " ").trim(); }).join(" · ")
           : node.textContent.replace(/\s+/g, " ").trim(),
         tags: node.dataset.searchTags || "",
-        status: node.dataset.searchStatus || "Community data"
+        status: node.dataset.searchStatus || (IS_ZH ? "社区资料" : "Community data")
       });
     });
 
@@ -141,8 +162,9 @@
     }
 
     /* Prefer the prebuilt index (scripts/build-search-index.cjs); fall back to live fetching. */
-    return fetch("/search-index.json", { credentials: "same-origin" }).then(function (response) {
-      if (!response.ok) throw new Error("search-index.json returned " + response.status);
+    var indexPath = IS_ZH ? "/zh/search-index.json" : "/search-index.json";
+    return fetch(indexPath, { credentials: "same-origin" }).then(function (response) {
+      if (!response.ok) throw new Error(indexPath + " returned " + response.status);
       return response.json();
     }).then(function (index) {
       if (!Array.isArray(index) || index.length < PAGE_PATHS.length) throw new Error("search-index.json is incomplete");
@@ -183,7 +205,7 @@
 
     var path = document.createElement("span");
     path.className = "search-result-path";
-    path.textContent = item.url.indexOf("#") === -1 ? "Open page" : "Jump to answer";
+    path.textContent = item.url.indexOf("#") === -1 ? (IS_ZH ? "打开页面" : "Open page") : (IS_ZH ? "直达答案" : "Jump to answer");
 
     article.append(meta, heading, snippet, path);
     return article;
@@ -193,22 +215,24 @@
     var trimmed = query.trim();
     results.replaceChildren();
     if (!trimmed) {
-      setStatus("Enter a topic to search the guide.");
-      if (updateUrl) history.replaceState(null, "", "/search");
+      setStatus(IS_ZH ? "输入物品、任务、地点或问题。" : "Enter a topic to search the guide.");
+      if (updateUrl) history.replaceState(null, "", SEARCH_ROUTE);
       return;
     }
 
     var matches = RanchersSearch.searchDocuments(documents, trimmed, 12);
-    setStatus(matches.length === 1 ? "1 result" : matches.length + " results");
+    setStatus(IS_ZH ? matches.length + " 条结果" : (matches.length === 1 ? "1 result" : matches.length + " results"));
     matches.forEach(function (item) { results.appendChild(resultElement(item)); });
 
     if (!matches.length) {
       var empty = document.createElement("div");
       empty.className = "search-empty";
-      empty.innerHTML = '<h2>No matching answer yet</h2><p>Try the item or quest name on its own, <a href="/database">browse the knowledge base</a>, or <a href="/contribute">send the missing question</a>.</p>';
+      empty.innerHTML = IS_ZH
+        ? '<h2>暂时没有匹配答案</h2><p>试试只输入物品名或任务名，也可以<a href="/zh/database">浏览知识库</a>。</p>'
+        : '<h2>No matching answer yet</h2><p>Try the item or quest name on its own, <a href="/database">browse the knowledge base</a>, or <a href="/contribute">send the missing question</a>.</p>';
       results.appendChild(empty);
     }
-    if (updateUrl) history.replaceState(null, "", "/search?q=" + encodeURIComponent(trimmed));
+    if (updateUrl) history.replaceState(null, "", SEARCH_ROUTE + "?q=" + encodeURIComponent(trimmed));
   }
 
   function runSearch(query, updateUrl) {
@@ -245,7 +269,7 @@
     });
   });
 
-  setStatus("Loading guide index...");
+  setStatus(IS_ZH ? "正在加载中文索引..." : "Loading guide index...");
   loadIndex().then(function (index) {
     documents = index;
     var initial = new URLSearchParams(location.search).get("q") || "";
@@ -253,6 +277,6 @@
     syncClearButton();
     render(initial, false);
   }).catch(function () {
-    setStatus("Search could not load. Refresh the page and try again.");
+    setStatus(IS_ZH ? "搜索索引加载失败，请刷新后重试。" : "Search could not load. Refresh the page and try again.");
   });
 })();

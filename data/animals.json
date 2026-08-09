@@ -690,7 +690,94 @@
           "tags": "brown chicken hen poultry coop egg price"
         }
       ],
-      "lastUpdated": "2026-08-08"
+      "lastUpdated": "2026-08-08",
+      "zh": {
+        "tocLabel": "鸡",
+        "kicker": "当前资料最完整",
+        "headerTag": "0.8.10.455",
+        "name": "鸡 Chicken",
+        "searchTitle": "鸡的完整照料",
+        "searchTags": "鸡 母鸡 公鸡 鸡舍 干草 食槽 水 温控 蛋 大鸡蛋",
+        "summary": null,
+        "groups": [
+          {
+            "heading": "喂食与饮水",
+            "id": "feeding",
+            "facts": [
+              {
+                "text": "鸡吃干草。可以手持干草靠近动物喂食，也可以把干草放进食槽；动物每天早晨会自行进食并覆盖当天需求。",
+                "badge": "official"
+              },
+              {
+                "text": "日常只需要补鸡舍内的食槽。室外食槽不是 Gigi 任务要求；室外围栏活动区影响的是出现大鸡蛋的机会。",
+                "badge": "official"
+              },
+              {
+                "text": "水只能通过食槽补充，手持喂食不能恢复饮水储备。水塔还需要在市政厅签水务合同后才能自动补水。",
+                "badge": "community"
+              },
+              {
+                "text": "干草可通过割灌木，或搜寻 NPC 农场的木箱和桶获得。",
+                "badge": "lead"
+              }
+            ]
+          },
+          {
+            "heading": "鸡舍与温控",
+            "id": null,
+            "facts": [
+              {
+                "text": "鸡需要鸡舍；温控必须使用 Angela 出售的鸡舍/谷仓专用设备，市政厅出售的住宅装饰暖气或空调对鸡舍无效。",
+                "badge": "official"
+              },
+              {
+                "text": "鸡舍暖气应安装在鸡舍外墙。该位置有两条独立当前期报告支持。",
+                "badge": "community"
+              },
+              {
+                "text": "没有 Angela 温控设备时，鸡可能因高温或低温死亡。",
+                "badge": "community"
+              }
+            ]
+          },
+          {
+            "heading": "鸡蛋、大鸡蛋与肉",
+            "id": null,
+            "facts": [
+              {
+                "text": "成年鸡在需求和满意度较高时开始产蛋；蛋的尺寸与是否受精包含随机性。把鼠标悬停在鸡蛋上可查看是否受精。",
+                "badge": "official"
+              },
+              {
+                "text": "大鸡蛋需要需求与幸福度保持较高，并让鸡在封闭的室外活动区活动；仍不能保证立即掉落。",
+                "badge": "official"
+              },
+              {
+                "text": "Leafy Market 货架上的小鸡蛋零售价为 60C。它是商店购买价，不是玩家卖蛋收入。",
+                "badge": "video"
+              },
+              {
+                "text": "当前不能出售活体动物；官方建议把多余成鸡放到地上后处理，并出售肉类。玩家报告的具体肉价差异较大，本站不把它当统一售价。",
+                "badge": "official"
+              }
+            ]
+          },
+          {
+            "heading": "生病与兽医",
+            "id": null,
+            "facts": [
+              {
+                "text": "真正生病的鸡可送往兽医；仅处于饥饿状态的动物会被拒绝治疗，应先恢复食物和水。",
+                "badge": "lead"
+              },
+              {
+                "text": "目前没有可靠的生病通知，建议每天查看动物状态。",
+                "badge": "lead"
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "cow",
@@ -892,7 +979,32 @@
           "tags": "black spotted bull cattle barn male breeding price"
         }
       ],
-      "lastUpdated": "2026-08-08"
+      "lastUpdated": "2026-08-08",
+      "zh": {
+        "tocLabel": "牛",
+        "kicker": null,
+        "headerTag": null,
+        "name": "牛 Cow",
+        "searchTitle": "牛",
+        "searchTags": "牛 奶牛 公牛 牛奶 谷仓 肉",
+        "summary": "官方商店页明确列出牛属于可饲养动物。当前资料确认肉、牛奶相关生产方向，但卖家、购买价、完整饲养周期和当前版本产量仍未验证。",
+        "groups": [
+          {
+            "heading": null,
+            "id": null,
+            "facts": [
+              {
+                "text": "当前不能出售活体动物，处理后出售肉类是已确认路线。",
+                "badge": "official"
+              },
+              {
+                "text": "旧版 Ranching v2 公告描述了哺乳动物怀孕、幼崽和玩家幸运值影响品质概率。这些只能作为历史机制线索，不能直接当作 0.8.10.455 事实。",
+                "badge": "historical"
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "goat",
@@ -949,7 +1061,17 @@
         }
       ],
       "variants": [],
-      "lastUpdated": "2026-08-08"
+      "lastUpdated": "2026-08-08",
+      "zh": {
+        "tocLabel": "山羊",
+        "kicker": null,
+        "headerTag": null,
+        "name": "山羊 Goat",
+        "searchTitle": "山羊",
+        "searchTags": "山羊 奶 谷仓 动物",
+        "summary": "官方商店页确认山羊存在；当前卖家、价格、住所、产物周期和收益均未验证。证据不足时保持未知，不从 Alpha Wiki 抄入当前表。",
+        "groups": []
+      }
     },
     {
       "id": "rabbit",
@@ -992,7 +1114,17 @@
         }
       ],
       "variants": [],
-      "lastUpdated": "2026-08-08"
+      "lastUpdated": "2026-08-08",
+      "zh": {
+        "tocLabel": "兔",
+        "kicker": null,
+        "headerTag": null,
+        "name": "兔 Rabbit",
+        "searchTitle": "兔",
+        "searchTags": "兔子 兔 动物 饲养",
+        "summary": "官方商店页确认兔存在；当前住所、食物、繁殖、产物和价格仍待当前版本画面验证。",
+        "groups": []
+      }
     }
   ],
   "sharedSystems": [
@@ -1168,5 +1300,40 @@
       "confirms": "The reviewed official store copy does not define the full rule set.",
       "check": "Test prerequisites, timing, capacity, and offspring rules."
     }
-  ]
+  ],
+  "zhExtra": {
+    "sections": [
+      {
+        "id": "missing",
+        "tocLabel": "动物消失排查",
+        "searchTitle": "鸡或动物突然消失",
+        "searchTags": "鸡消失 动物不见 失踪 围栏 温控 link 鸡舍",
+        "heading": "鸡或动物突然消失怎么排查",
+        "paragraphs": [],
+        "badge": null,
+        "steps": [
+          "确认购买后是否完成任务提示要求的交付或关联步骤。",
+          "检查动物是否仍关联正确鸡舍/谷仓，门和围栏是否完整。",
+          "检查室内食槽、饮水和专用温控设备。",
+          "记录日切前后、退出重进前后以及地图图标是否变化。",
+          "保留版本号、存档模式和截图。当前已有多条独立“动物消失”报告，但它们不一定属于同一原因。"
+        ],
+        "notice": "不要把“漏看交付提示”当作所有消失案例的统一答案；它只是已确认的一类卡点。"
+      }
+    ],
+    "related": [
+      {
+        "label": "作物数据库",
+        "href": "/zh/database/crops"
+      },
+      {
+        "label": "问题排查",
+        "href": "/zh/problems"
+      },
+      {
+        "label": "查看完整英文证据页",
+        "href": "/database/animals"
+      }
+    ]
+  }
 }

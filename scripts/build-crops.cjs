@@ -127,6 +127,9 @@ const html = `<!DOCTYPE html>
   <title>The Ranchers Crop Database — Confirmed Systems & Data Tracker</title>
   <meta name="description" content="Search The Ranchers crop records, seasons, reported prices and growth behavior with source links, build context and clear evidence labels for every community value.">
   <link rel="canonical" href="https://theranchersguide.com/database/crops">
+  <link rel="alternate" hreflang="en" href="https://theranchersguide.com/database/crops">
+  <link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/database/crops">
+  <link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/database/crops">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="The Ranchers Guide">
   <meta property="og:title" content="The Ranchers Crop Database — Confirmed Systems & Data Tracker">
@@ -137,7 +140,7 @@ const html = `<!DOCTYPE html>
 
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
-  <link rel="stylesheet" href="../assets/css/style.css?v=20260807-2">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260809-i18n2">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -384,25 +387,111 @@ ${renderRoster(data.confirmedSystems)}
     </div>
   </footer>
 
-  <script src="../assets/js/main.js?v=20260808-2" defer></script>
+  <script src="../assets/js/main.js?v=20260809-i18n2" defer></script>
   <script src="../assets/js/database.js?v=20260807-2" defer></script>
 </body>
 </html>
 `;
 
+/* ---------------- Chinese (zh-CN) page, rendered from the same JSON ---------------- */
+const ZH_BADGES = {
+  "official": '<span class="tag evidence-official">官方</span>',
+  "official-warn": '<span class="tag evidence-official">官方警告</span>',
+  "community": '<span class="tag evidence-community">多人印证</span>',
+  "video": '<span class="tag evidence-video">视频观测</span>',
+  "lead": '<span class="tag evidence-lead">单一线索</span>',
+  "model": '<span class="tag evidence-lead">理论模型</span>',
+  "shot-pending": '<span class="tag evidence-lead">待补画面</span>',
+  "unknown": '<span class="tag pending">未知</span>',
+  "historical": '<span class="tag historical">Historical 历史资料</span>',
+  "none": "",
+};
+
+function zhBadge(kind) {
+  if (!(kind in ZH_BADGES)) throw new Error(`Unknown zh badge: ${kind}`);
+  return ZH_BADGES[kind];
+}
+
+function renderZhEntry(entry) {
+  const zh = entry.zh;
+  const head = zh.kicker || zh.headerBadge
+    ? `<div class="section-heading-row"><div>${zh.kicker ? `<span class="kicker">${escapeHtml(zh.kicker)}</span>` : ""}<h2>${escapeHtml(zh.name)}</h2></div>${zh.headerBadge ? zhBadge(zh.headerBadge) : ""}</div>`
+    : `<h2>${escapeHtml(zh.name)}</h2>`;
+  const summary = zh.summary ? `<p>${escapeHtml(zh.summary)}</p>` : "";
+  const groups = zh.groups.map((g) => {
+    const h = g.heading ? `<h3${g.id ? ` id="${g.id}"` : ""}>${escapeHtml(g.heading)}</h3>` : "";
+    const items = g.facts.map((f) => `<li>${escapeHtml(f.text)}${zhBadge(f.badge)}</li>`).join("");
+    return `${h}<ul class="evidence-list">${items}</ul>`;
+  }).join("");
+  return `    <section class="evidence-ledger animal-profile" id="${entry.id}" data-search-entry data-search-title="${escapeHtml(zh.searchTitle)}" data-search-tags="${escapeHtml(zh.searchTags)}">${head}${summary}${groups}</section>`;
+}
+
+function renderZhExtraSection(s) {
+  const paras = (s.paragraphs || []).map((p) => `<p>${escapeHtml(p)}</p>`).join("");
+  const badge = s.badge ? zhBadge(s.badge) : "";
+  const steps = s.steps ? `<ol>${s.steps.map((t) => `<li>${escapeHtml(t)}</li>`).join("")}</ol>` : "";
+  const notice = s.notice ? `<div class="notice">${escapeHtml(s.notice)}</div>` : "";
+  return `    <section class="evidence-ledger animal-profile" id="${s.id}" data-search-entry data-search-title="${escapeHtml(s.searchTitle)}" data-search-tags="${escapeHtml(s.searchTags)}"><h2>${escapeHtml(s.heading)}</h2>${paras}${badge}${steps}${notice}</section>`;
+}
+
+const zhExtraById = Object.fromEntries(data.zhExtra.sections.map((s) => [s.id, s]));
+// Page order: zh crops → historical leads → zh inputs (fertilizer) → CashIn.
+const zhBodyParts = [
+  ...data.crops.filter((e) => e.zh).map(renderZhEntry),
+  renderZhExtraSection(zhExtraById["historical"]),
+  ...data.inputs.filter((e) => e.zh).map(renderZhEntry),
+  renderZhExtraSection(zhExtraById["cashin"]),
+];
+const zhTocItems = data.crops.filter((e) => e.zh).map((e) => `<li><a href="#${e.id}">${escapeHtml(e.zh.tocLabel)}</a></li>`).join("")
+  + `<li><a href="#historical">${escapeHtml(zhExtraById["historical"].tocLabel)}</a></li>`
+  + data.inputs.filter((e) => e.zh).map((e) => `<li><a href="#${e.id}">${escapeHtml(e.zh.tocLabel)}</a></li>`).join("")
+  + `<li><a href="#cashin">${escapeHtml(zhExtraById["cashin"].tocLabel)}</a></li>`;
+const zhRelated = `<section class="related"><h2>继续查询</h2><p>${data.zhExtra.related.map((r) => `<a href="${escapeHtml(r.href)}">${escapeHtml(r.label)}</a>`).join(" · ")}</p></section>`;
+
+const zhHtml = `<!DOCTYPE html>
+<!-- GENERATED by scripts/build-crops.cjs from data/crops.json (zh blocks) — do not edit directly. -->
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Ranchers 中文作物数据库 | 种子价格与生长时间</title>
+  <meta name="description" content="The Ranchers 中文作物数据库：种子购买价、季节、生长周期、再生、肥料和 CashIn 出售方式，区分当前观测与历史资料。">
+  <link rel="canonical" href="https://theranchersguide.com/zh/database/crops">
+  <link rel="alternate" hreflang="en" href="https://theranchersguide.com/database/crops"><link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/database/crops"><link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/database/crops">
+  <meta property="og:type" content="website"><meta property="og:title" content="The Ranchers 中文作物数据库"><meta property="og:description" content="当前版本种子与生长数据。"><meta property="og:url" content="https://theranchersguide.com/zh/database/crops"><meta property="og:image" content="https://theranchersguide.com/assets/img/db-crops.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260809-i18n2"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header"><nav class="nav-inner" aria-label="主导航"><a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide<small>非官方中文玩家指南</small></span></a><button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button><ul class="nav-links"><li><a href="/zh/guides/beginners-guide">新手</a></li><li><a class="active" href="/zh/database">知识库</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li><li><a href="/zh/search">搜索</a></li><li><a class="nav-cta" href="/contribute">投稿</a></li></ul></nav></header>
+  <main><article class="article" style="max-width:980px">
+    <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / <a href="/zh/database">知识库</a> / 作物</nav><h1>The Ranchers 中文作物数据库</h1><p class="meta">当前基线 ${escapeHtml(data.meta.build)} · ${escapeHtml(data.meta.lastUpdated)} 更新 · 玩家单颗出售价仍未知</p>
+    <div class="evidence-status"><strong>口径：</strong>48C、144C 等是视频中看到的种子购买价；31C 是大蒜成品的商店零售价；它们都不能直接当作玩家出售收入。</div>
+    <figure class="page-banner"><img src="/assets/img/db-crops.webp" width="800" height="450" alt="The Ranchers 温室和整齐的菜地"></figure>
+    <nav class="toc" aria-label="作物目录"><strong>快速跳转：</strong><ul>${zhTocItems}</ul></nav>
+${zhBodyParts.join("\n")}
+    ${zhRelated}
+  </article></main>
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>购买价、零售价、出售收入严格分开</span></div></div></footer><script src="/assets/js/main.js?v=20260809-i18n2" defer></script>
+</body></html>
+`;
+
 const output = path.join(root, "database", "crops.html");
+const zhOutput = path.join(root, "zh", "database", "crops.html");
 
 if (process.argv.includes("--check")) {
-  if (!fs.existsSync(output)) {
-    console.error("FAIL: database/crops.html is missing. Run: node scripts/build-crops.cjs");
-    process.exit(1);
+  let failed = false;
+  if (!fs.existsSync(output) || fs.readFileSync(output, "utf8") !== html) {
+    console.error("FAIL: database/crops.html is missing or out of sync with data/crops.json. Re-run: node scripts/build-crops.cjs");
+    failed = true;
   }
-  if (fs.readFileSync(output, "utf8") !== html) {
-    console.error("FAIL: database/crops.html is out of sync with data/crops.json. Re-run: node scripts/build-crops.cjs");
-    process.exit(1);
+  if (!fs.existsSync(zhOutput) || fs.readFileSync(zhOutput, "utf8") !== zhHtml) {
+    console.error("FAIL: zh/database/crops.html is missing or out of sync with data/crops.json. Re-run: node scripts/build-crops.cjs");
+    failed = true;
   }
-  console.log(`PASS: database/crops.html is in sync with data/crops.json (${data.crops.length} crops, ${data.inputs.length} inputs).`);
+  if (failed) process.exit(1);
+  console.log(`PASS: database/crops.html + zh/database/crops.html are in sync with data/crops.json (${data.crops.length} crops, ${data.inputs.length} inputs).`);
 } else {
   fs.writeFileSync(output, html, "utf8");
-  console.log(`Wrote database/crops.html: ${data.crops.length} crop profiles, ${data.inputs.length} input profiles, ${historicalCount} historical rows (${(fs.statSync(output).size / 1024).toFixed(1)} KB).`);
+  fs.mkdirSync(path.dirname(zhOutput), { recursive: true });
+  fs.writeFileSync(zhOutput, zhHtml, "utf8");
+  console.log(`Wrote database/crops.html + zh/database/crops.html: ${data.crops.length} crop profiles, ${data.inputs.length} input profiles, ${historicalCount} historical rows.`);
 }

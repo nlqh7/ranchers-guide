@@ -37,6 +37,28 @@ assert.equal(searchDocuments(documents, "coop save")[0].url, "/guides/multiplaye
 assert.equal(searchDocuments(documents, "seed yield")[0].url, "/database/crops");
 assert.deepEqual(searchDocuments(documents, "spaceship laser"), []);
 
+const chineseDocuments = [
+  {
+    title: "动物数据库",
+    url: "/zh/database/animals",
+    description: "鸡的喂养、饮水、鸡舍温控和大鸡蛋条件。",
+    sections: [
+      { heading: "鸡突然消失", text: "先检查鸡舍关联、围栏、温控和每日需求，再记录存档版本。" },
+    ],
+  },
+  {
+    title: "作物数据库",
+    url: "/zh/database/crops",
+    description: "种子价格、生长时间、季节和 CashIn 出售方式。",
+    sections: [
+      { heading: "草莓", text: "春季种子价格为 144C，首次成熟需要 7 天，之后每 3 天再次收获。" },
+    ],
+  },
+];
+
+assert.equal(searchDocuments(chineseDocuments, "鸡消失")[0].url, "/zh/database/animals");
+assert.equal(searchDocuments(chineseDocuments, "草莓多久成熟")[0].url, "/zh/database/crops");
+
 const naturalLanguageDocuments = [
   {
     title: "Building and Construction Guide",
@@ -127,7 +149,9 @@ const root = path.resolve(__dirname, "..");
 const pages = htmlFiles(root);
 assert.ok(pages.length >= 17);
 pages.forEach((file) => {
-  assert.match(fs.readFileSync(file, "utf8"), /href="\/search"/, `${path.relative(root, file)} needs a Search link`);
+  const html = fs.readFileSync(file, "utf8");
+  const searchHref = /<html lang="zh-CN">/.test(html) ? /href="\/zh\/search"/ : /href="\/search"/;
+  assert.match(html, searchHref, `${path.relative(root, file)} needs its locale Search link`);
 });
 const searchPage = fs.readFileSync(path.join(root, "search.html"), "utf8");
 const homePage = fs.readFileSync(path.join(root, "index.html"), "utf8");
@@ -138,7 +162,8 @@ assert.match(searchPage, /data-search-clear[^>]+aria-label="Clear search"/);
 assert.match(searchPage, /class="site-search-submit"[^>]+aria-label="Search"/);
 assert.match(searchPage, /class="site-search-icon"[^>]+aria-hidden="true"/);
 assert.match(sharedScript, /className = "nav-search-form"/);
-assert.match(sharedScript, /form\.action = "\/search"/);
+assert.match(sharedScript, /var searchRoute = isChinese \? "\/zh\/search" : "\/search"/);
+assert.match(sharedScript, /form\.action = searchRoute/);
 assert.match(sharedScript, /input\.name = "q"/);
 assert.match(sharedScript, /target\.scrollIntoView\(\{ block: "start" \}\)/);
 assert.match(homePage, /class="hero-search"[^>]+action="\/search"/);
@@ -146,7 +171,7 @@ assert.match(knowledgeBasePage, /<h1>The Ranchers Knowledge Base<\/h1>/);
 assert.match(knowledgeBasePage, /href="\/guides\/animal-guide#feeding"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /"\/database"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /search-index\.json/);
-assert.match(fs.readFileSync(path.join(root, "assets", "js", "main.js"), "utf8"), /pageHasMainSearch/);
+assert.match(sharedScript, /pageHasMainSearch = \["\/", "\/database", "\/search", "\/zh", "\/zh\/database", "\/zh\/search"\]/);
 
 /* Prebuilt search index (scripts/build-search-index.cjs — re-run after content edits). */
 const prebuiltIndex = JSON.parse(fs.readFileSync(path.join(root, "search-index.json"), "utf8"));
@@ -159,5 +184,12 @@ assert.equal(zirconiteHit.url, "/guides/building-construction#materials");
 assert.equal(zirconiteHit.type, "Guide answer");
 assert.match(fs.readFileSync(path.join(root, "database", "crops.html"), "utf8"), /id="strawberry-seeds"[^>]+data-search-entry/);
 assert.match(fs.readFileSync(path.join(root, "database", "animals.html"), "utf8"), /id="black-chicken"[^>]+data-search-entry/);
+
+const chineseIndex = JSON.parse(fs.readFileSync(path.join(root, "zh", "search-index.json"), "utf8"));
+const missingChickenResults = searchDocuments(chineseIndex, "鸡消失");
+assert.equal(missingChickenResults[0].url, "/zh/problems#animals");
+assert.ok(missingChickenResults.some((result) => result.url === "/zh/database/animals#missing"));
+assert.equal(searchDocuments(chineseIndex, "草莓多久成熟")[0].url, "/zh/database/crops#strawberry");
+assert.equal(searchDocuments(chineseIndex, "种子商店在哪里")[0].url, "/zh/map#leafy-market");
 
 console.log(`PASS: site search handles fuzzy queries and is linked from ${pages.length} HTML pages.`);
