@@ -177,6 +177,10 @@
   function entryType(url) {
     if (url === "/zh/database/crops") return "作物数据";
     if (url === "/zh/database/animals") return "动物数据";
+    if (url.indexOf("/zh/guides/") === 0) return "攻略步骤";
+    if (url.indexOf("/zh/problems") === 0) return "排查步骤";
+    if (url === "/zh/map") return "地点条目";
+    if (url.indexOf("/zh/") === 0) return "知识条目";
     if (url === "/database/crops") return "Crop data";
     if (url === "/database/animals") return "Animal data";
     return "Database entry";

@@ -78,7 +78,7 @@ function parseAttributes(raw) {
   return attrs;
 }
 
-function extractEntries(mainHtml) {
+function extractEntries(mainHtml, route) {
   const entries = [];
   const entryPattern = /<(\w+)([^>]*\bdata-search-entry\b[^>]*)>([\s\S]*?)<\/\1>/g;
   let match;
@@ -100,7 +100,7 @@ function extractEntries(mainHtml) {
       title: attrs["data-search-title"] || attrs.id,
       text,
       tags: attrs["data-search-tags"] || "",
-      status: attrs["data-search-status"] || "Community data",
+      status: attrs["data-search-status"] || (route.indexOf("/zh/") === 0 ? "社区资料" : "Community data"),
     });
   }
   return entries;
@@ -151,7 +151,7 @@ function extractDocument(html, route) {
     sectionAnswers: ["/", "/database", "/problems", "/research"].indexOf(route) === -1,
     description: descriptionMatch ? decodeEntities(descriptionMatch[1]) : "",
     sections: extractSections(mainHtml),
-    entries: extractEntries(mainHtml),
+    entries: extractEntries(mainHtml, route),
   };
 }
 

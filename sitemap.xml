@@ -76,6 +76,9 @@
   </url>
   <url>
     <loc>https://theranchersguide.com/guides/police-wanted-levels</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://theranchersguide.com/guides/police-wanted-levels" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/guides/police-wanted-levels" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/guides/police-wanted-levels" />
     <lastmod>2026-08-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -265,6 +268,13 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://theranchersguide.com/problems/vehicle-recovery" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/problems/vehicle-recovery" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/problems/vehicle-recovery" />
+    <lastmod>2026-08-09</lastmod><changefreq>weekly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://theranchersguide.com/zh/guides/police-wanted-levels</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://theranchersguide.com/guides/police-wanted-levels" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/guides/police-wanted-levels" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/guides/police-wanted-levels" />
     <lastmod>2026-08-09</lastmod><changefreq>weekly</changefreq><priority>0.8</priority>
   </url>
   <url>

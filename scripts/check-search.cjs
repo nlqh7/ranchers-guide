@@ -173,6 +173,8 @@ assert.match(knowledgeBasePage, /<h1>The Ranchers Knowledge Base<\/h1>/);
 assert.match(knowledgeBasePage, /href="\/guides\/animal-guide#feeding"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /"\/database"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /search-index\.json/);
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-zh-v2/, "Chinese search cache must invalidate the pre-police index");
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-v16/, "English search cache must invalidate revised evidence copy");
 
 /* Prebuilt search index (scripts/build-search-index.cjs — re-run after content edits). */
 const prebuiltIndex = JSON.parse(fs.readFileSync(path.join(root, "search-index.json"), "utf8"));
@@ -187,6 +189,8 @@ assert.match(fs.readFileSync(path.join(root, "database", "crops.html"), "utf8"),
 assert.match(fs.readFileSync(path.join(root, "database", "animals.html"), "utf8"), /id="black-chicken"[^>]+data-search-entry/);
 
 const chineseIndex = JSON.parse(fs.readFileSync(path.join(root, "zh", "search-index.json"), "utf8"));
+assert.ok(chineseIndex.every((entry) => entry.type !== "Database entry"), "Chinese search result types must be localized");
+assert.ok(chineseIndex.every((entry) => !String(entry.description || "").startsWith("Community data:")), "Chinese search snippets must not expose English status defaults");
 const missingChickenResults = searchDocuments(chineseIndex, "鸡消失");
 assert.equal(missingChickenResults[0].url, "/zh/guides/animal-guide#troubleshooting");
 assert.ok(missingChickenResults.some((result) => result.url === "/zh/problems#animals"));
@@ -197,7 +201,8 @@ assert.equal(searchDocuments(chineseIndex, "种子商店在哪里")[0].url, "/zh
 /* The five translated core guides must rank for the community phrases they answer. */
 assert.equal(searchDocuments(chineseIndex, "鸡不下蛋")[0].url, "/zh/guides/animal-guide#eggs");
 assert.equal(searchDocuments(chineseIndex, "大蛋")[0].url, "/zh/guides/gigi-large-egg-quest#eggs");
-assert.equal(searchDocuments(chineseIndex, "警星")[0].url, "/zh/guides/gigi-large-egg-quest#police");
+assert.equal(searchDocuments(chineseIndex, "警星")[0].url, "/zh/guides/police-wanted-levels#levels");
+assert.equal(searchDocuments(chineseIndex, "怎么投降")[0].url, "/zh/guides/police-wanted-levels#surrender");
 assert.equal(searchDocuments(chineseIndex, "卖车")[0].url, "/zh/problems/vehicle-recovery#selling");
 assert.ok(searchDocuments(chineseIndex, "屋顶")[0].url.startsWith("/zh/guides/roof-quest-stuck"));
 assert.ok(searchDocuments(chineseIndex, "CashIn").some((result) => result.url === "/zh/guides/money-making#cashin"));

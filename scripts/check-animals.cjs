@@ -9,6 +9,7 @@ const { spawnSync } = require("node:child_process");
 const root = path.resolve(__dirname, "..");
 const data = JSON.parse(fs.readFileSync(path.join(root, "data", "animals.json"), "utf8"));
 const html = fs.readFileSync(path.join(root, "database", "animals.html"), "utf8");
+const chineseGuide = fs.readFileSync(path.join(root, "zh", "guides", "animal-guide.html"), "utf8");
 const sharedStyles = fs.readFileSync(path.join(root, "assets", "css", "style.css"), "utf8");
 
 const LEVELS = new Set(data.meta.evidenceLevels);
@@ -25,6 +26,13 @@ for (const [id, src] of Object.entries(data.sources)) {
   assert.ok(src.title && src.date, `source ${id}: title and date are required`);
   assert.ok("url" in src && "build" in src, `source ${id}: url (may be null) and build fields are required`);
 }
+assert.equal(
+  data.sources["thread-livestock-profit"].url,
+  "https://steamcommunity.com/app/1501310/discussions/0/587308261888256098/",
+  "specific livestock-profit figures must cite the exact Steam thread"
+);
+assert.doesNotMatch(chineseGuide, /任务(?:<strong>)?没有 bug/, "documented prompt misses must not rule out other mission bugs");
+assert.match(chineseGuide, /不排除其他 bug/, "Chinese guide must preserve the qualified mission-bug wording");
 
 function checkFact(fact, where) {
   assert.ok(LEVELS.has(fact.evidenceLevel), `${where}: bad evidenceLevel ${fact.evidenceLevel}`);

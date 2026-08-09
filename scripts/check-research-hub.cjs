@@ -85,8 +85,8 @@ for (const route of [
 ]) {
   assert.match(searchScript, new RegExp(`"${route.replaceAll("/", "\\/")}"`));
 }
-assert.match(searchScript, /ranchers-search-index-v15/);
-assert.match(searchScript, /ranchers-search-index-zh-v1/);
+assert.match(searchScript, /ranchers-search-index-v16/);
+assert.match(searchScript, /ranchers-search-index-zh-v2/);
 
 const chineseProblems = read("zh/problems.html");
 assert.match(chineseProblems, /data-problem-search/);

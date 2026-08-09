@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Ranchers 警星与投降中文指南 | 1-5 级通缉</title>
+  <meta name="description" content="The Ranchers 中文警星指南：官方 1-5 级通缉系统、警察武力、投降与逃脱规则，以及当前 Early Access 版本仍待验证的操作。">
+  <link rel="canonical" href="https://theranchersguide.com/zh/guides/police-wanted-levels">
+  <link rel="alternate" hreflang="en" href="https://theranchersguide.com/guides/police-wanted-levels"><link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/guides/police-wanted-levels"><link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/guides/police-wanted-levels">
+  <meta property="og:type" content="article"><meta property="og:site_name" content="The Ranchers Guide"><meta property="og:title" content="The Ranchers 警星、投降与逃脱中文指南"><meta property="og:description" content="分清官方 EA 前设计与当前版本已观察到的警察行为。"><meta property="og:url" content="https://theranchersguide.com/zh/guides/police-wanted-levels"><meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon-180.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260809-i18n7">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header"><nav class="nav-inner" aria-label="主导航"><a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide<small>非官方中文玩家指南</small></span></a><button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button><ul class="nav-links"><li><a href="/zh/guides/beginners-guide">新手</a></li><li><a href="/zh/database">知识库</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li><li><a href="/zh/search">搜索</a></li><li><a class="nav-cta" href="/contribute">投稿</a></li></ul></nav></header>
+  <main><article class="article">
+    <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / 攻略 / 警星与投降</nav>
+    <h1>The Ranchers 警星与投降指南</h1>
+    <p class="meta">2026-08-09 复核 · 当前基线 0.8.10.x · 阅读约 6 分钟</p>
+    <div class="evidence-status"><strong>证据状态：</strong>1 篇 EA 前官方系统公告 · 当前版本确认存在追捕与拘留 · 投降操作方式尚未独立复测 — <a href="/methodology">验证方法 (EN) →</a></div>
+
+    <section class="answer-box" aria-labelledby="wanted-answer">
+      <h2 id="wanted-answer">先回答：游戏里真的能投降吗？</h2>
+      <p><span class="evidence-badge evidence-official">EA 前官方设计</span> 官方 Police District Update 明确写过玩家可以<strong>付款、投降，或者继续与警方周旋</strong>，并描述了投降可降低刑期与保释成本。</p>
+      <p><strong>但本站尚未在当前 0.8.10.x 版本复测投降的按键、提示或触发条件。</strong>所以可以确认“官方设计里有投降”，不能凭旧公告编造当前版本该按哪个键。当前玩家画面和任务报告只确认警星、追捕、拘留与入狱仍然存在。</p>
+    </section>
+
+    <nav class="toc" aria-label="页面目录"><strong>本指南内容</strong><ul>
+      <li><a href="#levels">1-5 级警星</a></li>
+      <li><a href="#surrender">投降与被抓的区别</a></li>
+      <li><a href="#evasion">逃脱后为什么还在搜索</a></li>
+      <li><a href="#current-build">当前版本确认了什么</a></li>
+      <li><a href="#limits">仍然未知的内容</a></li>
+      <li><a href="#faq">常见问题</a></li>
+    </ul></nav>
+
+    <section id="levels" data-search-entry data-search-title="1-5 级警星与警方武力" data-search-tags="警星 通缉 wanted level 一星 二星 三星 四星 五星 code green yellow red black">
+      <h2>1-5 级警星分别代表什么？</h2>
+      <p><span class="evidence-badge evidence-official">EA 前官方设计</span> 下表来自 2025 年 2 月官方 Police District Update。它能证明系统原本如何设计，<strong>不能证明当前版本每个细节都没有变化</strong>。</p>
+      <div class="data-table-wrap" role="region" aria-label="1 到 5 级警星说明" tabindex="0"><table>
+        <thead><tr><th>警星</th><th>代码</th><th>官方描述的警方行为</th><th>被抓后的结果</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1 级</strong></td><td>Code Green</td><td>处理轻微违法，优先和平收取罚款；付款后不逮捕、不攻击。</td><td>缴清罚款后继续行动。</td></tr>
+          <tr><td><strong>2 级</strong></td><td>Code Green</td><td>不使用致命武力，但会强烈要求玩家投降。</td><td>被抓或投降都会进入拘留。</td></tr>
+          <tr><td><strong>3 级</strong></td><td>Code Yellow</td><td>警用无人机使用非致命的阻止手段。</td><td>被抓后进入拘留，并可能服刑。</td></tr>
+          <tr><td><strong>4 级</strong></td><td>Code Red</td><td>获准使用轻型致命武器，尝试尽快结束追捕。</td><td>在致命火力下被捕并拘留。</td></tr>
+          <tr><td><strong>5 级</strong></td><td>Code Black</td><td>使用重型致命武器，不惜代价结束追捕。</td><td>最高强度的警方响应。</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section id="surrender" data-search-entry data-search-title="怎么投降以及投降是否划算" data-search-tags="怎么投降 投降 surrender 按键 保释 罚款 入狱 拘留">
+      <h2>投降和被抓有什么区别？</h2>
+      <p><span class="evidence-badge evidence-official">EA 前官方设计</span> 官方公告称，任何通缉等级都可以选择投降；主动投降的罚款和入狱天数低于被警方抓住。被抓或投降后，玩家会进入拘留室，支付罚款，并可能按罪行服刑。</p>
+      <div class="notice"><strong>当前版本操作未知：</strong>本站还没有带版本号的画面证明投降按钮在哪里、默认键位是什么，或者是否要先停车、下车或停止抵抗。看到论坛里有人给出按键时，先要求当前版本截图，不要把猜测当答案。</div>
+    </section>
+
+    <section id="evasion" data-search-entry data-search-title="甩掉警察后仍被搜索" data-search-tags="逃脱 甩警察 警车 搜索 躲藏 evasion 罚款">
+      <h2>甩掉警察后，为什么警车还在找你？</h2>
+      <p><span class="evidence-badge evidence-official">EA 前官方设计</span> 脱离追捕视线后并不会立刻结束：警车会继续搜索一小段时间，被重新发现就会恢复追捕。旧公告称，成功躲过搜索后会被判定为逃脱，并清除罚款、保留赃物。</p>
+      <p>公告没有给出搜索持续多少秒，也没有当前版本计时数据，因此本站不发布固定倒计时。</p>
+    </section>
+
+    <section id="current-build" data-search-entry data-search-title="当前 Early Access 的警察系统证据" data-search-tags="当前版本 0.8.10 警察 追捕 Gigi 拘留 入狱">
+      <h2>当前 Early Access 版本确认了什么？</h2>
+      <ul>
+        <li><span class="evidence-badge evidence-corroborated">当前玩家报告</span> Gigi 大鸡蛋任务会触发警察追捕，多名玩家报告徒步逃脱路线可完成任务，见<a href="/zh/guides/gigi-large-egg-quest#police">Gigi 任务攻略</a>。</li>
+        <li><span class="evidence-badge evidence-official">当前系统</span> 车辆被扣、My Garage 与 Car Pound 仍在当前版本使用，见<a href="/zh/problems/vehicle-recovery">车辆找回指南</a>。</li>
+        <li><span class="evidence-badge evidence-reported">待截图复核</span> 当前玩家讨论能证明拘留和罚款仍会发生，但本站尚未获得可公开复核的投降 UI 画面。</li>
+      </ul>
+    </section>
+
+    <section id="limits" data-search-entry data-search-title="警星系统未知信息" data-search-tags="罚款 金额 保释 入狱 天数 升星 条件 未知">
+      <h2>仍然未知的内容</h2>
+      <ul>
+        <li>当前版本的具体罚款、保释金额和入狱天数。</li>
+        <li>每种违法行为增加多少警星，以及撞公共设施的精确升级规则。</li>
+        <li>脱离追捕后的搜索持续时间。</li>
+        <li>当前版本主动投降的具体操作和触发条件。</li>
+      </ul>
+    </section>
+
+    <section id="evidence"><h2>来源与版本</h2>
+      <p>五级警星、警方武力、投降惩罚和逃脱结果来自<a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">官方 Steam 新闻中心</a>中的 “The Ranchers Police District Update”（2025-02-03）。这是<strong>发售前官方资料</strong>。当前 0.8.10.x 是否完全一致，必须靠当前版本画面继续校准。</p>
+    </section>
+
+    <section id="faq"><h2>警星常见问题</h2>
+      <details class="faq-item"><summary>我能直接交罚款解除警星吗？</summary><div class="faq-body"><p>EA 前官方说明明确支持 1 级直接付款和平解决。2 级以上则描述为投降或被捕后进入拘留。当前版本界面和金额仍待复测。</p></div></details>
+      <details class="faq-item"><summary>警察从几星开始使用致命武器？</summary><div class="faq-body"><p>EA 前官方表述是 4 级 Code Red 开始使用轻型致命武器，5 级 Code Black 使用重型致命武器。当前版本尚未逐级实测。</p></div></details>
+      <details class="faq-item"><summary>投降到底按什么键？</summary><div class="faq-body"><p>目前未知。官方旧公告确认存在投降选择，但本站没有当前版本的按键或 UI 截图，因此不编造操作。</p></div></details>
+    </section>
+
+    <section class="related"><h2>相关攻略</h2><ul>
+      <li><a href="/zh/guides/gigi-large-egg-quest">Gigi 大鸡蛋任务</a>：当前版本警察追捕与徒步逃脱路线。</li>
+      <li><a href="/zh/problems/vehicle-recovery">车辆找回</a>：扣押、修理、Car Pound 与 My Garage。</li>
+      <li><a href="/zh/problems">中文问题中心</a>：按症状查找其他处理路径。</li>
+    </ul></section>
+
+    <aside class="author-card" aria-label="作者信息"><div class="author-card-id"><strong>Niki</strong><span>The Ranchers Guide 编辑</span></div><p>本站将 EA 前官方设计与当前版本玩家证据分开。最近复核：2026 年 8 月。覆盖版本：0.8.10.x。<a href="/methodology">验证方法 (EN) →</a></p></aside>
+  </article></main>
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year>2026</span> The Ranchers Guide</span><span>旧公告不自动等于当前操作</span></div></div></footer>
+  <script src="/assets/js/main.js?v=20260809-i18n7" defer></script>
+</body>
+</html>

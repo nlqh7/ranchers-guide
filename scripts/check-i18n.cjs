@@ -16,6 +16,7 @@ const pairs = [
   ["guides/gigi-large-egg-quest.html", "zh/guides/gigi-large-egg-quest.html", "/guides/gigi-large-egg-quest", "/zh/guides/gigi-large-egg-quest"],
   ["guides/roof-quest-stuck.html", "zh/guides/roof-quest-stuck.html", "/guides/roof-quest-stuck", "/zh/guides/roof-quest-stuck"],
   ["guides/money-making.html", "zh/guides/money-making.html", "/guides/money-making", "/zh/guides/money-making"],
+  ["guides/police-wanted-levels.html", "zh/guides/police-wanted-levels.html", "/guides/police-wanted-levels", "/zh/guides/police-wanted-levels"],
   ["problems/vehicle-recovery.html", "zh/problems/vehicle-recovery.html", "/problems/vehicle-recovery", "/zh/problems/vehicle-recovery"],
 ];
 
@@ -57,11 +58,32 @@ for (const [, , , chineseRoute] of pairs.filter((pair) => pair[2] !== "/search")
 const chineseIndex = JSON.parse(read("zh/search-index.json"));
 assert.ok(chineseIndex.length >= pairs.length - 1, "Chinese search index must cover every indexable Chinese page");
 assert.ok(chineseIndex.every((entry) => entry.url.startsWith("/zh/")), "Chinese index must not mix English URLs");
+for (const [, , , chineseRoute] of pairs.filter((pair) => pair[2] !== "/search")) {
+  assert.ok(chineseIndex.some((entry) => entry.url === chineseRoute), `Chinese search index must include ${chineseRoute}`);
+}
 
 const sharedNavigation = read("assets/js/main.js");
 assert.doesNotMatch(sharedNavigation, /language-switch/, "language switch UI is intentionally hidden until localization expands");
 
 const sharedStyles = read("assets/css/style.css");
 assert.doesNotMatch(sharedStyles, /\.language-switch/, "hidden language switch must not leave dead component styles");
+
+const chineseKnowledgeBase = read("zh/database.html");
+for (const route of [
+  "/zh/guides/animal-guide",
+  "/zh/guides/gigi-large-egg-quest",
+  "/zh/guides/money-making",
+]) {
+  assert.match(chineseKnowledgeBase, new RegExp(`href="${escaped(route)}`), `Chinese knowledge base must expose ${route}`);
+}
+
+const chineseProblems = read("zh/problems.html");
+for (const route of [
+  "/zh/guides/roof-quest-stuck",
+  "/zh/guides/police-wanted-levels",
+  "/zh/problems/vehicle-recovery",
+]) {
+  assert.match(chineseProblems, new RegExp(`href="${escaped(route)}`), `Chinese problem center must expose ${route}`);
+}
 
 console.log(`PASS: ${pairs.length} English/Chinese page pairs expose reciprocal language metadata and isolated search.`);
