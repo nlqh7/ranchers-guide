@@ -6,6 +6,7 @@ const root = path.resolve(__dirname, "..");
 const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), "utf8");
 
 const mapPage = read("map.html");
+const chineseMapPage = read("zh/map.html");
 assert.match(mapPage, /<link rel="canonical" href="https:\/\/theranchersguide\.com\/map">/);
 assert.match(mapPage, /data-location-search/);
 assert.match(mapPage, /data-location-category/);
@@ -50,8 +51,31 @@ assert.match(mapPage, /theranchers\.wiki\/wiki\/map\//);
 assert.match(mapPage, /theranchers\.wiki\/wiki\/npcs\//);
 assert.match(mapPage, /29 entries/);
 
+for (const pattern of [
+  /data-current-map/,
+  /data-map-stage/,
+  /data-map-region="overview"/,
+  /data-map-zoom="in"/,
+  /data-map-zoom="out"/,
+  /data-map-zoom="reset"/,
+  /data-map-pan="left"/,
+  /data-map-inspector/,
+  /data-map-add-toggle/,
+  /data-map-pin-layer/,
+  /data-map-pin-form/,
+  /data-map-marker-layer/,
+  /data-map-pin-filter="all"/,
+  /assets\/js\/map-core\.js/,
+  /assets\/js\/map-viewer-core\.js/,
+  /assets\/js\/map\.js/,
+]) {
+  assert.match(chineseMapPage, pattern, `Chinese map must match the interactive map contract: ${pattern}`);
+}
+const chineseMarkers = chineseMapPage.match(/class="map-marker map-marker-[a-z]+"/g) || [];
+
 const approximateMarkers = mapPage.match(/class="map-marker map-marker-[a-z]+"/g) || [];
 assert.ok(approximateMarkers.length >= 12, "map should carry at least 12 approximate area markers");
+assert.equal(chineseMarkers.length, approximateMarkers.length, "English and Chinese maps must expose the same marker set");
 for (const category of ["shopping", "services", "transport", "landmarks"]) {
   assert.ok(
     new RegExp(`map-marker-${category}`).test(mapPage),

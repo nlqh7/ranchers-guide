@@ -88,6 +88,13 @@ for (const route of [
 assert.match(searchScript, /ranchers-search-index-v15/);
 assert.match(searchScript, /ranchers-search-index-zh-v1/);
 
+const chineseProblems = read("zh/problems.html");
+assert.match(chineseProblems, /data-problem-search/);
+assert.match(chineseProblems, /data-problem-filter-value="solved"/);
+assert.match(chineseProblems, /data-problem-filter-value="reported"/);
+assert.equal((chineseProblems.match(/data-problem-entry/g) || []).length, 9, "Chinese problem finder must cover all nine published records");
+assert.match(chineseProblems, /assets\/js\/problems\.js/);
+
 const sitemap = read("sitemap.xml");
 assert.match(sitemap, /https:\/\/theranchersguide\.com\/problems/);
 assert.match(sitemap, /https:\/\/theranchersguide\.com\/research/);

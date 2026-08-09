@@ -28,25 +28,28 @@
   var pinNotes = document.querySelector("[data-map-pin-notes]");
   var pinCoords = document.querySelector("[data-map-pin-coords]");
   var pinClose = document.querySelector("[data-map-pin-close]");
+  var isChinese = document.documentElement.lang.toLowerCase() === "zh-cn";
+  var hasDirectory = !!(search && category && entries.length && window.RanchersMap);
   var activePin = null;
   var placing = false;
-  if (!search || !category || !entries.length || !window.RanchersMap) return;
+  if (!mapStage || !mapImage || !window.RanchersMapViewer) return;
 
-  var locations = entries.map(function (entry) {
+  var locations = hasDirectory ? entries.map(function (entry) {
     return {
       element: entry,
       title: entry.dataset.locationTitle,
       category: entry.dataset.locationCategory,
       keywords: entry.dataset.locationKeywords,
     };
-  });
+  }) : [];
 
   function render() {
+    if (!hasDirectory) return;
     var matches = window.RanchersMap.filterLocations(locations, search.value, category.value);
     var visible = new Set(matches.map(function (item) { return item.element; }));
     entries.forEach(function (entry) { entry.hidden = !visible.has(entry); });
-    count.textContent = matches.length === 1 ? "1 location" : matches.length + " locations";
-    empty.hidden = matches.length !== 0;
+    if (count) count.textContent = isChinese ? matches.length + " 个地点" : (matches.length === 1 ? "1 location" : matches.length + " locations");
+    if (empty) empty.hidden = matches.length !== 0;
   }
 
   var viewState = window.RanchersMapViewer ? window.RanchersMapViewer.getView("overview") : { scale: 1, x: 0, y: 0 };
@@ -75,13 +78,17 @@
     markers.forEach(function (item) { item.classList.toggle("active", item === marker); });
     if (!inspector) return;
     inspector.querySelector("[data-map-inspector-title]").textContent = marker.dataset.markerTitle;
-    var confidence = marker.dataset.markerConfidence || "Approximate";
-    inspector.querySelector("[data-map-inspector-status]").textContent = "Location confidence: " + confidence + " — pin is an estimate, not a verified coordinate";
+    var confidence = marker.dataset.markerConfidence || (isChinese ? "大致区域" : "Approximate");
+    inspector.querySelector("[data-map-inspector-status]").textContent = isChinese
+      ? "位置可信度：" + confidence + "，标记为估算区域，并非已验证坐标"
+      : "Location confidence: " + confidence + " — pin is an estimate, not a verified coordinate";
     inspector.querySelector("[data-map-inspector-copy]").textContent = marker.dataset.markerCopy;
     if (inspectorLink && marker.dataset.markerTarget) {
       inspectorLink.hidden = false;
-      inspectorLink.setAttribute("href", marker.dataset.markerTarget);
-      inspectorLink.textContent = "View " + marker.dataset.markerTitle + " in the directory";
+      var target = marker.dataset.markerTarget;
+      if (target.charAt(0) === "#" && !document.querySelector(target)) target = "/map" + target;
+      inspectorLink.setAttribute("href", target);
+      inspectorLink.textContent = isChinese ? "查看 " + marker.dataset.markerTitle + " 条目" : "View " + marker.dataset.markerTitle + " in the directory";
     }
   }
 
@@ -116,8 +123,10 @@
     setInspector(title, status, copy);
   }
 
-  search.addEventListener("input", render);
-  category.addEventListener("change", render);
+  if (hasDirectory) {
+    search.addEventListener("input", render);
+    category.addEventListener("change", render);
+  }
 
   regionButtons.forEach(function (button) {
     button.addEventListener("click", function () {
@@ -151,7 +160,8 @@
     button.addEventListener("click", function () {
       var action = button.dataset.mapZoom;
       if (action === "reset") {
-        selectRegion("overview", "Full Sunvale overview", "Current player capture", "West is the rural ranch district; east is the dense city grid. Bridges across the central waterway connect the two halves.");
+        var overview = regionButtons.filter(function (item) { return item.dataset.mapRegion === "overview"; })[0];
+        selectRegion("overview", overview.dataset.mapTitle, overview.dataset.mapStatus, overview.dataset.mapCopy);
         return;
       }
       var delta = action === "in" ? 0.25 : -0.25;
@@ -210,7 +220,7 @@
   }
 
   function updatePinCoords(x, y) {
-    if (pinCoords) pinCoords.textContent = "Map position: " + x + "%, " + y + "%";
+    if (pinCoords) pinCoords.textContent = (isChinese ? "地图位置：" : "Map position: ") + x + "%, " + y + "%";
   }
 
   function placePin(sx, sy) {
@@ -220,7 +230,7 @@
     var pin = document.createElement("button");
     pin.type = "button";
     pin.className = "map-pin";
-    pin.setAttribute("aria-label", "Submitted location pin, drag to adjust");
+    pin.setAttribute("aria-label", isChinese ? "待提交的位置标记，可拖动调整" : "Submitted location pin, drag to adjust");
     pin.style.left = point.x + "%";
     pin.style.top = point.y + "%";
     pinLayer.appendChild(pin);
@@ -349,7 +359,15 @@
       var name = pinName ? pinName.value.trim() : "";
       var category = pinCategory ? pinCategory.value : "";
       var notes = pinNotes ? pinNotes.value.trim() : "";
-      var body = [
+      var body = (isChinese ? [
+        "地点：" + name,
+        "分类：" + (category || "未选择"),
+        "地图位置：" + activePin.x + "%, " + activePin.y + "%（当前玩家地图）",
+        "版本：0.8.10.455",
+        notes ? "备注：" + notes : "",
+        "",
+        "请尽量附上当前版本的地图面板或店面截图。"
+      ] : [
         "Location: " + name,
         "Category: " + (category || "Unspecified"),
         "Map position: " + activePin.x + "%, " + activePin.y + "% (current player map)",
@@ -357,8 +375,8 @@
         notes ? "Notes: " + notes : "",
         "",
         "Attach a current-build screenshot of the map panel or storefront if possible."
-      ].filter(Boolean).join("\n");
-      var subject = "Map location: " + name;
+      ]).filter(Boolean).join("\n");
+      var subject = (isChinese ? "地图地点：" : "Map location: ") + name;
       window.location.href = "mailto:contribute@theranchersguide.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
       pinForm.hidden = true;
       if (pinName) pinName.value = "";
@@ -369,5 +387,5 @@
   }
 
   applyMapView();
-  render();
+  if (hasDirectory) render();
 })();

@@ -6,6 +6,7 @@
   var entries = Array.from(document.querySelectorAll("[data-problem-entry]"));
   var count = document.querySelector("[data-problem-count]");
   var empty = document.querySelector("[data-problem-empty]");
+  var isChinese = document.documentElement.lang.toLowerCase() === "zh-cn";
   if (!search || !filter || !entries.length) return;
 
   var activeStatus = "all";
@@ -27,7 +28,7 @@
       if (visible) visibleCount += 1;
     });
 
-    count.textContent = visibleCount === 1 ? "1 result" : visibleCount + " results";
+    count.textContent = isChinese ? visibleCount + " 条结果" : (visibleCount === 1 ? "1 result" : visibleCount + " results");
     empty.hidden = visibleCount !== 0;
   }
 
