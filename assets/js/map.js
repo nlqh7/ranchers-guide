@@ -147,6 +147,8 @@
     });
   });
 
+  var pinFlashTimer = null;
+
   markerFocusButtons.forEach(function (button) {
     button.addEventListener("click", function () {
       if (!window.RanchersMapViewer) return;
@@ -159,9 +161,63 @@
       viewState = window.RanchersMapViewer.focus(mx, my, 2.6);
       applyMapView();
       selectMarker(marker);
+      marker.classList.add("pin-flash");
+      if (pinFlashTimer) clearTimeout(pinFlashTimer);
+      pinFlashTimer = setTimeout(function () { marker.classList.remove("pin-flash"); }, 2000);
       if (mapStage) mapStage.scrollIntoView({ behavior: "smooth", block: "center" });
     });
   });
+
+  /* Recognition-photo lightbox: pure front-end, no external library */
+  var atlasPhotos = Array.from(document.querySelectorAll("[data-atlas-photo]"));
+  if (atlasPhotos.length) {
+    var lightbox = document.createElement("div");
+    lightbox.className = "atlas-lightbox";
+    lightbox.setAttribute("role", "dialog");
+    lightbox.setAttribute("aria-modal", "true");
+    lightbox.setAttribute("aria-label", isChinese ? "放大的识别照片" : "Enlarged recognition photo");
+    var lightboxImg = document.createElement("img");
+    var lightboxClose = document.createElement("button");
+    lightboxClose.type = "button";
+    lightboxClose.className = "atlas-lightbox-close";
+    lightboxClose.setAttribute("aria-label", isChinese ? "关闭大图" : "Close enlarged photo");
+    lightboxClose.textContent = "×";
+    lightbox.appendChild(lightboxImg);
+    lightbox.appendChild(lightboxClose);
+    document.body.appendChild(lightbox);
+
+    function closeLightbox() {
+      lightbox.classList.remove("is-open");
+      document.body.style.overflow = "";
+    }
+    function openLightbox(photo) {
+      lightboxImg.src = photo.currentSrc || photo.src;
+      lightboxImg.alt = photo.alt || "";
+      lightbox.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+      lightboxClose.focus();
+    }
+    atlasPhotos.forEach(function (photo) {
+      photo.addEventListener("click", function () { openLightbox(photo); });
+    });
+    lightboxClose.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", function (event) {
+      if (event.target === lightbox) closeLightbox();
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && lightbox.classList.contains("is-open")) closeLightbox();
+    });
+    var swipeStartY = null;
+    lightbox.addEventListener("touchstart", function (event) {
+      swipeStartY = event.touches.length === 1 ? event.touches[0].clientY : null;
+    }, { passive: true });
+    lightbox.addEventListener("touchend", function (event) {
+      if (swipeStartY === null) return;
+      var deltaY = event.changedTouches[0].clientY - swipeStartY;
+      swipeStartY = null;
+      if (deltaY > 70) closeLightbox();
+    }, { passive: true });
+  }
 
   zoomButtons.forEach(function (button) {
     button.addEventListener("click", function () {

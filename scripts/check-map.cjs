@@ -68,6 +68,21 @@ assert.match(mapPage, /theranchers\.wiki\/wiki\/map\//);
 assert.match(mapPage, /theranchers\.wiki\/wiki\/npcs\//);
 assert.match(mapPage, /29 entries/);
 
+// Recognition photos: hover cards, lightbox hooks, locate-on-map button
+assert.match(mapPage, /data-visual-atlas/, "English map keeps the recognition-photo section");
+assert.equal((mapPage.match(/data-atlas-photo/g) || []).length, 4, "every English atlas photo opens the lightbox");
+assert.equal((mapPage.match(/atlas-locate-btn/g) || []).length, 1, "only the airport photo links to a verified pin");
+assert.match(mapPage, /class="location-map-button atlas-locate-btn" data-marker-focus="The Ranchers Airport"/, "locate button must target an existing guide pin");
+assert.equal((chineseMapPage.match(/data-atlas-photo/g) || []).length, 4, "every Chinese map photo opens the lightbox");
+assert.equal((chineseMapPage.match(/atlas-locate-btn/g) || []).length, 1, "Chinese map exposes exactly one locate-on-map button");
+assert.match(chineseMapPage, /atlas-locate-btn" data-marker-focus="The Ranchers Airport">在地图上定位/, "Chinese locate button targets the airport pin");
+assert.match(sharedStyles, /\.visual-atlas-card\s*\{[\s\S]*?transition:\s*transform/, "atlas cards share the site card hover transition");
+assert.match(sharedStyles, /\.visual-atlas-card:hover\s*\{\s*transform:\s*translateY\(-4px\)/, "atlas cards lift on hover");
+assert.match(sharedStyles, /\.visual-atlas-card:hover img\s*\{\s*transform:\s*scale\(1\.04\)/, "atlas photos zoom slightly on hover");
+assert.match(sharedStyles, /\.atlas-lightbox\s*\{[\s\S]*?position:\s*fixed/, "lightbox overlay styles exist");
+assert.match(sharedStyles, /@keyframes pin-flash/, "pin flash animation exists");
+assert.match(sharedStyles, /\.map-marker\.pin-flash/, "pin flash class targets map markers");
+
 for (const pattern of [
   /data-current-map/,
   /data-map-stage/,
@@ -140,6 +155,10 @@ assert.match(mapScript, /data-map-pin-filter/);
 assert.match(mapScript, /applyMarkerFilter\("none"\)/, "map script should initialize the guide-pin layer as off");
 assert.match(mapScript, /applyMarkerFilter\(marker\.dataset\.markerCategory\)/, "directory shortcuts should reveal the selected marker category");
 assert.match(mapScript, /markerTarget/);
+assert.match(mapScript, /data-atlas-photo/, "map script wires the photo lightbox");
+assert.match(mapScript, /atlas-lightbox/, "map script builds the lightbox overlay");
+assert.match(mapScript, /pin-flash/, "locate-on-map flashes the target pin");
+assert.match(mapScript, /Escape/, "lightbox closes on Escape");
 
 const sitemapForMap = read("sitemap.xml");
 assert.match(sitemapForMap, /<loc>https:\/\/theranchersguide\.com\/map<\/loc>[\s\S]*?<lastmod>2026-08-07<\/lastmod>/);
