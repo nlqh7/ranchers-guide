@@ -44,16 +44,16 @@
     <article class="article">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Guides / Animal Guide</nav>
       <h1>The Ranchers Animal Guide: Chickens, Step by Step</h1>
-      <p class="meta">Updated August 8, 2026 · Early Access 0.8.10.x · Reading time: ~12 min</p>
+      <p class="meta">Reviewed August 11, 2026 · Current version 0.8.10.562 · Reading time: ~12 min</p>
       <div class="evidence-status">
-        <strong>Evidence status:</strong> official support answers (Steam moderator Jennoula) · multi-player confirmations · single reports labeled inline · reviewed Aug 8, 2026 — <a href="/methodology">How we verify →</a>
+        <strong>Evidence status:</strong> official support answers (Steam moderator Jennoula) · multi-player confirmations · single reports labeled inline · reviewed Aug 11, 2026 — <a href="/methodology">How we verify →</a>
       </div>
 
 
       <figure class="page-banner"><img src="../assets/img/db-animals.webp" width="800" height="450" alt="The Ranchers gameplay screenshot: cows grazing outside the red barn"></figure>
 
       <div class="notice">
-        <strong>What this page covers:</strong> the full chicken care chain as it works in the current Early Access build — buying and transporting birds, feeding, heating, sickness, eggs, automation, the disappearing-chicken bug, and what to do with extra roosters. Goats, cows and bunnies are confirmed to exist but have far less observed detail; they get a short section at the end.
+        <strong>Current fix status:</strong> version 0.8.10.562 officially fixed several animal-disappearance paths, including night entry, chick growth, newborn spawning, loading and door gaps. The care chain below remains current; older recovery steps are labeled as pre-0.8.10.562 history.
       </div>
 
       <section class="answer-box">
@@ -119,15 +119,16 @@
       <p>The Air Conditioning Kit (prevents illness through winter/summer temperature control) follows the same linkage logic. Kit prices and exact ranges are not published; verify placement with the hammer view in your own save. More detail: <a href="/database/animals#barn-automation">barn automation in the animal database</a>.</p>
 
       <h2 id="troubleshooting">Chickens disappearing or not eating: the checklist</h2>
-      <p>This checklist is the current troubleshooting path for build <strong>0.8.10.455</strong>. It covers the <strong>most-reported</strong> causes — but it is not exhaustive: players are still reporting new disappearance cases that these steps do not fully explain (three independent recent reviews describe chickens vanishing even with needs met and fencing in place) <small>Multiple recent reports · Corroborated symptom, causes partly open</small>. Work through the list in order:</p>
+      <p><strong>First separate an old report from a current bug.</strong> Hotfix <strong>0.8.10.562</strong> officially fixed animals disappearing during night entry, chicks disappearing or getting stuck while growing, newborn mammals not appearing, animals missing after a load, and animals stuck between a coop/barn and its doors. Steam normally updates automatically; only check the title-screen version if the problem still occurs.</p>
       <ol>
-        <li><strong>Did you deposit them at the coop door?</strong> Handing chickens in at the doorway adds them to the stock count but they vanish or get stuck in the wall. <strong>Physically walk inside the coop and put them down.</strong> If birds already vanished this way: remove all remaining chickens, demolish the coop — the lost ones drop onto the grass — then rebuild and place them back inside. <small>Multiple player reports.</small></li>
+        <li><strong>Confirm the exact version.</strong> A reproduction on 0.8.10.455 or earlier is historical. A 0.8.10.562+ reproduction is useful current evidence.</li>
         <li><strong>Is the coop actually linked?</strong> Walk up to the door: the dark panel should show a counter like <strong>0/6 or 3/6</strong>. No counter means the animals are not linked to that coop. <small>Official reply.</small></li>
         <li><strong>Is the yard fenced?</strong> An open gate plus an unfenced entrance area means chickens simply wander off. <small>Multiple player reports.</small></li>
         <li><strong>Did you install the right heater?</strong> Missing (or decoration-version) heating/cooling kills birds to temperature stress. <small>Multiple player reports + official reply.</small></li>
-        <li><strong>Still missing?</strong> One player reports a full game reload brought vanished chickens back. <small>Single player report.</small></li>
+        <li><strong>Record the transition.</strong> Note whether it happened at night entry, growth, birth, loading, subway travel, or a doorway — those are the exact paths named in the official patch.</li>
       </ol>
-      <p>If you worked through all five steps and chickens still vanish, your case matches the open reports above — it is not something you did wrong. Note the coop counter (x/6), door/fence state, heater version and what happened around the day transition, then <a href="/contribute">send in your case</a> with your build number so the checklist can grow to cover it.</p>
+      <p><strong>Historical workaround, not current advice:</strong> before 0.8.10.562, players sometimes recovered a bird stuck at the coop door by moving the other chickens out and demolishing the coop; one report also said a reload restored a vanished bird. Do not demolish a current coop before confirming the new build still reproduces the issue.</p>
+      <p>If a bird still vanishes on 0.8.10.562 or later, note the coop counter (x/6), door/fence state, care state and exact transition, then <a href="/contribute">send in your case</a> with the version and screenshots.</p>
 
       <h2 id="profit">Selling animals &amp; making a profit</h2>
       <p><strong>Quick answer:</strong> you <strong>cannot sell live animals</strong> — there is no sale option in the current build. The officially recommended way to cash out spare birds (extra roosters, excess chicks) is to <strong>dispatch them and sell the meat</strong>. <small>Official reply.</small></p>
@@ -165,6 +166,7 @@
 
       <h2>Sources</h2>
       <ul>
+        <li><a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1840310314352719" rel="noopener noreferrer">Official hotfix 0.8.10.562 announcement</a> — fixes for night entry, chick growth, newborn spawning, load-time appearance, door gaps and roped-animal travel (August 10, 2026).</li>
         <li><a href="https://steamcommunity.com/app/1501310/discussions/0/587307906418973975/" rel="noopener noreferrer">Steam discussion: "Chicken coop mission"</a> — chickens spawn behind the seller's house, car boot transport (Aug 2026).</li>
         <li><a href="https://steamcommunity.com/app/1501310/discussions/" rel="noopener noreferrer">Steam discussion board</a> — official support answers (moderator Jennoula) on chicken feed, interior troughs, heater vs. decoration versions, egg size/fertility RNG, enclosed-roaming large eggs, the auto-feeding chain and the water-contract requirement, and dispatching excess birds (Aug 2026).</li>
         <li><a href="https://steamcommunity.com/app/1501310/discussions/0/587308261888256098/" rel="noopener noreferrer">Steam discussion: "Livestock profit"</a> — chicken meat and egg returns reported by Numinex and BeBeForever16; each exact figure remains single-source.</li>

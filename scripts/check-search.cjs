@@ -173,8 +173,8 @@ assert.match(knowledgeBasePage, /<h1>The Ranchers Knowledge Base<\/h1>/);
 assert.match(knowledgeBasePage, /href="\/guides\/animal-guide#feeding"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /"\/database"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /search-index\.json/);
-assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-zh-v2/, "Chinese search cache must invalidate the pre-police index");
-assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-v16/, "English search cache must invalidate revised evidence copy");
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-zh-v3/, "Chinese search cache must invalidate the pre-0.8.10.562 index");
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-v17/, "English search cache must invalidate the pre-0.8.10.562 index");
 
 /* Prebuilt search index (scripts/build-search-index.cjs — re-run after content edits). */
 const prebuiltIndex = JSON.parse(fs.readFileSync(path.join(root, "search-index.json"), "utf8"));
@@ -185,6 +185,8 @@ assert.equal(drift.status, 0, `search-index.json drift detected — re-run node 
 const zirconiteHit = searchDocuments(prebuiltIndex, "where can I buy zirconite")[0];
 assert.equal(zirconiteHit.url, "/guides/building-construction#materials");
 assert.equal(zirconiteHit.type, "Guide answer");
+const firstThirtyEntry = prebuiltIndex.find((entry) => entry.url === "/guides/beginners-guide#first-30-minutes");
+assert.equal(firstThirtyEntry.type, "Guide step", "guide search entries must not be labeled as database entries");
 assert.match(fs.readFileSync(path.join(root, "database", "crops.html"), "utf8"), /id="strawberry-seeds"[^>]+data-search-entry/);
 assert.match(fs.readFileSync(path.join(root, "database", "animals.html"), "utf8"), /id="black-chicken"[^>]+data-search-entry/);
 

@@ -12,12 +12,12 @@
 <body>
   <header class="site-header"><nav class="nav-inner" aria-label="主导航"><a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide<small>非官方中文玩家指南</small></span></a><button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button><ul class="nav-links"><li><a class="active" href="/zh/guides/beginners-guide">新手</a></li><li><a href="/zh/database">知识库</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li><li><a href="/zh/search">搜索</a></li><li><a class="nav-cta" href="/contribute">投稿</a></li></ul></nav></header>
   <main><article class="article">
-    <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / 攻略 / 养鸡指南</nav><h1>The Ranchers 养鸡指南：从买鸡到收益，一步一步来</h1><p class="meta">2026-08-08 更新 · Early Access 0.8.10.x · 阅读约 12 分钟</p>
-    <div class="evidence-status"><strong>证据状态：</strong>官方客服回复（Steam 管理员 Jennoula）· 多名玩家印证 · 单人报告逐条标注 · 2026-08-08 复核 — <a href="/methodology">我们如何验证 (EN) →</a></div>
+    <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / 攻略 / 养鸡指南</nav><h1>The Ranchers 养鸡指南：从买鸡到收益，一步一步来</h1><p class="meta">2026-08-11 复核 · 当前版本 0.8.10.562 · 阅读约 12 分钟</p>
+    <div class="evidence-status"><strong>证据状态：</strong>官方客服回复（Steam 管理员 Jennoula）· 多名玩家印证 · 单人报告逐条标注 · 2026-08-11 复核 — <a href="/methodology">我们如何验证 (EN) →</a></div>
 
     <figure class="page-banner"><img src="/assets/img/db-animals.webp" width="800" height="450" alt="The Ranchers 红色谷仓外吃草的牛"></figure>
 
-    <div class="notice"><strong>本页内容：</strong>当前 Early Access 版本里完整的养鸡链路——买鸡和运输、喂食、温控、生病、鸡蛋、自动化、鸡消失 bug，以及多余公鸡怎么处理。山羊、牛和兔子确认存在，但观测到的细节少得多，放在最后简短说明。</div>
+    <div class="notice"><strong>当前修复状态：</strong>0.8.10.562 已由官方修复多条动物消失路径，包括夜间进鸡舍/畜棚、雏鸡长大、新生动物生成、读档和门缝卡住。下面的照料链仍有效；旧恢复办法明确标成历史。</div>
 
     <section class="answer-box">
       <h2>先说结论</h2>
@@ -84,15 +84,16 @@
     </section>
 
     <section id="troubleshooting" data-search-entry data-search-title="鸡消失或不吃东西排查清单" data-search-tags="鸡消失 鸡不见 鸡没了 不吃东西 排查 鸡舍关联 围栏"><h2>鸡消失或不吃东西：排查清单</h2>
-      <p>这份清单是 <strong>0.8.10.455</strong> 版本当前的排查路径。它覆盖<strong>报告最多</strong>的原因——但并不穷尽：仍有玩家报告这些步骤解释不了的新消失案例（近期三条独立评测都描述了需求和围栏都正常、鸡还是消失）<small>近期多人印证 · 症状确认，原因部分未解</small>。按顺序逐项过：</p>
+      <p><strong>先区分旧报告和当前 bug。</strong>官方 0.8.10.562 已修复夜间进入建筑时消失、雏鸡长大时消失或卡住、新生哺乳动物不出现、读档后动物不显示，以及卡在鸡舍/畜棚和门之间。Steam 通常会自动更新；只有问题仍存在时才确认标题画面的版本。</p>
       <ol>
-        <li><strong>你是不是在鸡舍门口交付的？</strong>在门口交鸡会计入存栏数，但鸡会消失或卡进墙里。<strong>必须亲自走进鸡舍里面放下。</strong>如果鸡已经这样消失了：把剩下的鸡全取出，拆掉鸡舍——消失的鸡会掉在草地上——重建后再放回去。<small>多人印证。</small></li>
+        <li><strong>确认准确版本。</strong>0.8.10.455 或更早版本的复现属于历史；0.8.10.562 及更高版本的复现才是当前有效线索。</li>
         <li><strong>鸡舍真的关联上了吗？</strong>走到门口：深色面板上应该显示 <strong>0/6 或 3/6</strong> 这样的计数。没有计数说明动物没关联到这个鸡舍。<small>官方回复。</small></li>
         <li><strong>院子围好了吗？</strong>门开着加上入口区域没围栏，鸡会直接溜达走。<small>多人印证。</small></li>
         <li><strong>温控装对了吗？</strong>没装（或装了装饰版）温控会让鸡死于温度胁迫。<small>多人印证 + 官方回复。</small></li>
-        <li><strong>还是找不到？</strong>有玩家报告完全重进游戏后，消失的鸡回来了。<small>单一线索。</small></li>
+        <li><strong>记录发生节点。</strong>记清是夜间进建筑、长大、出生、读档、地铁运输还是门口；这些正是官方补丁列出的修复路径。</li>
       </ol>
-      <p>五步都过了鸡还是消失，那你的情况就属于上面说的未解报告——不是你操作错了。记下鸡舍计数（x/6）、门和围栏状态、温控版本、日切前后发生了什么，然后带上版本号<a href="/contribute">提交你的案例</a>，让这份清单能补上它。</p>
+      <p><strong>历史规避法，不是当前建议：</strong>0.8.10.562 以前，有玩家会先移出其他鸡、拆掉鸡舍来找回卡在门口的鸡，也有单人报告说重载能找回。确认新版本仍能复现之前，不要先拆当前鸡舍。</p>
+      <p>如果 0.8.10.562 或更高版本仍会消失，记下鸡舍计数（x/6）、门/围栏、照料状态和准确发生节点，再带版本号与截图<a href="/contribute">提交案例</a>。</p>
     </section>
 
     <section id="profit" data-search-entry data-search-title="卖动物与赚钱" data-search-tags="卖鸡 卖动物 公鸡 卖肉 肉价 收益"><h2>卖动物与赚钱</h2>
@@ -133,6 +134,7 @@
 
     <h2>来源</h2>
     <ul>
+      <li><a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1840310314352719" rel="noopener noreferrer">官方 0.8.10.562 热修公告</a>——夜间进建筑、雏鸡长大、新生动物、读档、门缝和牵绳动物运输修复（2026-08-10）。</li>
       <li><a href="https://steamcommunity.com/app/1501310/discussions/0/587307906418973975/" rel="noopener noreferrer">Steam 讨论："Chicken coop mission"</a>——鸡刷在卖家房后、汽车后备箱运输（2026 年 8 月）。</li>
       <li><a href="https://steamcommunity.com/app/1501310/discussions/" rel="noopener noreferrer">Steam 讨论区</a>——官方客服（管理员 Jennoula）关于鸡饲料、室内食槽、温控与装饰版区别、蛋尺寸/受精随机、围栏活动出大鸡蛋、自动喂食链路和供水合同要求、处理多余公鸡的回答；相关帖子包括 "Chicken Feed"、"About the chickens"、"Egg Hatching Question"、"Silos"、"Watertower problem" 和 "Can't sell roosters"（2026 年 8 月）。</li>
       <li><a href="https://steamcommunity.com/app/1501310/discussions/0/587308261888256098/" rel="noopener noreferrer">Steam 讨论："Livestock profit"</a>——Numinex 与 BeBeForever16 的鸡肉、鸡蛋收益报告；具体数字按单人来源处理。</li>

@@ -1,8 +1,8 @@
 {
   "meta": {
     "page": "database/animals.html",
-    "lastUpdated": "2026-08-08",
-    "build": "0.8.10.455",
+    "lastUpdated": "2026-08-11",
+    "build": "0.8.10.562",
     "evidenceLevels": [
       "official",
       "video-observed",
@@ -25,6 +25,14 @@
       "author": "RedPilz Studio / Trophy Games",
       "date": "2026-08",
       "build": "0.8.10.x"
+    },
+    "hotfix-0-8-10-562": {
+      "kind": "official-news",
+      "title": "Hotfix 0.8.10.562 — official Steam announcement",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1840310314352719",
+      "author": "RedPilz Studio",
+      "date": "2026-08-10",
+      "build": "0.8.10.562"
     },
     "ranching-v2-notes": {
       "kind": "official-news",
@@ -576,13 +584,23 @@
           "label": "Disappearing-chicken checklist",
           "facts": [
             {
-              "text": "Coop-door delivery bug: chickens submitted at the coop door enter the stock count but vanish or get stuck inside the coop's exterior wall. Walk physically inside the coop before dropping them; if one is stuck, remove all chickens and demolish the coop to drop it out.",
-              "evidenceLevel": "community-confirmed",
-              "build": "0.8.10.x",
+              "text": "Hotfix 0.8.10.562 officially fixed several animal disappearance paths: entering a barn or coop at night, chicks growing up, newborn mammals spawning, animals appearing after a load, and animals becoming stuck between a barn or coop and its doors. Older reports and workarounds below are pre-0.8.10.562 context; only a reproduction on 0.8.10.562 or later should be treated as a current residual bug.",
+              "evidenceLevel": "official",
+              "build": "0.8.10.562",
               "validity": "current",
               "sourceIds": [
+                "hotfix-0-8-10-562"
+              ]
+            },
+            {
+              "text": "Before 0.8.10.562, chickens submitted at the coop door could enter the stock count but vanish or get stuck inside the coop's exterior wall. The historical workaround was to walk inside before dropping them; stuck birds could sometimes be recovered by removing the others and demolishing the coop.",
+              "evidenceLevel": "community-confirmed",
+              "build": "0.8.10.455-or-earlier",
+              "validity": "obsolete",
+              "sourceIds": [
                 "thread-coop-door-bug",
-                "thread-huehnerstall-bug"
+                "thread-huehnerstall-bug",
+                "hotfix-0-8-10-562"
               ]
             },
             {
@@ -613,10 +631,10 @@
               ]
             },
             {
-              "text": "Reloading the save sometimes respawns a vanished chicken.",
+              "text": "Before 0.8.10.562, one player reported that reloading the save sometimes respawned a vanished chicken.",
               "evidenceLevel": "unverified-lead",
-              "build": "0.8.10.x",
-              "validity": "current",
+              "build": "0.8.10.455-or-earlier",
+              "validity": "obsolete",
               "sourceIds": [
                 "thread-chicken-fix"
               ]
@@ -690,11 +708,11 @@
           "tags": "brown chicken hen poultry coop egg price"
         }
       ],
-      "lastUpdated": "2026-08-08",
+      "lastUpdated": "2026-08-11",
       "zh": {
         "tocLabel": "鸡",
         "kicker": "当前资料最完整",
-        "headerTag": "0.8.10.455",
+        "headerTag": "0.8.10.562",
         "name": "鸡 Chicken",
         "searchTitle": "鸡的完整照料",
         "searchTags": "鸡 母鸡 公鸡 鸡舍 干草 食槽 水 温控 蛋 大鸡蛋",
@@ -1309,16 +1327,19 @@
         "searchTitle": "鸡或动物突然消失",
         "searchTags": "鸡消失 动物不见 失踪 围栏 温控 link 鸡舍",
         "heading": "鸡或动物突然消失怎么排查",
-        "paragraphs": [],
+        "paragraphs": [
+          "官方 0.8.10.562 热修已修复多条动物消失路径：夜间进入鸡舍/畜棚、雏鸡长大、新生哺乳动物生成、读档后动物不显示，以及动物卡在建筑和门之间。下面的旧规避法只保留作历史背景。"
+        ],
         "badge": null,
         "steps": [
+          "Steam 通常会自动更新；只有仍在复现问题时才确认标题画面为 0.8.10.562 或更高版本。",
           "确认购买后是否完成任务提示要求的交付或关联步骤。",
           "检查动物是否仍关联正确鸡舍/谷仓，门和围栏是否完整。",
           "检查室内食槽、饮水和专用温控设备。",
           "记录日切前后、退出重进前后以及地图图标是否变化。",
-          "保留版本号、存档模式和截图。当前已有多条独立“动物消失”报告，但它们不一定属于同一原因。"
+          "如果 0.8.10.562 或更高版本仍会消失，保留版本号、存档模式、日切前后状态和截图；这才是当前残留问题的有效线索。"
         ],
-        "notice": "不要把“漏看交付提示”当作所有消失案例的统一答案；它只是已确认的一类卡点。"
+        "notice": "不要继续把 0.8.10.455 及更早版本的临时规避法当成当前修复；先确认新版本是否仍能复现。"
       }
     ],
     "related": [

@@ -40,7 +40,8 @@ const earlyAccessStatus = read("guides/release-time-checklist.html");
 assert.match(earlyAccessStatus, /data-evidence-status="official"/);
 assert.match(earlyAccessStatus, /0\.8\.10\.455/);
 assert.match(earlyAccessStatus, /Current version at a glance/);
-assert.match(earlyAccessStatus, /What is still planned/);
+assert.match(earlyAccessStatus, /0\.8\.10\.562/);
+assert.match(earlyAccessStatus, /Current roadmap: available now vs\. planned/);
 assert.match(earlyAccessStatus, /Launch-week player reports/);
 assert.match(earlyAccessStatus, /reddit\.com\/r\/CozyGamers\/comments\/1vb46yx/);
 
@@ -85,8 +86,8 @@ for (const route of [
 ]) {
   assert.match(searchScript, new RegExp(`"${route.replaceAll("/", "\\/")}"`));
 }
-assert.match(searchScript, /ranchers-search-index-v16/);
-assert.match(searchScript, /ranchers-search-index-zh-v2/);
+assert.match(searchScript, /ranchers-search-index-v17/);
+assert.match(searchScript, /ranchers-search-index-zh-v3/);
 
 const chineseProblems = read("zh/problems.html");
 assert.match(chineseProblems, /data-problem-search/);

@@ -192,8 +192,8 @@ assert.deepEqual(mapCore.filterLocations(locations, "casino", "all"), []);
 
 const search = read("assets/js/search.js");
 assert.match(search, /"\/map"/);
-assert.match(search, /ranchers-search-index-v16/);
-assert.match(search, /ranchers-search-index-zh-v2/);
+assert.match(search, /ranchers-search-index-v17/);
+assert.match(search, /ranchers-search-index-zh-v3/);
 assert.match(search, /node\.querySelector\("h2, h3"\)/);
 
 const sitemap = read("sitemap.xml");

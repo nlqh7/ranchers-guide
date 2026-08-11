@@ -46,17 +46,55 @@ foreach ($relativePath in @('database/crops.html', 'database/animals.html')) {
     }
 }
 
+$currentVersion = '0\.8\.10\.562'
+
+foreach ($relativePath in @(
+    'index.html',
+    'guides/release-time-checklist.html',
+    'guides/beginners-guide.html',
+    'guides/money-making.html',
+    'guides/animal-guide.html',
+    'zh/guides/beginners-guide.html',
+    'zh/guides/money-making.html',
+    'zh/guides/animal-guide.html'
+)) {
+    $fullPath = Join-Path $repoRoot $relativePath
+    $content = Get-Content -Raw -LiteralPath $fullPath
+
+    if ($content -notmatch $currentVersion) {
+        $failures.Add("${relativePath}: missing the current official hotfix version 0.8.10.562.")
+    }
+}
+
 foreach ($relativePath in @('index.html', 'guides/release-time-checklist.html')) {
     $fullPath = Join-Path $repoRoot $relativePath
     $content = Get-Content -Raw -LiteralPath $fullPath
 
-    if ($content -notmatch '0\.8\.10\.455') {
-        $failures.Add("${relativePath}: missing the current official launch hotfix version.")
-    }
-
     if ($content -notmatch 'https://steamcommunity\.com/app/1501310') {
         $failures.Add("${relativePath}: missing a direct official Steam news source link.")
     }
+}
+
+$beginner = Get-Content -Raw -LiteralPath (Join-Path $repoRoot 'guides/beginners-guide.html')
+$beginnerZh = Get-Content -Raw -LiteralPath (Join-Path $repoRoot 'zh/guides/beginners-guide.html')
+$money = Get-Content -Raw -LiteralPath (Join-Path $repoRoot 'guides/money-making.html')
+$moneyZh = Get-Content -Raw -LiteralPath (Join-Path $repoRoot 'zh/guides/money-making.html')
+$status = Get-Content -Raw -LiteralPath (Join-Path $repoRoot 'guides/release-time-checklist.html')
+
+if ($beginner -notmatch 'id="first-30-minutes"' -or $beginnerZh -notmatch 'id="first-30-minutes"') {
+    $failures.Add('Beginner guides need a bilingual first-30-minutes answer section.')
+}
+if ($money -notmatch 'id="evidence-now"' -or $moneyZh -notmatch 'id="evidence-now"') {
+    $failures.Add('Money guides need a bilingual current-evidence summary.')
+}
+if ($money -match 'Fishing is the classic route') {
+    $failures.Add('Money guides must not present fishing as the verified no-capital route without current-build evidence.')
+}
+if ($status -notmatch 'id="roadmap"' -or $status -notmatch 'Current roadmap') {
+    $failures.Add('Early Access status page must answer current roadmap searches in an explicit section.')
+}
+if ($status -match '<strong>Update first\.</strong>') {
+    $failures.Add('Steam normally auto-updates; do not make manual updating a normal first-session step.')
 }
 
 if ($failures.Count -gt 0) {

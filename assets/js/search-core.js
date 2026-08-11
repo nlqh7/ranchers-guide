@@ -183,7 +183,10 @@
     if (url.indexOf("/zh/") === 0) return "知识条目";
     if (url === "/database/crops") return "Crop data";
     if (url === "/database/animals") return "Animal data";
-    return "Database entry";
+    if (url.indexOf("/guides/") === 0) return "Guide step";
+    if (url.indexOf("/problems") === 0) return "Problem step";
+    if (url === "/map") return "Location entry";
+    return "Knowledge entry";
   }
 
   function answerType(type) {
