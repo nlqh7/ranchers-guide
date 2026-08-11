@@ -20,7 +20,7 @@ problemPages.forEach((relativePath) => {
   const route = `/${relativePath.replace(/\.html$/, "")}`;
   assert.match(html, new RegExp(`<link rel="canonical" href="https://theranchersguide\\.com${route.replaceAll("/", "\\/")}"`));
   assert.match(html, /data-evidence-status="(?:official|corroborated)"/);
-  assert.match(html, /0\.8\.10\.455/);
+  assert.match(html, /0\.8\.10\.562/, `${relativePath} must state the current build baseline`);
   assert.match(html, /https:\/\/steamcommunity\.com\/app\/1501310/);
   assert.match(hub, new RegExp(`href="${route.replaceAll("/", "\\/")}"`));
 });

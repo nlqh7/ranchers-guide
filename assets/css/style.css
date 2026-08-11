@@ -815,6 +815,22 @@ figure img { border-radius: var(--radius); }
   border-color: var(--green-500);
 }
 .notice.info strong { color: var(--green-700); }
+.hotfix-notice {
+  border-left-color: var(--green-700);
+  background: var(--cream-100);
+}
+.hotfix-notice strong { color: var(--green-700); }
+.hotfix-fixed-list {
+  display: grid;
+  gap: 8px;
+  margin: 14px 0;
+  padding: 16px 18px;
+  border: 1px solid var(--cream-300);
+  border-radius: 8px;
+  background: #fff;
+  list-style: none;
+}
+.hotfix-fixed-list li { padding-left: 0; }
 
 /* ---------- Article layout ---------- */
 .article {

@@ -426,7 +426,7 @@
         "地点：" + name,
         "分类：" + (category || "未选择"),
         "地图位置：" + activePin.x + "%, " + activePin.y + "%（当前玩家地图）",
-        "版本：0.8.10.455",
+        "版本：0.8.10.562",
         notes ? "备注：" + notes : "",
         "",
         "请尽量附上当前版本的地图面板或店面截图。"
@@ -434,7 +434,7 @@
         "Location: " + name,
         "Category: " + (category || "Unspecified"),
         "Map position: " + activePin.x + "%, " + activePin.y + "% (current player map)",
-        "Build: 0.8.10.455",
+        "Build: 0.8.10.562",
         notes ? "Notes: " + notes : "",
         "",
         "Attach a current-build screenshot of the map panel or storefront if possible."
