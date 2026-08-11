@@ -326,7 +326,7 @@ ${renderRoster(data.confirmedSystems)}
 
       <h2>Sources</h2>
       <p>Confirmed rows come from the <a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">official Steam store page</a> and <a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">official Steam updates</a>, reviewed August 2026. Video-observed rows come from <a href="https://www.youtube.com/watch?v=GrFiYqWcBK0" rel="noopener noreferrer">Games Station gameplay footage (V0.8.10.455)</a>, reviewed August 7, 2026. The fertilizer calculation warning comes from an official Steam discussion reply, August 2026. How leads become verified values: <a href="/methodology">methodology</a>. Corrections with a version and screenshot: <a href="/contact">contact page</a>.</p>
-      <p>Pair this with the <a href="/database/animals">animal database</a> to plan your whole ranch economy, read the <a href="/guides/money-making">money-making guide</a> for the selling workflow, and read the <a href="/guides/beginners-guide">beginner's guide</a> if this is your first season.</p>
+      <p>Pair this with the <a href="/database/animals">animal database</a> to plan your whole ranch economy, read the <a href="/guides/farming-fields">farming &amp; fields guide</a> for watering, harvest and regrow rules, read the <a href="/guides/money-making">money-making guide</a> for the selling workflow, and read the <a href="/guides/beginners-guide">beginner's guide</a> if this is your first season.</p>
 
 
       <aside class="author-card" aria-label="About the author">

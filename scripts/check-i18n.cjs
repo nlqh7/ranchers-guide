@@ -18,6 +18,7 @@ const pairs = [
   ["guides/money-making.html", "zh/guides/money-making.html", "/guides/money-making", "/zh/guides/money-making"],
   ["guides/police-wanted-levels.html", "zh/guides/police-wanted-levels.html", "/guides/police-wanted-levels", "/zh/guides/police-wanted-levels"],
   ["problems/vehicle-recovery.html", "zh/problems/vehicle-recovery.html", "/problems/vehicle-recovery", "/zh/problems/vehicle-recovery"],
+  ["guides/farming-fields.html", "zh/guides/farming-fields.html", "/guides/farming-fields", "/zh/guides/farming-fields"],
 ];
 
 function read(relative) {
@@ -73,6 +74,7 @@ for (const route of [
   "/zh/guides/animal-guide",
   "/zh/guides/gigi-large-egg-quest",
   "/zh/guides/money-making",
+  "/zh/guides/farming-fields",
 ]) {
   assert.match(chineseKnowledgeBase, new RegExp(`href="${escaped(route)}`), `Chinese knowledge base must expose ${route}`);
 }

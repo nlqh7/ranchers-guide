@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Ranchers 种地攻略：浇水、收获、返收与肥料规则（证据分级）</title>
+  <meta name="description" content="The Ranchers 种地实战指南：忘记收获不会毁作物（官方更新）、雨天免浇水、每月 1 号换季清田（多人印证）、草莓返收 vs 红生菜一次性（视频观测）、肥料官方警告仍未解除。开田和温室解锁明确标注未验证。">
+  <link rel="canonical" href="https://theranchersguide.com/zh/guides/farming-fields">
+  <link rel="alternate" hreflang="en" href="https://theranchersguide.com/guides/farming-fields"><link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/guides/farming-fields"><link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/guides/farming-fields">
+  <meta property="og:type" content="article"><meta property="og:title" content="The Ranchers 种地攻略：浇水、收获、返收与肥料规则"><meta property="og:description" content="只写有证据的内容：忘收不毁、换季清田、返收差异、CashIn 出售、肥料警告；开田与温室标注未验证。"><meta property="og:url" content="https://theranchersguide.com/zh/guides/farming-fields"><meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260810-ui1"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header"><nav class="nav-inner" aria-label="主导航"><a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide<small>非官方中文玩家指南</small></span></a><button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button><ul class="nav-links"><li><a class="active" href="/zh/guides/beginners-guide">新手</a></li><li><a href="/zh/database">知识库</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li><li><a href="/zh/search">搜索</a></li><li><a class="nav-cta" href="/contribute">投稿</a></li></ul></nav></header>
+  <main><article class="article">
+    <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / 攻略 / 种地与田块</nav><h1>The Ranchers 种地攻略：浇水、收获、返收与肥料规则</h1><p class="meta">页面基线：当前官方版本 <strong>0.8.10.562</strong>（2026 年 8 月）· 视频证据录制于 0.8.10.455 · 2026-08-11 更新 · 阅读约 8 分钟</p>
+    <div class="evidence-status"><strong>证据状态：</strong>2 项官方声明（1 个发售前更新、1 个当前肥料警告）· 2 个多人印证发现 · 2 条视频观测（0.8.10.455）· 2 个主题挂起待实测 · 2026-08-11 复核 — <a href="/methodology">我们如何验证 (EN) →</a></div>
+
+    <p>怎么开田、要不要天天浇水、忘了收会不会烂——Steam 讨论区里这些问题刷屏，但大多数回答把 Alpha 时期的记忆和当前正式版混在一起。本页只写证据够硬的内容，两个最大的未知数（开田操作和温室）放进明确标注的"未验证"区块，不猜。</p>
+
+    <section class="answer-box">
+      <h2>先说结论</h2>
+      <ul>
+        <li><strong>不用每天浇水。</strong>下雨算浇水，没人管的地大约 3 个晴天才干枯 <span class="evidence-badge evidence-corroborated">多人印证</span>。</li>
+        <li><strong>忘记收获不会毁掉作物。</strong>果蔬会留在植株上；种子只在植株死亡时才消失 <span class="evidence-badge evidence-official">官方</span> <em>发售前更新，尚未在 0.8.10.562 复测</em>。</li>
+        <li><strong>每月 1 号换季会清掉当季作物。</strong>30 号是该季最后收获日，种地要看日历 <span class="evidence-badge evidence-corroborated">多人印证</span>。</li>
+        <li><strong>卖货走 CashIn 箱子</strong>——完整流程见<a href="/zh/guides/money-making#cashin">赚钱指南 CashIn 一节</a>。</li>
+        <li><strong>暂时别买肥料。</strong>官方"肥料计算错误"警告到 0.8.10.562 仍未解除 <span class="evidence-badge evidence-official">官方</span>。</li>
+        <li><strong>怎么开新田、温室怎么解锁尚未验证</strong>——先看<a href="#unverified">挂起区块</a>，别轻信旧教程。</li>
+      </ul>
+    </section>
+
+    <nav class="toc" aria-label="页面目录"><strong>本指南内容</strong><ul>
+      <li><a href="#harvest-rules">忘记收获 &amp; 种子什么时候消失</a></li>
+      <li><a href="#season-change">换季清田规则</a></li>
+      <li><a href="#regrow">返收作物 vs 一次性作物</a></li>
+      <li><a href="#watering">浇水：不是每天的苦差</a></li>
+      <li><a href="#selling">出售收获</a></li>
+      <li><a href="#fertilizer">肥料：官方警告仍有效</a></li>
+      <li><a href="#unverified">未验证：开田与温室</a></li>
+      <li><a href="#limitations">已知限制</a></li>
+      <li><a href="#faq">种地常见问题</a></li>
+    </ul></nav>
+
+    <section id="harvest-rules" data-search-entry data-search-title="忘记收获和种子消失规则" data-search-tags="种地 收获 忘记收 种子消失 植株死亡 官方"><h2>忘记收获 &amp; 种子什么时候消失</h2>
+      <p><span class="evidence-badge evidence-official">官方</span> <em>发售前更新（2025-12-02），机制假定延续，尚未在 0.8.10.562 复测</em></p>
+      <p>开发者发售前最后一次机制更新 <a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1817483467048225" rel="noopener noreferrer">"Bigger, better and truly next level!"</a>（2025-12-02）直接写明了新的种植规则：</p>
+      <ul>
+        <li><strong>种子只在植株死亡时消失。</strong>收获和时间流逝本身不会消耗已种下的种子。</li>
+        <li><strong>忘记收获不再销毁水果和蔬菜。</strong>成熟的产物会留在植株上等你收，不会烂掉。</li>
+        <li><strong>返收作物改用更简单直观的 re-grow 流程。</strong></li>
+      </ul>
+      <p>这些措辞来自官方更新，之后到 0.8.10.562 为止没有任何补丁说明推翻它，所以我们把它当作现行规则——同时明确标注：它在 Early Access 发售前公布，每一行都还没在当前版本里逐条复测。</p>
+    </section>
+
+    <section id="season-change" data-search-entry data-search-title="换季清田：30号最后收获日1号清田" data-search-tags="种地 换季 清田 季节 30号 茄子消失 冬天"><h2>换季清田（30 号 → 1 号）</h2>
+      <p><span class="evidence-badge evidence-corroborated">多人印证</span></p>
+      <p>两份独立的当前版本报告对上了季节日历。在 <a href="https://steamcommunity.com/app/1501310/discussions/0/587307906419070201/" rel="noopener noreferrer">"一整片茄子睡一觉没了???"</a>（2026-08-03）里，楼主整片茄子田隔夜消失；玩家 Mancer 解释：每季 30 号是该季作物的最后收获日，新季节从 1 号开始，换季时当季作物全部消失——这和 FIDELIS 在 <a href="https://steamcommunity.com/app/1501310/discussions/0/587308261888439079/" rel="noopener noreferrer">"东西消失"</a>（08-06）里夏季第 1 天种 60 块茄子的经历一致。</p>
+      <p>Mancer 同帖给出的季节种子清单只是单一社区报告，当工作参考用：夏季——绿生菜、茄子、玉米；春季——草莓、大蒜、绿沙拉；秋季——洋葱、胡萝卜、南瓜。本站视频观测（0.8.10.455）确认草莓和红生菜都标春季，见<a href="/zh/database/crops">作物数据库</a>。另有德语玩家反馈冬季商店无种子可买，与换季机制互证。</p>
+      <p><strong>实用结论：</strong>季末大面积播种前先翻日历——28 号种下去的种子可能连第一次收获都撑不到。</p>
+    </section>
+
+    <section id="regrow" data-search-entry data-search-title="返收作物和一次性作物：草莓每3天再收" data-search-tags="种地 返收 再生 regrow 草莓 红生菜 一次性 收获周期"><h2>返收作物 vs 一次性作物</h2>
+      <p><span class="evidence-badge evidence-video">视频观测</span> <em>录制于 0.8.10.455</em></p>
+      <p>保留的发售版实况画面把两类作物并排展示：</p>
+      <ul>
+        <li><strong>草莓种子（144C）：</strong>春季，种下 7 天后首收，之后<strong>每 3 天再收一次</strong>——返收型。</li>
+        <li><strong>红生菜种子（48C）：</strong>春季，3 天成熟，种子说明<strong>没有返收行</strong>——一次性，收完要重新种。</li>
+      </ul>
+      <p>官方发售前更新说的"返收作物 re-grow 流程简化" <span class="evidence-badge evidence-official">官方</span>与这个二分一致：返收作物保留植株循环再收，一次性作物用新种子重种。其他作物的确切返收间隔还在收集中——<a href="/zh/database/crops">作物数据库</a>逐条带证据标签。</p>
+    </section>
+
+    <section id="watering" data-search-entry data-search-title="浇水规则：雨天免浇约3天干枯洒水器" data-search-tags="浇水 洒水器 水壶 水井 下雨 干枯 田块消失 sprinkler"><h2>浇水：不是每天的苦差</h2>
+      <p><span class="evidence-badge evidence-corroborated">多人印证</span> <span class="evidence-badge evidence-official">官方</span> <em>发售前更新</em></p>
+      <p>两个独立讨论帖对"我的田怎么没了"给出一致答案。<a href="https://steamcommunity.com/app/1501310/discussions/0/587307627624760185/" rel="noopener noreferrer">"Agricultural fields?!"</a>（2026-07-31）里三名玩家一致认为：不浇水也不播种的田块几天后会自动消失；<a href="https://steamcommunity.com/app/1501310/discussions/0/587307627624786953/" rel="noopener noreferrer">"Removing Farming Patches?"</a>（07-31）里另一名玩家把干枯时限说成约 <strong>3 天无雨无水无作物/杂草</strong>——并指出下雨本身算浇水。所以浇水是"几天一次、除非下雨"的活，不是每天必做。</p>
+      <p>同一份 2025-12-02 官方更新还确认浇水工具链存在且调过参：<strong>洒水器浇水 timing 调快</strong>、<strong>浇水壶作用范围加大</strong> <span class="evidence-badge evidence-official">官方</span> <em>发售前</em>。发售版实况显示制作菜单种植页签里有三档洒水器和一口水井 <span class="evidence-badge evidence-video">视频观测</span> <em>0.8.10.455</em>。一名德语玩家提到浇水壶约浇 7 块田、高级洒水器覆盖 25 块——<span class="evidence-badge evidence-reported">单一线索</span>，未获印证。</p>
+      <p><strong>我们还不知道的：</strong>洒水器怎么接水/接电（管道、电缆、水井半径还是不用接）没有任何留存证据，所以我们刻意不写接法教程。洒水器摆放本身也被一名玩家吐槽"仍然别扭"（<a href="https://steamcommunity.com/app/1501310/discussions/0/587307627624786953/" rel="noopener noreferrer">同帖</a>，单一线索）。</p>
+    </section>
+
+    <section id="selling" data-search-entry data-search-title="出售收获：CashIn箱子结算" data-search-tags="卖菜 出售 CashIn 结算 种地收入 价格"><h2>出售收获</h2>
+      <p><span class="evidence-badge evidence-video">视频观测</span> <em>录制于 0.8.10.455</em></p>
+      <p>收获通过 <strong>CashIn 箱子</strong>出售：白天把产物存进去，钱在日终结算单的 "Farming" 行到账，账单不拆分每种作物。完整观测流程——关联箱子、存入、看账单——在<a href="/zh/guides/money-making#cashin">赚钱指南的 CashIn 一节</a>有逐步记录，这里不重复。</p>
+      <p>2025-12-02 更新还提到经济调整：<strong>水果、蔬菜和种子价格已调整</strong> <span class="evidence-badge evidence-official">官方</span> <em>发售前</em>——所以我们从不把 Alpha 旧价目当现价引用。结算单不拆分时，每种作物的出售单价仍然未知——哪些已测、哪些待测见<a href="/zh/database/crops">作物数据库</a>。</p>
+    </section>
+
+    <section id="fertilizer" data-search-entry data-search-title="肥料官方警告仍未解除：先别买" data-search-tags="肥料 化肥 fertilizer 警告 别买 计算错误"><h2>肥料：官方警告仍未解除</h2>
+      <p><span class="evidence-badge evidence-official">官方</span> <em>当前声明（2026-08-04）——截至 0.8.10.562 未解除</em></p>
+      <p>在 <a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364355575/" rel="noopener noreferrer">"Furtilizer not worth it"</a>（2026-08-03）里，一名玩家记录了花 8,000C 买传说级肥料、只覆盖 24 块田里的 8 块、最后只多赚 79C 的实验。客服 Jennoula 2026-08-04 回复：<em>"我们已经知道肥料目前计算不正确，正在处理；在调整好之前先别投资肥料。"</em></p>
+      <p><strong>0.8.10.562 热修说明（2026-08-10）没有提任何肥料修复</strong>，之后也没有官方声明解除警告。在补丁说明或官方回复明确"已调整"之前，本站的建议不变：<strong>跳过肥料，把钱投给更多种子或动物。</strong>肥料在商店里仍能看到（Leafy Market 的 Seed &amp; Fertilizer 页签，0.8.10.455 视频观测）——看得到不代表值得买。</p>
+    </section>
+
+    <section id="unverified" data-search-entry data-search-title="未验证：开田操作和温室解锁" data-search-tags="开田 锄头 翻地 tilling 温室 greenhouse 解锁 未验证"><h2>未验证：开田与温室</h2>
+      <p>这两个主题决定你怎么<strong>开</strong>农场、怎么<strong>扩展</strong>农场，但当前版本证据不足以写教程。与其照抄 2022 年 Alpha 攻略，我们把两条都挂起：</p>
+      <h3>怎么开新田？（挂起）</h3>
+      <p><span class="evidence-badge evidence-historical">历史</span> <span class="evidence-badge evidence-lead">未验证线索</span></p>
+      <p>记录在案的锄头翻地流程只有 <strong>2022 年 Alpha</strong>（一名玩家买种子和锄头、下地播种、每天浇水）——提示有锄头工具参与，但隔了两个大版本。当前版本证据只能证明这个机制叫 "tilling"（翻地），且翻过的田块会自己恢复成普通地面（2026-08-06 有反馈帖要求加个撤销翻地的方法；另见上面的干枯帖）。发售版实况显示制作菜单种植页签里有三种"地基"类物件 <span class="evidence-badge evidence-video">视频观测</span> <em>0.8.10.455</em>，但它们和开田有没有关系未证实。</p>
+      <p><strong>计划验证（尚未做）：</strong>在种子店买锄头，对着空地使用，记录出现的提示和田块生成过程；再分别放置种植页签里三种"地基"物件，记录各自造出什么。在留下记录之前，你在别处看到的任何"开田步骤"——包括我们本来能写的——都是未验证的。</p>
+      <h3>温室是什么、怎么解锁？（挂起）</h3>
+      <p><span class="evidence-badge evidence-historical">历史</span> <span class="evidence-badge evidence-reported">单一线索</span></p>
+      <p>温室出现在官方资料里，是建设农场的方式之一；一名当前版本玩家（Mancer，<a href="https://steamcommunity.com/app/1501310/discussions/0/587307906419070201/" rel="noopener noreferrer">茄子帖</a>）报告<strong>温室可以反季种植</strong>，自称实测冬天用温室种过——单人自述实测，尚无印证。解锁路径的唯一记录来自 <strong>2022 年 11 月</strong>：开发者当时确认温室蓝图在 Lina 处购买，需要材料加钱。这个商人、价格和条件在 Early Access 里是否保留，未知。</p>
+      <p><strong>计划验证（尚未做）：</strong>在当前版本查看 Lina 的蓝图列表有没有温室及材料清单；如果建成，在温室内试种反季种子并记录结果。</p>
+    </section>
+
+    <section id="limitations" data-search-entry data-search-title="已知限制" data-search-tags="证据 限制 版本 待测"><h2>已知限制</h2>
+      <ul>
+        <li>收获、种子消失和返收规则来自官方 2025-12-02 发售前更新，与发售后观测到的一切相符，但每一行仍待在 0.8.10.562 直接复测。</li>
+        <li>本页视频观测录制于发售版 0.8.10.455；当前官方版本为 0.8.10.562。0.8.10.562 热修动的是动物和车辆，不涉及种植系统，但我们明确区分观测版本，不把两个版本混写。</li>
+        <li>约 3 天干枯时限、浇水壶 7 格/高级洒水器 25 格覆盖、季节种子清单均为社区报告。</li>
+        <li>洒水器接水接电、开田工具流程、温室解锁规则仍是开放问题——见<a href="#unverified">挂起区块</a>。</li>
+      </ul>
+    </section>
+
+    <h2 id="faq">种地常见问题</h2>
+    <details class="faq-item">
+      <summary>作物必须每天浇水吗？</summary>
+      <div class="faq-body"><p>不用。下雨算浇水；多人印证的报告把干枯时限定在约三天无水——之后空的翻过的田块会恢复成普通地面。不下雨时几天浇一次即可；确切时限按社区报告对待，不是官方数值。</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>忘记收获会怎么样？</summary>
+      <div class="faq-body"><p>按官方发售前机制更新（2025-12-02），水果和蔬菜不会因为忘记收获而销毁，种子只在植株死亡时消失。一个大例外：每月 1 号换季会清掉当季作物（多人印证），所以 30 号结束前记得收。</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>肥料值得买吗？</summary>
+      <div class="faq-body"><p>现在不值。客服 2026-08-04 确认肥料计算不正确，建议玩家在调整前别投资。0.8.10.562 热修没有提修复，警告仍然有效。</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>怎么开新田？温室怎么解锁？</summary>
+      <div class="faq-body"><p>两个都挂起。开田流程只有 2022 Alpha 的记录，温室解锁线索（Lina 处买蓝图）来自 2022 年 11 月——都未在当前版本验证。我们把确切的验证步骤写在<a href="#unverified">挂起区块</a>里，而不是猜。</p></div>
+    </details>
+
+    <h2>相关攻略</h2>
+    <ul>
+      <li><a href="/zh/database/crops">作物数据库</a>——每种作物的季节、生长时间和返收行，逐条带证据标签。</li>
+      <li><a href="/zh/guides/money-making#cashin">赚钱指南</a>——CashIn 出售流程，以及结算单能告诉你什么、不能告诉你什么。</li>
+      <li><a href="/zh/guides/animal-guide">动物指南</a>——牧场经济的另一半：畜舍、饲料和 0.8.10.562 的动物消失修复。</li>
+      <li><a href="/zh/guides/beginners-guide">新手指南</a>——第一周逐日路线，包括种子和肥料在 Leafy Market 的位置。</li>
+    </ul>
+
+    <aside class="author-card" aria-label="关于作者">
+      <div class="author-card-id"><strong>Niki</strong><span>本站编辑，The Ranchers Guide</span></div>
+      <p>由本站编辑 Niki 调研和编辑。玩法证据来自公开视频、官方更新和社区报告。最近复核：2026 年 8 月。覆盖版本：0.8.10.x，页面基线 0.8.10.562。<a href="/methodology">我们如何验证 (EN) →</a></p>
+    </aside>
+  </article></main>
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>证据等级与版本标注与英文页一致</span></div></div></footer><script src="/assets/js/main.js?v=20260810-nav1" defer></script>
+</body></html>
