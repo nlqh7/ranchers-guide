@@ -167,7 +167,7 @@ const html = `<!DOCTYPE html>
     <article class="article" style="max-width: 980px;">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Database / Crops</nav>
       <h1>The Ranchers Crop Database</h1>
-      <p class="meta">Current build ${escapeHtml(data.meta.build)} · Data last updated ${escapeHtml(data.meta.lastUpdated)} · Historical values are labeled</p>
+      <p class="meta">Current page baseline ${escapeHtml(data.meta.build)} · Video evidence recorded on ${escapeHtml(data.meta.videoBuild)} · Data last updated ${escapeHtml(data.meta.lastUpdated)} · Historical values are labeled</p>
       <div class="evidence-status">
         <strong>Evidence status:</strong> ${confirmedCount} confirmed systems · ${videoCount} video-observed shop values · ${historicalCount} historical leads · ${pendingCount} pending rows · every fact carries its own evidence label — <a href="/methodology">How we verify →</a>
       </div>
@@ -238,7 +238,7 @@ ${renderHistoricalTable(data.crops)}
         <div class="section-heading-row">
           <div>
             <span class="kicker">Current-Build Evidence</span>
-            <h2 id="video-crop-data">Video-observed shop values (build ${escapeHtml(data.meta.build)})</h2>
+            <h2 id="video-crop-data">Video-observed shop values (recorded on build ${escapeHtml(data.meta.videoBuild)})</h2>
           </div>
           <a class="text-link" href="/contact">Submit a current-build correction</a>
         </div>
@@ -264,7 +264,7 @@ ${renderVideoTable(data.crops, data.inputs)}
         </div>
 
         <div class="data-conflict">
-          <strong>Conflicting values:</strong> the historical Alpha table above lists Strawberry Seeds at 38C and Red Lettuce Seeds at 18C; current-build ${escapeHtml(data.meta.build)} video footage shows 144C and 48C respectively. Treat the video-observed values as the current-build baseline; the historical rows stay as leads only.
+          <strong>Conflicting values:</strong> the historical Alpha table above lists Strawberry Seeds at 38C and Red Lettuce Seeds at 18C; video footage recorded on build ${escapeHtml(data.meta.videoBuild)} shows 144C and 48C respectively. Treat the video-observed values as the working reference for the current page baseline (${escapeHtml(data.meta.build)}); the historical rows stay as leads only.
         </div>
 
         <div class="notice info">
@@ -463,7 +463,7 @@ const zhHtml = `<!DOCTYPE html>
 <body>
   <header class="site-header"><nav class="nav-inner" aria-label="主导航"><a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide<small>非官方中文玩家指南</small></span></a><button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button><ul class="nav-links"><li><a href="/zh/guides/beginners-guide">新手</a></li><li><a class="active" href="/zh/database">知识库</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li><li><a href="/zh/search">搜索</a></li><li><a class="nav-cta" href="/contribute">投稿</a></li></ul></nav></header>
   <main><article class="article" style="max-width:980px">
-    <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / <a href="/zh/database">知识库</a> / 作物</nav><h1>The Ranchers 中文作物数据库</h1><p class="meta">当前基线 ${escapeHtml(data.meta.build)} · ${escapeHtml(data.meta.lastUpdated)} 更新 · 玩家单颗出售价仍未知</p>
+    <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / <a href="/zh/database">知识库</a> / 作物</nav><h1>The Ranchers 中文作物数据库</h1><p class="meta">页面基线 ${escapeHtml(data.meta.build)} · 视频证据录制于 ${escapeHtml(data.meta.videoBuild)} · ${escapeHtml(data.meta.lastUpdated)} 更新 · 玩家单颗出售价仍未知</p>
     <div class="evidence-status"><strong>口径：</strong>48C、144C 等是视频中看到的种子购买价；31C 是大蒜成品的商店零售价；它们都不能直接当作玩家出售收入。</div>
     <figure class="page-banner"><img src="/assets/img/db-crops.webp" width="800" height="450" alt="The Ranchers 温室和整齐的菜地"></figure>
     <nav class="toc" aria-label="作物目录"><strong>快速跳转：</strong><ul>${zhTocItems}</ul></nav>

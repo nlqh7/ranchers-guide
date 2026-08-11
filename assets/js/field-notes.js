@@ -108,7 +108,7 @@
   function resetForm() {
     editingId = "";
     form.reset();
-    form.elements.version.value = "0.8.10.455";
+    form.elements.version.value = "0.8.10.562";
     document.getElementById("field-note-form-title").textContent = "Add a field note";
     document.getElementById("field-note-submit").textContent = "Save field note";
     document.getElementById("field-note-cancel").hidden = true;
