@@ -43,6 +43,31 @@
   var searchRoute = isChinese ? "/zh/search" : "/search";
   var pageHasMainSearch = ["/", "/database", "/search", "/zh", "/zh/database", "/zh/search"].indexOf(cleanPath) !== -1;
 
+  /* Show one exact counterpart link only when this page declares a paired
+     locale. Utility pages without an alternate stay uncluttered. */
+  if (links) {
+    links.querySelectorAll(".nav-language-item").forEach(function (item) { item.remove(); });
+    var targetHreflang = isChinese ? "en" : "zh-CN";
+    var alternate = document.querySelector('link[rel="alternate"][hreflang="' + targetHreflang + '"]');
+    if (alternate && alternate.getAttribute("href")) {
+      var languageItem = document.createElement("li");
+      var languageLink = document.createElement("a");
+      var targetLabel = isChinese ? "English" : "中文";
+      languageItem.className = "nav-language-item";
+      languageLink.className = "nav-language-link";
+      languageLink.href = alternate.getAttribute("href");
+      languageLink.setAttribute("hreflang", targetHreflang);
+      languageLink.setAttribute("lang", isChinese ? "en" : "zh-CN");
+      languageLink.setAttribute("aria-label", isChinese ? "切换到英文" : "Switch to Chinese");
+      languageLink.title = isChinese ? "切换到英文" : "Switch to Chinese";
+      languageLink.innerHTML = '<svg class="nav-language-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.2 2.4 3.3 5.4 3.3 9s-1.1 6.6-3.3 9c-2.2-2.4-3.3-5.4-3.3-9S9.8 5.4 12 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>' + targetLabel + '</span>';
+      languageItem.append(languageLink);
+      var ctaLink = links.querySelector("a.nav-cta");
+      if (ctaLink && ctaLink.parentElement) links.insertBefore(languageItem, ctaLink.parentElement);
+      else links.append(languageItem);
+    }
+  }
+
   /* Normalize section highlighting so every page gives the same location cue. */
   if (links) {
     links.querySelectorAll("a.active, a[aria-current]").forEach(function (link) {

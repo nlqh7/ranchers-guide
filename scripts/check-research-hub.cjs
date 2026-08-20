@@ -102,7 +102,7 @@ assert.match(chineseProblems, /assets\/js\/problems\.js/);
 
 const sitemap = read("sitemap.xml");
 assert.match(sitemap, /https:\/\/theranchersguide\.com\/problems/);
-assert.match(sitemap, /https:\/\/theranchersguide\.com\/research/);
+assert.doesNotMatch(sitemap, /https:\/\/theranchersguide\.com\/research/);
 assert.match(sitemap, /https:\/\/theranchersguide\.com\/guides\/release-time-checklist/);
 assert.doesNotMatch(sitemap, /https:\/\/theranchersguide\.com\/contribute/);
 

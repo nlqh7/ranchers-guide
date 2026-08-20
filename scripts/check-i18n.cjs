@@ -79,10 +79,11 @@ for (const [, , , chineseRoute] of pairs.filter((pair) => pair[2] !== "/search")
 }
 
 const sharedNavigation = read("assets/js/main.js");
-assert.doesNotMatch(sharedNavigation, /language-switch/, "language switch UI is intentionally hidden until localization expands");
+assert.match(sharedNavigation, /nav-language-item/, "shared navigation must expose a paired-language switch");
+assert.match(sharedNavigation, /hreflang/, "language switch must follow the page's declared alternate locale");
 
 const sharedStyles = read("assets/css/style.css");
-assert.doesNotMatch(sharedStyles, /\.language-switch/, "hidden language switch must not leave dead component styles");
+assert.match(sharedStyles, /\.nav-language-link/, "shared styles must include the language switch treatment");
 
 const chineseKnowledgeBase = read("zh/database.html");
 for (const route of [
