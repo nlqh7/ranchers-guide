@@ -74,6 +74,7 @@
         "x": 70,
         "y": 38,
         "precision": "approximate",
+        "evidenceLayer": "supported",
         "locale": {
           "en": {
             "title": "Leafy Market",
@@ -119,6 +120,7 @@
         "x": 72,
         "y": 46,
         "precision": "approximate",
+        "evidenceLayer": "supported",
         "locale": {
           "en": {
             "title": "City Hall",
@@ -282,6 +284,7 @@
         "x": 78,
         "y": 36,
         "precision": "approximate",
+        "evidenceLayer": "reported",
         "locale": {
           "en": {
             "title": "Vehicle dealerships",
@@ -351,6 +354,7 @@
         "x": 90,
         "y": 45,
         "precision": "approximate",
+        "evidenceLayer": "supported",
         "locale": {
           "en": {
             "title": "The Ranchers Airport",
@@ -421,6 +425,7 @@
         "x": 69,
         "y": 33,
         "precision": "approximate",
+        "evidenceLayer": "reported",
         "locale": {
           "en": {
             "title": "The Ranchers Museum",
@@ -609,6 +614,7 @@
         "x": 74,
         "y": 41,
         "precision": "approximate",
+        "evidenceLayer": "reported",
         "locale": {
           "en": {
             "title": "Lina's Tools",
@@ -654,6 +660,7 @@
         "x": 66,
         "y": 43,
         "precision": "unverified",
+        "evidenceLayer": "reported",
         "locale": {
           "en": {
             "title": "Youssef's stand",
@@ -699,6 +706,7 @@
         "x": 76,
         "y": 50,
         "precision": "approximate",
+        "evidenceLayer": "reported",
         "locale": {
           "en": {
             "title": "Train station",
@@ -767,6 +775,7 @@
         "x": 30,
         "y": 48,
         "precision": "unverified",
+        "evidenceLayer": "reported",
         "locale": {
           "en": {
             "title": "Cash-In box",
@@ -813,6 +822,7 @@
         "x": 68,
         "y": 47,
         "precision": "approximate",
+        "evidenceLayer": "reported",
         "locale": {
           "en": {
             "title": "Bykii terminal",
@@ -858,6 +868,7 @@
         "x": 80,
         "y": 48,
         "precision": "unverified",
+        "evidenceLayer": "reported",
         "locale": {
           "en": {
             "title": "Wanglow's Garage",
@@ -904,6 +915,7 @@
         "x": 20,
         "y": 30,
         "precision": "planned",
+        "evidenceLayer": "planned",
         "locale": {
           "en": {
             "title": "Mines & dungeon entrances",
@@ -949,6 +961,7 @@
         "x": 88,
         "y": 63,
         "precision": "region-only",
+        "evidenceLayer": "reported",
         "locale": {
           "en": {
             "title": "Coastal zones & wild islands",

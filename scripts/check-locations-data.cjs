@@ -35,6 +35,7 @@ for (const location of data.locations) {
     assert.ok(Number.isFinite(location.marker.x) && location.marker.x >= 0 && location.marker.x <= 100);
     assert.ok(Number.isFinite(location.marker.y) && location.marker.y >= 0 && location.marker.y <= 100);
     assert.ok(["approximate", "region-only", "unverified", "planned"].includes(location.marker.precision));
+    assert.ok(["supported", "reported", "planned"].includes(location.marker.evidenceLayer), `${location.id} needs a map evidence layer`);
     assert.ok(location.marker.locale.en.label && location.marker.locale.zh.label);
     assert.ok(location.marker.locale.en.description && location.marker.locale.zh.description);
     assert.ok(location.marker.locale.en.target && location.marker.locale.zh.target);
@@ -42,6 +43,7 @@ for (const location of data.locations) {
 }
 
 assert.equal(markerIds.length, 13, "the current map must keep all 13 visible markers");
+assert.equal(data.locations.filter((location) => location.marker?.evidenceLayer === "supported").length, 3, "only three areas currently have official/video-backed placement context");
 assert.deepEqual(new Set(data.meta.markerOrder), new Set(markerIds), "markerOrder must list every marker once");
 
 for (const relativePath of ["map.html", "zh/map.html"]) {

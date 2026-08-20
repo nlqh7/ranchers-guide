@@ -47,8 +47,15 @@ assert.match(mapPage, /Player-captured August 2, 2026/i);
 assert.match(mapPage, /data-map-marker-layer/);
 assert.match(mapPage, /data-marker-category="(?:shopping|services|transport|landmarks)"/);
 assert.match(mapPage, /data-map-pin-filter="all"/);
+assert.match(mapPage, /data-map-evidence-filter="supported"/);
+assert.match(mapPage, /data-map-evidence-filter="reported"/);
+assert.match(mapPage, /data-map-evidence-filter="planned"/);
 assert.match(mapPage, /class="active"[^>]*data-map-pin-filter="none"[^>]*aria-pressed="true"/, "guide pins should be off by default");
 assert.match(mapPage, /data-map-marker-layer[^>]*hidden/, "guide pin layer should not cover the source map by default");
+assert.match(mapPage, /data-marker-evidence-layer="supported"/);
+assert.match(mapPage, /data-marker-evidence-layer="reported"/);
+assert.match(mapPage, /data-marker-evidence-layer="planned"/);
+assert.match(mapPage, /class="map-marker map-marker-[a-z]+ map-marker-area/, "approximate coordinates must render as search areas, not exact pins");
 assert.match(mapPage, /map-legend/);
 assert.match(mapPage, /class="map-confidence"/);
 assert.doesNotMatch(mapPage, /map-legend-note/, "confidence copy must not be packed into the pin legend");
@@ -101,6 +108,9 @@ for (const pattern of [
   /data-map-marker-layer/,
   /data-map-pin-filter="all"/,
   /data-map-pin-filter="none"/,
+  /data-map-evidence-filter="supported"/,
+  /data-map-evidence-filter="reported"/,
+  /data-map-evidence-filter="planned"/,
   /class="map-confidence"/,
   /assets\/js\/map-core\.js/,
   /assets\/js\/map-viewer-core\.js/,
@@ -108,9 +118,9 @@ for (const pattern of [
 ]) {
   assert.match(chineseMapPage, pattern, `Chinese map must match the interactive map contract: ${pattern}`);
 }
-const chineseMarkers = chineseMapPage.match(/class="map-marker map-marker-[a-z]+"/g) || [];
+const chineseMarkers = chineseMapPage.match(/class="map-marker map-marker-[a-z]+ map-marker-area/g) || [];
 
-const approximateMarkers = mapPage.match(/class="map-marker map-marker-[a-z]+"/g) || [];
+const approximateMarkers = mapPage.match(/class="map-marker map-marker-[a-z]+ map-marker-area/g) || [];
 assert.ok(approximateMarkers.length >= 12, "map should carry at least 12 approximate area markers");
 assert.equal(chineseMarkers.length, approximateMarkers.length, "English and Chinese maps must expose the same marker set");
 for (const category of ["shopping", "services", "transport", "landmarks"]) {
@@ -139,6 +149,7 @@ for (const image of [
   assert.ok(fs.existsSync(path.join(root, "assets", "img", image)), `${image} must exist`);
   assert.match(mapPage, new RegExp(`/assets/img/${image.replace(".", "\\.")}`));
 }
+assert.ok(fs.statSync(path.join(root, "assets", "img", "map-current-overview.webp")).size >= 110000, "current map should retain enough source detail for readable roads and icons");
 
 const mapScript = read("assets/js/map.js");
 assert.match(mapScript, /data-map-region/);
@@ -155,6 +166,9 @@ assert.match(mapScript, /addEventListener\("wheel"/);
 assert.match(mapScript, /data-map-pin-close/);
 assert.match(mapScript, /data-map-marker-layer/);
 assert.match(mapScript, /data-map-pin-filter/);
+assert.match(mapScript, /data-map-evidence-filter/);
+assert.match(mapScript, /activeEvidenceFilter/);
+assert.match(mapScript, /marker\.dataset\.markerEvidenceLayer/);
 assert.match(mapScript, /applyMarkerFilter\("none"\)/, "map script should initialize the guide-pin layer as off");
 assert.match(mapScript, /applyMarkerFilter\(marker\.dataset\.markerCategory\)/, "directory shortcuts should reveal the selected marker category");
 assert.match(mapScript, /markerTarget/);

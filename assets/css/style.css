@@ -1537,39 +1537,50 @@ table.data-table {
   pointer-events: none;
 }
 .map-marker {
+  --marker-color: var(--green-600);
   position: absolute;
   left: var(--mx, 50%);
   top: var(--my, 50%);
-  min-width: 24px;
-  min-height: 24px;
-  width: 26px;
-  height: 26px;
+  min-width: 34px;
+  min-height: 34px;
+  width: 34px;
+  height: 34px;
   padding: 0;
-  margin: -13px 0 0 -13px;
-  border: 2px solid #fff;
-  border-radius: 50% 50% 50% 0;
-  background: var(--green-500);
-  transform: rotate(-45deg) scale(calc(1 / var(--map-scale, 1)));
+  margin: -17px 0 0 -17px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--marker-color) 24%, transparent);
+  transform: scale(calc(1 / var(--map-scale, 1)));
   transform-origin: center;
   cursor: pointer;
   pointer-events: auto;
   touch-action: manipulation;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0 0 3px var(--marker-color), 0 2px 7px rgba(0, 0, 0, 0.34);
 }
 .map-marker::after {
   content: "";
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--marker-color);
   transform: translate(-50%, -50%);
 }
-.map-marker-services { background: #315b83; }
-.map-marker-transport { background: #b3552e; }
-.map-marker-landmarks { background: #6b4d8f; }
+.map-marker-services { --marker-color: #315b83; }
+.map-marker-transport { --marker-color: #b3552e; }
+.map-marker-landmarks { --marker-color: #6b4d8f; }
+.map-marker-evidence-reported { border-style: dashed; opacity: 0.9; }
+.map-marker-evidence-planned {
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+  min-height: 46px;
+  margin: -23px 0 0 -23px;
+  border-style: dotted;
+  opacity: 0.78;
+}
 .map-marker span {
   position: absolute;
   left: 50%;
@@ -1581,7 +1592,7 @@ table.data-table {
   font-size: 0.62rem;
   font-weight: 800;
   white-space: nowrap;
-  transform: translateX(-50%) rotate(45deg);
+  transform: translateX(-50%);
   transform-origin: bottom left;
   opacity: 0;
   pointer-events: none;

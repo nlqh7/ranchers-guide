@@ -20,6 +20,7 @@
   var markerLayer = document.querySelector("[data-map-marker-layer]");
   var markers = markerLayer ? Array.from(markerLayer.querySelectorAll("[data-marker-category]")) : [];
   var markerFilterButtons = Array.from(document.querySelectorAll("[data-map-pin-filter]"));
+  var evidenceFilterButtons = Array.from(document.querySelectorAll("[data-map-evidence-filter]"));
   var inspectorLink = inspector ? inspector.querySelector("[data-map-inspector-link]") : null;
   var pinLayer = document.querySelector("[data-map-pin-layer]");
   var pinForm = document.querySelector("[data-map-pin-form]");
@@ -127,22 +128,47 @@
     });
   });
 
-  function applyMarkerFilter(filter) {
-    if (markerLayer) markerLayer.hidden = filter === "none";
+  var activeCategoryFilter = "none";
+  var activeEvidenceFilter = "supported";
+
+  function renderMarkerLayers() {
+    if (markerLayer) markerLayer.hidden = activeCategoryFilter === "none";
     markerFilterButtons.forEach(function (button) {
-      var active = button.dataset.mapPinFilter === filter;
+      var active = button.dataset.mapPinFilter === activeCategoryFilter;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+    evidenceFilterButtons.forEach(function (button) {
+      var active = button.dataset.mapEvidenceFilter === activeEvidenceFilter;
       button.classList.toggle("active", active);
       button.setAttribute("aria-pressed", active ? "true" : "false");
     });
     markers.forEach(function (marker) {
-      marker.hidden = filter === "none" || (filter !== "all" && marker.dataset.markerCategory !== filter);
+      var categoryHidden = activeCategoryFilter === "none" || (activeCategoryFilter !== "all" && marker.dataset.markerCategory !== activeCategoryFilter);
+      var evidenceHidden = activeEvidenceFilter !== "all" && marker.dataset.markerEvidenceLayer !== activeEvidenceFilter;
+      marker.hidden = categoryHidden || evidenceHidden;
       if (marker.hidden) marker.classList.remove("active");
     });
+  }
+
+  function applyMarkerFilter(filter) {
+    activeCategoryFilter = filter;
+    renderMarkerLayers();
+  }
+
+  function applyEvidenceFilter(filter) {
+    activeEvidenceFilter = filter;
+    renderMarkerLayers();
   }
 
   markerFilterButtons.forEach(function (button) {
     button.addEventListener("click", function () {
       applyMarkerFilter(button.dataset.mapPinFilter);
+    });
+  });
+  evidenceFilterButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      applyEvidenceFilter(button.dataset.mapEvidenceFilter);
     });
   });
   applyMarkerFilter("none");
@@ -196,6 +222,7 @@
       if (!marker) return;
       var mx = parseFloat(marker.style.getPropertyValue("--mx"));
       var my = parseFloat(marker.style.getPropertyValue("--my"));
+      applyEvidenceFilter(marker.dataset.markerEvidenceLayer);
       applyMarkerFilter(marker.dataset.markerCategory);
       viewState = window.RanchersMapViewer.focus(mx, my, 2.6);
       applyMapView();
@@ -387,7 +414,7 @@
   }
 
   function isMapControl(target) {
-    return !!target.closest("[data-map-region], [data-map-pan], [data-map-zoom], [data-location-map], [data-map-pin-filter], .map-pin, .map-marker");
+    return !!target.closest("[data-map-region], [data-map-pan], [data-map-zoom], [data-location-map], [data-map-pin-filter], [data-map-evidence-filter], .map-pin, .map-marker");
   }
 
   if (mapStage) {
