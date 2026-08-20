@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Ranchers 中文电力与水指南 | 合同、通电与卖多余电</title>
+  <meta name="description" content="The Ranchers Early Access 中文电力与水攻略：电力合同怎么签、每天怎么结算、仪表怎么看、多余电力怎么卖、太阳能板任务卡住的真正原因，以及仍需当前版本验证的点。">
+  <link rel="canonical" href="https://theranchersguide.com/zh/guides/electricity-power">
+  <link rel="alternate" hreflang="en" href="https://theranchersguide.com/guides/electricity-power"><link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/guides/electricity-power"><link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/guides/electricity-power">
+  <meta property="og:type" content="article"><meta property="og:title" content="The Ranchers 中文电力与水指南"><meta property="og:description" content="从签约到卖多余电，逐步标注证据强度。"><meta property="og:url" content="https://theranchersguide.com/zh/guides/electricity-power"><meta property="og:image" content="https://theranchersguide.com/assets/img/card-money.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260810-ui1"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header"><nav class="nav-inner" aria-label="主导航"><a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide<small>非官方中文玩家指南</small></span></a><button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button><ul class="nav-links"><li><a class="active" href="/zh/guides/beginners-guide">新手</a></li><li><a href="/zh/database">知识库</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li><li><a href="/zh/search">搜索</a></li><li><a class="nav-cta" href="/contribute">投稿</a></li></ul></nav></header>
+  <main><article class="article">
+    <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / 攻略 / 电力与水指南</nav><h1>The Ranchers 电力与水指南：从签约到卖多余电</h1><p class="meta">2026-08 复核 · 当前版本 0.8.10.562 · 阅读约 9 分钟</p>
+    <div class="evidence-status"><strong>证据状态：</strong>8 项官方事实 · 5 个视频观测（合同费、每日计费、仪表、计费实例） · 1 个待验证回报报告 · 2026-08-08 复核 — <a href="/methodology">我们如何验证 (EN) →</a></div>
+
+    <figure class="page-banner"><img src="/assets/img/card-money.webp" width="800" height="450" alt="The Ranchers 牧场主在大型田地里、背景可见农场设施"></figure>
+
+    <div class="notice" data-evidence-status="official"><strong>当前状态：</strong>电力和水是 2026-07-30 Early Access 版本已确认的机制（基准 0.8.10.455）。合同存在、多余电力可卖——电力合同的结构（签约费 1000C、每天按消耗结算）已在当前版本视频核对。单价与发电产量仍未知，按此标注。<br><strong>当前官方版本：</strong>热修 <strong>0.8.10.562</strong>（2026-08-11）是最新复核版本；8 月热修说明未改动上述水电结论。</div>
+
+    <section class="answer-box">
+      <h2>先说结论</h2>
+      <p>要通电：找<strong>市政厅的市长 Victor</strong> 签电力合同——一次性 <strong>1000C</strong>，之后<strong>每天结算按实际消耗扣费</strong>。你发的多余电力会在<strong>同一笔结算里自动卖回</strong>给镇子。太阳能板任务卡住？它只算<strong>地面板</strong>，不算屋顶板。</p>
+    </section>
+
+    <nav class="toc" aria-label="页面目录"><strong>本指南内容</strong><ul>
+      <li><a href="#official-scope">官方确认了什么</a></li>
+      <li><a href="#two-paths">电力合同：快速回答与步骤</a></li>
+      <li><a href="#meter-ui">仪表界面（视频观测）</a></li>
+      <li><a href="#selling-surplus">卖多余电力</a></li>
+      <li><a href="#solar-quest">太阳能板任务卡住？</a></li>
+      <li><a href="#known-reports">玩家报告</a></li>
+      <li><a href="#test-protocol">仍需当前版本测试</a></li>
+      <li><a href="#faq">电力与水常见问题</a></li>
+    </ul></nav>
+
+    <h2 id="official-scope" data-search-entry data-search-title="官方确认的水电系统" data-search-tags="官方 水电 合同 水井 风力 太阳能 多余电">官方确认了什么</h2>
+    <p>Steam 商店页把牧场经营列为游戏核心支柱之一。在这一支柱里，官方文案明确列出了公用事业管理：你可以签水和电合同，或者用<strong>水井、风力发电机和太阳能板自建供应</strong>。每日运行成本是牧场经营循环的一部分，与制作、交易、技能并列。</p>
+    <p>同一段官方说明还写道，自发的多余能源和水可以<strong>卖回给村庄</strong>，让公用事业从纯成本变成潜在收入。</p>
+    <p><strong>仍未确认的是：</strong>每单位电价、水合同条款、发电速率、水井/风机/太阳能板的产出、多余电售价，以及完成一次多余电出售的确切步骤。下面的合同结构已经视频核对；那些数字仍保持开放，等待带版本的实况观测。</p>
+
+    <h2 id="two-paths" data-search-entry data-search-title="电力合同：怎么签、怎么计费" data-search-tags="电力合同 Victor 市政厅 1000C 签约费 每日结算 消耗">电力合同：快速回答与步骤</h2>
+    <p><strong>快速回答：</strong>要把牧场接入电网，找 <strong>Sunvale 市长 Victor 在市政厅</strong> 签电力合同。一次性 <strong>签约费 1000C</strong>，签约即扣；之后<strong>每天结束时按牧场实际消耗结算</strong>。如果你的牧场发电，<strong>镇子会买你的多余电</strong>。<small>合同与多余电出售由当前 Steam 商店页确认；条款在 EA 0.8.10.455 观测。</small></p>
+    <ol>
+      <li><strong>银行里至少有 1000C</strong>——这也是 "Power to the Bench" 任务的开启要求，任务会带你走一遍这个流程。</li>
+      <li><strong>去市政厅找 Victor</strong>（市长——<a href="/zh/map#city-hall">在地图上查看市政厅</a>）。他的对话里还提供水合同和额外土地购买。</li>
+      <li><strong>签电力合同。</strong>1000C 立即扣除（观测实例：签约时资金从 2,916C 掉到 1,916C）。</li>
+      <li><strong>看每天结算画面</strong>——消耗记在 <strong>Energy</strong> 行——并用手机上的<strong>电力仪表 app</strong> 查看每台设备的用量。</li>
+    </ol>
+    <p><strong>观测到的计费实例：</strong>一个只有一台工作台（5 个消费单位）的牧场，某天结算为 <strong>Energy −15C</strong> <small>EA 0.8.10.455 观测</small>。这是单次观测，不是费率表——单价在任何可引用的来源里都没公布，所以不要拿它去乘。</p>
+    <p><strong>水：</strong>Victor 的对话里有水合同选项，但观测的实况没有签，条款目前未知。<strong>自建供应</strong>（水井、风力、太阳能）是官方确认的替代路线；建造成本和日产量仍待验证，所以在跳过合同之前先记下你自己的数值。</p>
+
+    <h2 id="meter-ui" data-search-entry data-search-title="手机仪表界面怎么看" data-search-tags="仪表 电表 水表 手机 app 设备列表 消耗 效率">仪表界面（视频观测）</h2>
+    <p>手机上有一个<strong>电力/水仪表 app</strong>，两个标签页 <span class="evidence-badge evidence-video">视频观测</span> <span title="Games Station 实况（V0.8.10.455）75:05 观测">Games Station, 75:05</span>。在观测到的实况里，签完合同后电力标签页显示：</p>
+    <ul>
+      <li><strong>电力合同状态：Contract Active</strong>——合同状态在仪表 UI 里可见，不只存在于任务日志。</li>
+      <li><strong>设备列表：</strong>工作台 ×1，消费单位 5，效率值 0；总消耗显示为 5。</li>
+      <li><strong>"你的牧场能效：−5"</strong>——一个赤字状态的实例：没有建任何发电设备时，牧场跑在 −5，与官方"每日运行成本是循环一部分"的说法一致。</li>
+    </ul>
+    <p>这是仪表 UI 结构（设备列表、单设备消耗、总量、效率摘要）的第一个观测实例。现在有一个计费数据点：同一个牧场当天结算为 Energy −15C（见上面的合同部分）。仍未观测到的：单价，以及发电设备如何把数字推向正值。</p>
+
+    <h2 id="selling-surplus" data-search-entry data-search-title="多余电力怎么卖" data-search-tags="卖电 多余电 自动 结算 Energy 正收入 不付钱">卖多余电力</h2>
+    <p><strong>快速回答：</strong>你不用手动把电卖给谁——一旦<strong>签了电力合同</strong>，你的牧场发的多余电会在<strong>每天结算时自动转换</strong>：Energy 行从负扣费翻成正收入。如果你的结算没有多余收入，通常只是因为还没签合同。<small>多名玩家报告；合同对话确认镇子买多余电。EA 0.8.10.455 观测。</small></p>
+    <ul>
+      <li><strong>报告中的费率：</strong>一名玩家报告买入 2C/单位、多余电卖回 1C（他的存档后来变成买 3C / 卖 1C）。<strong>单一来源数字</strong>——可能随版本或补丁变化。</li>
+      <li><strong>一个未解案例：</strong>有玩家报告一个 +5 多余日却仍被扣 33C——可能是阈值或 bug；社区暂时没有结论。如果你碰到了，记下仪表和结算画面并上报。</li>
+    </ul>
+    <p>水的多余出售遵循同样的官方宣传逻辑，但观测实况里没签水合同，所以水出售行为仍未知。</p>
+
+    <h2 id="solar-quest" data-search-entry data-search-title="太阳能板任务卡住怎么办" data-search-tags="太阳能 任务 卡住 地面板 屋顶板 ground roof 不完成">太阳能板任务卡住？</h2>
+    <p><strong>快速回答：</strong>任务要的是<strong>基础地面太阳能板</strong>——商店列表（左中位置）那个地面槽里的。即使屋顶太阳能板能用、每天给你钱，它也<strong>不算</strong>。买并放置<strong>一块地面板</strong>，任务就完成。<small>多名玩家报告，互相印证；任务文字有误导。</small></p>
+    <p>如果放了一块地面板仍不前进，用标准的卡任务流程：按 <strong>T</strong> 看手机任务日志，睡到第二天，然后重启游戏。</p>
+
+    <h2 id="known-reports" data-search-entry data-search-title="玩家水电报告" data-search-tags="报告 卖电不付 任务不前进 账单 压力">玩家报告</h2>
+    <p>以下是报告，不是已复现的事实。每条都仍需可复现的当前版本测试，才能变成攻略数据。</p>
+    <div class="data-table-wrap" role="region" aria-label="玩家水电报告" tabindex="0">
+    <table>
+      <thead><tr><th>报告</th><th>证据</th><th>玩家描述</th><th>状态</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>卖多余电不给钱</td>
+          <td><span class="evidence-badge evidence-reported">单一线索</span></td>
+          <td>首发周玩家报告：电量为正、结束合同后也无回报，仍被收电网费。</td>
+          <td><a href="/research#excess-electricity">研究中 (EN)</a></td>
+        </tr>
+        <tr>
+          <td>"Power to the Bench" 任务不前进</td>
+          <td><span class="evidence-badge evidence-reported">单一线索</span></td>
+          <td>玩家报告电力任务不推进。所需的合同、电缆或工作台状态未确认。</td>
+          <td><a href="/research#power-to-the-bench">研究中 (EN)</a></td>
+        </tr>
+        <tr>
+          <td>每日水电账单带来压力</td>
+          <td><span class="evidence-badge evidence-corroborated">评论共识</span></td>
+          <td>媒体评测描述反复出现的公用事业成本和燃料表作为前期持续资源压力。这是评论，不是测量数值。</td>
+          <td>策略背景</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <p>上面玩家表述为概括，非原文复制。报告保留在<a href="/research">验证队列 (EN)</a> 直到出现可复现答案。</p>
+
+    <h2 id="test-protocol" data-search-entry data-search-title="仍需当前版本验证的点" data-search-tags="待验证 测试协议 合同屏幕 仪表读数 账单 设备 版本">仍需当前版本测试</h2>
+    <p>如果你想帮忙堵上水电疑问，最小有用的观测是一份带日期、带版本的记录：一个合同或一段仪表序列。本站的田野笔记工具可以私下保存，直到准备好提交。</p>
+    <ul>
+      <li><strong>合同屏幕：</strong>显示了哪些条款、费用、计费周期。</li>
+      <li><strong>仪表读数：</strong>一天切换前后，发电、消耗和多余的显示值。</li>
+      <li><strong>次日账单：</strong>出现的是扣费还是冲抵，金额多少。</li>
+      <li><strong>连接设备：</strong>测试里哪些建筑或机器在消耗电和水。</li>
+      <li><strong>版本号：</strong>每条记录都必须写出版本，因为 Early Access 经常变动。</li>
+    </ul>
+    <p>无论你签合同还是建水井/风机/太阳能板，都遵循同一套协议。在可比条件下两份独立的当前版本记录，能把一个发现提升到 <span class="evidence-badge evidence-corroborated">已印证</span>。</p>
+
+    <h2 id="faq">电力与水常见问题</h2>
+    <details class="faq-item">
+      <summary>我能完全离网运营牧场吗？</summary>
+      <div class="faq-body"><p>官方文案确认水井、风力、太阳能可以发电，但没说自建发电一定能覆盖整座牧场。在出现"无合同完整一天"的当前版本测试之前，把"完全离网"当作未验证。</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>怎么卖多余电？</summary>
+      <div class="faq-body"><p>在市政厅找 Victor 签电力合同，然后发的比用的多——多余部分在每天结算自动转换（Energy 行变正）。不涉及任何 NPC 访问或物品出售。有一份未解的玩家报告说多余日仍被扣费，所以如果你靠这笔收入，自己留好截图。</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>水电账单什么时候扣？</summary>
+      <div class="faq-body"><p>电力在每天结束时按牧场实际消耗结算，依据 0.8.10.455 构建里观测到的合同对话。单价未公布，所以记下你自己头几次扣费的日期和金额。</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>水电在首发版本里吗？</summary>
+      <div class="faq-body"><p>是的——公用事业管理是 Early Access 0.8.10.562 已确认的牧场经营系统之一。它不是路线图功能。</p></div>
+    </details>
+
+    <h2>来源</h2>
+    <ul>
+      <li><a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">官方 Steam 商店页</a>——牧场经营支柱、水电合同、水井/风力/太阳能、多余出售。</li>
+      <li><a href="https://ranchers.game/" rel="noopener noreferrer">官方 The Ranchers 网站</a>——发行商制作的特性概览。</li>
+      <li><a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">官方 Steam 新闻</a>——带日期的开发与更新说明。</li>
+      <li><a href="https://steamcommunity.com/app/1501310" rel="noopener noreferrer">Steam 社区中心</a>——首发周水电报告的来源。</li>
+      <li><a href="https://www.youtube.com/watch?v=GrFiYqWcBK0" rel="noopener noreferrer">Games Station 实况（V0.8.10.455）</a>——视频观测到的合同条款（66:21–66:41，1000C 签约费与每日消耗结算）、签约扣费、仪表 UI（75:05）、第 8 天 Energy −15C 结算实例（76:14–76:24），2026-08-07–08 复核。</li>
+    </ul>
+    <p>社区表述为概括而非复制。报告保留日期与出处；无支撑的修复不被当作事实发布。单价与发电产量在出现带版本的实况观测前保持开放。</p>
+
+    <h2>相关攻略</h2>
+    <ul>
+      <li><a href="/zh/guides/money-making#energy">赚钱指南</a>——多余电力能不能成为真实收入线。</li>
+      <li><a href="/zh/guides/animal-guide#automation">畜棚自动化</a>——那里的水塔需要先去市政厅签水合同。</li>
+      <li><a href="/zh/guides/beginners-guide">新手指南</a>——水电在你第一周的位置。</li>
+      <li><a href="/guides/release-time-checklist">Early Access 状态 (EN)</a>——当前版本哪些系统已上线。</li>
+      <li><a href="/zh/problems">问题排查</a>——跟踪中的水电报告与当前版本排错。</li>
+    </ul>
+
+    <aside class="author-card" aria-label="关于作者">
+      <div class="author-card-id"><strong>Niki</strong><span>本站编辑，The Ranchers Guide</span></div>
+      <p>由本站编辑 Niki 调研和编辑。玩法证据来自公开视频、官方更新和社区报告。最近复核：2026 年 8 月。覆盖版本：0.8.10.x。<a href="/methodology">我们如何验证 (EN) →</a></p>
+    </aside>
+  </article></main>
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>证据等级与版本标注与英文页一致</span></div></div></footer><script src="/assets/js/main.js?v=20260810-nav1" defer></script>
+</body></html>

@@ -90,10 +90,10 @@
     <section class="hero">
       <div class="container hero-inner">
         <div class="hero-copy">
-          <span class="hero-eyebrow">Unofficial Early Access companion</span>
+          <span class="hero-eyebrow">Guides · Maps · Tools</span>
           <h1><span>The Ranchers</span> <strong>Guide</strong></h1>
-          <p class="hero-promise">Build your ranch with fewer guesses.</p>
-          <p class="lead">Search current-version answers for items, quests, locations, systems and problems.</p>
+          <p class="hero-promise">Practical guides, maps and tools for The Ranchers players.</p>
+          <p class="lead">Find answers, explore locations, and build your ranch easier.</p>
 
           <form class="hero-search" action="/search" method="get" role="search">
             <label for="hero-search-query">Search the knowledge base</label>
@@ -103,13 +103,32 @@
               <button type="submit">Search</button>
             </div>
           </form>
-          <nav class="hero-query-links" aria-label="Popular answers">
-            <a href="/search?q=where+do+I+get+hay">Get hay</a>
-            <a href="/search?q=Gigi+large+eggs">Gigi quest</a>
-            <a href="/search?q=my+car+was+impounded">Lost car</a>
-            <a href="/database">Browse all</a>
-          </nav>
-          <p class="hero-source">Independent and evidence-tracked. <a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">Check official Steam notes</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hero entry cards -->
+    <section class="section hero-cards" aria-label="Choose where to start">
+      <div class="container">
+        <div class="card-grid cols-3">
+          <article class="card">
+            <div class="card-icon">🆘</div>
+            <h3><a class="stretched" href="/problems">I'm stuck</a></h3>
+            <p>Quest bugs, animal problems, missing items.</p>
+            <a class="card-link" href="/problems">Problems &amp; Fixes →</a>
+          </article>
+          <article class="card">
+            <div class="card-icon">📖</div>
+            <h3><a class="stretched" href="/database">I want to learn</a></h3>
+            <p>Animals, crops, materials, NPCs, quests.</p>
+            <a class="card-link" href="/database">Wiki / Database →</a>
+          </article>
+          <article class="card">
+            <div class="card-icon">🗺</div>
+            <h3><a class="stretched" href="/map">I want to explore</a></h3>
+            <p>Locations, shops, NPCs, services.</p>
+            <a class="card-link" href="/map">Interactive Map →</a>
+          </article>
         </div>
       </div>
     </section>
@@ -123,7 +142,7 @@
         <div>
           <span class="kicker">Player Research Hub</span>
           <h2 id="research-promo-title">Answers with visible evidence</h2>
-          <p>Start with a current-build fix, inspect what supports it, or help test an open question. Unresolved community reports stay in the research queue instead of becoming guessed advice.</p>
+          <p>Start with a current-build fix, inspect what supports it, or help test an open question. Unresolved community reports stay in the research queue instead of becoming guessed advice. <a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">See the official Steam news</a> for the latest build.</p>
           <p class="button-stack"><a class="btn" href="/problems">Browse Problems</a><a class="btn btn-outline" href="/community">Read Community Pulse</a><a class="btn btn-outline" href="/research">Open Research Queue</a></p>
         </div>
         <ol class="research-steps">
