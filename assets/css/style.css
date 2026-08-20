@@ -1031,6 +1031,9 @@ table.data-table {
 .animal-profile { scroll-margin-top: 120px; }
 .fact-historical { color: #7a6a5c; }
 .fact-source { color: var(--brown-500); font-size: 0.78rem; }
+.entity-directory { max-width: 980px; }
+.entity-profile { scroll-margin-top: 120px; }
+.entity-related { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-5); }
 .evidence-table tr[data-search-entry] { scroll-margin-top: 120px; }
 .evidence-table tr[data-search-entry]:target td {
   background: #fff0b8;

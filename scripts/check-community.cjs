@@ -35,8 +35,8 @@ assert.match(problemScript, /data-problem-entry/);
 
 const search = read("assets/js/search.js");
 assert.match(search, /"\/community"/);
-assert.match(search, /ranchers-search-index-v20/);
-assert.match(search, /ranchers-search-index-zh-v6/);
+assert.match(search, /ranchers-search-index-v21/);
+assert.match(search, /ranchers-search-index-zh-v7/);
 
 const sitemap = read("sitemap.xml");
 assert.match(sitemap, /https:\/\/theranchersguide\.com\/community/);

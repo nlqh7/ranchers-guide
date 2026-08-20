@@ -10,6 +10,8 @@ const pairs = [
   ["database/animals.html", "zh/database/animals.html", "/database/animals", "/zh/database/animals"],
   ["database/crops.html", "zh/database/crops.html", "/database/crops", "/zh/database/crops"],
   ["database/materials.html", "zh/database/materials.html", "/database/materials", "/zh/database/materials"],
+  ["database/npcs.html", "zh/database/npcs.html", "/database/npcs", "/zh/database/npcs"],
+  ["database/quests.html", "zh/database/quests.html", "/database/quests", "/zh/database/quests"],
   ["map.html", "zh/map.html", "/map", "/zh/map"],
   ["problems.html", "zh/problems.html", "/problems", "/zh/problems"],
   ["search.html", "zh/search.html", "/search", "/zh/search"],

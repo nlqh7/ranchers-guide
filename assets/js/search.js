@@ -20,6 +20,8 @@
     "/database/crops",
     "/database/animals",
     "/database/materials",
+    "/database/npcs",
+    "/database/quests",
     "/map",
     "/problems",
     "/problems/offline-mode-loading",
@@ -51,6 +53,8 @@
     "/zh/database/crops",
     "/zh/database/animals",
     "/zh/database/materials",
+    "/zh/database/npcs",
+    "/zh/database/quests",
     "/zh/map",
     "/zh/problems",
     "/zh/tools/chicken-troubleshooter"
@@ -58,7 +62,7 @@
   var IS_ZH = document.documentElement.lang.toLowerCase() === "zh-cn";
   var PAGE_PATHS = IS_ZH ? ZH_PAGE_PATHS : EN_PAGE_PATHS;
   var SEARCH_ROUTE = IS_ZH ? "/zh/search" : "/search";
-  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v6" : "ranchers-search-index-v20";
+  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v7" : "ranchers-search-index-v21";
   var documents = [];
   var form = document.querySelector("[data-search-form]");
   var input = document.querySelector("[data-search-input]");

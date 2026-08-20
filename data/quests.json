@@ -1,0 +1,74 @@
+{
+  "meta": { "build": "0.8.10.562", "lastUpdated": "2026-08-20" },
+  "sources": {
+    "launch-video": { "kind": "local-video", "title": "Games Station current-build gameplay archive and tracker frames", "url": null, "author": "Games Station", "date": "2026-08-07", "build": "0.8.10.455" },
+    "chicken-coop-thread": { "kind": "steam-thread", "title": "Steam thread: Chicken coop mission", "url": "https://steamcommunity.com/app/1501310/discussions/0/587307906418973975/", "author": "DJM / Yakiwi", "date": "2026-08-02", "build": "0.8.10.x" },
+    "roof-official-thread": { "kind": "steam-thread", "title": "Steam thread: roof tracker known issue and support sequence", "url": "https://steamcommunity.com/app/1501310/discussions/0/587308167364412800/", "author": "Jennoula", "date": "2026-08-04", "build": "0.8.10.x" },
+    "roof-community-scan": { "kind": "local-archive", "title": "August 2026 roof-building discussion scan", "url": null, "author": "Multiple players", "date": "2026-08-08", "build": "0.8.10.x" },
+    "gigi-quest-thread": { "kind": "steam-thread", "title": "Steam thread: Real Eggs, Real Evidence", "url": "https://steamcommunity.com/app/1501310/discussions/0/587308167364362187/", "author": "DJM / players", "date": "2026-08-04", "build": "0.8.10.x" },
+    "gigi-end-thread": { "kind": "steam-thread", "title": "Steam thread: current quest line after Real Eggs", "url": "https://steamcommunity.com/app/1501310/discussions/0/587307627624791770/", "author": "Multiple players", "date": "2026-08-01", "build": "0.8.10.x" },
+    "solar-thread": { "kind": "steam-thread", "title": "Steam thread: Solar Panel Quest", "url": "https://steamcommunity.com/app/1501310/discussions/0/587308261888288219/", "author": "sagatarious / FIDELIS", "date": "2026-08-05", "build": "0.8.10.x" }
+  },
+  "quests": [
+    {
+      "id": "rust-to-rumbling", "name": "Rust to Rumbling!", "zhName": "Rust to Rumbling! 修车任务", "nameConfidence": "exact-observed", "searchTags": "rust rumbling victor old car 3000 bykii vehicle quest", "zhSearchTags": "Rust to Rumbling Victor 旧车 3000 Bykii 汽车 任务",
+      "summary": "A current-build four-objective vehicle quest observed in the tracker on Day 5.", "zhSummary": "当前版本第 5 天任务追踪器中观测到的四目标车辆任务。",
+      "facts": [
+        { "text": "The exact tracker title Rust to Rumbling! and a four-objective chain were observed in current-build footage.", "zhText": "当前版本画面中观测到任务追踪器的准确标题 Rust to Rumbling!，流程共四个目标。", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["launch-video"] },
+        { "text": "The first retained objective is to save 3,000 C before progressing the vehicle route.", "zhText": "保留画面显示首个目标是存下 3,000 C，再继续车辆流程。", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["launch-video"] },
+        { "text": "The observed chain includes repairing Victor's old car, using a Bykii terminal and collecting the replacement vehicle; exact dialogue choices were not retained.", "zhText": "观测流程包含修理 Victor 的旧车、使用 Bykii 终端并领取替换车辆；现有资料未保留所有对话选项。", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["launch-video"] }
+      ],
+      "relatedRoutes": ["/database/npcs#victor", "/map?q=bykii", "/problems/vehicle-recovery"]
+    },
+    {
+      "id": "power-to-the-bench", "name": "Power to the Bench", "zhName": "Power to the Bench 工作台供电任务", "nameConfidence": "exact-observed", "searchTags": "power bench victor electricity contract 1000 city hall workbench quest", "zhSearchTags": "Power to the Bench Victor 电力 通电 供电 合同 1000 市政厅 工作台 任务",
+      "summary": "A five-objective utility tutorial that connects City Hall, Victor's contract and the ranch workbench.", "zhSummary": "连接市政厅、Victor 电力合同和牧场工作台的五目标公用事业教程任务。",
+      "facts": [
+        { "text": "The exact tracker title and five-objective route were observed on Day 8 in current-build footage.", "zhText": "当前版本第 8 天画面中观测到准确任务标题和五个目标。", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["launch-video"] },
+        { "text": "The observed route sends the player to City Hall and Victor to commission an electricity and gas contract before building the workbench.", "zhText": "观测流程要求玩家前往市政厅找 Victor 办理电力与燃气合同，然后建造工作台。", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["launch-video"] },
+        { "text": "Victor's retained dialogue states a 1,000 C commissioning fee, daily usage billing and city purchase of surplus power; it does not reveal a per-unit rate.", "zhText": "保留的 Victor 对话说明签约费为 1,000 C，按日结算用量，并可由城市回购余电；画面没有显示单位费率。", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["launch-video"] }
+      ],
+      "relatedRoutes": ["/database/npcs#victor", "/map#city-hall", "/guides/electricity-power#two-paths"]
+    },
+    {
+      "id": "chicken-coop-mission", "name": "Chicken Coop Mission", "zhName": "养鸡场任务 Chicken Coop Mission", "nameConfidence": "community-label", "searchTags": "chicken coop mission angela buy pickup field boot stuck prompt", "zhSearchTags": "养鸡 鸡舍 任务 Angela 买鸡 围栏 后备箱 卡住 提示",
+      "summary": "Community label for the early chicken-purchase objective; the exact in-game tracker title is not retained.", "zhSummary": "社区对早期买鸡目标的称呼；现有资料没有保留准确的游戏内任务标题。",
+      "facts": [
+        { "text": "Players complete the purchase step through Angela, the chicken seller.", "zhText": "玩家通过卖鸡商人 Angela 完成购买步骤。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["chicken-coop-thread"] },
+        { "text": "Bought chickens spawn in the fenced field behind her house instead of entering inventory; grab them and use a car boot or carry them home.", "zhText": "买到的鸡会生成在她屋后的围栏地里，不会进入背包；需要抱起后装进汽车后备箱或步行带回。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["chicken-coop-thread"] },
+        { "text": "Every retained stuck case came from missing the post-purchase prompt, but that pattern does not rule out other mission bugs.", "zhText": "现有卡住案例都源于漏看购买后的提示，但这不能排除任务存在其他故障。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["chicken-coop-thread"] }
+      ],
+      "relatedRoutes": ["/database/npcs#angela", "/guides/animal-guide#getting", "/tools/chicken-troubleshooter"]
+    },
+    {
+      "id": "roof-building", "name": "Roof-building tutorial objective", "zhName": "屋顶建造教程目标", "nameConfidence": "descriptive", "searchTags": "roof quest tracker stuck tutorial door window cap workbench", "zhSearchTags": "屋顶 任务 追踪器 卡住 教程 门 窗 Roof Cap 工作台",
+      "summary": "A descriptive entry for the roof-building objective because the exact tracker title is not retained.", "zhSummary": "屋顶建造目标的描述性条目，因为现有证据没有保留准确任务标题。",
+      "facts": [
+        { "text": "Official support confirmed a known state where the roof objective is built but its tracker does not advance.", "zhText": "官方支持确认存在屋顶已经建好但任务追踪器不推进的已知状态。", "evidenceLevel": "official", "build": "0.8.10.x", "validity": "current", "sourceIds": ["roof-official-thread"] },
+        { "text": "The official recovery sequence is to inspect the phone quest journal with T, sleep to the next day and restart the client if the tracker remains stuck.", "zhText": "官方恢复顺序是按 T 检查手机任务日志、睡到第二天，并在追踪器仍卡住时重启客户端。", "evidenceLevel": "official", "build": "0.8.10.x", "validity": "current", "sourceIds": ["roof-official-thread"] },
+        { "text": "Separate community cases involve hidden workbench rows, missing door/window placement or a Roof Cap opening; use the decision guide instead of treating every symptom as the tracker bug.", "zhText": "另一些社区案例来自工作台列表未滚动、门窗未放置或 Roof Cap 中央开口；应使用分类流程，而不是把所有症状都当成追踪器故障。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["roof-community-scan"] }
+      ],
+      "relatedRoutes": ["/guides/roof-quest-stuck#flow", "/guides/building-construction", "/problems/failed-quest-replay"]
+    },
+    {
+      "id": "real-eggs-real-evidence", "name": "Real Eggs, Real Evidence", "zhName": "Real Eggs, Real Evidence 大鸡蛋任务", "nameConfidence": "community-current", "searchTags": "real eggs evidence gigi large egg police chase quest end", "zhSearchTags": "Real Eggs Real Evidence Gigi 大鸡蛋 警察 追逐 任务 结尾",
+      "summary": "The current large-egg route involving Gigi, a police escape and the present end of the implemented quest line.", "zhSummary": "当前涉及 Gigi、大鸡蛋、逃离警察以及现有任务线终点的流程。",
+      "facts": [
+        { "text": "The retained current route requires two Large Eggs; daily care and enclosed outdoor roaming affect the chance, but the result remains random.", "zhText": "现有当前流程要求两个大鸡蛋；每日照料和封闭室外活动会影响机会，但产出仍具有随机性。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["gigi-quest-thread"] },
+        { "text": "After handoff, Gigi follows the player during a police escape and must be returned to her home area to complete the documented route.", "zhText": "交付后，Gigi 会在逃离警察期间跟随玩家，需要被送回她家附近才能完成已记录流程。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["gigi-quest-thread"] },
+        { "text": "Multiple players report no implemented follow-up after the return; waiting additional seasons is not a verified solution.", "zhText": "多名玩家报告送回后没有已实装的后续；继续等待多个季节不是已验证解法。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["gigi-end-thread"] }
+      ],
+      "relatedRoutes": ["/database/npcs#gigi", "/guides/gigi-large-egg-quest", "/guides/police-wanted-levels"]
+    },
+    {
+      "id": "solar-panel-objective", "name": "Solar panel objective", "zhName": "太阳能板任务目标", "nameConfidence": "community-label", "searchTags": "solar panel quest ground roof basic electricity objective stuck", "zhSearchTags": "太阳能板 任务 地面 屋顶 基础款 电力 目标 卡住",
+      "summary": "Community label for the objective that distinguishes the basic ground panel from the roof version.", "zhSummary": "社区对该目标的称呼；关键是区分基础地面太阳能板和屋顶版本。",
+      "facts": [
+        { "text": "Two players independently confirmed that the objective needs the basic ground solar panel.", "zhText": "两名玩家相互确认，该目标需要基础地面太阳能板。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["solar-thread"] },
+        { "text": "The roof solar panel does not satisfy this objective even though it is also a solar panel.", "zhText": "屋顶太阳能板虽然也是太阳能板，但不会满足该任务目标。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["solar-thread"] },
+        { "text": "The retained confirmations say one correctly placed ground panel is sufficient; exact quest title and prerequisite timing remain unverified.", "zhText": "现有确认称正确放置一个地面款即可；准确任务标题和前置触发时间仍未验证。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["solar-thread"] }
+      ],
+      "relatedRoutes": ["/guides/electricity-power#solar-quest", "/map#city-hall", "/database/npcs#victor"]
+    }
+  ]
+}

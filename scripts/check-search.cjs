@@ -173,8 +173,8 @@ assert.match(knowledgeBasePage, /<h1>The Ranchers Knowledge Base<\/h1>/);
 assert.match(knowledgeBasePage, /href="\/guides\/animal-guide#feeding"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /"\/database"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /search-index\.json/);
-assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-zh-v6/, "Chinese search cache must invalidate the previous page set");
-assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-v20/, "English search cache must invalidate the previous page set");
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-zh-v7/, "Chinese search cache must invalidate the previous page set");
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-v21/, "English search cache must invalidate the previous page set");
 
 /* Prebuilt search index (scripts/build-search-index.cjs — re-run after content edits). */
 const prebuiltIndex = JSON.parse(fs.readFileSync(path.join(root, "search-index.json"), "utf8"));
@@ -189,6 +189,8 @@ const firstThirtyEntry = prebuiltIndex.find((entry) => entry.url === "/guides/be
 assert.equal(firstThirtyEntry.type, "Guide step", "guide search entries must not be labeled as database entries");
 assert.match(fs.readFileSync(path.join(root, "database", "crops.html"), "utf8"), /id="strawberry-seeds"[^>]+data-search-entry/);
 assert.match(fs.readFileSync(path.join(root, "database", "animals.html"), "utf8"), /id="black-chicken"[^>]+data-search-entry/);
+assert.equal(searchDocuments(prebuiltIndex, "Power to the Bench")[0].url, "/database/quests#power-to-the-bench");
+assert.equal(searchDocuments(prebuiltIndex, "Angela chicken seller")[0].url, "/database/npcs#angela");
 
 const chineseIndex = JSON.parse(fs.readFileSync(path.join(root, "zh", "search-index.json"), "utf8"));
 assert.ok(chineseIndex.every((entry) => entry.type !== "Database entry"), "Chinese search result types must be localized");
@@ -200,6 +202,8 @@ assert.ok(missingChickenResults.some((result) => result.url === "/zh/database/an
 assert.equal(searchDocuments(chineseIndex, "草莓多久成熟")[0].url, "/zh/database/crops#strawberry");
 assert.equal(searchDocuments(chineseIndex, "种子商店在哪里")[0].url, "/zh/map#leafy-market");
 assert.equal(searchDocuments(chineseIndex, "锆矿在哪里买")[0].url, "/zh/database/materials#zirconite");
+assert.equal(searchDocuments(chineseIndex, "工作台通电任务")[0].url, "/zh/database/quests#power-to-the-bench");
+assert.ok(searchDocuments(chineseIndex, "Angela 买鸡").some((result) => result.url === "/zh/database/npcs#angela"));
 
 /* The five translated core guides must rank for the community phrases they answer. */
 assert.equal(searchDocuments(chineseIndex, "鸡不下蛋")[0].url, "/zh/guides/animal-guide#eggs");

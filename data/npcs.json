@@ -1,0 +1,42 @@
+{
+  "meta": { "build": "0.8.10.562", "lastUpdated": "2026-08-20" },
+  "sources": {
+    "launch-video": { "kind": "local-video", "title": "Games Station current-build gameplay archive", "url": null, "author": "Games Station", "date": "2026-08-07", "build": "0.8.10.455" },
+    "chicken-coop-thread": { "kind": "steam-thread", "title": "Steam thread: Chicken coop mission", "url": "https://steamcommunity.com/app/1501310/discussions/0/587307906418973975/", "author": "DJM / Yakiwi", "date": "2026-08-02", "build": "0.8.10.x" },
+    "animal-support-scan": { "kind": "local-archive", "title": "August 2026 animal support answers and community scan", "url": null, "author": "Jennoula / players", "date": "2026-08-08", "build": "0.8.10.x" },
+    "gigi-quest-thread": { "kind": "steam-thread", "title": "Steam thread: Real Eggs, Real Evidence quest route", "url": "https://steamcommunity.com/app/1501310/discussions/0/587308167364362187/", "author": "DJM / players", "date": "2026-08-04", "build": "0.8.10.x" },
+    "gigi-end-thread": { "kind": "steam-thread", "title": "Steam threads: current quest line after Gigi", "url": "https://steamcommunity.com/app/1501310/discussions/0/587307627624791770/", "author": "Multiple players", "date": "2026-08-01", "build": "0.8.10.x" }
+  },
+  "npcs": [
+    {
+      "id": "victor", "name": "Victor", "zhName": "Victor 维克托", "searchTags": "victor mayor city hall contracts power water land rust rumbling bench", "zhSearchTags": "Victor 维克托 市长 市政厅 合同 电力 水 土地 修车 工作台",
+      "summary": "Sunvale's Mayor and the current-build contact for ranch utility contracts and additional land.", "zhSummary": "Sunvale 市长，也是当前版本办理牧场水电合同和购买额外土地的联系人。",
+      "facts": [
+        { "text": "Current-build footage identifies Victor as Sunvale's Mayor and shows his conversation at City Hall.", "zhText": "当前版本视频将 Victor 标为 Sunvale 市长，并记录了他在市政厅的对话。", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["launch-video"] },
+        { "text": "His current dialogue offers electricity and gas, water, and additional-land options.", "zhText": "他当前的对话选项包括电力与燃气合同、水合同和购买额外土地。", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["launch-video"] },
+        { "text": "The observed Power to the Bench route sends the player to Victor for the electricity contract before building and checking a workbench.", "zhText": "视频中的 Power to the Bench 流程要求玩家先找 Victor 签电力合同，再建造并检查工作台。", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["launch-video"] }
+      ],
+      "relatedRoutes": ["/map#city-hall", "/guides/electricity-power#two-paths", "/database/quests#power-to-the-bench"]
+    },
+    {
+      "id": "angela", "name": "Angela", "zhName": "Angela 安吉拉", "searchTags": "angela chicken seller coop heater ac animal shop field", "zhSearchTags": "Angela 安吉拉 鸡 商人 鸡舍 暖气 空调 动物商店 围栏",
+      "summary": "The chicken seller tied to the coop mission, bird pickup and the correct coop climate equipment.", "zhSummary": "养鸡任务相关商人，负责出售鸡以及可用于鸡舍的正确温控设备。",
+      "facts": [
+        { "text": "Current players identify Angela as the chicken seller used by the coop mission.", "zhText": "当前玩家资料将 Angela 指认为养鸡任务中的卖鸡商人。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["chicken-coop-thread", "animal-support-scan"] },
+        { "text": "Purchased chickens appear in the fenced field behind her house rather than in the player's inventory; carry them or load them into a car boot.", "zhText": "购买的鸡会出现在她屋后的围栏地里，而不是玩家背包中；需要抱走或装进汽车后备箱。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["chicken-coop-thread"] },
+        { "text": "Official support context identifies Angela's coop/barn heater and AC as the functional versions; City Hall decoration units do not work for animal housing.", "zhText": "官方支持语境确认，应购买 Angela 出售的鸡舍/畜棚暖气和空调；市政厅的家用装饰版本对动物建筑无效。", "evidenceLevel": "official", "build": "0.8.10.x", "validity": "current", "sourceIds": ["animal-support-scan"] }
+      ],
+      "relatedRoutes": ["/guides/animal-guide#getting", "/tools/chicken-troubleshooter", "/database/quests#chicken-coop-mission"]
+    },
+    {
+      "id": "gigi", "name": "Gigi", "zhName": "Gigi 吉吉", "searchTags": "gigi real eggs evidence large egg police chase quest home", "zhSearchTags": "Gigi 吉吉 大鸡蛋 真实鸡蛋 证据 警察 追逐 任务 回家",
+      "summary": "The NPC at the center of the current large-egg quest and its police-chase return route.", "zhSummary": "当前大鸡蛋任务及随后警察追逐、送回家流程的核心 NPC。",
+      "facts": [
+        { "text": "The current quest route asks for two Large Eggs before the next handoff becomes available.", "zhText": "当前任务流程要求先准备两个大鸡蛋，之后才会出现下一步交付。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["gigi-quest-thread"] },
+        { "text": "After the egg handoff, Gigi follows the player through a police escape and must be returned to her home area to finish the documented route.", "zhText": "交付鸡蛋后，Gigi 会跟随玩家经历逃离警察的流程，并需要被送回她家附近才能完成已记录路线。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["gigi-quest-thread"] },
+        { "text": "Multiple current players report no implemented follow-up quest after this route; treat it as the present story endpoint, not a hidden trigger with a known solution.", "zhText": "多名当前玩家报告此流程后没有已实装的后续任务；现阶段应视为剧情终点，而不是存在已知隐藏触发条件。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["gigi-end-thread"] }
+      ],
+      "relatedRoutes": ["/guides/gigi-large-egg-quest", "/guides/police-wanted-levels", "/database/quests#real-eggs-real-evidence"]
+    }
+  ]
+}
