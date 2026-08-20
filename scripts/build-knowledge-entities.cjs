@@ -47,6 +47,62 @@ const confidenceLabels = {
   zh: { "exact-observed": "已观测准确任务名", "community-current": "当前社区任务名", "community-label": "社区称呼", descriptive: "描述性名称" },
 };
 
+const relationLabels = {
+  en: { "involves-npc": "NPC", "takes-place-at": "Place", "uses-location": "Place" },
+  zh: { "involves-npc": "NPC", "takes-place-at": "地点", "uses-location": "地点" },
+};
+
+const entityRoutes = {
+  npc: (id, locale) => `${locale === "zh" ? "/zh" : ""}/database/npcs#${id}`,
+  location: (id, locale) => `${locale === "zh" && zhMapAnchors.has(id) ? "/zh" : ""}/map#${id}`,
+};
+
+const relatedRouteLabels = {
+  "/map#city-hall": { en: "City Hall map", zh: "市政厅地图" },
+  "/problems/vehicle-recovery": { en: "Vehicle recovery", zh: "车辆找回" },
+  "/guides/electricity-power#two-paths": { en: "Electricity contracts & power", zh: "水电合同与供电" },
+  "/guides/electricity-power#solar-quest": { en: "Solar objective checklist", zh: "太阳能目标检查清单" },
+  "/guides/animal-guide#getting": { en: "Bring chickens home", zh: "把鸡运回家" },
+  "/tools/chicken-troubleshooter": { en: "Chicken troubleshooter", zh: "养鸡排查工具" },
+  "/guides/roof-quest-stuck#flow": { en: "Roof objective decision flow", zh: "屋顶目标分类排查" },
+  "/guides/building-construction": { en: "Building guide", zh: "建造指南" },
+  "/problems/failed-quest-replay": { en: "Failed quest recovery", zh: "失败任务恢复" },
+  "/guides/gigi-large-egg-quest": { en: "Gigi large-egg route", zh: "Gigi 大鸡蛋路线" },
+  "/guides/police-wanted-levels": { en: "Police chase and wanted levels", zh: "警察追捕与警星" },
+};
+
+function entityRecord(target, locale) {
+  const record = entityCatalog.get(`${target.type}:${target.id}`);
+  if (!record) throw new Error(`Unknown entity relation target ${target.type}:${target.id}`);
+  return {
+    href: entityRoutes[target.type](target.id, locale),
+    label: target.type === "location" ? record.locale[locale].title : locale === "zh" ? record.zhName : record.name,
+  };
+}
+
+function relationsHtml(record, locale) {
+  if (!record.relations?.length) return "";
+  const heading = locale === "zh" ? "关联实体" : "Connected entities";
+  const items = record.relations.map((relation) => {
+    const target = entityRecord(relation.target, locale);
+    return `<div class="entity-relation-row"><dt>${relationLabels[locale][relation.predicate]}</dt><dd><a data-entity-ref="${esc(relation.target.type)}:${esc(relation.target.id)}" href="${esc(target.href)}">${esc(target.label)}</a> ${badge(relation, locale)}</dd></div>`;
+  }).join("");
+  return `<div class="entity-relations"><strong>${heading}</strong><dl>${items}</dl></div>`;
+}
+
+function backlinksHtml(recordsKey, record, locale) {
+  const entityType = recordsKey === "npcs" ? "npc" : recordsKey === "quests" ? "quest" : null;
+  const links = entityType ? entityBacklinks.get(`${entityType}:${record.id}`) || [] : [];
+  if (!links.length) return "";
+  const heading = locale === "zh" ? "关联任务" : "Related quests";
+  const items = links.map(({ source }) => {
+    const label = locale === "zh" ? source.zhName : source.name;
+    const href = `${locale === "zh" ? "/zh" : ""}/database/quests#${source.id}`;
+    return `<a data-derived-backlink="quest:${esc(source.id)}" href="${href}">${esc(label)}</a>`;
+  }).join("");
+  return `<div class="entity-backlinks"><strong>${heading}</strong><div>${items}</div></div>`;
+}
+
 function badge(fact, locale) {
   const cls = fact.validity === "historical" ? "historical" : fact.evidenceLevel === "official" ? "evidence-official" : fact.evidenceLevel === "video-observed" ? "evidence-video" : fact.evidenceLevel === "community-confirmed" ? "evidence-corroborated" : "evidence-lead";
   return `<span class="tag ${cls}">${evidenceLabels[locale][fact.evidenceLevel]}</span>`;
@@ -80,18 +136,39 @@ function render(dataset, recordsKey, locale) {
   const sections = records.map((record) => {
     const confidence = recordsKey === "quests" ? `<span class="tag ${record.nameConfidence === "exact-observed" ? "evidence-video" : "evidence-lead"}">${confidenceLabels[locale][record.nameConfidence]}</span>` : "";
     const facts = record.facts.map((fact) => `<li${fact.validity === "historical" ? ' class="fact-historical"' : ""}><p>${esc(zh ? fact.zhText : fact.text)} ${badge(fact, locale)}</p><p class="fact-source">${sourceHtml(dataset, fact.sourceIds, locale)} · <strong>${zh ? "版本" : "Build"}:</strong> ${esc(fact.build)}</p></li>`).join("");
-    const related = record.relatedRoutes.map((relatedRoute, index) => {
+    const relatedLinks = record.relatedRoutes.map((relatedRoute) => {
       const href = zh ? localizeRoute(relatedRoute) : relatedRoute;
-      return `<a class="btn btn-outline btn-compact" href="${esc(href)}">${zh ? "打开相关答案" : "Open related answer"} ${index + 1}</a>`;
+      const labels = relatedRouteLabels[relatedRoute];
+      if (!labels) throw new Error(`Missing related route label for ${relatedRoute}`);
+      return `<a class="btn btn-outline btn-compact" href="${esc(href)}">${esc(labels[locale])}</a>`;
     }).join("");
-    return `<section class="evidence-ledger entity-profile" id="${record.id}" data-search-entry data-search-title="${esc(zh ? record.zhName : record.name)}" data-search-tags="${esc(zh ? record.zhSearchTags : record.searchTags)}" data-search-status="${zh ? "结构化资料" : "Structured record"}"><div class="section-heading-row"><div><span class="kicker">${c.noun}</span><h2>${esc(zh ? record.zhName : record.name)}</h2></div>${confidence}</div><p class="lead">${esc(zh ? record.zhSummary : record.summary)}</p><ul class="evidence-list">${facts}</ul><div class="entity-related">${related}</div></section>`;
+    const related = `<div class="entity-related"><strong>${zh ? "继续查找" : "Continue with"}</strong><div>${relatedLinks}</div></div>`;
+    return `<section class="evidence-ledger entity-profile" id="${record.id}" data-search-entry data-search-title="${esc(zh ? record.zhName : record.name)}" data-search-tags="${esc(zh ? record.zhSearchTags : record.searchTags)}" data-search-status="${zh ? "结构化资料" : "Structured record"}"><div class="section-heading-row"><div><span class="kicker">${c.noun}</span><h2>${esc(zh ? record.zhName : record.name)}</h2></div>${confidence}</div><p class="lead">${esc(zh ? record.zhSummary : record.summary)}</p>${relationsHtml(record, locale)}${backlinksHtml(recordsKey, record, locale)}<ul class="evidence-list">${facts}</ul><div class="entity-related">${related}</div></section>`;
   }).join("\n");
   return `<!DOCTYPE html>\n<!-- GENERATED by scripts/build-knowledge-entities.cjs from data/${recordsKey}.json — do not edit directly. -->\n<html lang="${zh ? "zh-CN" : "en"}"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${c.title}</title><meta name="description" content="${c.description}"><link rel="canonical" href="${zh ? zhUrl : enUrl}"><link rel="alternate" hreflang="en" href="${enUrl}"><link rel="alternate" hreflang="zh-CN" href="${zhUrl}"><link rel="alternate" hreflang="x-default" href="${enUrl}"><meta property="og:type" content="website"><meta property="og:site_name" content="The Ranchers Guide"><meta property="og:title" content="${c.title}"><meta property="og:description" content="${c.description}"><meta property="og:url" content="${zh ? zhUrl : enUrl}"><meta property="og:image" content="https://theranchersguide.com/assets/img/guide-barn.webp"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260820-ui2"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script></head><body><header class="site-header"><nav class="nav-inner" aria-label="${zh ? "主导航" : "Main navigation"}"><a class="logo" href="${zh ? "/zh/" : "/"}"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide<small>${zh ? "非官方中文玩家指南" : "Unofficial fan resource"}</small></span></a><button class="nav-toggle" aria-expanded="false" aria-label="${zh ? "展开导航" : "Toggle navigation"}">☰</button><ul class="nav-links">${nav(locale)}</ul></nav></header><main><article class="article entity-directory"><nav class="breadcrumb" aria-label="${zh ? "面包屑" : "Breadcrumb"}"><a href="${zh ? "/zh/" : "/"}">${zh ? "首页" : "Home"}</a> / <a href="${zh ? "/zh/database" : "/database"}">${zh ? "知识库" : "Database"}</a> / ${c.noun}</nav><h1>${c.heading}</h1><p class="meta">${zh ? "页面基线" : "Page baseline"}: ${dataset.meta.build} · ${zh ? "更新" : "Updated"} ${dataset.meta.lastUpdated}</p><p class="lead">${c.lead}</p><div class="notice info"><strong>${zh ? "发布边界：" : "Publication boundary:"}</strong> ${c.boundary}</div><nav class="toc" aria-label="${c.noun}"><strong>${c.noun}</strong><ul>${toc}</ul></nav>${sections}</article></main><footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>${zh ? "证据不足的实体不会自动发布" : "Evidence gates prevent thin entity pages"}</span></div></div></footer><script src="/assets/js/main.js?v=20260810-nav1" defer></script></body></html>`;
 }
 
+const npcData = JSON.parse(fs.readFileSync(path.join(root, "data", "npcs.json"), "utf8"));
+const questData = JSON.parse(fs.readFileSync(path.join(root, "data", "quests.json"), "utf8"));
+const locationData = JSON.parse(fs.readFileSync(path.join(root, "data", "locations.json"), "utf8"));
+const zhMapHtml = fs.readFileSync(path.join(root, "zh", "map.html"), "utf8");
+const zhMapAnchors = new Set(Array.from(zhMapHtml.matchAll(/id="([a-z0-9-]+)"\s+data-location-entry/g), (match) => match[1]));
+const entityCatalog = new Map([
+  ...npcData.npcs.map((record) => [`npc:${record.id}`, record]),
+  ...locationData.locations.map((record) => [`location:${record.id}`, record]),
+]);
+const entityBacklinks = new Map();
+for (const quest of questData.quests) {
+  for (const relation of quest.relations || []) {
+    const key = `${relation.target.type}:${relation.target.id}`;
+    if (!entityBacklinks.has(key)) entityBacklinks.set(key, []);
+    entityBacklinks.get(key).push({ source: quest, relation });
+  }
+}
+
 const jobs = [
-  ["npcs", JSON.parse(fs.readFileSync(path.join(root, "data", "npcs.json"), "utf8"))],
-  ["quests", JSON.parse(fs.readFileSync(path.join(root, "data", "quests.json"), "utf8"))],
+  ["npcs", npcData],
+  ["quests", questData],
 ];
 
 let drifted = false;

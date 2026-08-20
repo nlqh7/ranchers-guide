@@ -19,6 +19,7 @@ const nodeChecks = [
   ["check-home-card-links.cjs"],
   ["check-i18n.cjs"],
   ["check-knowledge-entities.cjs"],
+  ["check-relations.cjs"],
   ["check-local-server.cjs"],
   ["check-locations-data.cjs"],
   ["check-map.cjs"],

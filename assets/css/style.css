@@ -1033,7 +1033,41 @@ table.data-table {
 .fact-source { color: var(--brown-500); font-size: 0.78rem; }
 .entity-directory { max-width: 980px; }
 .entity-profile { scroll-margin-top: 120px; }
-.entity-related { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-5); }
+.entity-relations,
+.entity-backlinks,
+.entity-related { margin-top: var(--space-5); }
+.entity-relations > strong,
+.entity-backlinks > strong,
+.entity-related > strong {
+  display: block;
+  margin-bottom: var(--space-2);
+  color: var(--brown-900);
+  font-family: var(--font-display);
+}
+.entity-relations dl { display: grid; gap: var(--space-2); margin: 0; }
+.entity-relation-row {
+  display: grid;
+  grid-template-columns: minmax(72px, auto) minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: center;
+  padding-block: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+}
+.entity-relation-row dt { color: var(--brown-500); font-size: 0.82rem; font-weight: 800; text-transform: uppercase; }
+.entity-relation-row dd { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; margin: 0; }
+.entity-relation-row a,
+.entity-backlinks a { font-weight: 800; }
+.entity-backlinks > div,
+.entity-related > div { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.entity-backlinks a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+}
 .evidence-table tr[data-search-entry] { scroll-margin-top: 120px; }
 .evidence-table tr[data-search-entry]:target td {
   background: #fff0b8;
