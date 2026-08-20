@@ -36,12 +36,38 @@
 
   var locations = hasDirectory ? entries.map(function (entry) {
     return {
+      id: entry.id,
       element: entry,
       title: entry.dataset.locationTitle,
       category: entry.dataset.locationCategory,
+      aliases: entry.dataset.locationAliases || "",
       keywords: entry.dataset.locationKeywords,
     };
   }) : [];
+
+  var initialParams = new URLSearchParams(window.location.search);
+  if (hasDirectory) {
+    search.value = initialParams.get("q") || "";
+    var initialCategory = initialParams.get("category");
+    if (initialCategory && Array.from(category.options).some(function (option) { return option.value === initialCategory; })) {
+      category.value = initialCategory;
+    }
+  }
+
+  function updateQueryUrl() {
+    if (!hasDirectory || !window.history || !window.history.replaceState) return;
+    var query = window.RanchersMap.buildQueryString(search.value, category.value);
+    window.history.replaceState(null, "", window.location.pathname + query + window.location.hash);
+  }
+
+  function focusBestMatch(matches, shouldScroll) {
+    entries.forEach(function (entry) { entry.classList.remove("is-focused"); });
+    if (!search.value.trim() || !matches.length) return;
+    var best = window.RanchersMap.findBestLocation(locations, search.value, category.value);
+    if (!best) return;
+    best.element.classList.add("is-focused");
+    if (shouldScroll) best.element.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
 
   function render() {
     if (!hasDirectory) return;
@@ -50,6 +76,8 @@
     entries.forEach(function (entry) { entry.hidden = !visible.has(entry); });
     if (count) count.textContent = isChinese ? matches.length + " 个地点" : (matches.length === 1 ? "1 location" : matches.length + " locations");
     if (empty) empty.hidden = matches.length !== 0;
+    focusBestMatch(matches, false);
+    return matches;
   }
 
   var viewState = window.RanchersMapViewer ? window.RanchersMapViewer.getView("overview") : { scale: 1, x: 0, y: 0 };
@@ -130,8 +158,19 @@
   }
 
   if (hasDirectory) {
-    search.addEventListener("input", render);
-    category.addEventListener("change", render);
+    search.addEventListener("input", function () {
+      render();
+      updateQueryUrl();
+    });
+    search.addEventListener("keydown", function (event) {
+      if (event.key !== "Enter") return;
+      event.preventDefault();
+      focusBestMatch(render(), true);
+    });
+    category.addEventListener("change", function () {
+      render();
+      updateQueryUrl();
+    });
   }
 
   regionButtons.forEach(function (button) {
@@ -450,5 +489,8 @@
   }
 
   applyMapView();
-  if (hasDirectory) render();
+  if (hasDirectory) {
+    var initialMatches = render();
+    if (search.value.trim()) setTimeout(function () { focusBestMatch(initialMatches, true); }, 0);
+  }
 })();

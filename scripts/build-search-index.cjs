@@ -57,6 +57,7 @@ function pageType(route) {
     if (route.indexOf("/zh/database/") === 0) return "数据库";
     if (route === "/zh/map") return "地图";
     if (route === "/zh/problems") return "问题排查";
+    if (route.indexOf("/zh/tools/") === 0) return "工具";
     if (route === "/zh/") return "首页";
     return "站点";
   }

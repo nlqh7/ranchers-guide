@@ -1,0 +1,213 @@
+{
+  "meta": {
+    "schemaVersion": 1,
+    "build": "0.8.10.562",
+    "lastReviewed": "2026-08-20",
+    "disclaimer": "This tool orders evidence-backed checks. It does not inspect a save or prove a cause."
+  },
+  "sources": {
+    "hotfix-0-8-10-562": {
+      "title": { "en": "Official hotfix 0.8.10.562", "zh": "官方热修 0.8.10.562" },
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1840310314352719",
+      "kind": "official-news"
+    },
+    "coop-mission": {
+      "title": { "en": "Steam discussion: Chicken coop mission", "zh": "Steam 讨论：Chicken coop mission" },
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587307906418973975/",
+      "kind": "steam-thread"
+    },
+    "gigi-eggs": {
+      "title": { "en": "Steam discussion: Real Eggs, Real Evidence", "zh": "Steam 讨论：Real Eggs, Real Evidence" },
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587308167364362187/",
+      "kind": "steam-thread"
+    },
+    "coop-door-history": {
+      "title": { "en": "Steam discussion: historical coop-door workaround", "zh": "Steam 讨论：旧版本鸡舍门口规避法" },
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587308167364381340/",
+      "kind": "steam-thread"
+    },
+    "moderator-care-answers": {
+      "title": { "en": "Steam moderator care answers retained in the animal evidence ledger", "zh": "动物证据库中留存的 Steam 管理员照料答复" },
+      "url": null,
+      "kind": "evidence-ledger"
+    }
+  },
+  "shared": {
+    "updateFirst": {
+      "id": "update-first",
+      "evidenceLevel": "official",
+      "sourceIds": ["hotfix-0-8-10-562"],
+      "text": {
+        "en": "Update to 0.8.10.562 or later before testing again. The hotfix fixed several disappearance paths, so an older reproduction is historical evidence.",
+        "zh": "先更新到 0.8.10.562 或更高版本再复测。该热修已修复多条动物消失路径，旧版本复现只能算历史证据。"
+      }
+    }
+  },
+  "paths": {
+    "missing": {
+      "title": { "en": "Chicken missing or vanished", "zh": "鸡消失或不见了" },
+      "summary": {
+        "en": "Start with version and linkage checks. Do not demolish a current coop as the first response.",
+        "zh": "先检查版本和鸡舍关联。当前版本不要一上来就拆鸡舍。"
+      },
+      "relatedUrl": { "en": "/guides/animal-guide#troubleshooting", "zh": "/zh/guides/animal-guide#troubleshooting" },
+      "steps": [
+        {
+          "id": "coop-counter",
+          "evidenceLevel": "official",
+          "sourceIds": ["moderator-care-answers"],
+          "text": { "en": "Walk to the coop door and look for a stock counter such as 0/6 or 3/6. No counter means the coop is not linked correctly.", "zh": "走到鸡舍门口查看是否出现 0/6、3/6 之类的存栏计数。没有计数通常说明鸡舍没有正确关联。" }
+        },
+        {
+          "id": "fence-and-door",
+          "evidenceLevel": "community-confirmed",
+          "sourceIds": ["coop-mission"],
+          "text": { "en": "Check the fence, gate and coop entrance. A bird may have wandered rather than disappeared if the outdoor route is open.", "zh": "检查围栏、门和鸡舍入口。室外路线敞开时，鸡可能只是走远，并非真正消失。" }
+        },
+        {
+          "id": "transition-record",
+          "evidenceLevel": "official",
+          "sourceIds": ["hotfix-0-8-10-562"],
+          "text": { "en": "Record the exact transition: night entry, growth, birth, loading, subway travel or a doorway. Those are the paths named in the official hotfix.", "zh": "记录准确发生节点：夜间进建筑、长大、出生、读档、地铁运输还是门口。这些正是官方热修列出的路径。" }
+        },
+        {
+          "id": "report-residual",
+          "evidenceLevel": "unverified-lead",
+          "sourceIds": ["hotfix-0-8-10-562"],
+          "text": { "en": "If it still reproduces on 0.8.10.562+, keep the build, before/after count, coop counter, care state and a screenshot. Treat it as a residual report, not a known current cause.", "zh": "如果 0.8.10.562+ 仍复现，保留版本号、前后数量、鸡舍计数、照料状态和截图；把它作为残留问题报告，不要先认定原因。" }
+        }
+      ]
+    },
+    "food-water": {
+      "title": { "en": "Chicken not eating or drinking", "zh": "鸡不吃东西或不喝水" },
+      "summary": { "en": "Separate hand-feeding from trough behavior: hay can be hand-fed, but water comes from a trough.", "zh": "先区分手动喂食和食槽：干草可以手喂，饮水必须来自食槽。" },
+      "relatedUrl": { "en": "/guides/animal-guide#feeding", "zh": "/zh/guides/animal-guide#feeding" },
+      "steps": [
+        {
+          "id": "interior-trough",
+          "evidenceLevel": "official",
+          "sourceIds": ["moderator-care-answers"],
+          "text": { "en": "Fill the trough inside the coop with the selected food and water. Daily care does not require a second outdoor trough while the coop remains accessible.", "zh": "给鸡舍内食槽补充已选择的食物和水。鸡舍可正常进入时，日常照料不要求再放一个室外食槽。" }
+        },
+        {
+          "id": "morning-cycle",
+          "evidenceLevel": "official",
+          "sourceIds": ["moderator-care-answers"],
+          "text": { "en": "Check after the next morning cycle. Documented trough feeding happens once in the morning and covers the day.", "zh": "等到下一个早晨周期再检查。现有官方答复表明，动物每天早上从食槽进食一次并维持当天。" }
+        },
+        {
+          "id": "water-is-trough-only",
+          "evidenceLevel": "official",
+          "sourceIds": ["moderator-care-answers"],
+          "text": { "en": "Do not use hand-fed hay as a water test. The water reserve refills from the trough, not from hand-feeding.", "zh": "不要用手喂干草来判断饮水是否正常。饮水储备只能从食槽补充。" }
+        }
+      ]
+    },
+    "sick": {
+      "title": { "en": "Chicken is sick or losing health", "zh": "鸡生病或持续掉状态" },
+      "summary": { "en": "Temperature equipment prevents stress; it does not cure an animal that is already sick.", "zh": "温控设备用于预防温度压力，不能治好已经生病的动物。" },
+      "relatedUrl": { "en": "/guides/animal-guide#heater", "zh": "/zh/guides/animal-guide#heater" },
+      "steps": [
+        {
+          "id": "correct-heater",
+          "evidenceLevel": "community-confirmed",
+          "sourceIds": ["moderator-care-answers"],
+          "text": { "en": "Confirm you bought the coop/barn heater or AC from Angela. The house decoration version sold at City Hall does nothing for a coop.", "zh": "确认购买的是 Angela 出售的鸡舍/畜棚温控设备。市政厅出售的房屋装饰版对鸡舍无效。" }
+        },
+        {
+          "id": "heater-position",
+          "evidenceLevel": "community-confirmed",
+          "sourceIds": ["moderator-care-answers"],
+          "text": { "en": "Mount the coop heater on the outside wall and verify its building link with the hammer view.", "zh": "把鸡舍温控装在外墙，并用锤子视图确认它与鸡舍已经关联。" }
+        },
+        {
+          "id": "vet-for-illness",
+          "evidenceLevel": "official",
+          "sourceIds": ["moderator-care-answers"],
+          "text": { "en": "If the chicken is already sick, use the veterinary route. Correct temperature control prevents future stress but is not a cure.", "zh": "如果鸡已经生病，走兽医治疗路线。正确温控只能预防后续温度压力，不是治疗。" }
+        }
+      ]
+    },
+    "eggs": {
+      "title": { "en": "Hen is not laying eggs", "zh": "母鸡不下蛋" },
+      "summary": { "en": "Verify that the bird is an adult hen, then stabilize food, water, temperature and access before judging production.", "zh": "先确认是成年母鸡，再稳定食物、饮水、温控和鸡舍出入后判断产蛋。" },
+      "relatedUrl": { "en": "/guides/animal-guide#eggs", "zh": "/zh/guides/animal-guide#eggs" },
+      "steps": [
+        {
+          "id": "adult-hen",
+          "evidenceLevel": "official",
+          "sourceIds": ["moderator-care-answers"],
+          "text": { "en": "Confirm the animal is an adult hen rather than a rooster or a chick. Do not use one morning as proof of a broken production cycle.", "zh": "确认它是成年母鸡，而不是公鸡或雏鸡。不要用单个早晨就断定产蛋机制坏了。" }
+        },
+        {
+          "id": "care-chain",
+          "evidenceLevel": "official",
+          "sourceIds": ["moderator-care-answers"],
+          "text": { "en": "Verify the interior trough has food and water, the coop is linked, and the correct temperature kit is installed.", "zh": "确认鸡舍内食槽有食物和水、鸡舍已关联，并安装了正确的温控设备。" }
+        },
+        {
+          "id": "observe-cycle",
+          "evidenceLevel": "unverified-lead",
+          "sourceIds": ["moderator-care-answers"],
+          "text": { "en": "Observe more than one morning and record build, care bars and bird type. The site does not publish a guaranteed egg-per-day rate.", "zh": "连续观察不止一个早晨，并记录版本、照料条和鸡的类型。本站没有发布“每天必出一个蛋”的保证值。" }
+        }
+      ]
+    },
+    "large-eggs": {
+      "title": { "en": "No large eggs for Gigi", "zh": "Gigi 任务一直没有大鸡蛋" },
+      "summary": { "en": "Large eggs are RNG-based, so correct care improves the chance but does not guarantee the next batch.", "zh": "大鸡蛋受随机机制影响，正确照料只能提高机会，不能保证下一批一定出现。" },
+      "relatedUrl": { "en": "/guides/gigi-large-egg-quest#eggs", "zh": "/zh/guides/gigi-large-egg-quest#eggs" },
+      "steps": [
+        {
+          "id": "daily-petting",
+          "evidenceLevel": "community-confirmed",
+          "sourceIds": ["gigi-eggs"],
+          "text": { "en": "Pet the hens daily to raise their rating and keep their normal care chain stable.", "zh": "每天抚摸母鸡提高评级，并保持日常照料链稳定。" }
+        },
+        {
+          "id": "enclosed-roaming",
+          "evidenceLevel": "official",
+          "sourceIds": ["moderator-care-answers"],
+          "text": { "en": "Provide an enclosed outdoor roaming area. Official guidance ties enclosed roaming to the chance of large eggs; it does not require an outdoor trough.", "zh": "提供封闭的室外活动区。官方答复把封闭活动与大鸡蛋机会关联起来，但没有要求室外食槽。" }
+        },
+        {
+          "id": "rng-warning",
+          "evidenceLevel": "community-confirmed",
+          "sourceIds": ["gigi-eggs"],
+          "text": { "en": "Keep collecting normal batches. A player report saw large eggs only around the fourth or fifth batch; that is an example, not a guaranteed threshold.", "zh": "继续收取普通批次。有玩家到第 4–5 批才遇到大鸡蛋；这只是案例，不是保证阈值。" }
+        }
+      ]
+    },
+    "automation": {
+      "title": { "en": "Auto-feeding or water setup does nothing", "zh": "自动喂食或供水没有工作" },
+      "summary": { "en": "The automation chain fails when any link, setting or contract is missing.", "zh": "自动化链路只要缺少连接、设置或合同中的任意一项，就可能不工作。" },
+      "relatedUrl": { "en": "/guides/animal-guide#automation", "zh": "/zh/guides/animal-guide#automation" },
+      "steps": [
+        {
+          "id": "feature-kit",
+          "evidenceLevel": "official",
+          "sourceIds": ["moderator-care-answers"],
+          "text": { "en": "Mount the Auto-Feeding Kit on the coop and verify the kit is linked to that building.", "zh": "把自动喂食套件装到鸡舍上，并确认套件已与这座鸡舍关联。" }
+        },
+        {
+          "id": "silo-range",
+          "evidenceLevel": "official",
+          "sourceIds": ["moderator-care-answers"],
+          "text": { "en": "Place a silo inside link range and load it with hay. Use the hammer view to inspect the connection.", "zh": "把装有干草的筒仓放在关联范围内，用锤子视图检查连接。" }
+        },
+        {
+          "id": "water-contract",
+          "evidenceLevel": "official",
+          "sourceIds": ["moderator-care-answers"],
+          "text": { "en": "Place the water tower within its shorter link radius and sign the water contract with the mayor at City Hall. A tower alone does not refill.", "zh": "把水塔放在较短的关联半径内，并在市政厅与市长签水务合同。只有水塔不会自动补水。" }
+        },
+        {
+          "id": "trough-settings",
+          "evidenceLevel": "official",
+          "sourceIds": ["moderator-care-answers"],
+          "text": { "en": "Choose the food and water types on the coop trough, turn the system on, and look for the green light that confirms a complete setup.", "zh": "在鸡舍食槽上选择食物和水的类型，打开系统，并确认出现代表链路完整的绿灯。" }
+        }
+      ]
+    }
+  }
+}

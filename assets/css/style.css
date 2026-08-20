@@ -217,6 +217,30 @@
   --maxw: 1120px;
   --font-body: "Nunito", system-ui, -apple-system, sans-serif;
   --font-display: "Fraunces", Georgia, serif;
+
+  /* Semantic UI tokens: new components consume these aliases instead of
+     reaching into the brand palette directly. Keep the palette above as the
+     single source of truth for the visual identity. */
+  --color-canvas: var(--cream-100);
+  --color-surface: #fff;
+  --color-surface-muted: var(--cream-200);
+  --color-text: var(--ink);
+  --color-text-muted: var(--brown-700);
+  --color-border: var(--cream-300);
+  --color-action: var(--green-700);
+  --color-action-hover: #2e5426;
+  --color-accent: var(--gold);
+  --focus-ring: 0 0 0 3px rgba(93, 143, 74, 0.38);
+  --duration-fast: 150ms;
+  --duration-base: 180ms;
+  --ease-standard: ease;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -226,8 +250,8 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-body);
-  color: var(--ink);
-  background: var(--cream-100);
+  color: var(--color-text);
+  background: var(--color-canvas);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
@@ -236,6 +260,11 @@ img { max-width: 100%; height: auto; }
 
 a { color: var(--green-700); text-decoration: none; }
 a:hover { text-decoration: underline; }
+
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
@@ -623,7 +652,7 @@ main [data-search-entry][id] {
 
 .btn {
   display: inline-block;
-  background: var(--green-700);
+  background: var(--color-action);
   color: #fff !important;
   font-weight: 800;
   padding: 13px 26px;
@@ -634,9 +663,9 @@ main [data-search-entry][id] {
   font-family: var(--font-body);
   text-decoration: none;
   box-shadow: var(--shadow);
-  transition: transform 0.15s ease, background 0.15s ease;
+  transition: transform var(--duration-fast) var(--ease-standard), background var(--duration-fast) var(--ease-standard);
 }
-.btn:hover { background: #2e5426; transform: translateY(-2px); text-decoration: none; }
+.btn:hover { background: var(--color-action-hover); transform: translateY(-2px); text-decoration: none; }
 .btn.btn-outline {
   background: transparent;
   color: var(--brown-700) !important;
@@ -702,12 +731,12 @@ main [data-search-entry][id] {
 @media (min-width: 960px) { .card-grid.cols-3 { grid-template-columns: repeat(3, 1fr); } }
 
 .card {
-  background: #fff;
-  border: 2px solid var(--cream-300);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
   border-radius: var(--radius);
   padding: 26px 24px;
   box-shadow: var(--shadow);
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  transition: transform var(--duration-base) var(--ease-standard), box-shadow var(--duration-base) var(--ease-standard), border-color var(--duration-base) var(--ease-standard);
   display: flex;
   flex-direction: column;
 }
@@ -2490,6 +2519,77 @@ table.data-table {
 .text-action.destructive { color: var(--rust); }
 .field-notes-guide { margin-top: 36px; padding-bottom: 0; }
 
+/* ---------- Chicken troubleshooter ---------- */
+.troubleshooter-page { max-width: 1180px; margin-inline: auto; }
+.troubleshooter-layout {
+  display: grid;
+  gap: 20px;
+  margin-top: 26px;
+  align-items: start;
+}
+.troubleshooter-form,
+.troubleshooter-results {
+  border: 1px solid var(--cream-300);
+  background: #fff;
+  padding: clamp(20px, 3vw, 30px);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+}
+.troubleshooter-form { display: grid; gap: 18px; }
+.troubleshooter-form h2,
+.troubleshooter-results h2 { margin: 3px 0 0; font-size: 1.65rem; }
+.troubleshooter-form label {
+  display: grid;
+  gap: 7px;
+  color: var(--brown-800);
+  font-weight: 800;
+}
+.troubleshooter-form select {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--cream-300);
+  border-radius: 6px;
+  background: var(--cream-50);
+  color: var(--brown-900);
+  padding: 0 42px 0 13px;
+  font: inherit;
+}
+.troubleshooter-form .btn { min-height: 48px; }
+.troubleshooter-version { margin: 0; color: var(--brown-500); font-size: 0.82rem; }
+.troubleshooter-results:focus-visible { outline: 3px solid rgba(72, 121, 57, 0.28); outline-offset: 3px; }
+.troubleshooter-summary { margin: 9px 0 0; color: var(--brown-700); font-size: 1.02rem; }
+.troubleshooter-steps { margin: 24px 0; padding: 0; list-style: none; counter-reset: trouble-step; }
+.troubleshooter-steps li {
+  position: relative;
+  padding: 0 0 20px 48px;
+  min-height: 42px;
+  border-left: 2px solid var(--cream-300);
+  margin-left: 17px;
+  counter-increment: trouble-step;
+}
+.troubleshooter-steps li:last-child { border-left-color: transparent; padding-bottom: 0; }
+.troubleshooter-steps li::before {
+  content: counter(trouble-step);
+  position: absolute;
+  left: -18px;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--green-700);
+  color: #fff;
+  font-weight: 900;
+}
+.troubleshooter-steps p { margin: 8px 0 0; color: var(--brown-800); }
+.troubleshooter-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0; }
+.troubleshooter-sources { margin-bottom: 0; color: var(--brown-600); font-size: 0.88rem; }
+.compact-section { padding-bottom: 0; }
+@media (min-width: 860px) {
+  .troubleshooter-layout { grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr); }
+}
+
 @media (max-width: 559px) {
   .field-note-form { padding: 18px; }
   .file-actions { width: 100%; }
@@ -2612,6 +2712,23 @@ table.data-table {
 .visually-hidden {
   position: absolute; width: 1px; height: 1px;
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* React Bits-inspired motion contract, adapted for a static knowledge base.
+   Motion is enhancement only: content remains visible and usable without JS. */
+[data-ui-motion="lift"] {
+  transition: transform var(--duration-base) var(--ease-standard), box-shadow var(--duration-base) var(--ease-standard);
+}
+[data-ui-motion="lift"]:hover { transform: translateY(-2px); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* --- AdSense remediation batch: author card, evidence status, 5-level badges, conflicts --- */

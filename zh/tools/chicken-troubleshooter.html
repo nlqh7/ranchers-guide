@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Ranchers 养鸡排障工具 | 消失、生病、产蛋与自动喂食</title>
+  <meta name="description" content="选择游戏版本和养鸡症状，获得带证据等级的 The Ranchers 中文排查顺序，覆盖鸡消失、不吃喝、生病、不下蛋、大鸡蛋和自动喂食。">
+  <link rel="canonical" href="https://theranchersguide.com/zh/tools/chicken-troubleshooter">
+  <link rel="alternate" hreflang="en" href="https://theranchersguide.com/tools/chicken-troubleshooter"><link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/tools/chicken-troubleshooter"><link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/tools/chicken-troubleshooter">
+  <meta property="og:type" content="website"><meta property="og:title" content="The Ranchers 养鸡排障工具"><meta property="og:description" content="按版本和症状生成带来源的养鸡排查清单。"><meta property="og:url" content="https://theranchersguide.com/zh/tools/chicken-troubleshooter"><meta property="og:image" content="https://theranchersguide.com/assets/img/db-animals.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260820-tools1"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"The Ranchers 养鸡排障工具","applicationCategory":"UtilitiesApplication","operatingSystem":"任意网页浏览器","isAccessibleForFree":true,"url":"https://theranchersguide.com/zh/tools/chicken-troubleshooter","description":"按当前版本证据生成养鸡问题排查顺序。"}</script>
+</head>
+<body>
+  <header class="site-header"><nav class="nav-inner" aria-label="主导航"><a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide<small>非官方中文玩家指南</small></span></a><button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button><ul class="nav-links"><li><a href="/zh/guides/beginners-guide">新手</a></li><li><a href="/zh/database">知识库</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li><li><a href="/zh/search">搜索</a></li><li><a class="nav-cta" href="/contribute">投稿</a></li></ul></nav></header>
+  <main>
+    <section class="section troubleshooter-page" data-chicken-tool>
+      <div class="container">
+        <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / 工具 / 养鸡排障</nav>
+        <div class="tool-intro"><div><span class="kicker">当前版本照料流程</span><h1>养鸡排障工具</h1><p class="lead">选择你看到的症状，按安全顺序检查。每一步都会标明证据强度。</p></div><figure class="tool-intro-media"><img src="/assets/img/db-animals.webp" width="800" height="450" alt="The Ranchers 红色谷仓和牛群" loading="eager"></figure></div>
+        <div class="notice info"><strong>这是排查清单，不是自动诊断。</strong>工具无法读取你的存档；不知道的原因会保持未知，旧版本规避法也不会伪装成当前修复。</div>
+        <div class="troubleshooter-layout">
+          <form class="troubleshooter-form" data-chicken-form>
+            <div><span class="kicker">第 1 步</span><h2>描述当前情况</h2></div>
+            <label for="chicken-build">游戏版本<select id="chicken-build" name="build" required><option value="current">0.8.10.562 或更高</option><option value="older">0.8.10.455 或更早</option><option value="unknown">我不知道</option></select></label>
+            <label for="chicken-symptom">出现了什么问题？<select id="chicken-symptom" name="symptom" required><option value="missing">鸡消失或不见了</option><option value="food-water">鸡不吃东西或不喝水</option><option value="sick">鸡生病或持续掉状态</option><option value="eggs">成年母鸡不下蛋</option><option value="large-eggs">Gigi 任务没有大鸡蛋</option><option value="automation">自动喂食或供水不工作</option></select></label>
+            <button class="btn" type="submit">生成排查清单</button>
+            <p class="troubleshooter-version">证据基线：0.8.10.562，2026-08-20 复核。</p>
+          </form>
+          <section class="troubleshooter-results" data-chicken-results tabindex="-1" aria-live="polite" hidden></section>
+        </div>
+        <section class="section compact-section"><div class="split-band"><div><span class="kicker">需要完整说明？</span><h2>不要只看一个症状</h2><p>完整养鸡指南还包括购买、鸡舍、食物、饮水、温控、产蛋、自动化和版本历史。</p></div><div class="button-stack"><a class="btn" href="/zh/guides/animal-guide">打开完整养鸡指南</a><a class="btn btn-outline" href="/zh/database/animals#chicken">查看鸡的证据条目</a></div></div></section>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>The Ranchers Guide</h4><p>按版本和证据整理的非官方中文玩家资料。</p></div><nav aria-label="帮助"><h4>帮助</h4><ul><li><a href="/zh/guides/beginners-guide">新手</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li></ul></nav><nav aria-label="数据"><h4>数据</h4><ul><li><a href="/zh/database/crops">作物</a></li><li><a href="/zh/database/animals">动物</a></li><li><a href="/zh/search">搜索</a></li></ul></nav><nav aria-label="站点"><h4>站点</h4><ul><li><a href="/contribute">投稿</a></li><li><a href="/about">关于</a></li><li><a href="/contact">联系</a></li><li><a href="/privacy">隐私</a></li></ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>未知信息保持未知</span></div></div></footer>
+  <script src="/assets/js/main.js?v=20260810-nav1" defer></script><script src="/assets/js/chicken-troubleshooter-core.js?v=20260820-1" defer></script><script src="/assets/js/chicken-troubleshooter.js?v=20260820-1" defer></script>
+</body>
+</html>

@@ -9,6 +9,7 @@ const pairs = [
   ["guides/beginners-guide.html", "zh/guides/beginners-guide.html", "/guides/beginners-guide", "/zh/guides/beginners-guide"],
   ["database/animals.html", "zh/database/animals.html", "/database/animals", "/zh/database/animals"],
   ["database/crops.html", "zh/database/crops.html", "/database/crops", "/zh/database/crops"],
+  ["database/materials.html", "zh/database/materials.html", "/database/materials", "/zh/database/materials"],
   ["map.html", "zh/map.html", "/map", "/zh/map"],
   ["problems.html", "zh/problems.html", "/problems", "/zh/problems"],
   ["search.html", "zh/search.html", "/search", "/zh/search"],
@@ -19,6 +20,7 @@ const pairs = [
   ["guides/police-wanted-levels.html", "zh/guides/police-wanted-levels.html", "/guides/police-wanted-levels", "/zh/guides/police-wanted-levels"],
   ["problems/vehicle-recovery.html", "zh/problems/vehicle-recovery.html", "/problems/vehicle-recovery", "/zh/problems/vehicle-recovery"],
   ["guides/farming-fields.html", "zh/guides/farming-fields.html", "/guides/farming-fields", "/zh/guides/farming-fields"],
+  ["tools/chicken-troubleshooter.html", "zh/tools/chicken-troubleshooter.html", "/tools/chicken-troubleshooter", "/zh/tools/chicken-troubleshooter"],
 ];
 
 function read(relative) {

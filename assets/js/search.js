@@ -19,6 +19,7 @@
     "/database",
     "/database/crops",
     "/database/animals",
+    "/database/materials",
     "/map",
     "/problems",
     "/problems/offline-mode-loading",
@@ -30,6 +31,7 @@
     "/research",
     "/tools/profit-calculator",
     "/tools/field-notes",
+    "/tools/chicken-troubleshooter",
     "/methodology",
     "/about",
     "/contact",
@@ -48,13 +50,15 @@
     "/zh/database",
     "/zh/database/crops",
     "/zh/database/animals",
+    "/zh/database/materials",
     "/zh/map",
-    "/zh/problems"
+    "/zh/problems",
+    "/zh/tools/chicken-troubleshooter"
   ];
   var IS_ZH = document.documentElement.lang.toLowerCase() === "zh-cn";
   var PAGE_PATHS = IS_ZH ? ZH_PAGE_PATHS : EN_PAGE_PATHS;
   var SEARCH_ROUTE = IS_ZH ? "/zh/search" : "/search";
-  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v4" : "ranchers-search-index-v18";
+  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v6" : "ranchers-search-index-v20";
   var documents = [];
   var form = document.querySelector("[data-search-form]");
   var input = document.querySelector("[data-search-input]");
@@ -72,8 +76,9 @@
       if (path.indexOf("/zh/guides/") === 0) return "攻略";
       if (path === "/zh/database") return "知识库";
       if (path.indexOf("/zh/database/") === 0) return "数据库";
-      if (path === "/zh/map") return "地图";
-      if (path === "/zh/problems") return "问题排查";
+    if (path === "/zh/map") return "地图";
+    if (path === "/zh/problems") return "问题排查";
+    if (path.indexOf("/zh/tools/") === 0) return "工具";
       if (path === "/zh/") return "首页";
       return "站点";
     }

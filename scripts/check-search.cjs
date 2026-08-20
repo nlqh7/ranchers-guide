@@ -173,8 +173,8 @@ assert.match(knowledgeBasePage, /<h1>The Ranchers Knowledge Base<\/h1>/);
 assert.match(knowledgeBasePage, /href="\/guides\/animal-guide#feeding"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /"\/database"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /search-index\.json/);
-assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-zh-v4/, "Chinese search cache must invalidate the pre-farming-guide index");
-assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-v18/, "English search cache must invalidate the pre-farming-guide index");
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-zh-v6/, "Chinese search cache must invalidate the previous page set");
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-v20/, "English search cache must invalidate the previous page set");
 
 /* Prebuilt search index (scripts/build-search-index.cjs — re-run after content edits). */
 const prebuiltIndex = JSON.parse(fs.readFileSync(path.join(root, "search-index.json"), "utf8"));
@@ -183,8 +183,8 @@ assert.ok(Array.isArray(prebuiltIndex) && prebuiltIndex.length >= pages.length, 
 const drift = require("node:child_process").spawnSync(process.execPath, [path.join(root, "scripts", "build-search-index.cjs"), "--check"], { cwd: root, encoding: "utf8" });
 assert.equal(drift.status, 0, `search-index.json drift detected — re-run node scripts/build-search-index.cjs\n${drift.stdout}${drift.stderr}`);
 const zirconiteHit = searchDocuments(prebuiltIndex, "where can I buy zirconite")[0];
-assert.equal(zirconiteHit.url, "/guides/building-construction#materials");
-assert.equal(zirconiteHit.type, "Guide answer");
+assert.equal(zirconiteHit.url, "/database/materials#zirconite");
+assert.equal(zirconiteHit.type, "Knowledge entry");
 const firstThirtyEntry = prebuiltIndex.find((entry) => entry.url === "/guides/beginners-guide#first-30-minutes");
 assert.equal(firstThirtyEntry.type, "Guide step", "guide search entries must not be labeled as database entries");
 assert.match(fs.readFileSync(path.join(root, "database", "crops.html"), "utf8"), /id="strawberry-seeds"[^>]+data-search-entry/);
@@ -199,6 +199,7 @@ assert.ok(missingChickenResults.some((result) => result.url === "/zh/problems#an
 assert.ok(missingChickenResults.some((result) => result.url === "/zh/database/animals#missing"));
 assert.equal(searchDocuments(chineseIndex, "草莓多久成熟")[0].url, "/zh/database/crops#strawberry");
 assert.equal(searchDocuments(chineseIndex, "种子商店在哪里")[0].url, "/zh/map#leafy-market");
+assert.equal(searchDocuments(chineseIndex, "锆矿在哪里买")[0].url, "/zh/database/materials#zirconite");
 
 /* The five translated core guides must rank for the community phrases they answer. */
 assert.equal(searchDocuments(chineseIndex, "鸡不下蛋")[0].url, "/zh/guides/animal-guide#eggs");

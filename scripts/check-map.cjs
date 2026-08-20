@@ -67,6 +67,9 @@ assert.match(mapPage, /reviewed August 7, 2026/);
 assert.match(mapPage, /theranchers\.wiki\/wiki\/map\//);
 assert.match(mapPage, /theranchers\.wiki\/wiki\/npcs\//);
 assert.match(mapPage, /29 entries/);
+assert.match(chineseMapPage, /data-location-search/, "Chinese map needs a core-location search");
+assert.match(chineseMapPage, /data-location-category/, "Chinese map needs category filtering");
+assert.equal((chineseMapPage.match(/data-location-entry/g) || []).length, 6, "Chinese map finder covers six translated core locations");
 
 // Recognition photos: hover cards, lightbox hooks, locate-on-map button
 assert.match(mapPage, /data-visual-atlas/, "English map keeps the recognition-photo section");
@@ -159,6 +162,9 @@ assert.match(mapScript, /data-atlas-photo/, "map script wires the photo lightbox
 assert.match(mapScript, /atlas-lightbox/, "map script builds the lightbox overlay");
 assert.match(mapScript, /pin-flash/, "locate-on-map flashes the target pin");
 assert.match(mapScript, /Escape/, "lightbox closes on Escape");
+assert.match(mapScript, /URLSearchParams/, "map directory reads deep-link queries");
+assert.match(mapScript, /history\.replaceState/, "map directory keeps the shareable URL in sync");
+assert.match(mapScript, /findBestLocation/, "map directory highlights the best matching location");
 
 const sitemapForMap = read("sitemap.xml");
 assert.match(sitemapForMap, /<loc>https:\/\/theranchersguide\.com\/map<\/loc>[\s\S]*?<lastmod>2026-08-07<\/lastmod>/);
@@ -180,20 +186,25 @@ assert.deepEqual(viewerCore.panBy({ scale: 2, x: 0, y: 0 }, -0.1, 0), { scale: 2
 
 const mapCore = require("../assets/js/map-core.js");
 const locations = [
-  { title: "Leafy Market", category: "shopping", keywords: "seeds farming supplies" },
-  { title: "City Hall", category: "services", keywords: "land blueprints mayor" },
+  { id: "leafy-market", title: "Leafy Market", category: "shopping", keywords: "seeds farming supplies" },
+  { id: "city-hall", title: "City Hall 市政厅", category: "services", keywords: "land blueprints mayor zirconite 锆矿 合同" },
   { title: "Subway", category: "transport", keywords: "fast travel station" },
 ];
 
 assert.deepEqual(mapCore.filterLocations(locations, "seed", "all").map((item) => item.title), ["Leafy Market"]);
 assert.deepEqual(mapCore.filterLocations(locations, "", "transport").map((item) => item.title), ["Subway"]);
-assert.deepEqual(mapCore.filterLocations(locations, "blueprint", "services").map((item) => item.title), ["City Hall"]);
+assert.deepEqual(mapCore.filterLocations(locations, "blueprint", "services").map((item) => item.id), ["city-hall"]);
 assert.deepEqual(mapCore.filterLocations(locations, "casino", "all"), []);
+assert.equal(mapCore.findBestLocation(locations, "zirconite").id, "city-hall");
+assert.equal(mapCore.findBestLocation(locations, "市政厅").id, "city-hall");
+assert.equal(mapCore.findBestLocation(locations, "leafy markte").id, "leafy-market");
+assert.equal(mapCore.buildQueryString("city hall", "services"), "?q=city%20hall&category=services");
+assert.equal(mapCore.buildQueryString("", "all"), "");
 
 const search = read("assets/js/search.js");
 assert.match(search, /"\/map"/);
-assert.match(search, /ranchers-search-index-v18/);
-assert.match(search, /ranchers-search-index-zh-v4/);
+assert.match(search, /ranchers-search-index-v20/);
+assert.match(search, /ranchers-search-index-zh-v6/);
 assert.match(search, /node\.querySelector\("h2, h3"\)/);
 
 const sitemap = read("sitemap.xml");

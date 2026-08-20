@@ -31,6 +31,10 @@ assert.match(research, /id="furniture-placement"/);
 assert.match(research, /id="power-to-the-bench"/);
 assert.match(research, /id="aubergine-regrow"/);
 assert.match(research, /id="chicks-disappear"/);
+assert.match(research, /Residual animal disappearance after the hotfix/);
+assert.match(research, /Official fix · 0\.8\.10\.562/);
+assert.match(research, /1840310314352719/);
+assert.doesNotMatch(research, /A current Steam discussion reports chicks vanishing/);
 assert.match(research, /id="excess-electricity"/);
 assert.match(research, /id="exterior-walls"/);
 assert.match(research, /sharedfiles\/filedetails\/\?id=2883435340/);
@@ -86,8 +90,8 @@ for (const route of [
 ]) {
   assert.match(searchScript, new RegExp(`"${route.replaceAll("/", "\\/")}"`));
 }
-assert.match(searchScript, /ranchers-search-index-v18/);
-assert.match(searchScript, /ranchers-search-index-zh-v4/);
+assert.match(searchScript, /ranchers-search-index-v20/);
+assert.match(searchScript, /ranchers-search-index-zh-v6/);
 
 const chineseProblems = read("zh/problems.html");
 assert.match(chineseProblems, /data-problem-search/);

@@ -1,0 +1,219 @@
+{
+  "meta": {
+    "build": "0.8.10.562",
+    "lastUpdated": "2026-08-20"
+  },
+  "sources": {
+    "official-mines-answer": {
+      "kind": "steam-thread",
+      "title": "Steam thread: Questions about the game (official moderator answer)",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587307906418914271/",
+      "author": "Jennoula",
+      "date": "2026-08-02",
+      "build": "0.8.10.x"
+    },
+    "current-stone-thread": {
+      "kind": "steam-thread",
+      "title": "Steam thread: Crime system (current-build stone reports)",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587307627624728860/",
+      "author": "calmc1544 / X-C0brA-X",
+      "date": "2026-07-31",
+      "build": "0.8.10.x"
+    },
+    "charcoal-moderator-context": {
+      "kind": "steam-thread",
+      "title": "Steam thread: Fundamental Issues (moderator fire-extinguisher clarification)",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/660467026274291904/",
+      "author": "chesdaywalker / Jennoula",
+      "date": "2025-11-04",
+      "build": "pre-EA-2025"
+    },
+    "community-material-scan": {
+      "kind": "local-archive",
+      "title": "August 2026 community scan: charcoal, zirconite and stone threads",
+      "url": null,
+      "author": "Site editor",
+      "date": "2026-08-08",
+      "build": "0.8.10.x"
+    },
+    "current-hay-thread": {
+      "kind": "steam-thread",
+      "title": "Steam thread: where can I find hay (single current-build report)",
+      "url": null,
+      "author": "Tila",
+      "date": "2026-08-05",
+      "build": "0.8.10.x"
+    },
+    "official-chicken-feed": {
+      "kind": "steam-thread",
+      "title": "Steam thread: Chicken Feed (official moderator answer)",
+      "url": null,
+      "author": "Jennoula",
+      "date": "2026-08",
+      "build": "0.8.10.x"
+    },
+    "launch-video": {
+      "kind": "local-video",
+      "title": "Games Station gameplay footage: Red Tent recipe at 71:40",
+      "url": null,
+      "author": "Games Station",
+      "date": "2026-08-07",
+      "build": "0.8.10.455"
+    }
+  },
+  "materials": [
+    {
+      "id": "stone",
+      "name": "Stone",
+      "zhName": "石头 Stone",
+      "searchTitle": "Where to get Stone",
+      "zhSearchTitle": "石头在哪里获得",
+      "searchTags": "stone rock rocks material building pickaxe mine respawn buy meriam crime",
+      "zhSearchTags": "石头 石块 岩石 材料 建造 镐 矿洞 刷新 购买 市政厅 犯罪",
+      "summary": "Collect the loose stone available on land you own first. A reliable repeatable source after that supply is exhausted has not yet been verified.",
+      "zhSummary": "先收集自己土地上的散落石头。初始石头耗尽后，可靠的可重复来源仍待验证。",
+      "facts": [
+        {
+          "text": "Current-build players report gathering loose stone from ranch land and eventually exhausting the visible supply.",
+          "zhText": "当前版本玩家报告可以收集牧场土地上的散落石头，但可见的初始储量会被采完。",
+          "evidenceLevel": "community-confirmed",
+          "build": "0.8.10.x",
+          "validity": "current",
+          "sourceIds": ["current-stone-thread", "community-material-scan"]
+        },
+        {
+          "text": "Taking stone from land you do not own can be treated as theft and trigger fines or jail; neighboring plots are not a safe free supply.",
+          "zhText": "从不属于你的土地拿石头可能被判定为偷窃并触发罚款或坐牢；不要把邻近地块当成免费来源。",
+          "evidenceLevel": "unverified-lead",
+          "build": "0.8.10.x",
+          "validity": "current",
+          "sourceIds": ["current-stone-thread"]
+        },
+        {
+          "text": "Reliable repeatable Stone supply is still being verified. Mines are not available in the reviewed Early Access build.",
+          "zhText": "可靠的可重复石头来源仍待验证。当前审查的抢先体验版本尚未开放矿洞。",
+          "evidenceLevel": "official",
+          "build": "0.8.10.x",
+          "validity": "unknown",
+          "sourceIds": ["official-mines-answer"]
+        }
+      ]
+    },
+    {
+      "id": "wood-log",
+      "name": "Wood Log",
+      "zhName": "原木 Wood Log",
+      "searchTitle": "How to get Wood Logs",
+      "zhSearchTitle": "原木怎么获得",
+      "searchTags": "wood log timber tree chop charcoal building red tent recipe",
+      "zhSearchTags": "原木 木材 木头 砍树 木炭 建造 红帐篷 配方",
+      "summary": "Wood Logs are the base material for early construction and the input used by the community charcoal method.",
+      "zhSummary": "原木是早期建造材料，也是社区木炭制作方法所使用的原料。",
+      "facts": [
+        {
+          "text": "Current community reports obtain Wood Logs by cutting trees; the retained reports do not establish tree respawn timing or ownership rules.",
+          "zhText": "当前社区报告通过砍树获得原木；现有资料无法确认树木刷新时间或土地所有权规则。",
+          "evidenceLevel": "community-confirmed",
+          "build": "0.8.10.x",
+          "validity": "current",
+          "sourceIds": ["community-material-scan"]
+        },
+        {
+          "text": "Launch-build footage shows a Red Tent recipe requiring 10 Wood Logs and 8 Stone; it does not prove other recipe costs.",
+          "zhText": "首发版本视频显示红帐篷配方需要 10 个原木和 8 个石头；这不能证明其他配方的材料数量。",
+          "evidenceLevel": "video-observed",
+          "build": "0.8.10.455",
+          "validity": "current",
+          "sourceIds": ["launch-video"]
+        }
+      ]
+    },
+    {
+      "id": "hay",
+      "name": "Hay",
+      "zhName": "干草 Hay",
+      "searchTitle": "Where to get Hay for chickens",
+      "zhSearchTitle": "鸡饲料干草在哪里获得",
+      "searchTags": "hay grass bush crates barrels chicken feed trough silo animal food",
+      "zhSearchTags": "干草 草 灌木 木箱 桶 鸡饲料 食槽 筒仓 动物食物",
+      "summary": "Hay is chicken feed. The public current-build gathering route is still based on a single traceable player report.",
+      "zhSummary": "干草是鸡饲料。当前公开获取路线仍主要来自一条可追踪的玩家报告。",
+      "facts": [
+        {
+          "text": "An official moderator answer identifies hay as chicken feed; place it in the interior trough or load a connected silo for automation.",
+          "zhText": "官方版主确认干草是鸡饲料；可放进鸡舍内部食槽，或装入已连接的筒仓用于自动喂食。",
+          "evidenceLevel": "official",
+          "build": "0.8.10.x",
+          "validity": "current",
+          "sourceIds": ["official-chicken-feed"]
+        },
+        {
+          "text": "One current-build report gets hay by cutting bushes or searching crates and barrels on NPC farms. Treat this as a route to test, not a guaranteed drop table.",
+          "zhText": "一条当前版本报告称可通过砍灌木，或搜索 NPC 农场的木箱和桶获得干草。它是待复测路线，不是已确认掉落表。",
+          "evidenceLevel": "unverified-lead",
+          "build": "0.8.10.x",
+          "validity": "current",
+          "sourceIds": ["current-hay-thread"]
+        }
+      ]
+    },
+    {
+      "id": "charcoal",
+      "name": "Charcoal",
+      "zhName": "木炭 Charcoal",
+      "searchTitle": "How to make Charcoal",
+      "zhSearchTitle": "木炭怎么制作",
+      "searchTags": "charcoal coal burn logs torch fire extinguisher building material",
+      "zhSearchTags": "木炭 煤 原木 燃烧 火把 灭火器 建造 材料",
+      "summary": "The community route is to burn Wood Logs and extinguish the fire before collecting the resulting charcoal. Work away from buildings and crops.",
+      "zhSummary": "社区路线是燃烧原木，在收集生成的木炭前用灭火器灭火。操作时远离建筑和作物。",
+      "facts": [
+        {
+          "text": "Multiple current-build players describe the same core route: place or cut Wood Logs, ignite them, wait for the material change, then use a fire extinguisher before collecting Charcoal.",
+          "zhText": "多名当前版本玩家描述了相同核心路线：放下或砍出原木，点燃并等待材料变化，再用灭火器灭火后收集木炭。",
+          "evidenceLevel": "community-confirmed",
+          "build": "0.8.10.x",
+          "validity": "current",
+          "sourceIds": ["community-material-scan"]
+        },
+        {
+          "text": "The moderator separately identifies the fire extinguisher as the intended way to put out fires. The retained evidence does not lock down one keyboard control or an exact burn timer.",
+          "zhText": "官方版主另行说明灭火器是预期的灭火方式。现有证据不足以锁定唯一键盘操作或精确燃烧计时。",
+          "evidenceLevel": "official",
+          "build": "pre-EA-2025",
+          "validity": "historical",
+          "sourceIds": ["charcoal-moderator-context"]
+        }
+      ]
+    },
+    {
+      "id": "zirconite",
+      "name": "Zirconite",
+      "zhName": "锆矿 Zirconite",
+      "searchTitle": "Where can I buy Zirconite? Meriam at City Hall",
+      "zhSearchTitle": "锆矿在哪里买？市政厅的 Meriam",
+      "searchTags": "zirconite zerkonite meriam city hall architect buy mine material blueprint",
+      "zhSearchTags": "锆矿 Zirconite Zerkonite Meriam 市政厅 建筑师 购买 矿洞 材料 蓝图",
+      "summary": "Buy Zirconite for now. The official moderator says purchasing is the only current route until mines are implemented.",
+      "zhSummary": "现阶段需要购买锆矿。官方版主说明，在矿洞实装前，购买是当前唯一途径。",
+      "facts": [
+        {
+          "text": "The official moderator says buying Zirconite is the only current option until mines are implemented; do not search for a wild ore route in this build.",
+          "zhText": "官方版主说明，在矿洞实装前，购买锆矿是当前唯一途径；这个版本不必寻找野外矿石路线。",
+          "evidenceLevel": "official",
+          "build": "0.8.10.x",
+          "validity": "current",
+          "sourceIds": ["official-mines-answer"]
+        },
+        {
+          "text": "Multiple current community answers identify Meriam at City Hall as the seller. The retained evidence does not support publishing a stable current price.",
+          "zhText": "多条当前社区回答把市政厅的 Meriam 指为卖家。现有证据不足以发布稳定的当前价格。",
+          "evidenceLevel": "community-confirmed",
+          "build": "0.8.10.x",
+          "validity": "current",
+          "sourceIds": ["community-material-scan"]
+        }
+      ]
+    }
+  ]
+}
