@@ -39,6 +39,7 @@ for (const [englishFile, chineseFile, englishRoute, chineseRoute] of pairs) {
 
   assert.match(english, /<html lang="en">/, `${englishFile} must declare English`);
   assert.match(chinese, /<html lang="zh-CN">/, `${chineseFile} must declare Simplified Chinese`);
+  assert.match(english, new RegExp(`<link rel="canonical" href="${escaped(englishUrl)}">`));
   assert.match(chinese, new RegExp(`<link rel="canonical" href="${escaped(chineseUrl)}">`));
 
   for (const html of [english, chinese]) {
@@ -52,8 +53,18 @@ for (const [englishFile, chineseFile, englishRoute, chineseRoute] of pairs) {
 
 const sitemap = read("sitemap.xml");
 assert.match(sitemap, /xmlns:xhtml="http:\/\/www\.w3\.org\/1999\/xhtml"/);
-for (const [, , , chineseRoute] of pairs.filter((pair) => pair[2] !== "/search")) {
-  assert.match(sitemap, new RegExp(`<loc>https://theranchersguide.com${escaped(chineseRoute)}</loc>`));
+for (const [, , englishRoute, chineseRoute] of pairs.filter((pair) => pair[2] !== "/search")) {
+  const englishUrl = `https://theranchersguide.com${englishRoute}`;
+  const chineseUrl = `https://theranchersguide.com${chineseRoute}`;
+  const englishNode = sitemap.match(new RegExp(`<url>\\s*<loc>${escaped(englishUrl)}</loc>([\\s\\S]*?)</url>`));
+  const chineseNode = sitemap.match(new RegExp(`<url>\\s*<loc>${escaped(chineseUrl)}</loc>([\\s\\S]*?)</url>`));
+  assert.ok(englishNode, `sitemap must include English URL ${englishRoute}`);
+  assert.ok(chineseNode, `sitemap must include Chinese URL ${chineseRoute}`);
+  for (const node of [englishNode[1], chineseNode[1]]) {
+    assert.match(node, new RegExp(`hreflang="en" href="${escaped(englishUrl)}"`));
+    assert.match(node, new RegExp(`hreflang="zh-CN" href="${escaped(chineseUrl)}"`));
+    assert.match(node, new RegExp(`hreflang="x-default" href="${escaped(englishUrl)}"`));
+  }
 }
 
 const chineseIndex = JSON.parse(read("zh/search-index.json"));

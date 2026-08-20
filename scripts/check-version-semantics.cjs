@@ -54,7 +54,20 @@ const fieldNotesScript = read("assets/js/field-notes.js");
 assert.doesNotMatch(fieldNotesScript, /0\.8\.10\.455/, "field-notes.js must not contain the old build literal");
 assert.match(fieldNotesScript, /0\.8\.10\.562/, "field-notes.js defaults to the current build");
 
-// 5. Launch-vs-current timeline on utility guides: launch baseline plus a
+// 5. Farming advice must stay inside the exact scope of its evidence.
+const farmingEnglish = read("guides/farming-fields.html");
+const farmingChinese = read("zh/guides/farming-fields.html");
+assert.match(farmingEnglish, /watering interval for a planted crop is still unverified/i, "English farming guide must not infer planted-crop watering from empty plots");
+assert.doesNotMatch(farmingEnglish, /watering is a "every few days|Water every few days/i, "English farming guide must not publish an unsupported watering schedule");
+assert.match(farmingChinese, /已种作物多久浇一次仍未验证/, "Chinese farming guide must not infer planted-crop watering from empty plots");
+assert.doesNotMatch(farmingChinese, /不用每天浇水|几天浇一次即可/, "Chinese farming guide must not publish an unsupported watering schedule");
+assert.match(farmingEnglish, /exact cutoff as a reported rule until it is reproduced/i, "English farming guide must keep the day-30 cutoff at reported status");
+assert.match(farmingChinese, /30 号最后收、1 号换季.*尚未独立复现/, "Chinese farming guide must keep the day-30 cutoff at reported status");
+assert.match(farmingEnglish, /omission from patch notes is not proof/i, "English fertilizer advice must distinguish patch-note omission from a verified current result");
+assert.match(farmingChinese, /补丁说明没写不能证明行为一定没变/, "Chinese fertilizer advice must distinguish patch-note omission from a verified current result");
+assert.doesNotMatch(problemsHub, /0\.8\.10\.455\+/, "problem report builds must not imply unverified forward compatibility");
+
+// 6. Launch-vs-current timeline on utility guides: launch baseline plus a
 //    separate current-version statement.
 for (const page of ["guides/building-construction.html", "guides/electricity-power.html"]) {
   const html = read(page);
@@ -62,7 +75,7 @@ for (const page of ["guides/building-construction.html", "guides/electricity-pow
   assert.match(html, /Current official version:[\s\S]{0,120}0\.8\.10\.562/, `${page} states the current official version separately`);
 }
 
-// 6. Gigi quest: door-delivery bug is not claimed as officially fixed.
+// 7. Gigi quest: door-delivery bug is not claimed as officially fixed.
 for (const [page, fixedBadge] of [["guides/gigi-large-egg-quest.html", /Fixed in 0\.8\.10\.562 · Official[\s\S]{0,200}coop door/], ["zh/guides/gigi-large-egg-quest.html", /0\.8\.10\.562 已修复 · 官方[\s\S]{0,200}门口/]]) {
   assert.doesNotMatch(read(page), fixedBadge, `${page} must not claim the coop-door delivery path is officially fixed`);
 }

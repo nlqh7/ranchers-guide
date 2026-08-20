@@ -54,7 +54,7 @@
   var IS_ZH = document.documentElement.lang.toLowerCase() === "zh-cn";
   var PAGE_PATHS = IS_ZH ? ZH_PAGE_PATHS : EN_PAGE_PATHS;
   var SEARCH_ROUTE = IS_ZH ? "/zh/search" : "/search";
-  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v3" : "ranchers-search-index-v17";
+  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v4" : "ranchers-search-index-v18";
   var documents = [];
   var form = document.querySelector("[data-search-form]");
   var input = document.querySelector("[data-search-input]");

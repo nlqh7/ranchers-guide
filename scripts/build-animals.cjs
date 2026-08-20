@@ -55,11 +55,24 @@ function renderFact(fact) {
 
 function renderSpecies(animal) {
   const fields = animal.fields.map((field) => {
-    const facts = field.facts.map(renderFact).join("\n");
-    return `        <h3>${escapeHtml(field.label)}</h3>
-        <ul class="evidence-list">
-${facts}
-        </ul>`;
+    const confirmed = field.facts.filter((f) => f.validity !== "unknown");
+    const pending = field.facts.filter((f) => f.validity === "unknown");
+    const parts = [];
+    if (confirmed.length > 0) {
+      parts.push(`        <ul class="evidence-list">
+${confirmed.map(renderFact).join("\n")}
+        </ul>`);
+    }
+    if (pending.length > 0) {
+      parts.push(`        <details class="pending-facts">
+          <summary>${pending.length} item${pending.length > 1 ? "s" : ""} not yet verified — show</summary>
+          <ul class="evidence-list pending-list">
+${pending.map(renderFact).join("\n")}
+          </ul>
+        </details>`);
+    }
+    return `        <h3 id="${animal.id}-${field.key}">${escapeHtml(field.label)}</h3>
+${parts.join("\n")}`;
   }).join("\n");
 
   return `      <section class="evidence-ledger animal-profile" id="${animal.id}" data-search-entry data-search-title="${escapeHtml(animal.name)}" data-search-tags="${escapeHtml(animal.searchTags)}" data-search-status="Database record" aria-labelledby="${animal.id}-heading">
@@ -164,6 +177,16 @@ const html = `<!DOCTYPE html>
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Database / Animals</nav>
       <h1>The Ranchers Animal Database</h1>
       <p class="meta">Current page baseline ${escapeHtml(data.meta.build)} · Video evidence recorded on ${escapeHtml(data.meta.videoBuild)} · Data last updated ${escapeHtml(data.meta.lastUpdated)} · Historical values are labeled</p>
+      <nav class="toc" aria-label="Contents">
+        <div class="toctitle">Contents</div>
+        <ul>
+${data.species.map((a) => `          <li class="toc-cat"><a href="#${a.id}">${escapeHtml(a.name)}</a>
+            <ul class="toc-fields">
+${a.fields.map((f) => `              <li><a href="#${a.id}-${f.key}">${escapeHtml(f.label)}</a></li>`).join("\n")}
+            </ul>
+          </li>`).join("\n")}
+        </ul>
+      </nav>
       <div class="evidence-status">
         <strong>Evidence status:</strong> ${confirmedCount} confirmed systems · ${data.sharedSystems.length} automation features · ${data.videoObservedProducts.length} video-observed shelf listings · ${variantCount} historical leads · ${pendingCount} pending rows · every fact carries its own evidence label — <a href="/methodology">How we verify →</a>
       </div>
@@ -178,13 +201,6 @@ const html = `<!DOCTYPE html>
       <p>Collect discoveries privately in <a href="/tools/field-notes">Field Notes</a>, then export the versioned record when it is complete enough to verify.</p>
 
       <p class="lead">This living database combines the official roster with clearly labeled player research. Each animal has its own anchored profile below — search an individual animal, inspect its source and version context, and help replace historical values with current-build evidence.</p>
-
-      <nav class="toc" aria-label="Animal profiles">
-        <strong>Animal profiles:</strong>
-        <ul>
-${data.species.map((a) => `          <li><a href="#${a.id}">${escapeHtml(a.name)}</a></li>`).join("\n")}
-        </ul>
-      </nav>
 
 ${speciesHtml}
 
@@ -235,7 +251,7 @@ ${renderHistoricalTable(data.species)}
           </div>
           <a class="text-link" href="/contact">Submit a current-build correction</a>
         </div>
-        <p>These products were seen on the Leafy Market vegetable/grocery shelves in a current-build playthrough <span class="tag evidence-video">Video-observed</span> <span title="Observed in Games Station gameplay footage (V0.8.10.455) at 03:45">Games Station video, 03:45</span>. They are <strong>shop shelf listings, not ranch-production measurements</strong> — they prove the items exist in the current build, not how a raised animal produces them.</p>
+        <p>These products were seen on the Leafy Market vegetable/grocery shelves in launch-build footage <span class="tag evidence-video">Video-observed</span> <span title="Observed in Games Station gameplay footage (V0.8.10.455) at 03:45">Games Station video, 03:45</span>. They are <strong>shop shelf listings, not ranch-production measurements</strong> — they prove the items existed in build 0.8.10.455, not how a raised animal produces them or whether later patches changed the shelf.</p>
         <ul>
 ${renderVideoProducts(data.videoObservedProducts)}
         </ul>
@@ -298,14 +314,16 @@ ${renderRoster(data.confirmedRoster)}
       <h2>How to build a trustworthy animal row</h2>
       <p>Record the seller, purchase price and prerequisites; the housing cost, capacity and utilities; one full production cycle including feed, water, care interactions, elapsed days, output and quality; and the game version. Measure at least two consistent cycles through the same sale channel before ranking. The full workflow is on the <a href="/methodology">methodology page</a>.</p>
 
-      <h2>Questions still open in the current build</h2>
-      <ul>
+      <details class="pending-facts" style="margin-top:16px">
+        <summary>Open research questions (5) — show</summary>
+        <ul>
         <li>Are additional species present in the initial Early Access build?</li>
         <li>Which animals use barns, coops, pasture, or another structure?</li>
         <li>What daily care is mandatory, and what can be automated?</li>
         <li>How do product quality, friendship, breeding, or seasons affect output?</li>
         <li>Which costs are recurring, and how long does each investment take to repay?</li>
-      </ul>
+        </ul>
+      </details>
 
       <h2>Sources</h2>
       <p>The confirmed roster comes from the <a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">official Steam store page</a>; transport, map and probability rules come from <a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">official Steam updates</a>, reviewed August 2026. Chicken care, automation and selling mechanics come from Steam discussion threads with official replies, scanned August 8, 2026. Video-observed product listings come from <a href="https://www.youtube.com/watch?v=GrFiYqWcBK0" rel="noopener noreferrer">Games Station gameplay footage (V0.8.10.455)</a>, reviewed August 7, 2026. How leads become verified values: <a href="/methodology">methodology</a>. Corrections: <a href="/contact">send a documented correction</a>.</p>
@@ -403,8 +421,13 @@ function renderZhEntry(entry) {
   const summary = zh.summary ? `<p>${escapeHtml(zh.summary)}</p>` : "";
   const groups = zh.groups.map((g) => {
     const h = g.heading ? `<h3${g.id ? ` id="${g.id}"` : ""}>${escapeHtml(g.heading)}</h3>` : "";
-    const items = g.facts.map((f) => `<li>${escapeHtml(f.text)}${zhBadge(f.badge)}</li>`).join("");
-    return `${h}<ul class="evidence-list">${items}</ul>`;
+    const confirmed = g.facts.filter((f) => f.badge !== "unknown");
+    const pending = g.facts.filter((f) => f.badge === "unknown");
+    const items = confirmed.map((f) => `<li>${escapeHtml(f.text)}${zhBadge(f.badge)}</li>`).join("");
+    const pendingBlock = pending.length > 0
+      ? `<details class="pending-facts"><summary>${pending.length} 条待验证 — 展开</summary><ul class="evidence-list pending-list">${pending.map((f) => `<li>${escapeHtml(f.text)}${zhBadge(f.badge)}</li>`).join("")}</ul></details>`
+      : "";
+    return `${h}${items ? `<ul class="evidence-list">${items}</ul>` : ""}${pendingBlock}`;
   }).join("");
   return `    <section class="evidence-ledger animal-profile" id="${entry.id}" data-search-entry data-search-title="${escapeHtml(zh.searchTitle)}" data-search-tags="${escapeHtml(zh.searchTags)}">${head}${summary}${groups}</section>`;
 }

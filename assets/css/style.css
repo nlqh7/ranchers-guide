@@ -879,12 +879,30 @@ figure img { border-radius: var(--radius); }
 .toc {
   background: #fff;
   border: 2px solid var(--cream-300);
-  border-radius: var(--radius);
-  padding: 18px 22px;
-  margin: 22px 0;
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  margin: 16px 0;
+  font-size: 0.92rem;
+  display: inline-block;
+  min-width: 220px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
-.toc strong { font-family: var(--font-display); color: var(--brown-900); }
-.toc ul { margin: 0.5em 0 0; }
+.toc .toctitle {
+  font-family: var(--font-display);
+  color: var(--brown-900);
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+.toc ul {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+.toc .tocnumber {
+  color: var(--brown-500);
+  margin-right: 0.4em;
+}
 
 /* ---------- Data tables (database pages) ---------- */
 .table-tools {
@@ -2651,4 +2669,39 @@ table.data-table {
   background: #fff8e6;
   font-size: 0.95rem;
   line-height: 1.55;
+}
+
+/* 折叠的「待验证」事实块：默认收起，让已验证内容突出，不铺满页面 */
+details.pending-facts {
+  margin: 8px 0 16px;
+  border: 1px dashed #d8c9a8;
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: #faf6ec;
+}
+details.pending-facts summary {
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #a06a2a;
+  user-select: none;
+}
+details.pending-facts .pending-list {
+  margin-top: 8px;
+}
+
+/* Contents 目录：默认只显示动物/作物名，悬停才展开字段 */
+.toc .toc-fields {
+  display: none;
+  margin: 0.1em 0 0;
+  padding-left: 1.4em;
+  list-style: none;
+}
+.toc .toc-cat:hover .toc-fields,
+.toc .toc-cat:focus-within .toc-fields {
+  display: block;
+}
+.toc .toc-fields li {
+  font-size: 0.85rem;
+  line-height: 1.6;
 }
