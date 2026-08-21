@@ -37,6 +37,7 @@ const pairs = [
 ];
 const utilityPairs = [
   ["tools/player-report.html", "zh/tools/player-report.html", "/tools/player-report", "/zh/tools/player-report"],
+  ["tools/quest-tracker.html", "zh/tools/quest-tracker.html", "/tools/quest-tracker", "/zh/tools/quest-tracker"],
 ];
 
 function read(relative) {

@@ -16,6 +16,7 @@ function routeWithLocale(route, locale) {
   if (base === "/map") return `/zh/map${suffix}`;
   if (base === "/tools/chicken-troubleshooter") return `/zh/tools/chicken-troubleshooter${suffix}`;
   if (base === "/tools/ranch-checklist") return `/zh/tools/ranch-checklist${suffix}`;
+  if (base === "/tools/quest-tracker") return `/zh/tools/quest-tracker${suffix}`;
   if (/^\/(?:guides|problems|database)\//.test(base)) return `/zh${base}${suffix}`;
   return route;
 }
@@ -37,6 +38,11 @@ const routeLabels = {
   "/problems/vehicle-recovery": { en: "Vehicle recovery", zh: "车辆找回" },
   "/guides/gigi-large-egg-quest": { en: "Gigi large-egg route", zh: "Gigi 大鸡蛋路线" },
   "/guides/police-wanted-levels": { en: "Police chase and wanted levels", zh: "警察追捕与警星" },
+  "/database/crops": { en: "Browse crop records", zh: "查看作物记录" },
+  "/guides/farming-fields": { en: "Farming field guide", zh: "种田实战指南" },
+  "/guides/money-making#cashin": { en: "CashIn selling", zh: "CashIn 销售" },
+  "/guides/vehicles-transport": { en: "Vehicle guide", zh: "车辆指南" },
+  "/database/quests#rust-to-rumbling": { en: "Rust to Rumbling!", zh: "Rust to Rumbling! 修车任务" },
 };
 
 const journeyPlans = {
@@ -54,6 +60,16 @@ const journeyPlans = {
     { route: "/guides/electricity-power#two-paths", en: { label: "Electricity contracts", reason: "Compare the two documented contract paths." }, zh: { label: "水电合同路线", reason: "对照两条已有记录的合同路线。" } },
     { route: "/database/materials#zirconite", en: { label: "Buy Zirconite", reason: "Check the current purchase route before searching for a mine." }, zh: { label: "购买锆矿", reason: "先看当前购买路线，不要先找未开放矿洞。" } },
     { route: "/tools/ranch-checklist", en: { label: "Save a local checklist", reason: "Track your own power goal without creating a required order." }, zh: { label: "保存本地清单", reason: "记录自己的供电目标，不把它当成强制顺序。" } },
+  ],
+  "location:leafy-market": [
+    { route: "/database/crops", en: { label: "Browse crop records", reason: "Compare the seeds and crop facts before planning a field." }, zh: { label: "查看作物记录", reason: "规划农田前先对照种子和作物资料。" } },
+    { route: "/guides/farming-fields", en: { label: "Farming field guide", reason: "Use the current planting sequence and keep unknown field rules visible." }, zh: { label: "种田实战指南", reason: "按当前种植流程操作，并保留尚未确认的农田规则。" } },
+    { route: "/guides/money-making#cashin", en: { label: "CashIn selling", reason: "Follow the documented sale-settlement route without inventing crop sell prices." }, zh: { label: "CashIn 销售", reason: "按已有记录的结算路线操作，不猜单作物售价。" } },
+  ],
+  "location:bykii-terminal": [
+    { route: "/guides/vehicles-transport", en: { label: "Vehicle guide", reason: "Read the confirmed transport systems and current-build limits." }, zh: { label: "车辆指南", reason: "查看已确认的交通系统和当前版本边界。" } },
+    { route: "/database/quests#rust-to-rumbling", en: { label: "Rust to Rumbling!", reason: "Open the observed vehicle quest record before relying on a guessed terminal route." }, zh: { label: "Rust to Rumbling! 修车任务", reason: "查看视频观测到的车辆任务记录，不把终端位置猜成精确路线。" } },
+    { route: "/problems/vehicle-recovery", en: { label: "Vehicle recovery", reason: "Use the recovery path if the car is missing or not yet available." }, zh: { label: "车辆找回", reason: "车辆消失或尚未可用时，按排查路线处理。" } },
   ],
   "material:hay": [
     { route: "/database/animals#chicken", en: { label: "Chicken feed context", reason: "See how hay fits the interior trough and animal routine." }, zh: { label: "鸡饲料说明", reason: "查看干草与室内食槽、动物照护的关系。" } },

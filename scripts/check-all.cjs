@@ -20,6 +20,7 @@ const nodeChecks = [
   ["check-community.cjs"],
   ["check-player-report.cjs"],
   ["check-ranch-checklist.cjs"],
+  ["check-quest-tracker.cjs"],
   ["check-entity-journeys.cjs"],
   ["check-crops.cjs"],
   ["check-field-notes.cjs"],

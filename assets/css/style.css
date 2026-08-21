@@ -2727,12 +2727,37 @@ table.data-table {
 .ranch-checklist-item input { width: 20px; height: 20px; margin-top: 3px; accent-color: var(--green-700); flex: 0 0 auto; }
 .ranch-checklist-item input:checked + span { color: var(--brown-500); text-decoration: line-through; }
 .ranch-checklist-item a { min-height: 44px; padding: 11px 0; color: var(--green-700); font-size: 0.84rem; font-weight: 800; white-space: nowrap; }
-.ranch-checklist-reset { margin-top: 18px; }
-@media (min-width: 760px) {
+  .ranch-checklist-reset { margin-top: 18px; }
+  .quest-tracker-page { padding-top: 42px; }
+  .quest-tracker-intro { display: grid; gap: 18px; max-width: 780px; }
+  .quest-tracker-intro h1 { margin-bottom: 0; }
+  .quest-tracker-note { margin: 0; max-width: 70ch; }
+  .quest-tracker-status { min-height: 24px; margin: 26px 0 14px; color: var(--brown-500); font-size: 0.9rem; }
+  .quest-tracker-list { display: grid; gap: 16px; max-width: 980px; }
+  .quest-tracker-card { padding: 22px; border: 1px solid var(--cream-300); border-top: 4px solid var(--rust); background: var(--surface); box-shadow: var(--shadow-sm); }
+  .quest-tracker-card-head { display: flex; gap: 18px; align-items: start; justify-content: space-between; }
+  .quest-tracker-card-head h2 { margin: 8px 0 0; }
+  .quest-tracker-progress { color: var(--green-700); font-size: 0.84rem; font-weight: 800; white-space: nowrap; }
+  .quest-tracker-summary { max-width: 75ch; margin: 14px 0 18px; color: var(--brown-700); }
+  .quest-tracker-relations { display: grid; gap: 8px; margin: 0 0 16px; color: var(--brown-700); font-size: 0.88rem; }
+  .quest-tracker-relations > div, .quest-tracker-related > div { display: flex; flex-wrap: wrap; gap: 8px; }
+  .quest-tracker-link { color: var(--green-700); font-weight: 800; }
+  .quest-tracker-items { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+  .quest-tracker-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 13px 0; border-top: 1px solid var(--cream-300); }
+  .quest-tracker-item label { display: flex; gap: 10px; align-items: flex-start; min-height: 44px; cursor: pointer; }
+  .quest-tracker-item input { width: 20px; height: 20px; margin-top: 3px; accent-color: var(--green-700); flex: 0 0 auto; }
+  .quest-tracker-item input:checked + span { color: var(--brown-500); text-decoration: line-through; }
+  .quest-tracker-item.is-pending { background: var(--cream-100); }
+  .quest-tracker-fact-meta { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; align-items: center; }
+  .quest-tracker-fact-meta small { color: var(--brown-500); font-size: 0.75rem; }
+  .quest-tracker-card-foot { display: flex; flex-wrap: wrap; gap: 18px; align-items: end; justify-content: space-between; margin-top: 18px; }
+  .quest-tracker-related { display: grid; gap: 8px; color: var(--brown-700); font-size: 0.88rem; }
+  .quest-tracker-card-foot > .btn { flex: 0 0 auto; }
+  @media (min-width: 760px) {
   .ranch-checklist-goals { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .ranch-checklist-panel { max-width: 860px; }
 }
-@media (max-width: 520px) {
+  @media (max-width: 520px) {
   .ranch-checklist-item { grid-template-columns: 1fr; gap: 2px; }
   .ranch-checklist-item a { padding-left: 30px; }
 }
@@ -2772,6 +2797,13 @@ table.data-table {
     width: 100%;
     min-width: 0;
     max-width: 100%;
+  }
+  @media (max-width: 620px) {
+    .quest-tracker-card-head { display: grid; gap: 8px; }
+    .quest-tracker-item { grid-template-columns: 1fr; gap: 4px; }
+    .quest-tracker-fact-meta { justify-content: flex-start; padding-left: 30px; }
+    .quest-tracker-card-foot { align-items: stretch; }
+    .quest-tracker-card-foot > .btn { width: 100%; }
   }
 }
 .knowledge-directory {

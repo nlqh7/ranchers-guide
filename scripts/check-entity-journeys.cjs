@@ -13,6 +13,8 @@ const knownRoutes = new Set([
 const plans = [
   ["animal:chicken", 5],
   ["location:city-hall", 4],
+  ["location:leafy-market", 3],
+  ["location:bykii-terminal", 3],
   ["material:hay", 3],
   ["npc:angela", 4],
   ["npc:victor", 4],
