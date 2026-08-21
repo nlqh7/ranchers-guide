@@ -44,7 +44,7 @@ function renderPage(zh) {
   <link rel="canonical" href="https://theranchersguide.com${route}">
   <link rel="alternate" hreflang="en" href="https://theranchersguide.com/tools/player-report"><link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/tools/player-report"><link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/tools/player-report">
   <meta property="og:type" content="website"><meta property="og:site_name" content="The Ranchers Guide"><meta property="og:title" content="${escapeHtml(title)}"><meta property="og:description" content="${escapeHtml(description)}"><meta property="og:url" content="https://theranchersguide.com${route}"><meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260821-report1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260821-ui1">
   <script type="application/ld+json">${jsonScript({ "@context": "https://schema.org", "@type": "SoftwareApplication", name: title, applicationCategory: "UtilitiesApplication", operatingSystem: "Any web browser", isAccessibleForFree: true, url: `https://theranchersguide.com${route}`, description })}</script>
 </head>
 <body>

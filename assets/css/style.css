@@ -256,6 +256,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+main { min-width: 0; }
+
 img { max-width: 100%; height: auto; }
 
 a { color: var(--green-700); text-decoration: none; }
@@ -283,6 +285,8 @@ ul, ol { margin: 0.8em 0 0.8em 1.4em; }
 li { margin: 0.3em 0; }
 
 .container {
+  width: 100%;
+  min-width: 0;
   max-width: var(--maxw);
   margin: 0 auto;
   padding: 0 20px;
@@ -1216,6 +1220,14 @@ table.data-table {
   display: grid;
   gap: 28px;
   align-items: end;
+}
+.knowledge-hero-inner > * { min-width: 0; }
+.knowledge-hero h1,
+.knowledge-hero .lead,
+.coverage-summary dt,
+.coverage-summary dd {
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 .coverage-summary {
   display: grid;
@@ -2256,7 +2268,7 @@ table.data-table {
 .form-status { min-height: 1.3em; margin: 0; color: var(--green-700); font-size: 0.88rem; }
 
 @media (min-width: 760px) {
-  .coverage-summary { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .coverage-summary { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
   .problem-toolbar { grid-template-columns: minmax(0, 1fr) auto; align-items: end; }
   .community-layout { grid-template-columns: minmax(0, 1.8fr) minmax(270px, 0.65fr); }
   .community-actions { position: sticky; top: 92px; }
@@ -2698,6 +2710,17 @@ table.data-table {
 .knowledge-search-control {
   border-color: var(--brown-300);
   box-shadow: 0 4px 0 rgba(79, 50, 31, 0.08);
+}
+@media (max-width: 719px) {
+  .knowledge-hero-inner > div,
+  .knowledge-hero-inner > dl,
+  .section-head,
+  .section-head h2,
+  .section-head p {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
 }
 .knowledge-directory {
   display: grid;

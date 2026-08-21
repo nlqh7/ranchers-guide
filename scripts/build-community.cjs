@@ -130,7 +130,7 @@ function renderPage(zh) {
   <link rel="canonical" href="https://theranchersguide.com${route}">
   <link rel="alternate" hreflang="en" href="https://theranchersguide.com/community"><link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/community"><link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/community">
   <meta property="og:type" content="website"><meta property="og:site_name" content="The Ranchers Guide"><meta property="og:title" content="${escapeHtml(title)}"><meta property="og:description" content="${escapeHtml(description)}"><meta property="og:url" content="https://theranchersguide.com${route}"><meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260820-community1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260821-ui1">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
   <script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "CollectionPage", name: title, description, url: `https://theranchersguide.com${route}`, inLanguage: lang })}</script>
 </head>
