@@ -47,6 +47,12 @@ const pages = [
     requiredZh: ["answer-box", "放置", "材料", "来源"],
   },
   {
+    en: "guides/crafting-guide.html",
+    zh: "zh/guides/crafting-guide.html",
+    required: ["answer-box", "crafting", "workbench", "materials", "sources"],
+    requiredZh: ["answer-box", "制作", "工作台", "材料", "来源"],
+  },
+  {
     en: "guides/multiplayer-coop.html",
     zh: "zh/guides/multiplayer-coop.html",
     required: ["answer-box", "hosting", "roles", "troubleshooting"],

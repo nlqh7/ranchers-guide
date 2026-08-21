@@ -11,6 +11,7 @@
     "/guides/animal-guide",
     "/guides/electricity-power",
     "/guides/building-construction",
+    "/guides/crafting-guide",
     "/guides/roof-quest-stuck",
     "/guides/gigi-large-egg-quest",
     "/guides/police-wanted-levels",
@@ -71,6 +72,7 @@
     "/zh/updates/launch-hotfix-0-8-10-455",
     "/zh/updates/transport-update",
     "/zh/guides/building-construction",
+    "/zh/guides/crafting-guide",
     "/zh/guides/multiplayer-coop",
     "/zh/problems/fast-travel-subway",
     "/zh/tools/chicken-troubleshooter"

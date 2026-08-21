@@ -144,6 +144,20 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://theranchersguide.com/guides/crafting-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://theranchersguide.com/guides/crafting-guide" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/guides/crafting-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/guides/crafting-guide" />
+    <lastmod>2026-08-22</lastmod><changefreq>weekly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://theranchersguide.com/zh/guides/crafting-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://theranchersguide.com/guides/crafting-guide" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/guides/crafting-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/guides/crafting-guide" />
+    <lastmod>2026-08-22</lastmod><changefreq>weekly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://theranchersguide.com/guides/roof-quest-stuck</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://theranchersguide.com/guides/roof-quest-stuck" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/guides/roof-quest-stuck" />

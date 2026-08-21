@@ -26,6 +26,7 @@ const labels = {
     map: "Find City Hall on the map",
     animal: "Open the chicken care guide",
     building: "Back to building and placement",
+    crafting: "Open the crafting guide",
     footer: "Current routes first; missing evidence stays visible",
     nav: ["Guides", "Database", "Map", "Problems", "Research", "Search", "Contribute"]
   },
@@ -45,6 +46,7 @@ const labels = {
     map: "在地图中查找市政厅",
     animal: "打开养鸡指南",
     building: "返回建造与放置指南（英文）",
+    crafting: "打开制作指南",
     footer: "优先给当前路线，缺失证据保持可见",
     nav: ["新手", "知识库", "地图", "问题", "搜索", "投稿"]
   }
@@ -100,7 +102,7 @@ function render(locale) {
     <p class="lead">${l.lead}</p><div class="notice warning"><strong>${zh ? "当前版本边界：" : "Current-build boundary:"}</strong> ${l.currentNote}</div>
     <nav class="toc" aria-label="${l.contents}"><strong>${l.contents}</strong><ul>${toc}</ul></nav>
 ${sections}
-    <section class="answer-box"><h2>${l.unknown}</h2><p>${l.unknownCopy}</p><a class="btn" href="/guides/building-construction#materials">${l.building}</a></section>
+    <section class="answer-box"><h2>${l.unknown}</h2><p>${l.unknownCopy}</p><a class="btn" href="${prefix}/guides/crafting-guide">${l.crafting}</a> <a class="btn btn-outline" href="${prefix}/guides/building-construction#materials">${l.building}</a></section>
   </article></main><footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>${l.footer}</span></div></div></footer><script src="/assets/js/main.js?v=20260810-nav1" defer></script>
 </body></html>`;
 }
