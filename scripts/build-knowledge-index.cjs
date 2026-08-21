@@ -17,6 +17,7 @@ function routeWithLocale(route, locale) {
   if (base === "/tools/chicken-troubleshooter") return `/zh/tools/chicken-troubleshooter${suffix}`;
   if (base === "/tools/ranch-checklist") return `/zh/tools/ranch-checklist${suffix}`;
   if (base === "/tools/quest-tracker") return `/zh/tools/quest-tracker${suffix}`;
+  if (base === "/community") return `/zh/community${suffix}`;
   if (/^\/(?:guides|problems|database)\//.test(base)) return `/zh${base}${suffix}`;
   return route;
 }
@@ -43,6 +44,8 @@ const routeLabels = {
   "/guides/money-making#cashin": { en: "CashIn selling", zh: "CashIn 销售" },
   "/guides/vehicles-transport": { en: "Vehicle guide", zh: "车辆指南" },
   "/database/quests#rust-to-rumbling": { en: "Rust to Rumbling!", zh: "Rust to Rumbling! 修车任务" },
+  "/guides/resources-and-materials": { en: "Resources guide", zh: "资源材料指南" },
+  "/guides/crafting-guide": { en: "Crafting guide", zh: "制作指南" },
 };
 
 const journeyPlans = {
@@ -112,6 +115,36 @@ const journeyPlans = {
     { route: "/database/npcs#victor", en: { label: "Victor and Meriam context", reason: "Check the NPC and service context around the purchase route." }, zh: { label: "Victor 与 Meriam", reason: "查看购买路线涉及的 NPC 和服务上下文。" } },
     { route: "/guides/electricity-power#two-paths", en: { label: "Electricity route", reason: "Use a verified progression path when the material question is tied to power systems." }, zh: { label: "供电路线", reason: "如果材料问题与供电系统有关，从已有证据路线继续。" } },
     { route: "/guides/electricity-power#two-paths", en: { label: "Power route", reason: "Continue if the material question came from electricity work." }, zh: { label: "供电路线", reason: "如果材料问题来自供电任务，从这里继续。" } },
+  ],
+  "material:stone": [
+    { route: "/guides/resources-and-materials", en: { label: "Resource route", reason: "Start with the current-build collection boundary and theft warning." }, zh: { label: "资源路线", reason: "先查看当前版本的收集边界和偷取风险。" } },
+    { route: "/guides/crafting-guide", en: { label: "Crafting context", reason: "See the one observed recipe without assuming every blueprint cost." }, zh: { label: "制作上下文", reason: "查看已有观测配方，不把它扩展成所有蓝图成本。" } },
+    { route: "/guides/building-construction", en: { label: "Building guide", reason: "Use the building workflow when stone is needed for a structure." }, zh: { label: "建造指南", reason: "需要石头建造时，继续查看建造流程。" } },
+  ],
+  "material:wood-log": [
+    { route: "/guides/resources-and-materials", en: { label: "Resource route", reason: "Check the current tree-cutting lead and its unverified respawn boundary." }, zh: { label: "资源路线", reason: "查看当前砍树线索及尚未确认的刷新边界。" } },
+    { route: "/guides/crafting-guide", en: { label: "Crafting context", reason: "Use the Red Tent observation as a bounded material example." }, zh: { label: "制作上下文", reason: "把红帐篷观测作为有边界的材料示例。" } },
+    { route: "/guides/building-construction", en: { label: "Building guide", reason: "Continue to placement and construction troubleshooting." }, zh: { label: "建造指南", reason: "继续查看放置和建造排查。" } },
+  ],
+  "material:charcoal": [
+    { route: "/guides/resources-and-materials", en: { label: "Resource status", reason: "Keep the burning route marked as a lead until a current screenshot confirms it." }, zh: { label: "资源状态", reason: "在当前截图确认前，把燃烧路线保留为线索。" } },
+    { route: "/guides/crafting-guide", en: { label: "Crafting context", reason: "Check which material questions have a recipe observation and which remain open." }, zh: { label: "制作上下文", reason: "区分已有配方观测和仍待确认的材料问题。" } },
+    { route: "/community", en: { label: "Community signals", reason: "Review the source-linked lead without treating it as a confirmed recipe." }, zh: { label: "社区线索", reason: "查看带来源的线索，不把它当作已确认配方。" } },
+  ],
+  "animal:cow": [
+    { route: "/guides/animal-guide", en: { label: "Animal care guide", reason: "Keep current-build care answers separate from historical barn mechanics." }, zh: { label: "动物照护指南", reason: "把当前版本照护答案与历史谷仓机制分开。" } },
+    { route: "/database/animals#cow", en: { label: "Cow evidence", reason: "Review the roster, product observations and unknown purchase fields together." }, zh: { label: "牛的证据", reason: "集中查看动物名单、产物观测和未知购买字段。" } },
+    { route: "/tools/ranch-checklist", en: { label: "Save animal notes", reason: "Track your own care observations without turning them into site facts." }, zh: { label: "保存动物记录", reason: "记录自己的照护观察，不把它直接变成网站事实。" } },
+  ],
+  "animal:goat": [
+    { route: "/guides/animal-guide", en: { label: "Animal care guide", reason: "Use the shared care context while goat-specific current data remains open." }, zh: { label: "动物照护指南", reason: "在山羊当前版本数据不足时，先查看通用照护上下文。" } },
+    { route: "/database/animals#goat", en: { label: "Goat evidence", reason: "Separate the confirmed roster from unverified seller, price and feed fields." }, zh: { label: "山羊的证据", reason: "区分已确认的动物名单与未验证的卖家、价格和食物字段。" } },
+    { route: "/tools/ranch-checklist", en: { label: "Save animal notes", reason: "Keep personal observations local until they have traceable evidence." }, zh: { label: "保存动物记录", reason: "在具备可追踪证据前，把个人观察保存在本机。" } },
+  ],
+  "animal:rabbit": [
+    { route: "/guides/animal-guide", en: { label: "Animal care guide", reason: "Use the shared care context while rabbit-specific current data remains open." }, zh: { label: "动物照护指南", reason: "在兔子当前版本数据不足时，先查看通用照护上下文。" } },
+    { route: "/database/animals#rabbit", en: { label: "Rabbit evidence", reason: "Review the confirmed roster and keep diet, housing and price unknowns visible." }, zh: { label: "兔子的证据", reason: "查看已确认名单，并保留食物、住所和价格的未知状态。" } },
+    { route: "/tools/ranch-checklist", en: { label: "Save animal notes", reason: "Track personal observations locally rather than publishing guesses." }, zh: { label: "保存动物记录", reason: "先在本机记录个人观察，不把猜测公开成事实。" } },
   ],
 };
 

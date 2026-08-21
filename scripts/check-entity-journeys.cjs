@@ -12,17 +12,40 @@ const knownRoutes = new Set([
 
 const plans = [
   ["animal:chicken", 5],
-  ["location:city-hall", 4],
+  ["location:city-hall", 5],
   ["location:leafy-market", 3],
   ["location:bykii-terminal", 3],
   ["material:hay", 3],
+  ["material:stone", 3],
+  ["material:wood-log", 3],
+  ["material:charcoal", 3],
   ["npc:angela", 4],
   ["npc:victor", 4],
   ["npc:gigi", 4],
   ["quest:chicken-coop-mission", 4],
   ["quest:power-to-the-bench", 4],
   ["material:zirconite", 4],
+  ["animal:cow", 3],
+  ["animal:goat", 3],
+  ["animal:rabbit", 3],
 ];
+
+const answerCardCoverage = [
+  ["animal:chicken", 5],
+  ["material:hay", 2],
+  ["npc:victor", 3],
+  ["location:city-hall", 0],
+  ["material:zirconite", 2],
+];
+
+const requiredJourneyRoutes = {
+  "location:city-hall": [
+    "/database/npcs#victor",
+    "/database/quests#power-to-the-bench",
+    "/guides/electricity-power#two-paths",
+    "/database/materials#zirconite",
+  ],
+};
 
 for (const relative of ["knowledge-index.json", "zh/knowledge-index.json"]) {
   const payload = JSON.parse(fs.readFileSync(path.join(root, relative), "utf8"));
@@ -30,7 +53,16 @@ for (const relative of ["knowledge-index.json", "zh/knowledge-index.json"]) {
   for (const [id, minimum] of plans) {
     const entity = payload.entities.find((candidate) => candidate.id === id);
     assert.ok(entity, `${relative} is missing ${id}`);
+    if (answerCardCoverage.some(([coverageId]) => coverageId === id)) {
+      assert.ok(entity.summary, `${relative} ${id} needs an answer-card summary`);
+      assert.ok(entity.sources.length > 0 || id === "location:city-hall", `${relative} ${id} needs a source-backed answer card`);
+      const [coverageId, minimumFacts] = answerCardCoverage.find(([coverageId]) => coverageId === id);
+      assert.ok(entity.facts.length >= minimumFacts, `${relative} ${coverageId} needs at least ${minimumFacts} answer facts`);
+    }
     assert.ok(Array.isArray(entity.journey) && entity.journey.length >= minimum, `${relative} ${id} needs at least ${minimum} journey steps`);
+    for (const expectedRoute of requiredJourneyRoutes[id] || []) {
+      assert.ok(entity.journey.some((step) => step.href.replace(/^\/zh/, "") === expectedRoute), `${relative} ${id} is missing journey route ${expectedRoute}`);
+    }
     for (const step of entity.journey) {
       assert.ok(step.href && step.label && step.reason, `${relative} ${id} has incomplete journey metadata`);
       assert.ok(knownRoutes.has(step.href.split(/[?#]/)[0]), `${relative} ${id} points to missing route ${step.href}`);
