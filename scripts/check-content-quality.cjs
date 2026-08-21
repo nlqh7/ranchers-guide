@@ -40,6 +40,24 @@ const pages = [
     required: ["answer-box", "parking", "subway", "vehicle"],
     requiredZh: ["answer-box", "停车", "地铁", "车辆"],
   },
+  {
+    en: "guides/building-construction.html",
+    zh: "zh/guides/building-construction.html",
+    required: ["answer-box", "placement", "materials", "sources"],
+    requiredZh: ["answer-box", "放置", "材料", "来源"],
+  },
+  {
+    en: "guides/multiplayer-coop.html",
+    zh: "zh/guides/multiplayer-coop.html",
+    required: ["answer-box", "hosting", "roles", "troubleshooting"],
+    requiredZh: ["answer-box", "建房", "分工", "排查"],
+  },
+  {
+    en: "problems/fast-travel-subway.html",
+    zh: "zh/problems/fast-travel-subway.html",
+    required: ["answer-box", "subway", "vehicle", "evidence"],
+    requiredZh: ["answer-box", "地铁", "车辆", "来源"],
+  },
 ];
 
 function read(relativePath) {

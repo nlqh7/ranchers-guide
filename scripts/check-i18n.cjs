@@ -28,6 +28,9 @@ const pairs = [
   ["updates.html", "zh/updates.html", "/updates", "/zh/updates"],
   ["updates/launch-hotfix-0-8-10-455.html", "zh/updates/launch-hotfix-0-8-10-455.html", "/updates/launch-hotfix-0-8-10-455", "/zh/updates/launch-hotfix-0-8-10-455"],
   ["updates/transport-update.html", "zh/updates/transport-update.html", "/updates/transport-update", "/zh/updates/transport-update"],
+  ["guides/building-construction.html", "zh/guides/building-construction.html", "/guides/building-construction", "/zh/guides/building-construction"],
+  ["guides/multiplayer-coop.html", "zh/guides/multiplayer-coop.html", "/guides/multiplayer-coop", "/zh/guides/multiplayer-coop"],
+  ["problems/fast-travel-subway.html", "zh/problems/fast-travel-subway.html", "/problems/fast-travel-subway", "/zh/problems/fast-travel-subway"],
   ["tools/chicken-troubleshooter.html", "zh/tools/chicken-troubleshooter.html", "/tools/chicken-troubleshooter", "/zh/tools/chicken-troubleshooter"],
 ];
 const utilityPairs = [

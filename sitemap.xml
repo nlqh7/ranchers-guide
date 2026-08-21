@@ -127,7 +127,19 @@
   </url>
   <url>
     <loc>https://theranchersguide.com/guides/building-construction</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://theranchersguide.com/guides/building-construction" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/guides/building-construction" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/guides/building-construction" />
     <lastmod>2026-08-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://theranchersguide.com/zh/guides/building-construction</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://theranchersguide.com/guides/building-construction" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/guides/building-construction" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/guides/building-construction" />
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -166,7 +178,19 @@
   </url>
   <url>
     <loc>https://theranchersguide.com/guides/multiplayer-coop</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://theranchersguide.com/guides/multiplayer-coop" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/guides/multiplayer-coop" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/guides/multiplayer-coop" />
     <lastmod>2026-08-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://theranchersguide.com/zh/guides/multiplayer-coop</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://theranchersguide.com/guides/multiplayer-coop" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/guides/multiplayer-coop" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/guides/multiplayer-coop" />
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -247,7 +271,19 @@
   </url>
   <url>
     <loc>https://theranchersguide.com/problems/fast-travel-subway</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://theranchersguide.com/problems/fast-travel-subway" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/problems/fast-travel-subway" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/problems/fast-travel-subway" />
     <lastmod>2026-08-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://theranchersguide.com/zh/problems/fast-travel-subway</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://theranchersguide.com/problems/fast-travel-subway" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/problems/fast-travel-subway" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/problems/fast-travel-subway" />
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

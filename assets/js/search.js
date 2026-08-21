@@ -34,6 +34,9 @@
     "/updates",
     "/updates/launch-hotfix-0-8-10-455",
     "/updates/transport-update",
+    "/guides/building-construction",
+    "/guides/multiplayer-coop",
+    "/problems/fast-travel-subway",
     "/research",
     "/tools/profit-calculator",
     "/tools/field-notes",
@@ -67,6 +70,9 @@
     "/zh/updates",
     "/zh/updates/launch-hotfix-0-8-10-455",
     "/zh/updates/transport-update",
+    "/zh/guides/building-construction",
+    "/zh/guides/multiplayer-coop",
+    "/zh/problems/fast-travel-subway",
     "/zh/tools/chicken-troubleshooter"
   ];
   var IS_ZH = document.documentElement.lang.toLowerCase() === "zh-cn";
