@@ -22,6 +22,24 @@ const pages = [
     required: ["answer-box", "current", "sources", "materials"],
     requiredZh: ["answer-box", "当前", "来源", "材料"],
   },
+  {
+    en: "updates.html",
+    zh: "zh/updates.html",
+    required: ["answer-box", "0.8.10.562", "hotfix", "sources"],
+    requiredZh: ["answer-box", "0.8.10.562", "热修", "来源"],
+  },
+  {
+    en: "updates/launch-hotfix-0-8-10-455.html",
+    zh: "zh/updates/launch-hotfix-0-8-10-455.html",
+    required: ["answer-box", "0.8.10.455", "offline", "co-op"],
+    requiredZh: ["answer-box", "0.8.10.455", "离线", "联机"],
+  },
+  {
+    en: "updates/transport-update.html",
+    zh: "zh/updates/transport-update.html",
+    required: ["answer-box", "parking", "subway", "vehicle"],
+    requiredZh: ["answer-box", "停车", "地铁", "车辆"],
+  },
 ];
 
 function read(relativePath) {

@@ -25,6 +25,9 @@ const pairs = [
   ["guides/farming-fields.html", "zh/guides/farming-fields.html", "/guides/farming-fields", "/zh/guides/farming-fields"],
   ["guides/electricity-power.html", "zh/guides/electricity-power.html", "/guides/electricity-power", "/zh/guides/electricity-power"],
   ["guides/resources-and-materials.html", "zh/guides/resources-and-materials.html", "/guides/resources-and-materials", "/zh/guides/resources-and-materials"],
+  ["updates.html", "zh/updates.html", "/updates", "/zh/updates"],
+  ["updates/launch-hotfix-0-8-10-455.html", "zh/updates/launch-hotfix-0-8-10-455.html", "/updates/launch-hotfix-0-8-10-455", "/zh/updates/launch-hotfix-0-8-10-455"],
+  ["updates/transport-update.html", "zh/updates/transport-update.html", "/updates/transport-update", "/zh/updates/transport-update"],
   ["tools/chicken-troubleshooter.html", "zh/tools/chicken-troubleshooter.html", "/tools/chicken-troubleshooter", "/zh/tools/chicken-troubleshooter"],
 ];
 const utilityPairs = [

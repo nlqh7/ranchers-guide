@@ -31,6 +31,9 @@
     "/problems/fast-travel-subway",
     "/problems/failed-quest-replay",
     "/community",
+    "/updates",
+    "/updates/launch-hotfix-0-8-10-455",
+    "/updates/transport-update",
     "/research",
     "/tools/profit-calculator",
     "/tools/field-notes",
@@ -61,6 +64,9 @@
     "/zh/map",
     "/zh/problems",
     "/zh/community",
+    "/zh/updates",
+    "/zh/updates/launch-hotfix-0-8-10-455",
+    "/zh/updates/transport-update",
     "/zh/tools/chicken-troubleshooter"
   ];
   var IS_ZH = document.documentElement.lang.toLowerCase() === "zh-cn";
@@ -88,6 +94,8 @@
       if (path.indexOf("/zh/database/") === 0) return "数据库";
     if (path === "/zh/map") return "地图";
     if (path === "/zh/problems") return "问题排查";
+    if (path === "/zh/updates") return "更新";
+    if (path.indexOf("/zh/updates/") === 0) return "更新";
     if (path.indexOf("/zh/tools/") === 0) return "工具";
       if (path === "/zh/") return "首页";
       return "站点";
@@ -98,6 +106,8 @@
     if (path === "/map") return "Map";
     if (path.indexOf("/problems/") === 0 || path === "/problems") return "Problem";
     if (path === "/community") return "Community";
+    if (path === "/updates") return "Updates";
+    if (path.indexOf("/updates/") === 0) return "Updates";
     if (path === "/research") return "Research";
     if (path.indexOf("/tools/") === 0) return "Tool";
     if (path === "/") return "Home";
