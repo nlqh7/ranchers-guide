@@ -14,6 +14,7 @@ const pairs = [
   ["database/quests.html", "zh/database/quests.html", "/database/quests", "/zh/database/quests"],
   ["map.html", "zh/map.html", "/map", "/zh/map"],
   ["problems.html", "zh/problems.html", "/problems", "/zh/problems"],
+  ["community.html", "zh/community.html", "/community", "/zh/community"],
   ["search.html", "zh/search.html", "/search", "/zh/search"],
   ["guides/animal-guide.html", "zh/guides/animal-guide.html", "/guides/animal-guide", "/zh/guides/animal-guide"],
   ["guides/gigi-large-egg-quest.html", "zh/guides/gigi-large-egg-quest.html", "/guides/gigi-large-egg-quest", "/zh/guides/gigi-large-egg-quest"],
@@ -23,6 +24,9 @@ const pairs = [
   ["problems/vehicle-recovery.html", "zh/problems/vehicle-recovery.html", "/problems/vehicle-recovery", "/zh/problems/vehicle-recovery"],
   ["guides/farming-fields.html", "zh/guides/farming-fields.html", "/guides/farming-fields", "/zh/guides/farming-fields"],
   ["tools/chicken-troubleshooter.html", "zh/tools/chicken-troubleshooter.html", "/tools/chicken-troubleshooter", "/zh/tools/chicken-troubleshooter"],
+];
+const utilityPairs = [
+  ["tools/player-report.html", "zh/tools/player-report.html", "/tools/player-report", "/zh/tools/player-report"],
 ];
 
 function read(relative) {
@@ -68,6 +72,20 @@ for (const [, , englishRoute, chineseRoute] of pairs.filter((pair) => pair[2] !=
     assert.match(node, new RegExp(`hreflang="en" href="${escaped(englishUrl)}"`));
     assert.match(node, new RegExp(`hreflang="zh-CN" href="${escaped(chineseUrl)}"`));
     assert.match(node, new RegExp(`hreflang="x-default" href="${escaped(englishUrl)}"`));
+  }
+}
+
+for (const [englishFile, chineseFile, englishRoute, chineseRoute] of utilityPairs) {
+  const english = read(englishFile);
+  const chinese = read(chineseFile);
+  assert.match(english, /<html lang="en">/);
+  assert.match(chinese, /<html lang="zh-CN">/);
+  assert.match(english, new RegExp(`canonical" href="https://theranchersguide.com${escaped(englishRoute)}"`));
+  assert.match(chinese, new RegExp(`canonical" href="https://theranchersguide.com${escaped(chineseRoute)}"`));
+  for (const html of [english, chinese]) {
+    assert.match(html, new RegExp(`hreflang="en" href="https://theranchersguide.com${escaped(englishRoute)}"`));
+    assert.match(html, new RegExp(`hreflang="zh-CN" href="https://theranchersguide.com${escaped(chineseRoute)}"`));
+    assert.match(html, /noindex,follow/);
   }
 }
 

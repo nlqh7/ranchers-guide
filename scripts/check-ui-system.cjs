@@ -30,6 +30,7 @@ const componentSelectors = [
   ".data-table",
   ".toc",
   ".article-next",
+  ".knowledge-dossier",
 ];
 
 for (const token of semanticTokens) {

@@ -57,19 +57,22 @@
     "/zh/database/quests",
     "/zh/map",
     "/zh/problems",
+    "/zh/community",
     "/zh/tools/chicken-troubleshooter"
   ];
   var IS_ZH = document.documentElement.lang.toLowerCase() === "zh-cn";
   var PAGE_PATHS = IS_ZH ? ZH_PAGE_PATHS : EN_PAGE_PATHS;
   var SEARCH_ROUTE = IS_ZH ? "/zh/search" : "/search";
-  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v7" : "ranchers-search-index-v21";
+  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v8" : "ranchers-search-index-v22";
   var documents = [];
   var form = document.querySelector("[data-search-form]");
   var input = document.querySelector("[data-search-input]");
   var clearButton = document.querySelector("[data-search-clear]");
   var results = document.querySelector("[data-search-results]");
+  var dossier = document.querySelector("[data-knowledge-dossier]");
   var status = document.querySelector("[data-search-status]");
   var suggestions = document.querySelectorAll("[data-search-suggestion]");
+  var knowledgeEntities = [];
 
   function cleanTitle(title) {
     return String(title || "").replace(/\s*[|—]\s*(?:The Ranchers Guide|牧场主指南)\s*$/i, "").trim();
@@ -194,6 +197,17 @@
     });
   }
 
+  function loadKnowledgeIndex() {
+    var indexPath = IS_ZH ? "/zh/knowledge-index.json" : "/knowledge-index.json";
+    return fetch(indexPath, { credentials: "same-origin" }).then(function (response) {
+      if (!response.ok) throw new Error(indexPath + " returned " + response.status);
+      return response.json();
+    }).then(function (payload) {
+      if (!payload || !Array.isArray(payload.entities)) throw new Error("knowledge-index.json is incomplete");
+      return payload.entities;
+    });
+  }
+
   function setStatus(message) {
     status.textContent = message;
   }
@@ -228,9 +242,105 @@
     return article;
   }
 
+  function escapeHtml(value) {
+    return String(value || "").replace(/[&<>"']/g, function (character) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[character];
+    });
+  }
+
+  function normalizeQuery(value) {
+    return String(value || "").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+  }
+
+  function entityScore(entity, query) {
+    var normalized = normalizeQuery(query);
+    var queryTokens = normalized.split(/\s+/).filter(Boolean);
+    var label = normalizeQuery(entity.label);
+    var aliases = (entity.aliases || []).map(normalizeQuery).filter(Boolean);
+    var keywords = (entity.keywords || []).map(normalizeQuery).filter(function (value) { return value.length >= 3; });
+    var labelTokens = label.split(/\s+/).filter(Boolean);
+    if (!normalized || !label) return 0;
+    if (label === normalized || aliases.some(function (alias) { return alias === normalized; })) return 100;
+    if (label && normalized.indexOf(label) !== -1) return 92;
+    if (labelTokens.some(function (token) { return token.length >= 1 && normalized.indexOf(token) !== -1; })) return 88;
+    if (label.split(/\s+/).filter(Boolean).every(function (token) { return queryTokens.indexOf(token) !== -1; })) return 88;
+    if (aliases.some(function (alias) { return alias.length >= 3 && normalized.indexOf(alias) !== -1; })) return 78;
+    var matchedKeyword = keywords.some(function (keyword) { return queryTokens.indexOf(keyword) !== -1; });
+    return matchedKeyword ? 52 : 0;
+  }
+
+  function evidenceLabel(level) {
+    var labels = IS_ZH
+      ? { official: "官方", "video-observed": "视频观测", "community-confirmed": "社区互证", "unverified-lead": "单一线索" }
+      : { official: "Official", "video-observed": "Video-observed", "community-confirmed": "Community-confirmed", "unverified-lead": "Single-source lead" };
+    return labels[level] || (IS_ZH ? "待验证" : "Unverified");
+  }
+
+  function evidenceClass(level) {
+    return level === "official" ? "official" : level === "video-observed" ? "video" : level === "community-confirmed" ? "corroborated" : "lead";
+  }
+
+  function dossierEntity(query) {
+    return knowledgeEntities.map(function (entity) {
+      return { entity: entity, score: entityScore(entity, query) };
+    }).filter(function (item) { return item.score >= 52; }).sort(function (a, b) {
+      return b.score - a.score;
+    }).slice(0, 3).map(function (item) { return item.entity; });
+  }
+
+  function dossierFacts(entity) {
+    var useful = (entity.facts || []).filter(function (fact) { return fact.validity !== "unknown"; });
+    return (useful.length ? useful : entity.facts || []).slice(0, 5);
+  }
+
+  function dossierRelated(entity, matches) {
+    var links = (entity.relatedRoutes || []).slice();
+    matches.forEach(function (match) {
+      if (match.url === entity.route || links.some(function (link) { return link.href === match.url; })) return;
+      links.push({ href: match.url, label: match.title, kind: match.type });
+    });
+    var seen = new Set();
+    return links.filter(function (link) {
+      if (!link || !link.href || seen.has(link.href)) return false;
+      seen.add(link.href);
+      return true;
+    }).slice(0, 8);
+  }
+
+  function renderDossier(query, matches) {
+    if (!dossier) return;
+    dossier.replaceChildren();
+    var entities = dossierEntity(query);
+    if (!entities.length) {
+      dossier.hidden = true;
+      return;
+    }
+    dossier.hidden = false;
+    dossier.innerHTML = entities.map(function (entity) {
+      var facts = dossierFacts(entity).map(function (fact) {
+        var status = '<span class="evidence-badge evidence-' + evidenceClass(fact.evidenceLevel) + '">' + escapeHtml(evidenceLabel(fact.evidenceLevel)) + '</span>';
+        var build = fact.build ? ' <span class="knowledge-dossier-build">' + escapeHtml(fact.build) + '</span>' : "";
+        return '<li><span>' + escapeHtml(fact.text) + '</span> ' + status + build + '</li>';
+      }).join("");
+      var related = dossierRelated(entity, matches).map(function (link) {
+        return '<a class="knowledge-dossier-link" href="' + escapeHtml(link.href) + '"><span>' + escapeHtml(link.kind || (IS_ZH ? "关联答案" : "Related answer")) + '</span><strong>' + escapeHtml(link.label) + '</strong></a>';
+      }).join("");
+      var sources = (entity.sources || []).slice(0, 4).map(function (source) {
+        return source.url
+          ? '<a href="' + escapeHtml(source.url) + '" rel="noopener noreferrer">' + escapeHtml(source.title) + '</a>'
+          : '<span>' + escapeHtml(source.title) + '</span>';
+      }).join(" · ");
+      return '<article class="knowledge-dossier-card"><div class="knowledge-dossier-heading"><div><span class="kicker">' + escapeHtml(entity.typeLabel) + '</span><h2>' + escapeHtml(entity.label) + '</h2></div><a class="btn btn-outline btn-compact" href="' + escapeHtml(entity.route) + '">' + (IS_ZH ? "打开完整条目" : "Open full entry") + '</a></div><p class="knowledge-dossier-summary">' + escapeHtml(entity.summary) + '</p>' + (facts ? '<div class="knowledge-dossier-facts"><strong>' + (IS_ZH ? "先看这些" : "Start with these facts") + '</strong><ul>' + facts + '</ul></div>' : "") + (related ? '<div class="knowledge-dossier-related"><strong>' + (IS_ZH ? "相关信息" : "Related information") + '</strong><div>' + related + '</div></div>' : "") + (sources ? '<p class="knowledge-dossier-sources"><strong>' + (IS_ZH ? "证据来源" : "Sources") + ':</strong> ' + sources + '</p>' : "") + '</article>';
+    }).join("");
+  }
+
   function render(query, updateUrl) {
     var trimmed = query.trim();
     results.replaceChildren();
+    if (dossier) {
+      dossier.replaceChildren();
+      dossier.hidden = true;
+    }
     if (!trimmed) {
       setStatus(IS_ZH ? "输入物品、任务、地点或问题。" : "Enter a topic to search the guide.");
       if (updateUrl) history.replaceState(null, "", SEARCH_ROUTE);
@@ -238,6 +348,7 @@
     }
 
     var matches = RanchersSearch.searchDocuments(documents, trimmed, 12);
+    renderDossier(trimmed, matches);
     setStatus(IS_ZH ? matches.length + " 条结果" : (matches.length === 1 ? "1 result" : matches.length + " results"));
     matches.forEach(function (item) { results.appendChild(resultElement(item)); });
 
@@ -287,8 +398,9 @@
   });
 
   setStatus(IS_ZH ? "正在加载中文索引..." : "Loading guide index...");
-  loadIndex().then(function (index) {
-    documents = index;
+  Promise.all([loadIndex(), loadKnowledgeIndex().catch(function () { return []; })]).then(function (loaded) {
+    documents = loaded[0];
+    knowledgeEntities = loaded[1];
     var initial = new URLSearchParams(location.search).get("q") || "";
     input.value = initial;
     syncClearButton();

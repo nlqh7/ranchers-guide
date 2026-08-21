@@ -165,13 +165,13 @@
       "zhSearchTitle": "木炭怎么制作",
       "searchTags": "charcoal coal burn logs torch fire extinguisher building material",
       "zhSearchTags": "木炭 煤 原木 燃烧 火把 灭火器 建造 材料",
-      "summary": "The community route is to burn Wood Logs and extinguish the fire before collecting the resulting charcoal. Work away from buildings and crops.",
-      "zhSummary": "社区路线是燃烧原木，在收集生成的木炭前用灭火器灭火。操作时远离建筑和作物。",
+      "summary": "A community lead suggests burning Wood Logs and extinguishing the fire before collecting Charcoal. Current-build steps, yield and fire behaviour still need a direct screenshot or video.",
+      "zhSummary": "一条社区线索称可以燃烧原木，再灭火收集木炭。当前版本的具体步骤、产量和火焰行为仍需要直接截图或视频确认。",
       "facts": [
         {
-          "text": "Multiple current-build players describe the same core route: place or cut Wood Logs, ignite them, wait for the material change, then use a fire extinguisher before collecting Charcoal.",
-          "zhText": "多名当前版本玩家描述了相同核心路线：放下或砍出原木，点燃并等待材料变化，再用灭火器灭火后收集木炭。",
-          "evidenceLevel": "community-confirmed",
+          "text": "A community lead suggests placing or cutting Wood Logs, igniting them, waiting for a material change, then using a fire extinguisher before collecting Charcoal. The retained scan has no direct post URL, so this remains a route to test.",
+          "zhText": "一条社区线索称可以放下或砍出原木，点燃并等待材料变化，再用灭火器灭火后收集木炭。现有存档没有直接帖子链接，因此它仍是待复测路线。",
+          "evidenceLevel": "unverified-lead",
           "build": "0.8.10.x",
           "validity": "current",
           "sourceIds": ["community-material-scan"]

@@ -173,8 +173,10 @@ assert.match(knowledgeBasePage, /<h1>The Ranchers Knowledge Base<\/h1>/);
 assert.match(knowledgeBasePage, /href="\/guides\/animal-guide#feeding"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /"\/database"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /search-index\.json/);
-assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-zh-v7/, "Chinese search cache must invalidate the previous page set");
-assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-v21/, "English search cache must invalidate the previous page set");
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-zh-v8/, "Chinese search cache must invalidate the previous page set");
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-v22/, "English search cache must invalidate the previous page set");
+assert.match(searchPage, /data-knowledge-dossier/, "Search page must provide an entity dossier surface");
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /knowledge-index\.json/, "Search must load the prebuilt knowledge index");
 
 /* Prebuilt search index (scripts/build-search-index.cjs — re-run after content edits). */
 const prebuiltIndex = JSON.parse(fs.readFileSync(path.join(root, "search-index.json"), "utf8"));
@@ -191,6 +193,14 @@ assert.match(fs.readFileSync(path.join(root, "database", "crops.html"), "utf8"),
 assert.match(fs.readFileSync(path.join(root, "database", "animals.html"), "utf8"), /id="black-chicken"[^>]+data-search-entry/);
 assert.equal(searchDocuments(prebuiltIndex, "Power to the Bench")[0].url, "/database/quests#power-to-the-bench");
 assert.equal(searchDocuments(prebuiltIndex, "Angela chicken seller")[0].url, "/database/npcs#angela");
+
+const knowledgeIndex = JSON.parse(fs.readFileSync(path.join(root, "knowledge-index.json"), "utf8"));
+const chineseKnowledgeIndex = JSON.parse(fs.readFileSync(path.join(root, "zh", "knowledge-index.json"), "utf8"));
+assert.equal(knowledgeIndex.entities.length, 53, "Knowledge index should cover the current typed datasets");
+assert.equal(chineseKnowledgeIndex.entities.length, knowledgeIndex.entities.length, "Bilingual knowledge indexes must stay aligned");
+assert.ok(knowledgeIndex.entities.some((entity) => entity.id === "material:zirconite" && entity.facts.length >= 2));
+assert.ok(chineseKnowledgeIndex.entities.some((entity) => entity.id === "material:zirconite" && entity.label.includes("锆矿")));
+assert.ok(knowledgeIndex.entities.some((entity) => entity.id === "quest:power-to-the-bench" && entity.relatedRoutes.some((link) => link.href === "/database/npcs#victor")));
 
 const chineseIndex = JSON.parse(fs.readFileSync(path.join(root, "zh", "search-index.json"), "utf8"));
 assert.ok(chineseIndex.every((entry) => entry.type !== "Database entry"), "Chinese search result types must be localized");
