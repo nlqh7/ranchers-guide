@@ -1835,6 +1835,13 @@ table.data-table {
 .map-inspector dt { color: var(--brown-500); font-size: 0.72rem; font-weight: 800; text-transform: uppercase; }
 .map-inspector dd { margin: 2px 0 0; color: var(--brown-700); }
 .map-inspector .btn { justify-self: start; }
+.map-inspector-connections { display: grid; gap: 8px; margin-top: 4px; }
+.map-inspector-connections > strong { color: var(--brown-500); font-size: 0.72rem; text-transform: uppercase; }
+.map-inspector-connections > div { display: grid; gap: 8px; }
+.map-inspector-connection { display: grid; gap: 2px; padding: 10px 12px; border: 1px solid var(--cream-300); background: var(--surface); }
+.map-inspector-connection span { color: var(--brown-500); font-size: 0.72rem; font-weight: 800; text-transform: uppercase; }
+.map-inspector-connection strong { color: var(--green-700); }
+.map-inspector-connection:hover strong { color: var(--green-500); }
 .visual-atlas {
   display: grid;
   gap: 20px;
@@ -2684,6 +2691,33 @@ table.data-table {
 .knowledge-dossier-link:hover strong { color: var(--color-action); }
 .knowledge-dossier-sources { margin: 20px 0 0; color: var(--color-text-muted); font-size: 0.82rem; }
 .knowledge-dossier-sources a { color: var(--color-action); }
+.ranch-checklist-page { padding-top: 42px; }
+.ranch-checklist-intro { display: grid; gap: 18px; max-width: 760px; }
+.ranch-checklist-intro h1 { margin-bottom: 0; }
+.ranch-checklist-note { margin: 0; max-width: 70ch; }
+.ranch-checklist-goals { display: grid; gap: 10px; margin: 26px 0 0; }
+.ranch-checklist-goals button { min-height: 48px; padding: 12px 16px; border: 1px solid var(--cream-300); background: var(--cream-100); color: var(--brown-700); text-align: left; font: inherit; font-weight: 800; cursor: pointer; }
+.ranch-checklist-goals button:hover, .ranch-checklist-goals button[aria-pressed="true"] { border-color: var(--green-700); color: var(--green-700); background: var(--surface); }
+.ranch-checklist-panel { display: none; margin-top: 22px; padding: 22px; border: 1px solid var(--cream-300); background: var(--surface); }
+.ranch-checklist-panel.is-active { display: block; }
+.ranch-checklist-panel h2 { margin-top: 0; }
+.ranch-checklist-panel > p { max-width: 70ch; color: var(--brown-500); }
+.ranch-checklist-progress { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: center; margin: 18px 0; color: var(--brown-500); font-size: 0.88rem; }
+.ranch-checklist-items { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.ranch-checklist-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 13px 0; border-top: 1px solid var(--cream-300); }
+.ranch-checklist-item label { display: flex; gap: 10px; align-items: flex-start; min-height: 44px; cursor: pointer; }
+.ranch-checklist-item input { width: 20px; height: 20px; margin-top: 3px; accent-color: var(--green-700); flex: 0 0 auto; }
+.ranch-checklist-item input:checked + span { color: var(--brown-500); text-decoration: line-through; }
+.ranch-checklist-item a { min-height: 44px; padding: 11px 0; color: var(--green-700); font-size: 0.84rem; font-weight: 800; white-space: nowrap; }
+.ranch-checklist-reset { margin-top: 18px; }
+@media (min-width: 760px) {
+  .ranch-checklist-goals { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ranch-checklist-panel { max-width: 860px; }
+}
+@media (max-width: 520px) {
+  .ranch-checklist-item { grid-template-columns: 1fr; gap: 2px; }
+  .ranch-checklist-item a { padding-left: 30px; }
+}
 @media (max-width: 620px) {
   .knowledge-dossier-heading { display: grid; }
   .knowledge-dossier-heading .btn { width: 100%; }

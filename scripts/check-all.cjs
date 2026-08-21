@@ -18,6 +18,7 @@ const nodeChecks = [
   ["check-chicken-troubleshooter.cjs"],
   ["check-community.cjs"],
   ["check-player-report.cjs"],
+  ["check-ranch-checklist.cjs"],
   ["check-crops.cjs"],
   ["check-field-notes.cjs"],
   ["check-home-card-links.cjs"],

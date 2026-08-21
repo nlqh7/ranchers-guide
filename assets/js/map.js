@@ -22,6 +22,8 @@
   var markerFilterButtons = Array.from(document.querySelectorAll("[data-map-pin-filter]"));
   var evidenceFilterButtons = Array.from(document.querySelectorAll("[data-map-evidence-filter]"));
   var inspectorLink = inspector ? inspector.querySelector("[data-map-inspector-link]") : null;
+  var inspectorConnections = inspector ? inspector.querySelector("[data-map-inspector-connections]") : null;
+  var inspectorConnectionList = inspector ? inspector.querySelector("[data-map-inspector-connection-list]") : null;
   var pinLayer = document.querySelector("[data-map-pin-layer]");
   var pinForm = document.querySelector("[data-map-pin-form]");
   var pinName = document.querySelector("[data-map-pin-name]");
@@ -33,6 +35,8 @@
   var hasDirectory = !!(search && category && entries.length && window.RanchersMap);
   var activePin = null;
   var placing = false;
+  var selectedMarker = null;
+  var knowledgeEntities = [];
   if (!mapStage || !mapImage || !window.RanchersMapViewer) return;
 
   var locations = hasDirectory ? entries.map(function (entry) {
@@ -101,9 +105,50 @@
     inspector.querySelector("[data-map-inspector-status]").textContent = status;
     inspector.querySelector("[data-map-inspector-copy]").textContent = copy;
     if (inspectorLink) inspectorLink.hidden = true;
+    if (inspectorConnections) inspectorConnections.hidden = true;
   }
 
+  function markerRoute(marker) {
+    return marker && marker.dataset.markerId ? (isChinese ? "/zh/map#" : "/map#") + marker.dataset.markerId : "";
+  }
+
+  function renderInspectorConnections(marker) {
+    if (!inspectorConnections || !inspectorConnectionList) return;
+    var route = markerRoute(marker);
+    var matches = knowledgeEntities.filter(function (entity) {
+      return entity.route !== route && (entity.relatedRoutes || []).some(function (link) {
+        return (link.href || link) === route;
+      });
+    }).slice(0, 5);
+    inspectorConnectionList.replaceChildren();
+    if (!matches.length) {
+      inspectorConnections.hidden = true;
+      return;
+    }
+    matches.forEach(function (entity) {
+      var link = document.createElement("a");
+      link.className = "map-inspector-connection";
+      link.href = entity.route;
+      var type = document.createElement("span");
+      type.textContent = entity.typeLabel || (isChinese ? "关联条目" : "Related entry");
+      var label = document.createElement("strong");
+      label.textContent = entity.label;
+      link.append(type, label);
+      inspectorConnectionList.appendChild(link);
+    });
+    inspectorConnections.hidden = false;
+  }
+
+  fetch(isChinese ? "/zh/knowledge-index.json" : "/knowledge-index.json", { credentials: "same-origin" })
+    .then(function (response) { if (!response.ok) throw new Error("knowledge index " + response.status); return response.json(); })
+    .then(function (payload) {
+      knowledgeEntities = Array.isArray(payload.entities) ? payload.entities : [];
+      if (selectedMarker) renderInspectorConnections(selectedMarker);
+    })
+    .catch(function () { knowledgeEntities = []; });
+
   function selectMarker(marker) {
+    selectedMarker = marker;
     markers.forEach(function (item) { item.classList.toggle("active", item === marker); });
     if (!inspector) return;
     inspector.querySelector("[data-map-inspector-title]").textContent = marker.dataset.markerTitle;
@@ -112,6 +157,7 @@
       ? "位置可信度：" + confidence + "，标记为估算区域，并非已验证坐标"
       : "Location confidence: " + confidence + " — pin is an estimate, not a verified coordinate";
     inspector.querySelector("[data-map-inspector-copy]").textContent = marker.dataset.markerCopy;
+    renderInspectorConnections(marker);
     if (inspectorLink && marker.dataset.markerTarget) {
       inspectorLink.hidden = false;
       var target = marker.dataset.markerTarget;

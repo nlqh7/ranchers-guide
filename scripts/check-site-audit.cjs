@@ -18,14 +18,14 @@ assert.deepEqual(audit.issues.orphaned, [], "Every sitemap route needs an intern
 assert.deepEqual(audit.issues.duplicateTitles, [], "Page titles must be unique");
 assert.deepEqual(audit.issues.duplicateDescriptions, [], "Page descriptions must be unique");
 
-for (const route of ["/404", "/contribute", "/search", "/zh/search", "/research", "/tools/field-notes", "/tools/player-report", "/zh/tools/player-report"]) {
+for (const route of ["/404", "/contribute", "/search", "/zh/search", "/research", "/tools/field-notes", "/tools/player-report", "/zh/tools/player-report", "/tools/ranch-checklist", "/zh/tools/ranch-checklist"]) {
   const page = audit.pages.find((candidate) => candidate.route === route);
   assert.ok(page, `${route} must be audited`);
   assert.equal(page.inSitemap, false, `${route} must stay outside the sitemap`);
   assert.equal(page.noindex, true, `${route} must stay noindex`);
 }
 
-for (const relative of ["404.html", "contribute.html", "search.html", "zh/search.html", "research.html", "tools/field-notes.html", "tools/player-report.html", "zh/tools/player-report.html"]) {
+for (const relative of ["404.html", "contribute.html", "search.html", "zh/search.html", "research.html", "tools/field-notes.html", "tools/player-report.html", "zh/tools/player-report.html", "tools/ranch-checklist.html", "zh/tools/ranch-checklist.html"]) {
   const html = fs.readFileSync(path.join(root, relative), "utf8");
   assert.doesNotMatch(html, /pagead2\.googlesyndication\.com/, `${relative} must not load ads on a noindex utility surface`);
 }

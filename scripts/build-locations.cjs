@@ -211,7 +211,7 @@ function bootstrap() {
 function renderMarker(location, locale) {
   const marker = location.marker;
   const copy = marker.locale[locale];
-  return `                <button class="map-marker map-marker-${location.category} map-marker-area map-marker-evidence-${marker.evidenceLayer}" type="button" style="--mx:${marker.x}%;--my:${marker.y}%" data-marker-category="${location.category}" data-marker-evidence-layer="${marker.evidenceLayer}" data-marker-precision="${marker.precision}" data-marker-title="${copy.title}" data-marker-confidence="${copy.confidence}" data-marker-copy="${copy.description}" data-marker-target="${copy.target}" aria-label="${copy.ariaLabel}"><span>${copy.label}</span></button>`;
+  return `                <button class="map-marker map-marker-${location.category} map-marker-area map-marker-evidence-${marker.evidenceLayer}" type="button" style="--mx:${marker.x}%;--my:${marker.y}%" data-marker-id="${location.id}" data-marker-category="${location.category}" data-marker-evidence-layer="${marker.evidenceLayer}" data-marker-precision="${marker.precision}" data-marker-title="${copy.title}" data-marker-confidence="${copy.confidence}" data-marker-copy="${copy.description}" data-marker-target="${copy.target}" aria-label="${copy.ariaLabel}"><span>${copy.label}</span></button>`;
 }
 
 function renderEntry(location, locale) {
