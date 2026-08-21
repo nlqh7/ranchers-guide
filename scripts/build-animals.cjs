@@ -198,6 +198,25 @@ ${a.fields.map((f) => `              <li><a href="#${a.id}-${f.key}">${escapeHtm
         <strong>Current-build note:</strong> Official Steam material names chickens, bunnies, goats, and cows and now confirms several animal-management rules. It still does not publish a complete price or production table.
       </div>
 
+      <section class="evidence-ledger" aria-labelledby="animal-quick-start">
+        <div class="section-heading-row">
+          <div>
+            <span class="kicker">Start Here</span>
+            <h2 id="animal-quick-start">First animal: a practical care path</h2>
+          </div>
+          <a class="text-link" href="/guides/animal-guide">Open the animal troubleshooting guide</a>
+        </div>
+        <p>Chicken is the only animal with a broadly documented current-build care loop. Use this order before comparing prices or chasing production numbers:</p>
+        <ol>
+          <li>Finish the purchase prompt with Angela, then bring the chickens home from the fenced area behind her house.</li>
+          <li>Link the coop and fill the indoor trough with hay and water. The outdoor trough is not required for ordinary daily feeding.</li>
+          <li>Install the coop-specific heater from Angela on the coop exterior wall; a household decoration heater is not a substitute.</li>
+          <li>For large eggs, keep needs and satisfaction high, pet the chickens, and provide an enclosed outdoor roaming area. This improves the chance; it does not guarantee the next egg is large.</li>
+          <li>If an animal disappears, update to 0.8.10.562 or later first, then use the <a href="/guides/animal-guide">current troubleshooting checklist</a> rather than an older workaround.</li>
+        </ol>
+        <div class="notice info"><strong>Decision boundary:</strong> prices, production cycles and profit rankings for cow, goat and rabbit remain unverified in the current build. Use the profiles below as evidence-tracked records, not as a complete economy table.</div>
+      </section>
+
       <p>Collect discoveries privately in <a href="/tools/field-notes">Field Notes</a>, then export the versioned record when it is complete enough to verify.</p>
 
       <p class="lead">This living database combines the official roster with clearly labeled player research. Each animal has its own anchored profile below — search an individual animal, inspect its source and version context, and help replace historical values with current-build evidence.</p>
@@ -327,7 +346,7 @@ ${renderRoster(data.confirmedRoster)}
 
       <h2>Sources</h2>
       <p>The confirmed roster comes from the <a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">official Steam store page</a>; transport, map and probability rules come from <a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">official Steam updates</a>, reviewed August 2026. Chicken care, automation and selling mechanics come from Steam discussion threads with official replies, scanned August 8, 2026. Video-observed product listings come from <a href="https://www.youtube.com/watch?v=GrFiYqWcBK0" rel="noopener noreferrer">Games Station gameplay footage (V0.8.10.455)</a>, reviewed August 7, 2026. How leads become verified values: <a href="/methodology">methodology</a>. Corrections: <a href="/contact">send a documented correction</a>.</p>
-      <p>Planning a co-op barn? The <a href="/guides/multiplayer-coop">co-op guide</a> shows how to assign a dedicated barn lead. Building your first ranch? Start with the <a href="/guides/beginners-guide">beginner's guide</a>.</p>
+      <p>Planning a co-op barn? The <a href="/guides/multiplayer-coop">co-op guide</a> shows how to assign a dedicated barn lead. Need the egg quest or a location? Continue to the <a href="/guides/gigi-large-egg-quest">Gigi large-egg guide</a> or <a href="/map">the map</a>. Building your first ranch? Start with the <a href="/guides/beginners-guide">beginner's guide</a>.</p>
 
 
       <aside class="author-card" aria-label="About the author">
@@ -465,6 +484,18 @@ const zhHtml = `<!DOCTYPE html>
     <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / <a href="/zh/database">知识库</a> / 动物</nav><h1>The Ranchers 中文动物数据库</h1><p class="meta">页面基线 ${escapeHtml(data.meta.build)} · 视频证据录制于 ${escapeHtml(data.meta.videoBuild)} · ${escapeHtml(data.meta.lastUpdated)} 更新 · 旧版本内容单独标注</p>
     <div class="evidence-status"><strong>证据说明：</strong>“官方”来自开发者说明；“视频观测”来自保留版本号的画面；“多人印证”只证明多人遇到同类行为；“单一线索”不能直接当成确定机制。</div>
     <figure class="page-banner"><img src="/assets/img/db-animals.webp" width="800" height="450" alt="The Ranchers 牧场中的牛与红色谷仓"></figure>
+    <section class="evidence-ledger" aria-labelledby="animal-quick-start-zh">
+      <div class="section-heading-row"><div><span class="kicker">先从这里开始</span><h2 id="animal-quick-start-zh">第一次养动物：先走这条照料路径</h2></div><a class="text-link" href="/zh/guides/animal-guide">打开动物排障指南</a></div>
+      <p>目前只有鸡的当前版本照料链条有较完整证据。先按这个顺序操作，再考虑价格或收益比较：</p>
+      <ol>
+        <li>在 Angela 处完成购买提示，然后到她房屋后方的围栏区域把鸡带回牧场。</li>
+        <li>确认鸡舍已关联，补满室内食槽的干草和水；日常喂养不要求额外放置室外食槽。</li>
+        <li>使用 Angela 出售的鸡舍专用暖气，并安装在鸡舍外墙；市政厅的住宅装饰暖气不能替代它。</li>
+        <li>想提高大鸡蛋出现机会时，保持需求和满意度较高、每天抚摸，并准备封闭的室外活动区；这只是提高机会，不保证下一枚就是大鸡蛋。</li>
+        <li>如果动物消失，先把游戏更新到 0.8.10.562 或更高版本，再按<a href="/zh/guides/animal-guide">当前排障清单</a>记录问题，不要直接套用旧版本规避法。</li>
+      </ol>
+      <div class="notice info"><strong>数据边界：</strong>牛、山羊和兔的当前购买价、生产周期与收益排名仍未验证。下面的条目是带证据状态的记录，不是完整经济表。</div>
+    </section>
     <nav class="toc" aria-label="动物目录"><strong>快速跳转：</strong><ul>${zhTocItems}</ul></nav>
 ${data.species.filter((a) => a.zh).map(renderZhEntry).join("\n")}
 ${renderZhExtra(data.zhExtra)}
