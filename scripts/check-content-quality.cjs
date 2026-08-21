@@ -53,6 +53,12 @@ const pages = [
     requiredZh: ["answer-box", "制作", "工作台", "材料", "来源"],
   },
   {
+    en: "guides/vehicles-transport.html",
+    zh: "zh/guides/vehicles-transport.html",
+    required: ["answer-box", "My Garage", "AutoHue", "subway", "sources"],
+    requiredZh: ["answer-box", "My Garage", "AutoHue", "地铁", "来源"],
+  },
+  {
     en: "guides/multiplayer-coop.html",
     zh: "zh/guides/multiplayer-coop.html",
     required: ["answer-box", "hosting", "roles", "troubleshooting"],

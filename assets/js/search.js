@@ -12,6 +12,7 @@
     "/guides/electricity-power",
     "/guides/building-construction",
     "/guides/crafting-guide",
+    "/guides/vehicles-transport",
     "/guides/roof-quest-stuck",
     "/guides/gigi-large-egg-quest",
     "/guides/police-wanted-levels",
@@ -73,6 +74,7 @@
     "/zh/updates/transport-update",
     "/zh/guides/building-construction",
     "/zh/guides/crafting-guide",
+    "/zh/guides/vehicles-transport",
     "/zh/guides/multiplayer-coop",
     "/zh/problems/fast-travel-subway",
     "/zh/tools/chicken-troubleshooter"
