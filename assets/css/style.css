@@ -1835,6 +1835,15 @@ table.data-table {
 .map-inspector dt { color: var(--brown-500); font-size: 0.72rem; font-weight: 800; text-transform: uppercase; }
 .map-inspector dd { margin: 2px 0 0; color: var(--brown-700); }
 .map-inspector .btn { justify-self: start; }
+.map-inspector-journey { display: grid; gap: 8px; margin-top: 4px; }
+.map-inspector-journey > strong { color: var(--brown-500); font-size: 0.72rem; text-transform: uppercase; }
+.map-inspector-journey > div { display: grid; gap: 8px; }
+.map-inspector-journey-link { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 9px; align-items: start; padding: 9px 10px; border: 1px solid var(--cream-300); background: var(--surface); }
+.map-inspector-journey-link:hover { border-color: var(--green-700); }
+.map-inspector-journey-link > span:last-child { display: grid; gap: 2px; }
+.map-inspector-journey-number { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--cream-200); color: var(--green-700); font-size: 0.75rem; font-weight: 800; }
+.map-inspector-journey-link strong { color: var(--green-700); font-size: 0.9rem; }
+.map-inspector-journey-link small { color: var(--brown-500); line-height: 1.4; }
 .map-inspector-connections { display: grid; gap: 8px; margin-top: 4px; }
 .map-inspector-connections > strong { color: var(--brown-500); font-size: 0.72rem; text-transform: uppercase; }
 .map-inspector-connections > div { display: grid; gap: 8px; }
@@ -2689,6 +2698,15 @@ table.data-table {
 }
 .knowledge-dossier-link span { color: var(--color-text-muted); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; }
 .knowledge-dossier-link:hover strong { color: var(--color-action); }
+.knowledge-dossier-journey { display: grid; gap: 10px; margin: 20px 0 0; }
+.knowledge-dossier-journey > strong { display: block; color: var(--color-text); }
+.knowledge-dossier-journey > div { display: grid; gap: 8px; }
+.knowledge-dossier-journey-link { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 10px; align-items: start; padding: 10px 12px; border: 1px solid var(--color-border); background: var(--color-canvas); color: var(--color-text); text-decoration: none; }
+.knowledge-dossier-journey-link:hover { border-color: var(--color-action); }
+.knowledge-dossier-journey-number { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--cream-200); color: var(--green-700); font-size: 0.78rem; font-weight: 800; }
+.knowledge-dossier-journey-link > span:last-child { display: grid; gap: 3px; }
+.knowledge-dossier-journey-link strong { color: var(--green-700); }
+.knowledge-dossier-journey-link small { color: var(--color-text-muted); line-height: 1.45; }
 .knowledge-dossier-sources { margin: 20px 0 0; color: var(--color-text-muted); font-size: 0.82rem; }
 .knowledge-dossier-sources a { color: var(--color-action); }
 .ranch-checklist-page { padding-top: 42px; }

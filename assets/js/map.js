@@ -24,6 +24,8 @@
   var inspectorLink = inspector ? inspector.querySelector("[data-map-inspector-link]") : null;
   var inspectorConnections = inspector ? inspector.querySelector("[data-map-inspector-connections]") : null;
   var inspectorConnectionList = inspector ? inspector.querySelector("[data-map-inspector-connection-list]") : null;
+  var inspectorJourney = inspector ? inspector.querySelector("[data-map-inspector-journey]") : null;
+  var inspectorJourneyList = inspector ? inspector.querySelector("[data-map-inspector-journey-list]") : null;
   var pinLayer = document.querySelector("[data-map-pin-layer]");
   var pinForm = document.querySelector("[data-map-pin-form]");
   var pinName = document.querySelector("[data-map-pin-name]");
@@ -38,6 +40,20 @@
   var selectedMarker = null;
   var knowledgeEntities = [];
   if (!mapStage || !mapImage || !window.RanchersMapViewer) return;
+
+  if (inspector && !inspectorJourney) {
+    inspectorJourney = document.createElement("div");
+    inspectorJourney.className = "map-inspector-journey";
+    inspectorJourney.dataset.mapInspectorJourney = "";
+    inspectorJourney.hidden = true;
+    var journeyHeading = document.createElement("strong");
+    journeyHeading.textContent = isChinese ? "继续解决这个问题" : "Continue solving this";
+    inspectorJourneyList = document.createElement("div");
+    inspectorJourneyList.dataset.mapInspectorJourneyList = "";
+    inspectorJourney.append(journeyHeading, inspectorJourneyList);
+    if (inspectorConnections) inspector.insertBefore(inspectorJourney, inspectorConnections);
+    else inspector.appendChild(inspectorJourney);
+  }
 
   var locations = hasDirectory ? entries.map(function (entry) {
     return {
@@ -106,6 +122,7 @@
     inspector.querySelector("[data-map-inspector-copy]").textContent = copy;
     if (inspectorLink) inspectorLink.hidden = true;
     if (inspectorConnections) inspectorConnections.hidden = true;
+    if (inspectorJourney) inspectorJourney.hidden = true;
   }
 
   function markerRoute(marker) {
@@ -139,11 +156,44 @@
     inspectorConnections.hidden = false;
   }
 
+  function renderInspectorJourney(marker) {
+    if (!inspectorJourney || !inspectorJourneyList || !marker || !marker.dataset.markerId) return;
+    var entity = knowledgeEntities.find(function (candidate) {
+      return candidate.id === "location:" + marker.dataset.markerId;
+    });
+    var steps = entity && Array.isArray(entity.journey) ? entity.journey.slice(0, 5) : [];
+    inspectorJourneyList.replaceChildren();
+    if (!steps.length) {
+      inspectorJourney.hidden = true;
+      return;
+    }
+    steps.forEach(function (step, index) {
+      var link = document.createElement("a");
+      link.className = "map-inspector-journey-link";
+      link.href = step.href;
+      var number = document.createElement("span");
+      number.className = "map-inspector-journey-number";
+      number.textContent = String(index + 1);
+      var copy = document.createElement("span");
+      var label = document.createElement("strong");
+      label.textContent = step.label;
+      var reason = document.createElement("small");
+      reason.textContent = step.reason;
+      copy.append(label, reason);
+      link.append(number, copy);
+      inspectorJourneyList.appendChild(link);
+    });
+    inspectorJourney.hidden = false;
+  }
+
   fetch(isChinese ? "/zh/knowledge-index.json" : "/knowledge-index.json", { credentials: "same-origin" })
     .then(function (response) { if (!response.ok) throw new Error("knowledge index " + response.status); return response.json(); })
     .then(function (payload) {
       knowledgeEntities = Array.isArray(payload.entities) ? payload.entities : [];
-      if (selectedMarker) renderInspectorConnections(selectedMarker);
+      if (selectedMarker) {
+        renderInspectorConnections(selectedMarker);
+        renderInspectorJourney(selectedMarker);
+      }
     })
     .catch(function () { knowledgeEntities = []; });
 
@@ -158,6 +208,7 @@
       : "Location confidence: " + confidence + " — pin is an estimate, not a verified coordinate";
     inspector.querySelector("[data-map-inspector-copy]").textContent = marker.dataset.markerCopy;
     renderInspectorConnections(marker);
+    renderInspectorJourney(marker);
     if (inspectorLink && marker.dataset.markerTarget) {
       inspectorLink.hidden = false;
       var target = marker.dataset.markerTarget;

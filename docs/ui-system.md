@@ -24,6 +24,7 @@ This repository uses a small static component system. It borrows shadcn's open-c
 | Data list | `.data-table` inside `.data-table-wrap` | sortable state classes only |
 | Entity connections | `.entity-relations`, `.entity-backlinks`, `.entity-related` | sourced forward relation, derived backlink, named reading route |
 | Search dossier | `.knowledge-dossier` | entity summary, key facts, related answers and sources |
+| Search entity journey | `.knowledge-dossier-journey` | ordered next-step links for audited entities only |
 | Local progress helper | `.ranch-checklist` | no-account, browser-local goal checklist |
 | Article navigation | `.toc`, `.article-next` | none |
 | Optional motion | `[data-ui-motion="lift"]` | enhancement only |

@@ -31,6 +31,7 @@ const componentSelectors = [
   ".toc",
   ".article-next",
   ".knowledge-dossier",
+  ".knowledge-dossier-journey",
 ];
 
 for (const token of semanticTokens) {

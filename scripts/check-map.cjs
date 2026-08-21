@@ -179,6 +179,8 @@ assert.match(mapScript, /Escape/, "lightbox closes on Escape");
 assert.match(mapScript, /URLSearchParams/, "map directory reads deep-link queries");
 assert.match(mapScript, /history\.replaceState/, "map directory keeps the shareable URL in sync");
 assert.match(mapScript, /findBestLocation/, "map directory highlights the best matching location");
+assert.match(mapScript, /renderInspectorJourney/, "map inspector consumes audited entity journey routes");
+assert.match(sharedStyles, /\.map-inspector-journey-link/, "map journey links need a shared style");
 
 const sitemapForMap = read("sitemap.xml");
 assert.match(sitemapForMap, /<loc>https:\/\/theranchersguide\.com\/map<\/loc>[\s\S]*?<lastmod>2026-08-07<\/lastmod>/);
@@ -217,8 +219,8 @@ assert.equal(mapCore.buildQueryString("", "all"), "");
 
 const search = read("assets/js/search.js");
 assert.match(search, /"\/map"/);
-assert.match(search, /ranchers-search-index-v22/);
-assert.match(search, /ranchers-search-index-zh-v8/);
+assert.match(search, /ranchers-search-index-v23/);
+assert.match(search, /ranchers-search-index-zh-v10/);
 assert.match(search, /node\.querySelector\("h2, h3"\)/);
 
 const sitemap = read("sitemap.xml");

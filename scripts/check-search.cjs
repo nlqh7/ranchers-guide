@@ -173,8 +173,8 @@ assert.match(knowledgeBasePage, /<h1>The Ranchers Knowledge Base<\/h1>/);
 assert.match(knowledgeBasePage, /href="\/guides\/animal-guide#feeding"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /"\/database"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /search-index\.json/);
-assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-zh-v8/, "Chinese search cache must invalidate the previous page set");
-assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-v22/, "English search cache must invalidate the previous page set");
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-zh-v10/, "Chinese search cache must invalidate the previous page set");
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-v23/, "English search cache must invalidate the previous page set");
 assert.match(searchPage, /data-knowledge-dossier/, "Search page must provide an entity dossier surface");
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /knowledge-index\.json/, "Search must load the prebuilt knowledge index");
 

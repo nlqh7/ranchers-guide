@@ -15,6 +15,7 @@
     "/guides/gigi-large-egg-quest",
     "/guides/police-wanted-levels",
     "/guides/farming-fields",
+    "/guides/resources-and-materials",
     "/guides/controls-camera-settings",
     "/database",
     "/database/crops",
@@ -48,6 +49,8 @@
     "/zh/guides/money-making",
     "/zh/guides/police-wanted-levels",
     "/zh/guides/farming-fields",
+    "/zh/guides/resources-and-materials",
+    "/zh/guides/electricity-power",
     "/zh/problems/vehicle-recovery",
     "/zh/database",
     "/zh/database/crops",
@@ -63,7 +66,7 @@
   var IS_ZH = document.documentElement.lang.toLowerCase() === "zh-cn";
   var PAGE_PATHS = IS_ZH ? ZH_PAGE_PATHS : EN_PAGE_PATHS;
   var SEARCH_ROUTE = IS_ZH ? "/zh/search" : "/search";
-  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v8" : "ranchers-search-index-v22";
+  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v10" : "ranchers-search-index-v23";
   var documents = [];
   var form = document.querySelector("[data-search-form]");
   var input = document.querySelector("[data-search-input]");
@@ -307,6 +310,12 @@
     }).slice(0, 8);
   }
 
+  function dossierJourney(entity) {
+    return (entity.journey || []).slice(0, 6).map(function (step, index) {
+      return '<a class="knowledge-dossier-journey-link" href="' + escapeHtml(step.href) + '"><span class="knowledge-dossier-journey-number">' + (index + 1) + '</span><span><strong>' + escapeHtml(step.label) + '</strong><small>' + escapeHtml(step.reason) + '</small></span></a>';
+    }).join("");
+  }
+
   function renderDossier(query, matches) {
     if (!dossier) return;
     dossier.replaceChildren();
@@ -325,12 +334,13 @@
       var related = dossierRelated(entity, matches).map(function (link) {
         return '<a class="knowledge-dossier-link" href="' + escapeHtml(link.href) + '"><span>' + escapeHtml(link.kind || (IS_ZH ? "关联答案" : "Related answer")) + '</span><strong>' + escapeHtml(link.label) + '</strong></a>';
       }).join("");
+      var journey = dossierJourney(entity);
       var sources = (entity.sources || []).slice(0, 4).map(function (source) {
         return source.url
           ? '<a href="' + escapeHtml(source.url) + '" rel="noopener noreferrer">' + escapeHtml(source.title) + '</a>'
           : '<span>' + escapeHtml(source.title) + '</span>';
       }).join(" · ");
-      return '<article class="knowledge-dossier-card"><div class="knowledge-dossier-heading"><div><span class="kicker">' + escapeHtml(entity.typeLabel) + '</span><h2>' + escapeHtml(entity.label) + '</h2></div><a class="btn btn-outline btn-compact" href="' + escapeHtml(entity.route) + '">' + (IS_ZH ? "打开完整条目" : "Open full entry") + '</a></div><p class="knowledge-dossier-summary">' + escapeHtml(entity.summary) + '</p>' + (facts ? '<div class="knowledge-dossier-facts"><strong>' + (IS_ZH ? "先看这些" : "Start with these facts") + '</strong><ul>' + facts + '</ul></div>' : "") + (related ? '<div class="knowledge-dossier-related"><strong>' + (IS_ZH ? "相关信息" : "Related information") + '</strong><div>' + related + '</div></div>' : "") + (sources ? '<p class="knowledge-dossier-sources"><strong>' + (IS_ZH ? "证据来源" : "Sources") + ':</strong> ' + sources + '</p>' : "") + '</article>';
+      return '<article class="knowledge-dossier-card"><div class="knowledge-dossier-heading"><div><span class="kicker">' + escapeHtml(entity.typeLabel) + '</span><h2>' + escapeHtml(entity.label) + '</h2></div><a class="btn btn-outline btn-compact" href="' + escapeHtml(entity.route) + '">' + (IS_ZH ? "打开完整条目" : "Open full entry") + '</a></div><p class="knowledge-dossier-summary">' + escapeHtml(entity.summary) + '</p>' + (facts ? '<div class="knowledge-dossier-facts"><strong>' + (IS_ZH ? "先看这些" : "Start with these facts") + '</strong><ul>' + facts + '</ul></div>' : "") + (journey ? '<div class="knowledge-dossier-journey"><strong>' + (IS_ZH ? "继续解决这个问题" : "Continue solving this") + '</strong><div>' + journey + '</div></div>' : "") + (related ? '<div class="knowledge-dossier-related"><strong>' + (IS_ZH ? "相关信息" : "Related information") + '</strong><div>' + related + '</div></div>' : "") + (sources ? '<p class="knowledge-dossier-sources"><strong>' + (IS_ZH ? "证据来源" : "Sources") + ':</strong> ' + sources + '</p>' : "") + '</article>';
     }).join("");
   }
 

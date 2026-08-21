@@ -23,6 +23,8 @@ const pairs = [
   ["guides/police-wanted-levels.html", "zh/guides/police-wanted-levels.html", "/guides/police-wanted-levels", "/zh/guides/police-wanted-levels"],
   ["problems/vehicle-recovery.html", "zh/problems/vehicle-recovery.html", "/problems/vehicle-recovery", "/zh/problems/vehicle-recovery"],
   ["guides/farming-fields.html", "zh/guides/farming-fields.html", "/guides/farming-fields", "/zh/guides/farming-fields"],
+  ["guides/electricity-power.html", "zh/guides/electricity-power.html", "/guides/electricity-power", "/zh/guides/electricity-power"],
+  ["guides/resources-and-materials.html", "zh/guides/resources-and-materials.html", "/guides/resources-and-materials", "/zh/guides/resources-and-materials"],
   ["tools/chicken-troubleshooter.html", "zh/tools/chicken-troubleshooter.html", "/tools/chicken-troubleshooter", "/zh/tools/chicken-troubleshooter"],
 ];
 const utilityPairs = [
