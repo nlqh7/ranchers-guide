@@ -148,6 +148,14 @@
       "date": "2026-08",
       "build": "0.8.10.x"
     },
+    "thread-big-chicken-eggs": {
+      "kind": "steam-thread",
+      "title": "Steam thread \"Big Chicken Eggs\" (Jennoula, official)",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587307627624740721/",
+      "author": "Kartesk / Jennoula",
+      "date": "2026-08",
+      "build": "0.8.10.x"
+    },
     "thread-huehnerstall-bug": {
       "kind": "steam-thread",
       "title": "Steam thread \"Hühnerstall Bug\" (Kartesk, Jennoula)",
@@ -291,17 +299,16 @@
               "build": "0.8.10.x",
               "validity": "current",
               "sourceIds": [
-                "thread-cant-sell-roosters"
+                "thread-big-chicken-eggs"
               ]
             },
             {
               "text": "Mount the coop heater on the outside of the coop exterior wall.",
-              "evidenceLevel": "community-confirmed",
+              "evidenceLevel": "official",
               "build": "0.8.10.x",
               "validity": "current",
               "sourceIds": [
-                "thread-heater-mount",
-                "thread-huehnerstall-bug"
+                "thread-big-chicken-eggs"
               ]
             },
             {
@@ -468,7 +475,7 @@
               "build": "0.8.10.x",
               "validity": "current",
               "sourceIds": [
-                "thread-cant-sell-roosters",
+                "thread-big-chicken-eggs",
                 "ranching-v2-notes"
               ]
             },
