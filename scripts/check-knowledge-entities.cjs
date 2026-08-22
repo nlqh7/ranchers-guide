@@ -85,7 +85,13 @@ assert.match(npcHtml, /data-derived-backlink="quest:rust-to-rumbling"[^>]*>Rust 
 assert.match(npcHtml, /data-derived-backlink="quest:power-to-the-bench"[^>]*>Power to the Bench<\/a>/);
 assert.doesNotMatch(questHtml, /Open related answer \d/);
 assert.match(questHtml, />Electricity contracts &amp; power<\/a>/);
-assert.match(read("zh/database/quests.html"), />水电合同与供电<\/a>/);
+const zhQuestHtml = read("zh/database/quests.html");
+const zhNpcHtml = read("zh/database/npcs.html");
+assert.match(zhQuestHtml, />水电合同与供电<\/a>/);
+assert.match(zhQuestHtml, /href="\/zh\/guides\/electricity-power#two-paths"/);
+assert.match(zhNpcHtml, /href="\/zh\/guides\/electricity-power#two-paths"/);
+assert.doesNotMatch(zhQuestHtml, /href="\/guides\/(?:electricity-power|building-construction)/);
+assert.doesNotMatch(zhNpcHtml, /href="\/guides\/electricity-power/);
 
 for (const relative of ["database/npcs.html", "zh/database/npcs.html", "database/quests.html", "zh/database/quests.html"]) {
   const html = read(relative);

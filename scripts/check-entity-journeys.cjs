@@ -40,7 +40,12 @@ const plans = [
 const answerCardCoverage = [
   ["animal:chicken", 5],
   ["material:hay", 2],
+  ["material:stone", 2],
+  ["material:wood-log", 2],
+  ["material:charcoal", 2],
   ["npc:victor", 3],
+  ["npc:angela", 3],
+  ["npc:gigi", 3],
   ["location:city-hall", 0],
   ["material:zirconite", 2],
 ];

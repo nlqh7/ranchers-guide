@@ -225,8 +225,8 @@ const enLocationLinks = {
   "car-pound": [["/problems/vehicle-recovery", "Recover a vehicle"], ["/guides/vehicles-transport", "Read the transport guide"]],
   quickfix: [["/problems/vehicle-recovery", "Vehicle recovery"], ["/guides/vehicles-transport", "Read the transport guide"]],
   "auto-hue": [["/guides/police-wanted-levels", "Read the wanted-level guide"], ["/guides/vehicles-transport", "Read the transport guide"]],
-  airport: [["/database/crops#how-to-sell", "Open CashIn"], ["/guides/money-making#cashin", "Read the selling guide"]],
-  "cash-in-box": [["/database/crops#how-to-sell", "Open CashIn"], ["/guides/money-making#cashin", "Read the money guide"]],
+  airport: [["/database/crops#cashin", "Open CashIn"], ["/guides/money-making#cashin", "Read the selling guide"]],
+  "cash-in-box": [["/database/crops#cashin", "Open CashIn"], ["/guides/money-making#cashin", "Read the money guide"]],
   "bykii-terminal": [["/guides/vehicles-transport", "Read the transport guide"], ["/problems/vehicle-recovery", "Vehicle problems"]],
   "train-station": [["/guides/multiplayer-coop", "Read the co-op guide"]],
 };

@@ -35,6 +35,11 @@ for (const relative of ["tools/update-impact-tracker.html", "zh/tools/update-imp
   assert.match(html, /assets\/js\/update-impact-tracker\.js/);
 }
 
+for (const relative of ["updates.html", "zh/updates.html"]) {
+  const html = read(relative);
+  assert.match(html, /update-impact-tracker/, `${relative}: updates hub must link to the tracker`);
+}
+
 const script = read("assets/js/update-impact-tracker.js");
 assert.match(script, /data\/updates\.json/);
 assert.match(script, /localStorage/);

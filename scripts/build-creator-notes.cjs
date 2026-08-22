@@ -19,6 +19,7 @@ function routeFor(route, zh) {
   if (route === "/database") return "/zh/database";
   if (route.startsWith("/database/")) return `/zh${route}`;
   if (route.startsWith("/guides/")) return `/zh${route}`;
+  if (route.startsWith("/tools/")) return `/zh${route}`;
   return route;
 }
 

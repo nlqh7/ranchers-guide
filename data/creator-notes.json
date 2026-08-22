@@ -233,6 +233,28 @@
         { "route": "/updates", "label": "Update explanations", "zhLabel": "更新解读" },
         { "route": "/methodology", "label": "Evidence method", "zhLabel": "证据方法" }
       ]
+    },
+    {
+      "id": "community-building-guide",
+      "kind": { "en": "Community wiki guide", "zh": "社区 Wiki 攻略" },
+      "name": "The Ranchers Building Guide",
+      "zhName": "The Ranchers Building Guide 建造攻略",
+      "sourceTitle": "The Ranchers Wiki Building Guide",
+      "sourceUrl": "https://therancherswiki.wiki/building/the-ranchers-building-guide/",
+      "sourceDate": "2026-08-13",
+      "build": "Build not stated; updated 2026-08-13",
+      "scope": "A community building guide focused on planning work routes, testing placement space, phasing construction and using workshops to solve observed problems. It is a decision-making reference, not a current recipe or capacity table.",
+      "zhScope": "一篇围绕工作路线、放置空间测试、分阶段建造和用工作台解决实际问题的社区建造攻略。它适合参考决策，不是当前配方或容量表。",
+      "use": "We use its questions to strengthen the Building Guide and checklist: what route a structure serves, what should be tested in the placement preview and which claims still need current-build evidence. We do not copy its prose or promote its structure list as confirmed data.",
+      "zhUse": "本站用它的问题框架补强建造指南和清单：建筑服务哪条路线、放置预览要检查什么、哪些结论仍需当前版本证据。不复制原文，也不把它的建筑清单直接当成已确认数据。",
+      "risk": "The page does not state a current build, and its advice is intentionally general. Treat named structures, upgrade effects and placement rules as leads until the live game or an official source confirms them.",
+      "zhRisk": "页面没有标明当前版本，而且内容本身偏通用建议。建筑名称、升级效果和放置规则在游戏实测或官方来源确认前只能作为线索。",
+      "related": [
+        { "route": "/guides/building-construction", "label": "Building guide", "zhLabel": "建造指南" },
+        { "route": "/tools/ranch-checklist#build-goal", "label": "Building checklist", "zhLabel": "建造清单" },
+        { "route": "/guides/crafting-guide", "label": "Crafting guide", "zhLabel": "制作指南" },
+        { "route": "/methodology", "label": "Evidence method", "zhLabel": "证据方法" }
+      ]
     }
   ]
 }

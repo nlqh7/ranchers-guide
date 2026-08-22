@@ -23,6 +23,8 @@ function localizeRoute(route) {
   const suffix = route.slice(base.length);
   if (exact[base]) return exact[base] + suffix;
   if (base === "/map") return "/zh/map" + suffix;
+  if (base === "/problems/failed-quest-replay") return route;
+  if (base.startsWith("/guides/") || base.startsWith("/problems/") || base.startsWith("/tools/") || base.startsWith("/updates/")) return `/zh${route}`;
   return route;
 }
 

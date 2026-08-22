@@ -290,7 +290,7 @@ ${renderVideoTable(data.crops, data.inputs)}
         </div>
       </section>
 
-      <h2 id="how-to-sell">How crop selling works</h2>
+      <span id="cashin" class="anchor-alias" aria-hidden="true"></span><h2 id="how-to-sell">How crop selling works</h2>
       <ul class="evidence-list">
 ${data.cashin.map(renderFact).join("\n")}
       </ul>

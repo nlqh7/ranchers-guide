@@ -7,7 +7,7 @@ const data = JSON.parse(fs.readFileSync(path.join(root, "data", "creator-notes.j
 const english = fs.readFileSync(path.join(root, "creator-notes.html"), "utf8");
 const chinese = fs.readFileSync(path.join(root, "zh", "creator-notes.html"), "utf8");
 
-assert.equal(data.notes.length, 11);
+assert.equal(data.notes.length, 12);
 assert.equal(new Set(data.notes.map((note) => note.id)).size, data.notes.length);
 assert.ok(data.notes.every((note) => note.sourceUrl.startsWith("https://")));
 assert.ok(data.notes.every((note) => note.build && note.scope && note.zhScope && note.use && note.zhUse && note.risk && note.zhRisk));
@@ -28,6 +28,8 @@ for (const [page, lang, canonical, alternate] of [
 
 assert.equal((english.match(/class="creator-note-card"/g) || []).length, data.notes.length);
 assert.equal((chinese.match(/class="creator-note-card"/g) || []).length, data.notes.length);
+assert.match(chinese, /href="\/zh\/tools\/ranch-checklist#build-goal"/);
+assert.doesNotMatch(chinese, /href="\/tools\/ranch-checklist#build-goal"/);
 assert.doesNotMatch(english, /<img[^>]+(?:youtube|wiki\.ranchers)/i);
 assert.doesNotMatch(chinese, /<img[^>]+(?:youtube|wiki\.ranchers)/i);
 assert.match(fs.readFileSync(path.join(root, "sitemap.xml"), "utf8"), /https:\/\/theranchersguide\.com\/creator-notes/);

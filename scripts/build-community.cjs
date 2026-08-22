@@ -17,6 +17,22 @@ function externalLink(url, label) {
   return `<a class="btn btn-outline btn-compact" href="${escapeHtml(url)}" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
 }
 
+function routeFor(route, zh) {
+  if (!zh || !route) return route;
+  if (route === "/database/animals#chicken-selling") return "/zh/database/animals#chicken";
+  if (route === "/community") return "/zh/community";
+  if (route === "/map") return "/zh/map";
+  if (route === "/database") return "/zh/database";
+  if (route.startsWith("/database/")) return `/zh${route}`;
+  if (route.startsWith("/guides/")) return `/zh${route}`;
+  if (route.startsWith("/problems/")) return `/zh${route}`;
+  if (route === "/problems") return "/zh/problems";
+  if (route.startsWith("/tools/")) return `/zh${route}`;
+  if (route === "/updates") return "/zh/updates";
+  if (route.startsWith("/updates/")) return `/zh${route}`;
+  return route;
+}
+
 function sourceAction(entry, zh) {
   return /\/discussions\/?$/.test(entry.url)
     ? (zh ? "打开讨论区" : "Open discussions")
@@ -71,8 +87,8 @@ function renderCard(entry, zh) {
         <p>${escapeHtml(summary)}</p>
         <p class="community-card-why"><strong>${zh ? "为什么值得看" : "Why it matters"}:</strong> ${escapeHtml(why)}</p>
         <p class="community-card-risk"><strong>${zh ? "使用风险" : "Use with caution"}:</strong> ${escapeHtml(risk)}</p>
-        <p class="community-card-entity"><strong>${zh ? "关联实体" : "Related entity"}:</strong> ${entry.relatedEntityRoute ? `<a href="${escapeHtml(entry.relatedEntityRoute)}">${escapeHtml(relatedEntity)}</a>` : escapeHtml(relatedEntity)}</p>
-        <div class="community-card-actions">${externalLink(entry.url, sourceAction(entry, zh))}${additionalSources}${externalLink(entry.relatedRoute, relatedLabel)}</div>
+        <p class="community-card-entity"><strong>${zh ? "关联实体" : "Related entity"}:</strong> ${entry.relatedEntityRoute ? `<a href="${escapeHtml(routeFor(entry.relatedEntityRoute, zh))}">${escapeHtml(relatedEntity)}</a>` : escapeHtml(relatedEntity)}</p>
+        <div class="community-card-actions">${externalLink(entry.url, sourceAction(entry, zh))}${additionalSources}${externalLink(routeFor(entry.relatedRoute, zh), relatedLabel)}</div>
         <p class="source-note">${escapeHtml(sourceLabel)} · ${escapeHtml(build)}</p>
       </article>`;
 }

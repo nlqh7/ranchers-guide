@@ -64,6 +64,27 @@ for (const location of locations.locations) {
   assert.notEqual(clean(zh.summary), clean(en.entryHtml), `${location.id} must not fall back to English map copy`);
 }
 
+function locationEntries(html) {
+  return new Map([...html.matchAll(/<article data-location-entry[\s\S]*?id="([^"]+)"[\s\S]*?<\/article>/g)].map((match) => [match[1], match[0]]));
+}
+
+function cardLinks(html) {
+  return [...html.matchAll(/<a class="card-link" href="([^"]+)"/g)].map((match) => match[1]);
+}
+
+const englishLocations = locationEntries(fs.readFileSync(path.join(root, "map.html"), "utf8"));
+const chineseLocations = locationEntries(fs.readFileSync(path.join(root, "zh", "map.html"), "utf8"));
+assert.deepEqual([...englishLocations.keys()], [...chineseLocations.keys()], "English and Chinese map directories must keep the same location order");
+for (const [id, englishEntry] of englishLocations) {
+  const englishLinks = cardLinks(englishEntry);
+  const chineseLinks = cardLinks(chineseLocations.get(id));
+  assert.equal(chineseLinks.length, englishLinks.length, `${id} lost a related map link in Chinese`);
+  englishLinks.forEach((href, index) => {
+    const expected = href.startsWith("/") ? `/zh${href}` : href;
+    assert.equal(chineseLinks[index], expected, `${id} has an unmatched Chinese related link`);
+  });
+}
+
 for (const relative of ["knowledge-index.json", "zh/knowledge-index.json"]) {
   const payload = readJson(relative);
   const locale = payload.locale;

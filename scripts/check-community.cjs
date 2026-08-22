@@ -59,5 +59,8 @@ assert.match(read("assets/js/community.js"), /navigator\.clipboard/);
 assert.match(read("assets/js/community.js"), /contribute@theranchersguide\.com/);
 assert.match(read("sitemap.xml"), /https:\/\/theranchersguide\.com\/community/);
 assert.match(read("sitemap.xml"), /https:\/\/theranchersguide\.com\/zh\/community/);
+assert.match(chinese, /href="\/zh\/database\/animals#chicken"/);
+assert.match(chinese, /href="\/zh\/guides\/animal-guide"/);
+assert.doesNotMatch(chinese, /href="\/(?:database|guides|problems|tools|updates)(?:\/|#)/);
 
 console.log(`PASS: community radar has ${data.sources.length} source-linked cards, bilingual question builder and external discussion routes.`);
