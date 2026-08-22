@@ -14,7 +14,7 @@ function routeFor(route, zh) {
   if (!zh) return route;
   if (route === "/map") return "/zh/map";
   if (route === "/community") return "/zh/community";
-  if (route === "/methodology") return "/methodology";
+  if (route === "/methodology") return zh ? "/zh/methodology" : "/methodology";
   if (route === "/research") return "/research";
   if (route === "/database") return "/zh/database";
   if (route.startsWith("/database/")) return `/zh${route}`;

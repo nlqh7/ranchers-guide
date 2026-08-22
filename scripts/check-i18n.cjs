@@ -35,6 +35,7 @@ const pairs = [
   ["guides/multiplayer-coop.html", "zh/guides/multiplayer-coop.html", "/guides/multiplayer-coop", "/zh/guides/multiplayer-coop"],
   ["problems/fast-travel-subway.html", "zh/problems/fast-travel-subway.html", "/problems/fast-travel-subway", "/zh/problems/fast-travel-subway"],
   ["tools/chicken-troubleshooter.html", "zh/tools/chicken-troubleshooter.html", "/tools/chicken-troubleshooter", "/zh/tools/chicken-troubleshooter"],
+  ["methodology.html", "zh/methodology.html", "/methodology", "/zh/methodology"],
 ];
 const utilityPairs = [
   ["tools/player-report.html", "zh/tools/player-report.html", "/tools/player-report", "/zh/tools/player-report"],

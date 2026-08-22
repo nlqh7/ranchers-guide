@@ -172,6 +172,7 @@ assert.match(homePage, /class="hero-search"[^>]+action="\/search"/);
 assert.match(knowledgeBasePage, /<h1>The Ranchers Knowledge Base<\/h1>/);
 assert.match(knowledgeBasePage, /href="\/guides\/animal-guide#feeding"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /"\/database"/);
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /"\/zh\/community"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /search-index\.json/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-zh-v10/, "Chinese search cache must invalidate the previous page set");
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-v23/, "English search cache must invalidate the previous page set");

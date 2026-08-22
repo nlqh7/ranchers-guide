@@ -71,6 +71,7 @@
     "/zh/problems",
     "/zh/community",
     "/zh/creator-notes",
+    "/zh/methodology",
     "/zh/updates",
     "/zh/updates/launch-hotfix-0-8-10-455",
     "/zh/updates/transport-update",
@@ -111,6 +112,7 @@
     if (path === "/zh/updates") return "更新";
     if (path.indexOf("/zh/updates/") === 0) return "更新";
     if (path === "/zh/creator-notes") return "来源笔记";
+    if (path === "/zh/methodology") return "验证方法";
     if (path.indexOf("/zh/tools/") === 0) return "工具";
       if (path === "/zh/") return "首页";
       return "站点";
@@ -394,7 +396,7 @@
       var empty = document.createElement("div");
       empty.className = "search-empty";
       empty.innerHTML = IS_ZH
-        ? '<h2>暂时没有匹配答案</h2><p>试试只输入物品名或任务名，也可以<a href="/zh/database">浏览知识库</a>。</p>'
+        ? '<h2>暂时没有匹配答案</h2><p>试试只输入物品名或任务名，也可以<a href="/zh/database">浏览知识库</a>，或<a href="/zh/community">查看社区雷达</a>寻找正在调查的问题。</p>'
         : '<h2>No matching answer yet</h2><p>Try the item or quest name on its own, <a href="/database">browse the knowledge base</a>, or <a href="/contribute">send the missing question</a>.</p>';
       results.appendChild(empty);
     }

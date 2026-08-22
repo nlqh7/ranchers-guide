@@ -509,7 +509,19 @@
   </url>
   <url>
     <loc>https://theranchersguide.com/methodology</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://theranchersguide.com/methodology" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/methodology" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/methodology" />
     <lastmod>2026-08-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://theranchersguide.com/zh/methodology</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://theranchersguide.com/methodology" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/methodology" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/methodology" />
+    <lastmod>2026-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
