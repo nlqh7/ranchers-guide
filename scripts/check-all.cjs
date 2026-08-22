@@ -42,6 +42,7 @@ const nodeChecks = [
   ["check-research-hub.cjs"],
   ["check-search.cjs"],
   ["check-version-semantics.cjs"],
+  ["check-phase2-tools.cjs"],
 ];
 
 const powershellChecks = ["check-internal-links.ps1", "check-content-claims.ps1"];

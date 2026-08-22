@@ -76,7 +76,11 @@ assert.match(mapPage, /theranchers\.wiki\/wiki\/npcs\//);
 assert.match(mapPage, /29 entries/);
 assert.match(chineseMapPage, /data-location-search/, "Chinese map needs a core-location search");
 assert.match(chineseMapPage, /data-location-category/, "Chinese map needs category filtering");
-assert.equal((chineseMapPage.match(/data-location-entry/g) || []).length, 6, "Chinese map finder covers six translated core locations");
+assert.equal((chineseMapPage.match(/data-location-entry/g) || []).length, 29, "Chinese map finder must cover the full translated location directory");
+assert.match(chineseMapPage, /LOCATION_DIRECTORY:START[\s\S]*LOCATION_DIRECTORY:END/);
+assert.match(chineseMapPage, /City Hall 市政厅/);
+assert.match(chineseMapPage, /Auction Market/);
+assert.match(chineseMapPage, /Transit Posts/);
 
 // Recognition photos: hover cards, lightbox hooks, locate-on-map button
 assert.match(mapPage, /data-visual-atlas/, "English map keeps the recognition-photo section");

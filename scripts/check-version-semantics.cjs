@@ -11,6 +11,32 @@ const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), "u
 const BASELINE = "0.8.10.842";
 const VIDEO_BUILD = "0.8.10.455";
 
+// Historical hotfixes may appear in a dated fix list, but never as the
+// current page baseline. Keep this guard broad enough to catch a future
+// stale label without rejecting legitimate historical evidence paragraphs.
+const indexablePages = [
+  "index.html",
+  "guides/building-construction.html",
+  "guides/resources-and-materials.html",
+  "guides/money-making.html",
+  "guides/beginner-mistakes.html",
+  "guides/release-time-checklist.html",
+  "updates.html",
+  "zh/index.html",
+  "zh/guides/building-construction.html",
+  "zh/guides/resources-and-materials.html",
+  "zh/guides/money-making.html",
+  "zh/updates.html",
+];
+for (const page of indexablePages) {
+  const html = read(page);
+  assert.doesNotMatch(
+    html,
+    /(?:Current (?:page )?baseline|Current version(?: reviewed)?|当前(?:页面)?基线|当前(?:复核)?版本)[^<\n]{0,80}0\.8\.10\.562/i,
+    `${page} must not label historical 0.8.10.562 as current`
+  );
+}
+
 // 1. Data layers declare the two builds separately.
 for (const dataFile of ["data/crops.json", "data/animals.json"]) {
   const meta = JSON.parse(read(dataFile)).meta;
@@ -57,6 +83,11 @@ assert.match(fieldNotesScript, /0\.8\.10\.842/, "field-notes.js defaults to the 
 // 5. Farming advice must stay inside the exact scope of its evidence.
 const farmingEnglish = read("guides/farming-fields.html");
 const farmingChinese = read("zh/guides/farming-fields.html");
+const moneyEnglish = read("guides/money-making.html");
+const moneyChinese = read("zh/guides/money-making.html");
+assert.match(moneyEnglish, /Current version reviewed: <strong>0\.8\.10\.842<\/strong>/, "English money guide must use the current baseline");
+assert.doesNotMatch(moneyEnglish, /Current version reviewed: <strong>0\.8\.10\.562<\/strong>/, "English money guide must not present the historical hotfix as current");
+assert.match(moneyChinese, /当前复核版本：<strong>0\.8\.10\.842<\/strong>/, "Chinese money guide must use the current baseline");
 assert.match(farmingEnglish, /watering interval for a planted crop is still unverified/i, "English farming guide must not infer planted-crop watering from empty plots");
 assert.doesNotMatch(farmingEnglish, /watering is a "every few days|Water every few days/i, "English farming guide must not publish an unsupported watering schedule");
 assert.match(farmingChinese, /已种作物多久浇一次仍未验证/, "Chinese farming guide must not infer planted-crop watering from empty plots");
