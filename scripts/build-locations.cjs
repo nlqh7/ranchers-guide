@@ -218,9 +218,28 @@ function renderMarker(location, locale) {
   return `                <button class="map-marker map-marker-${location.category} map-marker-area map-marker-evidence-${marker.evidenceLayer}" type="button" style="--mx:${marker.x}%;--my:${marker.y}%" data-marker-id="${location.id}" data-marker-category="${location.category}" data-marker-evidence-layer="${marker.evidenceLayer}" data-marker-precision="${marker.precision}" data-marker-title="${copy.title}" data-marker-confidence="${copy.confidence}" data-marker-copy="${copy.description}" data-marker-target="${copy.target}" aria-label="${copy.ariaLabel}"><span>${copy.label}</span></button>`;
 }
 
+const enLocationLinks = {
+  "leafy-market": [["/database/crops", "Open crop records"], ["/guides/farming-fields", "Read the farming guide"]],
+  "city-hall": [["/database/npcs#victor", "Open Victor"], ["/database/quests#power-to-the-bench", "Open Power to the Bench"], ["/guides/electricity-power#two-paths", "Read the electricity guide"]],
+  subway: [["/problems/fast-travel-subway", "Read the fast-travel guide"], ["/guides/vehicles-transport", "Read the transport guide"]],
+  "car-pound": [["/problems/vehicle-recovery", "Recover a vehicle"], ["/guides/vehicles-transport", "Read the transport guide"]],
+  quickfix: [["/problems/vehicle-recovery", "Vehicle recovery"], ["/guides/vehicles-transport", "Read the transport guide"]],
+  "auto-hue": [["/guides/police-wanted-levels", "Read the wanted-level guide"], ["/guides/vehicles-transport", "Read the transport guide"]],
+  airport: [["/database/crops#how-to-sell", "Open CashIn"], ["/guides/money-making#cashin", "Read the selling guide"]],
+  "cash-in-box": [["/database/crops#how-to-sell", "Open CashIn"], ["/guides/money-making#cashin", "Read the money guide"]],
+  "bykii-terminal": [["/guides/vehicles-transport", "Read the transport guide"], ["/problems/vehicle-recovery", "Vehicle problems"]],
+  "train-station": [["/guides/multiplayer-coop", "Read the co-op guide"]],
+};
+
+function renderEnglishLinks(location) {
+  return (enLocationLinks[location.id] || []).map(([href, label]) => `<a class="card-link" href="${href}">${label} →</a>`).join("");
+}
+
 function renderEntry(location, locale) {
   const copy = location.locale[locale];
-  return `        <article data-location-entry data-search-entry id="${location.id}" data-location-title="${copy.title}" data-location-category="${location.category}" data-location-keywords="${copy.keywords}">${copy.entryHtml}</article>`;
+  const links = locale === "en" ? renderEnglishLinks(location) : "";
+  const entryHtml = links ? copy.entryHtml.replace(/<\/div>$/, `${links}</div>`) : copy.entryHtml;
+  return `        <article data-location-entry data-search-entry id="${location.id}" data-location-title="${copy.title}" data-location-category="${location.category}" data-location-keywords="${copy.keywords}">${entryHtml}</article>`;
 }
 
 const zhCategoryLabels = {

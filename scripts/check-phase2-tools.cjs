@@ -67,7 +67,7 @@ assert.ok(questData.quests.length > 0 && questData.quests.every((quest) => Array
 for (const relative of ["tools/ranch-checklist.html", "zh/tools/ranch-checklist.html"]) {
   const html = read(relative);
   check(html, /data-ranch-checklist/);
-  assert.equal((html.match(/data-checklist-panel=/g) || []).length, 4, `${relative}: checklist goal coverage drifted`);
+  assert.equal((html.match(/data-checklist-panel=/g) || []).length, 7, `${relative}: checklist goal coverage drifted`);
   check(html, /data-material-checklist/);
   assert.equal((html.match(/data-material-requirement/g) || []).length, 2, `${relative}: confirmed material checklist drifted`);
 }

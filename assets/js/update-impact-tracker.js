@@ -45,6 +45,9 @@
 
   function render(update) {
     var changes = update.changes.map(function (item) { return "<li>" + escapeHtml(text(item)) + "</li>"; }).join("");
+    var affectedRoutes = (update.affectedRoutes || []).map(function (item) {
+      return '<li><a href="' + escapeHtml(routeFor(item)) + '">' + escapeHtml(text(item)) + "</a></li>";
+    }).join("");
     var actions = update.actions.map(function (action) {
       return '<a class="btn btn-outline btn-compact" href="' + escapeHtml(routeFor(action)) + '">' + escapeHtml(text(action)) + "</a>";
     }).join("");
@@ -54,6 +57,7 @@
       '<p class="quest-tracker-summary">' + escapeHtml(text(update.summary)) + '</p>' +
       '<div class="quest-tracker-relations"><div><strong>' + (isZh ? "日期" : "Date") + '</strong> <span>' + escapeHtml(update.dateLabel) + '</span></div><div><strong>' + (isZh ? "来源" : "Source") + '</strong> <a class="quest-tracker-link" href="' + escapeHtml(update.source.url) + '" rel="noopener noreferrer">' + escapeHtml(sourceLabel) + '</a></div></div>' +
       '<div class="answer-box"><h3>' + (isZh ? "这次改了什么" : "What changed") + '</h3><ul>' + changes + '</ul></div>' +
+      '<div class="answer-box"><h3>' + (isZh ? "受影响的页面" : "Affected pages") + '</h3><ul class="plain-steps">' + affectedRoutes + '</ul></div>' +
       '<div class="quest-tracker-card-foot"><div class="quest-tracker-related"><strong>' + (isZh ? "现在去哪里" : "What to check next") + '</strong><div>' + actions + '</div></div></div>' +
       '</article>';
     status.textContent = (isZh ? "显示版本：" : "Showing version: ") + update.version;

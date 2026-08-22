@@ -18,6 +18,12 @@
         "en": "Update first when a quest or animal state looks wrong; this build targets quest validation, ranch links and batch limits.",
         "zh": "如果任务或动物状态异常，先更新游戏；本版重点处理任务校验、牧场关联和批量上限。"
       },
+      "affectedRoutes": [
+        { "en": "Quest tracker", "zh": "任务追踪器", "route": "/tools/quest-tracker", "routeZh": "/zh/tools/quest-tracker" },
+        { "en": "Animal guide", "zh": "动物指南", "route": "/guides/animal-guide#troubleshooting", "routeZh": "/zh/guides/animal-guide#troubleshooting" },
+        { "en": "Animal database", "zh": "动物数据库", "route": "/database/animals", "routeZh": "/zh/database/animals" },
+        { "en": "Crafting guide", "zh": "制作指南", "route": "/guides/crafting-guide", "routeZh": "/zh/guides/crafting-guide" }
+      ],
       "changes": [
         {
           "en": "Quest progression and validation were fixed for several scenarios.",
@@ -72,6 +78,12 @@
         "en": "Update first, then re-check animal, subway and vehicle symptoms that match the official fix list.",
         "zh": "先更新游戏，再重新检查公告点名的动物、地铁和车辆症状。"
       },
+      "affectedRoutes": [
+        { "en": "Animal guide", "zh": "动物指南", "route": "/guides/animal-guide#troubleshooting", "routeZh": "/zh/guides/animal-guide#troubleshooting" },
+        { "en": "Fast-travel troubleshooting", "zh": "快速旅行排查", "route": "/problems/fast-travel-subway", "routeZh": "/zh/problems/fast-travel-subway" },
+        { "en": "Gigi large-egg guide", "zh": "Gigi 大鸡蛋指南", "route": "/guides/gigi-large-egg-quest#eggs", "routeZh": "/zh/guides/gigi-large-egg-quest#eggs" },
+        { "en": "Vehicle guide", "zh": "车辆指南", "route": "/guides/vehicles-transport", "routeZh": "/zh/guides/vehicles-transport" }
+      ],
       "changes": [
         {
           "en": "Several animal disappearance and doorway/loading paths are covered by the hotfix.",
@@ -126,6 +138,11 @@
         "en": "Keep the launch fix as historical context; compare the title-screen build before reusing its troubleshooting steps.",
         "zh": "保留发售热修作为历史背景；复用旧排查步骤前先比较标题画面的版本。"
       },
+      "affectedRoutes": [
+        { "en": "Offline loading", "zh": "离线加载排查（英文页）", "route": "/problems/offline-mode-loading", "routeZh": "/problems/offline-mode-loading" },
+        { "en": "Friend-session join", "zh": "好友联机排查（英文页）", "route": "/problems/friend-session-join", "routeZh": "/problems/friend-session-join" },
+        { "en": "Multiplayer guide", "zh": "联机指南", "route": "/guides/multiplayer-coop", "routeZh": "/zh/guides/multiplayer-coop" }
+      ],
       "changes": [
         {
           "en": "The launch update addressed a Steam Offline Mode loading case.",
@@ -139,15 +156,15 @@
       "actions": [
         {
           "en": "Offline loading checks",
-          "zh": "离线加载排查",
+          "zh": "离线加载排查（英文页）",
           "route": "/problems/offline-mode-loading",
-          "routeZh": "/zh/problems/offline-mode-loading"
+          "routeZh": "/problems/offline-mode-loading"
         },
         {
           "en": "Friend-session checks",
-          "zh": "好友联机排查",
+          "zh": "好友联机排查（英文页）",
           "route": "/problems/friend-session-join",
-          "routeZh": "/zh/problems/friend-session-join"
+          "routeZh": "/problems/friend-session-join"
         },
         {
           "en": "Current multiplayer requirements",
@@ -176,6 +193,11 @@
         "en": "Use the current transport sequence to separate approved parking, subway travel and missing-vehicle symptoms.",
         "zh": "按当前交通流程区分合规停车、地铁出行和车辆消失症状。"
       },
+      "affectedRoutes": [
+        { "en": "Vehicles guide", "zh": "车辆指南", "route": "/guides/vehicles-transport", "routeZh": "/zh/guides/vehicles-transport" },
+        { "en": "Vehicle recovery", "zh": "车辆找回", "route": "/problems/vehicle-recovery", "routeZh": "/zh/problems/vehicle-recovery" },
+        { "en": "Interactive map", "zh": "互动地图", "route": "/map", "routeZh": "/zh/map" }
+      ],
       "changes": [
         {
           "en": "The current transport notes connect approved parking, subway travel and the My Garage recovery path.",
