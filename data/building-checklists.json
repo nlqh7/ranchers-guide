@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "lastUpdated": "2026-08-22",
+    "currentBuild": "0.8.10.842"
+  },
+  "targets": [
+    {
+      "id": "red-tent",
+      "name": "Red Tent",
+      "zhName": "红帐篷 Red Tent",
+      "build": "0.8.10.455",
+      "validity": "historical",
+      "summary": "The retained launch-build footage shows this recipe, but it has not been rechecked against the current build.",
+      "zhSummary": "现有首发版本视频保留了这个配方，但尚未按当前版本重新核对。",
+      "caution": "Recheck the in-game recipe after an update before treating these quantities as current.",
+      "zhCaution": "更新后请重新查看游戏内配方，不要直接把这些数量当作当前版本定值。",
+      "source": {
+        "label": "Games Station gameplay footage at 71:40",
+        "labelZh": "Games Station 游戏画面 71:40",
+        "url": null
+      },
+      "materials": [
+        { "id": "stone", "name": "Stone", "zhName": "石头 Stone", "required": 8, "route": "/database/materials#stone", "routeZh": "/zh/database/materials#stone" },
+        { "id": "wood-log", "name": "Wood Log", "zhName": "原木 Wood Log", "required": 10, "route": "/database/materials#wood-log", "routeZh": "/zh/database/materials#wood-log" }
+      ]
+    }
+  ]
+}

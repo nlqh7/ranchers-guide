@@ -6,6 +6,20 @@ const root = path.resolve(__dirname, "..");
 const readJson = (relative) => JSON.parse(fs.readFileSync(path.join(root, relative), "utf8"));
 const clean = (value) => String(value || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 
+function checkFactPairs(dataset, recordsKey, label) {
+  for (const record of dataset[recordsKey]) {
+    assert.ok(record.summary && record.zhSummary, `${label}:${record.id} needs bilingual summaries`);
+    if (record.whenNeeded || record.zhWhenNeeded) {
+      assert.ok(record.whenNeeded && record.zhWhenNeeded, `${label}:${record.id} needs bilingual decision guidance`);
+    }
+    assert.equal(record.facts.length, record.facts.filter((fact) => fact.zhText).length, `${label}:${record.id} has an untranslated fact`);
+  }
+}
+
+checkFactPairs(readJson("data/materials.json"), "materials", "material");
+checkFactPairs(readJson("data/npcs.json"), "npcs", "npc");
+checkFactPairs(readJson("data/quests.json"), "quests", "quest");
+
 const locations = readJson("data/locations.json");
 for (const location of locations.locations) {
   const en = location.locale?.en;
@@ -28,4 +42,4 @@ for (const relative of ["knowledge-index.json", "zh/knowledge-index.json"]) {
   }
 }
 
-console.log(`PASS: ${locations.locations.length} map entities have independent Chinese answer summaries and locale-safe knowledge entries.`);
+console.log(`PASS: bilingual entity answers cover materials, NPCs, quests and ${locations.locations.length} map entities with locale-safe knowledge entries.`);

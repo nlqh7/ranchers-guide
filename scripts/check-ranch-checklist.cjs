@@ -5,6 +5,7 @@ const path = require("node:path");
 const root = path.resolve(__dirname, "..");
 const en = fs.readFileSync(path.join(root, "tools", "ranch-checklist.html"), "utf8");
 const zh = fs.readFileSync(path.join(root, "zh", "tools", "ranch-checklist.html"), "utf8");
+const buildingData = JSON.parse(fs.readFileSync(path.join(root, "data", "building-checklists.json"), "utf8"));
 
 for (const [name, html] of [["English", en], ["Chinese", zh]]) {
   assert.match(html, /noindex,follow/i, `${name} checklist must remain noindex`);
@@ -18,4 +19,9 @@ for (const [name, html] of [["English", en], ["Chinese", zh]]) {
 }
 
 assert.equal((en.match(/data-check-item=/g) || []).length, (zh.match(/data-check-item=/g) || []).length, "bilingual checklist item counts must match");
-console.log("PASS: bilingual local ranch checklist has four goal paths, a bounded material check, local storage wiring and noindex/no-ad boundaries.");
+assert.ok(Array.isArray(buildingData.targets) && buildingData.targets.length >= 1, "building checklist needs at least one documented target");
+assert.ok(buildingData.targets.every((target) => target.id && target.name && target.zhName && target.build && target.validity && Array.isArray(target.materials) && target.materials.length > 0), "every building target needs bilingual labels, version boundary and materials");
+assert.ok(buildingData.targets.every((target) => target.materials.every((material) => material.id && material.required > 0 && material.route && material.routeZh)), "every documented material needs a positive quantity and bilingual route");
+assert.match(fs.readFileSync(path.join(root, "assets/js/ranch-checklist.js"), "utf8"), /building-checklists\.json/);
+assert.match(fs.readFileSync(path.join(root, "assets/js/ranch-checklist.js"), "utf8"), /materialsByTarget/);
+console.log(`PASS: bilingual local ranch checklist has four goal paths, ${buildingData.targets.length} data-driven documented build target(s), local storage wiring and noindex/no-ad boundaries.`);

@@ -3,6 +3,7 @@ const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
 const data = JSON.parse(fs.readFileSync(path.join(root, "data", "materials.json"), "utf8"));
+const buildingData = JSON.parse(fs.readFileSync(path.join(root, "data", "building-checklists.json"), "utf8"));
 const checkOnly = process.argv.includes("--check");
 
 function esc(value) {
@@ -96,7 +97,13 @@ function render(locale) {
       if (!label) throw new Error(`Missing related route label for ${route}`);
       return `<a class="btn btn-outline btn-compact" href="${localizeRoute(route, zh)}">${label[zh ? "zh" : "en"]}</a>`;
     }).join("");
-    const extra = `<div class="entity-decision"><strong>${zh ? "什么时候查" : "When this matters"}</strong><p>${esc(zh ? material.zhWhenNeeded : material.whenNeeded)}</p><div class="button-stack">${related}${material.id === "zirconite" ? `<a class="btn btn-outline btn-compact" href="${prefix}/map?q=${encodeURIComponent(zh ? "锆矿" : "zirconite")}">${l.map}</a>` : material.id === "hay" ? `<a class="btn btn-outline btn-compact" href="${prefix}/guides/animal-guide#feeding">${l.animal}</a>` : ""}</div></div>`;
+    const documentedUses = buildingData.targets.flatMap((target) => {
+      const requirement = target.materials.find((entry) => entry.id === material.id);
+      if (!requirement) return [];
+      return [{ target, requirement }];
+    });
+    const buildUse = documentedUses.length > 0 ? `<div class="entity-decision entity-build-target"><strong>${zh ? "已记录的建造用途" : "Documented build use"}</strong>${documentedUses.map(({ target, requirement }) => `<p><a href="${zh ? "/zh" : ""}/tools/ranch-checklist#build-goal">${esc(zh ? target.zhName : target.name)}</a> · ${zh ? "需要" : "Needs"} <strong>${requirement.required}</strong> ${esc(zh ? material.zhName : material.name)} · ${zh ? "来源画面版本" : "Source footage build"} ${esc(target.build)}.</p><p class="entity-decision-note">${esc(zh ? target.zhCaution : target.caution)} <span class="tag historical">${zh ? "历史参考" : "Historical reference"}</span></p>`).join("")}</div>` : "";
+    const extra = `<div class="entity-decision"><strong>${zh ? "什么时候查" : "When this matters"}</strong><p>${esc(zh ? material.zhWhenNeeded : material.whenNeeded)}</p><div class="button-stack">${related}${material.id === "zirconite" ? `<a class="btn btn-outline btn-compact" href="${prefix}/map?q=${encodeURIComponent(zh ? "锆矿" : "zirconite")}">${l.map}</a>` : material.id === "hay" ? `<a class="btn btn-outline btn-compact" href="${prefix}/guides/animal-guide#feeding">${l.animal}</a>` : ""}</div></div>${buildUse}`;
     return `      <section class="evidence-ledger material-profile" id="${material.id}" data-search-entry data-search-title="${esc(zh ? material.zhSearchTitle : material.searchTitle)}" data-search-tags="${esc(zh ? material.zhSearchTags : material.searchTags)}">
         <div class="section-heading-row"><div><span class="kicker">${l.breadcrumb}</span><h2>${esc(zh ? material.zhName : material.name)}</h2></div><span class="tag">${data.meta.lastUpdated}</span></div>
         <p class="lead">${esc(zh ? material.zhSummary : material.summary)}</p>
