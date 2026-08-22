@@ -20,6 +20,15 @@
       <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / <a href="/zh/database">知识库</a> / 任务追踪器</nav>
       <section class="quest-tracker-intro"><span class="kicker">私人浏览器工具</span><h1>任务追踪器</h1><p class="lead">在自己的存档中核对已经有资料支持的任务目标。追踪器直接使用当前任务记录，并把尚未确认的细节保留下来。</p><p class="notice info quest-tracker-note"><strong>进度只保存在这台设备上。</strong> 不会上传，也不需要账号。这是个人清单，不是完整任务逐字记录。</p></section>
       <div class="quest-tracker-status" data-quest-status role="status" aria-live="polite">正在读取任务记录……</div>
+      <section class="quest-tracker-controls" aria-labelledby="quest-filter-title">
+        <h2 id="quest-filter-title">查找任务</h2>
+        <div class="quest-tracker-filters">
+          <div class="calc-field"><label for="quest-category-filter">分类</label><select id="quest-category-filter" data-quest-filter="category"><option value="all">全部分类</option></select></div>
+          <div class="calc-field"><label for="quest-npc-filter">NPC</label><select id="quest-npc-filter" data-quest-filter="npc"><option value="all">全部 NPC</option></select></div>
+          <div class="calc-field"><label for="quest-location-filter">地点</label><select id="quest-location-filter" data-quest-filter="location"><option value="all">全部地点</option></select></div>
+        </div>
+        <p class="quest-tracker-overview" data-quest-overview role="status" aria-live="polite"></p>
+      </section>
       <section class="quest-tracker-list" data-quest-list aria-live="polite"></section>
       <p class="article-next"><a href="/zh/database/quests">打开任务数据库</a><span>缺少某个步骤？<a href="/contribute">提交问题供审核。</a></span></p>
     </div>

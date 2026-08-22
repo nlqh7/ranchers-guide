@@ -20,6 +20,15 @@
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/database">Database</a> / Quest tracker</nav>
       <section class="quest-tracker-intro"><span class="kicker">Private browser tool</span><h1>Quest tracker</h1><p class="lead">Check off documented quest objectives as you verify them in your own save. The tracker uses the current quest records and keeps unresolved details visible.</p><p class="notice info quest-tracker-note"><strong>Your progress stays on this device.</strong> Nothing is uploaded and no account is required. This is a personal checklist, not a complete quest transcript.</p></section>
       <div class="quest-tracker-status" data-quest-status role="status" aria-live="polite">Loading quest records…</div>
+      <section class="quest-tracker-controls" aria-labelledby="quest-filter-title">
+        <h2 id="quest-filter-title">Find a quest</h2>
+        <div class="quest-tracker-filters">
+          <div class="calc-field"><label for="quest-category-filter">Category</label><select id="quest-category-filter" data-quest-filter="category"><option value="all">All categories</option></select></div>
+          <div class="calc-field"><label for="quest-npc-filter">NPC</label><select id="quest-npc-filter" data-quest-filter="npc"><option value="all">All NPCs</option></select></div>
+          <div class="calc-field"><label for="quest-location-filter">Location</label><select id="quest-location-filter" data-quest-filter="location"><option value="all">All locations</option></select></div>
+        </div>
+        <p class="quest-tracker-overview" data-quest-overview role="status" aria-live="polite"></p>
+      </section>
       <section class="quest-tracker-list" data-quest-list aria-live="polite"></section>
       <p class="article-next"><a href="/database/quests">Open the quest database</a><span>Need a missing step checked? <a href="/contribute">Send the question for review.</a></span></p>
     </div>

@@ -1,0 +1,71 @@
+{
+  "meta": {
+    "build": "0.8.10.562",
+    "lastUpdated": "2026-08-22"
+  },
+  "notes": [
+    {
+      "id": "games-station",
+      "kind": { "en": "Video creator", "zh": "视频作者" },
+      "name": "Games Station",
+      "zhName": "Games Station",
+      "sourceTitle": "Games Station current-build gameplay archive",
+      "sourceUrl": "https://www.youtube.com/watch?v=GrFiYqWcBK0",
+      "sourceDate": "2026-08-07",
+      "build": "0.8.10.455",
+      "scope": "A current-build walkthrough used for bounded observations of animals, crops, shops, NPC conversations and map recognition. The archive is a visual reference, not a replacement for an in-game test.",
+      "zhScope": "一段带版本范围的实机流程视频，用于限定动物、作物、商店、NPC 对话和地图识别的观测。它是画面参考，不替代当前版本实测。",
+      "use": "We cite the relevant timestamp or use it to cross-check a page claim, then keep the observation tied to 0.8.10.455. We do not reproduce the creator's script, thumbnail or footage.",
+      "zhUse": "本站只引用相关时间点或用它交叉核对页面结论，并把观测绑定到 0.8.10.455；不复制作者脚本、缩略图或视频画面。",
+      "risk": "The game has moved beyond this launch-build archive. Prices, prompts and bug behavior may have changed in later builds.",
+      "zhRisk": "游戏已经超出这份首发版本存档。后续版本可能改变价格、提示语和 bug 行为。",
+      "related": [
+        { "route": "/database/animals", "label": "Animal database", "zhLabel": "动物数据库" },
+        { "route": "/database/crops", "label": "Crop database", "zhLabel": "作物数据库" },
+        { "route": "/map", "label": "Map and location evidence", "zhLabel": "地图与地点证据" }
+      ]
+    },
+    {
+      "id": "steam-community-guides",
+      "kind": { "en": "Community guide index", "zh": "社区攻略入口" },
+      "name": "Steam Community Guides",
+      "zhName": "Steam 社区指南",
+      "sourceTitle": "The Ranchers Steam Community Guides",
+      "sourceUrl": "https://steamcommunity.com/app/1501310/guides/",
+      "sourceDate": "2026-08-21",
+      "build": "Current index; individual guides vary",
+      "scope": "A useful place to find player questions and test leads about shop hours, seed yields and animal production. The index does not make every guide authoritative.",
+      "zhScope": "这里能找到玩家关于营业时间、种子产量和动物产出的提问与测试线索，但入口页不会让每篇攻略自动变成权威资料。",
+      "use": "We use a guide as a lead only when its version, steps and raw observation are visible. A claim enters a current answer only after an official response, a second independent record or a reproducible test supports it.",
+      "zhUse": "只有在攻略显示版本、步骤和原始观测时，本站才把它当作线索。要进入当前答案，还需要官方答复、第二条独立记录或可复现实测。",
+      "risk": "Older guides can preserve Alpha-era values or conclusions. Check the build before using any number, opening hour or production rule.",
+      "zhRisk": "旧攻略可能保留 Alpha 时代的数值或结论。使用任何数字、营业时间或产出规则前都要先检查版本。",
+      "related": [
+        { "route": "/community", "label": "Community Radar", "zhLabel": "社区雷达" },
+        { "route": "/guides/resources-and-materials", "label": "Resources and materials", "zhLabel": "资源与材料" },
+        { "route": "/methodology", "label": "Evidence method", "zhLabel": "证据方法" }
+      ]
+    },
+    {
+      "id": "official-wiki",
+      "kind": { "en": "Reference wiki", "zh": "参考 Wiki" },
+      "name": "The Ranchers Official Wiki",
+      "zhName": "The Ranchers 官方 Wiki",
+      "sourceTitle": "The Ranchers official Wiki",
+      "sourceUrl": "https://wiki.ranchers.game/",
+      "sourceDate": "2026-08-21",
+      "build": "Alpha-era pages; current status varies",
+      "scope": "A taxonomy and visual checklist for buildings, animals, items and places. It helps identify what to investigate, especially when a page names an entity or shows a building view.",
+      "zhScope": "它提供建筑、动物、物品和地点的分类骨架与视觉检查清单，适合用来发现待研究实体，尤其是页面给出名称或建筑画面时。",
+      "use": "We use names and relationships as research leads, then keep current-build facts in our own evidence records. Historical values are not copied into current tables.",
+      "zhUse": "本站只把名称和关系当研究线索，再用自己的证据记录当前版本事实；历史数值不会直接搬进当前表格。",
+      "risk": "Many pages retain pre-EA or Alpha-era values, and an image or category does not prove a current coordinate, recipe or unlock condition.",
+      "zhRisk": "不少页面仍停留在 EA 前或 Alpha 时代；图片或分类不能证明当前坐标、配方或解锁条件。",
+      "related": [
+        { "route": "/database", "label": "Knowledge base", "zhLabel": "知识库" },
+        { "route": "/map", "label": "Map evidence", "zhLabel": "地图证据" },
+        { "route": "/research", "label": "Research queue", "zhLabel": "研究队列" }
+      ]
+    }
+  ]
+}

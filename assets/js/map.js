@@ -21,6 +21,10 @@
   var markers = markerLayer ? Array.from(markerLayer.querySelectorAll("[data-marker-category]")) : [];
   var markerFilterButtons = Array.from(document.querySelectorAll("[data-map-pin-filter]"));
   var evidenceFilterButtons = Array.from(document.querySelectorAll("[data-map-evidence-filter]"));
+  var relationFilterButtons = Array.from(document.querySelectorAll("[data-map-relation-filter]"));
+  var progressCount = document.querySelector("[data-map-progress-count]");
+  var discoveryToggle = document.querySelector("[data-map-discovery-toggle]");
+  var progressReset = document.querySelector("[data-map-progress-reset]");
   var inspectorLink = inspector ? inspector.querySelector("[data-map-inspector-link]") : null;
   var inspectorConnections = inspector ? inspector.querySelector("[data-map-inspector-connections]") : null;
   var inspectorConnectionList = inspector ? inspector.querySelector("[data-map-inspector-connection-list]") : null;
@@ -39,6 +43,10 @@
   var placing = false;
   var selectedMarker = null;
   var knowledgeEntities = [];
+  var relationFilter = "all";
+  var discoveryKey = "ranchers-guide-map-progress-v1";
+  var discovered = {};
+  try { discovered = JSON.parse(localStorage.getItem(discoveryKey) || "{}"); } catch (_) { discovered = {}; }
   if (!mapStage || !mapImage || !window.RanchersMapViewer) return;
 
   if (inspector && !inspectorJourney) {
@@ -125,6 +133,26 @@
     if (inspectorJourney) inspectorJourney.hidden = true;
   }
 
+  function saveDiscovery() {
+    try { localStorage.setItem(discoveryKey, JSON.stringify(discovered)); } catch (_) { /* Private mode still keeps the map usable. */ }
+  }
+
+  function updateProgress() {
+    var found = markers.filter(function (marker) { return discovered[marker.dataset.markerId] === true; }).length;
+    if (progressCount) progressCount.textContent = isChinese ? found + " / " + markers.length + " 个区域已发现" : found + " / " + markers.length + " areas discovered";
+    markers.forEach(function (marker) {
+      marker.classList.toggle("is-discovered", discovered[marker.dataset.markerId] === true);
+    });
+    if (discoveryToggle) {
+      var canToggle = !!selectedMarker;
+      discoveryToggle.disabled = !canToggle;
+      discoveryToggle.textContent = canToggle && discovered[selectedMarker.dataset.markerId] === true
+        ? (isChinese ? "取消当前地点已发现" : "Mark selected as undiscovered")
+        : (isChinese ? "将当前地点标为已发现" : "Mark selected as discovered");
+      discoveryToggle.setAttribute("aria-pressed", canToggle && discovered[selectedMarker.dataset.markerId] === true ? "true" : "false");
+    }
+  }
+
   function markerRoute(marker) {
     return marker && marker.dataset.markerId ? (isChinese ? "/zh/map#" : "/map#") + marker.dataset.markerId : "";
   }
@@ -186,10 +214,19 @@
     inspectorJourney.hidden = false;
   }
 
+  function markerHasRelation(marker, type) {
+    if (type === "service") return marker.dataset.markerCategory === "services";
+    var route = markerRoute(marker);
+    return knowledgeEntities.some(function (entity) {
+      return entity.type === type && (entity.relatedRoutes || []).some(function (link) { return (link.href || link) === route; });
+    });
+  }
+
   fetch(isChinese ? "/zh/knowledge-index.json" : "/knowledge-index.json", { credentials: "same-origin" })
     .then(function (response) { if (!response.ok) throw new Error("knowledge index " + response.status); return response.json(); })
     .then(function (payload) {
       knowledgeEntities = Array.isArray(payload.entities) ? payload.entities : [];
+      renderMarkerLayers();
       if (selectedMarker) {
         renderInspectorConnections(selectedMarker);
         renderInspectorJourney(selectedMarker);
@@ -200,6 +237,7 @@
   function selectMarker(marker) {
     selectedMarker = marker;
     markers.forEach(function (item) { item.classList.toggle("active", item === marker); });
+    updateProgress();
     if (!inspector) return;
     inspector.querySelector("[data-map-inspector-title]").textContent = marker.dataset.markerTitle;
     var confidence = marker.dataset.markerConfidence || (isChinese ? "大致区域" : "Approximate");
@@ -240,10 +278,16 @@
       button.classList.toggle("active", active);
       button.setAttribute("aria-pressed", active ? "true" : "false");
     });
+    relationFilterButtons.forEach(function (button) {
+      var active = button.dataset.mapRelationFilter === relationFilter;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
     markers.forEach(function (marker) {
       var categoryHidden = activeCategoryFilter === "none" || (activeCategoryFilter !== "all" && marker.dataset.markerCategory !== activeCategoryFilter);
       var evidenceHidden = activeEvidenceFilter !== "all" && marker.dataset.markerEvidenceLayer !== activeEvidenceFilter;
-      marker.hidden = categoryHidden || evidenceHidden;
+      var relationHidden = relationFilter !== "all" && !markerHasRelation(marker, relationFilter);
+      marker.hidden = categoryHidden || evidenceHidden || relationHidden;
       if (marker.hidden) marker.classList.remove("active");
     });
   }
@@ -268,7 +312,33 @@
       applyEvidenceFilter(button.dataset.mapEvidenceFilter);
     });
   });
+  relationFilterButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      relationFilter = button.dataset.mapRelationFilter;
+      renderMarkerLayers();
+    });
+  });
   applyMarkerFilter("none");
+  updateProgress();
+
+  if (discoveryToggle) {
+    discoveryToggle.addEventListener("click", function () {
+      if (!selectedMarker) return;
+      var id = selectedMarker.dataset.markerId;
+      discovered[id] = discovered[id] !== true;
+      saveDiscovery();
+      updateProgress();
+    });
+  }
+  if (progressReset) {
+    progressReset.addEventListener("click", function () {
+      if (!Object.keys(discovered).length) return;
+      if (!window.confirm(isChinese ? "清除本地地图探索进度？" : "Clear your local map discovery progress?")) return;
+      discovered = {};
+      saveDiscovery();
+      updateProgress();
+    });
+  }
 
   function selectRegion(name, title, status, copy, showMarker) {
     viewState = window.RanchersMapViewer ? window.RanchersMapViewer.getView(name) : { scale: 1, x: 0, y: 0 };
@@ -511,7 +581,7 @@
   }
 
   function isMapControl(target) {
-    return !!target.closest("[data-map-region], [data-map-pan], [data-map-zoom], [data-location-map], [data-map-pin-filter], [data-map-evidence-filter], .map-pin, .map-marker");
+    return !!target.closest("[data-map-region], [data-map-pan], [data-map-zoom], [data-location-map], [data-map-pin-filter], [data-map-evidence-filter], [data-map-relation-filter], [data-map-discovery-toggle], [data-map-progress-reset], .map-pin, .map-marker");
   }
 
   if (mapStage) {

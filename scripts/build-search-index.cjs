@@ -59,6 +59,7 @@ function pageType(route) {
     if (route === "/zh/problems") return "问题排查";
     if (route === "/zh/updates") return "更新";
     if (route.indexOf("/zh/updates/") === 0) return "更新";
+    if (route === "/zh/creator-notes") return "来源笔记";
     if (route.indexOf("/zh/tools/") === 0) return "工具";
     if (route === "/zh/") return "首页";
     return "站点";
@@ -69,6 +70,7 @@ function pageType(route) {
   if (route === "/map") return "Map";
   if (route.indexOf("/problems/") === 0 || route === "/problems") return "Problem";
   if (route === "/community") return "Community";
+  if (route === "/creator-notes") return "Creator Notes";
   if (route === "/updates") return "Updates";
   if (route.indexOf("/updates/") === 0) return "Updates";
   if (route === "/research") return "Research";

@@ -72,6 +72,9 @@
       "zhSearchTags": "石头 石块 岩石 材料 建造 镐 矿洞 刷新 购买 市政厅 犯罪",
       "summary": "Collect the loose stone available on land you own first. A reliable repeatable source after that supply is exhausted has not yet been verified.",
       "zhSummary": "先收集自己土地上的散落石头。初始石头耗尽后，可靠的可重复来源仍待验证。",
+      "whenNeeded": "Use Stone first when an early building or placement step asks for a basic construction material; keep the supply gap visible instead of assuming a mine is available.",
+      "zhWhenNeeded": "当早期建造或放置步骤需要基础建材时先查石头；可靠的可重复来源仍未知，不要默认已经有矿洞。",
+      "relatedRoutes": ["/guides/building-construction#materials", "/guides/resources-and-materials"],
       "facts": [
         {
           "text": "Current-build players report gathering loose stone from ranch land and eventually exhausting the visible supply.",
@@ -109,6 +112,9 @@
       "zhSearchTags": "原木 木材 木头 砍树 木炭 建造 红帐篷 配方",
       "summary": "Wood Logs are the base material for early construction and the input used by the community charcoal method.",
       "zhSummary": "原木是早期建造材料，也是社区木炭制作方法所使用的原料。",
+      "whenNeeded": "Keep Wood Logs for early construction before testing the community charcoal lead; the retained evidence does not establish a universal recipe list.",
+      "zhWhenNeeded": "早期建造优先保留原木，再考虑测试社区木炭线索；现有证据不能推出完整配方表。",
+      "relatedRoutes": ["/guides/building-construction#materials", "/guides/crafting-guide"],
       "facts": [
         {
           "text": "Current community reports obtain Wood Logs by cutting trees; the retained reports do not establish tree respawn timing or ownership rules.",
@@ -138,6 +144,9 @@
       "zhSearchTags": "干草 草 灌木 木箱 桶 鸡饲料 食槽 筒仓 动物食物",
       "summary": "Hay is chicken feed. The public current-build gathering route is still based on a single traceable player report.",
       "zhSummary": "干草是鸡饲料。当前公开获取路线仍主要来自一条可追踪的玩家报告。",
+      "whenNeeded": "Check Hay as soon as chickens arrive: the feed use is officially supported, while the outdoor gathering route remains a lead to test.",
+      "zhWhenNeeded": "鸡到家后就要查干草：作为饲料的用途有官方支持，但户外获取路线仍只是待复测线索。",
+      "relatedRoutes": ["/guides/animal-guide#feeding", "/database/animals#chicken"],
       "facts": [
         {
           "text": "An official moderator answer identifies hay as chicken feed; place it in the interior trough or load a connected silo for automation.",
@@ -167,6 +176,9 @@
       "zhSearchTags": "木炭 煤 原木 燃烧 火把 灭火器 建造 材料",
       "summary": "A community lead suggests burning Wood Logs and extinguishing the fire before collecting Charcoal. Current-build steps, yield and fire behaviour still need a direct screenshot or video.",
       "zhSummary": "一条社区线索称可以燃烧原木，再灭火收集木炭。当前版本的具体步骤、产量和火焰行为仍需要直接截图或视频确认。",
+      "whenNeeded": "Treat Charcoal as a research lead rather than a guaranteed route. Use the linked crafting context, then verify the fire and collection steps in the current build before spending resources.",
+      "zhWhenNeeded": "把木炭当作待验证线索，不要当成保证可行的路线。先看制作背景，再在当前版本确认燃烧和收集步骤后投入资源。",
+      "relatedRoutes": ["/guides/crafting-guide", "/community"],
       "facts": [
         {
           "text": "A community lead suggests placing or cutting Wood Logs, igniting them, waiting for a material change, then using a fire extinguisher before collecting Charcoal. The retained scan has no direct post URL, so this remains a route to test.",
@@ -196,6 +208,9 @@
       "zhSearchTags": "锆矿 Zirconite Zerkonite Meriam 市政厅 建筑师 购买 矿洞 材料 蓝图",
       "summary": "Buy Zirconite for now. The official moderator says purchasing is the only current route until mines are implemented.",
       "zhSummary": "现阶段需要购买锆矿。官方版主说明，在矿洞实装前，购买是当前唯一途径。",
+      "whenNeeded": "Check Zirconite when a blueprint or advanced building asks for it. The current route points to Meriam at City Hall; a stable price and wild-ore route remain unverified.",
+      "zhWhenNeeded": "当蓝图或高级建造需要锆矿时再查。当前路线指向市政厅的 Meriam；稳定价格和野外矿石路线仍未验证。",
+      "relatedRoutes": ["/map#city-hall", "/guides/building-construction#materials", "/guides/resources-and-materials"],
       "facts": [
         {
           "text": "The official moderator says buying Zirconite is the only current option until mines are implemented; do not search for a wild ore route in this build.",

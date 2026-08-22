@@ -55,7 +55,7 @@ The first two are maintenance priorities, not rewrite targets. Farming is the cl
 | `/problems/failed-quest-replay` | 9 | Separate official recovery from community workarounds. |
 | `/community` | 8 | Original analysis; freshness and next-step value need upkeep. |
 | `/research` | 4 | Removed from sitemap, marked noindex and stripped of ads on 2026-08-20; remains accessible for transparency. |
-| `/tools/profit-calculator` | 8 | Functional but generic until current values are available. |
+| `/tools/profit-calculator` | 8 | Functional but generic until current values are available; kept accessible but moved to noindex/no-ad until it has stronger current data. |
 | `/tools/field-notes` | 6 | Private notebook utility; removed from sitemap and marked noindex on 2026-08-20. |
 | `/tools/chicken-troubleshooter` | 10 | Substantive decision tool despite low word count. |
 
@@ -98,7 +98,7 @@ The defensible position remains: official sources explain what exists; this site
 
 ## Resubmission Gate
 
-1. Completed 2026-08-20: `/research` and `/tools/field-notes` are noindex and outside the sitemap; `/research` no longer loads ads.
+1. Completed 2026-08-20: `/research` and `/tools/field-notes` are noindex and outside the sitemap; `/research` no longer loads ads. Completed 2026-08-22: `/tools/profit-calculator` is also noindex/no-ad and outside the sitemap because it only compares user-entered values.
 2. Plot removal now has post-launch official moderator guidance. Still verify one complete current-build farming workflow and one electricity workflow, or keep unresolved sections out of the primary answer path.
 3. Check Chinese beginner/crop/map pages for answer parity; do not bulk-translate more routes.
 4. Recheck every indexed route for 200 status, canonical, navigation, publisher identity and mobile usability.

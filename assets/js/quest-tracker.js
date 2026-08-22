@@ -6,9 +6,16 @@
 
   var list = root.querySelector("[data-quest-list]");
   var status = root.querySelector("[data-quest-status]");
+  var overview = root.querySelector("[data-quest-overview]");
   var isChinese = document.documentElement.lang.toLowerCase() === "zh-cn";
   var storageKey = "ranchers-guide-quest-tracker-v1";
   var state = {};
+  var records = [];
+  var filters = {
+    category: root.querySelector('[data-quest-filter="category"]'),
+    npc: root.querySelector('[data-quest-filter="npc"]'),
+    location: root.querySelector('[data-quest-filter="location"]')
+  };
 
   try { state = JSON.parse(localStorage.getItem(storageKey) || "{}"); } catch (_) { state = {}; }
 
@@ -78,10 +85,77 @@
     return relations.length ? '<div class="quest-tracker-relations"><strong>' + (isChinese ? "关联实体" : "Connected entities") + "</strong><div>" + relations.join("") + "</div></div>" : "";
   }
 
+  function relationIds(record, type) {
+    return (record.relations || []).filter(function (relation) {
+      return relation.target && relation.target.type === type && relation.target.id;
+    }).map(function (relation) { return relation.target.id; });
+  }
+
+  function relationLabel(id) {
+    var labels = isChinese ? {
+      victor: "Victor", angela: "Angela", gigi: "Gigi",
+      "city-hall": "市政厅", "bykii-terminal": "Bykii 终端"
+    } : {
+      victor: "Victor", angela: "Angela", gigi: "Gigi",
+      "city-hall": "City Hall", "bykii-terminal": "Bykii terminal"
+    };
+    return labels[id] || id;
+  }
+
+  function addOptions(select, values, firstLabel, labelGetter) {
+    if (!select) return;
+    select.innerHTML = '<option value="all">' + escapeHtml(firstLabel) + "</option>" + values.map(function (value) {
+      return '<option value="' + escapeHtml(value) + '">' + escapeHtml(labelGetter(value)) + "</option>";
+    }).join("");
+  }
+
+  function populateFilters() {
+    var categories = Array.from(new Set(records.map(function (record) { return record.category; }).filter(Boolean))).sort();
+    var npcs = Array.from(new Set(records.reduce(function (all, record) { return all.concat(relationIds(record, "npc")); }, []))).sort();
+    var locations = Array.from(new Set(records.reduce(function (all, record) { return all.concat(relationIds(record, "location")); }, []))).sort();
+    addOptions(filters.category, categories, isChinese ? "全部分类" : "All categories", function (value) {
+      var record = records.find(function (item) { return item.category === value; });
+      return isChinese ? (record.zhCategory || value) : value.charAt(0).toUpperCase() + value.slice(1);
+    });
+    addOptions(filters.npc, npcs, isChinese ? "全部 NPC" : "All NPCs", relationLabel);
+    addOptions(filters.location, locations, isChinese ? "全部地点" : "All locations", relationLabel);
+  }
+
+  function recordMatches(record) {
+    var category = filters.category ? filters.category.value : "all";
+    var npc = filters.npc ? filters.npc.value : "all";
+    var location = filters.location ? filters.location.value : "all";
+    return (category === "all" || record.category === category) &&
+      (npc === "all" || relationIds(record, "npc").indexOf(npc) !== -1) &&
+      (location === "all" || relationIds(record, "location").indexOf(location) !== -1);
+  }
+
+  function progressFor(record) {
+    var facts = Array.isArray(record.facts) ? record.facts : [];
+    var done = facts.reduce(function (count, fact, index) {
+      return count + (state[record.id + "::" + index] === true ? 1 : 0);
+    }, 0);
+    return { done: done, total: facts.length };
+  }
+
+  function updateOverview(filtered) {
+    if (!overview) return;
+    var progress = filtered.reduce(function (total, record) {
+      var current = progressFor(record);
+      total.done += current.done;
+      total.total += current.total;
+      return total;
+    }, { done: 0, total: 0 });
+    overview.textContent = isChinese
+      ? "显示 " + filtered.length + " / " + records.length + " 条任务 · 已核对 " + progress.done + " / " + progress.total + " 个目标"
+      : "Showing " + filtered.length + " of " + records.length + " quests · " + progress.done + " of " + progress.total + " objectives checked";
+  }
+
   function renderRecord(record) {
     var facts = Array.isArray(record.facts) ? record.facts : [];
     var name = isChinese ? record.zhName : record.name;
     var summary = isChinese ? record.zhSummary : record.summary;
+    var category = isChinese ? record.zhCategory : record.category;
     var titleKey = escapeHtml(record.id);
     var factHtml = facts.map(function (fact, index) {
       var key = record.id + "::" + index;
@@ -93,7 +167,16 @@
     var related = (record.relatedRoutes || []).map(function (route) {
       return '<a class="btn btn-outline btn-compact" href="' + escapeHtml(localizedRoute(route)) + '">' + escapeHtml(routeLabel(route)) + "</a>";
     }).join("");
-    return '<article class="quest-tracker-card" data-quest-card="' + titleKey + '"><div class="quest-tracker-card-head"><div><span class="kicker">' + (isChinese ? "任务记录" : "Quest record") + '</span><h2>' + escapeHtml(name) + '</h2></div><div class="quest-tracker-progress" data-quest-progress>0 / ' + facts.length + (isChinese ? " 已核对" : " checked") + '</div></div><p class="quest-tracker-summary">' + escapeHtml(summary) + '</p>' + relationLinks(record) + '<ul class="quest-tracker-items">' + factHtml + '</ul><div class="quest-tracker-card-foot"><div class="quest-tracker-related"><strong>' + (isChinese ? "继续查找" : "Continue with") + '</strong><div>' + related + '</div></div><button class="btn btn-outline btn-compact" type="button" data-quest-reset="' + titleKey + '">' + (isChinese ? "重置任务" : "Reset quest") + '</button></div></article>';
+    return '<article class="quest-tracker-card" data-quest-card="' + titleKey + '"><div class="quest-tracker-card-head"><div><span class="kicker">' + (isChinese ? "任务记录" : "Quest record") + '</span><h2>' + escapeHtml(name) + '</h2>' + (category ? '<span class="tag">' + escapeHtml(category) + '</span>' : '') + '</div><div class="quest-tracker-progress" data-quest-progress>0 / ' + facts.length + (isChinese ? " 已核对" : " checked") + '</div></div><p class="quest-tracker-summary">' + escapeHtml(summary) + '</p>' + relationLinks(record) + '<ul class="quest-tracker-items">' + factHtml + '</ul><div class="quest-tracker-card-foot"><div class="quest-tracker-related"><strong>' + (isChinese ? "继续查找" : "Continue with") + '</strong><div>' + related + '</div></div><button class="btn btn-outline btn-compact" type="button" data-quest-reset="' + titleKey + '">' + (isChinese ? "重置任务" : "Reset quest") + '</button></div></article>';
+  }
+
+  function renderRecords() {
+    var filtered = records.filter(recordMatches);
+    updateOverview(filtered);
+    list.innerHTML = filtered.length
+      ? filtered.map(renderRecord).join("")
+      : '<p class="notice info">' + (isChinese ? "没有符合这些筛选条件的任务。" : "No quests match these filters.") + "</p>";
+    wireCards();
   }
 
   function updateProgress(card) {
@@ -129,11 +212,15 @@
   fetch("/data/quests.json", { headers: { Accept: "application/json" } })
     .then(function (response) { if (!response.ok) throw new Error("quest-data"); return response.json(); })
     .then(function (data) {
-      var records = Array.isArray(data) ? data : data.quests;
-      if (!Array.isArray(records) || !records.length) throw new Error("empty-quest-data");
-      list.innerHTML = records.map(renderRecord).join("");
+      var loadedRecords = Array.isArray(data) ? data : data.quests;
+      if (!Array.isArray(loadedRecords) || !loadedRecords.length) throw new Error("empty-quest-data");
+      records = loadedRecords;
+      populateFilters();
+      Object.keys(filters).forEach(function (key) {
+        if (filters[key]) filters[key].addEventListener("change", renderRecords);
+      });
       status.textContent = isChinese ? "已载入 " + records.length + " 条任务记录。" : records.length + " quest records loaded.";
-      wireCards();
+      renderRecords();
     })
     .catch(function () {
       status.textContent = isChinese ? "任务记录暂时无法载入，请先打开任务数据库。" : "Quest records could not be loaded. Open the quest database instead.";

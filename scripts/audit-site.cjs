@@ -65,10 +65,11 @@ function pageKind(route, html) {
   if (route.startsWith("/problems/") || route.startsWith("/zh/problems/")) return "problem-guide";
   if (route.startsWith("/database/") || route.startsWith("/zh/database/")) return "database";
   if (route.startsWith("/tools/") || route.startsWith("/zh/tools/")) return "tool";
+  if (route === "/updates" || route === "/zh/updates" || route.startsWith("/updates/") || route.startsWith("/zh/updates/")) return "update";
   if (route.endsWith("/map") || route === "/map") return "map";
   if (["/database", "/zh/database", "/problems", "/zh/problems"].includes(route)) return "hub";
   if (["/about", "/contact", "/privacy", "/methodology"].includes(route)) return "trust";
-  if (["/research", "/community", "/contribute"].includes(route)) return "editorial-support";
+  if (["/research", "/community", "/contribute", "/zh/community", "/creator-notes", "/zh/creator-notes"].includes(route)) return "editorial-support";
   return html.includes("data-search-form") ? "utility" : "page";
 }
 
@@ -78,7 +79,10 @@ function classify(page) {
   if (page.route === "/contribute") return ["D", "Submission workflow supports the site but is not a search landing page."];
   if (page.kind === "trust") return ["C", "Required trust/support page, not a primary gameplay landing page."];
   if (page.route === "/research") return ["C", "Evidence hub supports credibility but exposes research-state language prominently."];
-  if (page.route === "/community") return ["B", "Original community analysis with sources, but freshness and player task value need review."];
+  if (["/community", "/zh/community"].includes(page.route)) return ["B", "Original community analysis with sources, but freshness and player task value need review."];
+  if (["/creator-notes", "/zh/creator-notes"].includes(page.route)) return ["B", "Source-linked editorial notes with explicit scope and risk boundaries."];
+  if (page.kind === "update" && page.words >= 600 && page.nextSteps > 0) return ["A", "Versioned update explanation with player checks and related routes."];
+  if (page.kind === "update" && page.words >= 350 && page.nextSteps > 0) return ["B", "Versioned update explanation with actionable next steps."];
   if (page.kind === "home") return ["A", "Primary discovery page with search and actionable routes."];
   if (page.kind === "map") return ["A", "Interactive map plus original location directory and evidence grading."];
   if (page.kind === "database" && page.words >= 500) return ["A", "Substantial structured reference data with searchable anchors."];

@@ -1,0 +1,163 @@
+{
+  "meta": {
+    "currentBuild": "0.8.10.562",
+    "reviewed": "2026-08-22",
+    "note": "This dataset summarizes existing update pages. It does not reproduce official announcements."
+  },
+  "updates": [
+    {
+      "id": "hotfix-0-8-10-562",
+      "version": "0.8.10.562",
+      "dateLabel": "August 10, 2026",
+      "status": "current",
+      "title": {
+        "en": "0.8.10.562 hotfix",
+        "zh": "0.8.10.562 热修"
+      },
+      "summary": {
+        "en": "Update first, then re-check animal, subway and vehicle symptoms that match the official fix list.",
+        "zh": "先更新游戏，再重新检查公告点名的动物、地铁和车辆症状。"
+      },
+      "changes": [
+        {
+          "en": "Several animal disappearance and doorway/loading paths are covered by the hotfix.",
+          "zh": "热修覆盖多种动物消失，以及卡在门口或读档后的路径。"
+        },
+        {
+          "en": "Roped animals freezing after subway travel and vehicles becoming unresponsive at AutoHue are listed fixes.",
+          "zh": "拴绳动物坐地铁后冻结、车辆进入 AutoHue 后失去响应被列入修复。"
+        },
+        {
+          "en": "The incubator wording distinguishes an infertile egg from a confirmed hatch failure.",
+          "zh": "孵化提示语区分不育鸡蛋与已确认的孵化失败。"
+        }
+      ],
+      "actions": [
+        {
+          "en": "Animal disappearance checklist",
+          "zh": "动物消失排查",
+          "route": "/guides/animal-guide#troubleshooting",
+          "routeZh": "/zh/guides/animal-guide#troubleshooting"
+        },
+        {
+          "en": "Subway symptom check",
+          "zh": "地铁症状排查",
+          "route": "/problems/fast-travel-subway",
+          "routeZh": "/zh/problems/fast-travel-subway"
+        },
+        {
+          "en": "Egg and incubation context",
+          "zh": "鸡蛋与孵化说明",
+          "route": "/guides/gigi-large-egg-quest#eggs",
+          "routeZh": "/zh/guides/gigi-large-egg-quest#eggs"
+        }
+      ],
+      "source": {
+        "kind": "official",
+        "label": "0.8.10.562 hotfix announcement",
+        "labelZh": "0.8.10.562 热修公告",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1840310314352719"
+      }
+    },
+    {
+      "id": "launch-hotfix-0-8-10-455",
+      "version": "0.8.10.455",
+      "dateLabel": "July 30, 2026",
+      "status": "historical",
+      "title": {
+        "en": "Launch hotfix: offline and co-op checks",
+        "zh": "发售热修：离线与联机排查"
+      },
+      "summary": {
+        "en": "Keep the launch fix as historical context; compare the title-screen build before reusing its troubleshooting steps.",
+        "zh": "保留发售热修作为历史背景；复用旧排查步骤前先比较标题画面的版本。"
+      },
+      "changes": [
+        {
+          "en": "The launch update addressed a Steam Offline Mode loading case.",
+          "zh": "发售更新处理了 Steam 离线模式下的一类加载问题。"
+        },
+        {
+          "en": "The launch update addressed a friend-session join case, while online co-op still needs Steam sign-in and internet access.",
+          "zh": "发售更新处理了一类好友联机加入问题，但在线联机仍需要登录 Steam 和网络。"
+        }
+      ],
+      "actions": [
+        {
+          "en": "Offline loading checks",
+          "zh": "离线加载排查",
+          "route": "/problems/offline-mode-loading",
+          "routeZh": "/zh/problems/offline-mode-loading"
+        },
+        {
+          "en": "Friend-session checks",
+          "zh": "好友联机排查",
+          "route": "/problems/friend-session-join",
+          "routeZh": "/zh/problems/friend-session-join"
+        },
+        {
+          "en": "Current multiplayer requirements",
+          "zh": "当前联机要求",
+          "route": "/guides/multiplayer-coop",
+          "routeZh": "/zh/guides/multiplayer-coop"
+        }
+      ],
+      "source": {
+        "kind": "official",
+        "label": "Official Steam news feed",
+        "labelZh": "官方 Steam 新闻",
+        "url": "https://steamcommunity.com/app/1501310/allnews/"
+      }
+    },
+    {
+      "id": "transport-2026-08",
+      "version": "0.8.10.x",
+      "dateLabel": "August 2026",
+      "status": "editorial",
+      "title": {
+        "en": "Transport update: parking, subway and recovery",
+        "zh": "交通更新：停车、地铁与车辆找回"
+      },
+      "summary": {
+        "en": "Use the current transport sequence to separate approved parking, subway travel and missing-vehicle symptoms.",
+        "zh": "按当前交通流程区分合规停车、地铁出行和车辆消失症状。"
+      },
+      "changes": [
+        {
+          "en": "The current transport notes connect approved parking, subway travel and the My Garage recovery path.",
+          "zh": "当前交通整理将合规停车、地铁出行和 My Garage 找回流程连在一起。"
+        },
+        {
+          "en": "The 0.8.10.562 hotfix narrows the known roped-animal subway symptom; it does not prove every missing vehicle has the same cause.",
+          "zh": "0.8.10.562 热修缩小了拴绳动物地铁症状的范围，但不能证明所有车辆消失都有同一原因。"
+        }
+      ],
+      "actions": [
+        {
+          "en": "Open the vehicles guide",
+          "zh": "打开车辆指南",
+          "route": "/guides/vehicles-transport",
+          "routeZh": "/zh/guides/vehicles-transport"
+        },
+        {
+          "en": "Recover a missing vehicle",
+          "zh": "找回消失的车辆",
+          "route": "/problems/vehicle-recovery",
+          "routeZh": "/zh/problems/vehicle-recovery"
+        },
+        {
+          "en": "Open the interactive map",
+          "zh": "打开互动地图",
+          "route": "/map",
+          "routeZh": "/zh/map"
+        }
+      ],
+      "source": {
+        "kind": "editorial",
+        "label": "Transport update page and official Steam news feed",
+        "labelZh": "交通更新页与官方 Steam 新闻",
+        "url": "https://steamcommunity.com/app/1501310/allnews/"
+      }
+    }
+  ]
+}

@@ -15,6 +15,7 @@ const pairs = [
   ["map.html", "zh/map.html", "/map", "/zh/map"],
   ["problems.html", "zh/problems.html", "/problems", "/zh/problems"],
   ["community.html", "zh/community.html", "/community", "/zh/community"],
+  ["creator-notes.html", "zh/creator-notes.html", "/creator-notes", "/zh/creator-notes"],
   ["search.html", "zh/search.html", "/search", "/zh/search"],
   ["guides/animal-guide.html", "zh/guides/animal-guide.html", "/guides/animal-guide", "/zh/guides/animal-guide"],
   ["guides/gigi-large-egg-quest.html", "zh/guides/gigi-large-egg-quest.html", "/guides/gigi-large-egg-quest", "/zh/guides/gigi-large-egg-quest"],
@@ -38,6 +39,7 @@ const pairs = [
 const utilityPairs = [
   ["tools/player-report.html", "zh/tools/player-report.html", "/tools/player-report", "/zh/tools/player-report"],
   ["tools/quest-tracker.html", "zh/tools/quest-tracker.html", "/tools/quest-tracker", "/zh/tools/quest-tracker"],
+  ["tools/update-impact-tracker.html", "zh/tools/update-impact-tracker.html", "/tools/update-impact-tracker", "/zh/tools/update-impact-tracker"],
 ];
 
 function read(relative) {
@@ -143,6 +145,56 @@ for (const route of [
   "/zh/problems/vehicle-recovery",
 ]) {
   assert.match(chineseHome, new RegExp(`href="${escaped(route)}`), `Chinese home must expose ${route}`);
+}
+
+function readData(relative) {
+  return JSON.parse(read(relative));
+}
+
+function assertBilingualFacts(value, label) {
+  if (!value || typeof value !== "object") return;
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => assertBilingualFacts(item, `${label}[${index}]`));
+    return;
+  }
+  if (Object.prototype.hasOwnProperty.call(value, "text") && Object.prototype.hasOwnProperty.call(value, "zhText")) {
+    assert.ok(value.text && value.zhText, `${label} must expose the same fact in both languages`);
+  }
+  if (Object.prototype.hasOwnProperty.call(value, "summary") && Object.prototype.hasOwnProperty.call(value, "zhSummary")) {
+    assert.ok(value.summary && value.zhSummary, `${label} must expose the same summary in both languages`);
+  }
+  for (const [key, child] of Object.entries(value)) assertBilingualFacts(child, `${label}.${key}`);
+}
+
+for (const relative of ["data/materials.json", "data/npcs.json", "data/quests.json"]) {
+  assertBilingualFacts(readData(relative), relative);
+}
+
+const animals = readData("data/animals.json");
+for (const animal of animals.species) {
+  assert.ok(animal.zh?.tocLabel && animal.zh?.name && (animal.zh?.summary || animal.zh?.groups?.length), `${animal.id} must have a complete Chinese entity block`);
+  assert.ok(animal.zh.groups.length > 0, `${animal.id} Chinese entity block must contain at least one answer group`);
+}
+
+const crops = readData("data/crops.json");
+for (const crop of crops.crops.concat(crops.inputs)) {
+  assert.ok(crop.zh?.tocLabel && crop.zh?.name && (crop.zh?.summary || crop.zh?.groups?.length), `${crop.id} must have a complete Chinese entity block`);
+  assert.ok(crop.zh.groups.length > 0, `${crop.id} Chinese entity block must contain at least one answer group`);
+}
+
+const locationData = readData("data/locations.json");
+for (const location of locationData.locations) {
+  assert.ok(location.locale?.en && location.locale?.zh, `${location.id} must have both map locales`);
+  if (location.marker) {
+    const enMarker = location.marker.locale?.en;
+    const zhMarker = location.marker.locale?.zh;
+    assert.ok(enMarker && zhMarker, `${location.id} marker must have both locales`);
+    for (const key of ["title", "confidence", "description", "ariaLabel", "label", "target"]) {
+      assert.ok(enMarker[key] && zhMarker[key], `${location.id} marker ${key} must exist in both locales`);
+    }
+    assert.ok(/^(\/|#|https?:\/\/)/.test(enMarker.target), `${location.id} English marker target must be a valid link`);
+    assert.ok(/^(\/|#|https?:\/\/)/.test(zhMarker.target), `${location.id} Chinese marker target must be a valid link`);
+  }
 }
 
 console.log(`PASS: ${pairs.length} English/Chinese page pairs expose reciprocal language metadata and isolated search.`);

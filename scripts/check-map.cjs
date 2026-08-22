@@ -111,6 +111,14 @@ for (const pattern of [
   /data-map-evidence-filter="supported"/,
   /data-map-evidence-filter="reported"/,
   /data-map-evidence-filter="planned"/,
+  /data-map-relation-filter="all"/,
+  /data-map-relation-filter="npc"/,
+  /data-map-relation-filter="quest"/,
+  /data-map-relation-filter="service"/,
+  /data-map-progress/,
+  /data-map-progress-count/,
+  /data-map-discovery-toggle/,
+  /data-map-progress-reset/,
   /class="map-confidence"/,
   /assets\/js\/map-core\.js/,
   /assets\/js\/map-viewer-core\.js/,
@@ -169,6 +177,12 @@ assert.match(mapScript, /data-map-pin-filter/);
 assert.match(mapScript, /data-map-evidence-filter/);
 assert.match(mapScript, /activeEvidenceFilter/);
 assert.match(mapScript, /marker\.dataset\.markerEvidenceLayer/);
+assert.match(mapScript, /ranchers-guide-map-progress-v1/);
+assert.match(mapScript, /data-map-relation-filter/);
+assert.match(mapScript, /markerHasRelation/);
+assert.match(mapScript, /localStorage/);
+assert.match(mapScript, /data-map-discovery-toggle/);
+assert.match(mapScript, /data-map-progress-reset/);
 assert.match(mapScript, /applyMarkerFilter\("none"\)/, "map script should initialize the guide-pin layer as off");
 assert.match(mapScript, /applyMarkerFilter\(marker\.dataset\.markerCategory\)/, "directory shortcuts should reveal the selected marker category");
 assert.match(mapScript, /markerTarget/);

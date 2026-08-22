@@ -28,6 +28,9 @@ function validateDataset(relative, recordsKey, minimumRecords) {
     assert.ok(record.name && record.zhName && record.summary && record.zhSummary, `${record.id} lacks bilingual identity`);
     assert.ok(record.facts.length >= 3, `${record.id} does not clear the three-fact publication gate`);
     assert.ok(record.relatedRoutes.length >= 1, `${record.id} must connect to an existing guide, map or database route`);
+    if (recordsKey === "npcs") {
+      assert.ok(record.whenNeeded && record.zhWhenNeeded, `${record.id} needs bilingual task-oriented lookup guidance`);
+    }
     for (const fact of record.facts) {
       assert.ok(fact.text && fact.zhText, `${record.id} has an untranslated fact`);
       assert.ok(["official", "video-observed", "community-confirmed", "unverified-lead"].includes(fact.evidenceLevel));

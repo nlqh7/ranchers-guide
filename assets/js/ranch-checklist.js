@@ -21,6 +21,21 @@
     var completed = checks.filter(function (check) { return check.checked; }).length;
     var progress = panel.querySelector("[data-checklist-progress]");
     if (progress) progress.textContent = isChinese ? completed + " / " + checks.length + " 已完成" : completed + " / " + checks.length + " complete";
+    updateMaterials(panel);
+  }
+
+  function updateMaterials(panel) {
+    if (!panel || !panel.querySelector("[data-material-checklist]")) return;
+    var requirements = Array.from(panel.querySelectorAll("[data-material-requirement]"));
+    var ready = requirements.filter(function (row) { return row.querySelector("[data-material-ready]")?.checked; }).length;
+    requirements.forEach(function (row) {
+      var input = row.querySelector("[data-material-ready]");
+      var required = row.dataset.required;
+      var remaining = row.querySelector("[data-material-remaining]");
+      if (remaining) remaining.textContent = isChinese ? (input.checked ? "已备齐" : "还需 " + required + " 个") : (input.checked ? "Ready" : "Need " + required);
+    });
+    var progress = panel.querySelector("[data-material-progress]");
+    if (progress) progress.textContent = isChinese ? ready + " / " + requirements.length + " 种材料已备齐" : ready + " / " + requirements.length + " materials ready";
   }
 
   function activate(goal) {
@@ -43,6 +58,17 @@
     });
   });
 
+  root.querySelectorAll("[data-material-ready]").forEach(function (check) {
+    var key = check.closest("[data-material-requirement]").dataset.materialKey;
+    check.checked = state.materials && state.materials[key] === true;
+    check.addEventListener("change", function () {
+      state.materials = state.materials || {};
+      state.materials[key] = check.checked;
+      save();
+      updateMaterials(check.closest("[data-checklist-panel]"));
+    });
+  });
+
   goals.forEach(function (button) {
     button.addEventListener("click", function () { activate(button.dataset.checklistGoal); });
   });
@@ -57,6 +83,17 @@
       });
       save();
       updatePanel(panel);
+    });
+  });
+
+  root.querySelectorAll("[data-material-reset]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      var panel = button.closest("[data-checklist-panel]");
+      if (!panel) return;
+      panel.querySelectorAll("[data-material-ready]").forEach(function (check) { check.checked = false; });
+      state.materials = {};
+      save();
+      updateMaterials(panel);
     });
   });
 

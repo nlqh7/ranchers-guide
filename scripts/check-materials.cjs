@@ -32,6 +32,8 @@ for (const [id, source] of Object.entries(data.sources)) {
 
 for (const material of data.materials) {
   assert.ok(material.name && material.zhName && material.searchTitle && material.zhSearchTitle && material.summary && material.zhSummary, `${material.id}: bilingual identity required`);
+  assert.ok(material.whenNeeded && material.zhWhenNeeded, `${material.id}: bilingual decision guidance required`);
+  assert.ok(Array.isArray(material.relatedRoutes) && material.relatedRoutes.length > 0, `${material.id}: related routes required`);
   assert.match(en, new RegExp(`id="${material.id}" data-search-entry`), `English page must expose #${material.id}`);
   assert.match(zh, new RegExp(`id="${material.id}" data-search-entry`), `Chinese page must expose #${material.id}`);
   for (const fact of material.facts) {

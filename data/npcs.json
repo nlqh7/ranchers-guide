@@ -11,6 +11,7 @@
     {
       "id": "victor", "name": "Victor", "zhName": "Victor 维克托", "searchTags": "victor mayor city hall contracts power water land rust rumbling bench", "zhSearchTags": "Victor 维克托 市长 市政厅 合同 电力 水 土地 修车 工作台",
       "summary": "Sunvale's Mayor and the current-build contact for ranch utility contracts and additional land.", "zhSummary": "Sunvale 市长，也是当前版本办理牧场水电合同和购买额外土地的联系人。",
+      "whenNeeded": "Look for Victor when you need a utility contract, additional land or the observed electricity-to-workbench route.", "zhWhenNeeded": "需要办理水电合同、购买额外土地，或按已记录路线推进电力与工作台时查找 Victor。",
       "facts": [
         { "text": "Current-build footage identifies Victor as Sunvale's Mayor and shows his conversation at City Hall.", "zhText": "当前版本视频将 Victor 标为 Sunvale 市长，并记录了他在市政厅的对话。", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["launch-video"] },
         { "text": "His current dialogue offers electricity and gas, water, and additional-land options.", "zhText": "他当前的对话选项包括电力与燃气合同、水合同和购买额外土地。", "evidenceLevel": "video-observed", "build": "0.8.10.455", "validity": "current", "sourceIds": ["launch-video"] },
@@ -21,6 +22,7 @@
     {
       "id": "angela", "name": "Angela", "zhName": "Angela 安吉拉", "searchTags": "angela chicken seller coop heater ac animal shop field", "zhSearchTags": "Angela 安吉拉 鸡 商人 鸡舍 暖气 空调 动物商店 围栏",
       "summary": "The chicken seller tied to the coop mission, bird pickup and the correct coop climate equipment.", "zhSummary": "养鸡任务相关商人，负责出售鸡以及可用于鸡舍的正确温控设备。",
+      "whenNeeded": "Look for Angela when you are buying the first chicken, trying to bring a purchased bird home or checking which climate equipment belongs in animal housing.", "zhWhenNeeded": "第一次买鸡、需要把买到的鸡带回家，或要确认动物建筑该用哪种温控设备时查找 Angela。",
       "facts": [
         { "text": "Current players identify Angela as the chicken seller used by the coop mission.", "zhText": "当前玩家资料将 Angela 指认为养鸡任务中的卖鸡商人。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["chicken-coop-thread", "animal-support-scan"] },
         { "text": "Purchased chickens appear in the fenced field behind her house rather than in the player's inventory; carry them or load them into a car boot.", "zhText": "购买的鸡会出现在她屋后的围栏地里，而不是玩家背包中；需要抱走或装进汽车后备箱。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["chicken-coop-thread"] },
@@ -31,6 +33,7 @@
     {
       "id": "gigi", "name": "Gigi", "zhName": "Gigi 吉吉", "searchTags": "gigi real eggs evidence large egg police chase quest home", "zhSearchTags": "Gigi 吉吉 大鸡蛋 真实鸡蛋 证据 警察 追逐 任务 回家",
       "summary": "The NPC at the center of the current large-egg quest and its police-chase return route.", "zhSummary": "当前大鸡蛋任务及随后警察追逐、送回家流程的核心 NPC。",
+      "whenNeeded": "Look for Gigi when the large-egg handoff or the documented police-chase return route is your current task; the retained evidence does not establish a follow-up quest.", "zhWhenNeeded": "当前目标是交付大鸡蛋或完成已记录的警察追逐送回路线时查找 Gigi；现有证据没有确认后续任务。",
       "facts": [
         { "text": "The current quest route asks for two Large Eggs before the next handoff becomes available.", "zhText": "当前任务流程要求先准备两个大鸡蛋，之后才会出现下一步交付。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["gigi-quest-thread"] },
         { "text": "After the egg handoff, Gigi follows the player through a police escape and must be returned to her home area to finish the documented route.", "zhText": "交付鸡蛋后，Gigi 会跟随玩家经历逃离警察的流程，并需要被送回她家附近才能完成已记录路线。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["gigi-quest-thread"] },

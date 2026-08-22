@@ -60,6 +60,23 @@ function sourceHtml(ids, locale) {
   }).join(" · ");
 }
 
+function localizeRoute(route, zh) {
+  if (!zh) return route;
+  if (route === "/community") return "/zh/community";
+  if (route.startsWith("/guides/") || route.startsWith("/database/") || route.startsWith("/map")) return `/zh${route}`;
+  return route;
+}
+
+const relatedLabels = {
+  "/guides/building-construction#materials": { en: "Building materials", zh: "建造材料" },
+  "/guides/resources-and-materials": { en: "Resources guide", zh: "资源材料指南" },
+  "/guides/crafting-guide": { en: "Crafting guide", zh: "制作指南" },
+  "/guides/animal-guide#feeding": { en: "Animal feeding", zh: "动物喂养" },
+  "/database/animals#chicken": { en: "Chicken evidence", zh: "鸡的证据条目" },
+  "/community": { en: "Community Radar", zh: "社区雷达" },
+  "/map#city-hall": { en: "City Hall map", zh: "市政厅地图" }
+};
+
 function badge(fact, locale) {
   const cls = fact.validity === "historical" ? "historical" : fact.evidenceLevel === "official" ? "evidence-official" : fact.evidenceLevel === "video-observed" ? "evidence-video" : fact.evidenceLevel === "community-confirmed" ? "evidence-corroborated" : "evidence-lead";
   return `<span class="tag ${cls}">${labels[locale].evidence[fact.evidenceLevel]}${fact.validity === "historical" ? " · historical" : ""}</span>`;
@@ -74,12 +91,17 @@ function render(locale) {
     : [["/guides/beginners-guide",0],["/database",1],["/map",2],["/problems",3],["/research",4],["/search",5],["/contribute",6]];
   const sections = data.materials.map((material) => {
     const facts = material.facts.map((fact) => `          <li${fact.validity === "historical" ? ' class="fact-historical"' : ""}><p>${esc(zh ? fact.zhText : fact.text)} ${badge(fact, locale)}</p><p class="fact-source"><strong>${l.source}:</strong> ${sourceHtml(fact.sourceIds, locale)} · <strong>${l.build}:</strong> ${esc(fact.build || "not specified")}</p></li>`).join("\n");
-    const extra = material.id === "zirconite" ? `<a class="btn btn-outline" href="${prefix}/map?q=${encodeURIComponent(zh ? "锆矿" : "zirconite")}">${l.map}</a>` : material.id === "hay" ? `<a class="btn btn-outline" href="${prefix}/guides/animal-guide#feeding">${l.animal}</a>` : "";
+    const related = (material.relatedRoutes || []).map((route) => {
+      const label = relatedLabels[route];
+      if (!label) throw new Error(`Missing related route label for ${route}`);
+      return `<a class="btn btn-outline btn-compact" href="${localizeRoute(route, zh)}">${label[zh ? "zh" : "en"]}</a>`;
+    }).join("");
+    const extra = `<div class="entity-decision"><strong>${zh ? "什么时候查" : "When this matters"}</strong><p>${esc(zh ? material.zhWhenNeeded : material.whenNeeded)}</p><div class="button-stack">${related}${material.id === "zirconite" ? `<a class="btn btn-outline btn-compact" href="${prefix}/map?q=${encodeURIComponent(zh ? "锆矿" : "zirconite")}">${l.map}</a>` : material.id === "hay" ? `<a class="btn btn-outline btn-compact" href="${prefix}/guides/animal-guide#feeding">${l.animal}</a>` : ""}</div></div>`;
     return `      <section class="evidence-ledger material-profile" id="${material.id}" data-search-entry data-search-title="${esc(zh ? material.zhSearchTitle : material.searchTitle)}" data-search-tags="${esc(zh ? material.zhSearchTags : material.searchTags)}">
         <div class="section-heading-row"><div><span class="kicker">${l.breadcrumb}</span><h2>${esc(zh ? material.zhName : material.name)}</h2></div><span class="tag">${data.meta.lastUpdated}</span></div>
         <p class="lead">${esc(zh ? material.zhSummary : material.summary)}</p>
-        <ul class="evidence-list">${facts}</ul>
         ${extra}
+        <ul class="evidence-list">${facts}</ul>
       </section>`;
   }).join("\n\n");
   const toc = data.materials.map((material) => `<li><a href="#${material.id}">${esc(zh ? material.zhName : material.name)}</a></li>`).join("");

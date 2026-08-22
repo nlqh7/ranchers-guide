@@ -473,7 +473,32 @@
         "tags": "aubergine eggplant summer seed price crop"
       },
       "videoRow": null,
-      "lastUpdated": "2026-08-08"
+      "lastUpdated": "2026-08-08",
+      "zh": {
+        "tocLabel": "茄子",
+        "kicker": "历史资料",
+        "headerBadge": "historical",
+        "name": "茄子 Aubergine",
+        "searchTitle": "茄子",
+        "searchTags": "茄子 aubergine 夏季 种子价格 历史作物",
+        "summary": "只有 Alpha 资料记录；当前版本还没有种子、种植周期或出售收入的画面证据。",
+        "groups": [
+          {
+            "heading": "当前状态",
+            "id": null,
+            "facts": [
+              {
+                "text": "旧记录中的 21C 是 Alpha 资料里的夏季种子价格，只作为历史线索，不用于当前版本收益比较。",
+                "badge": "historical"
+              },
+              {
+                "text": "当前版本的购买方式、成长时间、产量和玩家出售收入仍未知。",
+                "badge": "unknown"
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "corn",
@@ -508,7 +533,32 @@
         "tags": "corn maize summer seed price crop"
       },
       "videoRow": null,
-      "lastUpdated": "2026-08-08"
+      "lastUpdated": "2026-08-08",
+      "zh": {
+        "tocLabel": "玉米",
+        "kicker": "历史资料",
+        "headerBadge": "historical",
+        "name": "玉米 Corn",
+        "searchTitle": "玉米",
+        "searchTags": "玉米 corn 夏季 种子价格 历史作物",
+        "summary": "只有 Alpha 资料记录；当前版本还没有种子、种植周期或出售收入的画面证据。",
+        "groups": [
+          {
+            "heading": "当前状态",
+            "id": null,
+            "facts": [
+              {
+                "text": "旧记录中的 54C 是 Alpha 资料里的夏季种子价格，只作为历史线索，不用于当前版本收益比较。",
+                "badge": "historical"
+              },
+              {
+                "text": "当前版本的购买方式、成长时间、产量和玩家出售收入仍未知。",
+                "badge": "unknown"
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "green-lettuce",
@@ -543,7 +593,32 @@
         "tags": "green lettuce summer seed price crop"
       },
       "videoRow": null,
-      "lastUpdated": "2026-08-08"
+      "lastUpdated": "2026-08-08",
+      "zh": {
+        "tocLabel": "绿生菜",
+        "kicker": "历史资料",
+        "headerBadge": "historical",
+        "name": "绿生菜 Green Lettuce",
+        "searchTitle": "绿生菜",
+        "searchTags": "绿生菜 green lettuce 夏季 种子价格 历史作物",
+        "summary": "只有 Alpha 资料记录；当前版本还没有种子、种植周期或出售收入的画面证据。",
+        "groups": [
+          {
+            "heading": "当前状态",
+            "id": null,
+            "facts": [
+              {
+                "text": "旧记录中的 27C 是 Alpha 资料里的夏季种子价格，只作为历史线索，不用于当前版本收益比较。",
+                "badge": "historical"
+              },
+              {
+                "text": "当前版本的购买方式、成长时间、产量和玩家出售收入仍未知。",
+                "badge": "unknown"
+              }
+            ]
+          }
+        ]
+      }
     }
   ],
   "inputs": [
@@ -665,7 +740,32 @@
           ]
         }
       ],
-      "lastUpdated": "2026-08-08"
+      "lastUpdated": "2026-08-08",
+      "zh": {
+        "tocLabel": "OGM 肥料",
+        "kicker": "农业投入品",
+        "headerBadge": "video",
+        "name": "OGM 肥料 OGM Fertilizer",
+        "searchTitle": "OGM 肥料",
+        "searchTags": "OGM 肥料 1080C 传奇 肥料 bug",
+        "summary": "当前视频看到传奇品质 OGM 肥料标价 1,080C；官方仍警告肥料收益计算未修复，不应按它计算稳定利润。",
+        "groups": [
+          {
+            "heading": "当前状态",
+            "id": null,
+            "facts": [
+              {
+                "text": "视频中的商店详情显示 OGM 肥料为传奇品质、1,080C；详情没有提供足够的稳定收益说明。",
+                "badge": "video"
+              },
+              {
+                "text": "官方已警告肥料收益计算不正确；在修复前不要把 OGM 肥料当作可靠投资。",
+                "badge": "official-warn"
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "boost-fertilizer",
@@ -689,7 +789,32 @@
           ]
         }
       ],
-      "lastUpdated": "2026-08-08"
+      "lastUpdated": "2026-08-08",
+      "zh": {
+        "tocLabel": "Boost 肥料",
+        "kicker": "农业投入品",
+        "headerBadge": "shot-pending",
+        "name": "Boost 肥料 Boost Fertilizer",
+        "searchTitle": "Boost 肥料",
+        "searchTags": "Boost 肥料 价格 效果 待验证",
+        "summary": "视频确认商店里有 Boost 肥料，但没有打开详情页；价格、效果和稳定收益都未知。",
+        "groups": [
+          {
+            "heading": "当前状态",
+            "id": null,
+            "facts": [
+              {
+                "text": "Boost 肥料出现在同一个商店页签，但视频没有拍到可读的价格或效果详情。",
+                "badge": "shot-pending"
+              },
+              {
+                "text": "肥料总类仍受官方收益计算警告影响，不能用旧讨论推导当前版本利润。",
+                "badge": "official-warn"
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "hay",
@@ -731,7 +856,36 @@
           ]
         }
       ],
-      "lastUpdated": "2026-08-08"
+      "lastUpdated": "2026-08-08",
+      "zh": {
+        "tocLabel": "干草",
+        "kicker": "动物饲料",
+        "headerBadge": "official",
+        "name": "干草 Hay",
+        "searchTitle": "干草怎么获得",
+        "searchTags": "干草 hay 鸡 饲料 灌木 木箱 木桶",
+        "summary": "干草不是种植作物；它与鸡的日常喂养有关，获得路线仍需区分官方机制与玩家报告。",
+        "groups": [
+          {
+            "heading": "获得与用途",
+            "id": null,
+            "facts": [
+              {
+                "text": "干草用于鸡的日常喂养，详细食槽与饮水步骤见动物数据库。",
+                "badge": "official"
+              },
+              {
+                "text": "玩家报告的获得方式包括砍灌木，以及搜寻 NPC 农场的木箱和木桶；这条路线仍标为当前线索。",
+                "badge": "lead"
+              },
+              {
+                "text": "旧版资料提到野草产出干草，但没有当前版本画面复核；不要据此判断生长阶段或刷新规则。",
+                "badge": "historical"
+              }
+            ]
+          }
+        ]
+      }
     }
   ],
   "cashin": [
@@ -876,6 +1030,21 @@
           "收入会进入当日结算的 Farming 总额。"
         ],
         "notice": "由于结算把多种收入合并，本站目前不会发布未经单独测量的作物出售单价。"
+      },
+      {
+        "id": "current-reading",
+        "tocLabel": "当前读法",
+        "searchTitle": "作物数据当前版本怎么读",
+        "searchTags": "作物 当前版本 种子价格 出售价 肥料 草莓 大蒜 红生菜",
+        "heading": "作物数据的当前版本读法",
+        "paragraphs": [
+          "目前只有红生菜、草莓和大蒜有当前版本视频观察。48C、144C 是种子购买价；大蒜 31C 是商店成品零售价，不是玩家出售收入。",
+          "草莓的 18C 只是按完整春季和无漏收假设分摊种子成本的理论模型，不是售价或利润。结算界面把多种收入合并，所以本站不把任何单颗出售数字写成当前事实。",
+          "官方关于肥料计算错误的警告仍应优先于旧攻略；在修复前不要把肥料投入当成稳定收益。茄子、玉米和绿生菜目前只保留历史名称与旧种子价格线索。"
+        ],
+        "badge": "unknown",
+        "steps": null,
+        "notice": null
       }
     ],
     "related": [

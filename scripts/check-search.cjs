@@ -176,7 +176,15 @@ assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-zh-v10/, "Chinese search cache must invalidate the previous page set");
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-v23/, "English search cache must invalidate the previous page set");
 assert.match(searchPage, /data-knowledge-dossier/, "Search page must provide an entity dossier surface");
+assert.match(searchPage, /data-entity-filters/, "Search page must provide entity answer filters");
+const chineseSearchPage = fs.readFileSync(path.join(root, "zh", "search.html"), "utf8");
+for (const type of ["all", "animal", "crop", "material", "npc", "quest", "location"]) {
+  assert.match(searchPage, new RegExp(`data-entity-filter="${type}"`), `English search is missing ${type} entity filter`);
+  assert.match(chineseSearchPage, new RegExp(`data-entity-filter="${type}"`), `Chinese search is missing ${type} entity filter`);
+}
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /knowledge-index\.json/, "Search must load the prebuilt knowledge index");
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /activeEntityFilter/);
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /entity\.type === activeEntityFilter/);
 
 /* Prebuilt search index (scripts/build-search-index.cjs — re-run after content edits). */
 const prebuiltIndex = JSON.parse(fs.readFileSync(path.join(root, "search-index.json"), "utf8"));

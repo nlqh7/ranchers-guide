@@ -33,6 +33,7 @@
     "/problems/fast-travel-subway",
     "/problems/failed-quest-replay",
     "/community",
+    "/creator-notes",
     "/updates",
     "/updates/launch-hotfix-0-8-10-455",
     "/updates/transport-update",
@@ -69,6 +70,7 @@
     "/zh/map",
     "/zh/problems",
     "/zh/community",
+    "/zh/creator-notes",
     "/zh/updates",
     "/zh/updates/launch-hotfix-0-8-10-455",
     "/zh/updates/transport-update",
@@ -91,7 +93,9 @@
   var dossier = document.querySelector("[data-knowledge-dossier]");
   var status = document.querySelector("[data-search-status]");
   var suggestions = document.querySelectorAll("[data-search-suggestion]");
+  var entityFilterButtons = Array.from(document.querySelectorAll("[data-entity-filter]"));
   var knowledgeEntities = [];
+  var activeEntityFilter = "all";
 
   function cleanTitle(title) {
     return String(title || "").replace(/\s*[|—]\s*(?:The Ranchers Guide|牧场主指南)\s*$/i, "").trim();
@@ -106,6 +110,7 @@
     if (path === "/zh/problems") return "问题排查";
     if (path === "/zh/updates") return "更新";
     if (path.indexOf("/zh/updates/") === 0) return "更新";
+    if (path === "/zh/creator-notes") return "来源笔记";
     if (path.indexOf("/zh/tools/") === 0) return "工具";
       if (path === "/zh/") return "首页";
       return "站点";
@@ -116,6 +121,7 @@
     if (path === "/map") return "Map";
     if (path.indexOf("/problems/") === 0 || path === "/problems") return "Problem";
     if (path === "/community") return "Community";
+    if (path === "/creator-notes") return "Creator Notes";
     if (path === "/updates") return "Updates";
     if (path.indexOf("/updates/") === 0) return "Updates";
     if (path === "/research") return "Research";
@@ -308,6 +314,8 @@
       return { entity: entity, score: entityScore(entity, query) };
     }).filter(function (item) { return item.score >= 52; }).sort(function (a, b) {
       return b.score - a.score;
+    }).filter(function (item) {
+      return activeEntityFilter === "all" || item.entity.type === activeEntityFilter;
     }).slice(0, 3).map(function (item) { return item.entity; });
   }
 
@@ -393,6 +401,16 @@
     if (updateUrl) history.replaceState(null, "", SEARCH_ROUTE + "?q=" + encodeURIComponent(trimmed));
   }
 
+  function setEntityFilter(value) {
+    activeEntityFilter = value;
+    entityFilterButtons.forEach(function (button) {
+      var active = button.dataset.entityFilter === value;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+    if (input.value.trim()) render(input.value, false);
+  }
+
   function runSearch(query, updateUrl) {
     if (!documents.length) return;
     render(query, updateUrl);
@@ -424,6 +442,12 @@
       input.value = button.dataset.searchSuggestion;
       input.focus();
       runSearch(input.value, true);
+    });
+  });
+
+  entityFilterButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      setEntityFilter(button.dataset.entityFilter || "all");
     });
   });
 
