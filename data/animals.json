@@ -771,15 +771,18 @@
             "facts": [
               {
                 "text": "鸡需要鸡舍；温控必须使用 Angela 出售的鸡舍/谷仓专用设备，市政厅出售的住宅装饰暖气或空调对鸡舍无效。",
-                "badge": "official"
+                "badge": "official",
+                "sourceIds": ["thread-big-chicken-eggs"]
               },
               {
                 "text": "鸡舍暖气应安装在鸡舍外墙。该位置有两条独立当前期报告支持。",
-                "badge": "community"
+                "badge": "community",
+                "sourceIds": ["thread-big-chicken-eggs"]
               },
               {
                 "text": "没有 Angela 温控设备时，鸡可能因高温或低温死亡。",
-                "badge": "community"
+                "badge": "community",
+                "sourceIds": ["thread-big-chicken-eggs"]
               }
             ]
           },

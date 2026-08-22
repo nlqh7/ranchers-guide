@@ -432,6 +432,17 @@ function zhBadge(kind) {
   return ZH_BADGES[kind];
 }
 
+function renderZhSources(sourceIds = []) {
+  if (sourceIds.length === 0) return "";
+  const links = sourceIds.map((id) => {
+    const src = data.sources[id];
+    if (!src) throw new Error(`Unknown Chinese source id: ${id}`);
+    const label = escapeHtml(src.title);
+    return src.url ? `<a href="${escapeHtml(src.url)}" rel="noopener noreferrer">来源</a>` : label;
+  });
+  return ` <span class="fact-source">${links.join(" · ")}</span>`;
+}
+
 function renderZhEntry(entry) {
   const zh = entry.zh;
   const head = zh.kicker || zh.headerTag
@@ -442,9 +453,9 @@ function renderZhEntry(entry) {
     const h = g.heading ? `<h3${g.id ? ` id="${g.id}"` : ""}>${escapeHtml(g.heading)}</h3>` : "";
     const confirmed = g.facts.filter((f) => f.badge !== "unknown");
     const pending = g.facts.filter((f) => f.badge === "unknown");
-    const items = confirmed.map((f) => `<li>${escapeHtml(f.text)}${zhBadge(f.badge)}</li>`).join("");
+    const items = confirmed.map((f) => `<li>${escapeHtml(f.text)}${zhBadge(f.badge)}${renderZhSources(f.sourceIds)}</li>`).join("");
     const pendingBlock = pending.length > 0
-      ? `<details class="pending-facts"><summary>${pending.length} 条待验证 — 展开</summary><ul class="evidence-list pending-list">${pending.map((f) => `<li>${escapeHtml(f.text)}${zhBadge(f.badge)}</li>`).join("")}</ul></details>`
+      ? `<details class="pending-facts"><summary>${pending.length} 条待验证 — 展开</summary><ul class="evidence-list pending-list">${pending.map((f) => `<li>${escapeHtml(f.text)}${zhBadge(f.badge)}${renderZhSources(f.sourceIds)}</li>`).join("")}</ul></details>`
       : "";
     return `${h}${items ? `<ul class="evidence-list">${items}</ul>` : ""}${pendingBlock}`;
   }).join("");

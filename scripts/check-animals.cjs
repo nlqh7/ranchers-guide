@@ -9,6 +9,7 @@ const { spawnSync } = require("node:child_process");
 const root = path.resolve(__dirname, "..");
 const data = JSON.parse(fs.readFileSync(path.join(root, "data", "animals.json"), "utf8"));
 const html = fs.readFileSync(path.join(root, "database", "animals.html"), "utf8");
+const chineseHtml = fs.readFileSync(path.join(root, "zh", "database", "animals.html"), "utf8");
 const chineseGuide = fs.readFileSync(path.join(root, "zh", "guides", "animal-guide.html"), "utf8");
 const sharedStyles = fs.readFileSync(path.join(root, "assets", "css", "style.css"), "utf8");
 
@@ -31,6 +32,7 @@ assert.equal(
   "https://steamcommunity.com/app/1501310/discussions/0/587308261888256098/",
   "specific livestock-profit figures must cite the exact Steam thread"
 );
+assert.match(chineseHtml, /https:\/\/steamcommunity\.com\/app\/1501310\/discussions\/0\/587307627624740721\//, "Chinese animal database must expose the official temperature-device source");
 assert.doesNotMatch(chineseGuide, /任务(?:<strong>)?没有 bug/, "documented prompt misses must not rule out other mission bugs");
 assert.match(chineseGuide, /不排除其他 bug/, "Chinese guide must preserve the qualified mission-bug wording");
 
@@ -80,6 +82,10 @@ function checkZh(zh, where) {
     for (const f of g.facts) {
       assert.ok(f.text, `${where}: zh fact needs text`);
       assert.ok(ZH_BADGE_KINDS.has(f.badge), `${where}: bad zh badge ${f.badge}`);
+      if (f.sourceIds) {
+        assert.ok(Array.isArray(f.sourceIds) && f.sourceIds.length > 0, `${where}: zh sourceIds must be a non-empty array`);
+        for (const id of f.sourceIds) assert.ok(SOURCE_IDS.has(id), `${where}: unknown zh source id ${id}`);
+      }
     }
   }
 }
