@@ -20,6 +20,24 @@ checkFactPairs(readJson("data/materials.json"), "materials", "material");
 checkFactPairs(readJson("data/npcs.json"), "npcs", "npc");
 checkFactPairs(readJson("data/quests.json"), "quests", "quest");
 
+const animals = readJson("data/animals.json");
+for (const animal of animals.species) {
+  assert.ok(animal.summary && animal.zh?.summary, `animal:${animal.id} needs bilingual answer summaries`);
+  assert.ok(animal.whenNeeded && animal.zh?.whenNeeded, `animal:${animal.id} needs bilingual lookup guidance`);
+  assert.ok(Array.isArray(animal.zh.groups) && animal.zh.groups.length > 0, `animal:${animal.id} needs Chinese answer groups`);
+}
+
+const crops = readJson("data/crops.json");
+for (const crop of crops.crops) {
+  assert.ok(crop.summary && crop.zh?.summary, `crop:${crop.id} needs bilingual answer summaries`);
+  assert.ok(crop.decision && crop.zh?.decision, `crop:${crop.id} needs bilingual decision guidance`);
+  assert.ok(Array.isArray(crop.zh.groups) && crop.zh.groups.length > 0, `crop:${crop.id} needs Chinese answer groups`);
+}
+for (const input of crops.inputs) {
+  assert.ok(input.name && input.zh?.name, `input:${input.id} needs bilingual identity`);
+  assert.ok(Array.isArray(input.zh.groups) && input.zh.groups.length > 0, `input:${input.id} needs Chinese answer groups`);
+}
+
 const locations = readJson("data/locations.json");
 for (const location of locations.locations) {
   const en = location.locale?.en;
@@ -42,4 +60,4 @@ for (const relative of ["knowledge-index.json", "zh/knowledge-index.json"]) {
   }
 }
 
-console.log(`PASS: bilingual entity answers cover materials, NPCs, quests and ${locations.locations.length} map entities with locale-safe knowledge entries.`);
+console.log(`PASS: bilingual entity answers cover materials, NPCs, quests, ${animals.species.length} animals, ${crops.crops.length + crops.inputs.length} crop/input records and ${locations.locations.length} map entities.`);

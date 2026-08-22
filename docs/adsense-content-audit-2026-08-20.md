@@ -129,6 +129,16 @@ Before presenting the route as reliable, replace the `mailto:` dependency with a
 
 No approval is guaranteed. The goal is to remove obvious low-value and unfinished-content signals, not to manufacture a passing score.
 
+## 2026-08-22 Thin-Page Sweep
+
+The latest sweep re-read all 70 sitemap routes and 85 HTML files using the site's own audit rules. The only sitemap C grades remain the four required trust pages: `/about`, `/contact`, `/methodology`, and `/privacy`. No indexable gameplay route was classified as a placeholder, navigation-only shell, or unsupported entity page.
+
+The short pages below were reviewed as task pages, not rejected by word count: the database hub has goal-based answer links; the NPC directory has three evidence-gated records and reverse quest links; the problem pages begin with ordered fixes; and the legacy update pages state their build boundary and next action. Search, contribution, research and local-only tools remain outside the sitemap with intentional `noindex` boundaries.
+
+No public page was padded in this sweep. The only code change is a stronger bilingual-answer contract: animals and crops/inputs now require localized summaries, task guidance and at least one localized answer group in addition to the existing materials, NPC, quest and map checks. This protects the English/Chinese answer boundary without inventing facts or adding routes.
+
+**Result:** no true indexable thin page found; no new `noindex` decision justified; no unsupported entity or map relationship added.
+
 ## Sources
 
 - Google AdSense eligibility: https://support.google.com/adsense/answer/9724
