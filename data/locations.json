@@ -161,7 +161,7 @@
         },
         "zh": {
           "title": "Subway Stations",
-          "keywords": "fast travel station friends multiplayer ranch transit train",
+          "keywords": "地铁 Subway Stations 快速旅行 车站 联机 多人 牧场 交通 train",
           "summary": "交通更新记录了 15 个地铁站，可用于 Sunvale 内快速移动；附着或牵引动物的同行行为按当前任务确认。",
           "entryHtml": null
         }
@@ -185,7 +185,7 @@
         },
         "zh": {
           "title": "Overnight Parking",
-          "keywords": "safe parking vehicle impound overnight car",
+          "keywords": "过夜停车 Overnight Parking 安全停车 车辆 扣押 找车 停车点",
           "summary": "地图记录了 17 个过夜停车点；除牧场外，把车停在其他位置可能在日切后被扣押，具体点位仍需核对。",
           "entryHtml": null
         }
@@ -210,7 +210,7 @@
         },
         "zh": {
           "title": "Car Pound",
-          "keywords": "lost car vehicle recovery impounded mechanic",
+          "keywords": "扣押场 Car Pound 丢失车辆 车辆找回 扣押 维修 车库",
           "summary": "车辆通过 My Garage 找回后会回到附近 Car Pound 停车点；扣押车辆也通过手机应用管理。",
           "entryHtml": null
         }
@@ -235,7 +235,7 @@
         },
         "zh": {
           "title": "QuickFix Garage",
-          "keywords": "repair car vehicle damaged garage police chase",
+          "keywords": "QuickFix Garage 车库 维修 车辆 受损 警察追捕",
           "summary": "QuickFix 车库分布在开放世界，可维修受损车辆；追捕期间的可用性来自官方交通说明，具体位置仍需确认。",
           "entryHtml": null
         }
@@ -259,7 +259,7 @@
         },
         "zh": {
           "title": "Auto Hue Garage",
-          "keywords": "paint vehicle plate license stolen car police",
+          "keywords": "Auto Hue Garage 车辆涂装 车牌 被盗车辆 警星 警察",
           "summary": "Auto Hue 可更改车辆涂装，并可更改被盗车辆车牌以移出通缉登记；精确位置仍需当前画面确认。",
           "entryHtml": null
         }
@@ -332,7 +332,7 @@
         },
         "zh": {
           "title": "Farmers Market District",
-          "keywords": "market produce sell farming district",
+          "keywords": "农夫市场 Farmers Market 农产品 出售 农场 市区 市场",
           "summary": "Farmers Market 是官方命名的城区；商人、营业时间和销售加成尚未有当前版本观测。",
           "entryHtml": null
         }
@@ -356,7 +356,7 @@
         },
         "zh": {
           "title": "The Ranchers Airport",
-          "keywords": "The Ranchers Airport airport plane arrival Sunvale coast runway Freight Zone 2 road signs",
+          "keywords": "The Ranchers Airport 机场 飞机 到达 Sunvale 海岸 跑道 Freight Zone 2 路牌",
           "summary": "机场是官方介绍和扩图资料中的命名区域；可沿 Airport 或 Freight Zone 2 路牌识别，精确坐标仍待确认。",
           "entryHtml": null
         }
@@ -404,7 +404,7 @@
         },
         "zh": {
           "title": "Sunvale Port",
-          "keywords": "port harbor water district",
+          "keywords": "Sunvale Port 港口 海港 水运 区域",
           "summary": "Sunvale Port 是官方扩图资料中的港口区域；当前服务和任务用途仍需版本验证。",
           "entryHtml": null
         }
@@ -429,7 +429,7 @@
         },
         "zh": {
           "title": "The Ranchers Museum",
-          "keywords": "The Ranchers Museum museum city landmark",
+          "keywords": "The Ranchers Museum 博物馆 城市 地标",
           "summary": "The Ranchers Museum 是官方命名的城区地标；当前可互动用途尚未确认。",
           "entryHtml": null
         }
@@ -476,7 +476,7 @@
         },
         "zh": {
           "title": "The Ranchers Ferris Wheel",
-          "keywords": "ferris wheel attraction landmark",
+          "keywords": "摩天轮 Ferris Wheel 地标 游乐设施 景点",
           "summary": "The Ranchers Ferris Wheel 是扩图资料中的视觉地标；附近商店、任务或交通用途仍待当前截图。",
           "entryHtml": null
         }
@@ -501,7 +501,7 @@
         },
         "zh": {
           "title": "Police Station",
-          "keywords": "police station wanted stolen vehicle crime",
+          "keywords": "警察局 Police Station 警星 被盗车辆 犯罪 车辆",
           "summary": "Police Station 是与警察系统和被盗车辆相关的官方命名地点；面向玩家的具体服务仍待验证。",
           "entryHtml": null
         }
@@ -526,7 +526,7 @@
         },
         "zh": {
           "title": "Sunset Casino",
-          "keywords": "casino community shared place social players",
+          "keywords": "Sunset Casino 赌场 社交地点 玩家 Community Shared Place",
           "summary": "Sunset Casino 曾在开发资料中作为 Community Shared Place 出现；当前抢先体验是否开放及区域行为需要复核。",
           "entryHtml": null
         }
@@ -551,7 +551,7 @@
         },
         "zh": {
           "title": "NovaGen Corp Headquarters",
-          "keywords": "NovaGen headquarters corporation quest",
+          "keywords": "NovaGen 总部 公司 任务 地点 企业",
           "summary": "NovaGen Corp Headquarters 是扩展 Sunvale 中的官方命名总部；任务关联和可进入内部仍需当前版本证据。",
           "entryHtml": null
         }
@@ -576,7 +576,7 @@
         },
         "zh": {
           "title": "Vitalis Corp Headquarters",
-          "keywords": "Vitalis headquarters corporation quest",
+          "keywords": "Vitalis 总部 公司 任务 地点 企业",
           "summary": "Vitalis Corp Headquarters 是扩展 Sunvale 中的官方命名总部；任务关联和可进入内部仍需当前版本证据。",
           "entryHtml": null
         }
@@ -601,7 +601,7 @@
         },
         "zh": {
           "title": "Fuel Stations",
-          "keywords": "fuel gas petrol vehicle station",
+          "keywords": "加油站 Fuel Stations 燃油 汽油 车辆 车站",
           "summary": "官方扩图资料列出多个加油站；当前图标、价格和最近地标仍需截图确认。",
           "entryHtml": null
         }
@@ -625,7 +625,7 @@
         },
         "zh": {
           "title": "Lina's Tools",
-          "keywords": "Lina's Tools Lina tools hoe weapon upgrade shop city",
+          "keywords": "Lina's Tools Lina 工具 锄头 武器 升级 商店 城市",
           "summary": "旧 Wiki 将 Lina's Tools 记为出售锄头并处理工具/武器升级的商店；当前店面和精确位置仍未确认。",
           "entryHtml": null
         }
@@ -672,7 +672,7 @@
         },
         "zh": {
           "title": "Youssef's stand",
-          "keywords": "Youssef's stand Youssef seeds fertilizer produce stand basket icon clothing store",
+          "keywords": "Youssef's stand Youssef 种子 肥料 农产品 摊位 篮子图标 服装店",
           "summary": "旧 Wiki 将 Youssef's Stand 记为出售种子、肥料和农产品的摊位；当前版本应先用篮子图标和附近服装店核对。",
           "entryHtml": null
         }
@@ -766,7 +766,7 @@
         },
         "zh": {
           "title": "Auction Market",
-          "keywords": "auction market players trade phone app companion",
+          "keywords": "拍卖市场 Auction Market 玩家交易 手机应用 交易市场",
           "summary": "官方资料确认 Auction Market 用于玩家间交易，可从游戏内菜单或手机应用打开；没有确认的实体建筑位置。",
           "entryHtml": null
         }
@@ -790,7 +790,7 @@
         },
         "zh": {
           "title": "Cash-In box",
-          "keywords": "Cash-In box cash-in box sell earnings cargo platform sleep payment",
+          "keywords": "Cash-In box 出售箱 现金 出售 收入 货运平台 睡觉 结算",
           "summary": "旧 Wiki 将 Cash-In box 记为货运平台附近的早期售卖收入收集点；钱在睡眠后结算，精确位置仍需当前版本核对。",
           "entryHtml": null
         }
@@ -838,7 +838,7 @@
         },
         "zh": {
           "title": "Bykii terminal",
-          "keywords": "Bykii terminal Bykii bicycle bike rental terminal Victor car",
+          "keywords": "Bykii terminal Bykii 自行车 单车租赁 终端 Victor 汽车",
           "summary": "旧 Wiki 将 Bykii terminal 记为自行车租赁点，可在 Victor 的车辆路线前使用；数量和具体位置未验证。",
           "entryHtml": null
         }
@@ -885,7 +885,7 @@
         },
         "zh": {
           "title": "Wanglow's Garage",
-          "keywords": "Wanglow's Garage Wanglow garage vehicle repair buy car shop",
+          "keywords": "Wanglow's Garage Wanglow 车库 车辆维修 买车 商店",
           "summary": "社区报告将 Wanglow's Garage 记为车辆维修和购买地点；当前服务与位置未完成验证。",
           "entryHtml": null
         }
@@ -1027,7 +1027,7 @@
         },
         "zh": {
           "title": "Ranch Helipad",
-          "keywords": "helipad helicopter H pad Logistic Co ranch delivery logistics",
+          "keywords": "牧场停机坪 Helipad 直升机 H 标记 物流 配送 Logistic Co",
           "summary": "当前视频看到牧场附近有带 H 标记的停机坪；用途和地图位置尚未确认，不把 Logistic Co 字样当成已知功能。",
           "entryHtml": null
         }
@@ -1052,7 +1052,7 @@
         },
         "zh": {
           "title": "Transit Posts",
-          "keywords": "transit post fast travel teleport pickup truck player placed",
+          "keywords": "交通柱 Transit Posts 快速旅行 传送 皮卡 玩家放置",
           "summary": "旧 Wiki 将 Transit Posts 描述为解锁皮卡后由玩家放置的快速旅行点；它们不是固定设施，因此没有统一地图坐标。",
           "entryHtml": null
         }

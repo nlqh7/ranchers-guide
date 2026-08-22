@@ -139,6 +139,17 @@ No public page was padded in this sweep. The only code change is a stronger bili
 
 **Result:** no true indexable thin page found; no new `noindex` decision justified; no unsupported entity or map relationship added.
 
+## 2026-08-22 Answer Parity Follow-up
+
+The second pass did not find a new indexable gameplay thin page. It did find two concrete bilingual lookup gaps:
+
+- The Chinese Fertilizer input record had answer-group text but no localized summary, so it looked like a label plus status instead of a usable decision entry. It now states the current official warning and the “do not infer stable profit” decision without adding a number.
+- Fifteen Chinese location records reused English-only search keywords. Their existing Chinese summaries were present, but Chinese queries for subway, parking, vehicle services, markets and landmarks could miss the entries. Localized Chinese search terms were added to the existing records; coordinates, evidence levels and location claims were unchanged.
+
+Generated crop, map, knowledge and search outputs were rebuilt. The bilingual guard now requires localized summaries for every crop input and Chinese search keywords for every map location. No new route, entity, gameplay fact or noindex boundary was added.
+
+**Result:** the remaining C grades are still the four required trust pages; no indexable gameplay page was padded or split.
+
 ## Sources
 
 - Google AdSense eligibility: https://support.google.com/adsense/answer/9724

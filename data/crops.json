@@ -707,7 +707,7 @@
         "name": "肥料与农业投入品",
         "searchTitle": "肥料与 OGM 肥料",
         "searchTags": "肥料 fertilizer OGM boost 计算 bug",
-        "summary": null,
+        "summary": "当前版本应把肥料视为待修复投入品：官方已警告收益计算不正确，购买前先确认修复状态，不要用异常结果推算稳定利润。",
         "groups": [
           {
             "heading": null,

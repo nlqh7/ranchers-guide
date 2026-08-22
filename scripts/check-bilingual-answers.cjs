@@ -35,6 +35,7 @@ for (const crop of crops.crops) {
 }
 for (const input of crops.inputs) {
   assert.ok(input.name && input.zh?.name, `input:${input.id} needs bilingual identity`);
+  assert.ok(input.summary && input.zh?.summary, `input:${input.id} needs bilingual answer summaries`);
   assert.ok(Array.isArray(input.zh.groups) && input.zh.groups.length > 0, `input:${input.id} needs Chinese answer groups`);
 }
 
@@ -44,6 +45,8 @@ for (const location of locations.locations) {
   const zh = location.locale?.zh;
   assert.ok(en?.title && en?.keywords, `${location.id} needs an English location identity`);
   assert.ok(zh?.title && zh?.keywords, `${location.id} needs a Chinese location identity`);
+  assert.match(zh.keywords, /[\u3400-\u9fff]/, `${location.id} needs Chinese location search keywords`);
+  assert.notEqual(zh.keywords, en.keywords, `${location.id} must not reuse English-only location search keywords`);
   assert.ok(zh.summary && zh.summary.length >= 24, `${location.id} needs a Chinese answer summary`);
   assert.notEqual(clean(zh.summary), clean(en.entryHtml), `${location.id} must not fall back to English map copy`);
 }
