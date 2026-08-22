@@ -15,6 +15,12 @@ const plans = [
   ["location:city-hall", 5],
   ["location:leafy-market", 3],
   ["location:bykii-terminal", 3],
+  ["location:vehicle-dealers", 2],
+  ["location:quickfix", 2],
+  ["location:car-pound", 2],
+  ["location:cash-in-box", 2],
+  ["location:train-station", 1],
+  ["location:transit-posts", 2],
   ["material:hay", 3],
   ["material:stone", 3],
   ["material:wood-log", 3],
@@ -44,6 +50,10 @@ const requiredJourneyRoutes = {
     "/database/quests#power-to-the-bench",
     "/guides/electricity-power#two-paths",
     "/database/materials#zirconite",
+  ],
+  "location:cash-in-box": [
+    "/guides/money-making#cashin",
+    "/database/crops#cashin",
   ],
 };
 

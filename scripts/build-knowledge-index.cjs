@@ -74,6 +74,29 @@ const journeyPlans = {
     { route: "/database/quests#rust-to-rumbling", en: { label: "Rust to Rumbling!", reason: "Open the observed vehicle quest record before relying on a guessed terminal route." }, zh: { label: "Rust to Rumbling! 修车任务", reason: "查看视频观测到的车辆任务记录，不把终端位置猜成精确路线。" } },
     { route: "/problems/vehicle-recovery", en: { label: "Vehicle recovery", reason: "Use the recovery path if the car is missing or not yet available." }, zh: { label: "车辆找回", reason: "车辆消失或尚未可用时，按排查路线处理。" } },
   ],
+  "location:vehicle-dealers": [
+    { route: "/guides/vehicles-transport", en: { label: "Vehicle guide", reason: "Use the guide for confirmed vehicle systems; dealer stock still needs a build check." }, zh: { label: "车辆指南", reason: "先看已确认的车辆系统；经销商库存仍需按版本检查。" } },
+    { route: "/problems/vehicle-recovery", en: { label: "Vehicle recovery", reason: "Keep the recovery route available if a purchased vehicle is not where expected." }, zh: { label: "车辆找回", reason: "购车后车辆位置不对时，沿找回路线排查。" } },
+  ],
+  "location:quickfix": [
+    { route: "/guides/vehicles-transport", en: { label: "Vehicle guide", reason: "Check the repair and travel context before treating a damaged car as missing." }, zh: { label: "车辆指南", reason: "先看维修和出行关系，再判断车辆是否真的消失。" } },
+    { route: "/problems/vehicle-recovery", en: { label: "Vehicle recovery", reason: "Use the documented recovery sequence for a missing or impounded vehicle." }, zh: { label: "车辆找回", reason: "车辆消失或被扣留时，按已有找回顺序处理。" } },
+  ],
+  "location:car-pound": [
+    { route: "/problems/vehicle-recovery", en: { label: "Vehicle recovery", reason: "Start here when My Garage or an impound state explains where the vehicle went." }, zh: { label: "车辆找回", reason: "My Garage 或扣押状态导致车辆不见时，从这里开始排查。" } },
+    { route: "/guides/vehicles-transport", en: { label: "Vehicle guide", reason: "Keep the broader travel and vehicle-use context beside the recovery steps." }, zh: { label: "车辆指南", reason: "在找回步骤旁查看完整的车辆和出行说明。" } },
+  ],
+  "location:cash-in-box": [
+    { route: "/guides/money-making#cashin", en: { label: "Cash-In selling", reason: "Follow the recorded settlement route instead of assuming a direct sale price." }, zh: { label: "Cash-In 销售", reason: "按已有结算路线操作，不把它误读成即时单价。" } },
+    { route: "/database/crops#cashin", en: { label: "Cash-In data", reason: "Check the economy record and its aggregate-price boundary." }, zh: { label: "Cash-In 数据", reason: "查看经济数据和总额结算边界。" } },
+  ],
+  "location:train-station": [
+    { route: "/guides/multiplayer-coop", en: { label: "Co-op guide", reason: "Use the multiplayer guide for the current join and session context." }, zh: { label: "联机指南", reason: "查看当前版本的加入和联机说明。" } },
+  ],
+  "location:transit-posts": [
+    { route: "/problems/fast-travel-subway", en: { label: "Fast-travel troubleshooting", reason: "Separate subway issues from player-placed transit-post reports." }, zh: { label: "快速旅行排查", reason: "区分地铁问题和玩家放置交通点的社区说法。" } },
+    { route: "/guides/vehicles-transport", en: { label: "Vehicle guide", reason: "Read the transport systems together before planning a route." }, zh: { label: "车辆指南", reason: "规划路线前先对照交通系统说明。" } },
+  ],
   "material:hay": [
     { route: "/database/animals#chicken", en: { label: "Chicken feed context", reason: "See how hay fits the interior trough and animal routine." }, zh: { label: "鸡饲料说明", reason: "查看干草与室内食槽、动物照护的关系。" } },
     { route: "/guides/animal-guide#feeding", en: { label: "Feed and water guide", reason: "Follow the evidence-linked care steps before automating." }, zh: { label: "喂食与饮水指南", reason: "自动化前先按证据链接检查照护步骤。" } },
