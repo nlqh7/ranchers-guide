@@ -34,3 +34,21 @@ Reference with the player-facing checks: <https://theranchersguide.com/updates>
 - Keep the practical checklist in the post; do not paste the full announcement.
 - Answer a specific discussion question first when possible, then include the reference link.
 - Do not present the single review lead about door-blocked chickens as a confirmed `.842` bug; it remains under investigation.
+
+## Reddit adaptation
+
+### Title
+
+What to recheck after The Ranchers 0.8.10.842
+
+### Body
+
+The latest build is worth installing before replaying an old quest workaround. It targets several quest-validation cases and coop/barn edge cases, including linked counts, growth-stage state, hunger display, door turning and one disappearance path. It also raises shop and crafting batch limits.
+
+My suggested order is: confirm the title-screen build, reopen the quest, check the coop/barn link and linked count, then record the exact reproduction steps if the issue remains. This update does not establish crop prices, fertilizer behavior, greenhouse unlocking or exact map coordinates.
+
+Official notes: <https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1841579228669835>
+
+## Discord reply adaptation
+
+> Are you on `0.8.10.842` or later? Update first, then check the coop/barn link and linked count before replaying the quest. The patch covers several quest-validation and animal edge cases, but one report is not enough to call every remaining disappearance a confirmed bug. If it still happens, note the build, save, door state and exact steps.
