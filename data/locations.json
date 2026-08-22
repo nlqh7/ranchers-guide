@@ -2,7 +2,7 @@
   "meta": {
     "schemaVersion": 1,
     "build": "0.8.10.x",
-    "lastReviewed": "2026-08-07",
+    "lastReviewed": "2026-08-22",
     "coordinateSystem": "percentage-of-current-player-map",
     "markerOrder": [
       "city-hall",

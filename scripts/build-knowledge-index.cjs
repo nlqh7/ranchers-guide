@@ -137,7 +137,7 @@ const journeyPlans = {
     { route: "/map#city-hall", en: { label: "City Hall area", reason: "Open the approximate city-center map entry." }, zh: { label: "市政厅区域", reason: "打开大致的市中心地图条目。" } },
     { route: "/database/npcs#victor", en: { label: "Victor and Meriam context", reason: "Check the NPC and service context around the purchase route." }, zh: { label: "Victor 与 Meriam", reason: "查看购买路线涉及的 NPC 和服务上下文。" } },
     { route: "/guides/electricity-power#two-paths", en: { label: "Electricity route", reason: "Use a verified progression path when the material question is tied to power systems." }, zh: { label: "供电路线", reason: "如果材料问题与供电系统有关，从已有证据路线继续。" } },
-    { route: "/guides/electricity-power#two-paths", en: { label: "Power route", reason: "Continue if the material question came from electricity work." }, zh: { label: "供电路线", reason: "如果材料问题来自供电任务，从这里继续。" } },
+    { route: "/guides/building-construction#materials", en: { label: "Building material context", reason: "Check how the material fits the documented construction path." }, zh: { label: "建造材料上下文", reason: "查看该材料如何接入已有记录的建造流程。" } },
   ],
   "material:stone": [
     { route: "/guides/resources-and-materials", en: { label: "Resource route", reason: "Start with the current-build collection boundary and theft warning." }, zh: { label: "资源路线", reason: "先查看当前版本的收集边界和偷取风险。" } },
@@ -319,11 +319,16 @@ for (const locale of ["en", "zh"]) {
 for (const locale of ["en", "zh"]) {
   for (const entity of entityMap.values()) {
     if (!entity.route.startsWith(locale === "zh" ? "/zh/" : "/")) continue;
+    const seenJourneyRoutes = new Set();
     entity.journey = (journeyPlans[entity.id] || []).map((step) => ({
       href: routeWithLocale(step.route, locale),
       label: step[locale].label,
       reason: step[locale].reason,
-    }));
+    })).filter((step) => {
+      if (seenJourneyRoutes.has(step.href)) return false;
+      seenJourneyRoutes.add(step.href);
+      return true;
+    });
   }
 }
 

@@ -70,7 +70,7 @@ assert.match(mapPage, /Wanglow's Garage/);
 assert.match(mapPage, /dungeon entrances/i);
 assert.match(mapPage, /wild islands/i);
 assert.match(mapPage, /Transit posts/);
-assert.match(mapPage, /reviewed August 7, 2026/);
+assert.match(mapPage, /reviewed August 22, 2026/);
 assert.match(mapPage, /theranchers\.wiki\/wiki\/map\//);
 assert.match(mapPage, /theranchers\.wiki\/wiki\/npcs\//);
 assert.match(mapPage, /29 entries/);
@@ -197,7 +197,8 @@ assert.match(mapScript, /renderInspectorJourney/, "map inspector consumes audite
 assert.match(sharedStyles, /\.map-inspector-journey-link/, "map journey links need a shared style");
 
 const sitemapForMap = read("sitemap.xml");
-assert.match(sitemapForMap, /<loc>https:\/\/theranchersguide\.com\/map<\/loc>[\s\S]*?<lastmod>2026-08-07<\/lastmod>/);
+assert.match(sitemapForMap, /<loc>https:\/\/theranchersguide\.com\/map<\/loc>[\s\S]*?<lastmod>2026-08-22<\/lastmod>/);
+assert.match(sitemapForMap, /<loc>https:\/\/theranchersguide\.com\/zh\/map<\/loc>[\s\S]*?<lastmod>2026-08-22<\/lastmod>/);
 
 const viewerCore = require("../assets/js/map-viewer-core.js");
 assert.deepEqual(viewerCore.getView("rural"), { scale: 1.6, x: 24, y: 2 });

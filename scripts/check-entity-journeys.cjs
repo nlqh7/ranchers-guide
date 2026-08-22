@@ -78,6 +78,7 @@ for (const relative of ["knowledge-index.json", "zh/knowledge-index.json"]) {
       assert.ok(knownRoutes.has(step.href.split(/[?#]/)[0]), `${relative} ${id} points to missing route ${step.href}`);
       assert.match(step.href, locale === "zh" ? /^\/zh\// : /^\/(?!zh\/)/, `${relative} ${id} has the wrong locale route`);
     }
+    assert.equal(new Set(entity.journey.map((step) => step.href)).size, entity.journey.length, `${relative} ${id} has duplicate journey routes`);
   }
 }
 
