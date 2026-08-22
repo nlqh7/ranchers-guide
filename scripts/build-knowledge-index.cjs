@@ -25,6 +25,7 @@ function routeWithLocale(route, locale) {
 function routeForType(type, id, locale) {
   const prefix = locale === "zh" ? "/zh" : "";
   if (type === "location") return `${prefix}/map#${id}`;
+  if (type === "building") return `${prefix}/guides/building-construction#materials`;
   return `${prefix}/database/${type === "npc" ? "npcs" : type === "quest" ? "quests" : `${type}s`}#${id}`;
 }
 
@@ -35,6 +36,7 @@ const routeLabels = {
   "/tools/chicken-troubleshooter": { en: "Chicken troubleshooter", zh: "养鸡排查工具" },
   "/guides/roof-quest-stuck#flow": { en: "Roof objective decision flow", zh: "屋顶目标分类排查" },
   "/guides/building-construction": { en: "Building guide", zh: "建造指南" },
+  "/tools/ranch-checklist#build-goal": { en: "Local building checklist", zh: "本地建造清单" },
   "/problems/failed-quest-replay": { en: "Failed quest recovery", zh: "失败任务恢复" },
   "/problems/vehicle-recovery": { en: "Vehicle recovery", zh: "车辆找回" },
   "/guides/gigi-large-egg-quest": { en: "Gigi large-egg route", zh: "Gigi 大鸡蛋路线" },
@@ -154,6 +156,12 @@ const journeyPlans = {
     { route: "/guides/crafting-guide", en: { label: "Crafting context", reason: "Check which material questions have a recipe observation and which remain open." }, zh: { label: "制作上下文", reason: "区分已有配方观测和仍待确认的材料问题。" } },
     { route: "/community", en: { label: "Community signals", reason: "Review the source-linked lead without treating it as a confirmed recipe." }, zh: { label: "社区线索", reason: "查看带来源的线索，不把它当作已确认配方。" } },
   ],
+  "building:red-tent": [
+    { route: "/guides/building-construction", en: { label: "Building guide", reason: "Read the placement and construction boundaries before treating the old recipe as current." }, zh: { label: "建造指南", reason: "先看放置和建造边界，不要把旧配方当成当前版本。" } },
+    { route: "/tools/ranch-checklist#build-goal", en: { label: "Local building checklist", reason: "Track the retained material observation on this device." }, zh: { label: "本地建造清单", reason: "在本机记录这条已有材料观测。" } },
+    { route: "/database/materials#stone", en: { label: "Stone record", reason: "Check the documented material and its current-source boundary." }, zh: { label: "石头条目", reason: "查看材料记录和当前来源边界。" } },
+    { route: "/database/materials#wood-log", en: { label: "Wood Log record", reason: "Check the second documented material without expanding the recipe." }, zh: { label: "原木条目", reason: "查看第二种已记录材料，不扩写配方。" } },
+  ],
   "animal:cow": [
     { route: "/guides/animal-guide", en: { label: "Animal care guide", reason: "Keep current-build care answers separate from historical barn mechanics." }, zh: { label: "动物照护指南", reason: "把当前版本照护答案与历史谷仓机制分开。" } },
     { route: "/database/animals#cow", en: { label: "Cow evidence", reason: "Review the roster, product observations and unknown purchase fields together." }, zh: { label: "牛的证据", reason: "集中查看动物名单、产物观测和未知购买字段。" } },
@@ -173,8 +181,8 @@ const journeyPlans = {
 
 function labelForType(type, locale) {
   const labels = {
-    en: { animal: "Animal", crop: "Crop", material: "Material", npc: "NPC", quest: "Quest", location: "Location" },
-    zh: { animal: "动物", crop: "作物", material: "材料", npc: "NPC", quest: "任务", location: "地点" },
+    en: { animal: "Animal", crop: "Crop", material: "Material", building: "Building", npc: "NPC", quest: "Quest", location: "Location" },
+    zh: { animal: "动物", crop: "作物", material: "材料", building: "建筑", npc: "NPC", quest: "任务", location: "地点" },
   };
   return labels[locale][type];
 }
@@ -275,9 +283,11 @@ const animals = readJson("animals.json");
 const npcs = readJson("npcs.json");
 const quests = readJson("quests.json");
 const locations = readJson("locations.json");
+const buildings = readJson("building-checklists.json");
 
 const datasets = [
   ["material", materials, "materials"],
+  ["building", buildings, "targets"],
   ["crop", crops, "crops"],
   ["animal", animals, "species"],
   ["npc", npcs, "npcs"],

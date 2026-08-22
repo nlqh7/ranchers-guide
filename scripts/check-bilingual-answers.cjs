@@ -20,6 +20,19 @@ checkFactPairs(readJson("data/materials.json"), "materials", "material");
 checkFactPairs(readJson("data/npcs.json"), "npcs", "npc");
 checkFactPairs(readJson("data/quests.json"), "quests", "quest");
 
+const buildings = readJson("data/building-checklists.json");
+assert.ok(Object.keys(buildings.sources || {}).length > 0, "building checklist needs a source registry");
+for (const building of buildings.targets) {
+  assert.ok(building.summary && building.zhSummary, `building:${building.id} needs bilingual summaries`);
+  assert.ok(Array.isArray(building.facts) && building.facts.length > 0, `building:${building.id} needs a bounded answer fact`);
+  assert.ok(building.relatedRoutes?.length, `building:${building.id} needs related routes`);
+  for (const fact of building.facts) {
+    assert.ok(fact.text && fact.zhText, `building:${building.id} has an untranslated fact`);
+    assert.ok(fact.sourceIds?.length, `building:${building.id} fact needs a source`);
+    for (const sourceId of fact.sourceIds) assert.ok(buildings.sources[sourceId], `building:${building.id} references missing source ${sourceId}`);
+  }
+}
+
 const animals = readJson("data/animals.json");
 for (const animal of animals.species) {
   assert.ok(animal.summary && animal.zh?.summary, `animal:${animal.id} needs bilingual answer summaries`);

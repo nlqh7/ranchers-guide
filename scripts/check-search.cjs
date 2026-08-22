@@ -178,7 +178,7 @@ assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8
 assert.match(searchPage, /data-knowledge-dossier/, "Search page must provide an entity dossier surface");
 assert.match(searchPage, /data-entity-filters/, "Search page must provide entity answer filters");
 const chineseSearchPage = fs.readFileSync(path.join(root, "zh", "search.html"), "utf8");
-for (const type of ["all", "animal", "crop", "material", "npc", "quest", "location"]) {
+for (const type of ["all", "animal", "crop", "material", "building", "npc", "quest", "location"]) {
   assert.match(searchPage, new RegExp(`data-entity-filter="${type}"`), `English search is missing ${type} entity filter`);
   assert.match(chineseSearchPage, new RegExp(`data-entity-filter="${type}"`), `Chinese search is missing ${type} entity filter`);
 }
@@ -204,7 +204,7 @@ assert.equal(searchDocuments(prebuiltIndex, "Angela chicken seller")[0].url, "/d
 
 const knowledgeIndex = JSON.parse(fs.readFileSync(path.join(root, "knowledge-index.json"), "utf8"));
 const chineseKnowledgeIndex = JSON.parse(fs.readFileSync(path.join(root, "zh", "knowledge-index.json"), "utf8"));
-assert.equal(knowledgeIndex.entities.length, 53, "Knowledge index should cover the current typed datasets");
+assert.equal(knowledgeIndex.entities.length, 54, "Knowledge index should cover the current typed datasets");
 assert.equal(chineseKnowledgeIndex.entities.length, knowledgeIndex.entities.length, "Bilingual knowledge indexes must stay aligned");
 assert.ok(knowledgeIndex.entities.some((entity) => entity.id === "material:zirconite" && entity.facts.length >= 2));
 assert.ok(chineseKnowledgeIndex.entities.some((entity) => entity.id === "material:zirconite" && entity.label.includes("锆矿")));

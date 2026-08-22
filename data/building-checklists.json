@@ -3,6 +3,16 @@
     "lastUpdated": "2026-08-22",
     "currentBuild": "0.8.10.842"
   },
+  "sources": {
+    "launch-video": {
+      "kind": "local-video",
+      "title": "Games Station gameplay footage at 71:40",
+      "url": null,
+      "author": "Games Station",
+      "date": "2026-08-07",
+      "build": "0.8.10.455"
+    }
+  },
   "targets": [
     {
       "id": "red-tent",
@@ -12,13 +22,27 @@
       "validity": "historical",
       "summary": "The retained launch-build footage shows this recipe, but it has not been rechecked against the current build.",
       "zhSummary": "现有首发版本视频保留了这个配方，但尚未按当前版本重新核对。",
+      "searchTags": "red tent tent building recipe stone wood log materials construction shelter",
+      "zhSearchTags": "红帐篷 建筑 配方 石头 原木 材料 建造 住所",
       "caution": "Recheck the in-game recipe after an update before treating these quantities as current.",
       "zhCaution": "更新后请重新查看游戏内配方，不要直接把这些数量当作当前版本定值。",
-      "source": {
-        "label": "Games Station gameplay footage at 71:40",
-        "labelZh": "Games Station 游戏画面 71:40",
-        "url": null
-      },
+      "sourceIds": ["launch-video"],
+      "facts": [
+        {
+          "text": "Launch-build footage shows the Red Tent recipe as 8 Stone and 10 Wood Log; the current build has not been rechecked.",
+          "zhText": "首发版本视频显示红帐篷配方为 8 个石头和 10 个原木；当前版本尚未重新核对。",
+          "evidenceLevel": "video-observed",
+          "build": "0.8.10.455",
+          "validity": "historical",
+          "sourceIds": ["launch-video"]
+        }
+      ],
+      "relatedRoutes": [
+        "/guides/building-construction",
+        "/tools/ranch-checklist#build-goal",
+        "/database/materials#stone",
+        "/database/materials#wood-log"
+      ],
       "materials": [
         { "id": "stone", "name": "Stone", "zhName": "石头 Stone", "required": 8, "route": "/database/materials#stone", "routeZh": "/zh/database/materials#stone" },
         { "id": "wood-log", "name": "Wood Log", "zhName": "原木 Wood Log", "required": 10, "route": "/database/materials#wood-log", "routeZh": "/zh/database/materials#wood-log" }

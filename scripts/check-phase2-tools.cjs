@@ -104,7 +104,7 @@ for (const relative of ["search.html", "zh/search.html"]) {
   const html = read(relative);
   check(html, /data-knowledge-dossier/);
   check(html, /data-entity-filters/);
-  for (const type of ["all", "animal", "crop", "material", "npc", "quest", "location"]) {
+  for (const type of ["all", "animal", "crop", "material", "building", "npc", "quest", "location"]) {
     check(html, new RegExp(`data-entity-filter="${type}"`), `${relative}: missing ${type} entity filter`);
   }
 }

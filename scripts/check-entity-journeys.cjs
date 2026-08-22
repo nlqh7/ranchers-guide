@@ -31,6 +31,7 @@ const plans = [
   ["quest:chicken-coop-mission", 4],
   ["quest:power-to-the-bench", 4],
   ["material:zirconite", 4],
+  ["building:red-tent", 4],
   ["animal:cow", 3],
   ["animal:goat", 3],
   ["animal:rabbit", 3],
@@ -54,6 +55,12 @@ const requiredJourneyRoutes = {
   "location:cash-in-box": [
     "/guides/money-making#cashin",
     "/database/crops#cashin",
+  ],
+  "building:red-tent": [
+    "/guides/building-construction",
+    "/tools/ranch-checklist#build-goal",
+    "/database/materials#stone",
+    "/database/materials#wood-log",
   ],
 };
 
