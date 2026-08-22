@@ -5,7 +5,8 @@
     "chicken-coop-thread": { "kind": "steam-thread", "title": "Steam thread: Chicken coop mission", "url": "https://steamcommunity.com/app/1501310/discussions/0/587307906418973975/", "author": "DJM / Yakiwi", "date": "2026-08-02", "build": "0.8.10.x" },
     "animal-support-scan": { "kind": "local-archive", "title": "August 2026 animal support answers and community scan", "url": null, "author": "Jennoula / players", "date": "2026-08-08", "build": "0.8.10.x" },
     "gigi-quest-thread": { "kind": "steam-thread", "title": "Steam thread: Real Eggs, Real Evidence quest route", "url": "https://steamcommunity.com/app/1501310/discussions/0/587308167364362187/", "author": "DJM / players", "date": "2026-08-04", "build": "0.8.10.x" },
-    "gigi-end-thread": { "kind": "steam-thread", "title": "Steam threads: current quest line after Gigi", "url": "https://steamcommunity.com/app/1501310/discussions/0/587307627624791770/", "author": "Multiple players", "date": "2026-08-01", "build": "0.8.10.x" }
+    "gigi-end-thread": { "kind": "steam-thread", "title": "Steam threads: current quest line after Gigi", "url": "https://steamcommunity.com/app/1501310/discussions/0/587307627624791770/", "author": "Multiple players", "date": "2026-08-01", "build": "0.8.10.x" },
+    "gigi-official-end-thread": { "kind": "steam-thread", "title": "Steam thread: official reply on the current main quest endpoint", "url": "https://steamcommunity.com/app/1501310/discussions/0/590686908802417907/", "author": "Official moderator reply", "date": "2026-08-17", "build": null }
   },
   "npcs": [
     {
@@ -35,6 +36,7 @@
       "summary": "The NPC at the center of the current large-egg quest and its police-chase return route.", "zhSummary": "当前大鸡蛋任务及随后警察追逐、送回家流程的核心 NPC。",
       "whenNeeded": "Look for Gigi when the large-egg handoff or the documented police-chase return route is your current task; the retained evidence does not establish a follow-up quest.", "zhWhenNeeded": "当前目标是交付大鸡蛋或完成已记录的警察追逐送回路线时查找 Gigi；现有证据没有确认后续任务。",
       "facts": [
+        { "text": "An official moderator reply identifies the two-egg hand-in as the end of the main questline for now; this does not catalogue optional or unrelated quests.", "zhText": "官方版主回复确认，交付两枚鸡蛋后当前主线暂时结束；这不等于已经编目所有可选或无关任务。", "evidenceLevel": "official", "build": null, "validity": "current", "sourceIds": ["gigi-official-end-thread"] },
         { "text": "The current quest route asks for two Large Eggs before the next handoff becomes available.", "zhText": "当前任务流程要求先准备两个大鸡蛋，之后才会出现下一步交付。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["gigi-quest-thread"] },
         { "text": "After the egg handoff, Gigi follows the player through a police escape and must be returned to her home area to finish the documented route.", "zhText": "交付鸡蛋后，Gigi 会跟随玩家经历逃离警察的流程，并需要被送回她家附近才能完成已记录路线。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["gigi-quest-thread"] },
         { "text": "Multiple current players report no implemented follow-up quest after this route; treat it as the present story endpoint, not a hidden trigger with a known solution.", "zhText": "多名当前玩家报告此流程后没有已实装的后续任务；现阶段应视为剧情终点，而不是存在已知隐藏触发条件。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["gigi-end-thread"] }

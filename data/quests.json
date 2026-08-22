@@ -7,6 +7,7 @@
     "roof-community-scan": { "kind": "local-archive", "title": "August 2026 roof-building discussion scan", "url": null, "author": "Multiple players", "date": "2026-08-08", "build": "0.8.10.x" },
     "gigi-quest-thread": { "kind": "steam-thread", "title": "Steam thread: Real Eggs, Real Evidence", "url": "https://steamcommunity.com/app/1501310/discussions/0/587308167364362187/", "author": "DJM / players", "date": "2026-08-04", "build": "0.8.10.x" },
     "gigi-end-thread": { "kind": "steam-thread", "title": "Steam thread: current quest line after Real Eggs", "url": "https://steamcommunity.com/app/1501310/discussions/0/587307627624791770/", "author": "Multiple players", "date": "2026-08-01", "build": "0.8.10.x" },
+    "gigi-official-end-thread": { "kind": "steam-thread", "title": "Steam thread: official reply on the current main quest endpoint", "url": "https://steamcommunity.com/app/1501310/discussions/0/590686908802417907/", "author": "Official moderator reply", "date": "2026-08-17", "build": null },
     "solar-thread": { "kind": "steam-thread", "title": "Steam thread: Solar Panel Quest", "url": "https://steamcommunity.com/app/1501310/discussions/0/587308261888288219/", "author": "sagatarious / FIDELIS", "date": "2026-08-05", "build": "0.8.10.x" }
   },
   "quests": [
@@ -66,6 +67,7 @@
       "id": "real-eggs-real-evidence", "name": "Real Eggs, Real Evidence", "zhName": "Real Eggs, Real Evidence 大鸡蛋任务", "category": "animals", "zhCategory": "动物", "nameConfidence": "community-current", "searchTags": "real eggs evidence gigi large egg police chase quest end", "zhSearchTags": "Real Eggs Real Evidence Gigi 大鸡蛋 警察 追逐 任务 结尾",
       "summary": "The current large-egg route involving Gigi, a police escape and the present end of the implemented quest line.", "zhSummary": "当前涉及 Gigi、大鸡蛋、逃离警察以及现有任务线终点的流程。",
       "facts": [
+        { "text": "An official moderator reply identifies the two-egg hand-in as the end of the main questline for now; this does not catalogue optional or unrelated quests.", "zhText": "官方版主回复确认，交付两枚鸡蛋后当前主线暂时结束；这不等于已经编目所有可选或无关任务。", "evidenceLevel": "official", "build": null, "validity": "current", "sourceIds": ["gigi-official-end-thread"] },
         { "text": "The retained current route requires two Large Eggs; daily care and enclosed outdoor roaming affect the chance, but the result remains random.", "zhText": "现有当前流程要求两个大鸡蛋；每日照料和封闭室外活动会影响机会，但产出仍具有随机性。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["gigi-quest-thread"] },
         { "text": "After handoff, Gigi follows the player during a police escape and must be returned to her home area to complete the documented route.", "zhText": "交付后，Gigi 会在逃离警察期间跟随玩家，需要被送回她家附近才能完成已记录流程。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["gigi-quest-thread"] },
         { "text": "Multiple players report no implemented follow-up after the return; waiting additional seasons is not a verified solution.", "zhText": "多名玩家报告送回后没有已实装的后续；继续等待多个季节不是已验证解法。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["gigi-end-thread"] }

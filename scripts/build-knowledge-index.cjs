@@ -99,6 +99,22 @@ const journeyPlans = {
     { route: "/problems/fast-travel-subway", en: { label: "Fast-travel troubleshooting", reason: "Separate subway issues from player-placed transit-post reports." }, zh: { label: "快速旅行排查", reason: "区分地铁问题和玩家放置交通点的社区说法。" } },
     { route: "/guides/vehicles-transport", en: { label: "Vehicle guide", reason: "Read the transport systems together before planning a route." }, zh: { label: "车辆指南", reason: "规划路线前先对照交通系统说明。" } },
   ],
+  "location:auto-hue": [
+    { route: "/guides/police-wanted-levels", en: { label: "Wanted-level guide", reason: "Read the official plate-change connection without assuming a full crime-system solution." }, zh: { label: "警星指南", reason: "查看官方车牌更改关系，不把它扩写成完整犯罪系统解法。" } },
+    { route: "/guides/vehicles-transport", en: { label: "Vehicle guide", reason: "Keep the paint and plate service alongside the broader vehicle workflow." }, zh: { label: "车辆指南", reason: "把涂装和车牌服务放在完整车辆流程旁查看。" } },
+  ],
+  "location:auction-market": [
+    { route: "/guides/money-making#channels", en: { label: "Selling-channel comparison", reason: "Compare the auction with daily orders and local markets without assuming a fixed best payout." }, zh: { label: "出售渠道对比", reason: "把拍卖与每日订单、本地市场对比，不预设哪个渠道固定更高。" } },
+  ],
+  "location:police-station": [
+    { route: "/guides/police-wanted-levels", en: { label: "Wanted-level guide", reason: "Read the related police-system context while the station's exact player-facing services remain unverified." }, zh: { label: "警星指南", reason: "查看相关警察系统说明，同时保留警察局具体服务尚未验证的边界。" } },
+  ],
+  "location:fuel-stations": [
+    { route: "/guides/vehicles-transport", en: { label: "Vehicle guide", reason: "Keep the official fuel-station name with the broader vehicle context while price and exact locations remain open." }, zh: { label: "车辆指南", reason: "把官方加油站名称放在车辆上下文中查看，同时保留价格和精确位置未知。" } },
+  ],
+  "location:subway": [
+    { route: "/problems/fast-travel-subway", en: { label: "Fast-travel troubleshooting", reason: "Use the existing travel guide while station-by-station locations and fares remain outside the verified record." }, zh: { label: "快速旅行排查", reason: "查看现有交通指南，同时保留逐站位置和票价不在已验证记录内。" } },
+  ],
   "material:hay": [
     { route: "/database/animals#chicken", en: { label: "Chicken feed context", reason: "See how hay fits the interior trough and animal routine." }, zh: { label: "鸡饲料说明", reason: "查看干草与室内食槽、动物照护的关系。" } },
     { route: "/guides/animal-guide#feeding", en: { label: "Feed and water guide", reason: "Follow the evidence-linked care steps before automating." }, zh: { label: "喂食与饮水指南", reason: "自动化前先按证据链接检查照护步骤。" } },
@@ -129,6 +145,12 @@ const journeyPlans = {
     { route: "/tools/chicken-troubleshooter", en: { label: "Chicken troubleshooter", reason: "Use the symptom flow only after updating the game." }, zh: { label: "养鸡排查工具", reason: "先更新游戏，再使用症状排查流程。" } },
     { route: "/database/animals#chicken", en: { label: "Chicken entry", reason: "Keep care facts and unresolved cases together." }, zh: { label: "鸡条目", reason: "集中查看照护事实和未解决案例。" } },
   ],
+  "quest:rust-to-rumbling": [
+    { route: "/database/npcs#victor", en: { label: "Victor", reason: "Open the NPC relation retained in the observed vehicle quest." }, zh: { label: "Victor", reason: "查看当前车辆任务观测中记录的 NPC 关系。" } },
+    { route: "/map#bykii-terminal", en: { label: "Bykii terminal", reason: "Open the approximate location entry without treating its pin as exact." }, zh: { label: "Bykii terminal", reason: "查看大致地点条目，不把图钉当成精确坐标。" } },
+    { route: "/guides/vehicles-transport", en: { label: "Vehicle guide", reason: "Read the confirmed transport context and the limits of the retained footage." }, zh: { label: "车辆指南", reason: "查看已确认的交通说明和现有视频证据边界。" } },
+    { route: "/problems/vehicle-recovery", en: { label: "Vehicle recovery", reason: "Use the recovery path if the vehicle is missing or not yet available." }, zh: { label: "车辆找回", reason: "车辆消失或尚未可用时，沿找回路线排查。" } },
+  ],
   "quest:power-to-the-bench": [
     { route: "/map#city-hall", en: { label: "City Hall", reason: "Open the location area tied to the task." }, zh: { label: "市政厅", reason: "打开与任务关联的地点区域。" } },
     { route: "/database/npcs#victor", en: { label: "Victor", reason: "Check the NPC relation and evidence build." }, zh: { label: "Victor", reason: "查看 NPC 关系和证据版本。" } },
@@ -140,6 +162,21 @@ const journeyPlans = {
     { route: "/database/npcs#victor", en: { label: "Victor and Meriam context", reason: "Check the NPC and service context around the purchase route." }, zh: { label: "Victor 与 Meriam", reason: "查看购买路线涉及的 NPC 和服务上下文。" } },
     { route: "/guides/electricity-power#two-paths", en: { label: "Electricity route", reason: "Use a verified progression path when the material question is tied to power systems." }, zh: { label: "供电路线", reason: "如果材料问题与供电系统有关，从已有证据路线继续。" } },
     { route: "/guides/building-construction#materials", en: { label: "Building material context", reason: "Check how the material fits the documented construction path." }, zh: { label: "建造材料上下文", reason: "查看该材料如何接入已有记录的建造流程。" } },
+  ],
+  "crop:red-lettuce": [
+    { route: "/guides/farming-fields#start-farming", en: { label: "Start farming", reason: "Use the current planting sequence before committing more cash to a crop." }, zh: { label: "开始种田", reason: "先按当前种植流程操作，再决定是否继续投入现金。" } },
+    { route: "/guides/money-making#cashin", en: { label: "CashIn selling", reason: "Follow the documented settlement route without assuming a per-head sell price." }, zh: { label: "CashIn 出售", reason: "按已有结算路线出售，不把单颗售价当成已知。" } },
+    { route: "/map#leafy-market", en: { label: "Leafy Market", reason: "Open the approximate shop area tied to the observed seed listing." }, zh: { label: "Leafy Market", reason: "打开与种子画面相关的大致商店区域。" } },
+  ],
+  "crop:strawberry": [
+    { route: "/guides/farming-fields#regrow", en: { label: "Regrow crop rules", reason: "Compare the observed regrow timing with one-time harvest crops." }, zh: { label: "返收作物规则", reason: "把已有返收时间与一次性收获作物对照。" } },
+    { route: "/guides/money-making#cashin", en: { label: "CashIn selling", reason: "Use the settlement workflow while keeping berry price and yield open." }, zh: { label: "CashIn 出售", reason: "按结算流程操作，并保留草莓售价和产量未知。" } },
+    { route: "/map#leafy-market", en: { label: "Leafy Market", reason: "Open the approximate shop area tied to the observed seed listing." }, zh: { label: "Leafy Market", reason: "打开与种子画面相关的大致商店区域。" } },
+  ],
+  "crop:garlic": [
+    { route: "/guides/farming-fields#selling", en: { label: "Crop selling boundary", reason: "Separate shop retail price from the still-unobserved player sell value." }, zh: { label: "作物出售边界", reason: "区分商店零售价和仍未观测的玩家出售收入。" } },
+    { route: "/guides/money-making#cashin", en: { label: "CashIn selling", reason: "Follow the documented settlement route instead of reading 31C as farm income." }, zh: { label: "CashIn 出售", reason: "按已有结算路线操作，不把 31C 误读成种植收入。" } },
+    { route: "/map#leafy-market", en: { label: "Leafy Market", reason: "Open the shop area where the retail and seed tabs were observed." }, zh: { label: "Leafy Market", reason: "打开观察到零售价和种子页签的商店区域。" } },
   ],
   "material:stone": [
     { route: "/guides/resources-and-materials", en: { label: "Resource route", reason: "Start with the current-build collection boundary and theft warning." }, zh: { label: "资源路线", reason: "先查看当前版本的收集边界和偷取风险。" } },

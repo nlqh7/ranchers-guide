@@ -2774,6 +2774,7 @@ table.data-table {
 .ranch-checklist-goals { display: grid; gap: 10px; margin: 26px 0 0; }
 .ranch-checklist-goals button { min-height: 48px; padding: 12px 16px; border: 1px solid var(--cream-300); background: var(--cream-100); color: var(--brown-700); text-align: left; font: inherit; font-weight: 800; cursor: pointer; }
 .ranch-checklist-goals button:hover, .ranch-checklist-goals button[aria-pressed="true"] { border-color: var(--green-700); color: var(--green-700); background: var(--surface); }
+.ranch-checklist-overview { display: flex; flex-wrap: wrap; gap: 6px 12px; margin-top: 18px; padding: 12px 14px; border-left: 3px solid var(--green-700); background: var(--cream-100); color: var(--brown-700); font-size: 0.88rem; font-weight: 700; }
 .ranch-checklist-panel { display: none; margin-top: 22px; padding: 22px; border: 1px solid var(--cream-300); background: var(--surface); }
 .ranch-checklist-panel.is-active { display: block; }
 .ranch-checklist-panel h2 { margin-top: 0; }

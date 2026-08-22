@@ -34,6 +34,19 @@
     updateMaterials(panel);
   }
 
+  function updateOverview() {
+    var overview = root.querySelector("[data-checklist-overview]");
+    if (!overview) return;
+    var checks = Array.from(root.querySelectorAll("[data-check-item]"));
+    var completed = checks.filter(function (check) { return check.checked; }).length;
+    var materialRows = Array.from(root.querySelectorAll("[data-material-requirement]"));
+    var ready = materialRows.filter(function (row) { return row.querySelector("[data-material-ready]")?.checked; }).length;
+    var materialText = isChinese ? "材料 " + ready + " / " + materialRows.length + " 已备齐" : ready + " / " + materialRows.length + " materials ready";
+    overview.textContent = isChinese
+      ? completed + " / " + checks.length + " 项清单步骤已完成，覆盖 " + goals.length + " 个目标 · " + materialText
+      : completed + " / " + checks.length + " checklist steps complete across " + goals.length + " goals · " + materialText;
+  }
+
   function updateMaterials(panel) {
     if (!panel || !panel.querySelector("[data-material-checklist]")) return;
     var requirements = Array.from(panel.querySelectorAll("[data-material-requirement]"));
@@ -46,6 +59,7 @@
     });
     var progress = panel.querySelector("[data-material-progress]");
     if (progress) progress.textContent = isChinese ? ready + " / " + requirements.length + " 种材料已备齐" : ready + " / " + requirements.length + " materials ready";
+    updateOverview();
   }
 
   function materialStateFor(target) {
@@ -221,4 +235,5 @@
   var firstGoal = goals[0] && goals[0].dataset.checklistGoal;
   if (firstGoal) activate(firstGoal);
   setupMaterialTargets();
+  updateOverview();
 })();

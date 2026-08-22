@@ -12,9 +12,15 @@ const knownRoutes = new Set([
 
 const plans = [
   ["animal:chicken", 5],
+  ["quest:rust-to-rumbling", 4],
   ["location:city-hall", 5],
   ["location:leafy-market", 3],
   ["location:bykii-terminal", 3],
+  ["location:auto-hue", 2],
+  ["location:auction-market", 1],
+  ["location:police-station", 1],
+  ["location:fuel-stations", 1],
+  ["location:subway", 1],
   ["location:vehicle-dealers", 2],
   ["location:quickfix", 2],
   ["location:car-pound", 2],
