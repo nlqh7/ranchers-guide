@@ -27,6 +27,8 @@ assert.match(script, /relations/, "tracker must expose existing entity relations
 assert.match(script, /recordMatches/, "tracker must filter existing quest records");
 assert.match(script, /progressFor/, "tracker must calculate local completion progress");
 assert.match(script, /data-quest-overview/, "tracker must expose completion overview");
+assert.match(script, /data-quest-next/, "tracker must expose the next unchecked objective");
+assert.match(script, /nextObjectiveFor/, "tracker must derive the next objective from existing facts");
 assert.match(script, /ranchers-guide-quest-tracker-v1/, "tracker storage key must be versioned");
 
 const quests = JSON.parse(fs.readFileSync(path.join(root, "data/quests.json"), "utf8"));

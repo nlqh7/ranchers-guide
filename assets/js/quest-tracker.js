@@ -151,6 +151,25 @@
       : "Showing " + filtered.length + " of " + records.length + " quests · " + progress.done + " of " + progress.total + " objectives checked";
   }
 
+  function nextObjectiveFor(record) {
+    var facts = Array.isArray(record.facts) ? record.facts : [];
+    for (var index = 0; index < facts.length; index += 1) {
+      if (state[record.id + "::" + index] !== true) return { fact: facts[index], index: index };
+    }
+    return null;
+  }
+
+  function nextObjectiveHtml(record) {
+    var next = nextObjectiveFor(record);
+    if (!next) {
+      return '<div class="quest-tracker-next is-complete" data-quest-next><strong>' + (isChinese ? "这条任务的已记录目标已全部核对" : "All documented objectives checked") + '</strong></div>';
+    }
+    var fact = next.fact;
+    var text = isChinese ? fact.zhText : fact.text;
+    var prefix = isPending(fact) ? (isChinese ? "待验证：" : "TBD: ") : "";
+    return '<div class="quest-tracker-next" data-quest-next><strong>' + (isChinese ? "下一步" : "Next objective") + '</strong><span>' + escapeHtml(prefix + text) + '</span>' + displayEvidence(fact) + '</div>';
+  }
+
   function renderRecord(record) {
     var facts = Array.isArray(record.facts) ? record.facts : [];
     var name = isChinese ? record.zhName : record.name;
@@ -167,7 +186,7 @@
     var related = (record.relatedRoutes || []).map(function (route) {
       return '<a class="btn btn-outline btn-compact" href="' + escapeHtml(localizedRoute(route)) + '">' + escapeHtml(routeLabel(route)) + "</a>";
     }).join("");
-    return '<article class="quest-tracker-card" data-quest-card="' + titleKey + '"><div class="quest-tracker-card-head"><div><span class="kicker">' + (isChinese ? "任务记录" : "Quest record") + '</span><h2>' + escapeHtml(name) + '</h2>' + (category ? '<span class="tag">' + escapeHtml(category) + '</span>' : '') + '</div><div class="quest-tracker-progress" data-quest-progress>0 / ' + facts.length + (isChinese ? " 已核对" : " checked") + '</div></div><p class="quest-tracker-summary">' + escapeHtml(summary) + '</p>' + relationLinks(record) + '<ul class="quest-tracker-items">' + factHtml + '</ul><div class="quest-tracker-card-foot"><div class="quest-tracker-related"><strong>' + (isChinese ? "继续查找" : "Continue with") + '</strong><div>' + related + '</div></div><button class="btn btn-outline btn-compact" type="button" data-quest-reset="' + titleKey + '">' + (isChinese ? "重置任务" : "Reset quest") + '</button></div></article>';
+    return '<article class="quest-tracker-card" data-quest-card="' + titleKey + '"><div class="quest-tracker-card-head"><div><span class="kicker">' + (isChinese ? "任务记录" : "Quest record") + '</span><h2>' + escapeHtml(name) + '</h2>' + (category ? '<span class="tag">' + escapeHtml(category) + '</span>' : '') + '</div><div class="quest-tracker-progress" data-quest-progress>0 / ' + facts.length + (isChinese ? " 已核对" : " checked") + '</div></div><p class="quest-tracker-summary">' + escapeHtml(summary) + '</p>' + nextObjectiveHtml(record) + relationLinks(record) + '<ul class="quest-tracker-items">' + factHtml + '</ul><div class="quest-tracker-card-foot"><div class="quest-tracker-related"><strong>' + (isChinese ? "继续查找" : "Continue with") + '</strong><div>' + related + '</div></div><button class="btn btn-outline btn-compact" type="button" data-quest-reset="' + titleKey + '">' + (isChinese ? "重置任务" : "Reset quest") + '</button></div></article>';
   }
 
   function renderRecords() {
@@ -184,6 +203,9 @@
     var done = checks.filter(function (check) { return check.checked; }).length;
     var progress = card.querySelector("[data-quest-progress]");
     if (progress) progress.textContent = done + " / " + checks.length + (isChinese ? " 已核对" : " checked");
+    var record = records.find(function (item) { return item.id === card.dataset.questCard; });
+    var next = card.querySelector("[data-quest-next]");
+    if (record && next) next.outerHTML = nextObjectiveHtml(record);
   }
 
   function wireCards() {

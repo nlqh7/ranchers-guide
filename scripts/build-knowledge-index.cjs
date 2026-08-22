@@ -17,6 +17,7 @@ function routeWithLocale(route, locale) {
   if (base === "/tools/chicken-troubleshooter") return `/zh/tools/chicken-troubleshooter${suffix}`;
   if (base === "/tools/ranch-checklist") return `/zh/tools/ranch-checklist${suffix}`;
   if (base === "/tools/quest-tracker") return `/zh/tools/quest-tracker${suffix}`;
+  if (base === "/tools/player-report") return `/zh/tools/player-report${suffix}`;
   if (base === "/community") return `/zh/community${suffix}`;
   if (/^\/(?:guides|problems|database)\//.test(base)) return `/zh${base}${suffix}`;
   return route;
@@ -51,6 +52,18 @@ const routeLabels = {
 };
 
 const journeyPlans = {
+  "crop:aubergine": [
+    { route: "/guides/farming-fields", en: { label: "Check current farming evidence", reason: "This record is historical-only; review the current farming boundary before treating it as a live crop option." }, zh: { label: "查看当前种田证据", reason: "这条记录只有历史资料，先看当前种田证据边界，不要把它当成当前作物方案。" } },
+    { route: "/tools/player-report", en: { label: "Report a current crop screen", reason: "A current shop or planting capture is the missing evidence for this record." }, zh: { label: "提交当前作物画面", reason: "这条记录缺少当前商店或种植画面，提交截图可以帮助补证。" } },
+  ],
+  "crop:corn": [
+    { route: "/guides/farming-fields", en: { label: "Check current farming evidence", reason: "This record is historical-only; review the current farming boundary before treating it as a live crop option." }, zh: { label: "查看当前种田证据", reason: "这条记录只有历史资料，先看当前种田证据边界，不要把它当成当前作物方案。" } },
+    { route: "/tools/player-report", en: { label: "Report a current crop screen", reason: "A current shop or planting capture is the missing evidence for this record." }, zh: { label: "提交当前作物画面", reason: "这条记录缺少当前商店或种植画面，提交截图可以帮助补证。" } },
+  ],
+  "crop:green-lettuce": [
+    { route: "/guides/farming-fields", en: { label: "Check current farming evidence", reason: "This record is historical-only; review the current farming boundary before treating it as a live crop option." }, zh: { label: "查看当前种田证据", reason: "这条记录只有历史资料，先看当前种田证据边界，不要把它当成当前作物方案。" } },
+    { route: "/tools/player-report", en: { label: "Report a current crop screen", reason: "A current shop or planting capture is the missing evidence for this record." }, zh: { label: "提交当前作物画面", reason: "这条记录缺少当前商店或种植画面，提交截图可以帮助补证。" } },
+  ],
   "animal:chicken": [
     { route: "/guides/animal-guide#getting", en: { label: "Bring chickens home", reason: "Start with the documented purchase and delivery route." }, zh: { label: "把鸡带回家", reason: "先按已有证据确认购买和运回流程。" } },
     { route: "/database/npcs#angela", en: { label: "Find Angela", reason: "Open the seller profile and housing equipment notes." }, zh: { label: "找到 Angela", reason: "查看卖鸡商人和鸡舍设备记录。" } },

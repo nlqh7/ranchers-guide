@@ -7,10 +7,15 @@ const sitemap = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
 const knownRoutes = new Set([
   ...[...sitemap.matchAll(/<loc>https:\/\/theranchersguide\.com([^<]*)<\/loc>/g)].map((match) => match[1] || "/"),
   "/tools/ranch-checklist",
+  "/tools/player-report",
   "/zh/tools/ranch-checklist",
+  "/zh/tools/player-report",
 ]);
 
 const plans = [
+  ["crop:aubergine", 2],
+  ["crop:corn", 2],
+  ["crop:green-lettuce", 2],
   ["animal:chicken", 5],
   ["quest:rust-to-rumbling", 4],
   ["location:city-hall", 5],

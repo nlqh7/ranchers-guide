@@ -2812,6 +2812,11 @@ table.data-table {
   .quest-tracker-card-head h2 { margin: 8px 0 0; }
   .quest-tracker-progress { color: var(--green-700); font-size: 0.84rem; font-weight: 800; white-space: nowrap; }
   .quest-tracker-summary { max-width: 75ch; margin: 14px 0 18px; color: var(--brown-700); }
+  .quest-tracker-next { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: center; margin: 0 0 16px; padding: 12px 14px; border-left: 3px solid var(--green-700); background: var(--cream-100); color: var(--brown-700); }
+  .quest-tracker-next strong { color: var(--green-700); white-space: nowrap; }
+  .quest-tracker-next span { min-width: 0; }
+  .quest-tracker-next.is-complete { border-left-color: var(--cream-400); }
+  .quest-tracker-next.is-complete strong { color: var(--brown-500); }
   .quest-tracker-relations { display: grid; gap: 8px; margin: 0 0 16px; color: var(--brown-700); font-size: 0.88rem; }
   .quest-tracker-relations > div, .quest-tracker-related > div { display: flex; flex-wrap: wrap; gap: 8px; }
   .quest-tracker-link { color: var(--green-700); font-weight: 800; }
@@ -2875,6 +2880,7 @@ table.data-table {
   }
   @media (max-width: 620px) {
     .quest-tracker-card-head { display: grid; gap: 8px; }
+    .quest-tracker-next { grid-template-columns: 1fr; gap: 5px; }
     .quest-tracker-item { grid-template-columns: 1fr; gap: 4px; }
     .quest-tracker-fact-meta { justify-content: flex-start; padding-left: 30px; }
     .quest-tracker-card-foot { align-items: stretch; }
