@@ -23,7 +23,7 @@ const sourceIds = new Set(Object.keys(data.sources));
 const required = ["stone", "wood-log", "hay", "charcoal", "zirconite"];
 
 assert.deepEqual(data.materials.map((item) => item.id), required, "materials must use the approved high-demand order");
-assert.equal(data.meta.build, "0.8.10.562", "page baseline must remain the current official build");
+assert.equal(data.meta.build, "0.8.10.842", "page baseline must remain the current official build");
 
 for (const [id, source] of Object.entries(data.sources)) {
   assert.ok(source.kind && source.title && source.date, `source ${id} needs kind, title and date`);

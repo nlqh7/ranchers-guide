@@ -25,8 +25,8 @@ const pages = [
   {
     en: "updates.html",
     zh: "zh/updates.html",
-    required: ["answer-box", "0.8.10.562", "hotfix", "sources"],
-    requiredZh: ["answer-box", "0.8.10.562", "热修", "来源"],
+    required: ["answer-box", "0.8.10.842", "hotfix", "sources"],
+    requiredZh: ["answer-box", "0.8.10.842", "热修", "来源"],
   },
   {
     en: "updates/launch-hotfix-0-8-10-455.html",
@@ -84,7 +84,7 @@ function checkPage(relativePath, required) {
   assert.ok(description && description[1].length >= 80, `${relativePath}: description is too thin`);
   assert.match(html, /<h1\b/i, `${relativePath}: missing h1`);
   assert.match(html, /class="answer-box"/i, `${relativePath}: missing direct-answer block`);
-  assert.match(html, /0\.8\.10\.562|当前版本|current official version/i, `${relativePath}: missing current-build boundary`);
+  assert.match(html, /0\.8\.10\.842|当前版本|current official version/i, `${relativePath}: missing current-build boundary`);
   assert.match(html, /methodology|证据|来源|sources/i, `${relativePath}: missing evidence/transparency path`);
   assert.match(html, /related|相关|继续|next/i, `${relativePath}: missing next-step navigation`);
   for (const token of required) {

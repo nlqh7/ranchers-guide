@@ -1,15 +1,69 @@
 {
   "meta": {
-    "currentBuild": "0.8.10.562",
+    "currentBuild": "0.8.10.842",
     "reviewed": "2026-08-22",
     "note": "This dataset summarizes existing update pages. It does not reproduce official announcements."
   },
   "updates": [
     {
+      "id": "hotfix-0-8-10-842",
+      "version": "0.8.10.842",
+      "dateLabel": "August 21, 2026",
+      "status": "current",
+      "title": {
+        "en": "0.8.10.842 update",
+        "zh": "0.8.10.842 更新"
+      },
+      "summary": {
+        "en": "Update first when a quest or animal state looks wrong; this build targets quest validation, ranch links and batch limits.",
+        "zh": "如果任务或动物状态异常，先更新游戏；本版重点处理任务校验、牧场关联和批量上限。"
+      },
+      "changes": [
+        {
+          "en": "Quest progression and validation were fixed for several scenarios.",
+          "zh": "修复了部分场景下任务无法推进或校验不正确的问题。"
+        },
+        {
+          "en": "Barn and coop links now cover several growth-stage, hunger-display, linked-count and disappearance edge cases.",
+          "zh": "修复多种畜棚/鸡舍关联、成长阶段、饥饿显示、关联数量和动物消失边界问题。"
+        },
+        {
+          "en": "Shop stack limits increased to 200, non-stackable purchase limits to 50, and crafting batches to 50.",
+          "zh": "商店可购买堆叠物上限提高到 200，非堆叠物提高到 50，制作批量上限提高到 50。"
+        }
+      ],
+      "actions": [
+        {
+          "en": "Re-check a quest that failed to advance",
+          "zh": "重新检查无法推进的任务",
+          "route": "/tools/quest-tracker",
+          "routeZh": "/zh/tools/quest-tracker"
+        },
+        {
+          "en": "Run the animal disappearance checklist",
+          "zh": "运行动物消失排查",
+          "route": "/guides/animal-guide#troubleshooting",
+          "routeZh": "/zh/guides/animal-guide#troubleshooting"
+        },
+        {
+          "en": "Review the current animal database boundary",
+          "zh": "查看当前动物数据库边界",
+          "route": "/database/animals",
+          "routeZh": "/zh/database/animals"
+        }
+      ],
+      "source": {
+        "kind": "official",
+        "label": "0.8.10.842 update announcement",
+        "labelZh": "0.8.10.842 官方更新公告",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1841579228669835"
+      }
+    },
+    {
       "id": "hotfix-0-8-10-562",
       "version": "0.8.10.562",
       "dateLabel": "August 10, 2026",
-      "status": "current",
+      "status": "historical",
       "title": {
         "en": "0.8.10.562 hotfix",
         "zh": "0.8.10.562 热修"

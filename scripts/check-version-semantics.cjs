@@ -8,7 +8,7 @@ const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), "u
 // Version semantics: the site's current baseline build and the build on which
 // evidence was observed are different fields and must never be merged again.
 
-const BASELINE = "0.8.10.562";
+const BASELINE = "0.8.10.842";
 const VIDEO_BUILD = "0.8.10.455";
 
 // 1. Data layers declare the two builds separately.
@@ -38,7 +38,7 @@ for (const [name, html] of [["zh/database/crops.html", zhCropsPage], ["zh/databa
   assert.doesNotMatch(html, new RegExp(`视频证据录制于 ${BASELINE.replaceAll(".", "\\.")}`), `${name} must not tie video evidence to the baseline build`);
   assert.doesNotMatch(html, new RegExp(`${BASELINE.replaceAll(".", "\\.")}[^<]{0,20}(画面|实况| footage)`), `${name} must not claim baseline-build footage`);
 }
-assert.doesNotMatch(cropsPage, /current-build 0\.8\.10\.562 video footage/, "crops conflict note must not claim 0.8.10.562 footage");
+assert.doesNotMatch(cropsPage, /current-build 0\.8\.10\.842 video footage/, "crops conflict note must not claim 0.8.10.842 footage");
 
 // 3. problems.html tracker keeps the build in which each issue was reported.
 const problemsHub = read("problems.html");
@@ -47,12 +47,12 @@ assert.ok(roofRow, "roof quest row exists in the problems tracker");
 assert.match(roofRow[0], /<td>0\.8\.10\.455<\/td>/, "roof quest was reported on 0.8.10.455, not the current baseline");
 const animalFixRow = problemsHub.match(/<tr><td><a href="\/guides\/animal-guide#troubleshooting"[\s\S]*?<\/tr>/);
 assert.ok(animalFixRow, "animal disappearance fix row exists");
-assert.match(animalFixRow[0], /Fixed in 0\.8\.10\.562/, "officially fixed animal row keeps its 0.8.10.562 fix marker");
+assert.match(animalFixRow[0], /Fixed in 0\.8\.10\.562/, "officially fixed animal row keeps its historical 0.8.10.562 fix marker");
 
 // 4. field-notes client script must not resurrect the old build literal.
 const fieldNotesScript = read("assets/js/field-notes.js");
 assert.doesNotMatch(fieldNotesScript, /0\.8\.10\.455/, "field-notes.js must not contain the old build literal");
-assert.match(fieldNotesScript, /0\.8\.10\.562/, "field-notes.js defaults to the current build");
+assert.match(fieldNotesScript, /0\.8\.10\.842/, "field-notes.js defaults to the current build");
 
 // 5. Farming advice must stay inside the exact scope of its evidence.
 const farmingEnglish = read("guides/farming-fields.html");
@@ -72,7 +72,7 @@ assert.doesNotMatch(problemsHub, /0\.8\.10\.455\+/, "problem report builds must 
 for (const page of ["guides/building-construction.html", "guides/electricity-power.html"]) {
   const html = read(page);
   assert.match(html, /July 30, 2026 Early Access build \(launch\/video baseline <strong>0\.8\.10\.455<\/strong>\)/, `${page} keeps the launch/video baseline`);
-  assert.match(html, /Current official version:[\s\S]{0,120}0\.8\.10\.562/, `${page} states the current official version separately`);
+  assert.match(html, /Current official version:[\s\S]{0,120}0\.8\.10\.842/, `${page} states the current official version separately`);
 }
 
 // 7. Gigi quest: door-delivery bug is not claimed as officially fixed.

@@ -212,7 +212,7 @@ ${a.fields.map((f) => `              <li><a href="#${a.id}-${f.key}">${escapeHtm
           <li>Link the coop and fill the indoor trough with hay and water. The outdoor trough is not required for ordinary daily feeding.</li>
           <li>Install the coop-specific heater from Angela on the coop exterior wall; a household decoration heater is not a substitute.</li>
           <li>For large eggs, keep needs and satisfaction high, pet the chickens, and provide an enclosed outdoor roaming area. This improves the chance; it does not guarantee the next egg is large.</li>
-          <li>If an animal disappears, update to 0.8.10.562 or later first, then use the <a href="/guides/animal-guide">current troubleshooting checklist</a> rather than an older workaround.</li>
+          <li>If an animal disappears, update to 0.8.10.842 or later first, then use the <a href="/guides/animal-guide">current troubleshooting checklist</a> rather than an older workaround.</li>
         </ol>
         <div class="notice info"><strong>Decision boundary:</strong> prices, production cycles and profit rankings for cow, goat and rabbit remain unverified in the current build. Use the profiles below as evidence-tracked records, not as a complete economy table.</div>
       </section>
@@ -492,7 +492,7 @@ const zhHtml = `<!DOCTYPE html>
         <li>确认鸡舍已关联，补满室内食槽的干草和水；日常喂养不要求额外放置室外食槽。</li>
         <li>使用 Angela 出售的鸡舍专用暖气，并安装在鸡舍外墙；市政厅的住宅装饰暖气不能替代它。</li>
         <li>想提高大鸡蛋出现机会时，保持需求和满意度较高、每天抚摸，并准备封闭的室外活动区；这只是提高机会，不保证下一枚就是大鸡蛋。</li>
-        <li>如果动物消失，先把游戏更新到 0.8.10.562 或更高版本，再按<a href="/zh/guides/animal-guide">当前排障清单</a>记录问题，不要直接套用旧版本规避法。</li>
+        <li>如果动物消失，先把游戏更新到 0.8.10.842 或更高版本，再按<a href="/zh/guides/animal-guide">当前排障清单</a>记录问题，不要直接套用旧版本规避法。</li>
       </ol>
       <div class="notice info"><strong>数据边界：</strong>牛、山羊和兔的当前购买价、生产周期与收益排名仍未验证。下面的条目是带证据状态的记录，不是完整经济表。</div>
     </section>

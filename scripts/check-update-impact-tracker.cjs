@@ -6,8 +6,8 @@ const root = path.resolve(__dirname, "..");
 const read = (relative) => fs.readFileSync(path.join(root, relative), "utf8");
 const data = JSON.parse(read("data/updates.json"));
 
-assert.equal(data.meta.currentBuild, "0.8.10.562");
-assert.equal(data.updates.length, 3);
+assert.equal(data.meta.currentBuild, "0.8.10.842");
+assert.equal(data.updates.length, 4);
 assert.ok(data.updates.every((update) => update.id && update.version && update.title && update.summary));
 assert.ok(data.updates.every((update) => update.changes.length > 0 && update.actions.length > 0));
 assert.ok(data.updates.every((update) => update.source && update.source.url));

@@ -8,7 +8,7 @@ const data = JSON.parse(read("data/community.json"));
 const english = read("community.html");
 const chinese = read("zh/community.html");
 
-assert.equal(data.build, "0.8.10.562");
+assert.equal(data.build, "0.8.10.842");
 assert.ok(data.sources.length >= 8, "community radar should have a useful source snapshot");
 assert.ok(data.externalResources.length >= 5, "community page should expose classified external resources");
 assert.ok(data.externalResources.some((entry) => entry.id === "official-press-kit"));

@@ -1,8 +1,8 @@
 {
   "meta": {
     "page": "database/animals.html",
-    "lastUpdated": "2026-08-11",
-    "build": "0.8.10.562",
+    "lastUpdated": "2026-08-22",
+    "build": "0.8.10.842",
     "videoBuild": "0.8.10.455",
     "evidenceLevels": [
       "official",
@@ -34,6 +34,14 @@
       "author": "RedPilz Studio",
       "date": "2026-08-10",
       "build": "0.8.10.562"
+    },
+    "hotfix-0-8-10-842": {
+      "kind": "official-news",
+      "title": "0.8.10.842 update — official Steam announcement",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1841579228669835",
+      "author": "RedPilz Studio",
+      "date": "2026-08-21",
+      "build": "0.8.10.842"
     },
     "ranching-v2-notes": {
       "kind": "official-news",
@@ -585,12 +593,21 @@
           "label": "Disappearing-chicken checklist",
           "facts": [
             {
-              "text": "Hotfix 0.8.10.562 officially fixed several animal disappearance paths: entering a barn or coop at night, chicks growing up, newborn mammals spawning, animals appearing after a load, and animals becoming stuck between a barn or coop and its doors. Older reports and workarounds below are pre-0.8.10.562 context; only a reproduction on 0.8.10.562 or later should be treated as a current residual bug.",
+              "text": "Hotfix 0.8.10.562 officially fixed several animal disappearance paths: entering a barn or coop at night, chicks growing up, newborn mammals spawning, animals appearing after a load, and animals becoming stuck between a barn or coop and its doors. This remains the historical fix boundary; current residual reports should be tested on 0.8.10.842 or later.",
               "evidenceLevel": "official",
               "build": "0.8.10.562",
-              "validity": "current",
+              "validity": "historical",
               "sourceIds": [
                 "hotfix-0-8-10-562"
+              ]
+            },
+            {
+              "text": "The 0.8.10.842 update adds animal edge-case fixes for barn/coop association, growth-stage state, hunger display, linked counts, repeated turning at doors and a same-frame disappearance case.",
+              "evidenceLevel": "official",
+              "build": "0.8.10.842",
+              "validity": "current",
+              "sourceIds": [
+                "hotfix-0-8-10-842"
               ]
             },
             {
@@ -713,7 +730,7 @@
       "zh": {
         "tocLabel": "鸡",
         "kicker": "当前资料最完整",
-        "headerTag": "0.8.10.562",
+        "headerTag": "0.8.10.842",
         "name": "鸡 Chicken",
         "searchTitle": "鸡的完整照料",
         "searchTags": "鸡 母鸡 公鸡 鸡舍 干草 食槽 水 温控 蛋 大鸡蛋",
@@ -1359,16 +1376,16 @@
         "searchTags": "鸡消失 动物不见 失踪 围栏 温控 link 鸡舍",
         "heading": "鸡或动物突然消失怎么排查",
         "paragraphs": [
-          "官方 0.8.10.562 热修已修复多条动物消失路径：夜间进入鸡舍/畜棚、雏鸡长大、新生哺乳动物生成、读档后动物不显示，以及动物卡在建筑和门之间。下面的旧规避法只保留作历史背景。"
+          "官方 0.8.10.562 热修已修复多条动物消失路径：夜间进入鸡舍/畜棚、雏鸡长大、新生哺乳动物生成、读档后动物不显示，以及动物卡在建筑和门之间。0.8.10.842 又补充了关联、成长和同帧消失等边界；下面的旧规避法只保留作历史背景。"
         ],
         "badge": null,
         "steps": [
-          "Steam 通常会自动更新；只有仍在复现问题时才确认标题画面为 0.8.10.562 或更高版本。",
+          "Steam 通常会自动更新；只有仍在复现问题时才确认标题画面为 0.8.10.842 或更高版本。",
           "确认购买后是否完成任务提示要求的交付或关联步骤。",
           "检查动物是否仍关联正确鸡舍/谷仓，门和围栏是否完整。",
           "检查室内食槽、饮水和专用温控设备。",
           "记录日切前后、退出重进前后以及地图图标是否变化。",
-          "如果 0.8.10.562 或更高版本仍会消失，保留版本号、存档模式、日切前后状态和截图；这才是当前残留问题的有效线索。"
+          "如果 0.8.10.842 或更高版本仍会消失，保留版本号、存档模式、日切前后状态和截图；这才是当前残留问题的有效线索。"
         ],
         "notice": "不要继续把 0.8.10.455 及更早版本的临时规避法当成当前修复；先确认新版本是否仍能复现。"
       }
