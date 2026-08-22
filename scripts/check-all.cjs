@@ -29,6 +29,7 @@ const nodeChecks = [
   ["check-field-notes.cjs"],
   ["check-home-card-links.cjs"],
   ["check-i18n.cjs"],
+  ["check-bilingual-answers.cjs"],
   ["check-knowledge-entities.cjs"],
   ["check-relations.cjs"],
   ["check-local-server.cjs"],

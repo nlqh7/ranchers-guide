@@ -248,11 +248,13 @@
     renderInspectorConnections(marker);
     renderInspectorJourney(marker);
     if (inspectorLink && marker.dataset.markerTarget) {
-      inspectorLink.hidden = false;
       var target = marker.dataset.markerTarget;
-      if (target.charAt(0) === "#" && !document.querySelector(target)) target = "/map" + target;
-      inspectorLink.setAttribute("href", target);
-      inspectorLink.textContent = isChinese ? "查看 " + marker.dataset.markerTitle + " 条目" : "View " + marker.dataset.markerTitle + " in the directory";
+      var localTargetExists = target.charAt(0) !== "#" || !!document.querySelector(target);
+      inspectorLink.hidden = !localTargetExists;
+      if (localTargetExists) {
+        inspectorLink.setAttribute("href", target);
+        inspectorLink.textContent = isChinese ? "查看 " + marker.dataset.markerTitle + " 条目" : "View " + marker.dataset.markerTitle + " in the directory";
+      }
     }
   }
 

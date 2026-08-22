@@ -1,0 +1,31 @@
+const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const path = require("node:path");
+
+const root = path.resolve(__dirname, "..");
+const readJson = (relative) => JSON.parse(fs.readFileSync(path.join(root, relative), "utf8"));
+const clean = (value) => String(value || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+
+const locations = readJson("data/locations.json");
+for (const location of locations.locations) {
+  const en = location.locale?.en;
+  const zh = location.locale?.zh;
+  assert.ok(en?.title && en?.keywords, `${location.id} needs an English location identity`);
+  assert.ok(zh?.title && zh?.keywords, `${location.id} needs a Chinese location identity`);
+  assert.ok(zh.summary && zh.summary.length >= 24, `${location.id} needs a Chinese answer summary`);
+  assert.notEqual(clean(zh.summary), clean(en.entryHtml), `${location.id} must not fall back to English map copy`);
+}
+
+for (const relative of ["knowledge-index.json", "zh/knowledge-index.json"]) {
+  const payload = readJson(relative);
+  const locale = payload.locale;
+  for (const location of locations.locations) {
+    const entity = payload.entities.find((candidate) => candidate.id === `location:${location.id}`);
+    assert.ok(entity, `${relative} is missing location:${location.id}`);
+    assert.ok(entity.summary, `${relative} location:${location.id} needs an answer summary`);
+    assert.match(entity.route, locale === "zh" ? /^\/zh\/map#/ : /^\/map#/);
+    assert.ok(Array.isArray(entity.journey), `${relative} location:${location.id} needs journey metadata`);
+  }
+}
+
+console.log(`PASS: ${locations.locations.length} map entities have independent Chinese answer summaries and locale-safe knowledge entries.`);

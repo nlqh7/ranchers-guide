@@ -186,6 +186,8 @@ assert.match(mapScript, /data-map-progress-reset/);
 assert.match(mapScript, /applyMarkerFilter\("none"\)/, "map script should initialize the guide-pin layer as off");
 assert.match(mapScript, /applyMarkerFilter\(marker\.dataset\.markerCategory\)/, "directory shortcuts should reveal the selected marker category");
 assert.match(mapScript, /markerTarget/);
+assert.match(mapScript, /localTargetExists/, "map inspector must not expose a dead locale anchor");
+assert.match(mapScript, /inspectorLink\.hidden = !localTargetExists/, "missing Chinese directory entries must not create a cross-language dead link");
 assert.match(mapScript, /data-atlas-photo/, "map script wires the photo lightbox");
 assert.match(mapScript, /atlas-lightbox/, "map script builds the lightbox overlay");
 assert.match(mapScript, /pin-flash/, "locate-on-map flashes the target pin");
