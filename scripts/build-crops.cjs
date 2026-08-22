@@ -83,6 +83,7 @@ ${parts.join("\n")}`;
           <span class="tag">Updated ${escapeHtml(entry.lastUpdated)}</span>
         </div>
         <p class="lead">${escapeHtml(entry.summary)}</p>
+${entry.decision ? `        <div class="entity-decision"><strong>When to use this entry</strong><p>${escapeHtml(entry.decision)}</p><div class="button-stack"><a class="btn btn-outline btn-compact" href="/guides/farming-fields">Farming guide</a><a class="btn btn-outline btn-compact" href="/guides/money-making#cashin">CashIn selling</a>${entry.videoRow ? '<a class="btn btn-outline btn-compact" href="/map#leafy-market">Leafy Market</a>' : ""}</div></div>` : ""}
 ${fields}
       </section>`;
 }
@@ -447,7 +448,8 @@ function renderZhEntry(entry) {
       : "";
     return `${h}${items ? `<ul class="evidence-list">${items}</ul>` : ""}${pendingBlock}`;
   }).join("");
-  return `    <section class="evidence-ledger animal-profile" id="${entry.id}" data-search-entry data-search-title="${escapeHtml(zh.searchTitle)}" data-search-tags="${escapeHtml(zh.searchTags)}">${head}${summary}${groups}</section>`;
+  const decision = zh.decision ? `<div class="entity-decision"><strong>什么时候查</strong><p>${escapeHtml(zh.decision)}</p><div class="button-stack"><a class="btn btn-outline btn-compact" href="/zh/guides/farming-fields">种地实战攻略</a><a class="btn btn-outline btn-compact" href="/zh/guides/money-making#cashin">CashIn 出售</a>${entry.videoRow ? '<a class="btn btn-outline btn-compact" href="/zh/map#leafy-market">Leafy Market</a>' : ""}</div></div>` : "";
+  return `    <section class="evidence-ledger animal-profile" id="${entry.id}" data-search-entry data-search-title="${escapeHtml(zh.searchTitle)}" data-search-tags="${escapeHtml(zh.searchTags)}">${head}${summary}${decision}${groups}</section>`;
 }
 
 function renderZhExtraSection(s) {

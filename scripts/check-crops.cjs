@@ -73,6 +73,9 @@ function checkZh(zh, where) {
 }
 for (const entry of entries) {
   if (entry.zh) checkZh(entry.zh, entry.id);
+  if (entry.decision || entry.zh?.decision) {
+    assert.ok(entry.decision && entry.zh?.decision, `${entry.id}: decision guidance must be bilingual`);
+  }
 }
 assert.ok(data.zhExtra && Array.isArray(data.zhExtra.sections) && data.zhExtra.sections.length > 0, "zhExtra.sections required while zh page is generated");
 for (const s of data.zhExtra.sections) {

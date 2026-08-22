@@ -253,6 +253,7 @@
       "category": "poultry",
       "housingType": "Coop",
       "summary": "The best-documented animal in the current build. Buy from Angela, keep hay and water in the coop trough, mount the coop heater on the outside wall, and pet daily for a shot at large eggs.",
+      "whenNeeded": "Use this profile when you are buying your first chicken, troubleshooting care or disappearance, or checking the evidence behind the large-egg route.",
       "searchTags": "chicken hen rooster chick poultry coop egg large egg hay heater angela gigi quest food diet feed price buy sell",
       "fields": [
         {
@@ -741,7 +742,8 @@
         "name": "鸡 Chicken",
         "searchTitle": "鸡的完整照料",
         "searchTags": "鸡 母鸡 公鸡 鸡舍 干草 食槽 水 温控 蛋 大鸡蛋",
-        "summary": null,
+        "summary": "当前证据最完整的动物条目：从 Angela 买鸡，鸡舍食槽补干草和水，鸡舍专用暖气装在外墙；每天抚摸只能提高大鸡蛋出现机会，不能保证下一枚就是大鸡蛋。",
+        "whenNeeded": "第一次买鸡、排查照料或消失问题，或需要核对大鸡蛋任务路线时查这里。",
         "groups": [
           {
             "heading": "喂食与饮水",
@@ -831,6 +833,7 @@
       "category": "mammal",
       "housingType": "Barn",
       "summary": "Confirmed on the roster with milk and meat on current-build shop shelves. Purchase price, cycle and upkeep are still unmeasured — historical Alpha prices are kept as leads only.",
+      "whenNeeded": "Use this profile when deciding whether current-build cow information is enough for a purchase or production plan; price, care cycle and profit remain open.",
       "searchTags": "cow bull calf cattle barn milk meat spotted food diet feed price buy sell",
       "fields": [
         {
@@ -1033,7 +1036,8 @@
         "name": "牛 Cow",
         "searchTitle": "牛",
         "searchTags": "牛 奶牛 公牛 牛奶 谷仓 肉",
-        "summary": "官方商店页明确列出牛属于可饲养动物。当前资料确认肉、牛奶相关生产方向，但卖家、购买价、完整饲养周期和当前版本产量仍未验证。",
+        "summary": "官方商店页明确列出牛属于可饲养动物。当前资料确认肉、牛奶相关生产方向，但卖家、购买价、完整饲养周期和当前版本产量仍未验证。需要判断是否现在购买或规划产出时，先以这些未知项为边界。",
+        "whenNeeded": "准备购买牛或比较牛的产出路线时查这里；当前价格、照料周期和收益仍不能作为决策数字。",
         "groups": [
           {
             "heading": null,
@@ -1058,6 +1062,7 @@
       "category": "mammal",
       "housingType": "Barn",
       "summary": "Officially named on the roster and added as a species in the Ranching v2 notes. No current-build care, price or production data verified yet.",
+      "whenNeeded": "Use this profile to check what is actually documented about goats before treating an older ranching note as current-build guidance.",
       "searchTags": "goat barn mammal milk food diet feed price buy sell",
       "fields": [
         {
@@ -1116,6 +1121,7 @@
         "searchTitle": "山羊",
         "searchTags": "山羊 奶 谷仓 动物",
         "summary": "官方商店页确认山羊存在；当前卖家、价格、住所、产物周期和收益均未验证。证据不足时保持未知，不从 Alpha Wiki 抄入当前表。",
+        "whenNeeded": "想确认当前版本是否已经有可执行的山羊购买或照料路线时查这里；目前没有足够证据给出步骤。",
         "groups": [
           {
             "heading": "当前可用结论",
@@ -1140,6 +1146,7 @@
       "category": "mammal",
       "housingType": "Hutch / outdoor",
       "summary": "Named in official store copy as bunnies and added in the Ranching v2 notes. Diet is the only community-discussed detail, and even that is unconfirmed.",
+      "whenNeeded": "Use this profile to separate the confirmed rabbit roster entry from unverified diet, purchase and production claims.",
       "searchTags": "rabbit bunny bunnies hutch lettuce food diet feed price buy sell",
       "fields": [
         {
@@ -1183,7 +1190,8 @@
         "name": "兔 Rabbit",
         "searchTitle": "兔",
         "searchTags": "兔子 兔 动物 饲养",
-        "summary": "官方商店页确认兔存在；当前住所、食物、繁殖、产物和价格仍待当前版本画面验证。",
+        "summary": "官方商店页确认兔存在；当前住所、食物、繁殖、产物和价格仍待当前版本画面验证。当前资料不足以给出购买或饲养步骤。",
+        "whenNeeded": "想确认兔子条目是否已经有当前版本可执行资料时查这里；不要把旧 Wiki 或单条饮食线索当成完整指南。",
         "groups": [
           {
             "heading": "当前可用结论",

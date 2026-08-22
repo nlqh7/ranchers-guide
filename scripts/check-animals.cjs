@@ -91,6 +91,9 @@ function checkZh(zh, where) {
 }
 for (const animal of data.species) {
   if (animal.zh) checkZh(animal.zh, animal.id);
+  if (animal.whenNeeded || animal.zh?.whenNeeded) {
+    assert.ok(animal.whenNeeded && animal.zh?.whenNeeded, `${animal.id}: when-needed guidance must be bilingual`);
+  }
 }
 assert.ok(data.zhExtra && Array.isArray(data.zhExtra.sections) && data.zhExtra.sections.length > 0, "zhExtra.sections required while zh page is generated");
 for (const s of data.zhExtra.sections) {

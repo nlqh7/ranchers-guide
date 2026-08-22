@@ -100,6 +100,7 @@
       "name": "Red Lettuce",
       "category": "vegetable",
       "summary": "The cheapest seed confirmed in launch-build footage: 48C, Spring, 3 days, single harvest. Sell price per head is still unobserved.",
+      "decision": "Check this entry when you want a current-build, one-harvest Spring crop comparison. The seed and timing are observed; player sell value is still unknown, so this is not a profit ranking.",
       "searchTags": "red lettuce salad vegetable spring seed price grow harvest food sell buy",
       "fields": [
         {
@@ -193,7 +194,8 @@
         "name": "红生菜 Red Lettuce",
         "searchTitle": "红生菜",
         "searchTags": "红生菜 种子 48C 春季 3天 生长 收获",
-        "summary": null,
+        "summary": "当前画面确认红生菜是春季、3 天成熟、一次收获的作物；种子价格为 48C。玩家出售价格仍未知，因此不能直接当成收益排名。",
+        "decision": "想比较当前版本的一次性春季作物，或准备核对 48C 种子和 3 天成熟记录时查这里；出售收入仍要等实测。",
         "groups": [
           {
             "heading": null,
@@ -221,6 +223,7 @@
       "name": "Strawberry",
       "category": "fruit",
       "summary": "The first video-confirmed regrow crop: 144C seed, Spring, 7 days to first harvest, then fruit every 3 days. Berry sell price is unobserved — the 18C-per-harvest figure is a cost-allocation model, not revenue.",
+      "decision": "Check this entry when you are comparing a regrow crop with a one-time harvest. The observed timing is useful for planning, but the berry sell value and yield are still unknown.",
       "searchTags": "strawberry berry berries fruit spring regrow recurring seed price grow harvest sell buy",
       "fields": [
         {
@@ -323,7 +326,8 @@
         "name": "草莓 Strawberry",
         "searchTitle": "草莓",
         "searchTags": "草莓 种子 144C 春季 7天 每3天 再生 收获",
-        "summary": null,
+        "summary": "当前画面确认草莓种子 144C，春季 7 天首次成熟，之后每 3 天再生；出售价格和每株产量仍未知。18C 只是种子成本分摊模型，不是售价或利润。",
+        "decision": "想比较可再生作物与一次性收获，或核对 144C、7 天和每 3 天再生记录时查这里；不要用 18C 模型代替实际收益。",
         "groups": [
           {
             "heading": null,
@@ -355,6 +359,7 @@
       "name": "Garlic",
       "category": "vegetable",
       "summary": "The 31C figure seen on screen is the retail price of the harvested product, not the seed. The seed listing exists but its price was never captured.",
+      "decision": "Check this entry when you need to separate a shop retail value from a seed price or player sell value. The 31C screen value cannot answer the farm-profit question.",
       "searchTags": "garlic vegetable spring seed price grow harvest sell buy retail",
       "fields": [
         {
@@ -421,7 +426,8 @@
         "name": "大蒜 Garlic",
         "searchTitle": "大蒜",
         "searchTags": "大蒜 garlic 31C 零售价 种子 价格",
-        "summary": null,
+        "summary": "当前画面里的 31C 是 Leafy Market 成品大蒜的零售价，不是种子价，也不是玩家出售所得；种子价格和玩家卖价都没有拍清。",
+        "decision": "看到 31C 大蒜时查这里区分商店零售价、种子价格和玩家出售收入；现有证据只能确认前者。",
         "groups": [
           {
             "heading": null,
@@ -445,6 +451,7 @@
       "name": "Aubergine",
       "category": "vegetable",
       "summary": "Historical Alpha record only — no current-build evidence yet.",
+      "decision": "Use this entry only as a historical lead. Wait for a current-build shop or planting screen before using aubergine in a crop plan.",
       "searchTags": "aubergine eggplant vegetable summer seed price crop grow sell buy",
       "fields": [
         {
@@ -482,6 +489,7 @@
         "searchTitle": "茄子",
         "searchTags": "茄子 aubergine 夏季 种子价格 历史作物",
         "summary": "只有 Alpha 资料记录；当前版本还没有种子、种植周期或出售收入的画面证据。",
+        "decision": "只想核对旧资料时查这里；当前版本没有足够证据把茄子放进种植或收益计划。",
         "groups": [
           {
             "heading": "当前状态",
@@ -505,6 +513,7 @@
       "name": "Corn",
       "category": "vegetable",
       "summary": "Historical Alpha record only — no current-build evidence yet.",
+      "decision": "Use this entry only as a historical lead. Wait for a current-build shop or planting screen before using corn in a crop plan.",
       "searchTags": "corn maize vegetable summer seed price crop grow sell buy",
       "fields": [
         {
@@ -542,6 +551,7 @@
         "searchTitle": "玉米",
         "searchTags": "玉米 corn 夏季 种子价格 历史作物",
         "summary": "只有 Alpha 资料记录；当前版本还没有种子、种植周期或出售收入的画面证据。",
+        "decision": "只想核对旧资料时查这里；当前版本没有足够证据把玉米放进种植或收益计划。",
         "groups": [
           {
             "heading": "当前状态",
@@ -565,6 +575,7 @@
       "name": "Green Lettuce",
       "category": "vegetable",
       "summary": "Historical Alpha record only — no current-build evidence yet.",
+      "decision": "Use this entry only as a historical lead. Wait for a current-build shop or planting screen before using green lettuce in a crop plan.",
       "searchTags": "green lettuce salad vegetable summer seed price crop grow sell buy",
       "fields": [
         {
@@ -602,6 +613,7 @@
         "searchTitle": "绿生菜",
         "searchTags": "绿生菜 green lettuce 夏季 种子价格 历史作物",
         "summary": "只有 Alpha 资料记录；当前版本还没有种子、种植周期或出售收入的画面证据。",
+        "decision": "只想核对旧资料时查这里；当前版本没有足够证据把绿生菜放进种植或收益计划。",
         "groups": [
           {
             "heading": "当前状态",

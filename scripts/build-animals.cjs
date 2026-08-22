@@ -84,6 +84,7 @@ ${parts.join("\n")}`;
           <span class="tag">Updated ${escapeHtml(animal.lastUpdated)}</span>
         </div>
         <p class="lead">${escapeHtml(animal.summary)}</p>
+${animal.whenNeeded ? `        <div class="entity-decision"><strong>When to look here</strong><p>${escapeHtml(animal.whenNeeded)}</p></div>` : ""}
 ${fields}
       </section>`;
 }
@@ -459,7 +460,8 @@ function renderZhEntry(entry) {
       : "";
     return `${h}${items ? `<ul class="evidence-list">${items}</ul>` : ""}${pendingBlock}`;
   }).join("");
-  return `    <section class="evidence-ledger animal-profile" id="${entry.id}" data-search-entry data-search-title="${escapeHtml(zh.searchTitle)}" data-search-tags="${escapeHtml(zh.searchTags)}">${head}${summary}${groups}</section>`;
+  const decision = zh.whenNeeded ? `<div class="entity-decision"><strong>什么时候查</strong><p>${escapeHtml(zh.whenNeeded)}</p></div>` : "";
+  return `    <section class="evidence-ledger animal-profile" id="${entry.id}" data-search-entry data-search-title="${escapeHtml(zh.searchTitle)}" data-search-tags="${escapeHtml(zh.searchTags)}">${head}${summary}${decision}${groups}</section>`;
 }
 
 function renderZhExtra(extra) {
