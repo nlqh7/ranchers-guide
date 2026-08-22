@@ -1,5 +1,20 @@
 # AdSense Content Audit - 2026-08-20
 
+## 2026-08-22 Follow-up Evidence
+
+- Search Console performance for 2026-07-20 through 2026-08-20: 3,630 impressions, 212 clicks, 5.8% CTR and average position 8.1. Visible demand is concentrated around roadmap, vehicle driving, Zirconite, buildings and quests.
+- Search Console indexing snapshot: 15 indexed pages, 39 not indexed, and 30 discovered but not indexed. URL inspection confirmed the homepage and animal database indexed; the map and crops database were not indexed yet, while the map live test reported that the URL was indexable.
+- AdSense site status remains “not ready to show ads” with the reason “low-value content”. No review request was submitted. This is a live status, not an approval prediction.
+- The 2026-08-22 local follow-up added source-linked Creator Notes (3 to 10 entries), goal-based answers to both database hubs, and a symptom-first action box to both problem hubs. It did not add pages, unsupported facts or another system.
+- Audit result after the follow-up: no true indexed gameplay thin page, orphan, invalid relation or sitemap/noindex conflict. Remaining B grades are role-appropriate hubs, short evidence pages or functional surfaces; they should not be inflated with filler.
+
+## 2026-08-22 Thin-page sweep closeout
+
+- Reviewed all 69 sitemap routes by page role, answer entry, freshness marker, internal-link count and bilingual counterpart.
+- The apparent gaps were false positives for controls, wanted levels, the chicken troubleshooter, NPC/quest records and most map functionality: each already contains an actionable answer path or interactive workflow.
+- Made only three parity edits: added the Chinese map quick-answer block matching the English map's in-game entry path; added goal-based entry guidance to both quest directories. No facts, coordinates, entities or routes were added.
+- No additional noindex decision was justified. Search, contribution, trust and local-only tools remain support surfaces; no gameplay landing page was reduced to a navigation-only shell.
+
 ## Decision
 
 Do not build a new Wiki layer, add tools, or expand entity counts before addressing the content risks in this report. The site already has sound technical hygiene. AdSense approval still depends on whether indexed pages provide original, substantial, satisfying help rather than looking like templates, research notes, or incomplete datasets.

@@ -66,6 +66,173 @@
         { "route": "/map", "label": "Map evidence", "zhLabel": "地图证据" },
         { "route": "/research", "label": "Research queue", "zhLabel": "研究队列" }
       ]
+    },
+    {
+      "id": "animal-husbandry-guide",
+      "kind": { "en": "Steam guide", "zh": "Steam 攻略" },
+      "name": "Animal Husbandry Guide",
+      "zhName": "Animal Husbandry Guide 动物饲养攻略",
+      "sourceTitle": "Animal Husbandry Guide by Alfafreak",
+      "sourceUrl": "https://steamcommunity.com/sharedfiles/filedetails/?id=3777637227",
+      "sourceDate": "2026-08-22",
+      "build": "Build not stated; updated 2026-08-05",
+      "scope": "A recent player guide organized around chickens, rabbits, goats and cows. It is useful for finding the questions players ask about housing, feed, equipment and breeding, while its exact prices and setup advice remain author observations.",
+      "zhScope": "一篇近期玩家攻略，按鸡、兔、山羊和牛整理问题。它适合发现玩家对住所、饲料、设备和繁殖的实际疑问，但其中的具体价格和配置建议仍属于作者观测。",
+      "use": "We use the guide to select comparison targets and link players to the original walkthrough. We do not copy its shopping lists or promote its numbers into the current database without separate evidence.",
+      "zhUse": "本站用它选择对照目标，并让玩家回到原攻略查看完整流程；不会复制购物清单，也不会在缺少独立证据时把数字写进当前数据库。",
+      "risk": "The guide does not state a current build, and the 0.8.10.842 patch changed animal and coop behavior. Treat prices, capacities and breeding steps as leads until checked.",
+      "zhRisk": "攻略没有标明当前版本，而 0.8.10.842 曾修改动物和鸡舍行为。价格、容量和繁殖步骤在核对前只能作为线索。",
+      "related": [
+        { "route": "/database/animals", "label": "Animal database", "zhLabel": "动物数据库" },
+        { "route": "/guides/animal-guide", "label": "Animal care guide", "zhLabel": "动物照料攻略" },
+        { "route": "/community", "label": "Community Radar", "zhLabel": "社区雷达" }
+      ]
+    },
+    {
+      "id": "crop-seed-yield-tests",
+      "kind": { "en": "Steam guide", "zh": "Steam 攻略" },
+      "name": "Crop Seed Prices and Yield Tests",
+      "zhName": "Crop Seed Prices and Yield Tests 作物种子与产量测试",
+      "sourceTitle": "Crop Seed prices and Yield Tests by Alfafreak",
+      "sourceUrl": "https://steamcommunity.com/sharedfiles/filedetails/?id=3776114578",
+      "sourceDate": "2026-08-22",
+      "build": "Build not stated; updated 2026-08-06",
+      "scope": "A player spreadsheet-based guide covering seed prices, seasons, growth time and fertilizer observations. It is a useful comparison lead because the author records tests instead of presenting a generic crop list.",
+      "zhScope": "一篇以玩家表格测试为基础的攻略，涉及种子价格、季节、生长时间和肥料观测。它的价值在于留下了对照测试线索，而不是泛泛列出作物名称。",
+      "use": "We use its categories and test questions to decide what to reproduce. The current crop database keeps per-crop sell prices blank where settlement totals do not identify each crop, and does not import the spreadsheet as a table.",
+      "zhUse": "本站用它的分类和测试问题决定后续复核方向；在结算总额无法识别单颗作物时，当前作物库仍保留单作物售价空缺，不把表格直接搬成本站数据。",
+      "risk": "The guide does not state a build and includes a warning that fertilizer behavior is not working as advertised. Do not use its profit ranking as a current recommendation without a controlled retest.",
+      "zhRisk": "攻略没有标明版本，并明确提到肥料行为与说明不一致。没有控制变量复测前，不要把它的利润排序当作当前推荐。",
+      "related": [
+        { "route": "/database/crops", "label": "Crop database", "zhLabel": "作物数据库" },
+        { "route": "/guides/farming-fields", "label": "Farming guide", "zhLabel": "种田攻略" },
+        { "route": "/guides/money-making", "label": "Money-making guide", "zhLabel": "赚钱攻略" }
+      ]
+    },
+    {
+      "id": "dumpster-diving-route",
+      "kind": { "en": "Steam guide", "zh": "Steam 攻略" },
+      "name": "Making Money with Dumpster Diving",
+      "zhName": "Making Money with Dumpster Diving 垃圾桶赚钱路线",
+      "sourceTitle": "Making money with dumpster diving by Alfafreak",
+      "sourceUrl": "https://steamcommunity.com/sharedfiles/filedetails/?id=3775203725",
+      "sourceDate": "2026-08-22",
+      "build": "Build not stated; updated 2026-08-05",
+      "scope": "A short early-game route that combines dumpster searches, subway movement, Zerkonite protection and Cash-In selling. It gives players a concrete route to compare with the site's money and map pages.",
+      "zhScope": "一条面向前期的短路线，把翻垃圾桶、地铁移动、保护锆矿和 Cash-In 出售串起来。它能给玩家一个具体路线，也能作为本站赚钱页和地图页的对照线索。",
+      "use": "We summarize the decision path rather than reproducing the route map. The guide is used as a lead for locations and inventory priorities; any price or daily-income claim needs separate evidence.",
+      "zhUse": "本站只提炼决策路径，不复制路线图。地点和背包优先级可作为研究线索，价格或日收益必须另行取证。",
+      "risk": "Loot locations, item values and the best route may change with updates. The guide does not state a build, so it is not a guaranteed money formula.",
+      "zhRisk": "掉落地点、物品价值和最优路线可能随更新变化。攻略没有标明版本，因此不能当作保证收益公式。",
+      "related": [
+        { "route": "/guides/money-making", "label": "Money-making guide", "zhLabel": "赚钱攻略" },
+        { "route": "/map", "label": "Map and locations", "zhLabel": "地图与地点" },
+        { "route": "/database/materials", "label": "Materials database", "zhLabel": "材料数据库" }
+      ]
+    },
+    {
+      "id": "power-water-production",
+      "kind": { "en": "Steam guide", "zh": "Steam 攻略" },
+      "name": "Power & Water Production",
+      "zhName": "Power & Water Production 电力与供水",
+      "sourceTitle": "Power & Water Production",
+      "sourceUrl": "https://steamcommunity.com/sharedfiles/filedetails/?id=3786738011",
+      "sourceDate": "2026-08-22",
+      "build": "Build not stated; recent guide",
+      "scope": "A compact player note comparing a suggested solar, wind and water-pump mix by season. It is useful for identifying the power-planning question, not for proving a universal ratio.",
+      "zhScope": "一篇按季节比较太阳能、风力和水泵组合的简短玩家笔记。它适合帮助定位电力规划问题，不足以证明一个适用于所有农场的固定比例。",
+      "use": "We use it as a prompt to review the Electricity Guide and to identify which seasonal production assumptions need testing. We do not copy the ratio into a calculator.",
+      "zhUse": "本站用它提醒自己复核电力攻略，并标出需要测试的季节产能假设；不会把该比例直接写入计算器。",
+      "risk": "The guide gives a recommendation without stating its build, farm load or raw measurements. Seasonal output and cost claims remain unverified.",
+      "zhRisk": "攻略给出了建议，但没有说明版本、农场负载或原始测量。季节产能和成本结论仍未验证。",
+      "related": [
+        { "route": "/guides/electricity-power", "label": "Electricity guide", "zhLabel": "电力攻略" },
+        { "route": "/database/materials", "label": "Materials database", "zhLabel": "材料数据库" },
+        { "route": "/community", "label": "Community Radar", "zhLabel": "社区雷达" }
+      ]
+    },
+    {
+      "id": "animal-price-production-sheet",
+      "kind": { "en": "Steam guide", "zh": "Steam 攻略" },
+      "name": "Animal Prices and Production Sheet",
+      "zhName": "Animal Prices and Production Sheet 动物价格与产出表",
+      "sourceTitle": "(under Construction) Animal Prices and Eggs/Milk/Meat Production",
+      "sourceUrl": "https://steamcommunity.com/sharedfiles/filedetails/?id=3783680180",
+      "sourceDate": "2026-08-22",
+      "build": "Build not stated; under construction",
+      "scope": "A work-in-progress guide that links a spreadsheet for animal prices, products and daily-average profit comparisons. It shows the kind of comparison players want, while the sheet itself is not a verified source for this site.",
+      "zhScope": "一篇施工中的攻略，链接到包含动物价格、产物和日均收益比较的表格。它能说明玩家想查什么，但表格本身不是本站已验证的数据源。",
+      "use": "We use its categories to identify missing questions in the animal database, but keep prices, production and profit fields bounded by the site's evidence rules.",
+      "zhUse": "本站用它的分类发现动物数据库还缺哪些问题，但价格、产出和收益字段仍严格遵守本站证据规则。",
+      "risk": "The guide is explicitly unfinished and does not state a build or testing method. Spreadsheet rankings must not be presented as current facts.",
+      "zhRisk": "攻略明确处于未完成状态，也没有标明版本或测试方法。表格排序不能直接作为当前事实。",
+      "related": [
+        { "route": "/database/animals", "label": "Animal database", "zhLabel": "动物数据库" },
+        { "route": "/guides/animal-guide", "label": "Animal care guide", "zhLabel": "动物照料攻略" },
+        { "route": "/methodology", "label": "Evidence method", "zhLabel": "证据方法" }
+      ]
+    },
+    {
+      "id": "opening-hours-current",
+      "kind": { "en": "Steam guide", "zh": "Steam 攻略" },
+      "name": "Opening Hours",
+      "zhName": "Opening Hours 营业时间",
+      "sourceTitle": "Opening Hours by CanderThal",
+      "sourceUrl": "https://steamcommunity.com/sharedfiles/filedetails/?id=2883435340",
+      "sourceDate": "2026-08-22",
+      "build": "Older guide; superseded by an Early Access guide",
+      "scope": "An older opening-hours table for vendors and town services. Its main value now is showing the recurring player need for shop schedules and the locations that should be checked again in the current build.",
+      "zhScope": "一张较早的商店和城镇服务营业时间表。它现在的主要价值是证明玩家确实会查营业时间，并指出哪些地点需要在当前版本重新核对。",
+      "use": "We keep it as a historical lead and do not copy its schedule into current answers. The page itself points readers toward the newer Early Access guide.",
+      "zhUse": "本站把它保留为历史线索，不把旧时间表复制进当前答案；原攻略也提示读者查看较新的 EA 版本攻略。",
+      "risk": "The guide is old and the Steam page records that its creator has not updated it since 2022. All schedules should be treated as historical until rechecked.",
+      "zhRisk": "攻略较旧，Steam 页面也记录作者自 2022 年后没有更新。所有营业时间在重新核对前都应视为历史信息。",
+      "related": [
+        { "route": "/database/npcs", "label": "NPC database", "zhLabel": "NPC 数据库" },
+        { "route": "/map", "label": "Map and locations", "zhLabel": "地图与地点" },
+        { "route": "/community", "label": "Community Radar", "zhLabel": "社区雷达" }
+      ]
+    },
+    {
+      "id": "opening-hours-early-access",
+      "kind": { "en": "Removed Steam guide", "zh": "已移除的 Steam 攻略" },
+      "name": "Opening Hours (Early Access)",
+      "zhName": "Opening Hours (Early Access) EA 营业时间",
+      "sourceTitle": "Opening Hours (Early Access) by Alfafreak",
+      "sourceUrl": "https://steamcommunity.com/sharedfiles/filedetails/?id=3778011102",
+      "sourceDate": "2026-08-22",
+      "build": "Recent EA lead; Steam page currently removed",
+      "scope": "A recent Early Access schedule lead that grouped animal vendors, the veterinarian, City Hall, shops and dealerships. The record is kept to show what needs current verification, not as a live timetable.",
+      "zhScope": "一篇近期 EA 营业时间线索，按动物商人、兽医、市政厅、商店和车行分组。保留它是为了说明需要复核什么，不是把它当作当前营业表。",
+      "use": "We keep the direct source link and its removed status visible, then use the named services as candidates for map and NPC checks. No schedule is promoted without a current independent check.",
+      "zhUse": "本站保留直达来源和页面已移除的状态，用其中的服务名称作为地图和 NPC 复核候选；没有当前独立核对就不上线营业时间。",
+      "risk": "Steam currently marks the guide as removed, and its exact build is not stated. Do not rely on its hours for a time-sensitive trip.",
+      "zhRisk": "Steam 当前标记该攻略已被移除，而且没有明确版本。需要赶时间前往某地时不要依赖其中的营业时间。",
+      "related": [
+        { "route": "/database/npcs", "label": "NPC database", "zhLabel": "NPC 数据库" },
+        { "route": "/map", "label": "Map and locations", "zhLabel": "地图与地点" },
+        { "route": "/guides/vehicles-transport", "label": "Vehicles and transport", "zhLabel": "车辆与交通" }
+      ]
+    },
+    {
+      "id": "official-early-access-roadmap",
+      "kind": { "en": "Official roadmap link", "zh": "官方路线图链接" },
+      "name": "Early Access Roadmap",
+      "zhName": "Early Access Roadmap 抢先体验路线图",
+      "sourceTitle": "The Ranchers Early Access roadmap",
+      "sourceUrl": "https://open.codecks.io/ranchers/decks/15-early-access",
+      "sourceDate": "2025-06-09",
+      "build": "Pre-EA planning reference",
+      "scope": "An official roadmap link shared by a developer in a 2025 Steam discussion. It is useful for understanding historical planning context, not for proving what is available in build 0.8.10.842.",
+      "zhScope": "开发者在 2025 年 Steam 讨论中分享的官方路线图链接。它可用于理解历史规划背景，不能证明 0.8.10.842 已经提供了其中内容。",
+      "use": "We use it to separate historical plans from current update notes. Current availability must come from a dated official announcement or current-build evidence.",
+      "zhUse": "本站用它区分历史规划和当前更新说明。当前是否可用必须以带日期的官方公告或当前版本证据为准。",
+      "risk": "The linked roadmap may change, disappear or retain outdated plans. Do not copy its dates, features or planned systems into current answers without a new source check.",
+      "zhRisk": "路线图链接可能变化、失效或保留过时规划。没有新的来源核对，不要把其中日期、功能或计划系统写成当前答案。",
+      "related": [
+        { "route": "/updates", "label": "Update explanations", "zhLabel": "更新解读" },
+        { "route": "/methodology", "label": "Evidence method", "zhLabel": "证据方法" }
+      ]
     }
   ]
 }
