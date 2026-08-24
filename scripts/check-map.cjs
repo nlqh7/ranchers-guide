@@ -258,6 +258,8 @@ assert.match(mapScript, /history\[mode\]/, "explicit location selections can cre
 assert.match(mapScript, /searchNeedsHistoryBoundary/, "typing a new search from a selected location must preserve a browser Back boundary");
 assert.match(mapScript, /directoryFilterKeepsSelection/, "the directory category filter must clear a location it hides");
 assert.match(mapScript, /params\.get\("location"\)/, "map accepts location query deep links");
+assert.match(mapScript, /knownLocationIds/, "map deep links must accept directory-only task locations as well as marker ids");
+assert.match(mapScript, /No verified coordinate/, "directory-only deep links must explain the missing coordinate in the inspector");
 assert.match(mapScript, /search\.value\s*=\s*params\.get\("q"\)/, "browser Back must restore the directory search control from the URL");
 assert.match(mapScript, /category\.value\s*=\s*restoredCategory/, "browser Back must restore the directory category control from the URL");
 assert.match(mapScript, /popstate/, "browser Back restores map location state");

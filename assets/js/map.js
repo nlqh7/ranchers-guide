@@ -21,6 +21,7 @@
   var markerLayer = document.querySelector("[data-map-marker-layer]");
   var markers = markerLayer ? Array.from(markerLayer.querySelectorAll("[data-marker-category]")) : [];
   var knownMarkerIds = Array.from(new Set(markers.map(function (marker) { return marker.dataset.markerId; })));
+  var knownLocationIds = [];
   var markerFilterButtons = Array.from(document.querySelectorAll("[data-map-pin-filter]"));
   var layerToggleButtons = Array.from(document.querySelectorAll("[data-map-layer-toggle]"));
   var layerActionButtons = Array.from(document.querySelectorAll("[data-map-layer-action]"));
@@ -91,6 +92,7 @@
       keywords: entry.dataset.locationKeywords,
     };
   }) : [];
+  knownLocationIds = locations.map(function (location) { return location.id; });
 
   var initialParams = new URLSearchParams(window.location.search);
   if (hasDirectory) {
@@ -963,10 +965,10 @@
     var queryId = params.get("location") || "";
     var hashId = window.location.hash ? window.location.hash.slice(1) : "";
     var requestedId = window.RanchersMapState
-      ? window.RanchersMapState.resolveLocationId(queryId, hashId, knownMarkerIds)
-      : (knownMarkerIds.includes(queryId) ? queryId : (knownMarkerIds.includes(hashId) ? hashId : null));
-    var nextHash = queryId && knownMarkerIds.includes(queryId) && knownMarkerIds.includes(hashId) ? "" : window.location.hash;
-    if (queryId && !knownMarkerIds.includes(queryId)) params.delete("location");
+      ? window.RanchersMapState.resolveLocationId(queryId, hashId, knownLocationIds)
+      : (knownLocationIds.includes(queryId) ? queryId : (knownLocationIds.includes(hashId) ? hashId : null));
+    var nextHash = queryId && knownLocationIds.includes(queryId) && knownLocationIds.includes(hashId) ? "" : window.location.hash;
+    if (queryId && !knownLocationIds.includes(queryId)) params.delete("location");
     if (params.toString() !== new URLSearchParams(window.location.search).toString() || nextHash !== window.location.hash) {
       var normalized = params.toString();
       window.history.replaceState(null, "", window.location.pathname + (normalized ? "?" + normalized : "") + nextHash);
@@ -978,6 +980,21 @@
     var marker = markerForLocation(requestedId);
     if (marker) {
       focusMarkerOnMap(marker, false);
+      return;
+    }
+    var entry = entries.find(function (candidate) { return candidate.id === requestedId; });
+    if (entry) {
+      clearSelectedMarker();
+      if (hasDirectory) {
+        search.value = "";
+        category.value = "all";
+        render();
+      }
+      entries.forEach(function (candidate) { candidate.classList.remove("is-focused"); });
+      openEntryGroup(entry);
+      entry.classList.add("is-focused");
+      entry.scrollIntoView({ behavior: "smooth", block: "center" });
+      setInspector(entry.dataset.locationTitle, isChinese ? "暂无验证坐标" : "No verified coordinate", isChinese ? "此任务地点保留在目录中，但目前没有可可靠显示的地图标记。" : "This task location remains in the directory, but it does not have a reliable map marker yet.");
       return;
     }
     clearSelectedMarker();
