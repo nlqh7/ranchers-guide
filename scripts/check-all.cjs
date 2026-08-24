@@ -35,6 +35,8 @@ const nodeChecks = [
   ["check-local-server.cjs"],
   ["check-locations-data.cjs"],
   ["check-map.cjs"],
+  ["check-native-map.cjs"],
+  ["check-map-viewer.cjs"],
   ["check-materials.cjs"],
   ["check-navigation-state.cjs"],
   ["check-page-navigation.cjs"],

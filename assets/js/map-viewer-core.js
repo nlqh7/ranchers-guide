@@ -7,12 +7,12 @@
 
   var views = {
     overview: { scale: 1, x: 0, y: 0 },
-    rural: { scale: 1.6, x: 24, y: 2 },
-    city: { scale: 1.55, x: -25, y: 1 },
-    "city-north": { scale: 2.25, x: -24, y: 18 },
-    "city-center": { scale: 2.25, x: -24, y: 0 },
-    "city-south": { scale: 2.25, x: -24, y: -17 },
-    "east-coast": { scale: 2.45, x: -38, y: 1 },
+    rural: { scale: 2, x: -8, y: -50 },
+    city: { scale: 2, x: -46, y: -50 },
+    "city-north": { scale: 2.6, x: -57.2, y: -49.4 },
+    "city-center": { scale: 2.6, x: -55.45, y: -77.15 },
+    "city-south": { scale: 2.6, x: -65, y: -80 },
+    "east-coast": { scale: 2.6, x: -80, y: 3.34 },
   };
 
   function clampZoom(value) {
@@ -31,9 +31,7 @@
     if (direction === "right") next.x -= step;
     if (direction === "up") next.y += step;
     if (direction === "down") next.y -= step;
-    next.x = Math.min(45, Math.max(-45, next.x));
-    next.y = Math.min(30, Math.max(-30, next.y));
-    return next;
+    return clampXY(next);
   }
 
   function stageToImage(stagePoint, view) {
@@ -48,8 +46,12 @@
   }
 
   function clampXY(view) {
-    view.x = Math.min(45, Math.max(-45, Number(view.x) || 0));
-    view.y = Math.min(30, Math.max(-30, Number(view.y) || 0));
+    view.scale = clampZoom(view.scale);
+    var limit = 50 * (view.scale - 1);
+    view.x = Math.min(limit, Math.max(-limit, Number(view.x) || 0));
+    view.y = Math.min(limit, Math.max(-limit, Number(view.y) || 0));
+    view.x = Math.round(view.x * 1000000) / 1000000;
+    view.y = Math.round(view.y * 1000000) / 1000000;
     return view;
   }
 

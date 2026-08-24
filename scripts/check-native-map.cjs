@@ -1,0 +1,54 @@
+const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const path = require("node:path");
+
+const root = path.resolve(__dirname, "..");
+const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), "utf8");
+
+function pngSize(relativePath) {
+  const file = path.join(root, relativePath);
+  assert.ok(fs.existsSync(file), `${relativePath} must exist`);
+  const buffer = fs.readFileSync(file);
+  assert.equal(buffer.toString("ascii", 1, 4), "PNG", `${relativePath} must remain an original PNG asset`);
+  return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
+}
+
+assert.deepEqual(pngSize("assets/img/map/sunvale-native-b24847725.png"), { width: 4000, height: 4000 });
+for (const icon of ["city-hall", "shop-grocery", "subway", "parking", "airport", "museum", "dealer-berrari", "dealer-prestige", "dealer-star", "dealer-utility", "car-paint", "port", "ferris-wheel", "police-station", "casino", "novagen", "vitalis", "fuel-station"]) {
+  assert.deepEqual(pngSize(`assets/img/map/icons/${icon}-b24847725.png`), { width: 256, height: 256 });
+}
+
+for (const relativePath of ["map.html", "zh/map.html"]) {
+  const html = read(relativePath);
+  assert.match(html, /src="\/assets\/img\/map\/sunvale-native-b24847725\.png"[^>]*width="4000"[^>]*height="4000"[^>]*draggable="false"[^>]*data-protected-game-art/);
+  assert.equal((html.match(/class="map-marker map-marker-[a-z]+ map-marker-exact/g) || []).length, 58, `${relativePath} must expose all 58 exact native POI anchors`);
+  assert.equal((html.match(/map-marker-evidence-supported/g) || []).length, 9, `${relativePath} must default to the nine supported exact anchors`);
+  assert.equal((html.match(/data-marker-id="leafy-market"/g) || []).length, 7, `${relativePath} must expose every Leafy Market branch`);
+  assert.equal((html.match(/data-marker-id="subway"/g) || []).length, 16, `${relativePath} must expose every cross-checked Subway entrance`);
+  assert.equal((html.match(/data-marker-id="overnight-parking"/g) || []).length, 13, `${relativePath} must expose every enumerated current-build SAFE_PARKING tracker`);
+  assert.match(html, /\/assets\/img\/map\/icons\/city-hall-b24847725\.png/);
+  assert.match(html, /\/assets\/img\/map\/icons\/shop-grocery-b24847725\.png/);
+  assert.equal((html.match(/\/assets\/img\/map\/icons\/subway-b24847725\.png/g) || []).length, 16, `${relativePath} must use the native Subway glyph for every entrance`);
+  assert.equal((html.match(/\/assets\/img\/map\/icons\/parking-b24847725\.png/g) || []).length, 13, `${relativePath} must use the native Parking glyph for every tracker`);
+  assert.match(html, /\/assets\/img\/map\/icons\/airport-b24847725\.png/);
+  assert.match(html, /\/assets\/img\/map\/icons\/museum-b24847725\.png/);
+  assert.equal((html.match(/\/assets\/img\/map\/icons\/dealer-[a-z]+-b24847725\.png/g) || []).length, 4, `${relativePath} must use each native dealership glyph once`);
+  assert.match(html, /used with developer permission|经开发商许可/i, `${relativePath} must retain the permitted fan-site asset notice`);
+}
+
+const mapScript = read("assets/js/map.js");
+assert.match(mapScript, /data-protected-game-art/);
+assert.match(mapScript, /contextmenu/);
+assert.match(mapScript, /new Set\(markers\.map/, "multiple branch markers must keep one stable location identity");
+
+const styles = read("assets/css/style.css");
+assert.match(styles, /\.map-stage\s*\{[\s\S]*?aspect-ratio:\s*1\s*\/\s*1;/, "the complete native map must retain its square aspect ratio");
+assert.match(styles, /\.map-marker-native-icon\s*\{[\s\S]*?pointer-events:\s*none;/, "native glyphs must not steal marker interaction");
+assert.match(styles, /\.map-stage:not\(\.is-zoomed\) \.map-marker-exact::after\s*\{[\s\S]*?width:\s*22px;[\s\S]*?height:\s*22px;/, "overview markers must use a compact visible symbol while preserving the 44px hit target");
+assert.match(styles, /\.map-stage:not\(\.is-zoomed\) \.map-marker-native-icon\s*\{[\s\S]*?width:\s*15px;[\s\S]*?height:\s*15px;/, "overview native glyphs must remain readable without hiding nearby exact anchors");
+assert.doesNotMatch(styles, /(?:^|\n)\.map-marker-evidence-reported::after\s*\{/, "site-collected exact anchors must not use an approximate-looking dashed ring");
+assert.match(styles, /@media \(max-width: 560px\)[\s\S]*?\.map-region-tabs\s*\{[^}]*display:\s*grid;[^}]*grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\);[^}]*\}/, "mobile region controls must fit without an internal horizontal scrollbar");
+assert.match(styles, /\.map-viewer-panel\.is-map-fullscreen \.map-secondary-actions,[\s\S]*?\.map-viewer-panel\.is-map-fullscreen \.map-source-note\s*\{\s*display:\s*none;/, "full-screen mode must remove secondary submission and source copy from the map workspace");
+assert.match(styles, /-webkit-touch-callout:\s*none;/, "protected game art should deter long-press copying");
+
+console.log("PASS: complete native map, exact POI layers and game-art safeguards are wired.");

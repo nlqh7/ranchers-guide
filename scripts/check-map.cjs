@@ -15,6 +15,7 @@ for (const script of ["build-locations.cjs", "check-locations-data.cjs"]) {
 const mapPage = read("map.html");
 const chineseMapPage = read("zh/map.html");
 const sharedStyles = read("assets/css/style.css");
+assert.doesNotMatch(sharedStyles, /var\(--green-600\)/, "map marker colors must use a defined green token");
 assert.doesNotMatch(mapPage, /map-construction-badge/, "verification copy must not cover the map image");
 assert.doesNotMatch(chineseMapPage, /map-construction-badge/, "Chinese verification copy must not cover the map image");
 assert.doesNotMatch(sharedStyles, /\.map-construction-badge/, "removed map overlay must not leave dead styles");
@@ -22,6 +23,7 @@ assert.match(sharedStyles, /\[hidden\]\s*\{\s*display:\s*none\s*!important;/, "h
 assert.match(sharedStyles, /\.map-pin-controls button\s*\{[\s\S]*?min-height:\s*44px;/, "map filters need touch-sized controls");
 assert.match(mapPage, /<link rel="canonical" href="https:\/\/theranchersguide\.com\/map">/);
 assert.match(mapPage, /data-location-search/);
+assert.match(mapPage, /data-location-search[^>]*aria-controls="location-directory"[^>]*aria-describedby="location-count"/, "English search must expose its result region to assistive technology");
 assert.match(mapPage, /data-location-category/);
 assert.match(mapPage, /data-location-entry/g);
 assert.match(mapPage, /Leafy Market/);
@@ -32,8 +34,12 @@ assert.match(mapPage, /href="\/database\/npcs#victor"/);
 assert.match(mapPage, /href="\/problems\/vehicle-recovery"/);
 assert.match(chineseMapPage, /href="\/zh\/database\/npcs#victor"/);
 assert.match(chineseMapPage, /href="\/zh\/problems\/vehicle-recovery"/);
-assert.match(mapPage, /15 subway stations/);
-assert.match(mapPage, /17 Overnight Parking locations/);
+assert.match(mapPage, /16 active Subway POI trackers/);
+assert.match(mapPage, /official June update[^<]*version 0\.8\.10\.420 says 15 travel stations/);
+assert.match(chineseMapPage, /16 个启用的地铁 POI/);
+assert.match(chineseMapPage, /官方 0\.8\.10\.420 公告仍写 15 个可旅行站/);
+assert.match(mapPage, /13 active SAFE_PARKING map trackers/);
+assert.match(chineseMapPage, /13 个启用的 SAFE_PARKING 地图 tracker/);
 assert.match(mapPage, /href="\/contribute\?topic=map"/);
 assert.match(mapPage, /data-current-map/);
 assert.match(mapPage, /data-map-region="(?:overview|rural|city)"/);
@@ -49,23 +55,30 @@ assert.match(mapPage, /data-map-pin-form/);
 assert.match(mapPage, /data-map-pin-close/);
 assert.match(mapPage, /Games Station/);
 assert.match(mapPage, /youtube\.com\/watch\?v=GrFiYqWcBK0(?:&amp;|&)t=1695s/);
-assert.match(mapPage, /Player-captured August 2, 2026/i);
+assert.match(mapPage, /Site-owner build collection · b24847725/i);
 assert.match(mapPage, /data-map-marker-layer/);
 assert.match(mapPage, /data-marker-category="(?:shopping|services|transport|landmarks)"/);
 assert.match(mapPage, /data-map-pin-filter="all"/);
+assert.equal((mapPage.match(/data-map-layer-toggle="(?:shopping|services|transport|landmarks)"/g) || []).length, 4, "English map needs four independently toggleable marker layers");
+assert.equal((chineseMapPage.match(/data-map-layer-toggle="(?:shopping|services|transport|landmarks)"/g) || []).length, 4, "Chinese map needs four independently toggleable marker layers");
+assert.match(mapPage, /data-map-layer-action="all"/);
+assert.match(mapPage, /data-map-layer-action="none"/);
+assert.match(mapPage, /data-map-layer-summary[^>]*aria-live="polite"/);
+assert.match(chineseMapPage, /data-map-layer-summary[^>]*aria-live="polite"/);
 assert.match(mapPage, /data-map-evidence-filter="supported"/);
 assert.match(mapPage, /data-map-evidence-filter="reported"/);
 assert.match(mapPage, /data-map-evidence-filter="planned"/);
-assert.match(mapPage, /class="active"[^>]*data-map-pin-filter="none"[^>]*aria-pressed="true"/, "guide pins should be off by default");
-assert.match(mapPage, /data-map-marker-layer[^>]*hidden/, "guide pin layer should not cover the source map by default");
+assert.match(mapPage, /class="active"[^>]*data-map-pin-filter="all"[^>]*aria-pressed="true"/, "all categories should be active by default");
+assert.doesNotMatch(mapPage, /data-map-marker-layer[^>]*hidden/, "the supported marker layer should be visible by default");
+assert.equal((mapPage.match(/data-marker-evidence-layer="supported"/g) || []).length, 9, "default evidence must expose the nine exact anchors across three supported place groups");
 assert.match(mapPage, /data-marker-evidence-layer="supported"/);
 assert.match(mapPage, /data-marker-evidence-layer="reported"/);
-assert.match(mapPage, /data-marker-evidence-layer="planned"/);
-assert.match(mapPage, /class="map-marker map-marker-[a-z]+ map-marker-area/, "approximate coordinates must render as search areas, not exact pins");
-assert.match(mapPage, /map-legend/);
+assert.doesNotMatch(mapPage, /data-marker-evidence-layer="planned"/, "planned directory entries must not receive map coordinates");
+assert.equal((mapPage.match(/class="map-marker map-marker-[a-z]+ map-marker-exact/g) || []).length, 58, "the full map must render every exact current-build anchor");
+assert.match(mapPage, /class="map-layer-panel"/);
 assert.match(mapPage, /class="map-confidence"/);
 assert.doesNotMatch(mapPage, /map-legend-note/, "confidence copy must not be packed into the pin legend");
-assert.match(mapPage, /Approximate area/);
+assert.match(mapPage, /Site-owner build collection/);
 assert.match(mapPage, /Lina's Tools/);
 assert.match(mapPage, /Youssef's stand/);
 assert.match(mapPage, /Train station/);
@@ -76,17 +89,32 @@ assert.match(mapPage, /Wanglow's Garage/);
 assert.match(mapPage, /dungeon entrances/i);
 assert.match(mapPage, /wild islands/i);
 assert.match(mapPage, /Transit posts/);
-assert.match(mapPage, /reviewed August 22, 2026/);
+assert.match(mapPage, /Reviewed August 24, 2026/);
 assert.match(mapPage, /theranchers\.wiki\/wiki\/map\//);
 assert.match(mapPage, /theranchers\.wiki\/wiki\/npcs\//);
 assert.match(mapPage, /29 entries/);
+assert.match(mapPage, /Exact POI groups<\/dt><dd>16/);
+assert.match(mapPage, /Exact anchors<\/dt><dd>58/);
+assert.match(chineseMapPage, /精确 POI 组<\/dt><dd>16/);
+assert.match(chineseMapPage, /精确锚点<\/dt><dd>58/);
+assert.match(mapPage, /data-map-layer-count="transport">0 \/ 29 visible/);
+assert.match(chineseMapPage, /data-map-layer-count="transport">显示 0 \/ 29/);
 assert.match(chineseMapPage, /data-location-search/, "Chinese map needs a core-location search");
+assert.match(chineseMapPage, /for="zh-location-search"[\s\S]*?id="zh-location-search"[^>]*aria-controls="zh-location-directory"/, "Chinese search needs an explicit label and result relationship");
 assert.match(chineseMapPage, /data-location-category/, "Chinese map needs category filtering");
 assert.equal((chineseMapPage.match(/data-location-entry/g) || []).length, 29, "Chinese map finder must cover the full translated location directory");
 assert.match(chineseMapPage, /LOCATION_DIRECTORY:START[\s\S]*LOCATION_DIRECTORY:END/);
 assert.match(chineseMapPage, /City Hall 市政厅/);
 assert.match(chineseMapPage, /Auction Market/);
 assert.match(chineseMapPage, /Transit Posts/);
+assert.ok(mapPage.indexOf("data-location-search") < mapPage.indexOf("data-current-map"), "English search must appear before map controls");
+assert.ok(chineseMapPage.indexOf("data-location-search") < chineseMapPage.indexOf("data-current-map"), "Chinese search must appear before map controls");
+assert.equal((mapPage.match(/data-location-group=/g) || []).length, 4, "English directory must use four collapsible category groups");
+assert.equal((chineseMapPage.match(/data-location-group=/g) || []).length, 4, "Chinese directory must use four collapsible category groups");
+assert.match(mapPage, /data-map-expand/);
+assert.match(chineseMapPage, /data-map-expand/);
+assert.match(mapPage, /class="map-secondary-actions"/);
+assert.match(chineseMapPage, /class="map-secondary-actions"/);
 
 // Recognition photos: hover cards, lightbox hooks, locate-on-map button
 assert.match(mapPage, /data-visual-atlas/, "English map keeps the recognition-photo section");
@@ -102,6 +130,22 @@ assert.match(sharedStyles, /\.visual-atlas-card:hover img\s*\{\s*transform:\s*sc
 assert.match(sharedStyles, /\.atlas-lightbox\s*\{[\s\S]*?position:\s*fixed/, "lightbox overlay styles exist");
 assert.match(sharedStyles, /@keyframes pin-flash/, "pin flash animation exists");
 assert.match(sharedStyles, /\.map-marker\.pin-flash/, "pin flash class targets map markers");
+assert.match(sharedStyles, /\.map-stage\s*\{[\s\S]*?aspect-ratio:\s*1\s*\/\s*1;[\s\S]*?touch-action:\s*pan-y;/, "map stage must retain the complete square native texture and allow vertical touch scrolling");
+assert.match(sharedStyles, /@media \(max-width:\s*560px\)[\s\S]*?\.map-viewer-panel:not\(\.is-map-fullscreen\) \.map-stage\s*\{\s*aspect-ratio:\s*16\s*\/\s*10;/, "mobile inline map must use the planned 16:10 viewport without cropping the square texture");
+assert.match(sharedStyles, /\.map-viewer-panel:not\(\.is-map-fullscreen\) \.map-canvas\s*\{[^}]*left:\s*50%;[^}]*width:\s*auto;[^}]*height:\s*100%;[^}]*aspect-ratio:\s*1\s*\/\s*1;[^}]*translate\(calc\(-50% \+ var\(--map-x, 0%\)\), var\(--map-y, 0%\)\)/, "mobile letterboxing must keep the base map and markers in one centered square coordinate canvas");
+assert.match(sharedStyles, /@media \(max-width:\s*560px\)[\s\S]*?\.map-zone\s*\{\s*display:\s*none;/, "mobile map must rely on the 44px region tabs instead of labels that cover exact anchors");
+assert.match(sharedStyles, /\.map-viewer-panel:not\(\.is-map-fullscreen\) \.map-stage:not\(\.is-zoomed\) \.map-marker\[data-marker-id="subway"\]::after\s*\{[^}]*width:\s*20px;[^}]*height:\s*20px;/, "mobile inline subway overview needs compact visuals while retaining 44px hit targets");
+assert.match(sharedStyles, /\.map-stage img\s*\{[\s\S]*?object-fit:\s*contain;/, "map image must not crop its edges");
+assert.match(sharedStyles, /\.map-viewer-panel\.is-map-fullscreen \.map-stage\s*\{[\s\S]*?touch-action:\s*none;/, "expanded map owns drag and pinch gestures");
+assert.match(sharedStyles, /calc\(100dvh - 96px\)/, "fullscreen should reserve the real toolbar height while keeping the square map visible");
+assert.match(sharedStyles, /\.map-viewer-panel\.is-map-fullscreen\s*\{[^}]*background:\s*var\(--cream-100\);/, "expanded map must use a defined opaque surface token");
+assert.match(sharedStyles, /\.map-marker\s*\{[\s\S]*?min-width:\s*44px;[\s\S]*?min-height:\s*44px;/, "map markers need 44px touch targets");
+assert.match(sharedStyles, /\.map-marker::after\s*\{[^}]*width:\s*24px;[^}]*height:\s*24px;/, "marker visuals must stay smaller than their 44px touch targets");
+assert.match(sharedStyles, /\.map-marker\[data-marker-id="subway"\]::after\s*\{[^}]*width:\s*26px;[^}]*height:\s*26px;/, "dense subway pins need a compact visual that preserves the exact center anchor");
+assert.match(sharedStyles, /\.map-marker\[data-marker-id="subway"\]\s+\.map-marker-native-icon\s*\{[^}]*width:\s*17px;[^}]*height:\s*17px;/, "dense subway pins need a readable native glyph inside the compact visual");
+assert.match(sharedStyles, /\.map-pin::before\s*\{[^}]*width:\s*20px;[^}]*height:\s*20px;/, "the temporary pin should keep a compact visual inside its 44px hit target");
+assert.match(sharedStyles, /\.map-progress-summary button\s*\{\s*min-height:\s*44px;/, "progress controls need 44px touch targets");
+assert.match(sharedStyles, /@media \(prefers-reduced-motion: reduce\)\s*\{[^}]*\.map-marker\.pin-flash\s*\{\s*animation:\s*none;/, "map marker feedback must respect reduced-motion preferences");
 
 for (const pattern of [
   /data-current-map/,
@@ -131,17 +175,23 @@ for (const pattern of [
   /data-map-progress-reset/,
   /class="map-confidence"/,
   /assets\/js\/map-core\.js/,
+  /assets\/js\/map-state-core\.js/,
   /assets\/js\/map-viewer-core\.js/,
   /assets\/js\/map\.js/,
 ]) {
   assert.match(chineseMapPage, pattern, `Chinese map must match the interactive map contract: ${pattern}`);
 }
-const chineseMarkers = chineseMapPage.match(/class="map-marker map-marker-[a-z]+ map-marker-area/g) || [];
-
-const approximateMarkers = mapPage.match(/class="map-marker map-marker-[a-z]+ map-marker-area/g) || [];
-assert.ok(approximateMarkers.length >= 12, "map should carry at least 12 approximate area markers");
-assert.equal(chineseMarkers.length, approximateMarkers.length, "English and Chinese maps must expose the same marker set");
-for (const category of ["shopping", "services", "transport", "landmarks"]) {
+const chineseMarkers = chineseMapPage.match(/class="map-marker map-marker-[a-z]+ map-marker-exact/g) || [];
+const exactMarkers = mapPage.match(/class="map-marker map-marker-[a-z]+ map-marker-exact/g) || [];
+assert.match(mapPage, /data-map-relation-note[^>]*>[^<]*quest/i, "English map must explain that quest highlighting is limited to locations with verified anchors");
+assert.match(chineseMapPage, /data-map-relation-note[^>]*>[^<]*任务/, "Chinese map must explain that quest highlighting is limited to locations with verified anchors");
+assert.equal(exactMarkers.length, 58, "map should carry all current-build exact anchors");
+assert.equal(chineseMarkers.length, exactMarkers.length, "English and Chinese maps must expose the same marker set");
+assert.match(mapPage, /data-map-layer-summary[^>]*>9 visible</, "English static map fallback must start with the real nine-anchor default count");
+assert.match(chineseMapPage, /data-map-layer-summary[^>]*>显示 9 个</, "Chinese static map fallback must start with the real nine-anchor default count");
+assert.doesNotMatch(chineseMapPage, /不能证明每个标记的精确坐标|当前外部标记仍需复核|当前分店标记仍需复核/, "Chinese evidence copy must not contradict the verified current-build POI transforms");
+assert.match(chineseMapPage, /七个精确分店 POI/, "Chinese Leafy visual reference must describe the verified seven-branch layer");
+for (const category of ["shopping", "services", "landmarks"]) {
   assert.ok(
     new RegExp(`map-marker-${category}`).test(mapPage),
     `expected at least one ${category} marker`
@@ -158,7 +208,6 @@ for (const entry of locationEntries) {
 }
 
 for (const image of [
-  "map-current-overview.webp",
   "map-city-center.webp",
   "map-airport.webp",
   "map-city-hall.webp",
@@ -167,9 +216,10 @@ for (const image of [
   assert.ok(fs.existsSync(path.join(root, "assets", "img", image)), `${image} must exist`);
   assert.match(mapPage, new RegExp(`/assets/img/${image.replace(".", "\\.")}`));
 }
-assert.ok(fs.statSync(path.join(root, "assets", "img", "map-current-overview.webp")).size >= 110000, "current map should retain enough source detail for readable roads and icons");
+assert.ok(fs.statSync(path.join(root, "assets", "img", "map", "sunvale-native-b24847725.png")).size >= 900000, "the complete native map must retain enough source detail for readable roads and POIs");
 
 const mapScript = read("assets/js/map.js");
+assert.doesNotMatch(mapScript, /layoutMarkerOffsets|--marker-offset-[xy]/, "runtime marker rendering must never displace exact coordinate anchors");
 assert.match(mapScript, /data-map-region/);
 assert.match(mapScript, /data-location-map/);
 assert.match(mapScript, /data-map-zoom/);
@@ -193,8 +243,8 @@ assert.match(mapScript, /markerHasRelation/);
 assert.match(mapScript, /localStorage/);
 assert.match(mapScript, /data-map-discovery-toggle/);
 assert.match(mapScript, /data-map-progress-reset/);
-assert.match(mapScript, /applyMarkerFilter\("none"\)/, "map script should initialize the guide-pin layer as off");
-assert.match(mapScript, /applyMarkerFilter\(marker\.dataset\.markerCategory\)/, "directory shortcuts should reveal the selected marker category");
+assert.match(mapScript, /applyMarkerFilter\("all"\)/, "map script should initialize all categories with supported evidence");
+assert.match(mapScript, /focusLocation/, "directory shortcuts should synchronize category, evidence and relation state");
 assert.match(mapScript, /markerTarget/);
 assert.match(mapScript, /localTargetExists/, "map inspector must not expose a dead locale anchor");
 assert.match(mapScript, /inspectorLink\.hidden = !localTargetExists/, "missing Chinese directory entries must not create a cross-language dead link");
@@ -204,30 +254,102 @@ assert.match(mapScript, /pin-flash/, "locate-on-map flashes the target pin");
 assert.match(mapScript, /Escape/, "lightbox closes on Escape");
 assert.match(mapScript, /URLSearchParams/, "map directory reads deep-link queries");
 assert.match(mapScript, /history\.replaceState/, "map directory keeps the shareable URL in sync");
+assert.match(mapScript, /history\[mode\]/, "explicit location selections can create history entries");
+assert.match(mapScript, /searchNeedsHistoryBoundary/, "typing a new search from a selected location must preserve a browser Back boundary");
+assert.match(mapScript, /directoryFilterKeepsSelection/, "the directory category filter must clear a location it hides");
+assert.match(mapScript, /params\.get\("location"\)/, "map accepts location query deep links");
+assert.match(mapScript, /search\.value\s*=\s*params\.get\("q"\)/, "browser Back must restore the directory search control from the URL");
+assert.match(mapScript, /category\.value\s*=\s*restoredCategory/, "browser Back must restore the directory category control from the URL");
+assert.match(mapScript, /popstate/, "browser Back restores map location state");
+assert.match(mapScript, /is-relation-dimmed/, "relation filters dim unrelated markers instead of hiding them");
+assert.doesNotMatch(mapScript, /relationHidden/, "relation filters must not hide unrelated markers");
+assert.match(mapScript, /data-map-expand/, "mobile map supports an expanded mode");
+assert.match(mapScript, /mapPanel\.setAttribute\("role", "dialog"\)/, "expanded map needs dialog semantics");
+assert.match(mapScript, /mapPanel\.scrollTop = 0/, "opening the expanded map must start at the map instead of a stale layer-panel scroll position");
+assert.match(mapScript, /mapFocusableElements/, "expanded map needs a bounded keyboard focus loop");
+assert.match(mapScript, /lightboxOpener/, "the atlas lightbox restores its opener focus");
 assert.match(mapScript, /findBestLocation/, "map directory highlights the best matching location");
 assert.match(mapScript, /renderInspectorJourney/, "map inspector consumes audited entity journey routes");
 assert.match(sharedStyles, /\.map-inspector-journey-link/, "map journey links need a shared style");
 
 const sitemapForMap = read("sitemap.xml");
-assert.match(sitemapForMap, /<loc>https:\/\/theranchersguide\.com\/map<\/loc>[\s\S]*?<lastmod>2026-08-22<\/lastmod>/);
-assert.match(sitemapForMap, /<loc>https:\/\/theranchersguide\.com\/zh\/map<\/loc>[\s\S]*?<lastmod>2026-08-22<\/lastmod>/);
+assert.match(sitemapForMap, /<loc>https:\/\/theranchersguide\.com\/map<\/loc>[\s\S]*?<lastmod>2026-08-24<\/lastmod>/);
+assert.match(sitemapForMap, /<loc>https:\/\/theranchersguide\.com\/zh\/map<\/loc>[\s\S]*?<lastmod>2026-08-24<\/lastmod>/);
 
 const viewerCore = require("../assets/js/map-viewer-core.js");
-assert.deepEqual(viewerCore.getView("rural"), { scale: 1.6, x: 24, y: 2 });
-assert.deepEqual(viewerCore.getView("city"), { scale: 1.55, x: -25, y: 1 });
+assert.deepEqual(viewerCore.getView("rural"), { scale: 2, x: -8, y: -50 });
+assert.deepEqual(viewerCore.getView("city"), { scale: 2, x: -46, y: -50 });
 assert.equal(viewerCore.clampZoom(9), 3);
 assert.equal(viewerCore.clampZoom(0.2), 1);
 assert.deepEqual(viewerCore.pan({ scale: 2, x: 0, y: 0 }, "left"), { scale: 2, x: 3.5, y: 0 });
 assert.deepEqual(viewerCore.stageToImage({ sx: 0.5, sy: 0.5 }, { scale: 1, x: 0, y: 0 }), { x: 50, y: 50 });
 assert.deepEqual(viewerCore.stageToImage({ sx: 0.5, sy: 0.5 }, { scale: 2, x: 0, y: 0 }), { x: 50, y: 50 });
 assert.deepEqual(viewerCore.stageToImage({ sx: 0, sy: 0 }, { scale: 2, x: 0, y: 0 }), { x: 25, y: 25 });
-assert.deepEqual(viewerCore.stageToImage({ sx: 0.5, sy: 0.5 }, { scale: 1.6, x: 24, y: 2 }), { x: 35, y: 48.75 });
+assert.deepEqual(viewerCore.stageToImage({ sx: 0.5, sy: 0.5 }, { scale: 2, x: -8, y: -50 }), { x: 54, y: 75 });
 assert.deepEqual(viewerCore.zoomAt({ scale: 1, x: 0, y: 0 }, 2, { sx: 0.25, sy: 0.25 }), { scale: 2, x: 25, y: 25 });
 assert.deepEqual(viewerCore.zoomAt({ scale: 2, x: 25, y: 25 }, 0.5, { sx: 0.25, sy: 0.25 }), { scale: 1, x: 0, y: 0 });
-assert.deepEqual(viewerCore.panBy({ scale: 1, x: 0, y: 0 }, 0.1, 0.05), { scale: 1, x: 10, y: 5 });
+assert.deepEqual(viewerCore.panBy({ scale: 1, x: 0, y: 0 }, 0.1, 0.05), { scale: 1, x: 0, y: 0 }, "the overview must not expose blank space around the full map");
 assert.deepEqual(viewerCore.panBy({ scale: 2, x: 0, y: 0 }, -0.1, 0), { scale: 2, x: -10, y: 0 });
+assert.deepEqual(viewerCore.focus(84.24, 48.71625, 2.6), { scale: 2.6, x: -80, y: 3.33775 }, "edge POIs must be reachable without exposing space beyond the square map");
 
 const mapCore = require("../assets/js/map-core.js");
+const mapState = require("../assets/js/map-state-core.js");
+const supportedCityHall = { id: "city-hall", category: "services", evidenceLayer: "supported" };
+const supportedLeafyMarket = { id: "leafy-market", category: "shopping", evidenceLayer: "supported" };
+assert.equal(
+  mapState.directoryFilterKeepsSelection(supportedCityHall, "shopping"),
+  false,
+  "the visible directory category must not leave a hidden location selected"
+);
+assert.equal(
+  mapState.directoryFilterKeepsSelection(supportedCityHall, "all"),
+  true,
+  "the all-category directory filter must preserve a visible selection"
+);
+assert.equal(
+  mapState.searchNeedsHistoryBoundary("city-hall", "City Hall", "Airport"),
+  true,
+  "starting a different search from a selected location must preserve a Back-history boundary"
+);
+assert.equal(
+  mapState.searchNeedsHistoryBoundary(null, "City Hall", "Airport"),
+  false,
+  "ordinary search typing without a selected location must keep using replaceState only"
+);
+let interactionState = mapState.createState();
+interactionState = mapState.selectLocation(interactionState, supportedCityHall);
+assert.equal(interactionState.selectedLocationId, "city-hall", "selecting a marker enables location-specific actions");
+interactionState = mapState.selectRegion(interactionState, "overview");
+assert.equal(interactionState.selectedLocationId, null, "changing regions must clear the old location selection");
+interactionState = mapState.selectLocation(mapState.createState(), supportedCityHall);
+interactionState = mapState.setCategory(interactionState, "shopping", supportedCityHall);
+assert.equal(interactionState.selectedLocationId, null, "a category filter that hides the selection must clear it");
+interactionState = mapState.selectLocation(mapState.createState(), supportedCityHall);
+interactionState = mapState.setEvidence(interactionState, "reported", supportedCityHall);
+assert.equal(interactionState.selectedLocationId, null, "an evidence filter that hides the selection must clear it");
+interactionState = mapState.focusLocation(mapState.createState({ relation: "quest" }), supportedCityHall);
+assert.deepEqual(
+  { category: interactionState.category, evidence: interactionState.evidence, relation: interactionState.relation },
+  { category: "services", evidence: "supported", relation: "all" },
+  "directory focus must reveal its marker even when earlier filters conflict"
+);
+assert.equal(
+  mapState.resolveLocationId("not-a-place", "airport", ["city-hall", "airport"]),
+  "airport",
+  "an invalid location query must fall back to a valid legacy marker hash"
+);
+assert.deepEqual(
+  mapState.groupsOpenAfterSearch(false, ["shopping", "landmarks"], ["services"]),
+  ["services"],
+  "clearing search must restore the directory groups that were open before searching"
+);
+interactionState = mapState.selectLocation(mapState.createState(), supportedLeafyMarket);
+interactionState = mapState.toggleLayer(interactionState, "shopping", supportedLeafyMarket);
+assert.equal(mapState.markerVisible(supportedLeafyMarket, interactionState), false, "turning off Shopping must hide shopping markers");
+assert.equal(mapState.markerVisible(supportedCityHall, interactionState), true, "turning off Shopping must leave Services visible");
+assert.equal(interactionState.selectedLocationId, null, "turning off the selected marker layer must clear the selection");
+assert.equal(typeof mapState.layoutMarkerOffsets, "undefined", "map state must not expose collision layout that can move coordinate anchors");
+assert.doesNotMatch(sharedStyles, /--marker-offset-[xy]/, "marker CSS must anchor directly to its source percentage");
 const locations = [
   { id: "leafy-market", title: "Leafy Market", category: "shopping", keywords: "seeds farming supplies" },
   { id: "city-hall", title: "City Hall 市政厅", category: "services", keywords: "land blueprints mayor zirconite 锆矿 合同" },

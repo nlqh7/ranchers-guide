@@ -215,13 +215,44 @@ function bootstrap() {
 function renderMarker(location, locale) {
   const marker = location.marker;
   const copy = marker.locale[locale];
-  return `                <button class="map-marker map-marker-${location.category} map-marker-area map-marker-evidence-${marker.evidenceLayer}" type="button" style="--mx:${marker.x}%;--my:${marker.y}%" data-marker-id="${location.id}" data-marker-category="${location.category}" data-marker-evidence-layer="${marker.evidenceLayer}" data-marker-precision="${marker.precision}" data-marker-title="${copy.title}" data-marker-confidence="${copy.confidence}" data-marker-copy="${copy.description}" data-marker-target="${copy.target}" aria-label="${copy.ariaLabel}"><span>${copy.label}</span></button>`;
+  const iconPaths = {
+    "city-hall": "/assets/img/map/icons/city-hall-b24847725.png",
+    "shop-grocery": "/assets/img/map/icons/shop-grocery-b24847725.png",
+    subway: "/assets/img/map/icons/subway-b24847725.png",
+    parking: "/assets/img/map/icons/parking-b24847725.png",
+    airport: "/assets/img/map/icons/airport-b24847725.png",
+    museum: "/assets/img/map/icons/museum-b24847725.png",
+    "dealer-berrari": "/assets/img/map/icons/dealer-berrari-b24847725.png",
+    "dealer-prestige": "/assets/img/map/icons/dealer-prestige-b24847725.png",
+    "dealer-star": "/assets/img/map/icons/dealer-star-b24847725.png",
+    "dealer-utility": "/assets/img/map/icons/dealer-utility-b24847725.png",
+    "car-paint": "/assets/img/map/icons/car-paint-b24847725.png",
+    port: "/assets/img/map/icons/port-b24847725.png",
+    "ferris-wheel": "/assets/img/map/icons/ferris-wheel-b24847725.png",
+    "police-station": "/assets/img/map/icons/police-station-b24847725.png",
+    casino: "/assets/img/map/icons/casino-b24847725.png",
+    novagen: "/assets/img/map/icons/novagen-b24847725.png",
+    vitalis: "/assets/img/map/icons/vitalis-b24847725.png",
+    "fuel-station": "/assets/img/map/icons/fuel-station-b24847725.png",
+  };
+  const points = marker.points || [{ id: location.id, label: "", x: marker.x, y: marker.y, primary: true }];
+  return points.map((point) => {
+    const branchLabel = point.label ? ` · ${point.label}` : "";
+    const iconName = point.icon || marker.icon;
+    const icon = iconName && iconPaths[iconName]
+      ? `<img class="map-marker-native-icon" src="${iconPaths[iconName]}" alt="" width="256" height="256" draggable="false" data-protected-game-art aria-hidden="true">`
+      : "";
+    const markerKind = marker.precision === "exact" ? "exact" : "area";
+    const primary = point.primary ? " data-marker-primary=\"true\"" : "";
+    return `                <button class="map-marker map-marker-${location.category} map-marker-${markerKind} map-marker-evidence-${marker.evidenceLayer}" type="button" style="--mx:${point.x}%;--my:${point.y}%" data-marker-id="${location.id}" data-marker-instance-id="${location.id}:${point.id}" data-marker-point-label="${escapeHtml(point.label || "")}"${primary} data-marker-category="${location.category}" data-marker-evidence-layer="${marker.evidenceLayer}" data-marker-precision="${marker.precision}" data-marker-title="${escapeHtml(copy.title)}" data-marker-confidence="${escapeHtml(copy.confidence)}" data-marker-copy="${escapeHtml(copy.description)}" data-marker-target="${copy.target}" aria-label="${escapeHtml(copy.ariaLabel + branchLabel)}">${icon}<span>${escapeHtml(copy.label + branchLabel)}</span></button>`;
+  }).join("\n");
 }
 
 const enLocationLinks = {
   "leafy-market": [["/database/crops", "Open crop records"], ["/guides/farming-fields", "Read the farming guide"]],
   "city-hall": [["/database/npcs#victor", "Open Victor"], ["/database/quests#power-to-the-bench", "Open Power to the Bench"], ["/guides/electricity-power#two-paths", "Read the electricity guide"]],
   subway: [["/problems/fast-travel-subway", "Read the fast-travel guide"], ["/guides/vehicles-transport", "Read the transport guide"]],
+  "overnight-parking": [["/problems/vehicle-recovery", "Recover a vehicle"], ["/guides/vehicles-transport", "Read the transport guide"]],
   "car-pound": [["/problems/vehicle-recovery", "Recover a vehicle"], ["/guides/vehicles-transport", "Read the transport guide"]],
   quickfix: [["/problems/vehicle-recovery", "Vehicle recovery"], ["/guides/vehicles-transport", "Read the transport guide"]],
   "auto-hue": [["/guides/police-wanted-levels", "Read the wanted-level guide"], ["/guides/vehicles-transport", "Read the transport guide"]],
@@ -238,7 +269,19 @@ function renderEnglishLinks(location) {
 function renderEntry(location, locale) {
   const copy = location.locale[locale];
   const links = locale === "en" ? renderEnglishLinks(location) : "";
-  const entryHtml = links ? copy.entryHtml.replace(/<\/div>$/, `${links}</div>`) : copy.entryHtml;
+  let entryHtml = copy.entryHtml;
+  if (!location.marker) {
+    entryHtml = entryHtml
+      .replace(/<button[^>]*data-marker-focus="[^"]*"[^>]*>[\s\S]*?<\/button>/g, "")
+      .replace(/<span class="pin-pending">[\s\S]*?<\/span>/g, '<span class="pin-pending">No verified coordinate</span>');
+  }
+  if (location.marker?.precision === "exact") {
+    const focusButton = /data-marker-focus=/.test(entryHtml)
+      ? ""
+      : `<button type="button" class="location-map-button" data-marker-focus="${escapeHtml(location.marker.locale.en.title)}">Show exact POI</button>`;
+    entryHtml = entryHtml.replace(/<\/div>$/, `${focusButton}<span class="evidence-badge evidence-owner-collected">Site-owner build collection · b24847725</span></div>`);
+  }
+  if (links) entryHtml = entryHtml.replace(/<\/div>$/, `${links}</div>`);
   return `        <article data-location-entry data-search-entry id="${location.id}" data-location-title="${copy.title}" data-location-category="${location.category}" data-location-keywords="${copy.keywords}">${entryHtml}</article>`;
 }
 
@@ -247,6 +290,13 @@ const zhCategoryLabels = {
   services: "服务",
   transport: "交通",
   landmarks: "地标",
+};
+
+const enCategoryLabels = {
+  shopping: "Shopping",
+  services: "Services",
+  transport: "Transport",
+  landmarks: "Landmarks",
 };
 
 const zhEvidenceLabels = {
@@ -269,6 +319,7 @@ const zhLocationLinks = {
   "leafy-market": [["/zh/database/crops", "查看作物数据"], ["/zh/guides/farming-fields", "查看种地指南"]],
   "city-hall": [["/zh/database/npcs#victor", "查看 Victor"], ["/zh/database/quests#power-to-the-bench", "查看供电任务"], ["/zh/guides/electricity-power#two-paths", "查看水电指南"]],
   subway: [["/zh/problems/fast-travel-subway", "快速旅行排查"], ["/zh/guides/vehicles-transport", "查看交通指南"]],
+  "overnight-parking": [["/zh/problems/vehicle-recovery", "车辆找回"], ["/zh/guides/vehicles-transport", "查看交通指南"]],
   "car-pound": [["/zh/problems/vehicle-recovery", "车辆找回"], ["/zh/guides/vehicles-transport", "查看交通指南"]],
   quickfix: [["/zh/problems/vehicle-recovery", "车辆排查"], ["/zh/guides/vehicles-transport", "查看交通指南"]],
   "auto-hue": [["/zh/guides/police-wanted-levels", "查看警星指南"], ["/zh/guides/vehicles-transport", "查看交通指南"]],
@@ -287,11 +338,14 @@ function renderZhDirectoryEntry(location) {
   const markerButton = marker
     ? `<button type="button" class="location-map-button" data-marker-focus="${escapeHtml(marker.locale.zh.title)}">在地图上定位</button>`
     : "";
+  const ownerEvidence = marker?.precision === "exact"
+    ? '<span class="evidence-badge evidence-owner-collected">站长本地构建采集 · b24847725</span>'
+    : "";
   const pinStatus = marker
-    ? `<span class="pin-pending">${location.marker.precision === "approximate" ? "大致区域，非精确坐标" : "位置仍需当前截图核对"}</span>`
+    ? `<span class="pin-pending">${location.marker.precision === "exact" ? "当前版本精确 POI" : (location.marker.precision === "approximate" ? "大致区域，非精确坐标" : "位置仍需当前截图核对")}</span>`
     : `<span class="pin-pending">暂无可验证的精确标记</span>`;
   const searchTitle = copy.searchTitle || copy.title;
-  return `        <article data-location-entry data-search-entry id="${location.id}" data-location-title="${escapeHtml(copy.title)}" data-location-category="${location.category}" data-location-keywords="${escapeHtml(copy.keywords)}" data-search-title="${escapeHtml(searchTitle)}" data-search-tags="${escapeHtml(copy.keywords)}"><div><span class="location-category">${zhCategoryLabels[location.category]}</span><h2>${escapeHtml(copy.title)}</h2><p>${escapeHtml(copy.summary || "该地点已有名称或来源记录，但当前用途仍需进一步核对。")}</p></div><div class="location-use"><strong>证据状态</strong><span class="evidence-badge ${evidenceClass}">${status}</span>${markerButton}${pinStatus}${links}</div></article>`;
+  return `        <article data-location-entry data-search-entry id="${location.id}" data-location-title="${escapeHtml(copy.title)}" data-location-category="${location.category}" data-location-keywords="${escapeHtml(copy.keywords)}" data-search-title="${escapeHtml(searchTitle)}" data-search-tags="${escapeHtml(copy.keywords)}"><div><span class="location-category">${zhCategoryLabels[location.category]}</span><h2>${escapeHtml(copy.title)}</h2><p>${escapeHtml(copy.summary || "该地点已有名称或来源记录，但当前用途仍需进一步核对。")}</p></div><div class="location-use"><strong>证据状态</strong><span class="evidence-badge ${evidenceClass}">${status}</span>${ownerEvidence}${markerButton}${pinStatus}${links}</div></article>`;
 }
 
 function replaceGenerated(html, data, locale) {
@@ -299,16 +353,24 @@ function replaceGenerated(html, data, locale) {
   const markers = data.locations.filter((location) => location.marker)
     .sort((a, b) => markerOrder.get(a.id) - markerOrder.get(b.id))
     .map((location) => renderMarker(location, locale)).join("\n");
-  const entries = locale === "en"
-    ? data.locations.map((location) => renderEntry(location, locale)).join("\n")
-    : data.locations.map(renderZhDirectoryEntry).join("\n");
+  const categoryLabels = locale === "en" ? enCategoryLabels : zhCategoryLabels;
+  const entries = Object.keys(categoryLabels).map((category) => {
+    const categoryEntries = data.locations.filter((location) => location.category === category);
+    const renderedEntries = locale === "en"
+      ? categoryEntries.map((location) => renderEntry(location, locale)).join("\n")
+      : categoryEntries.map(renderZhDirectoryEntry).join("\n");
+    const countLabel = locale === "en"
+      ? `${categoryEntries.length} ${categoryEntries.length === 1 ? "place" : "places"}`
+      : `${categoryEntries.length} 个地点`;
+    return `        <details class="location-group" data-location-group="${category}"><summary><span>${categoryLabels[category]}</span><small>${countLabel}</small></summary><div class="location-group-list">\n${renderedEntries}\n        </div></details>`;
+  }).join("\n");
   const markerBody = `\n                <!-- MAP_MARKERS:START -->\n${markers}\n                <!-- MAP_MARKERS:END -->`;
   const entryBody = `\n        <!-- LOCATION_DIRECTORY:START -->\n${entries}\n        <!-- LOCATION_DIRECTORY:END -->`;
 
   const markerPattern = /(<div class="map-marker-layer"[^>]*>)([\s\S]*?)(\n[ \t]*<\/div>\n[ \t]*<div class="map-pin-layer")/;
   if (!markerPattern.test(html)) throw new Error(`Generated marker section missing in ${locale} map`);
   let output = html.replace(markerPattern, `$1${markerBody}$3`);
-  const directoryPattern = /(<div class="location-list">)([\s\S]*?)(\n[ \t]*<\/div>\s*<div class="search-empty")/;
+  const directoryPattern = /(<div class="location-list"[^>]*>)([\s\S]*?)(\n[ \t]*<\/div>\s*<div class="search-empty")/;
   if (!directoryPattern.test(output)) throw new Error(`Generated ${locale} directory section missing`);
   output = output.replace(directoryPattern, `$1${entryBody}$3`);
   return output;

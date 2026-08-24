@@ -4,6 +4,7 @@
   var search = document.querySelector("[data-location-search]");
   var category = document.querySelector("[data-location-category]");
   var entries = Array.from(document.querySelectorAll("[data-location-entry]"));
+  var locationGroups = Array.from(document.querySelectorAll("[data-location-group]"));
   var count = document.querySelector("[data-location-count]");
   var empty = document.querySelector("[data-location-empty]");
   var mapStage = document.querySelector("[data-map-stage]");
@@ -19,7 +20,11 @@
   var addToggle = document.querySelector("[data-map-add-toggle]");
   var markerLayer = document.querySelector("[data-map-marker-layer]");
   var markers = markerLayer ? Array.from(markerLayer.querySelectorAll("[data-marker-category]")) : [];
+  var knownMarkerIds = Array.from(new Set(markers.map(function (marker) { return marker.dataset.markerId; })));
   var markerFilterButtons = Array.from(document.querySelectorAll("[data-map-pin-filter]"));
+  var layerToggleButtons = Array.from(document.querySelectorAll("[data-map-layer-toggle]"));
+  var layerActionButtons = Array.from(document.querySelectorAll("[data-map-layer-action]"));
+  var layerSummary = document.querySelector("[data-map-layer-summary]");
   var evidenceFilterButtons = Array.from(document.querySelectorAll("[data-map-evidence-filter]"));
   var relationFilterButtons = Array.from(document.querySelectorAll("[data-map-relation-filter]"));
   var progressCount = document.querySelector("[data-map-progress-count]");
@@ -37,17 +42,30 @@
   var pinNotes = document.querySelector("[data-map-pin-notes]");
   var pinCoords = document.querySelector("[data-map-pin-coords]");
   var pinClose = document.querySelector("[data-map-pin-close]");
+  var mapPanel = document.querySelector(".map-viewer-panel");
+  var mapExpand = document.querySelector("[data-map-expand]");
+  var mapFullscreenClose = document.querySelector("[data-map-fullscreen-close]");
   var isChinese = document.documentElement.lang.toLowerCase() === "zh-cn";
   var hasDirectory = !!(search && category && entries.length && window.RanchersMap);
+  var searchWasActive = false;
+  var openGroupsBeforeSearch = [];
   var activePin = null;
   var placing = false;
   var selectedMarker = null;
+  var mapExpanded = false;
+  var mapInteractionState = window.RanchersMapState ? window.RanchersMapState.createState() : null;
   var knowledgeEntities = [];
   var relationFilter = "all";
   var discoveryKey = "ranchers-guide-map-progress-v1";
   var discovered = {};
   try { discovered = JSON.parse(localStorage.getItem(discoveryKey) || "{}"); } catch (_) { discovered = {}; }
   if (!mapStage || !mapImage || !window.RanchersMapViewer) return;
+
+  Array.from(document.querySelectorAll("[data-protected-game-art]")).forEach(function (asset) {
+    asset.setAttribute("draggable", "false");
+    asset.addEventListener("contextmenu", function (event) { event.preventDefault(); });
+    asset.addEventListener("dragstart", function (event) { event.preventDefault(); });
+  });
 
   if (inspector && !inspectorJourney) {
     inspectorJourney = document.createElement("div");
@@ -86,7 +104,28 @@
   function updateQueryUrl() {
     if (!hasDirectory || !window.history || !window.history.replaceState) return;
     var query = window.RanchersMap.buildQueryString(search.value, category.value);
-    window.history.replaceState(null, "", window.location.pathname + query + window.location.hash);
+    if (selectedMarker) query += (query ? "&" : "?") + "location=" + encodeURIComponent(selectedMarker.dataset.markerId);
+    window.history.replaceState(null, "", window.location.pathname + query + locationSafeHash(selectedMarker));
+  }
+
+  function locationSafeHash(marker) {
+    if (marker) return "";
+    var hashId = window.location.hash ? window.location.hash.slice(1) : "";
+    return knownMarkerIds.includes(hashId) ? "" : window.location.hash;
+  }
+
+  function writeLocationUrl(marker, mode) {
+    if (!window.history || !window.history[mode]) return;
+    var params = new URLSearchParams(window.location.search);
+    if (marker) params.set("location", marker.dataset.markerId);
+    else params.delete("location");
+    var query = params.toString();
+    window.history[mode](null, "", window.location.pathname + (query ? "?" + query : "") + locationSafeHash(marker));
+  }
+
+  function openEntryGroup(entry) {
+    var group = entry && entry.closest("[data-location-group]");
+    if (group) group.open = true;
   }
 
   function focusBestMatch(matches, shouldScroll) {
@@ -94,15 +133,34 @@
     if (!search.value.trim() || !matches.length) return;
     var best = window.RanchersMap.findBestLocation(locations, search.value, category.value);
     if (!best) return;
+    openEntryGroup(best.element);
     best.element.classList.add("is-focused");
     if (shouldScroll) best.element.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
   function render() {
     if (!hasDirectory) return;
+    var searching = !!search.value.trim();
+    var wasSearching = searchWasActive;
+    if (searching && !wasSearching) {
+      openGroupsBeforeSearch = locationGroups.filter(function (group) { return group.open; }).map(function (group) { return group.dataset.locationGroup; });
+    }
     var matches = window.RanchersMap.filterLocations(locations, search.value, category.value);
     var visible = new Set(matches.map(function (item) { return item.element; }));
     entries.forEach(function (entry) { entry.hidden = !visible.has(entry); });
+    var matchingGroupIds = [];
+    locationGroups.forEach(function (group) {
+      var hasVisibleEntry = Array.from(group.querySelectorAll("[data-location-entry]")).some(function (entry) { return !entry.hidden; });
+      group.hidden = !hasVisibleEntry;
+      if (hasVisibleEntry) matchingGroupIds.push(group.dataset.locationGroup);
+    });
+    if (searching || wasSearching) {
+      var groupsToOpen = window.RanchersMapState
+        ? window.RanchersMapState.groupsOpenAfterSearch(searching, matchingGroupIds, openGroupsBeforeSearch)
+        : (searching ? matchingGroupIds : openGroupsBeforeSearch);
+      locationGroups.forEach(function (group) { group.open = groupsToOpen.includes(group.dataset.locationGroup); });
+    }
+    searchWasActive = searching;
     if (count) count.textContent = isChinese ? matches.length + " 个地点" : (matches.length === 1 ? "1 location" : matches.length + " locations");
     if (empty) empty.hidden = matches.length !== 0;
     focusBestMatch(matches, false);
@@ -138,8 +196,8 @@
   }
 
   function updateProgress() {
-    var found = markers.filter(function (marker) { return discovered[marker.dataset.markerId] === true; }).length;
-    if (progressCount) progressCount.textContent = isChinese ? found + " / " + markers.length + " 个区域已发现" : found + " / " + markers.length + " areas discovered";
+    var found = knownMarkerIds.filter(function (id) { return discovered[id] === true; }).length;
+    if (progressCount) progressCount.textContent = isChinese ? found + " / " + knownMarkerIds.length + " 个地点已发现" : found + " / " + knownMarkerIds.length + " places discovered";
     markers.forEach(function (marker) {
       marker.classList.toggle("is-discovered", discovered[marker.dataset.markerId] === true);
     });
@@ -151,6 +209,28 @@
         : (isChinese ? "将当前地点标为已发现" : "Mark selected as discovered");
       discoveryToggle.setAttribute("aria-pressed", canToggle && discovered[selectedMarker.dataset.markerId] === true ? "true" : "false");
     }
+  }
+
+  function markerStateData(marker) {
+    return marker ? {
+      id: marker.dataset.markerId,
+      category: marker.dataset.markerCategory,
+      evidenceLayer: marker.dataset.markerEvidenceLayer,
+    } : null;
+  }
+
+  function markerForLocation(id) {
+    return markers.find(function (marker) { return marker.dataset.markerId === id && marker.dataset.markerPrimary === "true"; })
+      || markers.find(function (marker) { return marker.dataset.markerId === id; });
+  }
+
+  function clearSelectedMarker() {
+    selectedMarker = null;
+    if (mapInteractionState && window.RanchersMapState) {
+      mapInteractionState = window.RanchersMapState.selectLocation(mapInteractionState, null);
+    }
+    markers.forEach(function (marker) { marker.classList.remove("active"); });
+    updateProgress();
   }
 
   function markerRoute(marker) {
@@ -232,18 +312,33 @@
         renderInspectorJourney(selectedMarker);
       }
     })
-    .catch(function () { knowledgeEntities = []; });
+    .catch(function () {
+      knowledgeEntities = [];
+      relationFilter = "all";
+      relationFilterButtons.forEach(function (button) {
+        var isAll = button.dataset.mapRelationFilter === "all";
+        button.disabled = !isAll;
+        if (!isAll) button.title = isChinese ? "关联索引加载失败；基础地图仍可使用" : "Related-answer index unavailable; the base map still works";
+      });
+      renderMarkerLayers();
+    });
 
-  function selectMarker(marker) {
+  function selectMarker(marker, historyMode) {
     selectedMarker = marker;
+    if (mapInteractionState && window.RanchersMapState) {
+      mapInteractionState = window.RanchersMapState.selectLocation(mapInteractionState, markerStateData(marker));
+    }
     markers.forEach(function (item) { item.classList.toggle("active", item === marker); });
     updateProgress();
+    if (historyMode !== false) writeLocationUrl(marker, historyMode || "pushState");
     if (!inspector) return;
-    inspector.querySelector("[data-map-inspector-title]").textContent = marker.dataset.markerTitle;
+    var pointLabel = marker.dataset.markerPointLabel || "";
+    inspector.querySelector("[data-map-inspector-title]").textContent = marker.dataset.markerTitle + (pointLabel ? " · " + pointLabel : "");
     var confidence = marker.dataset.markerConfidence || (isChinese ? "大致区域" : "Approximate");
+    var exact = marker.dataset.markerPrecision === "exact";
     inspector.querySelector("[data-map-inspector-status]").textContent = isChinese
-      ? "位置可信度：" + confidence + "，标记为估算区域，并非已验证坐标"
-      : "Location confidence: " + confidence + " — pin is an estimate, not a verified coordinate";
+      ? (exact ? "位置可信度：" + confidence + "，锚点来自当前版本原生 POI" : "位置可信度：" + confidence + "，标记为估算区域，并非已验证坐标")
+      : (exact ? "Location confidence: " + confidence + " — anchored to the current-build native POI" : "Location confidence: " + confidence + " — pin is an estimate, not a verified coordinate");
     inspector.querySelector("[data-map-inspector-copy]").textContent = marker.dataset.markerCopy;
     renderInspectorConnections(marker);
     renderInspectorJourney(marker);
@@ -265,13 +360,24 @@
     });
   });
 
-  var activeCategoryFilter = "none";
+  var markerCategories = ["shopping", "services", "transport", "landmarks"];
+  var activeCategoryLayers = markerCategories.slice();
   var activeEvidenceFilter = "supported";
 
+  function layerCountCopy(visible, total) {
+    return isChinese ? "显示 " + visible + " / " + total : visible + " / " + total + " visible";
+  }
+
   function renderMarkerLayers() {
-    if (markerLayer) markerLayer.hidden = activeCategoryFilter === "none";
-    markerFilterButtons.forEach(function (button) {
-      var active = button.dataset.mapPinFilter === activeCategoryFilter;
+    if (markerLayer) markerLayer.hidden = activeCategoryLayers.length === 0;
+    layerToggleButtons.forEach(function (button) {
+      var active = activeCategoryLayers.includes(button.dataset.mapLayerToggle);
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+    layerActionButtons.forEach(function (button) {
+      var action = button.dataset.mapLayerAction;
+      var active = action === "all" ? activeCategoryLayers.length === markerCategories.length : activeCategoryLayers.length === 0;
       button.classList.toggle("active", active);
       button.setAttribute("aria-pressed", active ? "true" : "false");
     });
@@ -286,21 +392,61 @@
       button.setAttribute("aria-pressed", active ? "true" : "false");
     });
     markers.forEach(function (marker) {
-      var categoryHidden = activeCategoryFilter === "none" || (activeCategoryFilter !== "all" && marker.dataset.markerCategory !== activeCategoryFilter);
+      var categoryHidden = !activeCategoryLayers.includes(marker.dataset.markerCategory);
       var evidenceHidden = activeEvidenceFilter !== "all" && marker.dataset.markerEvidenceLayer !== activeEvidenceFilter;
-      var relationHidden = relationFilter !== "all" && !markerHasRelation(marker, relationFilter);
-      marker.hidden = categoryHidden || evidenceHidden || relationHidden;
-      if (marker.hidden) marker.classList.remove("active");
+      var relationDimmed = relationFilter !== "all" && !markerHasRelation(marker, relationFilter);
+      marker.hidden = categoryHidden || evidenceHidden;
+      marker.classList.toggle("is-relation-match", relationFilter !== "all" && !relationDimmed);
+      marker.classList.toggle("is-relation-dimmed", relationDimmed);
     });
+    markerCategories.forEach(function (markerCategory) {
+      var output = document.querySelector('[data-map-layer-count="' + markerCategory + '"]');
+      if (!output) return;
+      var categoryMarkers = markers.filter(function (marker) { return marker.dataset.markerCategory === markerCategory; });
+      var visible = categoryMarkers.filter(function (marker) { return !marker.hidden; }).length;
+      output.textContent = layerCountCopy(visible, categoryMarkers.length);
+    });
+    if (layerSummary) {
+      var visibleCount = markers.filter(function (marker) { return !marker.hidden; }).length;
+      layerSummary.textContent = isChinese ? "显示 " + visibleCount + " 个" : visibleCount + " visible";
+    }
   }
 
   function applyMarkerFilter(filter) {
-    activeCategoryFilter = filter;
+    var hadSelection = !!selectedMarker;
+    if (mapInteractionState && window.RanchersMapState) {
+      mapInteractionState = filter === "all" || filter === "none"
+        ? window.RanchersMapState.setAllLayers(mapInteractionState, filter === "all", markerStateData(selectedMarker))
+        : window.RanchersMapState.toggleLayer(mapInteractionState, filter, markerStateData(selectedMarker));
+      activeCategoryLayers = mapInteractionState.layers.slice();
+      if (hadSelection && !mapInteractionState.selectedLocationId) {
+        clearSelectedMarker();
+        writeLocationUrl(null, "replaceState");
+        setInspector(isChinese ? "未选择地点" : "No location selected", isChinese ? "筛选已更新" : "Filters updated", isChinese ? "先前地点已被当前筛选隐藏，请选择一个可见标记。" : "The previous location is hidden by the current filters. Select a visible marker to continue.");
+      }
+    } else if (filter === "all") {
+      activeCategoryLayers = markerCategories.slice();
+    } else if (filter === "none") {
+      activeCategoryLayers = [];
+    } else {
+      activeCategoryLayers = activeCategoryLayers.includes(filter)
+        ? activeCategoryLayers.filter(function (item) { return item !== filter; })
+        : activeCategoryLayers.concat(filter);
+    }
     renderMarkerLayers();
   }
 
   function applyEvidenceFilter(filter) {
+    var hadSelection = !!selectedMarker;
     activeEvidenceFilter = filter;
+    if (mapInteractionState && window.RanchersMapState) {
+      mapInteractionState = window.RanchersMapState.setEvidence(mapInteractionState, filter, markerStateData(selectedMarker));
+      if (hadSelection && !mapInteractionState.selectedLocationId) {
+        clearSelectedMarker();
+        writeLocationUrl(null, "replaceState");
+        setInspector(isChinese ? "未选择地点" : "No location selected", isChinese ? "筛选已更新" : "Filters updated", isChinese ? "先前地点已被当前筛选隐藏，请选择一个可见标记。" : "The previous location is hidden by the current filters. Select a visible marker to continue.");
+      }
+    }
     renderMarkerLayers();
   }
 
@@ -317,10 +463,11 @@
   relationFilterButtons.forEach(function (button) {
     button.addEventListener("click", function () {
       relationFilter = button.dataset.mapRelationFilter;
+      if (mapInteractionState && window.RanchersMapState) mapInteractionState = window.RanchersMapState.setRelation(mapInteractionState, relationFilter);
       renderMarkerLayers();
     });
   });
-  applyMarkerFilter("none");
+  applyMarkerFilter("all");
   updateProgress();
 
   if (discoveryToggle) {
@@ -343,6 +490,9 @@
   }
 
   function selectRegion(name, title, status, copy, showMarker) {
+    clearSelectedMarker();
+    writeLocationUrl(null, "replaceState");
+    if (mapInteractionState && window.RanchersMapState) mapInteractionState = window.RanchersMapState.selectRegion(mapInteractionState, name);
     viewState = window.RanchersMapViewer ? window.RanchersMapViewer.getView(name) : { scale: 1, x: 0, y: 0 };
     regionButtons.forEach(function (button) {
       button.classList.toggle("active", button.dataset.mapRegion === name);
@@ -354,15 +504,44 @@
 
   if (hasDirectory) {
     search.addEventListener("input", function () {
+      var currentQuery = new URLSearchParams(window.location.search).get("q") || "";
+      var shouldCreateBoundary = window.RanchersMapState
+        ? window.RanchersMapState.searchNeedsHistoryBoundary(selectedMarker && selectedMarker.dataset.markerId, currentQuery, search.value)
+        : !!selectedMarker && currentQuery.trim().toLowerCase() !== search.value.trim().toLowerCase();
+      if (shouldCreateBoundary) {
+        clearSelectedMarker();
+        writeLocationUrl(null, "pushState");
+      }
       render();
       updateQueryUrl();
     });
     search.addEventListener("keydown", function (event) {
       if (event.key !== "Enter") return;
       event.preventDefault();
-      focusBestMatch(render(), true);
+      var matches = render();
+      var best = window.RanchersMap.findBestLocation(locations, search.value, category.value);
+      if (!best) return;
+      var marker = markerForLocation(best.id);
+      if (marker) {
+        focusMarkerOnMap(marker, true);
+      } else {
+        clearSelectedMarker();
+        writeLocationUrl(null, "replaceState");
+        openEntryGroup(best.element);
+        best.element.classList.add("is-focused");
+        best.element.scrollIntoView({ behavior: "smooth", block: "center" });
+        setInspector(best.title, isChinese ? "暂无验证坐标" : "No verified coordinate", isChinese ? "此地点保留在目录中，但目前没有可可靠显示的地图标记。" : "This place remains in the directory, but it does not have a reliable map marker yet.");
+      }
     });
     category.addEventListener("change", function () {
+      var keepsSelection = window.RanchersMapState
+        ? window.RanchersMapState.directoryFilterKeepsSelection(markerStateData(selectedMarker), category.value)
+        : !selectedMarker || category.value === "all" || selectedMarker.dataset.markerCategory === category.value;
+      if (!keepsSelection) {
+        clearSelectedMarker();
+        writeLocationUrl(null, "replaceState");
+        setInspector(isChinese ? "未选择地点" : "No location selected", isChinese ? "分类已更新" : "Category updated", isChinese ? "先前地点已被当前目录分类隐藏，请选择一个可见地点。" : "The previous location is hidden by the current directory category. Select a visible place to continue.");
+      }
       render();
       updateQueryUrl();
     });
@@ -383,29 +562,43 @@
 
   var pinFlashTimer = null;
 
+  function focusMarkerOnMap(marker, pushHistory) {
+    if (!marker || !window.RanchersMapViewer) return;
+    var mx = parseFloat(marker.style.getPropertyValue("--mx"));
+    var my = parseFloat(marker.style.getPropertyValue("--my"));
+    if (mapInteractionState && window.RanchersMapState) {
+      mapInteractionState = window.RanchersMapState.focusLocation(mapInteractionState, markerStateData(marker));
+      activeCategoryLayers = mapInteractionState.layers.slice();
+      activeEvidenceFilter = mapInteractionState.evidence;
+      relationFilter = mapInteractionState.relation;
+    } else {
+      if (!activeCategoryLayers.includes(marker.dataset.markerCategory)) activeCategoryLayers.push(marker.dataset.markerCategory);
+      activeEvidenceFilter = marker.dataset.markerEvidenceLayer;
+      relationFilter = "all";
+    }
+    renderMarkerLayers();
+    viewState = window.RanchersMapViewer.focus(mx, my, 2.6);
+    applyMapView();
+    selectMarker(marker, pushHistory ? "pushState" : false);
+    marker.classList.add("pin-flash");
+    if (pinFlashTimer) clearTimeout(pinFlashTimer);
+    pinFlashTimer = setTimeout(function () { marker.classList.remove("pin-flash"); }, 2000);
+    if (mapStage) mapStage.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
   markerFocusButtons.forEach(function (button) {
     button.addEventListener("click", function () {
-      if (!window.RanchersMapViewer) return;
       var title = button.dataset.markerFocus;
-      var marker = markers.filter(function (item) { return item.dataset.markerTitle === title; })[0];
-      if (!marker) return;
-      var mx = parseFloat(marker.style.getPropertyValue("--mx"));
-      var my = parseFloat(marker.style.getPropertyValue("--my"));
-      applyEvidenceFilter(marker.dataset.markerEvidenceLayer);
-      applyMarkerFilter(marker.dataset.markerCategory);
-      viewState = window.RanchersMapViewer.focus(mx, my, 2.6);
-      applyMapView();
-      selectMarker(marker);
-      marker.classList.add("pin-flash");
-      if (pinFlashTimer) clearTimeout(pinFlashTimer);
-      pinFlashTimer = setTimeout(function () { marker.classList.remove("pin-flash"); }, 2000);
-      if (mapStage) mapStage.scrollIntoView({ behavior: "smooth", block: "center" });
+      var candidates = markers.filter(function (item) { return item.dataset.markerTitle === title; });
+      var marker = candidates.find(function (item) { return item.dataset.markerPrimary === "true"; }) || candidates[0];
+      focusMarkerOnMap(marker, true);
     });
   });
 
   /* Recognition-photo lightbox: pure front-end, no external library */
   var atlasPhotos = Array.from(document.querySelectorAll("[data-atlas-photo]"));
   if (atlasPhotos.length) {
+    var lightboxOpener = null;
     var lightbox = document.createElement("div");
     lightbox.className = "atlas-lightbox";
     lightbox.setAttribute("role", "dialog");
@@ -423,17 +616,28 @@
 
     function closeLightbox() {
       lightbox.classList.remove("is-open");
-      document.body.style.overflow = "";
+      document.body.classList.remove("has-modal-open");
+      if (lightboxOpener) lightboxOpener.focus();
+      lightboxOpener = null;
     }
     function openLightbox(photo) {
+      lightboxOpener = photo;
       lightboxImg.src = photo.currentSrc || photo.src;
       lightboxImg.alt = photo.alt || "";
       lightbox.classList.add("is-open");
-      document.body.style.overflow = "hidden";
+      document.body.classList.add("has-modal-open");
       lightboxClose.focus();
     }
     atlasPhotos.forEach(function (photo) {
+      photo.tabIndex = 0;
+      photo.setAttribute("role", "button");
+      photo.setAttribute("aria-label", (photo.alt || (isChinese ? "识别图片" : "Recognition photo")) + (isChinese ? "，按回车放大" : ", press Enter to enlarge"));
       photo.addEventListener("click", function () { openLightbox(photo); });
+      photo.addEventListener("keydown", function (event) {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        openLightbox(photo);
+      });
     });
     lightboxClose.addEventListener("click", closeLightbox);
     lightbox.addEventListener("click", function (event) {
@@ -441,6 +645,10 @@
     });
     document.addEventListener("keydown", function (event) {
       if (event.key === "Escape" && lightbox.classList.contains("is-open")) closeLightbox();
+      if (event.key === "Tab" && lightbox.classList.contains("is-open")) {
+        event.preventDefault();
+        lightboxClose.focus();
+      }
     });
     var swipeStartY = null;
     lightbox.addEventListener("touchstart", function (event) {
@@ -572,6 +780,58 @@
     pinClose.addEventListener("click", function () { setPlacing(false); });
   }
 
+  function mapFocusableElements() {
+    if (!mapPanel) return [];
+    return Array.from(mapPanel.querySelectorAll("a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), summary, [tabindex]:not([tabindex='-1'])")).filter(function (element) {
+      return !element.hidden && element.offsetParent !== null;
+    });
+  }
+
+  function setMapExpanded(next) {
+    mapExpanded = !!next;
+    if (mapPanel) mapPanel.classList.toggle("is-map-fullscreen", mapExpanded);
+    document.body.classList.toggle("has-map-fullscreen", mapExpanded);
+    if (mapExpand) {
+      mapExpand.setAttribute("aria-expanded", mapExpanded ? "true" : "false");
+      mapExpand.hidden = mapExpanded;
+    }
+    if (mapFullscreenClose) mapFullscreenClose.hidden = !mapExpanded;
+    if (mapExpanded) {
+      mapPanel.scrollTop = 0;
+      mapPanel.setAttribute("role", "dialog");
+      mapPanel.setAttribute("aria-modal", "true");
+      mapPanel.setAttribute("aria-label", isChinese ? "全屏 Sunvale 地图" : "Expanded Sunvale map");
+      if (mapFullscreenClose) mapFullscreenClose.focus();
+    } else if (mapExpand) {
+      mapPanel.removeAttribute("role");
+      mapPanel.removeAttribute("aria-modal");
+      mapPanel.removeAttribute("aria-label");
+      mapExpand.focus();
+    }
+  }
+
+  if (mapExpand) mapExpand.addEventListener("click", function () { setMapExpanded(true); });
+  if (mapFullscreenClose) mapFullscreenClose.addEventListener("click", function () { setMapExpanded(false); });
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && mapExpanded) setMapExpanded(false);
+    if (event.key === "Tab" && mapExpanded) {
+      var focusable = mapFocusableElements();
+      if (!focusable.length) return;
+      var first = focusable[0];
+      var last = focusable[focusable.length - 1];
+      if (!mapPanel.contains(document.activeElement)) {
+        event.preventDefault();
+        (event.shiftKey ? last : first).focus();
+      } else if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
   var pointers = new Map();
   var dragStart = null;
   var dragMoved = false;
@@ -599,6 +859,7 @@
 
     mapStage.addEventListener("pointerdown", function (event) {
       if (isMapControl(event.target)) return;
+      if (window.matchMedia && window.matchMedia("(pointer: coarse)").matches && !mapExpanded) return;
       pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
       if (pointers.size === 1) {
         dragStart = { x: event.clientX, y: event.clientY, view: { scale: viewState.scale, x: viewState.x, y: viewState.y } };
@@ -689,4 +950,39 @@
     var initialMatches = render();
     if (search.value.trim()) setTimeout(function () { focusBestMatch(initialMatches, true); }, 0);
   }
+
+  function restoreLocationFromUrl() {
+    var params = new URLSearchParams(window.location.search);
+    if (hasDirectory) {
+      search.value = params.get("q") || "";
+      var restoredCategory = params.get("category") || "all";
+      if (!Array.from(category.options).some(function (option) { return option.value === restoredCategory; })) restoredCategory = "all";
+      category.value = restoredCategory;
+      render();
+    }
+    var queryId = params.get("location") || "";
+    var hashId = window.location.hash ? window.location.hash.slice(1) : "";
+    var requestedId = window.RanchersMapState
+      ? window.RanchersMapState.resolveLocationId(queryId, hashId, knownMarkerIds)
+      : (knownMarkerIds.includes(queryId) ? queryId : (knownMarkerIds.includes(hashId) ? hashId : null));
+    var nextHash = queryId && knownMarkerIds.includes(queryId) && knownMarkerIds.includes(hashId) ? "" : window.location.hash;
+    if (queryId && !knownMarkerIds.includes(queryId)) params.delete("location");
+    if (params.toString() !== new URLSearchParams(window.location.search).toString() || nextHash !== window.location.hash) {
+      var normalized = params.toString();
+      window.history.replaceState(null, "", window.location.pathname + (normalized ? "?" + normalized : "") + nextHash);
+    }
+    if (!requestedId) {
+      clearSelectedMarker();
+      return;
+    }
+    var marker = markerForLocation(requestedId);
+    if (marker) {
+      focusMarkerOnMap(marker, false);
+      return;
+    }
+    clearSelectedMarker();
+  }
+
+  restoreLocationFromUrl();
+  window.addEventListener("popstate", restoreLocationFromUrl);
 })();
