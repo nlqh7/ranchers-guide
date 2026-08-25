@@ -113,7 +113,7 @@ for (const relativePath of ["map.html", "zh/map.html"]) {
   assert.equal((html.match(/class="map-marker map-marker-/g) || []).length, markerInstanceCount);
   const directory = html.match(/LOCATION_DIRECTORY:START[\s\S]*LOCATION_DIRECTORY:END/);
   assert.ok(directory, `${relativePath} must keep its generated directory`);
-  assert.equal((directory[0].match(/Site-owner build collection|站长本地构建采集/g) || []).length, markerIds.length, `${relativePath} must identify the provenance of every exact POI group`);
+  assert.equal((directory[0].match(/Site-collected anchor|站长采集锚点/g) || []).length, markerIds.length, `${relativePath} must identify the provenance of every exact POI group`);
 }
 
 const englishMap = fs.readFileSync(path.join(root, "map.html"), "utf8");

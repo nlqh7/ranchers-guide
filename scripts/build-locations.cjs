@@ -270,7 +270,11 @@ function renderEnglishLinks(location) {
 function renderEntry(location, locale) {
   const copy = location.locale[locale];
   const links = locale === "en" ? renderEnglishLinks(location) : "";
-  let entryHtml = copy.entryHtml;
+  const scrubBuildLabel = (value) => String(value || "")
+    .replace(/Steam build\s+24847725/gi, locale === "zh" ? "当前版本" : "current build")
+    .replace(/b24847725/gi, locale === "zh" ? "站长采集" : "site-collected")
+    .replace(/24847725/g, locale === "zh" ? "当前版本" : "current build");
+  let entryHtml = scrubBuildLabel(copy.entryHtml);
   if (!location.marker) {
     entryHtml = entryHtml
       .replace(/<button[^>]*data-marker-focus="[^"]*"[^>]*>[\s\S]*?<\/button>/g, "")
@@ -280,7 +284,7 @@ function renderEntry(location, locale) {
     const focusButton = /data-marker-focus=/.test(entryHtml)
       ? ""
       : `<button type="button" class="location-map-button" data-marker-focus="${escapeHtml(location.marker.locale.en.title)}">Show exact POI</button>`;
-    entryHtml = entryHtml.replace(/<\/div>$/, `${focusButton}<span class="evidence-badge evidence-owner-collected">Site-owner build collection · b24847725</span></div>`);
+    entryHtml = entryHtml.replace(/<\/div>$/, `${focusButton}<span class="evidence-badge evidence-owner-collected">Site-collected anchor</span></div>`);
   }
   if (links) entryHtml = entryHtml.replace(/<\/div>$/, `${links}</div>`);
   return `        <article data-location-entry data-search-entry id="${location.id}" data-location-title="${copy.title}" data-location-category="${location.category}" data-location-keywords="${copy.keywords}">${entryHtml}</article>`;
@@ -340,13 +344,17 @@ function renderZhDirectoryEntry(location) {
     ? `<button type="button" class="location-map-button" data-marker-focus="${escapeHtml(marker.locale.zh.title)}">在地图上定位</button>`
     : "";
   const ownerEvidence = marker?.precision === "exact"
-    ? '<span class="evidence-badge evidence-owner-collected">站长本地构建采集 · b24847725</span>'
+    ? '<span class="evidence-badge evidence-owner-collected">站长采集锚点</span>'
     : "";
   const pinStatus = marker
     ? `<span class="pin-pending">${location.marker.precision === "exact" ? "当前版本精确 POI" : (location.marker.precision === "approximate" ? "大致区域，非精确坐标" : "位置仍需当前截图核对")}</span>`
     : `<span class="pin-pending">暂无可验证的精确标记</span>`;
   const searchTitle = copy.searchTitle || copy.title;
-  return `        <article data-location-entry data-search-entry id="${location.id}" data-location-title="${escapeHtml(copy.title)}" data-location-category="${location.category}" data-location-keywords="${escapeHtml(copy.keywords)}" data-search-title="${escapeHtml(searchTitle)}" data-search-tags="${escapeHtml(copy.keywords)}"><div><span class="location-category">${zhCategoryLabels[location.category]}</span><h2>${escapeHtml(copy.title)}</h2><p>${escapeHtml(copy.summary || "该地点已有名称或来源记录，但当前用途仍需进一步核对。")}</p></div><div class="location-use"><strong>证据状态</strong><span class="evidence-badge ${evidenceClass}">${status}</span>${ownerEvidence}${markerButton}${pinStatus}${links}</div></article>`;
+  const summary = String(copy.summary || "该地点已有名称或来源记录，但当前用途仍需进一步核对.")
+    .replace(/Steam build\s+24847725/gi, "当前版本")
+    .replace(/b24847725/gi, "站长采集")
+    .replace(/24847725/g, "当前版本");
+  return `        <article data-location-entry data-search-entry id="${location.id}" data-location-title="${escapeHtml(copy.title)}" data-location-category="${location.category}" data-location-keywords="${escapeHtml(copy.keywords)}" data-search-title="${escapeHtml(searchTitle)}" data-search-tags="${escapeHtml(copy.keywords)}"><div><span class="location-category">${zhCategoryLabels[location.category]}</span><h2>${escapeHtml(copy.title)}</h2><p>${escapeHtml(summary)}</p></div><div class="location-use"><strong>证据状态</strong><span class="evidence-badge ${evidenceClass}">${status}</span>${ownerEvidence}${markerButton}${pinStatus}${links}</div></article>`;
 }
 
 function replaceGenerated(html, data, locale) {

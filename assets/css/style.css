@@ -1998,6 +1998,22 @@ table.data-table {
 }
 .map-layer-panel legend span:last-child { color: var(--green-700); font-size: 0.78rem; }
 .map-layer-panel > p { margin: 2px 0 12px; color: var(--brown-500); font-size: 0.82rem; }
+.map-advanced-filters {
+  margin-top: 10px;
+  border: 1px solid var(--cream-300);
+  background: var(--color-surface);
+}
+.map-advanced-filters > summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  color: var(--brown-700);
+  font-weight: 800;
+  cursor: pointer;
+}
+.map-advanced-filters[open] > summary { border-bottom: 1px solid var(--cream-300); }
+.map-advanced-filters > .map-pin-controls { margin: 10px; }
 .map-layer-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
 .map-layer-actions button,
 .map-layer-grid button {

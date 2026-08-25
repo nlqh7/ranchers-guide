@@ -6,12 +6,10 @@
   "use strict";
 
   var views = {
-    // The default layer is concentrated around the city and airport; start there
-    // at a readable scale. The Fit control still returns to a full-map view.
-    overview: { scale: 1.25, x: -12.5, y: -12.5 },
-    // The 16:10 mobile viewport needs a little more scale to use its width
-    // while keeping the default city and airport anchors inside the frame.
-    "overview-mobile": { scale: 1.5, x: -2, y: -18 },
+    // Open on the complete square texture. Players can zoom or choose a region
+    // after orienting themselves, without starting on a cropped corner.
+    overview: { scale: 1, x: 0, y: 0 },
+    "overview-mobile": { scale: 1, x: 0, y: 0 },
     full: { scale: 1, x: 0, y: 0 },
     rural: { scale: 2, x: -8, y: -50 },
     city: { scale: 2, x: -46, y: -50 },

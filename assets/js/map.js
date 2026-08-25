@@ -68,7 +68,7 @@
   var placing = false;
   var selectedMarker = null;
   var mapExpanded = false;
-  var mapInteractionState = window.RanchersMapState ? window.RanchersMapState.createState() : null;
+  var mapInteractionState = window.RanchersMapState ? window.RanchersMapState.createState({ evidence: "all" }) : null;
   var knowledgeEntities = [];
   var relationFilter = "all";
   var activeRegionLabel = isChinese ? "全图" : "Overview";
@@ -249,7 +249,7 @@
   }
 
   function toggleMarkerStack(stack) {
-    if (!stack || !mapStage || (viewState && viewState.scale > 1.25)) return;
+    if (!stack || !mapStage) return;
     var visible = stack.members.filter(function (marker) { return !marker.hidden; });
     if (visible.length < 2) return;
     if (stack.fanned) {
@@ -268,7 +268,7 @@
   }
 
   function toggleAllMarkerStacks() {
-    if (!mapStage || (viewState && viewState.scale > 1.25)) return;
+    if (!mapStage) return;
     var visibleStacks = markerStackGroups.filter(function (stack) {
       return stack.members.filter(function (marker) { return !marker.hidden; }).length >= 2;
     });
@@ -302,23 +302,12 @@
   }
 
   function updateMarkerStackBadges() {
-    var stackExpanded = !!(viewState && viewState.scale > 1.25);
-    if (mapStage) mapStage.classList.toggle("map-stacks-expanded", stackExpanded);
+    // Zooming must never rearrange anchors. Dense stacks stay at their source
+    // coordinate until the player explicitly presses +N or "Spread all icons".
+    if (mapStage) mapStage.classList.remove("map-stacks-expanded");
     markerStackGroups.forEach(function (stack, stackIndex) {
       var visible = stack.members.filter(function (marker) { return !marker.hidden; });
       stack.members.forEach(function (marker) { marker.classList.remove("is-stack-top"); });
-      if (stackExpanded) {
-        if (visible.length >= 2) {
-          clearMarkerStackFan(stack);
-          stack.autoFanned = true;
-          stack.fanned = true;
-          applyMarkerStackFan(stack, visible);
-        } else {
-          clearMarkerStackFan(stack);
-        }
-        stack.badge.hidden = true;
-        return;
-      }
       if (visible.length < 2) {
         clearMarkerStackFan(stack);
         stack.autoFanned = false;
@@ -344,16 +333,16 @@
         return stack.members.filter(function (marker) { return !marker.hidden; }).length >= 2;
       });
       var allVisibleStacksFanned = visibleStacks.length > 0 && visibleStacks.every(function (stack) { return stack.fanned; });
-      var allIconsVisible = stackExpanded || (visibleStacks.length > 0 && allVisibleStacksFanned);
-      stackActionButton.disabled = stackExpanded || visibleStacks.length === 0;
-      stackActionButton.classList.toggle("active", allVisibleStacksFanned && !stackExpanded);
-      stackActionButton.setAttribute("aria-pressed", allVisibleStacksFanned && !stackExpanded ? "true" : "false");
+      var allIconsVisible = visibleStacks.length > 0 && allVisibleStacksFanned;
+      stackActionButton.disabled = visibleStacks.length === 0;
+      stackActionButton.classList.toggle("active", allVisibleStacksFanned);
+      stackActionButton.setAttribute("aria-pressed", allVisibleStacksFanned ? "true" : "false");
       stackActionButton.textContent = isChinese
-        ? (stackExpanded ? "全部图标已显示" : allIconsVisible ? "收起全部图标" : "展开全部图标")
-        : (stackExpanded ? "All icons visible" : allIconsVisible ? "Collapse all icons" : "Spread all icons");
+        ? (allIconsVisible ? "收起全部图标" : "展开全部图标")
+        : (allIconsVisible ? "Collapse all icons" : "Spread all icons");
       stackActionButton.title = isChinese
-        ? (stackExpanded ? "放大视图已逐点显示所有固定锚点" : allIconsVisible ? "收起所有密集点位" : "展开当前筛选下的所有密集点位")
-        : (stackExpanded ? "Zoomed view already shows every fixed anchor" : allIconsVisible ? "Collapse every dense point" : "Spread every dense point in the current filters");
+        ? (allIconsVisible ? "收起所有密集点位" : "展开当前筛选下的所有密集点位")
+        : (allIconsVisible ? "Collapse every dense point" : "Spread every dense point in the current filters");
     }
     scheduleMarkerLabelPlacement();
   }
@@ -483,9 +472,7 @@
 
   function getRegionView(name) {
     if (!window.RanchersMapViewer) {
-      return name === "overview" && window.matchMedia && window.matchMedia("(max-width: 560px)").matches
-        ? { scale: 1.5, x: -2, y: -18 }
-        : (name === "overview" ? { scale: 1.25, x: -12.5, y: -12.5 } : { scale: 1, x: 0, y: 0 });
+      return { scale: 1, x: 0, y: 0 };
     }
     var viewName = name === "overview" && window.matchMedia && window.matchMedia("(max-width: 560px)").matches
       ? "overview-mobile"
@@ -676,10 +663,16 @@
     if (!inspector) return;
     inspector.querySelector("[data-map-inspector-title]").textContent = title;
     inspector.querySelector("[data-map-inspector-status]").textContent = status;
-    inspector.querySelector("[data-map-inspector-copy]").textContent = copy;
+    inspector.querySelector("[data-map-inspector-copy]").textContent = cleanMapCopy(copy);
     if (inspectorLink) inspectorLink.hidden = true;
     if (inspectorConnections) inspectorConnections.hidden = true;
     if (inspectorJourney) inspectorJourney.hidden = true;
+  }
+
+  function cleanMapCopy(value) {
+    return String(value || "")
+      .replace(/Steam build\s+\d+/gi, isChinese ? "当前版本" : "current build")
+      .replace(/\bb\d{7,}\b/gi, isChinese ? "站长采集" : "site-collected");
   }
 
   function saveDiscovery() {
@@ -832,7 +825,7 @@
     inspector.querySelector("[data-map-inspector-status]").textContent = isChinese
       ? (exact ? "位置可信度：" + confidence + "，锚点来自当前版本原生 POI" : "位置可信度：" + confidence + "，标记为估算区域，并非已验证坐标")
       : (exact ? "Location confidence: " + confidence + " — anchored to the current-build native POI" : "Location confidence: " + confidence + " — pin is an estimate, not a verified coordinate");
-    inspector.querySelector("[data-map-inspector-copy]").textContent = marker.dataset.markerCopy;
+    inspector.querySelector("[data-map-inspector-copy]").textContent = cleanMapCopy(marker.dataset.markerCopy);
     renderInspectorConnections(marker);
     renderInspectorJourney(marker);
     if (inspectorLink && marker.dataset.markerTarget) {
@@ -859,7 +852,7 @@
 
   var markerCategories = ["shopping", "services", "transport", "landmarks"];
   var activeCategoryLayers = markerCategories.slice();
-  var activeEvidenceFilter = "supported";
+  var activeEvidenceFilter = "all";
 
   function layerCountCopy(visible, total) {
     return isChinese ? "显示 " + visible + " / " + total : visible + " / " + total + " visible";
@@ -978,7 +971,7 @@
       renderMarkerLayers();
     });
   });
-  applyMarkerFilter("all");
+  applyMarkerFilter("all", true);
   if (labelToggle) {
     labelToggle.addEventListener("click", function () {
       setMarkerLabels(!mapStage.classList.contains("map-labels-visible"));
