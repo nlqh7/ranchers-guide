@@ -55,7 +55,7 @@ assert.match(styles, /\.map-marker-has-native-icon::after\s*\{[\s\S]*?border-rad
 assert.match(styles, /\.map-marker-has-native-icon \.map-marker-native-icon\s*\{[\s\S]*?width:\s*27px;[\s\S]*?height:\s*27px;/, "native glyphs must be the primary visible marker");
 assert.match(styles, /\.map-stage\.map-labels-visible \.map-marker-has-native-icon span\s*\{[\s\S]*?opacity:\s*1;/, "native POI labels must be opt-in so the overview stays readable");
 assert.match(styles, /\.map-stage\.map-labels-visible \.map-marker\[data-marker-stack-size\] span\s*\{[\s\S]*?opacity:\s*0;/, "stacked labels must collapse to one readable label instead of covering the map");
-assert.match(styles, /\.map-stage-hud\s*\{[\s\S]*?position:\s*absolute;/, "map HUD must stay attached to the map stage");
+assert.doesNotMatch(styles, /\.map-stage-hud\s*\{/, "removed map HUD must not leave dead styles");
 assert.match(styles, /\.map-stage-selection\s*\{[\s\S]*?position:\s*absolute;/, "selected marker summary must stay attached to the map stage");
 assert.match(styles, /\.map-inspector\s*\{[\s\S]*?scroll-margin-top:\s*96px;/, "inspector jumps must clear the sticky header");
 assert.match(styles, /\.map-stage:not\(\.is-zoomed\) \.map-marker-exact::after\s*\{[\s\S]*?width:\s*22px;[\s\S]*?height:\s*22px;/, "overview markers must use a compact visible symbol while preserving the 44px hit target");

@@ -1470,6 +1470,7 @@ table.data-table {
   border-radius: 10px;
   background: var(--cream-200);
 }
+.map-viewer-panel:not(.is-map-fullscreen) .map-pan-controls { display: none; }
 .map-region-tabs button,
 .map-zoom-controls button,
 .map-pan-controls button,
@@ -1522,35 +1523,6 @@ table.data-table {
   isolation: isolate;
   touch-action: pan-y;
 }
-.map-stage-hud {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 9;
-  display: flex;
-  max-width: calc(100% - 20px);
-  align-items: center;
-  gap: 0;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.82);
-  border-radius: 999px;
-  background: rgba(45, 35, 25, 0.78);
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(45, 35, 25, 0.28);
-  pointer-events: none;
-  backdrop-filter: blur(5px);
-}
-.map-stage-hud span {
-  min-width: 0;
-  padding: 5px 9px;
-  overflow: hidden;
-  font-size: 0.68rem;
-  font-weight: 900;
-  line-height: 1.2;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.map-stage-hud span + span { border-left: 1px solid rgba(255, 255, 255, 0.25); }
 .map-stage-selection {
   position: absolute;
   right: 10px;
@@ -1605,7 +1577,7 @@ table.data-table {
   position: absolute;
   inset: 0;
   transform: translate(var(--map-x, 0), var(--map-y, 0)) scale(var(--map-scale, 1));
-  transition: transform 260ms ease;
+  transition: none;
 }
 .map-stage img {
   display: block;

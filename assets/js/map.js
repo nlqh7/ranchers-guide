@@ -52,10 +52,6 @@
   var mapExpand = document.querySelector("[data-map-expand]");
   var mapFullscreenClose = document.querySelector("[data-map-fullscreen-close]");
   var labelToggle = document.querySelector("[data-map-label-toggle]");
-  var stageHud = document.querySelector("[data-map-stage-hud]");
-  var stageViewLabel = stageHud ? stageHud.querySelector("[data-map-stage-view]") : null;
-  var stageZoomLabel = stageHud ? stageHud.querySelector("[data-map-stage-zoom]") : null;
-  var stagePinsLabel = stageHud ? stageHud.querySelector("[data-map-stage-pins]") : null;
   var stageSelection = document.querySelector("[data-map-stage-selection]");
   var stageSelectionStatus = stageSelection ? stageSelection.querySelector("[data-map-stage-selection-status]") : null;
   var stageSelectionTitle = stageSelection ? stageSelection.querySelector("[data-map-stage-selection-title]") : null;
@@ -177,7 +173,7 @@
         markerLayer.appendChild(hit);
         markerStackHitByElement.set(marker, hit);
         markerStackGroups[markerStackGroups.length - 1].hitTargets.push(hit);
-        var stackHint = isChinese ? "此处附近有 " + stack.length + " 个地点；点击 +N 展开，点击图标可循环查看" : stack.length + " nearby locations; click +N to spread or click the icon to cycle";
+        var stackHint = isChinese ? "此处附近有 " + stack.length + " 个独立地点；点击图标可循环查看，使用“展开全部图标”分开显示" : stack.length + " nearby locations; click the marker to cycle, or use Spread all icons to separate them";
         marker.title = stackHint;
         marker.setAttribute("aria-label", marker.dataset.markerBaseAriaLabel + ". " + stackHint);
         if (!marker.querySelector(".map-marker-stack-tether")) {
@@ -482,7 +478,7 @@
 
   var viewState = getRegionView("overview");
 
-  function applyMapView() {
+  function applyMapView(deferOverlayWork) {
     if (!mapImage) return;
     var host = mapStage || mapImage;
     var mapMarkerScale = viewState.scale > 0 ? 1 / viewState.scale : 1;
@@ -495,9 +491,8 @@
     mapImage.style.setProperty("--map-x", viewState.x + "%");
     mapImage.style.setProperty("--map-y", viewState.y + "%");
     if (mapStage) mapStage.classList.toggle("is-zoomed", viewState.scale > 1.05);
-    updateMarkerStackBadges();
-    scheduleMarkerLabelPlacement();
-    updateMapStageHud();
+    if (deferOverlayWork) scheduleMapOverlayRefresh();
+    else updateMarkerStackBadges();
   }
 
   function rectanglesOverlap(first, second) {
@@ -625,12 +620,13 @@
     }, 220);
   }
 
-  function updateMapStageHud() {
-    if (!stageHud) return;
-    var visibleCount = markers.filter(function (marker) { return !marker.hidden; }).length;
-    if (stageViewLabel) stageViewLabel.textContent = activeRegionLabel;
-    if (stageZoomLabel) stageZoomLabel.textContent = Math.round(viewState.scale * 100) + "%";
-    if (stagePinsLabel) stagePinsLabel.textContent = isChinese ? "显示 " + visibleCount + " 个" : visibleCount + " pins";
+  var mapOverlayRefreshTimer = 0;
+  function scheduleMapOverlayRefresh() {
+    if (mapOverlayRefreshTimer) window.clearTimeout(mapOverlayRefreshTimer);
+    mapOverlayRefreshTimer = window.setTimeout(function () {
+      mapOverlayRefreshTimer = 0;
+      updateMarkerStackBadges();
+    }, 120);
   }
 
   function updateMapStageSelection(marker) {
@@ -842,10 +838,6 @@
   markers.forEach(function (marker) {
     marker.addEventListener("click", function (event) {
       event.stopPropagation();
-      if (event.target.closest && event.target.closest(".map-marker-stack-count")) {
-        toggleMarkerStack(getMarkerStackGroup(marker));
-        return;
-      }
       selectMarker(nextVisibleStackMarker(marker));
     });
   });
@@ -911,7 +903,6 @@
             : (isChinese ? "计划中" : "planned");
       layerSummary.textContent = isChinese ? "显示 " + visibleCount + " 个 · " + evidenceLabel : visibleCount + " visible · " + evidenceLabel;
     }
-    updateMapStageHud();
   }
 
   function applyMarkerFilter(filter, includeAllEvidence) {
@@ -1406,7 +1397,7 @@
       var factor = Math.exp(-event.deltaY * 0.0015);
       var anchor = stagePointFromClient(event.clientX, event.clientY);
       viewState = window.RanchersMapViewer.zoomAt(viewState, factor, anchor);
-      applyMapView();
+      applyMapView(true);
     }, { passive: false });
 
     mapStage.addEventListener("pointerdown", function (event) {
@@ -1431,7 +1422,7 @@
         var dist = Math.max(1, Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y));
         var anchor = stagePointFromClient(pinchStart.cx, pinchStart.cy);
         viewState = window.RanchersMapViewer.zoomAt(pinchStart.view, dist / pinchStart.dist, anchor);
-        applyMapView();
+        applyMapView(true);
         return;
       }
       if (pointers.size === 1 && dragStart) {
@@ -1443,7 +1434,7 @@
           if (mapStage) mapStage.classList.add("is-panning");
         }
         viewState = window.RanchersMapViewer.panBy(dragStart.view, dx, dy);
-        applyMapView();
+        applyMapView(true);
       }
     });
 
