@@ -49,7 +49,7 @@ const styles = read("assets/css/style.css");
 const mapStyles = styles.slice(styles.indexOf(".map-layer-panel"), styles.indexOf("/* ---------- Problem finder ---------- */"));
 assert.match(styles, /\.map-stage\s*\{[\s\S]*?aspect-ratio:\s*1\s*\/\s*1;/, "the complete native map must retain its square aspect ratio");
 assert.match(styles, /\.map-marker-native-icon\s*\{[\s\S]*?pointer-events:\s*none;/, "native glyphs must not steal marker interaction");
-assert.match(styles, /\.map-marker \.map-marker-stack-count\s*\{[\s\S]*?border-radius:\s*50%;[\s\S]*?background:\s*var\(--brown-900\);[\s\S]*?color:\s*#fff;/, "dense native POI stacks need a high-contrast count badge");
+assert.doesNotMatch(styles, /map-marker-stack-count/, "dense native POI stacks must not add a numeric overlay to native icons");
 assert.doesNotMatch(styles, /\.map-marker\s*\{[\s\S]*?transform:\s*scale\(calc\(1\s*\/\s*var\(--map-scale/, "map markers must scale with the map instead of shrinking relative to it");
 assert.match(styles, /\.map-marker-has-native-icon::after\s*\{[\s\S]*?border-radius:\s*8px;/, "native glyph markers must use a compact badge instead of the generic circle");
 assert.match(styles, /\.map-marker-has-native-icon \.map-marker-native-icon\s*\{[\s\S]*?width:\s*27px;[\s\S]*?height:\s*27px;/, "native glyphs must be the primary visible marker");
