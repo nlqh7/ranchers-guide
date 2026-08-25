@@ -13,6 +13,7 @@
   var regionButtons = Array.from(document.querySelectorAll("[data-map-region]:not([data-location-map])"));
   var locationButtons = Array.from(document.querySelectorAll("[data-location-map]"));
   var markerFocusButtons = Array.from(document.querySelectorAll("[data-marker-focus]"));
+  var taskDirectoryButtons = Array.from(document.querySelectorAll('[data-map-task-action="directory"]'));
   var zoomButtons = Array.from(document.querySelectorAll("[data-map-zoom]"));
   var panButtons = Array.from(document.querySelectorAll("[data-map-pan]"));
   var focusMarker = document.querySelector("[data-map-focus-marker]");
@@ -21,10 +22,14 @@
   var markerLayer = document.querySelector("[data-map-marker-layer]");
   var markers = markerLayer ? Array.from(markerLayer.querySelectorAll("[data-marker-category]")) : [];
   var knownMarkerIds = Array.from(new Set(markers.map(function (marker) { return marker.dataset.markerId; })));
+  var markerStackGroups = [];
+  var markerStackByElement = new Map();
+  var markerStackHitByElement = new Map();
   var knownLocationIds = [];
   var markerFilterButtons = Array.from(document.querySelectorAll("[data-map-pin-filter]"));
   var layerToggleButtons = Array.from(document.querySelectorAll("[data-map-layer-toggle]"));
   var layerActionButtons = Array.from(document.querySelectorAll("[data-map-layer-action]"));
+  var stackActionButton = document.querySelector("[data-map-stack-action]");
   var layerSummary = document.querySelector("[data-map-layer-summary]");
   var evidenceFilterButtons = Array.from(document.querySelectorAll("[data-map-evidence-filter]"));
   var relationFilterButtons = Array.from(document.querySelectorAll("[data-map-relation-filter]"));
@@ -46,6 +51,15 @@
   var mapPanel = document.querySelector(".map-viewer-panel");
   var mapExpand = document.querySelector("[data-map-expand]");
   var mapFullscreenClose = document.querySelector("[data-map-fullscreen-close]");
+  var labelToggle = document.querySelector("[data-map-label-toggle]");
+  var stageHud = document.querySelector("[data-map-stage-hud]");
+  var stageViewLabel = stageHud ? stageHud.querySelector("[data-map-stage-view]") : null;
+  var stageZoomLabel = stageHud ? stageHud.querySelector("[data-map-stage-zoom]") : null;
+  var stagePinsLabel = stageHud ? stageHud.querySelector("[data-map-stage-pins]") : null;
+  var stageSelection = document.querySelector("[data-map-stage-selection]");
+  var stageSelectionStatus = stageSelection ? stageSelection.querySelector("[data-map-stage-selection-status]") : null;
+  var stageSelectionTitle = stageSelection ? stageSelection.querySelector("[data-map-stage-selection-title]") : null;
+  var stageSelectionDetails = stageSelection ? stageSelection.querySelector("[data-map-stage-selection-details]") : null;
   var isChinese = document.documentElement.lang.toLowerCase() === "zh-cn";
   var hasDirectory = !!(search && category && entries.length && window.RanchersMap);
   var searchWasActive = false;
@@ -57,10 +71,308 @@
   var mapInteractionState = window.RanchersMapState ? window.RanchersMapState.createState() : null;
   var knowledgeEntities = [];
   var relationFilter = "all";
+  var activeRegionLabel = isChinese ? "全图" : "Overview";
   var discoveryKey = "ranchers-guide-map-progress-v1";
   var discovered = {};
   try { discovered = JSON.parse(localStorage.getItem(discoveryKey) || "{}"); } catch (_) { discovered = {}; }
   if (!mapStage || !mapImage || !window.RanchersMapViewer) return;
+
+  function compactMarkerLabels() {
+    markers.forEach(function (marker) {
+      var pointLabel = marker.dataset.markerPointLabel || "";
+      var label = marker.querySelector("span:not(.map-marker-stack-count)");
+      if (!pointLabel || !label) return;
+      label.textContent = pointLabel;
+      label.classList.add("map-marker-short-label");
+      label.title = marker.dataset.markerTitle || pointLabel;
+    });
+  }
+
+  compactMarkerLabels();
+
+  function getStackThreshold() {
+    var canvas = document.querySelector("[data-map-canvas]");
+    var width = canvas ? canvas.getBoundingClientRect().width : 0;
+    if (!width) return 1.8;
+    return Math.max(1.8, Math.min(8, (14 / width) * 100));
+  }
+
+  function resetMarkerStacks() {
+    markerStackGroups.forEach(function (stack) {
+      if (stack.badge && stack.badge.parentNode) stack.badge.parentNode.removeChild(stack.badge);
+      (stack.hitTargets || []).forEach(function (hit) { if (hit.parentNode) hit.parentNode.removeChild(hit); });
+    });
+    markerStackGroups = [];
+    markerStackByElement.clear();
+    markerStackHitByElement.clear();
+    markers.forEach(function (marker) {
+      marker.classList.remove("is-stack-top");
+      marker.classList.remove("is-stack-fanned");
+      marker.style.removeProperty("--stack-dx");
+      marker.style.removeProperty("--stack-dy");
+      marker.style.removeProperty("--stack-angle");
+      marker.style.removeProperty("--stack-line-length");
+      marker.style.removeProperty("z-index");
+      var oldTether = marker.querySelector(".map-marker-stack-tether");
+      if (oldTether) oldTether.remove();
+      marker.removeAttribute("data-marker-stack-size");
+      marker.removeAttribute("data-marker-stack-index");
+      if (marker.dataset.markerBaseTitle) marker.title = marker.dataset.markerBaseTitle;
+      if (marker.dataset.markerBaseAriaLabel) marker.setAttribute("aria-label", marker.dataset.markerBaseAriaLabel);
+    });
+    if (mapStage) mapStage.classList.remove("map-stack-fan-open");
+  }
+
+  function buildMarkerStacks() {
+    resetMarkerStacks();
+    var assigned = new Set();
+    var canvas = document.querySelector("[data-map-canvas]");
+    var compactStacking = !!(canvas && canvas.getBoundingClientRect().width < 280);
+    var threshold = getStackThreshold();
+    markers.forEach(function (seed) {
+      if (assigned.has(seed)) return;
+      var queue = [seed];
+      var stack = [];
+      assigned.add(seed);
+      while (queue.length) {
+        var current = queue.shift();
+        stack.push(current);
+        var cx = parseFloat(current.style.getPropertyValue("--mx"));
+        var cy = parseFloat(current.style.getPropertyValue("--my"));
+        markers.forEach(function (candidate) {
+          if (assigned.has(candidate)) return;
+          if (compactStacking && candidate.dataset.markerId !== current.dataset.markerId) return;
+          var x = parseFloat(candidate.style.getPropertyValue("--mx"));
+          var y = parseFloat(candidate.style.getPropertyValue("--my"));
+          if (Math.hypot(cx - x, cy - y) <= threshold) {
+            assigned.add(candidate);
+            queue.push(candidate);
+          }
+        });
+      }
+      if (stack.length < 2) return;
+      var badge = document.createElement("span");
+      badge.className = "map-marker-stack-count";
+      badge.setAttribute("aria-hidden", "true");
+      markerStackGroups.push({ members: stack, badge: badge, hitTargets: [], fanned: false, autoFanned: false });
+      stack.forEach(function (marker, index) {
+        markerStackByElement.set(marker, stack);
+        marker.dataset.markerStackSize = String(stack.length);
+        marker.dataset.markerStackIndex = String(index);
+        marker.dataset.markerBaseTitle = marker.dataset.markerBaseTitle || marker.title || marker.getAttribute("aria-label") || "";
+        marker.dataset.markerBaseAriaLabel = marker.dataset.markerBaseAriaLabel || marker.getAttribute("aria-label") || "";
+        var hit = document.createElement("button");
+        hit.type = "button";
+        hit.className = "map-marker-stack-hit";
+        hit.hidden = true;
+        hit.dataset.markerStackHit = marker.dataset.markerInstanceId || marker.dataset.markerId || "";
+        hit.style.setProperty("--mx", marker.style.getPropertyValue("--mx"));
+        hit.style.setProperty("--my", marker.style.getPropertyValue("--my"));
+        hit.setAttribute("aria-label", isChinese ? "选择 " + (marker.dataset.markerTitle || "此地点") : "Select " + (marker.dataset.markerTitle || "this location"));
+        hit.title = marker.dataset.markerTitle || "";
+        hit.addEventListener("click", function (event) {
+          event.stopPropagation();
+          selectMarker(marker);
+        });
+        markerLayer.appendChild(hit);
+        markerStackHitByElement.set(marker, hit);
+        markerStackGroups[markerStackGroups.length - 1].hitTargets.push(hit);
+        var stackHint = isChinese ? "此处附近有 " + stack.length + " 个地点；点击 +N 展开，点击图标可循环查看" : stack.length + " nearby locations; click +N to spread or click the icon to cycle";
+        marker.title = stackHint;
+        marker.setAttribute("aria-label", marker.dataset.markerBaseAriaLabel + ". " + stackHint);
+        if (!marker.querySelector(".map-marker-stack-tether")) {
+          var tether = document.createElement("span");
+          tether.className = "map-marker-stack-tether";
+          tether.setAttribute("aria-hidden", "true");
+          marker.appendChild(tether);
+        }
+      });
+    });
+  }
+
+  function getMarkerStackGroup(marker) {
+    return markerStackGroups.find(function (stack) { return stack.members.includes(marker); }) || null;
+  }
+
+  function clearMarkerStackFan(stack) {
+    if (!stack) return;
+    stack.fanned = false;
+    stack.members.forEach(function (marker) {
+      marker.classList.remove("is-stack-fanned");
+      marker.style.removeProperty("--stack-dx");
+      marker.style.removeProperty("--stack-dy");
+      marker.style.removeProperty("--stack-angle");
+      marker.style.removeProperty("--stack-line-length");
+      marker.style.removeProperty("z-index");
+      var hit = markerStackHitByElement.get(marker);
+      if (hit) {
+        hit.hidden = true;
+        hit.style.removeProperty("--stack-dx");
+        hit.style.removeProperty("--stack-dy");
+      }
+    });
+  }
+
+  function applyMarkerStackFan(stack, visible) {
+    if (!stack || !visible.length) return;
+    var scale = viewState && viewState.scale > 0 ? viewState.scale : 1;
+    var radius = Math.min(72, Math.max(42, visible.length * 5));
+    var stageRect = mapStage ? mapStage.getBoundingClientRect() : null;
+    var stackHitMargin = 34;
+    if (stageRect) stackHitMargin = Math.min(stackHitMargin, Math.max(22, Math.min(stageRect.width, stageRect.height) / 2 - 4));
+    visible.forEach(function (marker, index) {
+      var angle = -Math.PI / 2 + (Math.PI * 2 * index / visible.length);
+      var markerRect = marker.getBoundingClientRect();
+      var baseX = markerRect.left + markerRect.width / 2;
+      var baseY = markerRect.top + markerRect.height / 2;
+      var targetX = baseX + Math.cos(angle) * radius;
+      var targetY = baseY + Math.sin(angle) * radius;
+      if (stageRect) {
+        targetX = Math.max(stageRect.left + stackHitMargin, Math.min(stageRect.right - stackHitMargin, targetX));
+        targetY = Math.max(stageRect.top + stackHitMargin, Math.min(stageRect.bottom - stackHitMargin, targetY));
+      }
+      var displayDx = targetX - baseX;
+      var displayDy = targetY - baseY;
+      marker.classList.add("is-stack-fanned");
+      marker.style.setProperty("--stack-dx", (displayDx / scale).toFixed(3) + "px");
+      marker.style.setProperty("--stack-dy", (displayDy / scale).toFixed(3) + "px");
+      marker.style.setProperty("--stack-angle", (angle * 180 / Math.PI).toFixed(2) + "deg");
+      marker.style.setProperty("--stack-line-length", Math.max(0, Math.hypot(displayDx, displayDy) - 13) / scale + "px");
+      var hit = markerStackHitByElement.get(marker);
+      if (hit) {
+        hit.hidden = false;
+        hit.style.setProperty("--stack-dx", (displayDx / scale).toFixed(3) + "px");
+        hit.style.setProperty("--stack-dy", (displayDy / scale).toFixed(3) + "px");
+      }
+    });
+    if (mapStage) mapStage.classList.add("map-stack-fan-open");
+  }
+
+  function toggleMarkerStack(stack) {
+    if (!stack || !mapStage || (viewState && viewState.scale > 1.25)) return;
+    var visible = stack.members.filter(function (marker) { return !marker.hidden; });
+    if (visible.length < 2) return;
+    if (stack.fanned) {
+      clearMarkerStackFan(stack);
+      stack.autoFanned = false;
+    }
+    else {
+      markerStackGroups.forEach(function (other) {
+        if (other !== stack) clearMarkerStackFan(other);
+      });
+      stack.autoFanned = false;
+      stack.fanned = true;
+      applyMarkerStackFan(stack, visible);
+    }
+    updateMarkerStackBadges();
+  }
+
+  function toggleAllMarkerStacks() {
+    if (!mapStage || (viewState && viewState.scale > 1.25)) return;
+    var visibleStacks = markerStackGroups.filter(function (stack) {
+      return stack.members.filter(function (marker) { return !marker.hidden; }).length >= 2;
+    });
+    if (!visibleStacks.length) {
+      updateMarkerStackBadges();
+      return;
+    }
+    var shouldOpen = visibleStacks.some(function (stack) { return !stack.fanned; });
+    visibleStacks.forEach(function (stack) {
+      var visible = stack.members.filter(function (marker) { return !marker.hidden; });
+      if (shouldOpen) {
+        stack.autoFanned = false;
+        stack.fanned = true;
+        applyMarkerStackFan(stack, visible);
+      } else {
+        clearMarkerStackFan(stack);
+        stack.autoFanned = false;
+      }
+    });
+    updateMarkerStackBadges();
+  }
+
+  function collapseFannedStack(restoreFocus) {
+    var openStacks = markerStackGroups.filter(function (stack) { return stack.fanned; });
+    if (!openStacks.length) return false;
+    var focusTarget = openStacks[0].members.find(function (marker) { return marker.classList.contains("is-stack-top") && !marker.hidden; }) || openStacks[0].members.find(function (marker) { return !marker.hidden; });
+    openStacks.forEach(function (stack) { clearMarkerStackFan(stack); });
+    updateMarkerStackBadges();
+    if (restoreFocus && focusTarget) focusTarget.focus();
+    return true;
+  }
+
+  function updateMarkerStackBadges() {
+    var stackExpanded = !!(viewState && viewState.scale > 1.25);
+    if (mapStage) mapStage.classList.toggle("map-stacks-expanded", stackExpanded);
+    markerStackGroups.forEach(function (stack, stackIndex) {
+      var visible = stack.members.filter(function (marker) { return !marker.hidden; });
+      stack.members.forEach(function (marker) { marker.classList.remove("is-stack-top"); });
+      if (stackExpanded) {
+        if (visible.length >= 2) {
+          clearMarkerStackFan(stack);
+          stack.autoFanned = true;
+          stack.fanned = true;
+          applyMarkerStackFan(stack, visible);
+        } else {
+          clearMarkerStackFan(stack);
+        }
+        stack.badge.hidden = true;
+        return;
+      }
+      if (visible.length < 2) {
+        clearMarkerStackFan(stack);
+        stack.autoFanned = false;
+        stack.badge.hidden = true;
+        return;
+      }
+      if (stack.autoFanned) {
+        clearMarkerStackFan(stack);
+        stack.autoFanned = false;
+      }
+      var host = visible[visible.length - 1];
+      stack.badge.hidden = false;
+      stack.badge.textContent = stack.fanned ? "−" : "+" + (visible.length - 1);
+      host.classList.add("is-stack-top");
+      if (stack.fanned) visible.forEach(function (marker, index) { marker.style.zIndex = String(20 + stackIndex + index); });
+      else host.style.zIndex = String(20 + stackIndex);
+      if (stack.badge.parentNode !== host) host.appendChild(stack.badge);
+      if (stack.fanned) applyMarkerStackFan(stack, visible);
+    });
+    if (mapStage) mapStage.classList.toggle("map-stack-fan-open", markerStackGroups.some(function (stack) { return stack.fanned; }));
+    if (stackActionButton) {
+      var visibleStacks = markerStackGroups.filter(function (stack) {
+        return stack.members.filter(function (marker) { return !marker.hidden; }).length >= 2;
+      });
+      var allVisibleStacksFanned = visibleStacks.length > 0 && visibleStacks.every(function (stack) { return stack.fanned; });
+      var allIconsVisible = stackExpanded || (visibleStacks.length > 0 && allVisibleStacksFanned);
+      stackActionButton.disabled = stackExpanded || visibleStacks.length === 0;
+      stackActionButton.classList.toggle("active", allVisibleStacksFanned && !stackExpanded);
+      stackActionButton.setAttribute("aria-pressed", allVisibleStacksFanned && !stackExpanded ? "true" : "false");
+      stackActionButton.textContent = isChinese
+        ? (stackExpanded ? "全部图标已显示" : allIconsVisible ? "收起全部图标" : "展开全部图标")
+        : (stackExpanded ? "All icons visible" : allIconsVisible ? "Collapse all icons" : "Spread all icons");
+      stackActionButton.title = isChinese
+        ? (stackExpanded ? "放大视图已逐点显示所有固定锚点" : allIconsVisible ? "收起所有密集点位" : "展开当前筛选下的所有密集点位")
+        : (stackExpanded ? "Zoomed view already shows every fixed anchor" : allIconsVisible ? "Collapse every dense point" : "Spread every dense point in the current filters");
+    }
+    scheduleMarkerLabelPlacement();
+  }
+
+  function nextVisibleStackMarker(marker) {
+    var stack = markerStackByElement.get(marker);
+    if (!stack) return marker;
+    var visible = stack.filter(function (candidate) { return !candidate.hidden; });
+    if (visible.length < 2) return marker;
+    var currentIndex = selectedMarker ? visible.indexOf(selectedMarker) : -1;
+    return visible[(currentIndex >= 0 ? currentIndex + 1 : visible.indexOf(marker)) % visible.length];
+  }
+
+  buildMarkerStacks();
+  window.addEventListener("resize", function () {
+    buildMarkerStacks();
+    updateMarkerStackBadges();
+    scheduleMarkerLabelPlacement();
+  });
 
   Array.from(document.querySelectorAll("[data-protected-game-art]")).forEach(function (asset) {
     asset.setAttribute("draggable", "false");
@@ -169,18 +481,195 @@
     return matches;
   }
 
-  var viewState = window.RanchersMapViewer ? window.RanchersMapViewer.getView("overview") : { scale: 1, x: 0, y: 0 };
+  function getRegionView(name) {
+    if (!window.RanchersMapViewer) {
+      return name === "overview" && window.matchMedia && window.matchMedia("(max-width: 560px)").matches
+        ? { scale: 1.5, x: -2, y: -18 }
+        : (name === "overview" ? { scale: 1.25, x: -12.5, y: -12.5 } : { scale: 1, x: 0, y: 0 });
+    }
+    var viewName = name === "overview" && window.matchMedia && window.matchMedia("(max-width: 560px)").matches
+      ? "overview-mobile"
+      : name;
+    return window.RanchersMapViewer.getView(viewName);
+  }
+
+  var viewState = getRegionView("overview");
 
   function applyMapView() {
     if (!mapImage) return;
     var host = mapStage || mapImage;
+    var mapMarkerScale = viewState.scale > 0 ? 1 / viewState.scale : 1;
     host.style.setProperty("--map-scale", viewState.scale);
+    host.style.setProperty("--map-marker-scale", mapMarkerScale);
     host.style.setProperty("--map-x", viewState.x + "%");
     host.style.setProperty("--map-y", viewState.y + "%");
     mapImage.style.setProperty("--map-scale", viewState.scale);
+    mapImage.style.setProperty("--map-marker-scale", mapMarkerScale);
     mapImage.style.setProperty("--map-x", viewState.x + "%");
     mapImage.style.setProperty("--map-y", viewState.y + "%");
     if (mapStage) mapStage.classList.toggle("is-zoomed", viewState.scale > 1.05);
+    updateMarkerStackBadges();
+    scheduleMarkerLabelPlacement();
+    updateMapStageHud();
+  }
+
+  function rectanglesOverlap(first, second) {
+    return first.left < second.right && first.right > second.left &&
+      first.top < second.bottom && first.bottom > second.top;
+  }
+
+  function labelOverlapsMarker(labelRect, host, markerRects) {
+    return markerRects.some(function (item) {
+      if (item.marker === host || item.marker.hidden) return false;
+      return rectanglesOverlap(labelRect, item.rect);
+    });
+  }
+
+  function updateMarkerLabelPlacement() {
+    if (!mapStage) return;
+    var stageRect = mapStage.getBoundingClientRect();
+    var edge = 3;
+    var mapScale = viewState && viewState.scale > 0 ? viewState.scale : 1;
+    var markerRects = markers.filter(function (marker) { return !marker.hidden; }).map(function (marker) {
+      return { marker: marker, rect: marker.getBoundingClientRect() };
+    });
+    var placedLabelRects = [];
+    var collisionOffsets = [
+      [0, 0],
+      [0, -48],
+      [0, 48],
+      [-64, 0],
+      [64, 0],
+      [-64, -48],
+      [64, -48],
+      [-64, 48],
+      [64, 48],
+      [0, -96],
+      [0, 96],
+      [-112, 0],
+      [112, 0],
+      [-112, -48],
+      [112, -48],
+      [-112, 48],
+      [112, 48],
+      [-64, -96],
+      [64, -96],
+      [-64, 96],
+      [64, 96],
+      [0, -144],
+      [0, 144]
+    ];
+
+    function setLabelShift(label, shiftX, shiftY) {
+      if (shiftX) label.style.setProperty("--map-label-shift-x", (shiftX / mapScale).toFixed(3) + "px");
+      else label.style.removeProperty("--map-label-shift-x");
+      if (shiftY) label.style.setProperty("--map-label-shift-y", (shiftY / mapScale).toFixed(3) + "px");
+      else label.style.removeProperty("--map-label-shift-y");
+    }
+
+    function labelFitsStage(rect) {
+      return rect.left >= stageRect.left + edge &&
+        rect.right <= stageRect.right - edge &&
+        rect.top >= stageRect.top + edge &&
+        rect.bottom <= stageRect.bottom - edge;
+    }
+
+    markers.forEach(function (marker) {
+      marker.classList.remove("map-label-edge-left", "map-label-edge-right", "map-label-edge-top");
+      marker.classList.remove("map-label-collision-hidden");
+      var label = marker.querySelector("span:not(.map-marker-stack-count):not(.map-marker-stack-tether)");
+      if (!label) return;
+      label.style.removeProperty("--map-label-shift-x");
+      label.style.removeProperty("--map-label-shift-y");
+      if (marker.hidden) return;
+      var labelRect = label.getBoundingClientRect();
+      if (labelRect.left < stageRect.left + edge) marker.classList.add("map-label-edge-left");
+      if (labelRect.right > stageRect.right - edge) marker.classList.add("map-label-edge-right");
+      if (labelRect.top < stageRect.top + edge) marker.classList.add("map-label-edge-top");
+      labelRect = label.getBoundingClientRect();
+      var shiftX = 0;
+      var shiftY = 0;
+      if (labelRect.left < stageRect.left + edge) shiftX += stageRect.left + edge - labelRect.left;
+      if (labelRect.right > stageRect.right - edge) shiftX -= labelRect.right - (stageRect.right - edge);
+      if (labelRect.top < stageRect.top + edge) shiftY += stageRect.top + edge - labelRect.top;
+      if (labelRect.bottom > stageRect.bottom - edge) shiftY -= labelRect.bottom - (stageRect.bottom - edge);
+      var labelIsVisible = window.getComputedStyle(label).opacity !== "0" && window.getComputedStyle(label).display !== "none";
+      if (!labelIsVisible) {
+        setLabelShift(label, shiftX, shiftY);
+        return;
+      }
+      var resolved = false;
+      collisionOffsets.some(function (offset) {
+        var candidateX = shiftX + offset[0];
+        var candidateY = shiftY + offset[1];
+        setLabelShift(label, candidateX, candidateY);
+        var candidateRect = label.getBoundingClientRect();
+        var overlapsPlacedLabel = placedLabelRects.some(function (placedRect) {
+          return rectanglesOverlap(candidateRect, placedRect);
+        });
+        if (labelFitsStage(candidateRect) &&
+            !labelOverlapsMarker(candidateRect, marker, markerRects) &&
+            !overlapsPlacedLabel) {
+          resolved = true;
+          placedLabelRects.push(candidateRect);
+          return true;
+        }
+        return false;
+      });
+      if (!resolved) {
+        setLabelShift(label, shiftX, shiftY);
+        marker.classList.add("map-label-collision-hidden");
+        placedLabelRects.push(label.getBoundingClientRect());
+      }
+    });
+  }
+
+  var labelPlacementTimer = 0;
+  function scheduleMarkerLabelPlacement() {
+    if (labelPlacementTimer) window.clearTimeout(labelPlacementTimer);
+    if (window.requestAnimationFrame) {
+      window.requestAnimationFrame(function () {
+        window.requestAnimationFrame(updateMarkerLabelPlacement);
+      });
+    }
+    labelPlacementTimer = window.setTimeout(function () {
+      labelPlacementTimer = 0;
+      updateMarkerLabelPlacement();
+    }, 220);
+  }
+
+  function updateMapStageHud() {
+    if (!stageHud) return;
+    var visibleCount = markers.filter(function (marker) { return !marker.hidden; }).length;
+    if (stageViewLabel) stageViewLabel.textContent = activeRegionLabel;
+    if (stageZoomLabel) stageZoomLabel.textContent = Math.round(viewState.scale * 100) + "%";
+    if (stagePinsLabel) stagePinsLabel.textContent = isChinese ? "显示 " + visibleCount + " 个" : visibleCount + " pins";
+  }
+
+  function updateMapStageSelection(marker) {
+    if (!stageSelection) return;
+    if (!marker) {
+      stageSelection.hidden = true;
+      return;
+    }
+    var pointLabel = marker.dataset.markerPointLabel || "";
+    var exact = marker.dataset.markerPrecision === "exact";
+    stageSelection.hidden = false;
+    if (stageSelectionStatus) stageSelectionStatus.textContent = isChinese
+      ? (exact ? "精确锚点" : "估算区域")
+      : (exact ? "Exact anchor" : "Approximate area");
+    if (stageSelectionTitle) stageSelectionTitle.textContent = marker.dataset.markerTitle + (pointLabel ? " · " + pointLabel : "");
+  }
+
+  function setMarkerLabels(visible) {
+    if (!mapStage) return;
+    mapStage.classList.toggle("map-labels-visible", visible);
+    if (!labelToggle) return;
+    labelToggle.setAttribute("aria-pressed", visible ? "true" : "false");
+    labelToggle.classList.toggle("active", visible);
+    labelToggle.textContent = visible
+      ? (isChinese ? "隐藏名称" : "Hide labels")
+      : (isChinese ? "显示名称" : "Show labels");
   }
 
   function setInspector(title, status, copy) {
@@ -232,6 +721,7 @@
       mapInteractionState = window.RanchersMapState.selectLocation(mapInteractionState, null);
     }
     markers.forEach(function (marker) { marker.classList.remove("active"); });
+    updateMapStageSelection(null);
     updateProgress();
   }
 
@@ -331,6 +821,7 @@
       mapInteractionState = window.RanchersMapState.selectLocation(mapInteractionState, markerStateData(marker));
     }
     markers.forEach(function (item) { item.classList.toggle("active", item === marker); });
+    updateMapStageSelection(marker);
     updateProgress();
     if (historyMode !== false) writeLocationUrl(marker, historyMode || "pushState");
     if (!inspector) return;
@@ -358,7 +849,11 @@
   markers.forEach(function (marker) {
     marker.addEventListener("click", function (event) {
       event.stopPropagation();
-      selectMarker(marker);
+      if (event.target.closest && event.target.closest(".map-marker-stack-count")) {
+        toggleMarkerStack(getMarkerStackGroup(marker));
+        return;
+      }
+      selectMarker(nextVisibleStackMarker(marker));
     });
   });
 
@@ -379,7 +874,9 @@
     });
     layerActionButtons.forEach(function (button) {
       var action = button.dataset.mapLayerAction;
-      var active = action === "all" ? activeCategoryLayers.length === markerCategories.length : activeCategoryLayers.length === 0;
+      var active = action === "all"
+        ? activeCategoryLayers.length === markerCategories.length && activeEvidenceFilter === "all"
+        : activeCategoryLayers.length === 0;
       button.classList.toggle("active", active);
       button.setAttribute("aria-pressed", active ? "true" : "false");
     });
@@ -401,6 +898,8 @@
       marker.classList.toggle("is-relation-match", relationFilter !== "all" && !relationDimmed);
       marker.classList.toggle("is-relation-dimmed", relationDimmed);
     });
+    updateMarkerStackBadges();
+    scheduleMarkerLabelPlacement();
     markerCategories.forEach(function (markerCategory) {
       var output = document.querySelector('[data-map-layer-count="' + markerCategory + '"]');
       if (!output) return;
@@ -410,12 +909,21 @@
     });
     if (layerSummary) {
       var visibleCount = markers.filter(function (marker) { return !marker.hidden; }).length;
-      layerSummary.textContent = isChinese ? "显示 " + visibleCount + " 个" : visibleCount + " visible";
+      var evidenceLabel = activeEvidenceFilter === "all"
+        ? (isChinese ? "全部证据" : "all evidence")
+        : activeEvidenceFilter === "supported"
+          ? (isChinese ? "来源支持" : "source-backed")
+          : activeEvidenceFilter === "reported"
+            ? (isChinese ? "站长采集/报告" : "site-collected / reported")
+            : (isChinese ? "计划中" : "planned");
+      layerSummary.textContent = isChinese ? "显示 " + visibleCount + " 个 · " + evidenceLabel : visibleCount + " visible · " + evidenceLabel;
     }
+    updateMapStageHud();
   }
 
-  function applyMarkerFilter(filter) {
+  function applyMarkerFilter(filter, includeAllEvidence) {
     var hadSelection = !!selectedMarker;
+    if (filter === "all" && includeAllEvidence === true) activeEvidenceFilter = "all";
     if (mapInteractionState && window.RanchersMapState) {
       mapInteractionState = filter === "all" || filter === "none"
         ? window.RanchersMapState.setAllLayers(mapInteractionState, filter === "all", markerStateData(selectedMarker))
@@ -454,9 +962,10 @@
 
   markerFilterButtons.forEach(function (button) {
     button.addEventListener("click", function () {
-      applyMarkerFilter(button.dataset.mapPinFilter);
+      applyMarkerFilter(button.dataset.mapPinFilter, button.dataset.mapPinFilter === "all");
     });
   });
+  if (stackActionButton) stackActionButton.addEventListener("click", toggleAllMarkerStacks);
   evidenceFilterButtons.forEach(function (button) {
     button.addEventListener("click", function () {
       applyEvidenceFilter(button.dataset.mapEvidenceFilter);
@@ -470,6 +979,24 @@
     });
   });
   applyMarkerFilter("all");
+  if (labelToggle) {
+    labelToggle.addEventListener("click", function () {
+      setMarkerLabels(!mapStage.classList.contains("map-labels-visible"));
+      scheduleMarkerLabelPlacement();
+    });
+    setMarkerLabels(false);
+  }
+  if (stageSelectionDetails) {
+    stageSelectionDetails.addEventListener("click", function () {
+      if (!inspector) return;
+      inspector.scrollIntoView({ behavior: "smooth", block: "start" });
+      var heading = inspector.querySelector("[data-map-inspector-title]");
+      if (heading) {
+        heading.setAttribute("tabindex", "-1");
+        heading.focus({ preventScroll: true });
+      }
+    });
+  }
   updateProgress();
 
   if (discoveryToggle) {
@@ -495,7 +1022,9 @@
     clearSelectedMarker();
     writeLocationUrl(null, "replaceState");
     if (mapInteractionState && window.RanchersMapState) mapInteractionState = window.RanchersMapState.selectRegion(mapInteractionState, name);
-    viewState = window.RanchersMapViewer ? window.RanchersMapViewer.getView(name) : { scale: 1, x: 0, y: 0 };
+    viewState = getRegionView(name);
+    var regionButton = regionButtons.find(function (button) { return button.dataset.mapRegion === name; });
+    activeRegionLabel = regionButton ? regionButton.textContent.trim() : title;
     regionButtons.forEach(function (button) {
       button.classList.toggle("active", button.dataset.mapRegion === name);
       button.setAttribute("aria-pressed", button.dataset.mapRegion === name ? "true" : "false");
@@ -559,6 +1088,24 @@
     button.addEventListener("click", function () {
       selectRegion(button.dataset.mapRegion, button.dataset.mapTitle, button.dataset.mapStatus, button.dataset.mapCopy, true);
       if (mapStage) mapStage.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  });
+
+  function focusTaskDirectoryEntry(id) {
+    if (!id || !knownLocationIds.includes(id)) return;
+    var params = new URLSearchParams(window.location.search);
+    params.delete("q");
+    params.delete("category");
+    params.set("location", id);
+    if (window.history && window.history.pushState) {
+      window.history.pushState(null, "", window.location.pathname + "?" + params.toString());
+    }
+    restoreLocationFromUrl();
+  }
+
+  taskDirectoryButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      focusTaskDirectoryEntry(button.dataset.mapTaskTarget);
     });
   });
 
@@ -670,6 +1217,8 @@
       if (action === "reset") {
         var overview = regionButtons.filter(function (item) { return item.dataset.mapRegion === "overview"; })[0];
         selectRegion("overview", overview.dataset.mapTitle, overview.dataset.mapStatus, overview.dataset.mapCopy);
+        viewState = window.RanchersMapViewer ? window.RanchersMapViewer.getView("full") : { scale: 1, x: 0, y: 0 };
+        applyMapView();
         return;
       }
       var delta = action === "in" ? 0.25 : -0.25;
@@ -793,6 +1342,7 @@
     mapExpanded = !!next;
     if (mapPanel) mapPanel.classList.toggle("is-map-fullscreen", mapExpanded);
     document.body.classList.toggle("has-map-fullscreen", mapExpanded);
+    scheduleMarkerLabelPlacement();
     if (mapExpand) {
       mapExpand.setAttribute("aria-expanded", mapExpanded ? "true" : "false");
       mapExpand.hidden = mapExpanded;
@@ -815,7 +1365,14 @@
   if (mapExpand) mapExpand.addEventListener("click", function () { setMapExpanded(true); });
   if (mapFullscreenClose) mapFullscreenClose.addEventListener("click", function () { setMapExpanded(false); });
   document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape" && mapExpanded) setMapExpanded(false);
+    if (event.key === "Escape" && mapExpanded) {
+      setMapExpanded(false);
+      return;
+    }
+    if (event.key === "Escape" && collapseFannedStack(true)) {
+      event.preventDefault();
+      return;
+    }
     if (event.key === "Tab" && mapExpanded) {
       var focusable = mapFocusableElements();
       if (!focusable.length) return;
@@ -911,6 +1468,11 @@
     }
     mapStage.addEventListener("pointerup", endPointer);
     mapStage.addEventListener("pointercancel", endPointer);
+    mapStage.addEventListener("click", function (event) {
+      if (dragMoved || !mapStage.classList.contains("map-stack-fan-open")) return;
+      if (event.target.closest && (event.target.closest(".map-marker") || event.target.closest("[data-map-stage-selection]"))) return;
+      collapseFannedStack(false);
+    });
   }
 
   if (pinForm) {

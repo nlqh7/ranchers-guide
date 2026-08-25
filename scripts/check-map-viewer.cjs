@@ -1,7 +1,9 @@
 const assert = require("node:assert/strict");
 const viewer = require("../assets/js/map-viewer-core.js");
 
-assert.deepEqual(viewer.getView("overview"), { scale: 1, x: 0, y: 0 });
+assert.deepEqual(viewer.getView("overview"), { scale: 1.25, x: -12.5, y: -12.5 });
+assert.deepEqual(viewer.getView("overview-mobile"), { scale: 1.5, x: -2, y: -18 });
+assert.deepEqual(viewer.getView("full"), { scale: 1, x: 0, y: 0 });
 assert.deepEqual(viewer.getView("rural"), { scale: 2, x: -8, y: -50 });
 assert.deepEqual(viewer.getView("city"), { scale: 2, x: -46, y: -50 });
 assert.deepEqual(viewer.getView("city-center"), { scale: 2.6, x: -55.45, y: -77.15 });

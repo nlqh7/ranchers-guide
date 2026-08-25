@@ -243,8 +243,9 @@ function renderMarker(location, locale) {
       ? `<img class="map-marker-native-icon" src="${iconPaths[iconName]}" alt="" width="256" height="256" draggable="false" data-protected-game-art aria-hidden="true">`
       : "";
     const markerKind = marker.precision === "exact" ? "exact" : "area";
+    const nativeClass = icon ? " map-marker-has-native-icon" : "";
     const primary = point.primary ? " data-marker-primary=\"true\"" : "";
-    return `                <button class="map-marker map-marker-${location.category} map-marker-${markerKind} map-marker-evidence-${marker.evidenceLayer}" type="button" style="--mx:${point.x}%;--my:${point.y}%" data-marker-id="${location.id}" data-marker-instance-id="${location.id}:${point.id}" data-marker-point-label="${escapeHtml(point.label || "")}"${primary} data-marker-category="${location.category}" data-marker-evidence-layer="${marker.evidenceLayer}" data-marker-precision="${marker.precision}" data-marker-title="${escapeHtml(copy.title)}" data-marker-confidence="${escapeHtml(copy.confidence)}" data-marker-copy="${escapeHtml(copy.description)}" data-marker-target="${copy.target}" aria-label="${escapeHtml(copy.ariaLabel + branchLabel)}">${icon}<span>${escapeHtml(copy.label + branchLabel)}</span></button>`;
+    return `                <button class="map-marker map-marker-${location.category} map-marker-${markerKind} map-marker-evidence-${marker.evidenceLayer}${nativeClass}" type="button" style="--mx:${point.x}%;--my:${point.y}%" data-marker-id="${location.id}" data-marker-instance-id="${location.id}:${point.id}" data-marker-point-label="${escapeHtml(point.label || "")}"${primary} data-marker-category="${location.category}" data-marker-evidence-layer="${marker.evidenceLayer}" data-marker-precision="${marker.precision}" data-marker-title="${escapeHtml(copy.title)}" data-marker-confidence="${escapeHtml(copy.confidence)}" data-marker-copy="${escapeHtml(copy.description)}" data-marker-target="${copy.target}" aria-label="${escapeHtml(copy.ariaLabel + branchLabel)}">${icon}<span>${escapeHtml(copy.label + branchLabel)}</span></button>`;
   }).join("\n");
 }
 
@@ -373,6 +374,12 @@ function replaceGenerated(html, data, locale) {
   const directoryPattern = /(<div class="location-list"[^>]*>)([\s\S]*?)(\n[ \t]*<\/div>\s*<div class="search-empty")/;
   if (!directoryPattern.test(output)) throw new Error(`Generated ${locale} directory section missing`);
   output = output.replace(directoryPattern, `$1${entryBody}$3`);
+  const progressPattern = /(<span data-map-progress-count>)[^<]*(<\/span>)/;
+  if (!progressPattern.test(output)) throw new Error(`Generated ${locale} progress summary missing`);
+  const progressText = locale === "zh"
+    ? `0 / ${data.locations.filter((location) => location.marker).length} 个地点已发现`
+    : `0 / ${data.locations.filter((location) => location.marker).length} places discovered`;
+  output = output.replace(progressPattern, `$1${progressText}$2`);
   return output;
 }
 

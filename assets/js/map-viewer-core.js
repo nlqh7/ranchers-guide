@@ -6,7 +6,13 @@
   "use strict";
 
   var views = {
-    overview: { scale: 1, x: 0, y: 0 },
+    // The default layer is concentrated around the city and airport; start there
+    // at a readable scale. The Fit control still returns to a full-map view.
+    overview: { scale: 1.25, x: -12.5, y: -12.5 },
+    // The 16:10 mobile viewport needs a little more scale to use its width
+    // while keeping the default city and airport anchors inside the frame.
+    "overview-mobile": { scale: 1.5, x: -2, y: -18 },
+    full: { scale: 1, x: 0, y: 0 },
     rural: { scale: 2, x: -8, y: -50 },
     city: { scale: 2, x: -46, y: -50 },
     "city-north": { scale: 2.6, x: -57.2, y: -49.4 },
