@@ -156,7 +156,7 @@
     });
 
     if (main) {
-      main.querySelectorAll("form, script, style, noscript, .ad-slot, .field-note-list, [data-search-entry]").forEach(function (node) {
+      main.querySelectorAll("form, script, style, noscript, .ad-slot, .field-note-list, .map-task-relations, [data-search-entry]").forEach(function (node) {
         node.remove();
       });
       main.querySelectorAll("h1, h2, h3, p, li, summary, th, td").forEach(function (node) {

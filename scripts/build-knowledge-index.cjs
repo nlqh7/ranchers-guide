@@ -303,7 +303,7 @@ function baseRecord({ type, record, dataset, route, locale, title }) {
     build: fact.build || dataset.meta?.build || null,
     sourceIds: fact.sourceIds || [],
   }));
-  const names = unique([record.name, record.zhName, record.zh?.name, record.locale?.en?.title, record.locale?.zh?.title, record.marker?.locale?.en?.title, record.marker?.locale?.zh?.title]);
+  const names = unique([record.name, record.zhName, record.buildGuide?.name, record.buildGuide?.zhName, record.zh?.name, record.locale?.en?.title, record.locale?.zh?.title, record.marker?.locale?.en?.title, record.marker?.locale?.zh?.title]);
   const tags = unique([record.searchTags, record.zhSearchTags, record.zh?.searchTags, record.locale?.en?.keywords, record.locale?.zh?.keywords]).join(" ");
   return {
     id: `${type}:${record.id}`,

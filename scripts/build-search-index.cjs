@@ -119,7 +119,8 @@ function extractSections(mainHtml) {
     .replace(/<(form|script|style|noscript)\b[\s\S]*?<\/\1>/gi, " ")
     .replace(/<(\w+)([^>]*\bdata-search-entry\b[^>]*)>[\s\S]*?<\/\1>/g, " ")
     .replace(/<[^>]*class="[^"]*\bad-slot\b[^"]*"[^>]*>[\s\S]*?<\/[^>]+>/g, " ")
-    .replace(/<[^>]*class="[^"]*\bfield-note-list\b[^"]*"[^>]*>[\s\S]*?<\/[^>]+>/g, " ");
+    .replace(/<[^>]*class="[^"]*\bfield-note-list\b[^"]*"[^>]*>[\s\S]*?<\/[^>]+>/g, " ")
+    .replace(/<(\w+)[^>]*class="[^"]*\bmap-task-relations\b[^"]*"[^>]*>[\s\S]*?<\/\1>/g, " ");
 
   const sections = [];
   const seen = new Set();

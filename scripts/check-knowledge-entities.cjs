@@ -73,6 +73,26 @@ assert.ok(quests.quests.some((quest) => quest.id === "rust-to-rumbling" && quest
 assert.ok(quests.quests.some((quest) => quest.id === "roof-building" && quest.nameConfidence === "descriptive"));
 
 const powerQuest = quests.quests.find((quest) => quest.id === "power-to-the-bench");
+assert.equal(powerQuest.buildGuide?.questId, "F_Quest_10", "power guide must link to the decoded quest, not a guessed title");
+assert.equal(powerQuest.buildGuide.steps.length, 5, "power guide must retain all five configured objectives");
+assert.ok(powerQuest.buildGuide.steps.every((step) => step.text && step.zhText && step.sourceFields.length), "objectives need bilingual summaries and field provenance");
+const configuredEntries = { "rust-to-rumbling": [9, 4], "power-to-the-bench": [10, 5], "roof-building": [11, 10], "chicken-coop-mission": [14, 9], "solar-panel-objective": [15, 4], "real-eggs-real-evidence": [16, 5] };
+for (const [id, [number, count]] of Object.entries(configuredEntries)) {
+  const guide = quests.quests.find((quest) => quest.id === id).buildGuide;
+  assert.equal(guide?.questId, `F_Quest_${String(number).padStart(2, "0")}`, `${id}: wrong native quest mapping`);
+  assert.equal(guide.evidenceLevel, "build-observed");
+  assert.equal(guide.validity, "unknown", "serialized presence must not become runtime verification");
+  assert.equal(guide.build, quests.meta.build);
+  assert.deepEqual(guide.sourceIds, ["owned-build-dialogue"]);
+  assert.equal(guide.steps.length, count);
+  assert.deepEqual(guide.steps.map((step) => step.entry), Array.from({length: count}, (_, i) => i + 1));
+  for (const row of [...guide.steps, ...guide.notes]) {
+    assert.ok(row.text && row.zhText && row.sourceFields.length);
+    assert.doesNotMatch(row.text + row.zhText, /State_SetMoney|InventoryGetItemCount|LUA_/);
+  }
+}
+assert.match(quests.quests.find(q => q.id === "chicken-coop-mission").buildGuide.notes[0].text, /not.*price/i);
+assert.match(quests.quests.find(q => q.id === "real-eggs-real-evidence").buildGuide.notes[0].text, /12.*2/);
 assert.ok(powerQuest.relations.some((relation) => relation.predicate === "involves-npc" && relation.target.type === "npc" && relation.target.id === "victor"));
 assert.ok(powerQuest.relations.some((relation) => relation.predicate === "takes-place-at" && relation.target.type === "location" && relation.target.id === "city-hall"));
 
@@ -87,6 +107,26 @@ assert.doesNotMatch(questHtml, /Open related answer \d/);
 assert.match(questHtml, />Electricity contracts &amp; power<\/a>/);
 const zhQuestHtml = read("zh/database/quests.html");
 const zhNpcHtml = read("zh/database/npcs.html");
+for (const html of [questHtml, zhQuestHtml]) {
+  assert.equal((html.match(/data-quest-build-guide=/g) || []).length, 6, "all six guides must reach the actual page");
+  assert.equal((html.match(/data-quest-objective=/g) || []).length, 37, "all 37 reviewed objectives must be rendered");
+  assert.match(html, /quest-guide\.css\?v=20260827-1/);
+  assert.doesNotMatch(html, /State_HasMoney|InventoryGetItemCount|Quest_Concrd|F_Quest_/);
+}
+assert.match(questHtml, /Coop Dreams/);
+assert.match(zhQuestHtml, /鸡舍梦想计划/);
+assert.match(zhQuestHtml, /站长收集/);
+assert.match(zhQuestHtml, /证据版本: 0\.8\.10\.455/, "older gameplay observations must retain their own build");
+assert.match(zhQuestHtml, /href="\/zh\/map#city-hall"/);
+assert.match(zhQuestHtml, /href="\/zh\/map#bykii-terminal"/);
+for (const relative of ["knowledge-index.json", "zh/knowledge-index.json"]) {
+  const index = readJson(relative);
+  for (const quest of quests.quests) {
+    const entry = index.entities.find(row => row.id === `quest:${quest.id}`);
+    assert.ok(entry.aliases.includes(quest.buildGuide.name) && entry.aliases.includes(quest.buildGuide.zhName), `${relative}: native names must be searchable`);
+    assert.ok(entry.aliases.includes(quest.name), "old task names must stay searchable");
+  }
+}
 assert.match(zhQuestHtml, />水电合同与供电<\/a>/);
 assert.match(zhQuestHtml, /href="\/zh\/guides\/electricity-power#two-paths"/);
 assert.match(zhNpcHtml, /href="\/zh\/guides\/electricity-power#two-paths"/);

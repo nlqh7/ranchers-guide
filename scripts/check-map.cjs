@@ -382,8 +382,11 @@ assert.match(mapScript, /renderInspectorJourney/, "map inspector consumes audite
 assert.match(sharedStyles, /\.map-inspector-journey-link/, "map journey links need a shared style");
 
 const sitemapForMap = read("sitemap.xml");
-assert.match(sitemapForMap, /<loc>https:\/\/theranchersguide\.com\/map<\/loc>[\s\S]*?<lastmod>2026-08-24<\/lastmod>/);
-assert.match(sitemapForMap, /<loc>https:\/\/theranchersguide\.com\/zh\/map<\/loc>[\s\S]*?<lastmod>2026-08-24<\/lastmod>/);
+for (const route of ["/map", "/zh/map"]) {
+  const entry = sitemapForMap.match(/<url>[\s\S]*?<\/url>/g).find(block => block.includes(`<loc>https://theranchersguide.com${route}</loc>`));
+  const date = entry?.match(/<lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/)?.[1];
+  assert.ok(date && date >= "2026-08-25", `${route}: lastmod must include the released map update`);
+}
 
 const viewerCore = require("../assets/js/map-viewer-core.js");
 assert.deepEqual(viewerCore.getView("rural"), { scale: 2, x: -8, y: -50 });
