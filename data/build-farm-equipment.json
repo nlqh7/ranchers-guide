@@ -1,0 +1,202 @@
+{
+  "build": "0.8.10.842",
+  "steamBuild": "24847725",
+  "evidenceLevel": "build-observed",
+  "validity": "unknown",
+  "unit": null,
+  "interval": null,
+  "seasons": [
+    "Spring",
+    "Summer",
+    "Autumn",
+    "Winter"
+  ],
+  "sources": {
+    "PLC_FarmTools-d5ed0c2389": {
+      "kind": "local-build",
+      "title": "PLC_FarmTools",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12067,
+      "rawSha256": "d5ed0c2389aba279581731b84a2b28f0164508537c6eceee178524d3921e4a1e"
+    },
+    "localization": {
+      "asset": "resources.assets",
+      "pathId": 393483,
+      "rawSha256": "2c505386fe9b1b9c2579aad1e6957907db838d8c7f87227e818fbfd4b57d5f4e",
+      "kind": "local-build",
+      "title": "Owned-build item localization",
+      "url": null
+    }
+  },
+  "equipment": [
+    {
+      "id": "sprinkler_n1",
+      "name": "Basic Sprinkler",
+      "zhName": "基础款洒水器",
+      "nameKey": "Items_DB/sprinkler_n1/Name",
+      "sourceId": "PLC_FarmTools-d5ed0c2389",
+      "grid": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          4,
+          4,
+          4,
+          4
+        ]
+      },
+      "electricity": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "sprinkler_n2",
+      "name": "Advanced Sprinkler",
+      "zhName": "进阶款洒水器",
+      "nameKey": "Items_DB/sprinkler_n2/Name",
+      "sourceId": "PLC_FarmTools-d5ed0c2389",
+      "grid": {
+        "x": 2,
+        "y": 2,
+        "z": 2
+      },
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "electricity": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "prop_Scarecrow_01",
+      "name": "Bob the Scarecrow",
+      "zhName": "稻草人鲍勃",
+      "nameKey": "Items_DB/prop_Scarecrow_01/Name",
+      "sourceId": "PLC_FarmTools-d5ed0c2389",
+      "grid": {
+        "x": 4,
+        "y": 4,
+        "z": 4
+      },
+      "water": null,
+      "electricity": null
+    },
+    {
+      "id": "prop_Scarecrow_00",
+      "name": "Scarecrow",
+      "zhName": "稻草人",
+      "nameKey": "Items_DB/prop_Scarecrow_00/Name",
+      "sourceId": "PLC_FarmTools-d5ed0c2389",
+      "grid": {
+        "x": 2,
+        "y": 2,
+        "z": 2
+      },
+      "water": null,
+      "electricity": null
+    },
+    {
+      "id": "prop_Outdoor_Well",
+      "name": "Water Well",
+      "zhName": "水井",
+      "nameKey": "Items_DB/prop_Outdoor_Well/Name",
+      "sourceId": "PLC_FarmTools-d5ed0c2389",
+      "grid": null,
+      "water": null,
+      "electricity": null
+    },
+    {
+      "id": "sprinkler_ceiling_n1",
+      "name": "Green House Sprinkler",
+      "zhName": "温室洒水器",
+      "nameKey": "Items_DB/sprinkler_ceiling_n1/Name",
+      "sourceId": "PLC_FarmTools-d5ed0c2389",
+      "grid": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "electricity": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "prop_Trough_01",
+      "name": "Trough",
+      "zhName": "饲料槽",
+      "nameKey": "Items_DB/prop_Trough_01/Name",
+      "sourceId": "PLC_FarmTools-d5ed0c2389",
+      "grid": null,
+      "water": null,
+      "electricity": null
+    }
+  ]
+}

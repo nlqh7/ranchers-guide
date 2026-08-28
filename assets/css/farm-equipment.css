@@ -1,0 +1,40 @@
+body.farm-surface { background: var(--cream-100); }
+.farm-guide.article { max-width: 1080px; padding-top: 28px; }
+.farm-guide > h1 { margin-bottom: 12px; }
+.farm-lead { margin-bottom: 16px; }
+.farm-nav, .farm-entry-nav { display: flex; flex-wrap: wrap; gap: 0 20px; border-block: 1px solid var(--cream-300); margin-block: 16px; }
+.farm-nav a, .farm-entry-nav a, .farm-link, .farm-sources a { display: inline-flex; align-items: center; min-height: 44px; }
+.farm-reference h2 { font-size: 1.3rem; margin-block: 24px 12px; }
+.farm-reference [id] { scroll-margin-top: 110px; }
+.farm-boundary, .farm-requirement, .farm-missing { color: var(--brown-700); font-size: .875rem; line-height: 1.6; }
+.farm-profile { border-bottom: 1px solid var(--cream-300); padding: 20px 12px; }
+.farm-profile:target { outline: 2px solid var(--green-700); outline-offset: -2px; background: var(--cream-200); }
+.farm-profile h3 { font-size: 1.15rem; margin: 0 0 12px; }
+.farm-profile h4 { font-size: .875rem; margin: 0 0 8px; color: var(--brown-700); }
+.farm-profile-body { display: grid; grid-template-columns: 1.1fr 1fr; gap: 32px; }
+.farm-profile-body > div { min-width: 0; }
+.farm-materials { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 16px; list-style: none; padding: 0; margin: 0; }
+.farm-materials li { margin: 0; padding: 0; }
+.farm-materials a { display: flex; align-items: center; gap: 6px; min-height: 44px; color: var(--green-700); }
+.farm-materials img { width: 28px; height: 28px; object-fit: contain; flex: none; margin: 0; }
+.farm-materials strong { color: var(--brown-900); white-space: nowrap; }
+.farm-requirement { margin: 8px 0 0; }
+.farm-link { font-size: .85rem; }
+.farm-table-wrap { max-width: 100%; overflow-x: auto; }
+.farm-reference table { width: 100%; table-layout: fixed; border-collapse: collapse; margin: 0; font-size: .875rem; }
+.farm-reference th, .farm-reference td { padding: 8px 4px; border: 1px solid var(--cream-300); text-align: center; vertical-align: middle; font-variant-numeric: tabular-nums; }
+.farm-reference th { background: var(--cream-100); color: var(--brown-900); font: inherit; font-weight: 600; letter-spacing: normal; text-transform: none; }
+.farm-reference thead th { background: var(--cream-200); }
+.farm-reference td { background: var(--cream-100); }
+.farm-reference th:first-child { width: 28%; text-align: left; padding-left: 8px; }
+.farm-sources { margin-block: 20px 28px; border-block: 1px solid var(--cream-300); color: var(--brown-700); font-size: .85rem; }
+.farm-sources summary { min-height: 44px; padding-block: 12px; color: var(--green-700); font-weight: 600; cursor: pointer; }
+@media(max-width:600px) {
+  .farm-guide.article { padding-inline: 18px; }
+  .farm-guide > h1 { font-size: 1.75rem; }
+  .farm-profile { padding-inline: 8px; }
+  .farm-materials { gap: 0 8px; font-size: .9rem; }
+  .farm-profile-body { grid-template-columns: minmax(0,1fr); gap: 16px; }
+  .farm-reference table { font-size: .8rem; }
+  .farm-entry-nav { gap: 0 16px; }
+}

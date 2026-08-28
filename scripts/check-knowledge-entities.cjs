@@ -33,7 +33,8 @@ function validateDataset(relative, recordsKey, minimumRecords) {
     }
     for (const fact of record.facts) {
       assert.ok(fact.text && fact.zhText, `${record.id} has an untranslated fact`);
-      assert.ok(["official", "video-observed", "community-confirmed", "unverified-lead"].includes(fact.evidenceLevel));
+      assert.ok(["official", "video-observed", "community-confirmed", "unverified-lead", "build-observed"].includes(fact.evidenceLevel));
+      if (fact.evidenceLevel === 'build-observed') assert.equal(fact.validity, 'unknown');
       assert.ok(["current", "historical", "unknown"].includes(fact.validity));
       assert.ok(fact.sourceIds.length > 0, `${record.id} fact lacks sources`);
       for (const sourceId of fact.sourceIds) assert.ok(data.sources[sourceId], `${record.id} references missing source ${sourceId}`);
@@ -44,6 +45,8 @@ function validateDataset(relative, recordsKey, minimumRecords) {
 
 const npcs = validateDataset("data/npcs.json", "npcs", 3);
 const quests = validateDataset("data/quests.json", "quests", 6);
+assert.equal(quests.quests.length, 16, 'All sixteen decoded static quests must reach the website');
+assert.deepEqual(quests.quests.map(q => q.buildGuide.questId).sort(), Array.from({length:16}, (_, i) => `F_Quest_${String(i + 1).padStart(2, '0')}`));
 const locations = readJson("data/locations.json");
 const entityTargets = new Set([
   ...npcs.npcs.map((record) => `npc:${record.id}`),
@@ -59,7 +62,7 @@ for (const quest of quests.quests) {
     seenRelations.add(relationKey);
     assert.ok(["involves-npc", "takes-place-at", "uses-location"].includes(relation.predicate), `${quest.id} uses unsupported predicate ${relation.predicate}`);
     assert.ok(entityTargets.has(`${relation.target.type}:${relation.target.id}`), `${quest.id} points to missing entity ${relation.target.type}:${relation.target.id}`);
-    assert.ok(["official", "video-observed", "community-confirmed", "unverified-lead"].includes(relation.evidenceLevel), `${quest.id} relation lacks an evidence level`);
+    assert.ok(["official", "video-observed", "community-confirmed", "unverified-lead", "build-observed"].includes(relation.evidenceLevel), `${quest.id} relation lacks an evidence level`);
     assert.ok(["current", "historical", "unknown"].includes(relation.validity), `${quest.id} relation lacks validity`);
     assert.ok(relation.build, `${quest.id} relation lacks a build`);
     assert.ok(relation.sourceIds.length > 0, `${quest.id} relation lacks sources`);
@@ -108,8 +111,8 @@ assert.match(questHtml, />Electricity contracts &amp; power<\/a>/);
 const zhQuestHtml = read("zh/database/quests.html");
 const zhNpcHtml = read("zh/database/npcs.html");
 for (const html of [questHtml, zhQuestHtml]) {
-  assert.equal((html.match(/data-quest-build-guide=/g) || []).length, 6, "all six guides must reach the actual page");
-  assert.equal((html.match(/data-quest-objective=/g) || []).length, 37, "all 37 reviewed objectives must be rendered");
+  assert.equal((html.match(/data-quest-build-guide=/g) || []).length, 16, "all sixteen static guides must reach the actual page");
+  assert.equal((html.match(/data-quest-objective=/g) || []).length, 71, "all 71 reviewed objectives must be rendered");
   assert.match(html, /quest-guide\.css\?v=20260827-1/);
   assert.doesNotMatch(html, /State_HasMoney|InventoryGetItemCount|Quest_Concrd|F_Quest_/);
 }
@@ -141,4 +144,7 @@ for (const relative of ["database/npcs.html", "zh/database/npcs.html", "database
   assert.match(html, /hreflang="zh-CN"/);
 }
 
+for (const [route, heading] of [['map.html', 'Task locations'], ['zh/map.html', '任务地点']]) {
+  assert.match(read(route), new RegExp(`data-map-task-relations>\\s*<summary>${heading}</summary>\\s*<div class="map-task-relation-list">`), 'Task directory headings must not retain stale fixed counts');
+}
 console.log(`PASS: knowledge entities publish ${npcs.npcs.length} NPCs and ${quests.quests.length} quests behind evidence gates.`);

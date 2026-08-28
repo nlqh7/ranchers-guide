@@ -135,7 +135,7 @@
       var score = queryTerms.reduce(function (sum, term) {
         return sum + fieldScore(text, term, 1);
       }, 0);
-      return { text: text, score: score };
+      return { text: section.text || text, score: score };
     }).sort(function (a, b) { return b.score - a.score; });
 
     var source = candidates.length && candidates[0].score > 0
@@ -168,7 +168,8 @@
     }
 
     var normalizedQuery = normalize(query);
-    if (normalize(title).indexOf(normalizedQuery) !== -1) total += 90;
+    if (normalize(title) === normalizedQuery) total += 140;
+    else if (normalize(title).indexOf(normalizedQuery) !== -1) total += 90;
     else if (normalize(description).indexOf(normalizedQuery) !== -1) total += 50;
     else if (sections.some(function (section) { return normalize(sectionText(section)).indexOf(normalizedQuery) !== -1; })) total += 30;
     return total;
@@ -263,7 +264,31 @@
     }).slice(0, typeof limit === "number" ? limit : 12);
   }
 
+  function dossierSupportsExactAnswer(entity, query, matches) {
+    var exact = matches.filter(function (match) { return normalize(match.title) === normalize(query); });
+    return !exact.length || exact.some(function (match) { return match.url === entity.route; });
+  }
+
+  function dossierFacts(entity) {
+    var facts = entity.facts || [];
+    var useful = facts.filter(function (fact) {
+      return fact.validity !== 'unknown' || (fact.evidenceLevel === 'build-observed' && (fact.sourceIds || []).length > 0);
+    });
+    return (useful.length ? useful : facts).slice(0, 5);
+  }
+
+  function evidencePresentation(level, locale) {
+    var labels = locale === 'zh'
+      ? { official: '官方', 'video-observed': '视频观测', 'community-confirmed': '社区互证', 'unverified-lead': '单一线索', 'build-observed': '构建资料（未实测）' }
+      : { official: 'Official', 'video-observed': 'Video-observed', 'community-confirmed': 'Community-confirmed', 'unverified-lead': 'Single-source lead', 'build-observed': 'Build data (not gameplay-tested)' };
+    var classes = {official:'official', 'video-observed':'video', 'community-confirmed':'corroborated', 'build-observed':'build'};
+    return {label: labels[level] || (locale === 'zh' ? '待验证' : 'Unverified'), className: classes[level] || 'lead'};
+  }
+
   return {
+    dossierSupportsExactAnswer: dossierSupportsExactAnswer,
+    dossierFacts: dossierFacts,
+    evidencePresentation: evidencePresentation,
     normalize: normalize,
     levenshtein: levenshtein,
     queryTokens: queryTokens,

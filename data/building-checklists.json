@@ -11,6 +11,38 @@
       "author": "Games Station",
       "date": "2026-08-07",
       "build": "0.8.10.455"
+    },
+    "official-wiki-water-tower": {
+      "kind": "official-wiki",
+      "title": "Official Wiki: Water Tower",
+      "url": "https://wiki.ranchers.game/Buildings/WaterTower",
+      "author": "The Ranchers Official Wiki",
+      "date": "page date not stated",
+      "build": "alpha-2023"
+    },
+    "official-wiki-silo": {
+      "kind": "official-wiki",
+      "title": "Official Wiki: Silo",
+      "url": "https://wiki.ranchers.game/Buildings/Silo",
+      "author": "The Ranchers Official Wiki",
+      "date": "page date not stated",
+      "build": "alpha-2023"
+    },
+    "official-wiki-coop": {
+      "kind": "official-wiki",
+      "title": "Official Wiki: Coop",
+      "url": "https://wiki.ranchers.game/Ranching/Coop",
+      "author": "The Ranchers Official Wiki",
+      "date": "page date not stated",
+      "build": "alpha-2023"
+    },
+    "official-wiki-barn": {
+      "kind": "official-wiki",
+      "title": "Official Wiki: Barn",
+      "url": "https://wiki.ranchers.game/Ranching/Barn",
+      "author": "The Ranchers Official Wiki",
+      "date": "page date not stated",
+      "build": "alpha-2023"
     }
   },
   "targets": [
@@ -25,6 +57,7 @@
       "searchTags": "red tent tent building recipe stone wood log materials construction shelter",
       "zhSearchTags": "红帐篷 建筑 配方 石头 原木 材料 建造 住所",
       "caution": "Recheck the in-game recipe after an update before treating these quantities as current.",
+      "source": { "label": "Games Station launch-build footage", "labelZh": "Games Station 首发版本视频", "url": null },
       "zhCaution": "更新后请重新查看游戏内配方，不要直接把这些数量当作当前版本定值。",
       "sourceIds": ["launch-video"],
       "facts": [
@@ -46,6 +79,213 @@
       "materials": [
         { "id": "stone", "name": "Stone", "zhName": "石头 Stone", "required": 8, "route": "/database/materials#stone", "routeZh": "/zh/database/materials#stone" },
         { "id": "wood-log", "name": "Wood Log", "zhName": "原木 Wood Log", "required": 10, "route": "/database/materials#wood-log", "routeZh": "/zh/database/materials#wood-log" }
+      ]
+    },
+    {
+      "id": "water-tower",
+      "name": "Water Tower",
+      "zhName": "水塔 Water Tower",
+      "build": "alpha-2023",
+      "validity": "historical",
+      "summary": "The Official Wiki records 10 Rock and 30 Wood for an older Water Tower entry. This is a historical lead, not a current-build recipe.",
+      "zhSummary": "官方 Wiki 旧条目记录水塔需要 10 个岩石和 30 个木材。这是历史线索，不是当前版本配方。",
+      "searchTags": "water tower building materials rock wood historical official wiki",
+      "zhSearchTags": "水塔 建筑 材料 岩石 木材 历史 官方 Wiki",
+      "caution": "Historical Official Wiki record from the Alpha-era site. Recheck the current in-game recipe before gathering to this quantity.",
+      "zhCaution": "来自 Alpha 时代官方 Wiki 的历史记录。按这个数量收集前，请先在当前版本游戏内重新核对。",
+      "source": { "label": "Official Wiki: Water Tower", "labelZh": "官方 Wiki：Water Tower 水塔", "url": "https://wiki.ranchers.game/Buildings/WaterTower" },
+      "sourceIds": ["official-wiki-water-tower"],
+      "facts": [{ "text": "The historical Official Wiki entry lists 10 Rock and 30 Wood.", "zhText": "历史官方 Wiki 条目列出 10 个岩石和 30 个木材。", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["official-wiki-water-tower"] }],
+      "relatedRoutes": ["/guides/building-construction", "/guides/electricity-power", "/database/materials#stone", "/database/materials#wood-log"],
+      "materials": [
+        { "id": "stone", "name": "Stone", "zhName": "石头 Stone", "required": 10, "route": "/database/materials#stone", "routeZh": "/zh/database/materials#stone" },
+        { "id": "wood-log", "name": "Wood Log", "zhName": "原木 Wood Log", "required": 30, "route": "/database/materials#wood-log", "routeZh": "/zh/database/materials#wood-log" }
+      ]
+    },
+    {
+      "id": "silo",
+      "name": "Silo",
+      "zhName": "筒仓 Silo",
+      "build": "alpha-2023",
+      "validity": "historical",
+      "summary": "The Official Wiki records 15 Rock for the older Silo entry. Treat it as a historical comparison only; current construction requirements are not rechecked.",
+      "zhSummary": "官方 Wiki 旧条目记录筒仓需要 15 个岩石。仅作历史对照，当前建造需求尚未复核。",
+      "searchTags": "silo building materials rock historical official wiki",
+      "zhSearchTags": "筒仓 建筑 材料 岩石 历史 官方 Wiki",
+      "caution": "Historical Official Wiki record from the Alpha-era site. Confirm the current recipe in-game.",
+      "zhCaution": "来自 Alpha 时代官方 Wiki 的历史记录。请在游戏内确认当前配方。",
+      "source": { "label": "Official Wiki: Silo", "labelZh": "官方 Wiki：Silo 筒仓", "url": "https://wiki.ranchers.game/Buildings/Silo" },
+      "sourceIds": ["official-wiki-silo"],
+      "facts": [{ "text": "The historical Official Wiki entry lists 15 Rock for the base Silo.", "zhText": "历史官方 Wiki 条目列出基础筒仓需要 15 个岩石。", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["official-wiki-silo"] }],
+      "relatedRoutes": ["/guides/building-construction", "/guides/animal-guide", "/database/materials#stone"],
+      "materials": [{ "id": "stone", "name": "Stone", "zhName": "石头 Stone", "required": 15, "route": "/database/materials#stone", "routeZh": "/zh/database/materials#stone" }]
+    },
+    {
+      "id": "big-silo",
+      "name": "Big Silo",
+      "zhName": "大型筒仓 Big Silo",
+      "build": "alpha-2023",
+      "validity": "historical",
+      "summary": "The Official Wiki records 25 Rock for the older Big Silo entry. This quantity has not been checked against the current build.",
+      "zhSummary": "官方 Wiki 旧条目记录大型筒仓需要 25 个岩石。这个数量尚未按当前版本核对。",
+      "searchTags": "big silo building materials rock historical official wiki",
+      "zhSearchTags": "大型筒仓 建筑 材料 岩石 历史 官方 Wiki",
+      "caution": "Historical Official Wiki record from the Alpha-era site. Confirm the current recipe in-game.",
+      "zhCaution": "来自 Alpha 时代官方 Wiki 的历史记录。请在游戏内确认当前配方。",
+      "source": { "label": "Official Wiki: Silo", "labelZh": "官方 Wiki：Silo 筒仓", "url": "https://wiki.ranchers.game/Buildings/Silo" },
+      "sourceIds": ["official-wiki-silo"],
+      "facts": [{ "text": "The historical Official Wiki entry lists 25 Rock for the Big Silo.", "zhText": "历史官方 Wiki 条目列出大型筒仓需要 25 个岩石。", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["official-wiki-silo"] }],
+      "relatedRoutes": ["/guides/building-construction", "/guides/animal-guide", "/database/materials#stone"],
+      "materials": [{ "id": "stone", "name": "Stone", "zhName": "石头 Stone", "required": 25, "route": "/database/materials#stone", "routeZh": "/zh/database/materials#stone" }]
+    },
+    {
+      "id": "deluxe-silo",
+      "name": "Deluxe Silo",
+      "zhName": "豪华筒仓 Deluxe Silo",
+      "build": "alpha-2023",
+      "validity": "historical",
+      "summary": "The Official Wiki records 50 Rock for the older Deluxe Silo entry. This quantity has not been checked against the current build.",
+      "zhSummary": "官方 Wiki 旧条目记录豪华筒仓需要 50 个岩石。这个数量尚未按当前版本核对。",
+      "searchTags": "deluxe silo building materials rock historical official wiki",
+      "zhSearchTags": "豪华筒仓 建筑 材料 岩石 历史 官方 Wiki",
+      "caution": "Historical Official Wiki record from the Alpha-era site. Confirm the current recipe in-game.",
+      "zhCaution": "来自 Alpha 时代官方 Wiki 的历史记录。请在游戏内确认当前配方。",
+      "source": { "label": "Official Wiki: Silo", "labelZh": "官方 Wiki：Silo 筒仓", "url": "https://wiki.ranchers.game/Buildings/Silo" },
+      "sourceIds": ["official-wiki-silo"],
+      "facts": [{ "text": "The historical Official Wiki entry lists 50 Rock for the Deluxe Silo.", "zhText": "历史官方 Wiki 条目列出豪华筒仓需要 50 个岩石。", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["official-wiki-silo"] }],
+      "relatedRoutes": ["/guides/building-construction", "/guides/animal-guide", "/database/materials#stone"],
+      "materials": [{ "id": "stone", "name": "Stone", "zhName": "石头 Stone", "required": 50, "route": "/database/materials#stone", "routeZh": "/zh/database/materials#stone" }]
+    },
+    {
+      "id": "coop",
+      "name": "Coop",
+      "zhName": "鸡舍 Coop",
+      "build": "alpha-2023",
+      "validity": "historical",
+      "summary": "The Official Wiki records 20 Wood, 15 Rock and 15 Hay for the older Coop entry. Current requirements are not rechecked.",
+      "zhSummary": "官方 Wiki 旧条目记录鸡舍需要 20 个木材、15 个岩石和 15 个干草。当前需求尚未复核。",
+      "searchTags": "coop chicken coop building materials wood rock hay historical official wiki",
+      "zhSearchTags": "鸡舍 建筑 材料 木材 岩石 干草 历史 官方 Wiki",
+      "caution": "Historical Official Wiki record from the Alpha-era site. Confirm the current recipe in-game.",
+      "zhCaution": "来自 Alpha 时代官方 Wiki 的历史记录。请在游戏内确认当前配方。",
+      "source": { "label": "Official Wiki: Coop", "labelZh": "官方 Wiki：Coop 鸡舍", "url": "https://wiki.ranchers.game/Ranching/Coop" },
+      "sourceIds": ["official-wiki-coop"],
+      "facts": [{ "text": "The historical Official Wiki entry lists 20 Wood, 15 Rock and 15 Hay for the base Coop.", "zhText": "历史官方 Wiki 条目列出基础鸡舍需要 20 个木材、15 个岩石和 15 个干草。", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["official-wiki-coop"] }],
+      "relatedRoutes": ["/guides/building-construction", "/guides/animal-guide", "/database/animals#chicken", "/database/materials#wood-log", "/database/materials#stone", "/database/materials#hay"],
+      "materials": [
+        { "id": "wood-log", "name": "Wood Log", "zhName": "原木 Wood Log", "required": 20, "route": "/database/materials#wood-log", "routeZh": "/zh/database/materials#wood-log" },
+        { "id": "stone", "name": "Stone", "zhName": "石头 Stone", "required": 15, "route": "/database/materials#stone", "routeZh": "/zh/database/materials#stone" },
+        { "id": "hay", "name": "Hay", "zhName": "干草 Hay", "required": 15, "route": "/database/materials#hay", "routeZh": "/zh/database/materials#hay" }
+      ]
+    },
+    {
+      "id": "big-coop",
+      "name": "Big Coop",
+      "zhName": "大型鸡舍 Big Coop",
+      "build": "alpha-2023",
+      "validity": "historical",
+      "summary": "The Official Wiki records 40 Wood, 25 Rock and 15 Hay for the older Big Coop entry. Current requirements are not rechecked.",
+      "zhSummary": "官方 Wiki 旧条目记录大型鸡舍需要 40 个木材、25 个岩石和 15 个干草。当前需求尚未复核。",
+      "searchTags": "big coop building materials wood rock hay historical official wiki",
+      "zhSearchTags": "大型鸡舍 建筑 材料 木材 岩石 干草 历史 官方 Wiki",
+      "caution": "Historical Official Wiki record from the Alpha-era site. Confirm the current recipe in-game.",
+      "zhCaution": "来自 Alpha 时代官方 Wiki 的历史记录。请在游戏内确认当前配方。",
+      "source": { "label": "Official Wiki: Coop", "labelZh": "官方 Wiki：Coop 鸡舍", "url": "https://wiki.ranchers.game/Ranching/Coop" },
+      "sourceIds": ["official-wiki-coop"],
+      "facts": [{ "text": "The historical Official Wiki entry lists 40 Wood, 25 Rock and 15 Hay for the Big Coop.", "zhText": "历史官方 Wiki 条目列出大型鸡舍需要 40 个木材、25 个岩石和 15 个干草。", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["official-wiki-coop"] }],
+      "relatedRoutes": ["/guides/building-construction", "/guides/animal-guide", "/database/animals#chicken", "/database/materials#wood-log", "/database/materials#stone", "/database/materials#hay"],
+      "materials": [
+        { "id": "wood-log", "name": "Wood Log", "zhName": "原木 Wood Log", "required": 40, "route": "/database/materials#wood-log", "routeZh": "/zh/database/materials#wood-log" },
+        { "id": "stone", "name": "Stone", "zhName": "石头 Stone", "required": 25, "route": "/database/materials#stone", "routeZh": "/zh/database/materials#stone" },
+        { "id": "hay", "name": "Hay", "zhName": "干草 Hay", "required": 15, "route": "/database/materials#hay", "routeZh": "/zh/database/materials#hay" }
+      ]
+    },
+    {
+      "id": "deluxe-coop",
+      "name": "Deluxe Coop",
+      "zhName": "豪华鸡舍 Deluxe Coop",
+      "build": "alpha-2023",
+      "validity": "historical",
+      "summary": "The Official Wiki records 70 Wood, 50 Rock and 15 Hay for the older Deluxe Coop entry. Current requirements are not rechecked.",
+      "zhSummary": "官方 Wiki 旧条目记录豪华鸡舍需要 70 个木材、50 个岩石和 15 个干草。当前需求尚未复核。",
+      "searchTags": "deluxe coop building materials wood rock hay historical official wiki",
+      "zhSearchTags": "豪华鸡舍 建筑 材料 木材 岩石 干草 历史 官方 Wiki",
+      "caution": "Historical Official Wiki record from the Alpha-era site. Confirm the current recipe in-game.",
+      "zhCaution": "来自 Alpha 时代官方 Wiki 的历史记录。请在游戏内确认当前配方。",
+      "source": { "label": "Official Wiki: Coop", "labelZh": "官方 Wiki：Coop 鸡舍", "url": "https://wiki.ranchers.game/Ranching/Coop" },
+      "sourceIds": ["official-wiki-coop"],
+      "facts": [{ "text": "The historical Official Wiki entry lists 70 Wood, 50 Rock and 15 Hay for the Deluxe Coop.", "zhText": "历史官方 Wiki 条目列出豪华鸡舍需要 70 个木材、50 个岩石和 15 个干草。", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["official-wiki-coop"] }],
+      "relatedRoutes": ["/guides/building-construction", "/guides/animal-guide", "/database/animals#chicken", "/database/materials#wood-log", "/database/materials#stone", "/database/materials#hay"],
+      "materials": [
+        { "id": "wood-log", "name": "Wood Log", "zhName": "原木 Wood Log", "required": 70, "route": "/database/materials#wood-log", "routeZh": "/zh/database/materials#wood-log" },
+        { "id": "stone", "name": "Stone", "zhName": "石头 Stone", "required": 50, "route": "/database/materials#stone", "routeZh": "/zh/database/materials#stone" },
+        { "id": "hay", "name": "Hay", "zhName": "干草 Hay", "required": 15, "route": "/database/materials#hay", "routeZh": "/zh/database/materials#hay" }
+      ]
+    },
+    {
+      "id": "barn",
+      "name": "Barn",
+      "zhName": "畜棚 Barn",
+      "build": "alpha-2023",
+      "validity": "historical",
+      "summary": "The Official Wiki records 20 Wood, 15 Rock and 15 Hay for the older Barn entry. Current requirements are not rechecked.",
+      "zhSummary": "官方 Wiki 旧条目记录畜棚需要 20 个木材、15 个岩石和 15 个干草。当前需求尚未复核。",
+      "searchTags": "barn building materials wood rock hay historical official wiki",
+      "zhSearchTags": "畜棚 建筑 材料 木材 岩石 干草 历史 官方 Wiki",
+      "caution": "Historical Official Wiki record from the Alpha-era site. Confirm the current recipe in-game.",
+      "zhCaution": "来自 Alpha 时代官方 Wiki 的历史记录。请在游戏内确认当前配方。",
+      "source": { "label": "Official Wiki: Barn", "labelZh": "官方 Wiki：Barn 畜棚", "url": "https://wiki.ranchers.game/Ranching/Barn" },
+      "sourceIds": ["official-wiki-barn"],
+      "facts": [{ "text": "The historical Official Wiki entry lists 20 Wood, 15 Rock and 15 Hay for the base Barn.", "zhText": "历史官方 Wiki 条目列出基础畜棚需要 20 个木材、15 个岩石和 15 个干草。", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["official-wiki-barn"] }],
+      "relatedRoutes": ["/guides/building-construction", "/guides/animal-guide", "/database/animals#cow", "/database/materials#wood-log", "/database/materials#stone", "/database/materials#hay"],
+      "materials": [
+        { "id": "wood-log", "name": "Wood Log", "zhName": "原木 Wood Log", "required": 20, "route": "/database/materials#wood-log", "routeZh": "/zh/database/materials#wood-log" },
+        { "id": "stone", "name": "Stone", "zhName": "石头 Stone", "required": 15, "route": "/database/materials#stone", "routeZh": "/zh/database/materials#stone" },
+        { "id": "hay", "name": "Hay", "zhName": "干草 Hay", "required": 15, "route": "/database/materials#hay", "routeZh": "/zh/database/materials#hay" }
+      ]
+    },
+    {
+      "id": "big-barn",
+      "name": "Big Barn",
+      "zhName": "大型畜棚 Big Barn",
+      "build": "alpha-2023",
+      "validity": "historical",
+      "summary": "The Official Wiki records 40 Wood, 25 Rock and 15 Hay for the older Big Barn entry. Current requirements are not rechecked.",
+      "zhSummary": "官方 Wiki 旧条目记录大型畜棚需要 40 个木材、25 个岩石和 15 个干草。当前需求尚未复核。",
+      "searchTags": "big barn building materials wood rock hay historical official wiki",
+      "zhSearchTags": "大型畜棚 建筑 材料 木材 岩石 干草 历史 官方 Wiki",
+      "caution": "Historical Official Wiki record from the Alpha-era site. Confirm the current recipe in-game.",
+      "zhCaution": "来自 Alpha 时代官方 Wiki 的历史记录。请在游戏内确认当前配方。",
+      "source": { "label": "Official Wiki: Barn", "labelZh": "官方 Wiki：Barn 畜棚", "url": "https://wiki.ranchers.game/Ranching/Barn" },
+      "sourceIds": ["official-wiki-barn"],
+      "facts": [{ "text": "The historical Official Wiki entry lists 40 Wood, 25 Rock and 15 Hay for the Big Barn.", "zhText": "历史官方 Wiki 条目列出大型畜棚需要 40 个木材、25 个岩石和 15 个干草。", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["official-wiki-barn"] }],
+      "relatedRoutes": ["/guides/building-construction", "/guides/animal-guide", "/database/animals#cow", "/database/materials#wood-log", "/database/materials#stone", "/database/materials#hay"],
+      "materials": [
+        { "id": "wood-log", "name": "Wood Log", "zhName": "原木 Wood Log", "required": 40, "route": "/database/materials#wood-log", "routeZh": "/zh/database/materials#wood-log" },
+        { "id": "stone", "name": "Stone", "zhName": "石头 Stone", "required": 25, "route": "/database/materials#stone", "routeZh": "/zh/database/materials#stone" },
+        { "id": "hay", "name": "Hay", "zhName": "干草 Hay", "required": 15, "route": "/database/materials#hay", "routeZh": "/zh/database/materials#hay" }
+      ]
+    },
+    {
+      "id": "deluxe-barn",
+      "name": "Deluxe Barn",
+      "zhName": "豪华畜棚 Deluxe Barn",
+      "build": "alpha-2023",
+      "validity": "historical",
+      "summary": "The Official Wiki records 70 Wood, 50 Rock and 15 Hay for the older Deluxe Barn entry. Current requirements are not rechecked.",
+      "zhSummary": "官方 Wiki 旧条目记录豪华畜棚需要 70 个木材、50 个岩石和 15 个干草。当前需求尚未复核。",
+      "searchTags": "deluxe barn building materials wood rock hay historical official wiki",
+      "zhSearchTags": "豪华畜棚 建筑 材料 木材 岩石 干草 历史 官方 Wiki",
+      "caution": "Historical Official Wiki record from the Alpha-era site. Confirm the current recipe in-game.",
+      "zhCaution": "来自 Alpha 时代官方 Wiki 的历史记录。请在游戏内确认当前配方。",
+      "source": { "label": "Official Wiki: Barn", "labelZh": "官方 Wiki：Barn 畜棚", "url": "https://wiki.ranchers.game/Ranching/Barn" },
+      "sourceIds": ["official-wiki-barn"],
+      "facts": [{ "text": "The historical Official Wiki entry lists 70 Wood, 50 Rock and 15 Hay for the Deluxe Barn.", "zhText": "历史官方 Wiki 条目列出豪华畜棚需要 70 个木材、50 个岩石和 15 个干草。", "evidenceLevel": "official", "build": "alpha-2023", "validity": "historical", "sourceIds": ["official-wiki-barn"] }],
+      "relatedRoutes": ["/guides/building-construction", "/guides/animal-guide", "/database/animals#cow", "/database/materials#wood-log", "/database/materials#stone", "/database/materials#hay"],
+      "materials": [
+        { "id": "wood-log", "name": "Wood Log", "zhName": "原木 Wood Log", "required": 70, "route": "/database/materials#wood-log", "routeZh": "/zh/database/materials#wood-log" },
+        { "id": "stone", "name": "Stone", "zhName": "石头 Stone", "required": 50, "route": "/database/materials#stone", "routeZh": "/zh/database/materials#stone" },
+        { "id": "hay", "name": "Hay", "zhName": "干草 Hay", "required": 15, "route": "/database/materials#hay", "routeZh": "/zh/database/materials#hay" }
       ]
     }
   ]

@@ -1,7 +1,7 @@
 {
   "meta": {
     "page": "database/crops.html",
-    "lastUpdated": "2026-08-27",
+    "lastUpdated": "2026-08-28",
     "build": "0.8.10.842",
     "videoBuild": "0.8.10.455",
     "evidenceLevels": [
@@ -101,6 +101,21 @@
       "author": "Site editor",
       "date": "2026-08-08",
       "build": "0.8.10.x"
+    },
+    "local-fertilizers-24847725": {
+      "kind": "first-hand-build-resource",
+      "title": "Site-owner collection: Fertilizers and exact I2 names",
+      "url": null,
+      "date": "2026-08-28",
+      "build": "0.8.10.842 / Steam build 24847725",
+      "asset": "resources.assets",
+      "pathId": 11978,
+      "rawSha256": "8600e1cd54c590e439bcfdf5209c46de888dc6f943a297ee595afdd37f3ea366",
+      "localization": {
+        "asset": "resources.assets",
+        "pathId": 393483,
+        "rawSha256": "2c505386fe9b1b9c2579aad1e6957907db838d8c7f87227e818fbfd4b57d5f4e"
+      }
     }
   },
   "buildRoster": {
@@ -128,7 +143,9 @@
         "evidenceLevel": "build-observed",
         "validity": "current",
         "build": "0.8.10.842",
-        "sourceIds": ["local-build-24847725"]
+        "sourceIds": [
+          "local-build-24847725"
+        ]
       },
       {
         "id": "garlic",
@@ -144,7 +161,9 @@
         "evidenceLevel": "build-observed",
         "validity": "current",
         "build": "0.8.10.842",
-        "sourceIds": ["local-build-24847725"]
+        "sourceIds": [
+          "local-build-24847725"
+        ]
       },
       {
         "id": "strawberry",
@@ -160,7 +179,9 @@
         "evidenceLevel": "build-observed",
         "validity": "current",
         "build": "0.8.10.842",
-        "sourceIds": ["local-build-24847725"]
+        "sourceIds": [
+          "local-build-24847725"
+        ]
       },
       {
         "id": "aubergine",
@@ -176,7 +197,9 @@
         "evidenceLevel": "build-observed",
         "validity": "current",
         "build": "0.8.10.842",
-        "sourceIds": ["local-build-24847725"]
+        "sourceIds": [
+          "local-build-24847725"
+        ]
       },
       {
         "id": "corn",
@@ -192,7 +215,9 @@
         "evidenceLevel": "build-observed",
         "validity": "current",
         "build": "0.8.10.842",
-        "sourceIds": ["local-build-24847725"]
+        "sourceIds": [
+          "local-build-24847725"
+        ]
       },
       {
         "id": "green-lettuce",
@@ -208,7 +233,9 @@
         "evidenceLevel": "build-observed",
         "validity": "current",
         "build": "0.8.10.842",
-        "sourceIds": ["local-build-24847725"]
+        "sourceIds": [
+          "local-build-24847725"
+        ]
       },
       {
         "id": "pumpkin",
@@ -224,7 +251,9 @@
         "evidenceLevel": "build-observed",
         "validity": "current",
         "build": "0.8.10.842",
-        "sourceIds": ["local-build-24847725"]
+        "sourceIds": [
+          "local-build-24847725"
+        ]
       },
       {
         "id": "carrot",
@@ -240,7 +269,9 @@
         "evidenceLevel": "build-observed",
         "validity": "current",
         "build": "0.8.10.842",
-        "sourceIds": ["local-build-24847725"]
+        "sourceIds": [
+          "local-build-24847725"
+        ]
       },
       {
         "id": "onion",
@@ -256,7 +287,9 @@
         "evidenceLevel": "build-observed",
         "validity": "current",
         "build": "0.8.10.842",
-        "sourceIds": ["local-build-24847725"]
+        "sourceIds": [
+          "local-build-24847725"
+        ]
       },
       {
         "id": "marrow",
@@ -272,7 +305,9 @@
         "evidenceLevel": "build-observed",
         "validity": "current",
         "build": "0.8.10.842",
-        "sourceIds": ["local-build-24847725"]
+        "sourceIds": [
+          "local-build-24847725"
+        ]
       },
       {
         "id": "leek",
@@ -288,13 +323,30 @@
         "evidenceLevel": "build-observed",
         "validity": "current",
         "build": "0.8.10.842",
-        "sourceIds": ["local-build-24847725"]
+        "sourceIds": [
+          "local-build-24847725"
+        ]
       }
     ],
     "notIncluded": [
-      {"id": "peppers", "name": "Peppers", "zhName": "甜椒", "sourceTable": "Seed_fruits_NotINCLUDED"},
-      {"id": "melon", "name": "Melon", "zhName": "甜瓜", "sourceTable": "Seed_fruits_NotINCLUDED"},
-      {"id": "chili", "name": "Chili", "zhName": "辣椒", "sourceTable": "Seed_fruits_NotINCLUDED"}
+      {
+        "id": "peppers",
+        "name": "Peppers",
+        "zhName": "甜椒",
+        "sourceTable": "Seed_fruits_NotINCLUDED"
+      },
+      {
+        "id": "melon",
+        "name": "Melon",
+        "zhName": "甜瓜",
+        "sourceTable": "Seed_fruits_NotINCLUDED"
+      },
+      {
+        "id": "chili",
+        "name": "Chili",
+        "zhName": "辣椒",
+        "sourceTable": "Seed_fruits_NotINCLUDED"
+      }
     ]
   },
   "crops": [
@@ -840,7 +892,7 @@
     {
       "id": "fertilizer",
       "name": "Fertilizer",
-      "summary": "Officially flagged as miscalculating in the current build — the official advice is to avoid investing until it is fixed.",
+      "summary": "The item-file description targets a better chance of higher-quality crops. The actual chance and benefit are unverified.",
       "searchTags": "fertilizer ogm boost price bonus yield rare legendary bug",
       "fields": [
         {
@@ -848,10 +900,10 @@
           "label": "Shop price",
           "facts": [
             {
-              "text": "Fertilizer retails at 288C (Rare quality) in the Leafy Market \"Seed & Fertilizer\" tab.",
+              "text": "The 0.8.10.455 video showed Rare Fertilizer at 288C in Leafy Market's Seed & Fertilizer tab; this is an observed older-build price, not a current quote.",
               "evidenceLevel": "video-observed",
               "build": "0.8.10.455",
-              "validity": "current",
+              "validity": "historical",
               "sourceIds": [
                 "games-station-video"
               ]
@@ -863,7 +915,7 @@
           "label": "Effect & the calculation bug",
           "facts": [
             {
-              "text": "Official warning: fertilizer \"is not currently calculating correctly\", it is being looked into, and players should avoid investing in fertilizer until it is adjusted.",
+              "text": "On August 4, 2026, official support warned that fertilizer was calculating incorrectly and advised against investing until adjusted. This is not a test of the later 0.8.10.842 build.",
               "evidenceLevel": "official",
               "build": "0.8.10.x",
               "validity": "current",
@@ -902,41 +954,66 @@
         "status": "Video-observed",
         "tags": "fertilizer price 288 rare boost ogm"
       },
-      "lastUpdated": "2026-08-08",
+      "lastUpdated": "2026-08-28",
       "zh": {
         "tocLabel": "肥料",
         "kicker": null,
         "headerBadge": null,
-        "name": "肥料与农业投入品",
-        "searchTitle": "肥料与 OGM 肥料",
+        "name": "肥料 Fertilizer",
+        "searchTitle": "肥料",
         "searchTags": "肥料 fertilizer OGM boost 计算 bug",
-        "summary": "当前版本应把肥料视为待修复投入品：官方已警告收益计算不正确，购买前先确认修复状态，不要用异常结果推算稳定利润。",
+        "summary": "物品文件描述的用途是提高高品质作物的出现机会；实际概率与收益尚未验证。",
         "groups": [
           {
             "heading": null,
             "id": null,
             "facts": [
               {
-                "text": "当前商店存在普通 Fertilizer、OGM Fertilizer 和 Boost Fertilizer。具体效果必须按当前版本重新测量。",
+                "text": "0.8.10.455 视频中，Leafy Market 的 Seed & Fertilizer 页签显示稀有品质肥料标价288C；这不是当前版本报价。",
+                "evidenceLevel": "video-observed",
+                "build": "0.8.10.455",
+                "validity": "historical",
+                "sourceIds": ["games-station-video"],
                 "badge": "video"
               },
               {
-                "text": "官方回复确认肥料收益计算存在需要修复的问题，因此不能用现有异常结果推出稳定利润倍率。",
+                "text": "官方客服在2026年8月4日警告肥料计算错误，并建议调整前不要投资；该回复不等于对后来0.8.10.842版本的实测。",
+                "evidenceLevel": "official",
+                "build": "0.8.10.x",
+                "validity": "unknown",
+                "sourceIds": ["thread-fertilizer-bug"],
                 "badge": "official-warn"
-              },
-              {
-                "text": "干草也出现在农业与动物循环中，但它不是用来推算作物利润的肥料。",
-                "badge": "none"
               }
             ]
           }
+        ]
+      },
+      "buildInput": {
+        "sourceItemId": "fertilizer_quality_basic",
+        "name": "Fertilizer",
+        "zhName": "肥料",
+        "intendedUse": "quality",
+        "localizedDescription": null,
+        "energy": {
+          "consumption": 1,
+          "restoration": 0
+        },
+        "stackable": true,
+        "equippable": true,
+        "heldSlot": "Right_Hand_Weapon",
+        "evidenceLevel": "build-observed",
+        "build": "0.8.10.842",
+        "validity": "unknown",
+        "sourceIds": [
+          "local-fertilizers-24847725"
         ]
       }
     },
     {
       "id": "ogm-fertilizer",
       "name": "OGM Fertilizer",
-      "summary": "Premium Legendary tier seen on the shop shelf at 1,080C. Same calculation-bug warning applies as for regular fertilizer.",
+      "lookupAliases": ["OGM 肥料"],
+      "summary": "The item-file description targets a better chance of giant fruit and vegetables. It gives no verified chance, size or sale bonus.",
       "searchTags": "ogm fertilizer legendary price bonus premium",
       "fields": [
         {
@@ -944,10 +1021,10 @@
           "label": "Shop price",
           "facts": [
             {
-              "text": "OGM Fertilizer retails at 1,080C (Legendary) — shop detail panel showed Health 6/6, Consumed energy 1/540, and no description text.",
+              "text": "The 0.8.10.455 video showed Legendary OGM Fertilizer at 1,080C, Health 6/6 and Consumed energy 1/540, with no description text. These are older-build observations, not a current quote or tested cost.",
               "evidenceLevel": "video-observed",
               "build": "0.8.10.455",
-              "validity": "current",
+              "validity": "historical",
               "sourceIds": [
                 "games-station-video"
               ]
@@ -955,37 +1032,66 @@
           ]
         }
       ],
-      "lastUpdated": "2026-08-08",
+      "lastUpdated": "2026-08-28",
       "zh": {
-        "tocLabel": "OGM 肥料",
+        "tocLabel": "转基因肥料",
         "kicker": "农业投入品",
         "headerBadge": "video",
-        "name": "OGM 肥料 OGM Fertilizer",
-        "searchTitle": "OGM 肥料",
-        "searchTags": "OGM 肥料 1080C 传奇 肥料 bug",
-        "summary": "当前视频看到传奇品质 OGM 肥料标价 1,080C；官方仍警告肥料收益计算未修复，不应按它计算稳定利润。",
+        "name": "转基因肥料 OGM Fertilizer",
+        "searchTitle": "转基因肥料",
+        "searchTags": "转基因肥料 OGM 肥料 1080C 传奇 巨型 肥料 bug",
+        "summary": "物品文件描述的用途是提高巨型果蔬的出现机会；没有已验证的概率、尺寸或售价加成。",
         "groups": [
           {
             "heading": "当前状态",
             "id": null,
             "facts": [
               {
-                "text": "视频中的商店详情显示 OGM 肥料为传奇品质、1,080C；详情没有提供足够的稳定收益说明。",
+                "text": "0.8.10.455 视频中，OGM 肥料为传奇品质、标价1,080C；这是旧版本观测，不代表当前报价。",
+                "evidenceLevel": "video-observed",
+                "build": "0.8.10.455",
+                "validity": "historical",
+                "sourceIds": ["games-station-video"],
                 "badge": "video"
               },
               {
-                "text": "官方已警告肥料收益计算不正确；在修复前不要把 OGM 肥料当作可靠投资。",
+                "text": "2026年8月4日官方警告肥料计算错误；0.8.10.842尚未复测，不把文件描述当成稳定收益。",
+                "evidenceLevel": "official",
+                "build": "0.8.10.x",
+                "validity": "unknown",
+                "sourceIds": ["thread-fertilizer-bug"],
                 "badge": "official-warn"
               }
             ]
           }
+        ]
+      },
+      "buildInput": {
+        "sourceItemId": "fertilizer_giant_basic",
+        "name": "OGM Fertilizer",
+        "zhName": "转基因肥料",
+        "intendedUse": "giant",
+        "localizedDescription": null,
+        "energy": {
+          "consumption": 1,
+          "restoration": 0
+        },
+        "stackable": true,
+        "equippable": true,
+        "heldSlot": "Right_Hand_Weapon",
+        "evidenceLevel": "build-observed",
+        "build": "0.8.10.842",
+        "validity": "unknown",
+        "sourceIds": [
+          "local-fertilizers-24847725"
         ]
       }
     },
     {
       "id": "boost-fertilizer",
       "name": "Boost Fertilizer",
-      "summary": "Name confirmed on the shelf; its price and details were never opened on screen.",
+      "lookupAliases": ["Boost 肥料"],
+      "summary": "The item-file description targets a better chance of more produce per plant. Actual quantities, probability and current price are unverified.",
       "searchTags": "boost fertilizer price bonus",
       "fields": [
         {
@@ -993,9 +1099,9 @@
           "label": "Shop price",
           "facts": [
             {
-              "text": "Boost Fertilizer exists in the same shop tab, but its detail panel was never opened — price and description unknown.",
+              "text": "Boost Fertilizer appeared in the 0.8.10.455 shop video, but its detail panel was not opened. No readable price or in-game description was recorded.",
               "evidenceLevel": "unverified-lead",
-              "build": null,
+              "build": "0.8.10.455",
               "validity": "unknown",
               "sourceIds": [
                 "games-station-video"
@@ -1004,30 +1110,58 @@
           ]
         }
       ],
-      "lastUpdated": "2026-08-08",
+      "lastUpdated": "2026-08-28",
       "zh": {
-        "tocLabel": "Boost 肥料",
+        "tocLabel": "增效肥料",
         "kicker": "农业投入品",
         "headerBadge": "shot-pending",
-        "name": "Boost 肥料 Boost Fertilizer",
-        "searchTitle": "Boost 肥料",
-        "searchTags": "Boost 肥料 价格 效果 待验证",
-        "summary": "视频确认商店里有 Boost 肥料，但没有打开详情页；价格、效果和稳定收益都未知。",
+        "name": "增效肥料 Boost Fertilizer",
+        "searchTitle": "增效肥料",
+        "searchTags": "增效肥料 Boost 肥料 产量 价格 效果 待验证",
+        "summary": "物品文件描述的用途是提高单株产出更多果蔬的机会；实际数量、概率与当前价格尚未验证。",
         "groups": [
           {
             "heading": "当前状态",
             "id": null,
             "facts": [
               {
-                "text": "Boost 肥料出现在同一个商店页签，但视频没有拍到可读的价格或效果详情。",
+                "text": "0.8.10.455 视频中能看到 Boost 肥料，但没有拍到可读的价格或效果详情。",
+                "evidenceLevel": "unverified-lead",
+                "build": "0.8.10.455",
+                "validity": "unknown",
+                "sourceIds": ["games-station-video"],
                 "badge": "shot-pending"
               },
               {
-                "text": "肥料总类仍受官方收益计算警告影响，不能用旧讨论推导当前版本利润。",
+                "text": "官方在2026年8月4日警告肥料计算错误；当前版本仍需复测，不能用旧讨论推导利润。",
+                "evidenceLevel": "official",
+                "build": "0.8.10.x",
+                "validity": "unknown",
+                "sourceIds": ["thread-fertilizer-bug"],
                 "badge": "official-warn"
               }
             ]
           }
+        ]
+      },
+      "buildInput": {
+        "sourceItemId": "fertilizer_nbfruit_basic",
+        "name": "Boost Fertilizer",
+        "zhName": "增效肥料",
+        "intendedUse": "quantity",
+        "localizedDescription": null,
+        "energy": {
+          "consumption": 1,
+          "restoration": 0
+        },
+        "stackable": true,
+        "equippable": true,
+        "heldSlot": "Right_Hand_Weapon",
+        "evidenceLevel": "build-observed",
+        "build": "0.8.10.842",
+        "validity": "unknown",
+        "sourceIds": [
+          "local-fertilizers-24847725"
         ]
       }
     },

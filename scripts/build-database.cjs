@@ -20,8 +20,9 @@ function render(locale) {
     npcs: ['Shops, services & quests', '商店、服务与相关任务'],
   };
   const guideLinks = {
-    animals: [['animal-guide#feeding', 'Feed and water', '喂食与饮水']],
-    crops: [['farming-fields', 'Planting guide', '种植指南'], ['money-making', 'Selling crops', '出售与收益']],
+    materials: [['crafting-guide', 'Recipes & tools', '制作配方与工具'], ['building-construction#shop-building-materials', 'Building requirements', '建筑材料需求'], ['resources-and-materials#shops', 'Shop item lookup', '商店商品查阅'], ['electricity-power#equipment', 'Power & water equipment', '水电设备']],
+    animals: [['animal-guide#feeding', 'Feed and water', '喂食与饮水'], ['resources-and-materials#consumables', 'Milk, eggs & meat', '奶、蛋与肉类资料']],
+    crops: [['farming-fields', 'Planting guide', '种植指南'], ['farming-fields#farm-equipment', 'Sprinklers & farm equipment', '洒水器与农用设施'], ['money-making', 'Selling crops', '出售与收益']],
     quests: [['gigi-large-egg-quest', 'Gigi’s large eggs', 'Gigi 大鸡蛋攻略']],
   };
   const cards = Object.keys(labels).map(kind => {

@@ -47,7 +47,7 @@ function renderEntries(data, kind, locale, base = '') {
     const entries = data.buildRoster.entries.filter(c => c.season === season);
     return `<div><h3>${escapeHtml(zh ? entries[0].zhSeason : season)}</h3><div class="database-entry-links">${entries.map(c =>
       link(c.id, zh ? c.zhName : c.name)).join('')}</div></div>`;
-  }).join('')}</div>`;
+  }).join('')}${data.inputs?.some(i => i.buildInput) ? `<div><h3>${zh ? '肥料' : 'Fertilizers'}</h3><div class="database-entry-links">${data.inputs.filter(i => i.buildInput).map(i => link(i.id, zh ? i.buildInput.zhName : i.buildInput.name)).join('')}</div></div>` : ''}</div>`;
 }
 
 function renderLookup(data, kind, locale) {
@@ -64,7 +64,7 @@ function renderLookup(data, kind, locale) {
   return `${renderTabs(locale, kind)}
     <section class="database-browser" id="browse-entries" aria-labelledby="browse-entries-title">
       <h2 id="browse-entries-title">${title}</h2>
-      ${renderEntries(data, kind, locale)}
+      ${renderEntries(data, kind, locale)}${['materials','animals'].includes(kind)?`<div class="database-guide-links"><a href="${zh?'/zh':''}/guides/resources-and-materials#consumables">${zh?'食物与消耗品配置':'Food & consumable settings'}</a></div>`:''}
       <p class="database-browse-note">${notes[kind][zh ? 1 : 0]}</p>
     </section>`;
 }

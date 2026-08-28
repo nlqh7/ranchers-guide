@@ -32,17 +32,23 @@
   function displayEvidence(fact) {
     var level = fact.evidenceLevel || "unverified-lead";
     var labels = isChinese
-      ? { official: "官方", "video-observed": "视频观测", "community-confirmed": "社区互证", "player-tested": "玩家实测", "unverified-lead": "未验证线索" }
-      : { official: "Official", "video-observed": "Video-observed", "community-confirmed": "Community-confirmed", "player-tested": "Player-tested", "unverified-lead": "Unverified lead" };
+      ? { official: "官方", "video-observed": "视频观测", "community-confirmed": "社区互证", "player-tested": "玩家实测", "unverified-lead": "未验证线索", "build-observed": "游戏构建配置" }
+      : { official: "Official", "video-observed": "Video-observed", "community-confirmed": "Community-confirmed", "player-tested": "Player-tested", "unverified-lead": "Unverified lead", "build-observed": "Game-build configuration" };
     return '<span class="tag evidence-' + escapeHtml(level.replace(/[^a-z-]/g, "")) + '">' + escapeHtml(labels[level] || level) + "</span>";
   }
 
   function isPending(fact) {
-    return fact.validity === "unknown" || fact.evidenceLevel === "unverified-lead";
+    return (fact.validity === "unknown" && fact.evidenceLevel !== 'build-observed') || fact.evidenceLevel === "unverified-lead";
   }
 
   function routeLabel(route) {
     var labels = isChinese ? {
+      "/guides/beginners-guide": "新手路线",
+      "/guides/crafting-guide": "制作配方与工具",
+      "/guides/farming-fields": "播种与浇水",
+      "/guides/resources-and-materials": "收集材料",
+      "/guides/money-making": "出售与收入",
+      "/guides/vehicles-transport": "交通与车辆",
       "/problems/vehicle-recovery": "车辆找回",
       "/guides/electricity-power": "电力攻略",
       "/guides/animal-guide": "动物攻略",
@@ -53,6 +59,12 @@
       "/guides/gigi-large-egg-quest": "大鸡蛋任务",
       "/guides/police-wanted-levels": "警星攻略"
     } : {
+      "/guides/beginners-guide": "Getting started",
+      "/guides/crafting-guide": "Recipes & tools",
+      "/guides/farming-fields": "Planting & watering",
+      "/guides/resources-and-materials": "Find materials",
+      "/guides/money-making": "Selling & income",
+      "/guides/vehicles-transport": "Travel & vehicles",
       "/problems/vehicle-recovery": "Vehicle recovery",
       "/guides/electricity-power": "Electricity guide",
       "/guides/animal-guide": "Animal guide",
@@ -69,6 +81,7 @@
 
   function localizedRoute(route) {
     if (!isChinese || route.indexOf("/zh/") === 0 || route.indexOf("http") === 0) return route;
+    if (route.split("#")[0] === "/problems/failed-quest-replay") return route;
     return "/zh" + route;
   }
 
@@ -76,10 +89,7 @@
     var relations = (record.relations || []).map(function (relation) {
       var target = relation.target || {};
       var prefix = target.type === "location" ? "/map#" : "/database/" + (target.type === "npc" ? "npcs#" : "quests#");
-      var label = target.type === "location" ? (target.id === "city-hall" ? (isChinese ? "市政厅" : "City Hall") : target.id) : target.id;
-      if (target.type === "npc" && target.id === "victor") label = "Victor";
-      if (target.type === "npc" && target.id === "angela") label = "Angela";
-      if (target.type === "npc" && target.id === "gigi") label = "Gigi";
+      var label = relationLabel(target.id);
       return '<a class="quest-tracker-link" href="' + escapeHtml(localizedRoute(prefix + target.id)) + '">' + escapeHtml(label) + "</a>";
     });
     return relations.length ? '<div class="quest-tracker-relations"><strong>' + (isChinese ? "关联实体" : "Connected entities") + "</strong><div>" + relations.join("") + "</div></div>" : "";
@@ -93,9 +103,11 @@
 
   function relationLabel(id) {
     var labels = isChinese ? {
+      airport: "机场", "leafy-market": "绿叶市场",
       victor: "Victor", angela: "Angela", gigi: "Gigi",
       "city-hall": "市政厅", "bykii-terminal": "Bykii 终端"
     } : {
+      airport: "Airport", "leafy-market": "Leafy Market",
       victor: "Victor", angela: "Angela", gigi: "Gigi",
       "city-hall": "City Hall", "bykii-terminal": "Bykii terminal"
     };
@@ -130,8 +142,18 @@
       (location === "all" || relationIds(record, "location").indexOf(location) !== -1);
   }
 
+  function objectiveFacts(record) {
+    // Published checklist indices retain their original meaning.
+    if (record.nameConfidence === 'exact-build' && record.buildGuide && record.buildGuide.steps.length) {
+      return record.buildGuide.steps.map(function (step) {
+        return Object.assign({}, step, {evidenceLevel:'build-observed', validity:'unknown', build:record.buildGuide.build});
+      });
+    }
+    return Array.isArray(record.facts) ? record.facts : [];
+  }
+
   function progressFor(record) {
-    var facts = Array.isArray(record.facts) ? record.facts : [];
+    var facts = objectiveFacts(record);
     var done = facts.reduce(function (count, fact, index) {
       return count + (state[record.id + "::" + index] === true ? 1 : 0);
     }, 0);
@@ -152,7 +174,7 @@
   }
 
   function nextObjectiveFor(record) {
-    var facts = Array.isArray(record.facts) ? record.facts : [];
+    var facts = objectiveFacts(record);
     for (var index = 0; index < facts.length; index += 1) {
       if (state[record.id + "::" + index] !== true) return { fact: facts[index], index: index };
     }
@@ -171,7 +193,7 @@
   }
 
   function renderRecord(record) {
-    var facts = Array.isArray(record.facts) ? record.facts : [];
+    var facts = objectiveFacts(record);
     var name = isChinese ? record.zhName : record.name;
     var summary = isChinese ? record.zhSummary : record.summary;
     var category = isChinese ? record.zhCategory : record.category;

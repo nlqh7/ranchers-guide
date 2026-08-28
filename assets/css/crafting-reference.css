@@ -1,0 +1,48 @@
+.crafting-guide.article { max-width: 1080px; padding-top: 28px; }
+.crafting-guide > h1 { margin-bottom: 12px; }
+.crafting-guide > .recipe-lead { margin: 0 0 16px; }
+.crafting-reference { margin-bottom: 24px; }
+.recipe-boundary { color: var(--brown-700); font-size: .88rem; line-height: 1.6; margin: 0 0 16px; }
+.recipe-controls { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 20px; }
+.recipe-controls label { display: grid; gap: 6px; font-size: .88rem; font-weight: 600; color: var(--brown-700); }
+.recipe-controls input, .recipe-controls select { width: 100%; min-width: 0; min-height: 44px; font: inherit; border: 1px solid var(--cream-300); background: var(--cream-100); color: var(--brown-900); border-radius: 6px; padding: 8px 12px; }
+.crafting-reference [data-recipe-group] > h2 { font-size: 1.2rem; margin: 22px 0 10px; }
+.recipe-table-wrap { max-width: 100%; overflow-x: auto; }
+.crafting-reference .recipe-table { width: 100%; table-layout: fixed; border-collapse: collapse; margin: 0; background: var(--cream-100); font-size: .94rem; }
+.crafting-reference .recipe-table th, .crafting-reference .recipe-table td { border: 1px solid var(--cream-300); padding: 8px 14px; text-align: left; vertical-align: middle; }
+.crafting-reference .recipe-table th { background: var(--cream-100); color: var(--brown-900); font: inherit; font-weight: 600; letter-spacing: normal; text-transform: none; }
+.crafting-reference .recipe-table thead th { background: var(--cream-200); padding-block: 12px; }
+.recipe-table th:first-child { width: 32%; }
+.recipe-table tr[id], .crafting-reference h2[id] { scroll-margin-top: 110px; }
+.recipe-table tr:target { outline: 2px solid var(--green-700); outline-offset: -2px; background: var(--cream-200); }
+.recipe-table th > a { display: flex; align-items: center; min-height: 44px; color: var(--green-700); text-decoration: none; overflow-wrap: anywhere; }
+.recipe-table th small { display: block; color: var(--brown-700); font-size: .76rem; font-weight: 400; line-height: 1.5; }
+.recipe-muted { color: var(--brown-700); font-size: .85rem; }
+.recipe-table .recipe-ingredients { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; padding: 0; margin: 0; gap: 0 10px; }
+.recipe-ingredients li { margin: 0; padding: 0; }
+.recipe-ingredients a { display: flex; align-items: center; gap: 6px; min-height: 44px; color: var(--green-700); text-decoration: none; }
+.recipe-ingredients a:hover, .recipe-table th > a:hover { text-decoration: underline; }
+.recipe-ingredients img { width: 28px; height: 28px; object-fit: contain; flex: none; margin: 0; }
+.recipe-ingredients strong { color: var(--brown-900); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.recipe-sources, .recipe-history { border-block: 1px solid var(--cream-300); margin-block: 20px; }
+.recipe-sources summary, .recipe-history > summary { min-height: 44px; padding: 11px 0; color: var(--green-700); cursor: pointer; font-weight: 600; }
+.recipe-sources { font-size: .85rem; color: var(--brown-700); }
+.recipe-more, .recipe-sources a { display: inline-flex; align-items: center; min-height: 44px; }
+.crafting-reference [hidden] { display: none !important; }
+.shop-reference h2[id], .shop-group[id], .shop-unresolved li[id] { scroll-margin-top: 110px; }
+.shop-group { border-top: 1px solid var(--cream-300); margin-block: 10px; }
+.shop-group > summary { min-height: 44px; padding: 12px 0; color: var(--green-700); font-weight: 600; cursor: pointer; }
+.shop-reference .recipe-table th > a { gap: 8px; }
+.shop-reference .recipe-table th img { width: 28px; height: 28px; object-fit: contain; flex: none; margin: 0; }
+.shop-condition { display: block; font-size: .76rem; color: var(--brown-700); }
+.shop-recipe-link { display: flex; align-items: center; min-height: 44px; }
+.shop-unresolved { margin-block: 12px; font-size: .85rem; color: var(--brown-700); overflow-wrap: anywhere; }
+.shop-unresolved > summary { min-height: 44px; padding-block: 11px; cursor: pointer; }
+@media (max-width: 600px) {
+  .crafting-guide.article { padding-inline: 18px; }
+  .crafting-guide > h1 { font-size: 1.75rem; }
+  .recipe-controls { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 10px; }
+  .crafting-reference .recipe-table th, .crafting-reference .recipe-table td { padding: 8px 10px; }
+  .recipe-table th:first-child { width: 43%; }
+  .recipe-table .recipe-ingredients { grid-template-columns: 1fr; }
+}

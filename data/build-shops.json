@@ -1,0 +1,2627 @@
+{
+  "build": "0.8.10.842",
+  "steamBuild": "24847725",
+  "evidenceLevel": "build-observed",
+  "validity": "unknown",
+  "sources": {
+    "localization": {
+      "asset": "resources.assets",
+      "pathId": 393483,
+      "rawSha256": "2c505386fe9b1b9c2579aad1e6957907db838d8c7f87227e818fbfd4b57d5f4e",
+      "kind": "local-build",
+      "title": "Owned-build item localization",
+      "url": null
+    },
+    "Architect-004ad708f5": {
+      "kind": "local-build",
+      "title": "Architect",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12012,
+      "rawSha256": "004ad708f5dd4ff16a54cea6a38b02ead23a3ebd62d209b71285a7e821a01a8a"
+    },
+    "Town_SeedVendor-954144e13b": {
+      "kind": "local-build",
+      "title": "Town_SeedVendor",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12044,
+      "rawSha256": "954144e13b80fad37774a176ce00f1cff466053ffa1ff115b5a39c15adfe033d"
+    },
+    "Country_Animalery_Chickens-f394f14392": {
+      "kind": "local-build",
+      "title": "Country_Animalery_Chickens",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12005,
+      "rawSha256": "f394f143928d98a4c267a804c292c5b8d959c2371accae5f8eac60cd8bf88719"
+    },
+    "Country_Animalery_Cows-4bb4d90a3b": {
+      "kind": "local-build",
+      "title": "Country_Animalery_Cows",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12036,
+      "rawSha256": "4bb4d90a3b9503cdb261092e8d0b4e8ae88a6dafd55edee825eecb0d82b8a5ea"
+    },
+    "Country_CarDealer-27fb27aab3": {
+      "kind": "local-build",
+      "title": "Country_CarDealer",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12007,
+      "rawSha256": "27fb27aab36f0b75c3a16dac1a4320f8e9d0ef9b2a13406f9efb1aba915c68ef"
+    },
+    "CarDealer_StarAuto-35257ffb03": {
+      "kind": "local-build",
+      "title": "CarDealer_StarAuto",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 11985,
+      "rawSha256": "35257ffb033b4d71efa911fc6f7537d50881ec337d6f0dcd2ce9cce2030ee296"
+    },
+    "CarDealer_Utility-80b5356d60": {
+      "kind": "local-build",
+      "title": "CarDealer_Utility",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12024,
+      "rawSha256": "80b5356d60fc9be161fb0b8a13fe9c3358957c5265987c71420c9f8caf7ee117"
+    },
+    "CarDealer_PrestigeMotors-54493d2de0": {
+      "kind": "local-build",
+      "title": "CarDealer_PrestigeMotors",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12037,
+      "rawSha256": "54493d2de03ef8deb41ed4b3babbd33e4e48f8fb0691c59b8a6ef51b9d371347"
+    }
+  },
+  "shops": [
+    {
+      "id": "building-store",
+      "name": "Building store",
+      "zhName": "建筑商店",
+      "category": "building",
+      "sourceId": "Architect-004ad708f5",
+      "labelKind": "editor-described-shop-category"
+    },
+    {
+      "id": "seed-store",
+      "name": "Seed & grocery store",
+      "zhName": "种子与杂货商店",
+      "category": "farming",
+      "sourceId": "Town_SeedVendor-954144e13b",
+      "labelKind": "editor-described-shop-category"
+    },
+    {
+      "id": "poultry-store",
+      "name": "Poultry & rabbit store",
+      "zhName": "家禽与兔子商店",
+      "category": "animals",
+      "sourceId": "Country_Animalery_Chickens-f394f14392",
+      "labelKind": "editor-described-shop-category"
+    },
+    {
+      "id": "livestock-store",
+      "name": "Cattle & goat store",
+      "zhName": "牛与山羊商店",
+      "category": "animals",
+      "sourceId": "Country_Animalery_Cows-4bb4d90a3b",
+      "labelKind": "editor-described-shop-category"
+    },
+    {
+      "id": "country-vehicles",
+      "name": "Country vehicle dealer",
+      "zhName": "乡村车辆商店",
+      "category": "vehicles",
+      "sourceId": "Country_CarDealer-27fb27aab3",
+      "labelKind": "editor-described-shop-category"
+    },
+    {
+      "id": "standard-cars",
+      "name": "Standard car dealer",
+      "zhName": "普通汽车商店",
+      "category": "vehicles",
+      "sourceId": "CarDealer_StarAuto-35257ffb03",
+      "labelKind": "editor-described-shop-category"
+    },
+    {
+      "id": "utility-vehicles",
+      "name": "Utility vehicle dealer",
+      "zhName": "实用车辆商店",
+      "category": "vehicles",
+      "sourceId": "CarDealer_Utility-80b5356d60",
+      "labelKind": "editor-described-shop-category"
+    },
+    {
+      "id": "prestige-cars",
+      "name": "Prestige car dealer",
+      "zhName": "豪华汽车商店",
+      "category": "vehicles",
+      "sourceId": "CarDealer_PrestigeMotors-54493d2de0",
+      "labelKind": "editor-described-shop-category"
+    }
+  ],
+  "items": [
+    {
+      "id": "ressource_rock_simple",
+      "name": "Stone",
+      "zhName": "石头",
+      "nameKey": "Items_DB/ressource_rock_simple/Name"
+    },
+    {
+      "id": "ressource_wood",
+      "name": "Wood Log",
+      "zhName": "木材原木",
+      "nameKey": "Items_DB/ressource_wood/Name"
+    },
+    {
+      "id": "ressource_zerkonite",
+      "name": "Zerkonite",
+      "zhName": "钛锆钍矿石",
+      "nameKey": "Items_DB/ressource_zerkonite/Name"
+    },
+    {
+      "id": "tools_axe_metal",
+      "name": "Axe",
+      "zhName": "斧头",
+      "nameKey": "Items_DB/tools_axe_metal/Name"
+    },
+    {
+      "id": "tools_hammer_metal",
+      "name": "Hammer",
+      "zhName": "锤子",
+      "nameKey": "Items_DB/tools_hammer_metal/Name"
+    },
+    {
+      "id": "tools_hoe_metal",
+      "name": "Hoe",
+      "zhName": "锄头",
+      "nameKey": "Items_DB/tools_hoe_metal/Name"
+    },
+    {
+      "id": "tools_pick_metal",
+      "name": "Pickaxe",
+      "zhName": "镐头",
+      "nameKey": "Items_DB/tools_pick_metal/Name"
+    },
+    {
+      "id": "tools_watercan_metal",
+      "name": "Watering Can",
+      "zhName": "洒水壶",
+      "nameKey": "Items_DB/tools_watercan_metal/Name"
+    },
+    {
+      "id": "tools_fireextinguisher",
+      "name": "Fire extinguisher",
+      "zhName": "灭火器",
+      "nameKey": "Items_DB/tools_fireextinguisher/Name"
+    },
+    {
+      "id": "prop_Roof_LVL1_SolarPanel_01",
+      "name": "Roof Solar Panel",
+      "zhName": "屋顶太阳能电池板",
+      "nameKey": "Items_DB/prop_Roof_LVL1_SolarPanel_01/Name"
+    },
+    {
+      "id": "enrg_solar_n1",
+      "name": "Solar Panel (Basic)",
+      "zhName": "基础款太阳能电池板",
+      "nameKey": "Items_DB/enrg_solar_n1/Name"
+    },
+    {
+      "id": "enrg_solar_n1b",
+      "name": "Big Solar Panel (Basic)",
+      "zhName": "基础款大型太阳能电池板",
+      "nameKey": "Items_DB/enrg_solar_n1b/Name"
+    },
+    {
+      "id": "enrg_solar_n2",
+      "name": "Solar Panel (Upgraded)",
+      "zhName": "升级款太阳能电池板",
+      "nameKey": "Items_DB/enrg_solar_n2/Name"
+    },
+    {
+      "id": "enrg_solar_n2b",
+      "name": "Big Solar Panel (Upgraded)",
+      "zhName": "升级款大型太阳能电池板",
+      "nameKey": "Items_DB/enrg_solar_n2b/Name"
+    },
+    {
+      "id": "enrg_solar_n3",
+      "name": "Solar Panel (Advanced)",
+      "zhName": "高级款太阳能电池板",
+      "nameKey": "Items_DB/enrg_solar_n3/Name"
+    },
+    {
+      "id": "enrg_solar_n3b",
+      "name": "Big Solar Panel (Advanced)",
+      "zhName": "高级款大型太阳能电池板",
+      "nameKey": "Items_DB/enrg_solar_n3b/Name"
+    },
+    {
+      "id": "enrg_windturbine_n2",
+      "name": "Wind Turbine (Upgraded)",
+      "zhName": "升级款风力涡轮机",
+      "nameKey": "Items_DB/enrg_windturbine_n2/Name"
+    },
+    {
+      "id": "enrg_windturbine_n3",
+      "name": "Wind Turbine (Advanced)",
+      "zhName": "高级款风力涡轮机",
+      "nameKey": "Items_DB/enrg_windturbine_n3/Name"
+    },
+    {
+      "id": "enrg_water_pump_n1",
+      "name": "Water Pump(Basic)",
+      "zhName": "基础款水泵",
+      "nameKey": "Items_DB/enrg_water_pump_n1/Name"
+    },
+    {
+      "id": "prop_TV_Flat_01",
+      "name": "Flat Television",
+      "zhName": "平板电视",
+      "nameKey": "Items_DB/prop_TV_Flat_01/Name"
+    },
+    {
+      "id": "prop_Wall_Heater_01",
+      "name": "Heather",
+      "zhName": "海瑟加热器",
+      "nameKey": "Items_DB/prop_Wall_Heater_01/Name"
+    },
+    {
+      "id": "prop_Wall_AirConditioner_01",
+      "name": "Air Conditioner",
+      "zhName": "空调",
+      "nameKey": "Items_DB/prop_Wall_AirConditioner_01/Name"
+    },
+    {
+      "id": "prop_Kitchen_CounterWashing_01",
+      "name": "KNOXUL WOOSH",
+      "zhName": "诺克斯尔伍什清洗台",
+      "nameKey": "Items_DB/prop_Kitchen_CounterWashing_01/Name"
+    },
+    {
+      "id": "prop_Kitchen_Fridge_01",
+      "name": "LOGAN",
+      "zhName": "洛根冰箱",
+      "nameKey": "Items_DB/prop_Kitchen_Fridge_01/Name"
+    },
+    {
+      "id": "prop_Kitchen_Fridge_02",
+      "name": "FRYZBAR",
+      "zhName": "福莱斯吧冰箱",
+      "nameKey": "Items_DB/prop_Kitchen_Fridge_02/Name"
+    },
+    {
+      "id": "prop_Kitchen_Oven_01",
+      "name": "OVYY",
+      "zhName": "奥维烤箱",
+      "nameKey": "Items_DB/prop_Kitchen_Oven_01/Name"
+    },
+    {
+      "id": "prop_Converter_CoffeeMachine_01",
+      "name": "KitchenMaid - Coffee Maker",
+      "zhName": "厨娘牌咖啡机",
+      "nameKey": "Items_DB/prop_Converter_CoffeeMachine_01/Name"
+    },
+    {
+      "id": "prop_Converter_Toaster_01",
+      "name": "Hamilton - Toaster",
+      "zhName": "汉密尔顿牌烤面包机",
+      "nameKey": "Items_DB/prop_Converter_Toaster_01/Name"
+    },
+    {
+      "id": "prop_Converter_Microwave_01",
+      "name": "Hamilton - Microwave",
+      "zhName": "汉密尔顿牌微波炉",
+      "nameKey": "Items_DB/prop_Converter_Microwave_01/Name"
+    },
+    {
+      "id": "prop_Computer_01",
+      "name": "Predator PC",
+      "zhName": "掠夺者牌笔记本电脑",
+      "nameKey": "Items_DB/prop_Computer_01/Name"
+    },
+    {
+      "id": "prop_Barbeque_01",
+      "name": "UBBER",
+      "zhName": "优伯",
+      "nameKey": "Items_DB/prop_Barbeque_01/Name"
+    },
+    {
+      "id": "prop_Roof_LVL1_SatelliteDish_01",
+      "name": "Satellite Dish",
+      "zhName": "卫星锅盖",
+      "nameKey": "Items_DB/prop_Roof_LVL1_SatelliteDish_01/Name"
+    },
+    {
+      "id": "prop_Roof_LVL1_Antenna_01",
+      "name": "TV Antenna",
+      "zhName": "电视天线",
+      "nameKey": "Items_DB/prop_Roof_LVL1_Antenna_01/Name"
+    },
+    {
+      "id": "Custum_GreenHouse_01",
+      "name": "Green House Type 1",
+      "zhName": "1型温室",
+      "nameKey": "Items_DB/Custum_GreenHouse_01/Name"
+    },
+    {
+      "id": "prop_WaterTower_Small",
+      "name": "Water Tower",
+      "zhName": "水塔",
+      "nameKey": "Items_DB/prop_WaterTower_Small/Name"
+    },
+    {
+      "id": "prop_Silo_Small",
+      "name": "Silo - Small",
+      "zhName": "小筒仓",
+      "nameKey": "Items_DB/prop_Silo_Small/Name"
+    },
+    {
+      "id": "prop_Silo_Medium",
+      "name": "Silo - Medium",
+      "zhName": "中号筒仓",
+      "nameKey": "Items_DB/prop_Silo_Medium/Name"
+    },
+    {
+      "id": "prop_Silo_Big",
+      "name": "Silo - Big",
+      "zhName": "大筒仓",
+      "nameKey": "Items_DB/prop_Silo_Big/Name"
+    },
+    {
+      "id": "Custum_Barn_Weak_Small",
+      "name": "Coop",
+      "zhName": "鸡舍",
+      "nameKey": "Items_DB/Custum_Barn_Weak_Small/Name"
+    },
+    {
+      "id": "ressource_straw",
+      "name": "Hay",
+      "zhName": "干草",
+      "nameKey": "Items_DB/ressource_straw/Name"
+    },
+    {
+      "id": "Custum_Barn_Weak_Medium",
+      "name": "Big Coop",
+      "zhName": "大鸡舍",
+      "nameKey": "Items_DB/Custum_Barn_Weak_Medium/Name"
+    },
+    {
+      "id": "Custum_Barn_Weak_Big",
+      "name": "Deluxe Coop",
+      "zhName": "豪华鸡舍",
+      "nameKey": "Items_DB/Custum_Barn_Weak_Big/Name"
+    },
+    {
+      "id": "Custum_Barn_Strong_Small",
+      "name": "Barn",
+      "zhName": "谷仓",
+      "nameKey": "Items_DB/Custum_Barn_Strong_Small/Name"
+    },
+    {
+      "id": "Custum_Barn_Strong_Medium",
+      "name": "Big Barn",
+      "zhName": "大谷仓",
+      "nameKey": "Items_DB/Custum_Barn_Strong_Medium/Name"
+    },
+    {
+      "id": "Custum_Barn_Strong_Big",
+      "name": "Deluxe Barn",
+      "zhName": "豪华谷仓",
+      "nameKey": "Items_DB/Custum_Barn_Strong_Big/Name"
+    },
+    {
+      "id": "seed_red_luttuce",
+      "name": "Red Lettuce Seed",
+      "zhName": "红叶生菜种子",
+      "nameKey": "Items_DB/seed_red_luttuce/Name"
+    },
+    {
+      "id": "seed_garlic",
+      "name": "Garlic Seed",
+      "zhName": "大蒜种子",
+      "nameKey": "Items_DB/seed_garlic/Name"
+    },
+    {
+      "id": "seed_strawberry",
+      "name": "Strawberry Seed",
+      "zhName": "草莓种子",
+      "nameKey": "Items_DB/seed_strawberry/Name"
+    },
+    {
+      "id": "vegetable_red_luttuce_normal",
+      "name": "Green Salad",
+      "zhName": "绿色沙拉菜",
+      "nameKey": "Items_DB/vegetable_red_luttuce_normal/Name"
+    },
+    {
+      "id": "vegetable_garlic_normal",
+      "name": "Garlic",
+      "zhName": "大蒜",
+      "nameKey": "Items_DB/vegetable_garlic_normal/Name"
+    },
+    {
+      "id": "vegetable_strawberry_normal",
+      "name": "Strawberry",
+      "zhName": "草莓",
+      "nameKey": "Items_DB/vegetable_strawberry_normal/Name"
+    },
+    {
+      "id": "vegetable_peppers_normal",
+      "name": "Pepper",
+      "zhName": "甜椒",
+      "nameKey": "Items_DB/vegetable_peppers_normal/Name"
+    },
+    {
+      "id": "seed_aubergine",
+      "name": "Aubergine Seed",
+      "zhName": "茄子种子",
+      "nameKey": "Items_DB/seed_aubergine/Name"
+    },
+    {
+      "id": "seed_corn",
+      "name": "Corn Seed",
+      "zhName": "玉米种子",
+      "nameKey": "Items_DB/seed_corn/Name"
+    },
+    {
+      "id": "seed_green_luttuce",
+      "name": "Green Lettuce Seed",
+      "zhName": "绿叶生菜种子",
+      "nameKey": "Items_DB/seed_green_luttuce/Name"
+    },
+    {
+      "id": "vegetable_aubergine_normal",
+      "name": "Aubergine",
+      "zhName": "茄子",
+      "nameKey": "Items_DB/vegetable_aubergine_normal/Name"
+    },
+    {
+      "id": "vegetable_melon_normal",
+      "name": "Melon",
+      "zhName": "甜瓜",
+      "nameKey": "Items_DB/vegetable_melon_normal/Name"
+    },
+    {
+      "id": "vegetable_green_luttuce_normal",
+      "name": "Green Lettuce",
+      "zhName": "绿叶生菜",
+      "nameKey": "Items_DB/vegetable_green_luttuce_normal/Name"
+    },
+    {
+      "id": "vegetable_corn_normal",
+      "name": "Corn",
+      "zhName": "玉米",
+      "nameKey": "Items_DB/vegetable_corn_normal/Name"
+    },
+    {
+      "id": "vegetable_chili_normal",
+      "name": "Chili",
+      "zhName": "辣椒",
+      "nameKey": "Items_DB/vegetable_chili_normal/Name"
+    },
+    {
+      "id": "seed_pumpkin",
+      "name": "Pumpkin Seed",
+      "zhName": "南瓜种子",
+      "nameKey": "Items_DB/seed_pumpkin/Name"
+    },
+    {
+      "id": "seed_carotte",
+      "name": "Carotte Seed",
+      "zhName": "胡萝卜种子",
+      "nameKey": "Items_DB/seed_carotte/Name"
+    },
+    {
+      "id": "seed_onion",
+      "name": "Onions Seed",
+      "zhName": "洋葱种子",
+      "nameKey": "Items_DB/seed_onion/Name"
+    },
+    {
+      "id": "vegetable_pumpkin_normal",
+      "name": "Pumpkin",
+      "zhName": "南瓜",
+      "nameKey": "Items_DB/vegetable_pumpkin_normal/Name"
+    },
+    {
+      "id": "vegetable_carotte_normal",
+      "name": "Carotte",
+      "zhName": "胡萝卜",
+      "nameKey": "Items_DB/vegetable_carotte_normal/Name"
+    },
+    {
+      "id": "vegetable_leek_normal",
+      "name": "Leek",
+      "zhName": "韭葱",
+      "nameKey": "Items_DB/vegetable_leek_normal/Name"
+    },
+    {
+      "id": "vegetable_onion_normal",
+      "name": "Onion",
+      "zhName": "洋葱",
+      "nameKey": "Items_DB/vegetable_onion_normal/Name"
+    },
+    {
+      "id": "vegetable_marrow_normal",
+      "name": "Marrow",
+      "zhName": "西葫芦",
+      "nameKey": "Items_DB/vegetable_marrow_normal/Name"
+    },
+    {
+      "id": "fertilizer_quality_basic",
+      "name": "Fertilizer",
+      "zhName": "肥料",
+      "nameKey": "Items_DB/fertilizer_quality_basic/Name"
+    },
+    {
+      "id": "fertilizer_nbfruit_basic",
+      "name": "Boost Fertilizer",
+      "zhName": "增效肥料",
+      "nameKey": "Items_DB/fertilizer_nbfruit_basic/Name"
+    },
+    {
+      "id": "fertilizer_giant_basic",
+      "name": "OGM Fertilizer",
+      "zhName": "转基因肥料",
+      "nameKey": "Items_DB/fertilizer_giant_basic/Name"
+    },
+    {
+      "id": "consumable_milk_small_cow",
+      "name": "Cow Milk - Small",
+      "zhName": "小份牛奶",
+      "nameKey": "Items_DB/consumable_milk_small_cow/Name"
+    },
+    {
+      "id": "consumable_egg_brown_small_chicken",
+      "name": "Chicken Egg - Small",
+      "zhName": "小号鸡蛋",
+      "nameKey": "Items_DB/consumable_egg_brown_small_chicken/Name"
+    },
+    {
+      "id": "consumable_chicken_Leg",
+      "name": "Chicken Leg",
+      "zhName": "鸡腿",
+      "nameKey": "Items_DB/consumable_chicken_Leg/Name"
+    },
+    {
+      "id": "consumable_chicken_breast",
+      "name": "Chicken Breast",
+      "zhName": "鸡胸肉",
+      "nameKey": "Items_DB/consumable_chicken_breast/Name"
+    },
+    {
+      "id": "consumable_meat_small_cow",
+      "name": "Cow Meat - Small",
+      "zhName": "小块牛肉",
+      "nameKey": "Items_DB/consumable_meat_small_cow/Name"
+    },
+    {
+      "id": "consumable_meat_medium_cow",
+      "name": "Cow Meat - Medium",
+      "zhName": "中块牛肉",
+      "nameKey": "Items_DB/consumable_meat_medium_cow/Name"
+    },
+    {
+      "id": "weapon_Ammo_01",
+      "name": "Devil Kiss - Cartridge",
+      "zhName": "恶魔之吻 - 子弹",
+      "nameKey": "Items_DB/weapon_Ammo_01/Name"
+    },
+    {
+      "id": "weapon_revolver_lvl1",
+      "name": "Revolver",
+      "zhName": "左轮手枪",
+      "nameKey": "Items_DB/weapon_revolver_lvl1/Name"
+    },
+    {
+      "id": "weapon_rifle_lvl1",
+      "name": "AK-45 Advanced",
+      "zhName": "AK-45进阶款步枪",
+      "nameKey": "Items_DB/weapon_rifle_lvl1/Name"
+    },
+    {
+      "id": "animal_chicken_rooster_male_red",
+      "name": "Red Rooster",
+      "zhName": "红羽公鸡",
+      "nameKey": "Items_DB/animal_chicken_rooster_male_red/Name"
+    },
+    {
+      "id": "animal_chicken_rooster_male_white",
+      "name": "White Rooster",
+      "zhName": "白羽公鸡",
+      "nameKey": "Items_DB/animal_chicken_rooster_male_white/Name"
+    },
+    {
+      "id": "animal_chicken_rooster_male_multiclr",
+      "name": "Rainbow Rooster",
+      "zhName": "彩虹公鸡",
+      "nameKey": "Items_DB/animal_chicken_rooster_male_multiclr/Name"
+    },
+    {
+      "id": "animal_chicken_black_female",
+      "name": "Black Chicken",
+      "zhName": "黑羽鸡",
+      "nameKey": "Items_DB/animal_chicken_black_female/Name"
+    },
+    {
+      "id": "animal_chicken_white_female",
+      "name": "White Chicken",
+      "zhName": "白羽鸡",
+      "nameKey": "Items_DB/animal_chicken_white_female/Name"
+    },
+    {
+      "id": "animal_chicken_brown_female",
+      "name": "Brown Chicken",
+      "zhName": "棕羽鸡",
+      "nameKey": "Items_DB/animal_chicken_brown_female/Name"
+    },
+    {
+      "id": "animal_rabit_male",
+      "name": "Rabbit Buck",
+      "zhName": "兔子 - 公兔",
+      "nameKey": "Items_DB/animal_rabit_male/Name"
+    },
+    {
+      "id": "animal_rabit_female",
+      "name": "Rabbit Doe",
+      "zhName": "兔子 - 母兔",
+      "nameKey": "Items_DB/animal_rabit_female/Name"
+    },
+    {
+      "id": "Custum_Barn_HeaterModule",
+      "name": "Barn Heat Kit",
+      "zhName": "谷仓加热套件",
+      "nameKey": "Items_DB/Custum_Barn_HeaterModule/Name"
+    },
+    {
+      "id": "Custum_Barn_AutoFeederModule",
+      "name": "Barn AutoFeeder Kit",
+      "zhName": "谷仓自动喂食器套件",
+      "nameKey": "Items_DB/Custum_Barn_AutoFeederModule/Name"
+    },
+    {
+      "id": "animal_cow_brown_female",
+      "name": "Maine-Anjou - COW",
+      "zhName": "缅因-安茹牛 - 母牛",
+      "nameKey": "Items_DB/animal_cow_brown_female/Name"
+    },
+    {
+      "id": "animal_cow_brown_male",
+      "name": "Maine-Anjou - BULL",
+      "zhName": "缅因-安茹牛 - 公牛",
+      "nameKey": "Items_DB/animal_cow_brown_male/Name"
+    },
+    {
+      "id": "animal_cow_black_female",
+      "name": "Bretonne Pie Noire - COW",
+      "zhName": "布列塔尼黑白花牛 - 母牛",
+      "nameKey": "Items_DB/animal_cow_black_female/Name"
+    },
+    {
+      "id": "animal_cow_black_male",
+      "name": "Bretonne Pie Noire - BULL",
+      "zhName": "布列塔尼黑白花牛 - 公牛",
+      "nameKey": "Items_DB/animal_cow_black_male/Name"
+    },
+    {
+      "id": "animal_cow_brown_super_female_brown",
+      "name": "Angeln - COW",
+      "zhName": "安格伦牛 - 母牛",
+      "nameKey": "Items_DB/animal_cow_brown_super_female_brown/Name"
+    },
+    {
+      "id": "animal_cow_brown_super_female_tache",
+      "name": "Deutsche Rotbunte - COW",
+      "zhName": "德国红白花牛 - 母牛",
+      "nameKey": "Items_DB/animal_cow_brown_super_female_tache/Name"
+    },
+    {
+      "id": "animal_cow_brown_super_female_white",
+      "name": "Gascon - COW",
+      "zhName": "加斯科牛 - 母牛",
+      "nameKey": "Items_DB/animal_cow_brown_super_female_white/Name"
+    },
+    {
+      "id": "animal_goat_white_male",
+      "name": "Buck",
+      "zhName": "山羊 - 公羊",
+      "nameKey": "Items_DB/animal_goat_white_male/Name"
+    },
+    {
+      "id": "animal_goat_white_female",
+      "name": "Goat Doe",
+      "zhName": "山羊 - 母羊",
+      "nameKey": "Items_DB/animal_goat_white_female/Name"
+    },
+    {
+      "id": "tools_rope",
+      "name": "Rope",
+      "zhName": "绳子",
+      "nameKey": "Items_DB/tools_rope/Name"
+    },
+    {
+      "id": "tools_bucket_wood",
+      "name": "Bucket",
+      "zhName": "水桶",
+      "nameKey": "Items_DB/tools_bucket_wood/Name"
+    },
+    {
+      "id": "VIC_LadiesBike-02",
+      "name": null,
+      "zhName": null,
+      "nameKey": null,
+      "nameStatus": "unresolved-reference"
+    },
+    {
+      "id": "VIC_Scooter_04",
+      "name": "Vespa 125",
+      "zhName": "韦帕125踏板车",
+      "nameKey": "Items_DB/VIC_Scooter_04/Name"
+    },
+    {
+      "id": "VIC_DirtBike_01",
+      "name": null,
+      "zhName": null,
+      "nameKey": null,
+      "nameStatus": "unresolved-reference"
+    },
+    {
+      "id": "VIC_DirtBike_02",
+      "name": null,
+      "zhName": null,
+      "nameKey": null,
+      "nameStatus": "unresolved-reference"
+    },
+    {
+      "id": "VIC_CamperVan_04",
+      "name": null,
+      "zhName": null,
+      "nameKey": null,
+      "nameStatus": "unresolved-reference"
+    },
+    {
+      "id": "VIC_Van_01",
+      "name": "Fjord Econoline",
+      "zhName": "Fjord Econoline",
+      "nameKey": "Items_DB/VIC_Van_01/Name"
+    },
+    {
+      "id": "VIC_4x4_01",
+      "name": null,
+      "zhName": null,
+      "nameKey": null,
+      "nameStatus": "unresolved-reference"
+    },
+    {
+      "id": "VIC_Car_01",
+      "name": "Citroon 2CV",
+      "zhName": "Citroon 2CV",
+      "nameKey": "Items_DB/VIC_Car_01/Name"
+    },
+    {
+      "id": "VIC_Car_02",
+      "name": "Voltla 3R",
+      "zhName": "Voltla 3R",
+      "nameKey": "Items_DB/VIC_Car_02/Name"
+    },
+    {
+      "id": "VIC_Car_03",
+      "name": "Kinda Sportage",
+      "zhName": "Kinda Sportage",
+      "nameKey": "Items_DB/VIC_Car_03/Name"
+    },
+    {
+      "id": "VIC_Car_04",
+      "name": "Fuss Focus",
+      "zhName": "Fuss Focus",
+      "nameKey": "Items_DB/VIC_Car_04/Name"
+    },
+    {
+      "id": "VIC_Car_05",
+      "name": "Nada 2106",
+      "zhName": "Nada 2106",
+      "nameKey": "Items_DB/VIC_Car_05/Name"
+    },
+    {
+      "id": "VIC_Car_06",
+      "name": "Fjord Granola",
+      "zhName": "Fjord Granola",
+      "nameKey": "Items_DB/VIC_Car_06/Name"
+    },
+    {
+      "id": "VIC_Car_07",
+      "name": "Dudge Chugger",
+      "zhName": "Dudge Chugger",
+      "nameKey": "Items_DB/VIC_Car_07/Name"
+    },
+    {
+      "id": "VIC_Car_08",
+      "name": "Outblander",
+      "zhName": "Outblander",
+      "nameKey": "Items_DB/VIC_Car_08/Name"
+    },
+    {
+      "id": "VIC_ThreeWheeler_01",
+      "name": "Vespro Load",
+      "zhName": "Vespro Load",
+      "nameKey": "Items_DB/VIC_ThreeWheeler_01/Name"
+    },
+    {
+      "id": "VIC_ThreeWheeler_02",
+      "name": "Vespro VanGo",
+      "zhName": "Vespro VanGo",
+      "nameKey": "Items_DB/VIC_ThreeWheeler_02/Name"
+    },
+    {
+      "id": "VIC_ThreeWheeler_03",
+      "name": "Vespro Cubo",
+      "zhName": "Vespro Cubo",
+      "nameKey": "Items_DB/VIC_ThreeWheeler_03/Name"
+    },
+    {
+      "id": "VIC_PickUp_01",
+      "name": "Fjord F-One",
+      "zhName": "Fjord F-One",
+      "nameKey": "Items_DB/VIC_PickUp_01/Name"
+    },
+    {
+      "id": "VIC_PickUp_02",
+      "name": "Citroon H",
+      "zhName": "Citroon H",
+      "nameKey": "Items_DB/VIC_PickUp_02/Name"
+    },
+    {
+      "id": "VIC_Van_02",
+      "name": "Folker Vanagone",
+      "zhName": "Folker Vanagone",
+      "nameKey": "Items_DB/VIC_Van_02/Name"
+    },
+    {
+      "id": "VIC_Van_03",
+      "name": "Folker Transporter",
+      "zhName": "Folker Transporter",
+      "nameKey": "Items_DB/VIC_Van_03/Name"
+    },
+    {
+      "id": "VIC_Car_Luxe_01",
+      "name": "Land Grover 110",
+      "zhName": "Land Grover 110",
+      "nameKey": "Items_DB/VIC_Car_Luxe_01/Name"
+    },
+    {
+      "id": "VIC_Car_Luxe_02",
+      "name": "HmmV8",
+      "zhName": "HmmV8",
+      "nameKey": "Items_DB/VIC_Car_Luxe_02/Name"
+    },
+    {
+      "id": "VIC_Car_Luxe_03",
+      "name": "RamPage X",
+      "zhName": "RamPage X",
+      "nameKey": "Items_DB/VIC_Car_Luxe_03/Name"
+    },
+    {
+      "id": "VIC_Car_Luxe_04",
+      "name": "Fjord Confusion",
+      "zhName": "Fjord Confusion",
+      "nameKey": "Items_DB/VIC_Car_Luxe_04/Name"
+    },
+    {
+      "id": "VIC_Car_Luxe_05",
+      "name": "Chevrolair Cruza",
+      "zhName": "Chevrolair Cruza",
+      "nameKey": "Items_DB/VIC_Car_Luxe_05/Name"
+    },
+    {
+      "id": "VIC_Car_Roadster_01",
+      "name": "Fezzario 250",
+      "zhName": "Fezzario 250",
+      "nameKey": "Items_DB/VIC_Car_Roadster_01/Name"
+    }
+  ],
+  "offers": [
+    {
+      "id": "building-store-allthetime-ressource_rock_simple",
+      "shopId": "building-store",
+      "itemId": "ressource_rock_simple",
+      "season": "AllTheTime",
+      "section": "supplies",
+      "sourceSection": "_SHOP_BUILDER_GENERAL_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-ressource_wood",
+      "shopId": "building-store",
+      "itemId": "ressource_wood",
+      "season": "AllTheTime",
+      "section": "supplies",
+      "sourceSection": "_SHOP_BUILDER_GENERAL_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-ressource_zerkonite",
+      "shopId": "building-store",
+      "itemId": "ressource_zerkonite",
+      "season": "AllTheTime",
+      "section": "supplies",
+      "sourceSection": "_SHOP_BUILDER_GENERAL_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-tools_axe_metal",
+      "shopId": "building-store",
+      "itemId": "tools_axe_metal",
+      "season": "AllTheTime",
+      "section": "supplies",
+      "sourceSection": "_SHOP_BUILDER_GENERAL_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-tools_hammer_metal",
+      "shopId": "building-store",
+      "itemId": "tools_hammer_metal",
+      "season": "AllTheTime",
+      "section": "supplies",
+      "sourceSection": "_SHOP_BUILDER_GENERAL_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-tools_hoe_metal",
+      "shopId": "building-store",
+      "itemId": "tools_hoe_metal",
+      "season": "AllTheTime",
+      "section": "supplies",
+      "sourceSection": "_SHOP_BUILDER_GENERAL_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-tools_pick_metal",
+      "shopId": "building-store",
+      "itemId": "tools_pick_metal",
+      "season": "AllTheTime",
+      "section": "supplies",
+      "sourceSection": "_SHOP_BUILDER_GENERAL_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-tools_watercan_metal",
+      "shopId": "building-store",
+      "itemId": "tools_watercan_metal",
+      "season": "AllTheTime",
+      "section": "supplies",
+      "sourceSection": "_SHOP_BUILDER_GENERAL_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-tools_fireextinguisher",
+      "shopId": "building-store",
+      "itemId": "tools_fireextinguisher",
+      "season": "AllTheTime",
+      "section": "supplies",
+      "sourceSection": "_SHOP_BUILDER_GENERAL_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-prop_Roof_LVL1_SolarPanel_01",
+      "shopId": "building-store",
+      "itemId": "prop_Roof_LVL1_SolarPanel_01",
+      "season": "AllTheTime",
+      "section": "generators",
+      "sourceSection": "_SHOP_BUILDER_ENERGY_GENERATOR_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-enrg_solar_n1",
+      "shopId": "building-store",
+      "itemId": "enrg_solar_n1",
+      "season": "AllTheTime",
+      "section": "generators",
+      "sourceSection": "_SHOP_BUILDER_ENERGY_GENERATOR_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-enrg_solar_n1b",
+      "shopId": "building-store",
+      "itemId": "enrg_solar_n1b",
+      "season": "AllTheTime",
+      "section": "generators",
+      "sourceSection": "_SHOP_BUILDER_ENERGY_GENERATOR_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-enrg_solar_n2",
+      "shopId": "building-store",
+      "itemId": "enrg_solar_n2",
+      "season": "AllTheTime",
+      "section": "generators",
+      "sourceSection": "_SHOP_BUILDER_ENERGY_GENERATOR_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-enrg_solar_n2b",
+      "shopId": "building-store",
+      "itemId": "enrg_solar_n2b",
+      "season": "AllTheTime",
+      "section": "generators",
+      "sourceSection": "_SHOP_BUILDER_ENERGY_GENERATOR_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-enrg_solar_n3",
+      "shopId": "building-store",
+      "itemId": "enrg_solar_n3",
+      "season": "AllTheTime",
+      "section": "generators",
+      "sourceSection": "_SHOP_BUILDER_ENERGY_GENERATOR_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-enrg_solar_n3b",
+      "shopId": "building-store",
+      "itemId": "enrg_solar_n3b",
+      "season": "AllTheTime",
+      "section": "generators",
+      "sourceSection": "_SHOP_BUILDER_ENERGY_GENERATOR_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-enrg_windturbine_n2",
+      "shopId": "building-store",
+      "itemId": "enrg_windturbine_n2",
+      "season": "AllTheTime",
+      "section": "generators",
+      "sourceSection": "_SHOP_BUILDER_ENERGY_GENERATOR_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-enrg_windturbine_n3",
+      "shopId": "building-store",
+      "itemId": "enrg_windturbine_n3",
+      "season": "AllTheTime",
+      "section": "generators",
+      "sourceSection": "_SHOP_BUILDER_ENERGY_GENERATOR_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-enrg_water_pump_n1",
+      "shopId": "building-store",
+      "itemId": "enrg_water_pump_n1",
+      "season": "AllTheTime",
+      "section": "generators",
+      "sourceSection": "_SHOP_BUILDER_ENERGY_GENERATOR_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-prop_TV_Flat_01",
+      "shopId": "building-store",
+      "itemId": "prop_TV_Flat_01",
+      "season": "AllTheTime",
+      "section": "equipment",
+      "sourceSection": "_SHOP_BUILDER_MACHINES_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-prop_Wall_Heater_01",
+      "shopId": "building-store",
+      "itemId": "prop_Wall_Heater_01",
+      "season": "AllTheTime",
+      "section": "equipment",
+      "sourceSection": "_SHOP_BUILDER_MACHINES_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-prop_Wall_AirConditioner_01",
+      "shopId": "building-store",
+      "itemId": "prop_Wall_AirConditioner_01",
+      "season": "AllTheTime",
+      "section": "equipment",
+      "sourceSection": "_SHOP_BUILDER_MACHINES_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-prop_Kitchen_CounterWashing_01",
+      "shopId": "building-store",
+      "itemId": "prop_Kitchen_CounterWashing_01",
+      "season": "AllTheTime",
+      "section": "equipment",
+      "sourceSection": "_SHOP_BUILDER_MACHINES_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-prop_Kitchen_Fridge_01",
+      "shopId": "building-store",
+      "itemId": "prop_Kitchen_Fridge_01",
+      "season": "AllTheTime",
+      "section": "equipment",
+      "sourceSection": "_SHOP_BUILDER_MACHINES_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-prop_Kitchen_Fridge_02",
+      "shopId": "building-store",
+      "itemId": "prop_Kitchen_Fridge_02",
+      "season": "AllTheTime",
+      "section": "equipment",
+      "sourceSection": "_SHOP_BUILDER_MACHINES_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-prop_Kitchen_Oven_01",
+      "shopId": "building-store",
+      "itemId": "prop_Kitchen_Oven_01",
+      "season": "AllTheTime",
+      "section": "equipment",
+      "sourceSection": "_SHOP_BUILDER_MACHINES_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-prop_Converter_CoffeeMachine_01",
+      "shopId": "building-store",
+      "itemId": "prop_Converter_CoffeeMachine_01",
+      "season": "AllTheTime",
+      "section": "equipment",
+      "sourceSection": "_SHOP_BUILDER_MACHINES_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-prop_Converter_Toaster_01",
+      "shopId": "building-store",
+      "itemId": "prop_Converter_Toaster_01",
+      "season": "AllTheTime",
+      "section": "equipment",
+      "sourceSection": "_SHOP_BUILDER_MACHINES_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-prop_Converter_Microwave_01",
+      "shopId": "building-store",
+      "itemId": "prop_Converter_Microwave_01",
+      "season": "AllTheTime",
+      "section": "equipment",
+      "sourceSection": "_SHOP_BUILDER_MACHINES_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-prop_Computer_01",
+      "shopId": "building-store",
+      "itemId": "prop_Computer_01",
+      "season": "AllTheTime",
+      "section": "equipment",
+      "sourceSection": "_SHOP_BUILDER_MACHINES_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-prop_Barbeque_01",
+      "shopId": "building-store",
+      "itemId": "prop_Barbeque_01",
+      "season": "AllTheTime",
+      "section": "equipment",
+      "sourceSection": "_SHOP_BUILDER_MACHINES_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-prop_Roof_LVL1_SatelliteDish_01",
+      "shopId": "building-store",
+      "itemId": "prop_Roof_LVL1_SatelliteDish_01",
+      "season": "AllTheTime",
+      "section": "equipment",
+      "sourceSection": "_SHOP_BUILDER_MACHINES_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-prop_Roof_LVL1_Antenna_01",
+      "shopId": "building-store",
+      "itemId": "prop_Roof_LVL1_Antenna_01",
+      "season": "AllTheTime",
+      "section": "equipment",
+      "sourceSection": "_SHOP_BUILDER_MACHINES_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-Custum_GreenHouse_01",
+      "shopId": "building-store",
+      "itemId": "Custum_GreenHouse_01",
+      "season": "AllTheTime",
+      "section": "buildings",
+      "sourceSection": "_SHOP_BUILDER_FARM_Buildings_",
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 20
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 30
+        }
+      ],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-prop_WaterTower_Small",
+      "shopId": "building-store",
+      "itemId": "prop_WaterTower_Small",
+      "season": "AllTheTime",
+      "section": "buildings",
+      "sourceSection": "_SHOP_BUILDER_FARM_Buildings_",
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 10
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 30
+        }
+      ],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-prop_Silo_Small",
+      "shopId": "building-store",
+      "itemId": "prop_Silo_Small",
+      "season": "AllTheTime",
+      "section": "buildings",
+      "sourceSection": "_SHOP_BUILDER_FARM_Buildings_",
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 30
+        }
+      ],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-prop_Silo_Medium",
+      "shopId": "building-store",
+      "itemId": "prop_Silo_Medium",
+      "season": "AllTheTime",
+      "section": "buildings",
+      "sourceSection": "_SHOP_BUILDER_FARM_Buildings_",
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 45
+        }
+      ],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-prop_Silo_Big",
+      "shopId": "building-store",
+      "itemId": "prop_Silo_Big",
+      "season": "AllTheTime",
+      "section": "buildings",
+      "sourceSection": "_SHOP_BUILDER_FARM_Buildings_",
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 60
+        }
+      ],
+      "questRequirements": [],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-Custum_Barn_Weak_Small",
+      "shopId": "building-store",
+      "itemId": "Custum_Barn_Weak_Small",
+      "season": "AllTheTime",
+      "section": "buildings",
+      "sourceSection": "_SHOP_BUILDER_FARM_Buildings_",
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 15
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 20
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 15
+        }
+      ],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-Custum_Barn_Weak_Medium",
+      "shopId": "building-store",
+      "itemId": "Custum_Barn_Weak_Medium",
+      "season": "AllTheTime",
+      "section": "buildings",
+      "sourceSection": "_SHOP_BUILDER_FARM_Buildings_",
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 25
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 40
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 15
+        }
+      ],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-Custum_Barn_Weak_Big",
+      "shopId": "building-store",
+      "itemId": "Custum_Barn_Weak_Big",
+      "season": "AllTheTime",
+      "section": "buildings",
+      "sourceSection": "_SHOP_BUILDER_FARM_Buildings_",
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 50
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 70
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 15
+        }
+      ],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-Custum_Barn_Strong_Small",
+      "shopId": "building-store",
+      "itemId": "Custum_Barn_Strong_Small",
+      "season": "AllTheTime",
+      "section": "buildings",
+      "sourceSection": "_SHOP_BUILDER_FARM_Buildings_",
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 15
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 20
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 15
+        }
+      ],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-Custum_Barn_Strong_Medium",
+      "shopId": "building-store",
+      "itemId": "Custum_Barn_Strong_Medium",
+      "season": "AllTheTime",
+      "section": "buildings",
+      "sourceSection": "_SHOP_BUILDER_FARM_Buildings_",
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 25
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 40
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 15
+        }
+      ],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "building-store-allthetime-Custum_Barn_Strong_Big",
+      "shopId": "building-store",
+      "itemId": "Custum_Barn_Strong_Big",
+      "season": "AllTheTime",
+      "section": "buildings",
+      "sourceSection": "_SHOP_BUILDER_FARM_Buildings_",
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 50
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 70
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 15
+        }
+      ],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Architect-004ad708f5"
+    },
+    {
+      "id": "seed-store-spring-seed_red_luttuce",
+      "shopId": "seed-store",
+      "itemId": "seed_red_luttuce",
+      "season": "Spring",
+      "section": "seeds",
+      "sourceSection": "_SHOP_Seeds_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-spring-seed_garlic",
+      "shopId": "seed-store",
+      "itemId": "seed_garlic",
+      "season": "Spring",
+      "section": "seeds",
+      "sourceSection": "_SHOP_Seeds_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-spring-seed_strawberry",
+      "shopId": "seed-store",
+      "itemId": "seed_strawberry",
+      "season": "Spring",
+      "section": "seeds",
+      "sourceSection": "_SHOP_Seeds_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-spring-vegetable_red_luttuce_normal",
+      "shopId": "seed-store",
+      "itemId": "vegetable_red_luttuce_normal",
+      "season": "Spring",
+      "section": "produce",
+      "sourceSection": "_SHOP_Vegetable_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-spring-vegetable_garlic_normal",
+      "shopId": "seed-store",
+      "itemId": "vegetable_garlic_normal",
+      "season": "Spring",
+      "section": "produce",
+      "sourceSection": "_SHOP_Vegetable_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-spring-vegetable_strawberry_normal",
+      "shopId": "seed-store",
+      "itemId": "vegetable_strawberry_normal",
+      "season": "Spring",
+      "section": "produce",
+      "sourceSection": "_SHOP_Vegetable_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-spring-vegetable_peppers_normal",
+      "shopId": "seed-store",
+      "itemId": "vegetable_peppers_normal",
+      "season": "Spring",
+      "section": "produce",
+      "sourceSection": "_SHOP_Vegetable_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-summer-seed_aubergine",
+      "shopId": "seed-store",
+      "itemId": "seed_aubergine",
+      "season": "Summer",
+      "section": "seeds",
+      "sourceSection": "_SHOP_Seeds_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-summer-seed_corn",
+      "shopId": "seed-store",
+      "itemId": "seed_corn",
+      "season": "Summer",
+      "section": "seeds",
+      "sourceSection": "_SHOP_Seeds_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-summer-seed_green_luttuce",
+      "shopId": "seed-store",
+      "itemId": "seed_green_luttuce",
+      "season": "Summer",
+      "section": "seeds",
+      "sourceSection": "_SHOP_Seeds_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-summer-vegetable_aubergine_normal",
+      "shopId": "seed-store",
+      "itemId": "vegetable_aubergine_normal",
+      "season": "Summer",
+      "section": "produce",
+      "sourceSection": "_SHOP_Vegetable_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-summer-vegetable_melon_normal",
+      "shopId": "seed-store",
+      "itemId": "vegetable_melon_normal",
+      "season": "Summer",
+      "section": "produce",
+      "sourceSection": "_SHOP_Vegetable_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-summer-vegetable_green_luttuce_normal",
+      "shopId": "seed-store",
+      "itemId": "vegetable_green_luttuce_normal",
+      "season": "Summer",
+      "section": "produce",
+      "sourceSection": "_SHOP_Vegetable_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-summer-vegetable_corn_normal",
+      "shopId": "seed-store",
+      "itemId": "vegetable_corn_normal",
+      "season": "Summer",
+      "section": "produce",
+      "sourceSection": "_SHOP_Vegetable_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-summer-vegetable_chili_normal",
+      "shopId": "seed-store",
+      "itemId": "vegetable_chili_normal",
+      "season": "Summer",
+      "section": "produce",
+      "sourceSection": "_SHOP_Vegetable_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-autumn-seed_pumpkin",
+      "shopId": "seed-store",
+      "itemId": "seed_pumpkin",
+      "season": "Autumn",
+      "section": "seeds",
+      "sourceSection": "_SHOP_Seeds_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-autumn-seed_carotte",
+      "shopId": "seed-store",
+      "itemId": "seed_carotte",
+      "season": "Autumn",
+      "section": "seeds",
+      "sourceSection": "_SHOP_Seeds_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-autumn-seed_onion",
+      "shopId": "seed-store",
+      "itemId": "seed_onion",
+      "season": "Autumn",
+      "section": "seeds",
+      "sourceSection": "_SHOP_Seeds_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-autumn-vegetable_pumpkin_normal",
+      "shopId": "seed-store",
+      "itemId": "vegetable_pumpkin_normal",
+      "season": "Autumn",
+      "section": "produce",
+      "sourceSection": "_SHOP_Vegetable_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-autumn-vegetable_carotte_normal",
+      "shopId": "seed-store",
+      "itemId": "vegetable_carotte_normal",
+      "season": "Autumn",
+      "section": "produce",
+      "sourceSection": "_SHOP_Vegetable_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-autumn-vegetable_leek_normal",
+      "shopId": "seed-store",
+      "itemId": "vegetable_leek_normal",
+      "season": "Autumn",
+      "section": "produce",
+      "sourceSection": "_SHOP_Vegetable_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-autumn-vegetable_onion_normal",
+      "shopId": "seed-store",
+      "itemId": "vegetable_onion_normal",
+      "season": "Autumn",
+      "section": "produce",
+      "sourceSection": "_SHOP_Vegetable_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-autumn-vegetable_marrow_normal",
+      "shopId": "seed-store",
+      "itemId": "vegetable_marrow_normal",
+      "season": "Autumn",
+      "section": "produce",
+      "sourceSection": "_SHOP_Vegetable_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-winter-vegetable_pumpkin_normal",
+      "shopId": "seed-store",
+      "itemId": "vegetable_pumpkin_normal",
+      "season": "Winter",
+      "section": "produce",
+      "sourceSection": "_SHOP_Vegetable_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-winter-vegetable_carotte_normal",
+      "shopId": "seed-store",
+      "itemId": "vegetable_carotte_normal",
+      "season": "Winter",
+      "section": "produce",
+      "sourceSection": "_SHOP_Vegetable_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-winter-vegetable_onion_normal",
+      "shopId": "seed-store",
+      "itemId": "vegetable_onion_normal",
+      "season": "Winter",
+      "section": "produce",
+      "sourceSection": "_SHOP_Vegetable_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-winter-vegetable_green_luttuce_normal",
+      "shopId": "seed-store",
+      "itemId": "vegetable_green_luttuce_normal",
+      "season": "Winter",
+      "section": "produce",
+      "sourceSection": "_SHOP_Vegetable_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-winter-vegetable_garlic_normal",
+      "shopId": "seed-store",
+      "itemId": "vegetable_garlic_normal",
+      "season": "Winter",
+      "section": "produce",
+      "sourceSection": "_SHOP_Vegetable_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-winter-vegetable_aubergine_normal",
+      "shopId": "seed-store",
+      "itemId": "vegetable_aubergine_normal",
+      "season": "Winter",
+      "section": "produce",
+      "sourceSection": "_SHOP_Vegetable_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-allthetime-fertilizer_quality_basic",
+      "shopId": "seed-store",
+      "itemId": "fertilizer_quality_basic",
+      "season": "AllTheTime",
+      "section": "seeds",
+      "sourceSection": "_SHOP_Seeds_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-allthetime-fertilizer_nbfruit_basic",
+      "shopId": "seed-store",
+      "itemId": "fertilizer_nbfruit_basic",
+      "season": "AllTheTime",
+      "section": "seeds",
+      "sourceSection": "_SHOP_Seeds_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-allthetime-fertilizer_giant_basic",
+      "shopId": "seed-store",
+      "itemId": "fertilizer_giant_basic",
+      "season": "AllTheTime",
+      "section": "seeds",
+      "sourceSection": "_SHOP_Seeds_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-allthetime-consumable_milk_small_cow",
+      "shopId": "seed-store",
+      "itemId": "consumable_milk_small_cow",
+      "season": "AllTheTime",
+      "section": "groceries",
+      "sourceSection": "_SHOP_Grocery_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-allthetime-consumable_egg_brown_small_chicken",
+      "shopId": "seed-store",
+      "itemId": "consumable_egg_brown_small_chicken",
+      "season": "AllTheTime",
+      "section": "groceries",
+      "sourceSection": "_SHOP_Grocery_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-allthetime-consumable_chicken_Leg",
+      "shopId": "seed-store",
+      "itemId": "consumable_chicken_Leg",
+      "season": "AllTheTime",
+      "section": "groceries",
+      "sourceSection": "_SHOP_Grocery_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-allthetime-consumable_chicken_breast",
+      "shopId": "seed-store",
+      "itemId": "consumable_chicken_breast",
+      "season": "AllTheTime",
+      "section": "groceries",
+      "sourceSection": "_SHOP_Grocery_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-allthetime-consumable_meat_small_cow",
+      "shopId": "seed-store",
+      "itemId": "consumable_meat_small_cow",
+      "season": "AllTheTime",
+      "section": "groceries",
+      "sourceSection": "_SHOP_Grocery_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-allthetime-consumable_meat_medium_cow",
+      "shopId": "seed-store",
+      "itemId": "consumable_meat_medium_cow",
+      "season": "AllTheTime",
+      "section": "groceries",
+      "sourceSection": "_SHOP_Grocery_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-allthetime-weapon_Ammo_01",
+      "shopId": "seed-store",
+      "itemId": "weapon_Ammo_01",
+      "season": "AllTheTime",
+      "section": "equipment",
+      "sourceSection": "_SHOP_FireArms_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-allthetime-weapon_revolver_lvl1",
+      "shopId": "seed-store",
+      "itemId": "weapon_revolver_lvl1",
+      "season": "AllTheTime",
+      "section": "equipment",
+      "sourceSection": "_SHOP_FireArms_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "seed-store-allthetime-weapon_rifle_lvl1",
+      "shopId": "seed-store",
+      "itemId": "weapon_rifle_lvl1",
+      "season": "AllTheTime",
+      "section": "equipment",
+      "sourceSection": "_SHOP_FireArms_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Town_SeedVendor-954144e13b"
+    },
+    {
+      "id": "poultry-store-allthetime-animal_chicken_rooster_male_red",
+      "shopId": "poultry-store",
+      "itemId": "animal_chicken_rooster_male_red",
+      "season": "AllTheTime",
+      "section": "animals",
+      "sourceSection": "_SHOP_ANIMLAERY_Animals_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Chickens-f394f14392"
+    },
+    {
+      "id": "poultry-store-allthetime-animal_chicken_rooster_male_white",
+      "shopId": "poultry-store",
+      "itemId": "animal_chicken_rooster_male_white",
+      "season": "AllTheTime",
+      "section": "animals",
+      "sourceSection": "_SHOP_ANIMLAERY_Animals_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Chickens-f394f14392"
+    },
+    {
+      "id": "poultry-store-allthetime-animal_chicken_rooster_male_multiclr",
+      "shopId": "poultry-store",
+      "itemId": "animal_chicken_rooster_male_multiclr",
+      "season": "AllTheTime",
+      "section": "animals",
+      "sourceSection": "_SHOP_ANIMLAERY_Animals_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Chickens-f394f14392"
+    },
+    {
+      "id": "poultry-store-allthetime-animal_chicken_black_female",
+      "shopId": "poultry-store",
+      "itemId": "animal_chicken_black_female",
+      "season": "AllTheTime",
+      "section": "animals",
+      "sourceSection": "_SHOP_ANIMLAERY_Animals_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Chickens-f394f14392"
+    },
+    {
+      "id": "poultry-store-allthetime-animal_chicken_white_female",
+      "shopId": "poultry-store",
+      "itemId": "animal_chicken_white_female",
+      "season": "AllTheTime",
+      "section": "animals",
+      "sourceSection": "_SHOP_ANIMLAERY_Animals_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Chickens-f394f14392"
+    },
+    {
+      "id": "poultry-store-allthetime-animal_chicken_brown_female",
+      "shopId": "poultry-store",
+      "itemId": "animal_chicken_brown_female",
+      "season": "AllTheTime",
+      "section": "animals",
+      "sourceSection": "_SHOP_ANIMLAERY_Animals_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Chickens-f394f14392"
+    },
+    {
+      "id": "poultry-store-allthetime-animal_rabit_male",
+      "shopId": "poultry-store",
+      "itemId": "animal_rabit_male",
+      "season": "AllTheTime",
+      "section": "animals",
+      "sourceSection": "_SHOP_ANIMLAERY_Animals_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Chickens-f394f14392"
+    },
+    {
+      "id": "poultry-store-allthetime-animal_rabit_female",
+      "shopId": "poultry-store",
+      "itemId": "animal_rabit_female",
+      "season": "AllTheTime",
+      "section": "animals",
+      "sourceSection": "_SHOP_ANIMLAERY_Animals_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Chickens-f394f14392"
+    },
+    {
+      "id": "poultry-store-allthetime-ressource_straw",
+      "shopId": "poultry-store",
+      "itemId": "ressource_straw",
+      "season": "AllTheTime",
+      "section": "supplies",
+      "sourceSection": "_SHOP_ANIMLAERY_GENERAL_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Country_Animalery_Chickens-f394f14392"
+    },
+    {
+      "id": "poultry-store-allthetime-Custum_Barn_HeaterModule",
+      "shopId": "poultry-store",
+      "itemId": "Custum_Barn_HeaterModule",
+      "season": "AllTheTime",
+      "section": "supplies",
+      "sourceSection": "_SHOP_ANIMLAERY_GENERAL_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Chickens-f394f14392"
+    },
+    {
+      "id": "poultry-store-allthetime-Custum_Barn_AutoFeederModule",
+      "shopId": "poultry-store",
+      "itemId": "Custum_Barn_AutoFeederModule",
+      "season": "AllTheTime",
+      "section": "supplies",
+      "sourceSection": "_SHOP_ANIMLAERY_GENERAL_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Chickens-f394f14392"
+    },
+    {
+      "id": "livestock-store-allthetime-animal_cow_brown_female",
+      "shopId": "livestock-store",
+      "itemId": "animal_cow_brown_female",
+      "season": "AllTheTime",
+      "section": "animals",
+      "sourceSection": "_SHOP_ANIMLAERY_Animals_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Cows-4bb4d90a3b"
+    },
+    {
+      "id": "livestock-store-allthetime-animal_cow_brown_male",
+      "shopId": "livestock-store",
+      "itemId": "animal_cow_brown_male",
+      "season": "AllTheTime",
+      "section": "animals",
+      "sourceSection": "_SHOP_ANIMLAERY_Animals_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Cows-4bb4d90a3b"
+    },
+    {
+      "id": "livestock-store-allthetime-animal_cow_black_female",
+      "shopId": "livestock-store",
+      "itemId": "animal_cow_black_female",
+      "season": "AllTheTime",
+      "section": "animals",
+      "sourceSection": "_SHOP_ANIMLAERY_Animals_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Cows-4bb4d90a3b"
+    },
+    {
+      "id": "livestock-store-allthetime-animal_cow_black_male",
+      "shopId": "livestock-store",
+      "itemId": "animal_cow_black_male",
+      "season": "AllTheTime",
+      "section": "animals",
+      "sourceSection": "_SHOP_ANIMLAERY_Animals_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Cows-4bb4d90a3b"
+    },
+    {
+      "id": "livestock-store-allthetime-animal_cow_brown_super_female_brown",
+      "shopId": "livestock-store",
+      "itemId": "animal_cow_brown_super_female_brown",
+      "season": "AllTheTime",
+      "section": "animals",
+      "sourceSection": "_SHOP_ANIMLAERY_Animals_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Cows-4bb4d90a3b"
+    },
+    {
+      "id": "livestock-store-allthetime-animal_cow_brown_super_female_tache",
+      "shopId": "livestock-store",
+      "itemId": "animal_cow_brown_super_female_tache",
+      "season": "AllTheTime",
+      "section": "animals",
+      "sourceSection": "_SHOP_ANIMLAERY_Animals_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Cows-4bb4d90a3b"
+    },
+    {
+      "id": "livestock-store-allthetime-animal_cow_brown_super_female_white",
+      "shopId": "livestock-store",
+      "itemId": "animal_cow_brown_super_female_white",
+      "season": "AllTheTime",
+      "section": "animals",
+      "sourceSection": "_SHOP_ANIMLAERY_Animals_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Cows-4bb4d90a3b"
+    },
+    {
+      "id": "livestock-store-allthetime-animal_goat_white_male",
+      "shopId": "livestock-store",
+      "itemId": "animal_goat_white_male",
+      "season": "AllTheTime",
+      "section": "animals",
+      "sourceSection": "_SHOP_ANIMLAERY_Animals_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Cows-4bb4d90a3b"
+    },
+    {
+      "id": "livestock-store-allthetime-animal_goat_white_female",
+      "shopId": "livestock-store",
+      "itemId": "animal_goat_white_female",
+      "season": "AllTheTime",
+      "section": "animals",
+      "sourceSection": "_SHOP_ANIMLAERY_Animals_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Cows-4bb4d90a3b"
+    },
+    {
+      "id": "livestock-store-allthetime-tools_rope",
+      "shopId": "livestock-store",
+      "itemId": "tools_rope",
+      "season": "AllTheTime",
+      "section": "supplies",
+      "sourceSection": "_SHOP_ANIMLAERY_GENERAL_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Cows-4bb4d90a3b"
+    },
+    {
+      "id": "livestock-store-allthetime-tools_bucket_wood",
+      "shopId": "livestock-store",
+      "itemId": "tools_bucket_wood",
+      "season": "AllTheTime",
+      "section": "supplies",
+      "sourceSection": "_SHOP_ANIMLAERY_GENERAL_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Cows-4bb4d90a3b"
+    },
+    {
+      "id": "livestock-store-allthetime-ressource_straw",
+      "shopId": "livestock-store",
+      "itemId": "ressource_straw",
+      "season": "AllTheTime",
+      "section": "supplies",
+      "sourceSection": "_SHOP_ANIMLAERY_GENERAL_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Country_Animalery_Cows-4bb4d90a3b"
+    },
+    {
+      "id": "livestock-store-allthetime-Custum_Barn_HeaterModule",
+      "shopId": "livestock-store",
+      "itemId": "Custum_Barn_HeaterModule",
+      "season": "AllTheTime",
+      "section": "supplies",
+      "sourceSection": "_SHOP_ANIMLAERY_GENERAL_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Cows-4bb4d90a3b"
+    },
+    {
+      "id": "livestock-store-allthetime-Custum_Barn_AutoFeederModule",
+      "shopId": "livestock-store",
+      "itemId": "Custum_Barn_AutoFeederModule",
+      "season": "AllTheTime",
+      "section": "supplies",
+      "sourceSection": "_SHOP_ANIMLAERY_GENERAL_",
+      "materials": [],
+      "questRequirements": [
+        "F_Quest_14"
+      ],
+      "sourceId": "Country_Animalery_Cows-4bb4d90a3b"
+    },
+    {
+      "id": "country-vehicles-allthetime-VIC_LadiesBike-02",
+      "shopId": "country-vehicles",
+      "itemId": "VIC_LadiesBike-02",
+      "season": "AllTheTime",
+      "section": "two-wheel",
+      "sourceSection": "_SHOP_CARSHOP_TWOWHEEL_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Country_CarDealer-27fb27aab3"
+    },
+    {
+      "id": "country-vehicles-allthetime-VIC_Scooter_04",
+      "shopId": "country-vehicles",
+      "itemId": "VIC_Scooter_04",
+      "season": "AllTheTime",
+      "section": "two-wheel",
+      "sourceSection": "_SHOP_CARSHOP_TWOWHEEL_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Country_CarDealer-27fb27aab3"
+    },
+    {
+      "id": "country-vehicles-allthetime-VIC_DirtBike_01",
+      "shopId": "country-vehicles",
+      "itemId": "VIC_DirtBike_01",
+      "season": "AllTheTime",
+      "section": "two-wheel",
+      "sourceSection": "_SHOP_CARSHOP_TWOWHEEL_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Country_CarDealer-27fb27aab3"
+    },
+    {
+      "id": "country-vehicles-allthetime-VIC_DirtBike_02",
+      "shopId": "country-vehicles",
+      "itemId": "VIC_DirtBike_02",
+      "season": "AllTheTime",
+      "section": "two-wheel",
+      "sourceSection": "_SHOP_CARSHOP_TWOWHEEL_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Country_CarDealer-27fb27aab3"
+    },
+    {
+      "id": "country-vehicles-allthetime-VIC_CamperVan_04",
+      "shopId": "country-vehicles",
+      "itemId": "VIC_CamperVan_04",
+      "season": "AllTheTime",
+      "section": "four-wheel",
+      "sourceSection": "_SHOP_CARSHOP_FORWHEEL_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Country_CarDealer-27fb27aab3"
+    },
+    {
+      "id": "country-vehicles-allthetime-VIC_Van_01",
+      "shopId": "country-vehicles",
+      "itemId": "VIC_Van_01",
+      "season": "AllTheTime",
+      "section": "four-wheel",
+      "sourceSection": "_SHOP_CARSHOP_FORWHEEL_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Country_CarDealer-27fb27aab3"
+    },
+    {
+      "id": "country-vehicles-allthetime-VIC_4x4_01",
+      "shopId": "country-vehicles",
+      "itemId": "VIC_4x4_01",
+      "season": "AllTheTime",
+      "section": "vip",
+      "sourceSection": "_SHOP_CARSHOP_VIP_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "Country_CarDealer-27fb27aab3"
+    },
+    {
+      "id": "standard-cars-allthetime-VIC_Car_01",
+      "shopId": "standard-cars",
+      "itemId": "VIC_Car_01",
+      "season": "AllTheTime",
+      "section": "cars",
+      "sourceSection": "_SHOP_CARSHOP_StandarCars_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "CarDealer_StarAuto-35257ffb03"
+    },
+    {
+      "id": "standard-cars-allthetime-VIC_Car_02",
+      "shopId": "standard-cars",
+      "itemId": "VIC_Car_02",
+      "season": "AllTheTime",
+      "section": "cars",
+      "sourceSection": "_SHOP_CARSHOP_StandarCars_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "CarDealer_StarAuto-35257ffb03"
+    },
+    {
+      "id": "standard-cars-allthetime-VIC_Car_03",
+      "shopId": "standard-cars",
+      "itemId": "VIC_Car_03",
+      "season": "AllTheTime",
+      "section": "cars",
+      "sourceSection": "_SHOP_CARSHOP_StandarCars_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "CarDealer_StarAuto-35257ffb03"
+    },
+    {
+      "id": "standard-cars-allthetime-VIC_Car_04",
+      "shopId": "standard-cars",
+      "itemId": "VIC_Car_04",
+      "season": "AllTheTime",
+      "section": "cars",
+      "sourceSection": "_SHOP_CARSHOP_StandarCars_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "CarDealer_StarAuto-35257ffb03"
+    },
+    {
+      "id": "standard-cars-allthetime-VIC_Car_05",
+      "shopId": "standard-cars",
+      "itemId": "VIC_Car_05",
+      "season": "AllTheTime",
+      "section": "cars",
+      "sourceSection": "_SHOP_CARSHOP_StandarCars_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "CarDealer_StarAuto-35257ffb03"
+    },
+    {
+      "id": "standard-cars-allthetime-VIC_Car_06",
+      "shopId": "standard-cars",
+      "itemId": "VIC_Car_06",
+      "season": "AllTheTime",
+      "section": "cars",
+      "sourceSection": "_SHOP_CARSHOP_StandarCars_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "CarDealer_StarAuto-35257ffb03"
+    },
+    {
+      "id": "standard-cars-allthetime-VIC_Car_07",
+      "shopId": "standard-cars",
+      "itemId": "VIC_Car_07",
+      "season": "AllTheTime",
+      "section": "cars",
+      "sourceSection": "_SHOP_CARSHOP_StandarCars_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "CarDealer_StarAuto-35257ffb03"
+    },
+    {
+      "id": "standard-cars-allthetime-VIC_Car_08",
+      "shopId": "standard-cars",
+      "itemId": "VIC_Car_08",
+      "season": "AllTheTime",
+      "section": "cars",
+      "sourceSection": "_SHOP_CARSHOP_StandarCars_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "CarDealer_StarAuto-35257ffb03"
+    },
+    {
+      "id": "utility-vehicles-allthetime-VIC_ThreeWheeler_01",
+      "shopId": "utility-vehicles",
+      "itemId": "VIC_ThreeWheeler_01",
+      "season": "AllTheTime",
+      "section": "vehicles",
+      "sourceSection": "_SHOP_CARSHOP_UTILITYVEC_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "CarDealer_Utility-80b5356d60"
+    },
+    {
+      "id": "utility-vehicles-allthetime-VIC_ThreeWheeler_02",
+      "shopId": "utility-vehicles",
+      "itemId": "VIC_ThreeWheeler_02",
+      "season": "AllTheTime",
+      "section": "vehicles",
+      "sourceSection": "_SHOP_CARSHOP_UTILITYVEC_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "CarDealer_Utility-80b5356d60"
+    },
+    {
+      "id": "utility-vehicles-allthetime-VIC_ThreeWheeler_03",
+      "shopId": "utility-vehicles",
+      "itemId": "VIC_ThreeWheeler_03",
+      "season": "AllTheTime",
+      "section": "vehicles",
+      "sourceSection": "_SHOP_CARSHOP_UTILITYVEC_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "CarDealer_Utility-80b5356d60"
+    },
+    {
+      "id": "utility-vehicles-allthetime-VIC_PickUp_01",
+      "shopId": "utility-vehicles",
+      "itemId": "VIC_PickUp_01",
+      "season": "AllTheTime",
+      "section": "vehicles",
+      "sourceSection": "_SHOP_CARSHOP_UTILITYVEC_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "CarDealer_Utility-80b5356d60"
+    },
+    {
+      "id": "utility-vehicles-allthetime-VIC_PickUp_02",
+      "shopId": "utility-vehicles",
+      "itemId": "VIC_PickUp_02",
+      "season": "AllTheTime",
+      "section": "vehicles",
+      "sourceSection": "_SHOP_CARSHOP_UTILITYVEC_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "CarDealer_Utility-80b5356d60"
+    },
+    {
+      "id": "utility-vehicles-allthetime-VIC_Van_01",
+      "shopId": "utility-vehicles",
+      "itemId": "VIC_Van_01",
+      "season": "AllTheTime",
+      "section": "vehicles",
+      "sourceSection": "_SHOP_CARSHOP_UTILITYVEC_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "CarDealer_Utility-80b5356d60"
+    },
+    {
+      "id": "utility-vehicles-allthetime-VIC_Van_02",
+      "shopId": "utility-vehicles",
+      "itemId": "VIC_Van_02",
+      "season": "AllTheTime",
+      "section": "vehicles",
+      "sourceSection": "_SHOP_CARSHOP_UTILITYVEC_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "CarDealer_Utility-80b5356d60"
+    },
+    {
+      "id": "utility-vehicles-allthetime-VIC_Van_03",
+      "shopId": "utility-vehicles",
+      "itemId": "VIC_Van_03",
+      "season": "AllTheTime",
+      "section": "vehicles",
+      "sourceSection": "_SHOP_CARSHOP_UTILITYVEC_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "CarDealer_Utility-80b5356d60"
+    },
+    {
+      "id": "prestige-cars-allthetime-VIC_Car_Luxe_01",
+      "shopId": "prestige-cars",
+      "itemId": "VIC_Car_Luxe_01",
+      "season": "AllTheTime",
+      "section": "cars",
+      "sourceSection": "_SHOP_CARSHOP_PRESTIGECars_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "CarDealer_PrestigeMotors-54493d2de0"
+    },
+    {
+      "id": "prestige-cars-allthetime-VIC_Car_Luxe_02",
+      "shopId": "prestige-cars",
+      "itemId": "VIC_Car_Luxe_02",
+      "season": "AllTheTime",
+      "section": "cars",
+      "sourceSection": "_SHOP_CARSHOP_PRESTIGECars_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "CarDealer_PrestigeMotors-54493d2de0"
+    },
+    {
+      "id": "prestige-cars-allthetime-VIC_Car_Luxe_03",
+      "shopId": "prestige-cars",
+      "itemId": "VIC_Car_Luxe_03",
+      "season": "AllTheTime",
+      "section": "cars",
+      "sourceSection": "_SHOP_CARSHOP_PRESTIGECars_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "CarDealer_PrestigeMotors-54493d2de0"
+    },
+    {
+      "id": "prestige-cars-allthetime-VIC_Car_Luxe_04",
+      "shopId": "prestige-cars",
+      "itemId": "VIC_Car_Luxe_04",
+      "season": "AllTheTime",
+      "section": "cars",
+      "sourceSection": "_SHOP_CARSHOP_PRESTIGECars_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "CarDealer_PrestigeMotors-54493d2de0"
+    },
+    {
+      "id": "prestige-cars-allthetime-VIC_Car_Luxe_05",
+      "shopId": "prestige-cars",
+      "itemId": "VIC_Car_Luxe_05",
+      "season": "AllTheTime",
+      "section": "cars",
+      "sourceSection": "_SHOP_CARSHOP_PRESTIGECars_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "CarDealer_PrestigeMotors-54493d2de0"
+    },
+    {
+      "id": "prestige-cars-allthetime-VIC_Car_Roadster_01",
+      "shopId": "prestige-cars",
+      "itemId": "VIC_Car_Roadster_01",
+      "season": "AllTheTime",
+      "section": "cars",
+      "sourceSection": "_SHOP_CARSHOP_PRESTIGECars_",
+      "materials": [],
+      "questRequirements": [],
+      "sourceId": "CarDealer_PrestigeMotors-54493d2de0"
+    }
+  ]
+}

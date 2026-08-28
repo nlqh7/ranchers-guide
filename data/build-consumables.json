@@ -1,0 +1,485 @@
+{
+  "build": "0.8.10.842",
+  "steamBuild": "24847725",
+  "evidenceLevel": "build-observed",
+  "validity": "unknown",
+  "sources": {
+    "localization": {
+      "asset": "resources.assets",
+      "pathId": 393483,
+      "rawSha256": "2c505386fe9b1b9c2579aad1e6957907db838d8c7f87227e818fbfd4b57d5f4e",
+      "kind": "local-build",
+      "title": "Owned-build item localization",
+      "url": null
+    },
+    "Consumables-3ee64d4bbc": {
+      "kind": "local-build",
+      "title": "Consumables",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12043,
+      "rawSha256": "3ee64d4bbcf186115b2efe318bfa3124b57b7d14eec73c2ec2e6e7f2f4c7ec50"
+    }
+  },
+  "items": [
+    {
+      "id": "consumable_milk_gold_cow",
+      "name": "Cow Milk - Giant",
+      "zhName": "超大份牛奶",
+      "nameKey": "Items_DB/consumable_milk_gold_cow/Name",
+      "category": "milk",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": true,
+      "energy": {
+        "consumption": 0,
+        "restore": 56
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 40
+      }
+    },
+    {
+      "id": "consumable_milk_large_cow",
+      "name": "Cow Milk - Large",
+      "zhName": "大份牛奶",
+      "nameKey": "Items_DB/consumable_milk_large_cow/Name",
+      "category": "milk",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": true,
+      "energy": {
+        "consumption": 0,
+        "restore": 42
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 30
+      }
+    },
+    {
+      "id": "consumable_milk_medium_cow",
+      "name": "Cow Milk - Medium",
+      "zhName": "中份牛奶",
+      "nameKey": "Items_DB/consumable_milk_medium_cow/Name",
+      "category": "milk",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": true,
+      "energy": {
+        "consumption": 0,
+        "restore": 32
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 24
+      }
+    },
+    {
+      "id": "consumable_milk_small_cow",
+      "name": "Cow Milk - Small",
+      "zhName": "小份牛奶",
+      "nameKey": "Items_DB/consumable_milk_small_cow/Name",
+      "category": "milk",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": true,
+      "energy": {
+        "consumption": 0,
+        "restore": 28
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 20
+      }
+    },
+    {
+      "id": "consumable_egg_brown_small_chicken",
+      "name": "Chicken Egg - Small",
+      "zhName": "小号鸡蛋",
+      "nameKey": "Items_DB/consumable_egg_brown_small_chicken/Name",
+      "category": "eggs",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": null,
+      "energy": {
+        "consumption": 0,
+        "restore": 40
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 15
+      }
+    },
+    {
+      "id": "consumable_egg_brown_medium_chicken",
+      "name": "Chicken Egg - Medium",
+      "zhName": "中号鸡蛋",
+      "nameKey": "Items_DB/consumable_egg_brown_medium_chicken/Name",
+      "category": "eggs",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": null,
+      "energy": {
+        "consumption": 0,
+        "restore": 55
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 30
+      }
+    },
+    {
+      "id": "consumable_egg_brown_large_chicken",
+      "name": "Chicken Egg - Large",
+      "zhName": "大号鸡蛋",
+      "nameKey": "Items_DB/consumable_egg_brown_large_chicken/Name",
+      "category": "eggs",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": null,
+      "energy": {
+        "consumption": 0,
+        "restore": 60
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 40
+      }
+    },
+    {
+      "id": "consumable_egg_white_small_duck",
+      "name": "Duck Egg - Small",
+      "zhName": "小号鸭蛋",
+      "nameKey": "Items_DB/consumable_egg_white_small_duck/Name",
+      "category": "eggs",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": null,
+      "energy": {
+        "consumption": 0,
+        "restore": 50
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 20
+      }
+    },
+    {
+      "id": "consumable_egg_white_medium_duck",
+      "name": "Duck Egg - Medium",
+      "zhName": "中号鸭蛋",
+      "nameKey": "Items_DB/consumable_egg_white_medium_duck/Name",
+      "category": "eggs",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": null,
+      "energy": {
+        "consumption": 0,
+        "restore": 65
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 20
+      }
+    },
+    {
+      "id": "consumable_egg_white_large_duck",
+      "name": "Duck Egg - Large",
+      "zhName": "大号鸭蛋",
+      "nameKey": "Items_DB/consumable_egg_white_large_duck/Name",
+      "category": "eggs",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": null,
+      "energy": {
+        "consumption": 0,
+        "restore": 80
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 20
+      }
+    },
+    {
+      "id": "consumable_chicken_full",
+      "name": "Chicken",
+      "zhName": "鸡肉",
+      "nameKey": "Items_DB/consumable_chicken_full/Name",
+      "category": "meat",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": null,
+      "energy": {
+        "consumption": 0,
+        "restore": 200
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 50
+      }
+    },
+    {
+      "id": "consumable_chicken_Leg",
+      "name": "Chicken Leg",
+      "zhName": "鸡腿",
+      "nameKey": "Items_DB/consumable_chicken_Leg/Name",
+      "category": "meat",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": null,
+      "energy": {
+        "consumption": 0,
+        "restore": 50
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 25
+      }
+    },
+    {
+      "id": "consumable_chicken_breast",
+      "name": "Chicken Breast",
+      "zhName": "鸡胸肉",
+      "nameKey": "Items_DB/consumable_chicken_breast/Name",
+      "category": "meat",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": null,
+      "energy": {
+        "consumption": 0,
+        "restore": 100
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 35
+      }
+    },
+    {
+      "id": "consumable_meat_small_cow",
+      "name": "Cow Meat - Small",
+      "zhName": "小块牛肉",
+      "nameKey": "Items_DB/consumable_meat_small_cow/Name",
+      "category": "meat",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": null,
+      "energy": {
+        "consumption": 0,
+        "restore": 70
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 35
+      }
+    },
+    {
+      "id": "consumable_meat_medium_cow",
+      "name": "Cow Meat - Medium",
+      "zhName": "中块牛肉",
+      "nameKey": "Items_DB/consumable_meat_medium_cow/Name",
+      "category": "meat",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": null,
+      "energy": {
+        "consumption": 0,
+        "restore": 130
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 42
+      }
+    },
+    {
+      "id": "consumable_meat_big_cow",
+      "name": "Meat Steak - Big",
+      "zhName": "大块牛排",
+      "nameKey": "Items_DB/consumable_meat_big_cow/Name",
+      "category": "meat",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": null,
+      "energy": {
+        "consumption": 0,
+        "restore": 200
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 60
+      }
+    },
+    {
+      "id": "consumable_magic_algue",
+      "name": "Seaweed",
+      "zhName": "海藻",
+      "nameKey": "Items_DB/consumable_magic_algue/Name",
+      "category": "other",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": null,
+      "energy": {
+        "consumption": 0,
+        "restore": 13
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 5
+      }
+    },
+    {
+      "id": "consumable_bird_meat",
+      "name": "Bird Meat",
+      "zhName": "禽肉",
+      "nameKey": "Items_DB/consumable_bird_meat/Name",
+      "category": "meat",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": null,
+      "energy": {
+        "consumption": 0,
+        "restore": 45
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 40
+      }
+    },
+    {
+      "id": "consumable_milk_medium_goat",
+      "name": "Goat Milk - Medium",
+      "zhName": "中份山羊奶",
+      "nameKey": "Items_DB/consumable_milk_medium_goat/Name",
+      "category": "milk",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": true,
+      "energy": {
+        "consumption": 0,
+        "restore": 64
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 44
+      }
+    },
+    {
+      "id": "consumable_milk_small_goat",
+      "name": "Goat Milk - Small",
+      "zhName": "小份山羊奶",
+      "nameKey": "Items_DB/consumable_milk_small_goat/Name",
+      "category": "milk",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": true,
+      "energy": {
+        "consumption": 0,
+        "restore": 32
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 40
+      }
+    },
+    {
+      "id": "consumable_meat_small_goat",
+      "name": "Goat Meat - Small",
+      "zhName": "小块山羊肉",
+      "nameKey": "Items_DB/consumable_meat_small_goat/Name",
+      "category": "meat",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": null,
+      "energy": {
+        "consumption": 0,
+        "restore": 20
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 40
+      }
+    },
+    {
+      "id": "consumable_meat_medium_goat",
+      "name": "Goat Meat - Medium",
+      "zhName": "中块山羊肉",
+      "nameKey": "Items_DB/consumable_meat_medium_goat/Name",
+      "category": "meat",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": null,
+      "energy": {
+        "consumption": 0,
+        "restore": 30
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 42
+      }
+    },
+    {
+      "id": "consumable_meat_big_goat",
+      "name": "Goat Meat - Big",
+      "zhName": "大块山羊肉",
+      "nameKey": "Items_DB/consumable_meat_big_goat/Name",
+      "category": "meat",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": null,
+      "energy": {
+        "consumption": 0,
+        "restore": 40
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 60
+      }
+    },
+    {
+      "id": "consumable_meat_small_ram",
+      "name": "Lamb Meat - Small",
+      "zhName": "小块羔羊肉",
+      "nameKey": "Items_DB/consumable_meat_small_ram/Name",
+      "category": "meat",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": null,
+      "energy": {
+        "consumption": 0,
+        "restore": 15
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 27
+      }
+    },
+    {
+      "id": "consumable_meat_medium_ram",
+      "name": "Lamb Meat - Medium",
+      "zhName": "中块羔羊肉",
+      "nameKey": "Items_DB/consumable_meat_medium_ram/Name",
+      "category": "meat",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": null,
+      "energy": {
+        "consumption": 0,
+        "restore": 30
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 42
+      }
+    },
+    {
+      "id": "consumable_meat_big_ram",
+      "name": "Lamb Meat - Big",
+      "zhName": "大块羔羊肉",
+      "nameKey": "Items_DB/consumable_meat_big_ram/Name",
+      "category": "meat",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": null,
+      "energy": {
+        "consumption": 0,
+        "restore": 40
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 60
+      }
+    },
+    {
+      "id": "consumable_meat_small_rabit",
+      "name": "Rabbit Meat - Small",
+      "zhName": "小块兔肉",
+      "nameKey": "Items_DB/consumable_meat_small_rabit/Name",
+      "category": "meat",
+      "sourceId": "Consumables-3ee64d4bbc",
+      "isDrink": null,
+      "energy": {
+        "consumption": 0,
+        "restore": 60
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 108
+      }
+    }
+  ]
+}

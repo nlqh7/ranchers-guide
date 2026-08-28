@@ -1,7 +1,7 @@
 {
   "meta": {
     "build": "0.8.10.842",
-    "lastUpdated": "2026-08-27"
+    "lastUpdated": "2026-08-28"
   },
   "sources": {
     "owned-build-dialogue": {
@@ -82,6 +82,1041 @@
     }
   },
   "quests": [
+    {
+      "id": "meet-meriem",
+      "name": "Meet Meriem",
+      "zhName": "与玛丽阿姆见面",
+      "category": "orientation",
+      "zhCategory": "初到牧场",
+      "nameConfidence": "exact-build",
+      "searchTags": "Meet Meriem",
+      "zhSearchTags": "与玛丽阿姆见面",
+      "summary": "Meet Meriem at the airport entrance to begin the ranch introduction.",
+      "zhSummary": "在机场入口与玛丽阿姆见面，开始牧场引导。",
+      "facts": [
+        {
+          "text": "Meet Meriem at the airport entrance.",
+          "zhText": "在机场入口寻找玛丽阿姆。",
+          "sourceFields": [
+            "Description en",
+            "Description zh-CN"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "Configured for the farm owner; this is not a separate objective for every co-op visitor.",
+          "zhText": "配置限定牧场主执行，不是每位联机访客都各做一次的目标。",
+          "sourceFields": [
+            "QuestFor_FarmOwnerOnly"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "The success configuration starts A new begining!, the drive to your ranch.",
+          "zhText": "成功配置衔接“新的开始！”，继续开车去牧场。",
+          "sourceFields": [
+            "Quest_OnSuccess_StartQuest"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "predicate": "takes-place-at",
+          "target": {
+            "type": "location",
+            "id": "airport"
+          },
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        }
+      ],
+      "buildGuide": {
+        "questId": "F_Quest_01",
+        "name": "Meet Meriem",
+        "zhName": "与玛丽阿姆见面",
+        "evidenceLevel": "build-observed",
+        "build": "0.8.10.842",
+        "validity": "unknown",
+        "sourceIds": [
+          "owned-build-dialogue"
+        ],
+        "steps": [],
+        "notes": [
+          {
+            "text": "Meet Meriem at the airport entrance.",
+            "zhText": "在机场入口寻找玛丽阿姆。",
+            "sourceFields": [
+              "Description en",
+              "Description zh-CN"
+            ]
+          },
+          {
+            "text": "Configured for the farm owner; this is not a separate objective for every co-op visitor.",
+            "zhText": "配置限定牧场主执行，不是每位联机访客都各做一次的目标。",
+            "sourceFields": [
+              "QuestFor_FarmOwnerOnly"
+            ]
+          },
+          {
+            "text": "The success configuration starts A new begining!, the drive to your ranch.",
+            "zhText": "成功配置衔接“新的开始！”，继续开车去牧场。",
+            "sourceFields": [
+              "Quest_OnSuccess_StartQuest"
+            ]
+          }
+        ]
+      },
+      "relatedRoutes": [
+        "/guides/beginners-guide"
+      ]
+    },
+    {
+      "id": "a-new-beginning",
+      "name": "A new begining!",
+      "zhName": "新的开始！",
+      "category": "orientation",
+      "zhCategory": "初到牧场",
+      "nameConfidence": "exact-build",
+      "searchTags": "A new begining!",
+      "zhSearchTags": "新的开始！",
+      "summary": "Drive Meriam to your ranch and complete the introductory handover.",
+      "zhSummary": "载玛丽阿姆回到牧场，并完成初次交接。",
+      "facts": [
+        {
+          "text": "Take the driver’s seat in Meriam’s car; being in the ranch area also satisfies this configured check.",
+          "zhText": "坐上玛丽阿姆车辆的驾驶位；已经到牧场区域也符合此项配置判定。",
+          "sourceFields": [
+            "Entry 1 en",
+            "Entry 1 zh-CN",
+            "Entry 1 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "Wait for Meriam to board; the check also accepts reaching the ranch area.",
+          "zhText": "等玛丽阿姆上车；判定也接受已经到达牧场区域。",
+          "sourceFields": [
+            "Entry 2 en",
+            "Entry 2 zh-CN",
+            "Entry 2 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "Drive to the ranch area.",
+          "zhText": "把车开到牧场区域。",
+          "sourceFields": [
+            "Entry 3 en",
+            "Entry 3 zh-CN",
+            "Entry 3 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        }
+      ],
+      "relations": [],
+      "buildGuide": {
+        "questId": "F_Quest_02",
+        "name": "A new begining!",
+        "zhName": "新的开始！",
+        "evidenceLevel": "build-observed",
+        "build": "0.8.10.842",
+        "validity": "unknown",
+        "sourceIds": [
+          "owned-build-dialogue"
+        ],
+        "steps": [
+          {
+            "entry": 1,
+            "text": "Take the driver’s seat in Meriam’s car; being in the ranch area also satisfies this configured check.",
+            "zhText": "坐上玛丽阿姆车辆的驾驶位；已经到牧场区域也符合此项配置判定。",
+            "sourceFields": [
+              "Entry 1 en",
+              "Entry 1 zh-CN",
+              "Entry 1 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 2,
+            "text": "Wait for Meriam to board; the check also accepts reaching the ranch area.",
+            "zhText": "等玛丽阿姆上车；判定也接受已经到达牧场区域。",
+            "sourceFields": [
+              "Entry 2 en",
+              "Entry 2 zh-CN",
+              "Entry 2 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 3,
+            "text": "Drive to the ranch area.",
+            "zhText": "把车开到牧场区域。",
+            "sourceFields": [
+              "Entry 3 en",
+              "Entry 3 zh-CN",
+              "Entry 3 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 4,
+            "text": "At the ranch, both you and Meriam must leave the quest car.",
+            "zhText": "到达牧场后，你和玛丽阿姆都需要离开任务车辆。",
+            "sourceFields": [
+              "Entry 4 en",
+              "Entry 4 zh-CN",
+              "Entry 4 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 5,
+            "text": "Speak to Meriam. The inventory check requires a Bronze hammer, Red Tent and strawberry, at least one of each.",
+            "zhText": "与玛丽阿姆交谈。背包判定要求 Bronze 品质的锤子、红色帐篷和草莓各至少一件。",
+            "sourceFields": [
+              "Entry 5 en",
+              "Entry 5 zh-CN",
+              "Entry 5 LUA_OnCondition"
+            ]
+          }
+        ],
+        "notes": [
+          {
+            "text": "The final inventory check is a completion condition, not a verified reward list.",
+            "zhText": "末尾背包检查是完成条件，不当作已验证的奖励清单。",
+            "sourceFields": [
+              "Entry 5 LUA_OnCondition"
+            ]
+          },
+          {
+            "text": "This introductory drive is configured for the farm owner.",
+            "zhText": "该引导驾驶任务配置为牧场主执行。",
+            "sourceFields": [
+              "QuestFor_FarmOwnerOnly"
+            ]
+          }
+        ]
+      },
+      "relatedRoutes": [
+        "/guides/beginners-guide"
+      ]
+    },
+    {
+      "id": "from-blueprint-to-bed",
+      "name": "From Blueprint to Bed",
+      "zhName": "从蓝图到床铺",
+      "category": "building",
+      "zhCategory": "建造",
+      "nameConfidence": "exact-build",
+      "searchTags": "From Blueprint to Bed",
+      "zhSearchTags": "从蓝图到床铺",
+      "summary": "Place the Red Tent blueprint, build it with a hammer and rest inside.",
+      "zhSummary": "放下红色帐篷蓝图，用锤子建成后在里面休息。",
+      "facts": [
+        {
+          "text": "Equip the Red Tent blueprint; an already placed or built tent also satisfies the first check.",
+          "zhText": "装备红色帐篷蓝图；已有已放置或建成的帐篷也符合第一项检查。",
+          "sourceFields": [
+            "Entry 1 en",
+            "Entry 1 zh-CN",
+            "Entry 1 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "Place the Red Tent blueprint.",
+          "zhText": "放下红色帐篷蓝图。",
+          "sourceFields": [
+            "Entry 2 en",
+            "Entry 2 zh-CN",
+            "Entry 2 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "Use the hammer to finish building the tent; placement alone is not the completed-build check.",
+          "zhText": "用锤子完成帐篷建造；只放下蓝图不等于建成。",
+          "sourceFields": [
+            "Entry 3 en",
+            "Entry 3 zh-CN",
+            "Entry 3 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        }
+      ],
+      "relations": [],
+      "buildGuide": {
+        "questId": "F_Quest_03",
+        "name": "From Blueprint to Bed",
+        "zhName": "从蓝图到床铺",
+        "evidenceLevel": "build-observed",
+        "build": "0.8.10.842",
+        "validity": "unknown",
+        "sourceIds": [
+          "owned-build-dialogue"
+        ],
+        "steps": [
+          {
+            "entry": 1,
+            "text": "Equip the Red Tent blueprint; an already placed or built tent also satisfies the first check.",
+            "zhText": "装备红色帐篷蓝图；已有已放置或建成的帐篷也符合第一项检查。",
+            "sourceFields": [
+              "Entry 1 en",
+              "Entry 1 zh-CN",
+              "Entry 1 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 2,
+            "text": "Place the Red Tent blueprint.",
+            "zhText": "放下红色帐篷蓝图。",
+            "sourceFields": [
+              "Entry 2 en",
+              "Entry 2 zh-CN",
+              "Entry 2 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 3,
+            "text": "Use the hammer to finish building the tent; placement alone is not the completed-build check.",
+            "zhText": "用锤子完成帐篷建造；只放下蓝图不等于建成。",
+            "sourceFields": [
+              "Entry 3 en",
+              "Entry 3 zh-CN",
+              "Entry 3 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 4,
+            "text": "Sleep while the Red Tent is placed on the ranch.",
+            "zhText": "红色帐篷已放置后进入睡眠。",
+            "sourceFields": [
+              "Entry 4 en",
+              "Entry 4 zh-CN",
+              "Entry 4 LUA_OnCondition"
+            ]
+          }
+        ],
+        "notes": [
+          {
+            "text": "The quest checks the ordinary Red Tent ID, not the four-person tent.",
+            "zhText": "任务检查普通红色帐篷的物品 ID，不是四人款。",
+            "sourceFields": [
+              "Entry 1 LUA_OnCondition",
+              "Entry 3 LUA_OnCondition"
+            ]
+          }
+        ]
+      },
+      "relatedRoutes": [
+        "/guides/crafting-guide#recipe-red_tent",
+        "/guides/building-construction"
+      ]
+    },
+    {
+      "id": "axe-pick-and-welcome",
+      "name": "Axe, Pick & Welcome!",
+      "zhName": "斧头、镐和欢迎礼！",
+      "category": "tools",
+      "zhCategory": "工具",
+      "nameConfidence": "exact-build",
+      "searchTags": "Axe, Pick & Welcome!",
+      "zhSearchTags": "斧头、镐和欢迎礼！",
+      "summary": "Find the axe and pickaxe, then prepare wood logs and stones.",
+      "zhSummary": "找到斧头与镐，再准备原木和石头。",
+      "facts": [
+        {
+          "text": "Obtain at least one axe.",
+          "zhText": "获得至少一把斧头。",
+          "sourceFields": [
+            "Entry 1 en",
+            "Entry 1 zh-CN",
+            "Entry 1 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "Obtain at least one pickaxe.",
+          "zhText": "获得至少一把镐。",
+          "sourceFields": [
+            "Entry 2 en",
+            "Entry 2 zh-CN",
+            "Entry 2 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "Have at least 15 Wood Logs in your inventory.",
+          "zhText": "背包中准备至少15根原木。",
+          "sourceFields": [
+            "Entry 3 en",
+            "Entry 3 zh-CN",
+            "Entry 3 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "predicate": "involves-npc",
+          "target": {
+            "type": "npc",
+            "id": "victor"
+          },
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        }
+      ],
+      "buildGuide": {
+        "questId": "F_Quest_04",
+        "name": "Axe, Pick & Welcome!",
+        "zhName": "斧头、镐和欢迎礼！",
+        "evidenceLevel": "build-observed",
+        "build": "0.8.10.842",
+        "validity": "unknown",
+        "sourceIds": [
+          "owned-build-dialogue"
+        ],
+        "steps": [
+          {
+            "entry": 1,
+            "text": "Obtain at least one axe.",
+            "zhText": "获得至少一把斧头。",
+            "sourceFields": [
+              "Entry 1 en",
+              "Entry 1 zh-CN",
+              "Entry 1 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 2,
+            "text": "Obtain at least one pickaxe.",
+            "zhText": "获得至少一把镐。",
+            "sourceFields": [
+              "Entry 2 en",
+              "Entry 2 zh-CN",
+              "Entry 2 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 3,
+            "text": "Have at least 15 Wood Logs in your inventory.",
+            "zhText": "背包中准备至少15根原木。",
+            "sourceFields": [
+              "Entry 3 en",
+              "Entry 3 zh-CN",
+              "Entry 3 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 4,
+            "text": "Have at least 15 Stones in your inventory.",
+            "zhText": "背包中准备至少15块石头。",
+            "sourceFields": [
+              "Entry 4 en",
+              "Entry 4 zh-CN",
+              "Entry 4 LUA_OnCondition"
+            ]
+          }
+        ],
+        "notes": [
+          {
+            "text": "These checks count items in your inventory; they do not establish a fixed spawn coordinate for either tool.",
+            "zhText": "这些条件检查背包物品数量，不能据此标出工具的精确刷新坐标。",
+            "sourceFields": [
+              "Entry 1 LUA_OnCondition",
+              "Entry 2 LUA_OnCondition"
+            ]
+          },
+          {
+            "text": "Victor’s introductory call points you toward his family’s stored tools.",
+            "zhText": "任务说明中，维克多的引导电话会提示家中存放的旧工具。",
+            "sourceFields": [
+              "Description en",
+              "Description zh-CN"
+            ]
+          }
+        ]
+      },
+      "relatedRoutes": [
+        "/guides/crafting-guide#recipes-tools",
+        "/guides/resources-and-materials"
+      ]
+    },
+    {
+      "id": "drop-and-earn",
+      "name": "Drop & Earn, the next day!",
+      "zhName": "放下就赚，次日到账！",
+      "category": "money",
+      "zhCategory": "出售",
+      "nameConfidence": "exact-build",
+      "searchTags": "Drop & Earn, the next day!",
+      "zhSearchTags": "放下就赚，次日到账！",
+      "summary": "Put items into the Cash-In box to start the selling tutorial.",
+      "zhSummary": "向现金兑换箱放入物品，开始出售教学。",
+      "facts": [
+        {
+          "text": "The objective asks for Wood Logs and Stones in the Cash-In box; its configured condition checks whether the box has an item awaiting sale.",
+          "zhText": "目标文字要求把原木和石头放进现金兑换箱；配置条件检查箱中是否有等待出售的物品。",
+          "sourceFields": [
+            "Entry 1 en",
+            "Entry 1 zh-CN",
+            "Entry 1 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "The condition checks pending sale contents, not received payment or a guaranteed selling price.",
+          "zhText": "条件检查待售物品，不检查是否已到账，也不能证明出售价格。",
+          "sourceFields": [
+            "Entry 1 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "The success configuration continues to Next-Door Neighbors.",
+          "zhText": "成功配置继续衔接“隔壁邻居”。",
+          "sourceFields": [
+            "Quest_OnSuccess_StartQuest"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        }
+      ],
+      "relations": [],
+      "buildGuide": {
+        "questId": "F_Quest_05",
+        "name": "Drop & Earn, the next day!",
+        "zhName": "放下就赚，次日到账！",
+        "evidenceLevel": "build-observed",
+        "build": "0.8.10.842",
+        "validity": "unknown",
+        "sourceIds": [
+          "owned-build-dialogue"
+        ],
+        "steps": [
+          {
+            "entry": 1,
+            "text": "The objective asks for Wood Logs and Stones in the Cash-In box; its configured condition checks whether the box has an item awaiting sale.",
+            "zhText": "目标文字要求把原木和石头放进现金兑换箱；配置条件检查箱中是否有等待出售的物品。",
+            "sourceFields": [
+              "Entry 1 en",
+              "Entry 1 zh-CN",
+              "Entry 1 LUA_OnCondition"
+            ]
+          }
+        ],
+        "notes": [
+          {
+            "text": "The condition checks pending sale contents, not received payment or a guaranteed selling price.",
+            "zhText": "条件检查待售物品，不检查是否已到账，也不能证明出售价格。",
+            "sourceFields": [
+              "Entry 1 LUA_OnCondition"
+            ]
+          },
+          {
+            "text": "The success configuration continues to Next-Door Neighbors.",
+            "zhText": "成功配置继续衔接“隔壁邻居”。",
+            "sourceFields": [
+              "Quest_OnSuccess_StartQuest"
+            ]
+          },
+          {
+            "text": "This selling introduction is configured for the farm owner.",
+            "zhText": "该出售引导配置为牧场主执行。",
+            "sourceFields": [
+              "QuestFor_FarmOwnerOnly"
+            ]
+          }
+        ]
+      },
+      "relatedRoutes": [
+        "/guides/money-making#cashin"
+      ]
+    },
+    {
+      "id": "next-door-neighbors",
+      "name": "Next-Door Neighbors",
+      "zhName": "隔壁邻居",
+      "category": "orientation",
+      "zhCategory": "初到牧场",
+      "nameConfidence": "exact-build",
+      "searchTags": "Next-Door Neighbors",
+      "zhSearchTags": "隔壁邻居",
+      "summary": "Meet Gigi and Scott, with watering-can and hoe checks for the farming introduction.",
+      "zhSummary": "认识吉吉和斯科特，并检查种田引导需要的洒水壶与锄头。",
+      "facts": [
+        {
+          "text": "Meet Gigi and hold at least one Bronze Watering Can.",
+          "zhText": "与吉吉见面，并持有至少一个 Bronze 品质洒水壶。",
+          "sourceFields": [
+            "Entry 1 en",
+            "Entry 1 zh-CN",
+            "Entry 1 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "Meet Scott and hold at least one Bronze Hoe.",
+          "zhText": "与斯科特见面，并持有至少一把 Bronze 品质锄头。",
+          "sourceFields": [
+            "Entry 2 en",
+            "Entry 2 zh-CN",
+            "Entry 2 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "Conversation alone is not the entire configured condition: each meeting also checks its corresponding tool.",
+          "zhText": "配置不仅检查见面，每一项还检查对应工具。",
+          "sourceFields": [
+            "Entry 1 LUA_OnCondition",
+            "Entry 2 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "predicate": "involves-npc",
+          "target": {
+            "type": "npc",
+            "id": "gigi"
+          },
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        }
+      ],
+      "buildGuide": {
+        "questId": "F_Quest_06",
+        "name": "Next-Door Neighbors",
+        "zhName": "隔壁邻居",
+        "evidenceLevel": "build-observed",
+        "build": "0.8.10.842",
+        "validity": "unknown",
+        "sourceIds": [
+          "owned-build-dialogue"
+        ],
+        "steps": [
+          {
+            "entry": 1,
+            "text": "Meet Gigi and hold at least one Bronze Watering Can.",
+            "zhText": "与吉吉见面，并持有至少一个 Bronze 品质洒水壶。",
+            "sourceFields": [
+              "Entry 1 en",
+              "Entry 1 zh-CN",
+              "Entry 1 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 2,
+            "text": "Meet Scott and hold at least one Bronze Hoe.",
+            "zhText": "与斯科特见面，并持有至少一把 Bronze 品质锄头。",
+            "sourceFields": [
+              "Entry 2 en",
+              "Entry 2 zh-CN",
+              "Entry 2 LUA_OnCondition"
+            ]
+          }
+        ],
+        "notes": [
+          {
+            "text": "Conversation alone is not the entire configured condition: each meeting also checks its corresponding tool.",
+            "zhText": "配置不仅检查见面，每一项还检查对应工具。",
+            "sourceFields": [
+              "Entry 1 LUA_OnCondition",
+              "Entry 2 LUA_OnCondition"
+            ]
+          },
+          {
+            "text": "The success configuration continues to Seeds of Success.",
+            "zhText": "成功配置衔接“成功的种子”。",
+            "sourceFields": [
+              "Quest_OnSuccess_StartQuest"
+            ]
+          }
+        ]
+      },
+      "relatedRoutes": [
+        "/guides/farming-fields",
+        "/guides/crafting-guide#recipes-tools"
+      ]
+    },
+    {
+      "id": "seeds-of-success",
+      "name": "Seeds of Success",
+      "zhName": "成功的种子",
+      "category": "farming",
+      "zhCategory": "种植",
+      "nameConfidence": "exact-build",
+      "searchTags": "Seeds of Success",
+      "zhSearchTags": "成功的种子",
+      "summary": "Till, sow and water a field, then reach the configured planted-plot target.",
+      "zhSummary": "翻地、播种、浇水，并达到配置中的播种地块目标。",
+      "facts": [
+        {
+          "text": "Return to the ranch area.",
+          "zhText": "回到牧场区域。",
+          "sourceFields": [
+            "Entry 1 en",
+            "Entry 1 zh-CN",
+            "Entry 1 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "Equip the hoe; having an existing plantation also passes this check.",
+          "zhText": "装备锄头；已有种植地也符合这一检查。",
+          "sourceFields": [
+            "Entry 2 en",
+            "Entry 2 zh-CN",
+            "Entry 2 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "Till the soil to create a planting area.",
+          "zhText": "翻地，建立种植地块。",
+          "sourceFields": [
+            "Entry 3 en",
+            "Entry 3 zh-CN",
+            "Entry 3 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        }
+      ],
+      "relations": [],
+      "buildGuide": {
+        "questId": "F_Quest_07",
+        "name": "Seeds of Success",
+        "zhName": "成功的种子",
+        "evidenceLevel": "build-observed",
+        "build": "0.8.10.842",
+        "validity": "unknown",
+        "sourceIds": [
+          "owned-build-dialogue"
+        ],
+        "steps": [
+          {
+            "entry": 1,
+            "text": "Return to the ranch area.",
+            "zhText": "回到牧场区域。",
+            "sourceFields": [
+              "Entry 1 en",
+              "Entry 1 zh-CN",
+              "Entry 1 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 2,
+            "text": "Equip the hoe; having an existing plantation also passes this check.",
+            "zhText": "装备锄头；已有种植地也符合这一检查。",
+            "sourceFields": [
+              "Entry 2 en",
+              "Entry 2 zh-CN",
+              "Entry 2 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 3,
+            "text": "Till the soil to create a planting area.",
+            "zhText": "翻地，建立种植地块。",
+            "sourceFields": [
+              "Entry 3 en",
+              "Entry 3 zh-CN",
+              "Entry 3 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 4,
+            "text": "Put seeds in the prepared soil.",
+            "zhText": "向准备好的土地播种。",
+            "sourceFields": [
+              "Entry 4 en",
+              "Entry 4 zh-CN",
+              "Entry 4 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 5,
+            "text": "Water the seeded soil with the watering can.",
+            "zhText": "用洒水壶浇灌已播种的土地。",
+            "sourceFields": [
+              "Entry 5 en",
+              "Entry 5 zh-CN",
+              "Entry 5 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 6,
+            "text": "Have 16 seeded plots; the last objective and configured condition both use 16.",
+            "zhText": "种满16块地；最后一条目标文字和配置判定都使用16。",
+            "sourceFields": [
+              "Entry 6 en",
+              "Entry 6 zh-CN",
+              "Entry 6 LUA_OnCondition"
+            ]
+          }
+        ],
+        "notes": [
+          {
+            "text": "The introductory description says ten plots, but the last objective and condition use 16. Do not stop at ten based only on the description.",
+            "zhText": "任务简介写10块，最后目标和判定写16块；不要只按简介种10块就停下。",
+            "sourceFields": [
+              "Description en",
+              "Description zh-CN",
+              "Entry 6 en",
+              "Entry 6 zh-CN",
+              "Entry 6 LUA_OnCondition"
+            ]
+          }
+        ]
+      },
+      "relatedRoutes": [
+        "/guides/farming-fields"
+      ]
+    },
+    {
+      "id": "feathered-foes",
+      "name": "Feathered Foes",
+      "zhName": "长着羽毛的敌人",
+      "category": "farming",
+      "zhCategory": "种植",
+      "nameConfidence": "exact-build",
+      "searchTags": "Feathered Foes",
+      "zhSearchTags": "长着羽毛的敌人",
+      "summary": "Craft and build a scarecrow, checking which variant the placement objective accepts.",
+      "zhSummary": "制作并建造稻草人，注意放置目标接受的具体款式。",
+      "facts": [
+        {
+          "text": "Prepare one ordinary Scarecrow or Bob the Scarecrow; the first condition also accepts one already built.",
+          "zhText": "准备一个普通稻草人或稻草人鲍勃；第一项也接受已经建好的相应物品。",
+          "sourceFields": [
+            "Entry 1 en",
+            "Entry 1 zh-CN",
+            "Entry 1 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "Build one ordinary Scarecrow. This second condition names only the ordinary variant.",
+          "zhText": "建造一个普通稻草人；第二项配置只写普通款。",
+          "sourceFields": [
+            "Entry 2 en",
+            "Entry 2 zh-CN",
+            "Entry 2 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "The two checks accept different variants. Bob satisfies the first condition but is not listed in the final build condition.",
+          "zhText": "前后两项接受的款式不同：鲍勃符合第一项，但未列在最后建造判定中。",
+          "sourceFields": [
+            "Entry 1 LUA_OnCondition",
+            "Entry 2 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "predicate": "involves-npc",
+          "target": {
+            "type": "npc",
+            "id": "gigi"
+          },
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        }
+      ],
+      "buildGuide": {
+        "questId": "F_Quest_08",
+        "name": "Feathered Foes",
+        "zhName": "长着羽毛的敌人",
+        "evidenceLevel": "build-observed",
+        "build": "0.8.10.842",
+        "validity": "unknown",
+        "sourceIds": [
+          "owned-build-dialogue"
+        ],
+        "steps": [
+          {
+            "entry": 1,
+            "text": "Prepare one ordinary Scarecrow or Bob the Scarecrow; the first condition also accepts one already built.",
+            "zhText": "准备一个普通稻草人或稻草人鲍勃；第一项也接受已经建好的相应物品。",
+            "sourceFields": [
+              "Entry 1 en",
+              "Entry 1 zh-CN",
+              "Entry 1 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 2,
+            "text": "Build one ordinary Scarecrow. This second condition names only the ordinary variant.",
+            "zhText": "建造一个普通稻草人；第二项配置只写普通款。",
+            "sourceFields": [
+              "Entry 2 en",
+              "Entry 2 zh-CN",
+              "Entry 2 LUA_OnCondition"
+            ]
+          }
+        ],
+        "notes": [
+          {
+            "text": "The two checks accept different variants. Bob satisfies the first condition but is not listed in the final build condition.",
+            "zhText": "前后两项接受的款式不同：鲍勃符合第一项，但未列在最后建造判定中。",
+            "sourceFields": [
+              "Entry 1 LUA_OnCondition",
+              "Entry 2 LUA_OnCondition"
+            ]
+          },
+          {
+            "text": "The task introduction describes scarecrows as crop protection against birds; no protection radius is specified here.",
+            "zhText": "任务简介将稻草人用于防鸟护田，但这里没有给出保护半径。",
+            "sourceFields": [
+              "Description en",
+              "Description zh-CN"
+            ]
+          }
+        ]
+      },
+      "relatedRoutes": [
+        "/guides/crafting-guide#recipe-prop_Scarecrow_00",
+        "/guides/farming-fields"
+      ]
+    },
     {
       "id": "rust-to-rumbling",
       "name": "Rust to Rumbling!",
@@ -367,6 +1402,486 @@
       ]
     },
     {
+      "id": "roof-building",
+      "name": "Roof-building tutorial objective",
+      "zhName": "屋顶建造教程目标",
+      "category": "building",
+      "zhCategory": "建造",
+      "nameConfidence": "descriptive",
+      "searchTags": "roof quest tracker stuck tutorial door window cap workbench",
+      "zhSearchTags": "屋顶 任务 追踪器 卡住 教程 门 窗 Roof Cap 工作台",
+      "summary": "A descriptive entry for the roof-building objective because the exact tracker title is not retained.",
+      "zhSummary": "屋顶建造目标的描述性条目，因为现有证据没有保留准确任务标题。",
+      "facts": [
+        {
+          "text": "Official support confirmed a known state where the roof objective is built but its tracker does not advance.",
+          "zhText": "官方支持确认存在屋顶已经建好但任务追踪器不推进的已知状态。",
+          "evidenceLevel": "official",
+          "build": "0.8.10.x",
+          "validity": "current",
+          "sourceIds": [
+            "roof-official-thread"
+          ]
+        },
+        {
+          "text": "The official recovery sequence is to inspect the phone quest journal with T, sleep to the next day and restart the client if the tracker remains stuck.",
+          "zhText": "官方恢复顺序是按 T 检查手机任务日志、睡到第二天，并在追踪器仍卡住时重启客户端。",
+          "evidenceLevel": "official",
+          "build": "0.8.10.x",
+          "validity": "current",
+          "sourceIds": [
+            "roof-official-thread"
+          ]
+        },
+        {
+          "text": "Separate community cases involve hidden workbench rows, missing door/window placement or a Roof Cap opening; use the decision guide instead of treating every symptom as the tracker bug.",
+          "zhText": "另一些社区案例来自工作台列表未滚动、门窗未放置或 Roof Cap 中央开口；应使用分类流程，而不是把所有症状都当成追踪器故障。",
+          "evidenceLevel": "community-confirmed",
+          "build": "0.8.10.x",
+          "validity": "current",
+          "sourceIds": [
+            "roof-community-scan"
+          ]
+        }
+      ],
+      "relations": [],
+      "buildGuide": {
+        "questId": "F_Quest_11",
+        "name": "Farewell, Nylon Palace!",
+        "zhName": "再见，尼龙帐篷！",
+        "evidenceLevel": "build-observed",
+        "build": "0.8.10.842",
+        "validity": "unknown",
+        "sourceIds": [
+          "owned-build-dialogue"
+        ],
+        "steps": [
+          {
+            "entry": 1,
+            "text": "Craft and place a storage chest.",
+            "zhText": "制作并放好储物箱。",
+            "sourceFields": [
+              "Entry 1 en",
+              "Entry 1 zh-CN",
+              "Entry 1 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 2,
+            "text": "Build at least nine house foundations.",
+            "zhText": "至少建好 9 个房屋地基。",
+            "sourceFields": [
+              "Entry 2 en",
+              "Entry 2 zh-CN",
+              "Entry 2 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 3,
+            "text": "Build at least nine standard exterior wall sections.",
+            "zhText": "至少建好 9 段普通外墙。",
+            "sourceFields": [
+              "Entry 3 en",
+              "Entry 3 zh-CN",
+              "Entry 3 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 4,
+            "text": "Build at least two window-wall sections.",
+            "zhText": "至少建好 2 段窗墙。",
+            "sourceFields": [
+              "Entry 4 en",
+              "Entry 4 zh-CN",
+              "Entry 4 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 5,
+            "text": "Install two windows, in addition to the window walls.",
+            "zhText": "另外安装 2 扇窗户，窗墙不能代替窗户。",
+            "sourceFields": [
+              "Entry 5 en",
+              "Entry 5 zh-CN",
+              "Entry 5 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 6,
+            "text": "Build an exterior wall section with a doorway.",
+            "zhText": "建好至少 1 段门墙。",
+            "sourceFields": [
+              "Entry 6 en",
+              "Entry 6 zh-CN",
+              "Entry 6 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 7,
+            "text": "Install the door itself.",
+            "zhText": "安装门本身，只有门墙还不够。",
+            "sourceFields": [
+              "Entry 7 en",
+              "Entry 7 zh-CN",
+              "Entry 7 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 8,
+            "text": "Build a doorstep.",
+            "zhText": "建好门口台阶。",
+            "sourceFields": [
+              "Entry 8 en",
+              "Entry 8 zh-CN",
+              "Entry 8 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 9,
+            "text": "Complete the roof.",
+            "zhText": "建好屋顶。",
+            "sourceFields": [
+              "Entry 9 en",
+              "Entry 9 zh-CN",
+              "Entry 9 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 10,
+            "text": "Craft and place a bed.",
+            "zhText": "制作并放好床。",
+            "sourceFields": [
+              "Entry 10 en",
+              "Entry 10 zh-CN",
+              "Entry 10 LUA_OnCondition"
+            ]
+          }
+        ],
+        "notes": [
+          {
+            "text": "Window walls and windows have separate checks, as do doorway walls and doors. Check for missing pieces before using the roof-tracker recovery guide.",
+            "zhText": "窗墙与窗户、门墙与门分别检查；先确认没有漏装，再按屋顶任务排查处理。",
+            "sourceFields": [
+              "Entry 4 LUA_OnCondition",
+              "Entry 5 LUA_OnCondition",
+              "Entry 6 LUA_OnCondition",
+              "Entry 7 LUA_OnCondition"
+            ]
+          }
+        ]
+      },
+      "relatedRoutes": [
+        "/guides/roof-quest-stuck#flow",
+        "/guides/building-construction",
+        "/problems/failed-quest-replay"
+      ]
+    },
+    {
+      "id": "a-ride-and-a-revelation",
+      "name": "A Ride and a Revelation",
+      "zhName": "一次车程，一场启发",
+      "category": "transport",
+      "zhCategory": "交通",
+      "nameConfidence": "exact-build",
+      "searchTags": "A Ride and a Revelation",
+      "zhSearchTags": "一次车程，一场启发",
+      "summary": "Meet Gigi and Chris at NovaGen, visit Leafy Market, then take Gigi home.",
+      "zhSummary": "在诺瓦基因见吉吉与克里斯，前往绿叶市场后送吉吉回家。",
+      "facts": [
+        {
+          "text": "Go to the NovaGen area.",
+          "zhText": "前往诺瓦基因区域。",
+          "sourceFields": [
+            "Entry 1 en",
+            "Entry 1 zh-CN",
+            "Entry 1 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "Complete the first conversation with Gigi.",
+          "zhText": "完成与吉吉的第一次交谈。",
+          "sourceFields": [
+            "Entry 2 en",
+            "Entry 2 zh-CN",
+            "Entry 2 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "Speak with Chris.",
+          "zhText": "与克里斯交谈。",
+          "sourceFields": [
+            "Entry 3 en",
+            "Entry 3 zh-CN",
+            "Entry 3 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "predicate": "takes-place-at",
+          "target": {
+            "type": "location",
+            "id": "leafy-market"
+          },
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        }
+      ],
+      "buildGuide": {
+        "questId": "F_Quest_12",
+        "name": "A Ride and a Revelation",
+        "zhName": "一次车程，一场启发",
+        "evidenceLevel": "build-observed",
+        "build": "0.8.10.842",
+        "validity": "unknown",
+        "sourceIds": [
+          "owned-build-dialogue"
+        ],
+        "steps": [
+          {
+            "entry": 1,
+            "text": "Go to the NovaGen area.",
+            "zhText": "前往诺瓦基因区域。",
+            "sourceFields": [
+              "Entry 1 en",
+              "Entry 1 zh-CN",
+              "Entry 1 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 2,
+            "text": "Complete the first conversation with Gigi.",
+            "zhText": "完成与吉吉的第一次交谈。",
+            "sourceFields": [
+              "Entry 2 en",
+              "Entry 2 zh-CN",
+              "Entry 2 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 3,
+            "text": "Speak with Chris.",
+            "zhText": "与克里斯交谈。",
+            "sourceFields": [
+              "Entry 3 en",
+              "Entry 3 zh-CN",
+              "Entry 3 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 4,
+            "text": "Speak with Gigi again.",
+            "zhText": "再次与吉吉交谈。",
+            "sourceFields": [
+              "Entry 4 en",
+              "Entry 4 zh-CN",
+              "Entry 4 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 5,
+            "text": "Enter Leafy Market.",
+            "zhText": "进入绿叶市场。",
+            "sourceFields": [
+              "Entry 5 en",
+              "Entry 5 zh-CN",
+              "Entry 5 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 6,
+            "text": "Buy more seeds. The condition checks a seed-category inventory count greater than two, not a purchase receipt.",
+            "zhText": "购买更多种子。条件检查种子类别背包计数大于2，不是检查购物票据。",
+            "sourceFields": [
+              "Entry 6 en",
+              "Entry 6 zh-CN",
+              "Entry 6 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 7,
+            "text": "Take Gigi back to her ranch area.",
+            "zhText": "把吉吉送回她的牧场区域。",
+            "sourceFields": [
+              "Entry 7 en",
+              "Entry 7 zh-CN",
+              "Entry 7 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 8,
+            "text": "Complete the final goodbye conversation.",
+            "zhText": "完成最后的道别交谈。",
+            "sourceFields": [
+              "Entry 8 en",
+              "Entry 8 zh-CN",
+              "Entry 8 LUA_OnCondition"
+            ]
+          }
+        ],
+        "notes": [
+          {
+            "text": "The objective order visits Leafy Market before the home drop-off, even though the introductory description mentions them in the opposite order.",
+            "zhText": "目标列表先去绿叶市场再送回家，和任务简介中的叙述顺序不同。",
+            "sourceFields": [
+              "Description en",
+              "Description zh-CN",
+              "Entry 5 en",
+              "Entry 7 en"
+            ]
+          },
+          {
+            "text": "The success configuration continues to Seed Capital.",
+            "zhText": "成功配置衔接“种子本金计划”。",
+            "sourceFields": [
+              "Quest_OnSuccess_StartQuest"
+            ]
+          }
+        ]
+      },
+      "relatedRoutes": [
+        "/guides/farming-fields",
+        "/guides/vehicles-transport"
+      ]
+    },
+    {
+      "id": "seed-capital",
+      "name": "Seed Capital",
+      "zhName": "种子本金计划",
+      "category": "farming",
+      "zhCategory": "种植",
+      "nameConfidence": "exact-build",
+      "searchTags": "Seed Capital",
+      "zhSearchTags": "种子本金计划",
+      "summary": "Reach the planted-field and account-balance targets together.",
+      "zhSummary": "同时达到播种地块和账户余额目标。",
+      "facts": [
+        {
+          "text": "Have at least 32 seeded plots.",
+          "zhText": "拥有至少32块已播种的土地。",
+          "sourceFields": [
+            "Entry 1 en",
+            "Entry 1 zh-CN",
+            "Entry 1 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "Have at least 10,500 C in your account.",
+          "zhText": "账户中拥有至少10,500 C。",
+          "sourceFields": [
+            "Entry 2 en",
+            "Entry 2 zh-CN",
+            "Entry 2 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "The balance check is a target, not a purchase cost or reward.",
+          "zhText": "余额检查是目标，不是购买费用或奖励。",
+          "sourceFields": [
+            "Entry 2 en",
+            "Entry 2 zh-CN",
+            "Entry 2 LUA_OnCondition"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        }
+      ],
+      "relations": [],
+      "buildGuide": {
+        "questId": "F_Quest_13",
+        "name": "Seed Capital",
+        "zhName": "种子本金计划",
+        "evidenceLevel": "build-observed",
+        "build": "0.8.10.842",
+        "validity": "unknown",
+        "sourceIds": [
+          "owned-build-dialogue"
+        ],
+        "steps": [
+          {
+            "entry": 1,
+            "text": "Have at least 32 seeded plots.",
+            "zhText": "拥有至少32块已播种的土地。",
+            "sourceFields": [
+              "Entry 1 en",
+              "Entry 1 zh-CN",
+              "Entry 1 LUA_OnCondition"
+            ]
+          },
+          {
+            "entry": 2,
+            "text": "Have at least 10,500 C in your account.",
+            "zhText": "账户中拥有至少10,500 C。",
+            "sourceFields": [
+              "Entry 2 en",
+              "Entry 2 zh-CN",
+              "Entry 2 LUA_OnCondition"
+            ]
+          }
+        ],
+        "notes": [
+          {
+            "text": "The balance check is a target, not a purchase cost or reward.",
+            "zhText": "余额检查是目标，不是购买费用或奖励。",
+            "sourceFields": [
+              "Entry 2 en",
+              "Entry 2 zh-CN",
+              "Entry 2 LUA_OnCondition"
+            ]
+          },
+          {
+            "text": "The field target counts seeded plots, not harvested crops or harvest income.",
+            "zhText": "农田目标检查已播种地块，不是收获数量或出售收入。",
+            "sourceFields": [
+              "Entry 1 LUA_OnCondition"
+            ]
+          }
+        ]
+      },
+      "relatedRoutes": [
+        "/guides/farming-fields",
+        "/guides/money-making"
+      ]
+    },
+    {
       "id": "chicken-coop-mission",
       "name": "Chicken Coop Mission",
       "zhName": "养鸡场任务 Chicken Coop Mission",
@@ -554,53 +2069,53 @@
       ]
     },
     {
-      "id": "roof-building",
-      "name": "Roof-building tutorial objective",
-      "zhName": "屋顶建造教程目标",
-      "category": "building",
-      "zhCategory": "建造",
-      "nameConfidence": "descriptive",
-      "searchTags": "roof quest tracker stuck tutorial door window cap workbench",
-      "zhSearchTags": "屋顶 任务 追踪器 卡住 教程 门 窗 Roof Cap 工作台",
-      "summary": "A descriptive entry for the roof-building objective because the exact tracker title is not retained.",
-      "zhSummary": "屋顶建造目标的描述性条目，因为现有证据没有保留准确任务标题。",
+      "id": "solar-panel-objective",
+      "name": "Solar panel objective",
+      "zhName": "太阳能板任务目标",
+      "category": "utilities",
+      "zhCategory": "公用事业",
+      "nameConfidence": "community-label",
+      "searchTags": "solar panel quest ground roof basic electricity objective stuck",
+      "zhSearchTags": "太阳能板 任务 地面 屋顶 基础款 电力 目标 卡住",
+      "summary": "Community label for the objective that distinguishes the basic ground panel from the roof version.",
+      "zhSummary": "社区对该目标的称呼；关键是区分基础地面太阳能板和屋顶版本。",
       "facts": [
         {
-          "text": "Official support confirmed a known state where the roof objective is built but its tracker does not advance.",
-          "zhText": "官方支持确认存在屋顶已经建好但任务追踪器不推进的已知状态。",
-          "evidenceLevel": "official",
-          "build": "0.8.10.x",
-          "validity": "current",
-          "sourceIds": [
-            "roof-official-thread"
-          ]
-        },
-        {
-          "text": "The official recovery sequence is to inspect the phone quest journal with T, sleep to the next day and restart the client if the tracker remains stuck.",
-          "zhText": "官方恢复顺序是按 T 检查手机任务日志、睡到第二天，并在追踪器仍卡住时重启客户端。",
-          "evidenceLevel": "official",
-          "build": "0.8.10.x",
-          "validity": "current",
-          "sourceIds": [
-            "roof-official-thread"
-          ]
-        },
-        {
-          "text": "Separate community cases involve hidden workbench rows, missing door/window placement or a Roof Cap opening; use the decision guide instead of treating every symptom as the tracker bug.",
-          "zhText": "另一些社区案例来自工作台列表未滚动、门窗未放置或 Roof Cap 中央开口；应使用分类流程，而不是把所有症状都当成追踪器故障。",
+          "text": "Two players independently confirmed that the objective needs the basic ground solar panel.",
+          "zhText": "两名玩家相互确认，该目标需要基础地面太阳能板。",
           "evidenceLevel": "community-confirmed",
           "build": "0.8.10.x",
           "validity": "current",
           "sourceIds": [
-            "roof-community-scan"
+            "solar-thread"
+          ]
+        },
+        {
+          "text": "The roof solar panel does not satisfy this objective even though it is also a solar panel.",
+          "zhText": "屋顶太阳能板虽然也是太阳能板，但不会满足该任务目标。",
+          "evidenceLevel": "community-confirmed",
+          "build": "0.8.10.x",
+          "validity": "current",
+          "sourceIds": [
+            "solar-thread"
+          ]
+        },
+        {
+          "text": "The retained confirmations say one correctly placed ground panel is sufficient; exact quest title and prerequisite timing remain unverified.",
+          "zhText": "现有确认称正确放置一个地面款即可；准确任务标题和前置触发时间仍未验证。",
+          "evidenceLevel": "community-confirmed",
+          "build": "0.8.10.x",
+          "validity": "current",
+          "sourceIds": [
+            "solar-thread"
           ]
         }
       ],
       "relations": [],
       "buildGuide": {
-        "questId": "F_Quest_11",
-        "name": "Farewell, Nylon Palace!",
-        "zhName": "再见，尼龙帐篷！",
+        "questId": "F_Quest_15",
+        "name": "Tame the Meter!",
+        "zhName": "搞定电表！",
         "evidenceLevel": "build-observed",
         "build": "0.8.10.842",
         "validity": "unknown",
@@ -610,8 +2125,8 @@
         "steps": [
           {
             "entry": 1,
-            "text": "Craft and place a storage chest.",
-            "zhText": "制作并放好储物箱。",
+            "text": "Open the phone's energy meter and inspect daily usage.",
+            "zhText": "打开手机电表，查看每天的用电量。",
             "sourceFields": [
               "Entry 1 en",
               "Entry 1 zh-CN",
@@ -620,8 +2135,8 @@
           },
           {
             "entry": 2,
-            "text": "Build at least nine house foundations.",
-            "zhText": "至少建好 9 个房屋地基。",
+            "text": "Buy solar panel blueprints from Meriam for the panels you need.",
+            "zhText": "找 Meriam 购买所需的太阳能板蓝图。",
             "sourceFields": [
               "Entry 2 en",
               "Entry 2 zh-CN",
@@ -630,8 +2145,8 @@
           },
           {
             "entry": 3,
-            "text": "Build at least nine standard exterior wall sections.",
-            "zhText": "至少建好 9 段普通外墙。",
+            "text": "Place and finish building the panels.",
+            "zhText": "放置太阳能板并完成建造。",
             "sourceFields": [
               "Entry 3 en",
               "Entry 3 zh-CN",
@@ -640,92 +2155,35 @@
           },
           {
             "entry": 4,
-            "text": "Build at least two window-wall sections.",
-            "zhText": "至少建好 2 段窗墙。",
+            "text": "Check that the ranch meets the electricity-efficiency objective.",
+            "zhText": "检查牧场是否达成用电效率目标。",
             "sourceFields": [
               "Entry 4 en",
               "Entry 4 zh-CN",
               "Entry 4 LUA_OnCondition"
             ]
-          },
-          {
-            "entry": 5,
-            "text": "Install two windows, in addition to the window walls.",
-            "zhText": "另外安装 2 扇窗户，窗墙不能代替窗户。",
-            "sourceFields": [
-              "Entry 5 en",
-              "Entry 5 zh-CN",
-              "Entry 5 LUA_OnCondition"
-            ]
-          },
-          {
-            "entry": 6,
-            "text": "Build an exterior wall section with a doorway.",
-            "zhText": "建好至少 1 段门墙。",
-            "sourceFields": [
-              "Entry 6 en",
-              "Entry 6 zh-CN",
-              "Entry 6 LUA_OnCondition"
-            ]
-          },
-          {
-            "entry": 7,
-            "text": "Install the door itself.",
-            "zhText": "安装门本身，只有门墙还不够。",
-            "sourceFields": [
-              "Entry 7 en",
-              "Entry 7 zh-CN",
-              "Entry 7 LUA_OnCondition"
-            ]
-          },
-          {
-            "entry": 8,
-            "text": "Build a doorstep.",
-            "zhText": "建好门口台阶。",
-            "sourceFields": [
-              "Entry 8 en",
-              "Entry 8 zh-CN",
-              "Entry 8 LUA_OnCondition"
-            ]
-          },
-          {
-            "entry": 9,
-            "text": "Complete the roof.",
-            "zhText": "建好屋顶。",
-            "sourceFields": [
-              "Entry 9 en",
-              "Entry 9 zh-CN",
-              "Entry 9 LUA_OnCondition"
-            ]
-          },
-          {
-            "entry": 10,
-            "text": "Craft and place a bed.",
-            "zhText": "制作并放好床。",
-            "sourceFields": [
-              "Entry 10 en",
-              "Entry 10 zh-CN",
-              "Entry 10 LUA_OnCondition"
-            ]
           }
         ],
         "notes": [
           {
-            "text": "Window walls and windows have separate checks, as do doorway walls and doors. Check for missing pieces before using the roof-tracker recovery guide.",
-            "zhText": "窗墙与窗户、门墙与门分别检查；先确认没有漏装，再按屋顶任务排查处理。",
+            "text": "The final check is electricity efficiency, not simply owning one panel. This configuration gives no fixed panel count or numeric efficiency target.",
+            "zhText": "最后检查的是牧场用电效率，不只是拥有一块板；此处配置没有给出固定板数或具体效率数值。",
             "sourceFields": [
-              "Entry 4 LUA_OnCondition",
-              "Entry 5 LUA_OnCondition",
-              "Entry 6 LUA_OnCondition",
-              "Entry 7 LUA_OnCondition"
+              "Entry 4 LUA_OnCondition"
+            ]
+          },
+          {
+            "text": "Earlier player reports recommend the basic ground panel. The build checks a solar-item family; this alone does not verify that roof panels work.",
+            "zhText": "较早的玩家互证推荐基础地面款。构建中检查的是太阳能物品系列，单凭它不能确认屋顶款是否适用。",
+            "sourceFields": [
+              "Entry 2 LUA_OnCondition",
+              "Entry 3 LUA_OnCondition"
             ]
           }
         ]
       },
       "relatedRoutes": [
-        "/guides/roof-quest-stuck#flow",
-        "/guides/building-construction",
-        "/problems/failed-quest-replay"
+        "/guides/electricity-power#solar-quest"
       ]
     },
     {
@@ -882,124 +2340,6 @@
       "relatedRoutes": [
         "/guides/gigi-large-egg-quest",
         "/guides/police-wanted-levels"
-      ]
-    },
-    {
-      "id": "solar-panel-objective",
-      "name": "Solar panel objective",
-      "zhName": "太阳能板任务目标",
-      "category": "utilities",
-      "zhCategory": "公用事业",
-      "nameConfidence": "community-label",
-      "searchTags": "solar panel quest ground roof basic electricity objective stuck",
-      "zhSearchTags": "太阳能板 任务 地面 屋顶 基础款 电力 目标 卡住",
-      "summary": "Community label for the objective that distinguishes the basic ground panel from the roof version.",
-      "zhSummary": "社区对该目标的称呼；关键是区分基础地面太阳能板和屋顶版本。",
-      "facts": [
-        {
-          "text": "Two players independently confirmed that the objective needs the basic ground solar panel.",
-          "zhText": "两名玩家相互确认，该目标需要基础地面太阳能板。",
-          "evidenceLevel": "community-confirmed",
-          "build": "0.8.10.x",
-          "validity": "current",
-          "sourceIds": [
-            "solar-thread"
-          ]
-        },
-        {
-          "text": "The roof solar panel does not satisfy this objective even though it is also a solar panel.",
-          "zhText": "屋顶太阳能板虽然也是太阳能板，但不会满足该任务目标。",
-          "evidenceLevel": "community-confirmed",
-          "build": "0.8.10.x",
-          "validity": "current",
-          "sourceIds": [
-            "solar-thread"
-          ]
-        },
-        {
-          "text": "The retained confirmations say one correctly placed ground panel is sufficient; exact quest title and prerequisite timing remain unverified.",
-          "zhText": "现有确认称正确放置一个地面款即可；准确任务标题和前置触发时间仍未验证。",
-          "evidenceLevel": "community-confirmed",
-          "build": "0.8.10.x",
-          "validity": "current",
-          "sourceIds": [
-            "solar-thread"
-          ]
-        }
-      ],
-      "relations": [],
-      "buildGuide": {
-        "questId": "F_Quest_15",
-        "name": "Tame the Meter!",
-        "zhName": "搞定电表！",
-        "evidenceLevel": "build-observed",
-        "build": "0.8.10.842",
-        "validity": "unknown",
-        "sourceIds": [
-          "owned-build-dialogue"
-        ],
-        "steps": [
-          {
-            "entry": 1,
-            "text": "Open the phone's energy meter and inspect daily usage.",
-            "zhText": "打开手机电表，查看每天的用电量。",
-            "sourceFields": [
-              "Entry 1 en",
-              "Entry 1 zh-CN",
-              "Entry 1 LUA_OnCondition"
-            ]
-          },
-          {
-            "entry": 2,
-            "text": "Buy solar panel blueprints from Meriam for the panels you need.",
-            "zhText": "找 Meriam 购买所需的太阳能板蓝图。",
-            "sourceFields": [
-              "Entry 2 en",
-              "Entry 2 zh-CN",
-              "Entry 2 LUA_OnCondition"
-            ]
-          },
-          {
-            "entry": 3,
-            "text": "Place and finish building the panels.",
-            "zhText": "放置太阳能板并完成建造。",
-            "sourceFields": [
-              "Entry 3 en",
-              "Entry 3 zh-CN",
-              "Entry 3 LUA_OnCondition"
-            ]
-          },
-          {
-            "entry": 4,
-            "text": "Check that the ranch meets the electricity-efficiency objective.",
-            "zhText": "检查牧场是否达成用电效率目标。",
-            "sourceFields": [
-              "Entry 4 en",
-              "Entry 4 zh-CN",
-              "Entry 4 LUA_OnCondition"
-            ]
-          }
-        ],
-        "notes": [
-          {
-            "text": "The final check is electricity efficiency, not simply owning one panel. This configuration gives no fixed panel count or numeric efficiency target.",
-            "zhText": "最后检查的是牧场用电效率，不只是拥有一块板；此处配置没有给出固定板数或具体效率数值。",
-            "sourceFields": [
-              "Entry 4 LUA_OnCondition"
-            ]
-          },
-          {
-            "text": "Earlier player reports recommend the basic ground panel. The build checks a solar-item family; this alone does not verify that roof panels work.",
-            "zhText": "较早的玩家互证推荐基础地面款。构建中检查的是太阳能物品系列，单凭它不能确认屋顶款是否适用。",
-            "sourceFields": [
-              "Entry 2 LUA_OnCondition",
-              "Entry 3 LUA_OnCondition"
-            ]
-          }
-        ]
-      },
-      "relatedRoutes": [
-        "/guides/electricity-power#solar-quest"
       ]
     }
   ]

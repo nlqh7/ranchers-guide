@@ -98,10 +98,12 @@ assert.doesNotMatch(englishMapSupportCopy, /Steam build\s+24847725/, "visible ma
 assert.doesNotMatch(chineseMapSupportCopy, /Steam build\s+24847725/, "Chinese visible map support copy must not expose internal build ids");
 assert.match(mapPage, /data-map-task-relations/, "English map needs the task-location relation matrix");
 assert.match(chineseMapPage, /data-map-task-relations/, "Chinese map needs the task-location relation matrix");
-assert.equal((mapPage.match(/data-map-task-relation-card/g) || []).length, 6, "English map must expose all six task relation cards");
-assert.equal((chineseMapPage.match(/data-map-task-relation-card/g) || []).length, 6, "Chinese map must expose all six task relation cards");
-assert.equal((mapPage.match(/data-map-task-status="(?:anchored|directory|unresolved)"/g) || []).length, 6, "English task relation cards need explicit location states");
-assert.equal((chineseMapPage.match(/data-map-task-status="(?:anchored|directory|unresolved)"/g) || []).length, 6, "Chinese task relation cards need explicit location states");
+const allTaskIds = require('../data/quests.json').quests.map(quest => quest.id).sort();
+for (const html of [mapPage, chineseMapPage]) {
+  assert.deepEqual([...html.matchAll(/data-map-task-id="([^"]+)"/g)].map(match => match[1]).sort(), allTaskIds, 'Every published quest needs exactly one map relation card');
+  assert.equal((html.match(/data-map-task-relation-card/g) || []).length, allTaskIds.length);
+  assert.equal((html.match(/data-map-task-status="(?:anchored|directory|unresolved)"/g) || []).length, allTaskIds.length, 'Every card needs an explicit coordinate status');
+}
 for (const taskId of taskRelationIds) {
   assert.match(mapPage, new RegExp(`data-map-task-id="${taskId}"`), `English task matrix is missing ${taskId}`);
   assert.match(chineseMapPage, new RegExp(`data-map-task-id="${taskId}"`), `Chinese task matrix is missing ${taskId}`);
@@ -480,8 +482,8 @@ assert.equal(mapCore.buildQueryString("", "all"), "");
 
 const search = read("assets/js/search.js");
 assert.match(search, /"\/map"/);
-assert.match(search, /ranchers-search-index-v27/);
-assert.match(search, /ranchers-search-index-zh-v14/);
+assert.match(search, /ranchers-search-index-v32/);
+assert.match(search, /ranchers-search-index-zh-v19/);
 assert.match(search, /node\.querySelector\("h2, h3"\)/);
 
 const sitemap = read("sitemap.xml");

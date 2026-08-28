@@ -105,7 +105,7 @@ function extractEntries(mainHtml, route) {
     entries.push({
       id: attrs.id,
       title: attrs["data-search-title"] || attrs.id,
-      text,
+      text: attrs["data-search-text"] || text,
       tags: attrs["data-search-tags"] || "",
       status: attrs["data-search-status"] || (route.indexOf("/zh/") === 0 ? "社区资料" : "Community data"),
     });
@@ -116,6 +116,7 @@ function extractEntries(mainHtml, route) {
 function extractSections(mainHtml) {
   /* Remove non-content blocks and search entries, mirroring search.js. */
   let cleaned = mainHtml
+    .replace(/<section\b[^>]*class="[^"]*\bdatabase-browser\b[^"]*"[^>]*>[\s\S]*?<\/section>/gi, " ")
     .replace(/<(form|script|style|noscript)\b[\s\S]*?<\/\1>/gi, " ")
     .replace(/<(\w+)([^>]*\bdata-search-entry\b[^>]*)>[\s\S]*?<\/\1>/g, " ")
     .replace(/<[^>]*class="[^"]*\bad-slot\b[^"]*"[^>]*>[\s\S]*?<\/[^>]+>/g, " ")

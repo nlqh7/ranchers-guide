@@ -1,0 +1,31 @@
+.equipment-guide.article { max-width: 1080px; padding-top: 28px; }
+.equipment-guide > h1 { margin-bottom: 12px; }
+.equipment-guide > .equipment-lead { margin-bottom: 20px; }
+.equipment-reference { margin-bottom: 32px; }
+.equipment-reference h2 { font-size: 1.3rem; margin: 24px 0 12px; }
+.equipment-reference [id] { scroll-margin-top: 110px; }
+.equipment-boundary { color: var(--brown-700); font-size: .88rem; line-height: 1.6; }
+.equipment-nav { display: flex; flex-wrap: wrap; gap: 4px 24px; margin-block: 16px; border-block: 1px solid var(--cream-300); }
+.equipment-nav a, .equipment-shop, .equipment-sources a { display: inline-flex; min-height: 44px; align-items: center; }
+.equipment-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+.equipment-profile { border: 1px solid var(--cream-300); border-radius: 8px; padding: 16px; min-width: 0; background: var(--cream-100); }
+.equipment-profile:target { outline: 2px solid var(--green-700); outline-offset: 2px; }
+.equipment-profile h3 { display: flex; align-items: center; gap: 8px; font-size: 1.05rem; margin: 0 0 12px; min-height: 28px; }
+.equipment-profile h3 img { width: 28px; height: 28px; object-fit: contain; flex: none; margin: 0; }
+.equipment-table-wrap { max-width: 100%; overflow-x: auto; }
+.equipment-reference table { table-layout: fixed; width: 100%; margin: 0; border-collapse: collapse; font-size: .86rem; }
+.equipment-reference th, .equipment-reference td { padding: 8px 4px; border: 1px solid var(--cream-300); text-align: center; vertical-align: middle; font-variant-numeric: tabular-nums; }
+.equipment-reference th { background: var(--cream-100); color: var(--brown-900); font: inherit; font-weight: 600; text-transform: none; letter-spacing: normal; }
+.equipment-reference thead th { background: var(--cream-200); }
+.equipment-reference th:first-child { width: 29%; text-align: left; padding-left: 8px; }
+.equipment-shop { font-size: .86rem; margin-top: 6px; }
+.equipment-sources { margin-top: 24px; border-block: 1px solid var(--cream-300); color: var(--brown-700); font-size: .85rem; }
+.equipment-sources summary { min-height: 44px; padding-block: 12px; cursor: pointer; color: var(--green-700); font-weight: 600; }
+@media(max-width:600px) {
+  .equipment-guide.article { padding-inline: 18px; }
+  .equipment-guide > h1 { font-size: 1.75rem; }
+  .equipment-grid { grid-template-columns: 1fr; }
+  .equipment-profile { padding: 12px; }
+  .equipment-reference table { font-size: .8rem; }
+  .equipment-nav { gap: 2px 16px; }
+}

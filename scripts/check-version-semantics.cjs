@@ -100,10 +100,19 @@ assert.doesNotMatch(problemsHub, /0\.8\.10\.455\+/, "problem report builds must 
 
 // 6. Launch-vs-current timeline on utility guides: launch baseline plus a
 //    separate current-version statement.
-for (const page of ["guides/building-construction.html", "guides/electricity-power.html"]) {
+for (const page of ["guides/building-construction.html"]) {
   const html = read(page);
   assert.match(html, /July 30, 2026 Early Access build \(launch\/video baseline <strong>0\.8\.10\.455<\/strong>\)/, `${page} keeps the launch/video baseline`);
   assert.match(html, /Current official version:[\s\S]{0,120}0\.8\.10\.842/, `${page} states the current official version separately`);
+}
+for (const [page, current, historical] of [
+  ['guides/electricity-power.html', /Current official version:[\s\S]{0,60}0\.8\.10\.842/, /Historical contract[\s\S]{0,130}0\.8\.10\.455[\s\S]{0,80}not retested/],
+  ['zh/guides/electricity-power.html', /当前官方版本：[\s\S]{0,60}0\.8\.10\.842/, /历史观测基准[\s\S]{0,60}0\.8\.10\.455[\s\S]{0,60}不代表已在当前版本重新实测/]
+]) {
+  const note = read(page).split('id="utility-version-notes"')[1]?.split('</p>')[0];
+  assert.ok(note, `${page} keeps source-version context outside the lookup`);
+  assert.match(note, current);
+  assert.match(note, historical);
 }
 
 // 7. Gigi quest: door-delivery bug is not claimed as officially fixed.

@@ -41,8 +41,8 @@ const copy = {
 };
 
 const evidenceLabels = {
-  en: { official: "Official", "video-observed": "Video-observed", "community-confirmed": "Community-confirmed", "unverified-lead": "Single-source lead" },
-  zh: { official: "官方", "video-observed": "视频观测", "community-confirmed": "社区互证", "unverified-lead": "单一线索" },
+  en: { official: "Official", "video-observed": "Video-observed", "community-confirmed": "Community-confirmed", "unverified-lead": "Single-source lead", "build-observed": "Game-build configuration" },
+  zh: { official: "官方", "video-observed": "视频观测", "community-confirmed": "社区互证", "unverified-lead": "单一线索", "build-observed": "游戏构建配置" },
 };
 
 const confidenceLabels = {
@@ -61,6 +61,15 @@ const entityRoutes = {
 };
 
 const relatedRouteLabels = {
+  "/guides/beginners-guide": { en: "Getting started", zh: "新手路线" },
+  "/guides/crafting-guide#recipe-red_tent": { en: "Red Tent materials", zh: "红色帐篷材料" },
+  "/guides/crafting-guide#recipes-tools": { en: "Tools & equipment", zh: "工具与装备" },
+  "/guides/crafting-guide#recipe-prop_Scarecrow_00": { en: "Scarecrow materials", zh: "稻草人材料" },
+  "/guides/farming-fields": { en: "Planting & watering", zh: "播种与浇水" },
+  "/guides/resources-and-materials": { en: "Find materials", zh: "收集材料" },
+  "/guides/money-making#cashin": { en: "Cash-In selling", zh: "现金兑换箱出售" },
+  "/guides/money-making": { en: "Selling & income", zh: "出售与收入" },
+  "/guides/vehicles-transport": { en: "Travel & vehicles", zh: "交通与车辆" },
   "/map#city-hall": { en: "City Hall map", zh: "市政厅地图" },
   "/problems/vehicle-recovery": { en: "Vehicle recovery", zh: "车辆找回" },
   "/guides/electricity-power#two-paths": { en: "Electricity contracts & power", zh: "水电合同与供电" },
@@ -152,7 +161,7 @@ function questGuideHtml(dataset, record, locale) {
   const links = record.relatedRoutes.map(route => `<a class="btn btn-outline btn-compact" href="${esc(zh ? localizeRoute(route) : route)}">${esc(relatedRouteLabels[route][locale])}</a>`).join("");
   return `<section class="entity-profile quest-guide" id="${record.id}" data-search-entry data-search-title="${esc(title)}" data-search-tags="${esc([guide.name, guide.zhName, record.name, record.zhName, zh ? record.zhSearchTags : record.searchTags].join(" "))}" data-search-status="${zh ? "任务步骤" : "Quest steps"}">
 <h2>${esc(title)}</h2>
-<details class="quest-build-guide" data-quest-build-guide="${record.id}"><summary>${zh ? "查看步骤与准备" : "Steps & preparation"}</summary><p class="quest-guide-origin">${zh ? "站长收集 · 游戏任务配置整理，未逐项实测" : "Site-collected · interpreted game configuration, not fully play-tested"}</p><ol>${steps}</ol><div class="quest-guide-notes"><strong>${zh ? "容易漏掉的地方" : "Before you move on"}</strong><ul>${notes}</ul></div></details>
+<details class="quest-build-guide" data-quest-build-guide="${record.id}"><summary>${zh ? "查看步骤与准备" : "Steps & preparation"}</summary><p class="quest-guide-origin">${zh ? "站长收集 · 游戏任务配置整理，未逐项实测" : "Site-collected · interpreted game configuration, not fully play-tested"}</p>${steps ? `<ol>${steps}</ol>` : ''}<div class="quest-guide-notes"><strong>${zh ? "容易漏掉的地方" : "Before you move on"}</strong><ul>${notes}</ul></div></details>
 ${relationsHtml(record, locale)}<div class="entity-related"><div>${links}</div></div>
 <details class="quest-guide-evidence"><summary>${zh ? "玩家记录与资料来源" : "Player reports & sources"}</summary><p>${zh ? "任务标题与上述步骤来自站长持有的游戏构建，按原生字段整理；不代表所有运行时任务已收录，未确认奖励不补写。" : "The title and steps above were interpreted from the editor's owned game build. This is not a complete runtime quest catalog; unverified rewards are omitted."} ${zh ? "版本" : "Build"}: ${esc(guide.build)}.</p><p>${zh ? "非官方网站；游戏内容版权归开发商所有。" : "Unofficial fan resource; game content belongs to its developer."}</p><ul class="evidence-list">${facts}</ul></details></section>`;
 }
@@ -227,6 +236,26 @@ for (const [recordsKey, dataset] of jobs) {
       fs.writeFileSync(file, html, "utf8");
     }
   }
+}
+
+for (const locale of ['en', 'zh']) {
+  const zh = locale === 'zh';
+  const prefix = zh ? '/zh' : '';
+  const file = path.join(root, zh ? 'zh/map.html' : 'map.html');
+  const before = fs.readFileSync(file, 'utf8');
+  const native = questData.quests.filter(q => q.nameConfidence === 'exact-build');
+  const cards = native.map(q => {
+    const place = q.relations.find(r => r.target.type === 'location');
+    const status = place ? 'directory' : 'unresolved';
+    const text = zh ? (place ? '配置关联地点；不代表任务步骤的精确坐标。' : '查看任务步骤与准备；暂无可靠任务坐标。') : (place ? 'A configured related place, not an exact objective coordinate.' : 'Read the steps and preparation; no reliable objective coordinate is recorded.');
+    return `<article class="map-task-relation-card" data-map-task-relation-card data-native-task data-map-task-id="${q.id}" data-map-task-status="${status}"><div class="map-task-relation-copy"><span class="map-task-status is-${status}">${zh ? (place ? '关联地点' : '暂无任务坐标') : (place ? 'Related place' : 'No task coordinate')}</span><h3>${esc(zh ? q.buildGuide.zhName : q.buildGuide.name)}</h3><p>${text}</p></div><div class="map-task-relation-actions">${place ? `<button type="button" data-map-task-action="directory" data-map-task-target="${place.target.id}">${zh ? '查看关联地点' : 'Open related place'}</button>` : ''}<a href="${prefix}/database/quests#${q.id}">${zh ? '任务详情' : 'Task details'}&nbsp;→</a></div></article>`;
+  }).join('\n');
+  const after = before.replace(/(data-map-task-relations>)[\s\S]*?(<div class="map-task-relation-list">)/, `$1\n              <summary>${zh ? '任务地点' : 'Task locations'}</summary>\n              $2`).replace(/(<div class="map-task-relation-list">)([\s\S]*?)(\s*<\/div>\s*<\/details>)/, (_, start, body, end) => {
+    const retained = body.replace(/\s*<article\b[^>]*\bdata-native-task\b[\s\S]*?<\/article>/g, '').trimEnd();
+    return `${start}${retained}\n${cards}${end}`;
+  });
+  if (checkOnly) { if (before !== after) drifted = true; }
+  else fs.writeFileSync(file, after);
 }
 
 if (checkOnly && drifted) {

@@ -4,7 +4,7 @@ const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
 const allowedPredicates = new Set(["involves-npc", "takes-place-at", "uses-location"]);
-const allowedEvidenceLevels = new Set(["official", "video-observed", "community-confirmed", "unverified-lead"]);
+const allowedEvidenceLevels = new Set(["official", "video-observed", "community-confirmed", "unverified-lead", "build-observed"]);
 const allowedValidity = new Set(["current", "historical", "unknown"]);
 const functionalSurfaces = new Set(["contribute.html", "search.html", "zh/search.html"]);
 
@@ -57,6 +57,7 @@ for (const quest of questData.quests) {
     assert.ok(allowedPredicates.has(relation.predicate), `${quest.id} uses unsupported predicate ${relation.predicate}`);
     if (!targets.has(targetKey)) invalidReferences.push(`${quest.id} -> ${targetKey}`);
     assert.ok(allowedEvidenceLevels.has(relation.evidenceLevel), `${quest.id} relation lacks a valid evidence level`);
+    if (relation.evidenceLevel === 'build-observed') assert.equal(relation.validity, 'unknown', 'Build relationships are not runtime confirmation');
     assert.ok(relation.build, `${quest.id} relation lacks a build`);
     assert.ok(allowedValidity.has(relation.validity), `${quest.id} relation lacks valid validity`);
     assert.ok(Array.isArray(relation.sourceIds) && relation.sourceIds.length > 0, `${quest.id} relation lacks sources`);

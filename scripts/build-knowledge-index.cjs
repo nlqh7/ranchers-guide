@@ -263,10 +263,10 @@ function localizedFacts(record, locale) {
   if (record.zh?.groups) {
     return record.zh.groups.flatMap((group) => (group.facts || []).map((fact) => ({
       text: fact.text,
-      evidenceLevel: ({ official: "official", video: "video-observed", community: "community-confirmed", lead: "unverified-lead", unknown: "unverified-lead", model: "unverified-lead" })[fact.badge] || "unverified-lead",
-      validity: fact.badge === "historical" ? "historical" : fact.badge === "unknown" || fact.badge === "model" ? "unknown" : "current",
-      build: null,
-      sourceIds: [],
+      evidenceLevel: fact.evidenceLevel || ({ official: "official", video: "video-observed", community: "community-confirmed", lead: "unverified-lead", unknown: "unverified-lead", model: "unverified-lead" })[fact.badge] || "unverified-lead",
+      validity: fact.validity || (fact.badge === "historical" ? "historical" : fact.badge === "unknown" || fact.badge === "model" ? "unknown" : "current"),
+      build: fact.build || null,
+      sourceIds: fact.sourceIds || [],
       group: group.heading || "",
     })));
   }
@@ -300,8 +300,16 @@ function baseRecord({ type, record, dataset, route, locale, title }) {
     group: locale === 'zh' ? '游戏构建资料（未实测）' : 'Game-build reference (not gameplay-tested)',
     evidenceLevel: ref.evidenceLevel, validity: ref.validity, build: ref.build, sourceIds: ref.sourceIds,
   })) : [];
-  const sourceIds = [...factsEn.flatMap((fact) => fact.sourceIds || []), ...(record.sourceIds || []), ...(ref?.sourceIds || [])];
-  const facts = [...referenceFacts, ...localizedFacts(record, locale)].map((fact) => ({
+  const input = record.buildInput;
+  if (input) {
+    const zh = locale === 'zh';
+    const text = `${localizedSummary(record, locale)} ${zh ? '文件体力消耗' : 'Configured energy use'}: ${input.energy.consumption}; ${zh ? '恢复' : 'restored'}: ${input.energy.restoration}. ${zh ? '实际效果未实测。' : 'Actual effects are not gameplay-tested.'}`;
+    referenceFacts.push({text, group: zh ? '游戏文件配置' : 'Game-file settings', evidenceLevel:input.evidenceLevel, validity:input.validity, build:input.build, sourceIds:input.sourceIds});
+  }
+  const localized = localizedFacts(record, locale);
+  const sourceIds = [...factsEn.flatMap((fact) => fact.sourceIds || []), ...localized.flatMap(fact => fact.sourceIds || []), ...(record.sourceIds || []), ...(ref?.sourceIds || []), ...(input?.sourceIds || [])];
+  const lookupFacts = (record.lookupFacts || []).map(fact => ({ ...fact, text: locale === 'zh' ? fact.zhText : fact.text }));
+  const facts = [...referenceFacts, ...lookupFacts, ...localized].map((fact) => ({
     group: fact.group || "",
     text: fact.text,
     evidenceLevel: fact.evidenceLevel || "unverified-lead",
@@ -309,7 +317,7 @@ function baseRecord({ type, record, dataset, route, locale, title }) {
     build: fact.build || dataset.meta?.build || null,
     sourceIds: fact.sourceIds || [],
   }));
-  const names = unique([record.name, record.zhName, record.buildGuide?.name, record.buildGuide?.zhName, record.zh?.name, record.locale?.en?.title, record.locale?.zh?.title, record.marker?.locale?.en?.title, record.marker?.locale?.zh?.title, ...[...(ref?.breeds || []), ...(ref?.entries || []), ...(ref?.products || [])].flatMap(b => [b.name, b.zhName])]);
+  const names = unique([record.name, record.zhName, record.buildGuide?.name, record.buildGuide?.zhName, input?.name, input?.zhName, record.zh?.name, record.locale?.en?.title, record.locale?.zh?.title, record.marker?.locale?.en?.title, record.marker?.locale?.zh?.title, ...(record.lookupAliases || []), ...[...(ref?.breeds || []), ...(ref?.entries || []), ...(ref?.products || [])].flatMap(b => [b.name, b.zhName])]);
   const tags = unique([record.searchTags, record.zhSearchTags, record.zh?.searchTags, record.locale?.en?.keywords, record.locale?.zh?.keywords]).join(" ");
   return {
     id: `${type}:${record.id}`,
@@ -324,7 +332,7 @@ function baseRecord({ type, record, dataset, route, locale, title }) {
     summary: localizedSummary(record, locale),
     facts,
     sources: sourceList(dataset, sourceIds),
-    relatedRoutes: [],
+    relatedRoutes: input ? [{href: routeWithLocale('/guides/farming-fields#fertilizer', locale), label: locale === 'zh' ? '肥料警告与测试状态' : 'Fertilizer warning & test status', kind: locale === 'zh' ? '攻略' : 'Guide'}] : [],
     build: dataset.meta?.build || record.build || null,
   };
 }
@@ -341,10 +349,35 @@ const quests = readJson("quests.json");
 const locations = readJson("locations.json");
 const buildings = readJson("building-checklists.json");
 
+const cropLookup = {
+  ...crops,
+  crops: [...crops.crops, ...crops.inputs.filter(input => input.buildInput), ...crops.buildRoster.entries.filter(entry => !crops.crops.some(crop => crop.id === entry.id))].map(record => {
+    const entry = crops.buildRoster.entries.find(crop => crop.id === record.id);
+    if (!entry) return record;
+    const days = n => `${n} ${n === 1 ? 'day' : 'days'}`;
+    const availability = entry.townSeedVendor === 'listed'
+      ? ['Referenced by the seed-shop table; current availability is not guaranteed.', '种子商店表有引用，不保证当前可购买。']
+      : ['Not referenced by the seed-shop table; acquisition is unconfirmed.', '种子商店表没有引用，购买途径未确认。'];
+    const facts = [
+      [`Configuration (not gameplay-tested): ${entry.season}; first harvest after ${days(entry.daysToFirstHarvest)}; ${entry.regrowEveryDays ? `regrow interval ${days(entry.regrowEveryDays)}` : 'no regrow'}.`, `构建配置（未实测）：${entry.zhSeason}；首次收获 ${entry.daysToFirstHarvest} 天；${entry.regrowEveryDays ? `再生间隔 ${entry.regrowEveryDays} 天` : '不再生'}。`],
+      [`Configured dry tolerance: ${days(entry.daysWithoutWater)}. This is not a tested watering schedule.`, `配置断水容忍为 ${entry.daysWithoutWater} 天，不等于经过实测的浇水方案。`],
+      availability,
+    ];
+    return {
+      ...record,
+      summary: record.summary || `Look up ${entry.name} growing configuration. ${availability[0]}`,
+      zhSummary: record.zhSummary || record.zh?.summary || `查询${entry.zhName}的生长配置。${availability[1]}`,
+      lookupAliases: [entry.name, entry.zhName],
+      sourceIds: unique([...(record.sourceIds || []), ...entry.sourceIds]),
+      lookupFacts: facts.map(([text, zhText]) => ({text, zhText, group: 'Game-build configuration', evidenceLevel: entry.evidenceLevel, validity: entry.validity, build: entry.build, sourceIds: entry.sourceIds})),
+    };
+  }),
+};
+
 const datasets = [
   ["material", materials, "materials"],
   ["building", buildings, "targets"],
-  ["crop", crops, "crops"],
+  ["crop", cropLookup, "crops"],
   ["animal", animals, "species"],
   ["npc", npcs, "npcs"],
   ["quest", quests, "quests"],

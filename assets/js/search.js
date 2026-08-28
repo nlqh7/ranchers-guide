@@ -85,7 +85,7 @@
   var IS_ZH = document.documentElement.lang.toLowerCase() === "zh-cn";
   var PAGE_PATHS = IS_ZH ? ZH_PAGE_PATHS : EN_PAGE_PATHS;
   var SEARCH_ROUTE = IS_ZH ? "/zh/search" : "/search";
-  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v14" : "ranchers-search-index-v27";
+  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v19" : "ranchers-search-index-v32";
   var documents = [];
   var form = document.querySelector("[data-search-form]");
   var input = document.querySelector("[data-search-input]");
@@ -147,16 +147,16 @@
       entries.push({
         id: node.id,
         title: node.dataset.searchTitle || (entryHeading ? entryHeading.textContent.trim() : (node.cells && node.cells[0] ? node.cells[0].textContent.trim() : node.id)),
-        text: node.cells
+        text: node.dataset.searchText || (node.cells
           ? Array.from(node.cells).map(function (cell) { return cell.textContent.replace(/\s+/g, " ").trim(); }).join(" · ")
-          : node.textContent.replace(/\s+/g, " ").trim(),
+          : node.textContent.replace(/\s+/g, " ").trim()),
         tags: node.dataset.searchTags || "",
         status: node.dataset.searchStatus || (IS_ZH ? "社区资料" : "Community data")
       });
     });
 
     if (main) {
-      main.querySelectorAll("form, script, style, noscript, .ad-slot, .field-note-list, .map-task-relations, [data-search-entry]").forEach(function (node) {
+      main.querySelectorAll("form, script, style, noscript, .ad-slot, .field-note-list, .map-task-relations, .database-browser, [data-search-entry]").forEach(function (node) {
         node.remove();
       });
       main.querySelectorAll("h1, h2, h3, p, li, summary, th, td").forEach(function (node) {
@@ -300,17 +300,6 @@
     return matchedKeyword ? 52 : 0;
   }
 
-  function evidenceLabel(level) {
-    var labels = IS_ZH
-      ? { official: "官方", "video-observed": "视频观测", "community-confirmed": "社区互证", "unverified-lead": "单一线索" }
-      : { official: "Official", "video-observed": "Video-observed", "community-confirmed": "Community-confirmed", "unverified-lead": "Single-source lead" };
-    return labels[level] || (IS_ZH ? "待验证" : "Unverified");
-  }
-
-  function evidenceClass(level) {
-    return level === "official" ? "official" : level === "video-observed" ? "video" : level === "community-confirmed" ? "corroborated" : "lead";
-  }
-
   function dossierEntity(query) {
     return knowledgeEntities.map(function (entity) {
       return { entity: entity, score: entityScore(entity, query) };
@@ -319,11 +308,6 @@
     }).filter(function (item) {
       return activeEntityFilter === "all" || item.entity.type === activeEntityFilter;
     }).slice(0, 3).map(function (item) { return item.entity; });
-  }
-
-  function dossierFacts(entity) {
-    var useful = (entity.facts || []).filter(function (fact) { return fact.validity !== "unknown"; });
-    return (useful.length ? useful : entity.facts || []).slice(0, 5);
   }
 
   function dossierRelated(entity, matches) {
@@ -349,15 +333,18 @@
   function renderDossier(query, matches) {
     if (!dossier) return;
     dossier.replaceChildren();
-    var entities = dossierEntity(query);
+    var entities = dossierEntity(query).filter(function (entity) {
+      return activeEntityFilter !== "all" || window.RanchersSearch.dossierSupportsExactAnswer(entity, query, matches);
+    });
     if (!entities.length) {
       dossier.hidden = true;
       return;
     }
     dossier.hidden = false;
     dossier.innerHTML = entities.map(function (entity) {
-      var facts = dossierFacts(entity).map(function (fact) {
-        var status = '<span class="evidence-badge evidence-' + evidenceClass(fact.evidenceLevel) + '">' + escapeHtml(evidenceLabel(fact.evidenceLevel)) + '</span>';
+      var facts = window.RanchersSearch.dossierFacts(entity).map(function (fact) {
+        var evidence = window.RanchersSearch.evidencePresentation(fact.evidenceLevel, IS_ZH ? 'zh' : 'en');
+        var status = '<span class="evidence-badge evidence-' + evidence.className + '">' + escapeHtml(evidence.label) + '</span>';
         var build = fact.build ? ' <span class="knowledge-dossier-build">' + escapeHtml(fact.build) + '</span>' : "";
         return '<li><span>' + escapeHtml(fact.text) + '</span> ' + status + build + '</li>';
       }).join("");

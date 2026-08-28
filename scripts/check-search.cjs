@@ -174,8 +174,8 @@ assert.match(knowledgeBasePage, /href="\/guides\/animal-guide#feeding"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /"\/database"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /"\/zh\/community"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /search-index\.json/);
-assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-zh-v14/, "Chinese search cache must invalidate the previous page set");
-assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-v27/, "English search cache must invalidate the previous page set");
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-zh-v19/, "Chinese search cache must invalidate the previous page set");
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-v32/, "English search cache must invalidate the previous page set");
 assert.match(searchPage, /data-knowledge-dossier/, "Search page must provide an entity dossier surface");
 assert.match(searchPage, /data-entity-filters/, "Search page must provide entity answer filters");
 const chineseSearchPage = fs.readFileSync(path.join(root, "zh", "search.html"), "utf8");
@@ -209,7 +209,11 @@ const expectedEntityIds = [
   ['animal', 'animals', 'species'], ['crop', 'crops', 'crops'],
   ['material', 'materials', 'materials'], ['building', 'building-checklists', 'targets'],
   ['npc', 'npcs', 'npcs'], ['quest', 'quests', 'quests'], ['location', 'locations', 'locations'],
-].flatMap(([type, file, key]) => require(`../data/${file}.json`)[key].map(record => `${type}:${record.id}`)).sort();
+].flatMap(([type, file, key]) => {
+  const dataset = require(`../data/${file}.json`);
+  const records = type === 'crop' ? [...dataset[key], ...dataset.buildRoster.entries, ...dataset.inputs.filter(input => input.buildInput)] : dataset[key];
+  return [...new Set(records.map(record => `${type}:${record.id}`))];
+}).sort();
 for (const index of [knowledgeIndex, chineseKnowledgeIndex]) {
   assert.deepEqual(index.entities.map(entity => entity.id).sort(), expectedEntityIds, 'each published data record must have exactly one knowledge entry');
 }
@@ -237,7 +241,9 @@ assert.equal(searchDocuments(chineseIndex, "大蛋")[0].url, "/zh/guides/gigi-la
 assert.equal(searchDocuments(chineseIndex, "警星")[0].url, "/zh/guides/police-wanted-levels#levels");
 assert.equal(searchDocuments(chineseIndex, "怎么投降")[0].url, "/zh/guides/police-wanted-levels#surrender");
 assert.equal(searchDocuments(chineseIndex, "卖车")[0].url, "/zh/problems/vehicle-recovery#selling");
-assert.ok(searchDocuments(chineseIndex, "屋顶")[0].url.startsWith("/zh/guides/roof-quest-stuck"));
+assert.ok(searchDocuments(chineseIndex, "屋顶").some(result => result.url.startsWith("/zh/guides/roof-quest-stuck")), 'Broad roof queries include both parts and troubleshooting');
+assert.ok(searchDocuments(chineseIndex, "屋顶任务卡住")[0].url.startsWith("/zh/guides/roof-quest-stuck"), 'Explicit quest trouble must still rank the troubleshooting guide first');
+assert.equal(searchDocuments(chineseIndex, "水井")[0].url, '/zh/guides/farming-fields#farm-prop_Outdoor_Well');
 assert.ok(searchDocuments(chineseIndex, "CashIn").some((result) => result.url === "/zh/guides/money-making#cashin"));
 
 console.log(`PASS: site search handles fuzzy queries and is linked from ${pages.length} HTML pages.`);

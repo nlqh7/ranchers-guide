@@ -1,0 +1,56 @@
+/* Building lookup surfaces share the site's cream, brown and green tokens. */
+.building-guide.article, .ranch-checklist-page > .container { max-width: 1080px; }
+.building-guide.article { padding-top: 28px; }
+.building-guide > h1 { margin-bottom: 12px; }
+.building-guide > .building-lead { margin: 0 0 18px; color: var(--brown-700); }
+.building-guide > h2#building-materials { margin-top: 20px; }
+.building-requirements { margin: 0 0 24px; }
+.building-table-wrap { max-width: 100%; overflow-x: auto; }
+.building-requirements-table { width: 100%; border-collapse: collapse; margin: 0; font-size: 0.94rem; background: var(--cream-100); }
+.building-requirements-table caption { text-align: left; color: var(--brown-700); font-size: 0.86rem; padding: 0 0 14px; line-height: 1.6; }
+.building-requirements-table th, .building-requirements-table td { padding: 8px 18px; border: 1px solid var(--cream-300); text-align: left; vertical-align: middle; }
+.building-guide .building-requirements-table { background: var(--cream-100); font-size: 0.94rem; }
+.building-guide .building-requirements-table th { background: var(--cream-100); font-size: inherit; text-transform: none; letter-spacing: normal; }
+.building-requirements-table thead th { background: var(--cream-200); color: var(--brown-900); font-weight: 700; padding-block: 12px; }
+.building-guide .building-requirements-table thead th { background: var(--cream-200); }
+.building-requirements-table th[scope="row"] { width: 29%; font-weight: 700; color: var(--brown-900); }
+.building-requirements-table th small { display: block; font-weight: 400; color: var(--brown-700); font-size: 0.78rem; }
+.building-requirements-table .building-source-group th { background: var(--cream-200); color: var(--brown-700); font-size: 0.8rem; font-weight: 400; padding-block: 6px; }
+.building-requirements-table tr[id] { scroll-margin-top: 110px; }
+.building-requirements-table .building-ingredients { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 14px; list-style: none; margin: 0; padding: 0; }
+.building-ingredients li { margin: 0; padding: 0; }
+.building-ingredients a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--green-700); text-decoration: none; }
+.building-ingredients a:hover { text-decoration: underline; }
+.building-ingredients strong { color: var(--brown-900); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.building-ingredients img { width: 28px; height: 28px; object-fit: contain; flex: none; margin: 0; }
+.building-sources, .material-tracker, .checklist-secondary { border-block: 1px solid var(--cream-300); margin-block: 14px; }
+.building-sources summary, .material-tracker summary, .checklist-secondary > summary { min-height: 44px; padding: 11px 0; cursor: pointer; color: var(--green-700); font-weight: 600; }
+.building-sources { font-size: 0.86rem; }
+.building-sources a { display: inline-flex; align-items: center; min-height: 44px; }
+.building-sources p { color: var(--brown-700); }
+.building-sources li { margin: 0; }
+.ranch-checklist-page { padding-top: 28px; }
+.ranch-checklist-page .ranch-checklist-intro { display: block; max-width: none; }
+.ranch-checklist-intro h1 { margin-bottom: 12px; }
+.ranch-checklist-intro .lead { font-size: 1rem; margin: 0 0 20px; }
+.ranch-checklist-page .ranch-checklist-panel { max-width: none; padding: 0; border: 0; background: transparent; }
+.ranch-checklist-page [data-checklist-panel="build"] { display: block; margin-top: 0; }
+.ranch-checklist-page .material-tracker { padding-bottom: 12px; }
+.ranch-checklist-page .material-tracker .calc-field { max-width: 420px; margin-top: 12px; }
+.ranch-checklist-page .material-tracker select { min-height: 44px; width: 100%; }
+.ranch-checklist-page .material-tracker .source-note { font-size: 0.85rem; }
+.ranch-checklist-page .material-tracker .quest-tracker-status:empty { display: none; }
+.ranch-checklist-page .material-checklist-row > a { grid-column: auto; padding-left: 0; }
+.ranch-checklist-page .material-checklist-row strong { white-space: normal; }
+.ranch-checklist-page .ranch-checklist-goals { margin-top: 10px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ranch-checklist-page [data-checklist-goal="build"] { display: none; }
+@media (max-width: 600px) {
+  .building-guide.article, .ranch-checklist-page > .container { padding-inline: 18px; }
+  .building-guide > h1, .ranch-checklist-intro h1 { font-size: 1.75rem; }
+  .building-requirements-table th, .building-requirements-table td { padding: 8px 10px; }
+  .building-requirements-table th[scope="row"] { width: 40%; }
+  .building-requirements-table .building-ingredients { grid-template-columns: 1fr; gap: 0; }
+  .building-requirements-table th small { font-size: 0.72rem; }
+  .ranch-checklist-page .ranch-checklist-goals { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ranch-checklist-page .material-checklist-row { grid-template-columns: minmax(0, 1fr) auto; }
+}

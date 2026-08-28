@@ -1,0 +1,4362 @@
+{
+  "build": "0.8.10.842",
+  "steamBuild": "24847725",
+  "evidenceLevel": "build-observed",
+  "validity": "unknown",
+  "sources": {
+    "localization": {
+      "asset": "resources.assets",
+      "pathId": 393483,
+      "rawSha256": "2c505386fe9b1b9c2579aad1e6957907db838d8c7f87227e818fbfd4b57d5f4e",
+      "kind": "local-build",
+      "title": "Owned-build item localization",
+      "url": null
+    },
+    "Plantations_Recipes-6629f940b8": {
+      "kind": "local-build",
+      "title": "Plantations_Recipes",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12000,
+      "rawSha256": "6629f940b80ee142611bdde4271ba15b1441492a1f297c338a2b72817496f2b1"
+    },
+    "Meubles_Recipes-86d1c60bcf": {
+      "kind": "local-build",
+      "title": "Meubles_Recipes",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12014,
+      "rawSha256": "86d1c60bcfce2d7c4d7e3955c1f4e57478df6950a1c45a7206a4931f2853a0c2"
+    },
+    "Shelter_Recipes-17e803581a": {
+      "kind": "local-build",
+      "title": "Shelter_Recipes",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12017,
+      "rawSha256": "17e803581a0af2c5e84a7611d4ceec40f3fc548144d80bd9cda10dcc3f7a754c"
+    },
+    "ToolsWeapons-8a7c01dbe1": {
+      "kind": "local-build",
+      "title": "ToolsWeapons",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12040,
+      "rawSha256": "8a7c01dbe11f918302e4655d6f1a11a89b424bc608dbc2b4ebcd4aff6bcc1084"
+    },
+    "Deco_Recipes-29c41bdd46": {
+      "kind": "local-build",
+      "title": "Deco_Recipes",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12064,
+      "rawSha256": "29c41bdd46a7921e0f87a6eb49ca7494ef20cb9312592eeadbeb9f1e41e4f53b"
+    },
+    "Ressources-281b3f2379": {
+      "kind": "local-build",
+      "title": "Ressources",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12068,
+      "rawSha256": "281b3f2379ceddc3681a018d841b1482ffd6e14ea4dae33a94a7bb0e08247d62"
+    },
+    "Autres_Recipes-8ea6b0aca6": {
+      "kind": "local-build",
+      "title": "Autres_Recipes",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12075,
+      "rawSha256": "8ea6b0aca6a469c61da369144c95ce10f0b2966e2b7ddbdc1b4901ec4dbb0265"
+    }
+  },
+  "ingredients": [
+    {
+      "id": "farm_water_1L",
+      "name": "Water",
+      "zhName": "水",
+      "nameKey": "Items_DB/farm_water_1L/Name",
+      "sourceId": "Ressources-281b3f2379"
+    },
+    {
+      "id": "farm_energy_1KW",
+      "name": "Energy",
+      "zhName": "能源",
+      "nameKey": "Items_DB/farm_energy_1KW/Name",
+      "sourceId": "Ressources-281b3f2379"
+    },
+    {
+      "id": "ressource_wood",
+      "name": "Wood Log",
+      "zhName": "木材原木",
+      "nameKey": "Items_DB/ressource_wood/Name",
+      "sourceId": "Ressources-281b3f2379"
+    },
+    {
+      "id": "ressource_coal",
+      "name": "Charcoal",
+      "zhName": "木炭",
+      "nameKey": "Items_DB/ressource_coal/Name",
+      "sourceId": "Ressources-281b3f2379"
+    },
+    {
+      "id": "ressource_straw",
+      "name": "Hay",
+      "zhName": "干草",
+      "nameKey": "Items_DB/ressource_straw/Name",
+      "sourceId": "Ressources-281b3f2379"
+    },
+    {
+      "id": "ressource_rock_simple",
+      "name": "Stone",
+      "zhName": "石头",
+      "nameKey": "Items_DB/ressource_rock_simple/Name",
+      "sourceId": "Ressources-281b3f2379"
+    },
+    {
+      "id": "ressource_zerkonite",
+      "name": "Zerkonite",
+      "zhName": "钛锆钍矿石",
+      "nameKey": "Items_DB/ressource_zerkonite/Name",
+      "sourceId": "Ressources-281b3f2379"
+    },
+    {
+      "id": "ressource_Fuel",
+      "name": "Fuel jerrycan",
+      "zhName": "燃料罐",
+      "nameKey": "Items_DB/ressource_Fuel/Name",
+      "sourceId": "Ressources-281b3f2379"
+    }
+  ],
+  "recipes": [
+    {
+      "id": "sprinkler_n1",
+      "name": "Basic Sprinkler",
+      "zhName": "基础款洒水器",
+      "nameKey": "Items_DB/sprinkler_n1/Name",
+      "sourceId": "Plantations_Recipes-6629f940b8",
+      "category": "farming",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 5
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 5
+        },
+        {
+          "id": "ressource_zerkonite",
+          "quantity": 10
+        },
+        {
+          "id": "ressource_coal",
+          "quantity": 10
+        }
+      ],
+      "questRequirements": [],
+      "demoFlag": null
+    },
+    {
+      "id": "sprinkler_n2",
+      "name": "Advanced Sprinkler",
+      "zhName": "进阶款洒水器",
+      "nameKey": "Items_DB/sprinkler_n2/Name",
+      "sourceId": "Plantations_Recipes-6629f940b8",
+      "category": "farming",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 10
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 10
+        },
+        {
+          "id": "ressource_zerkonite",
+          "quantity": 20
+        },
+        {
+          "id": "ressource_coal",
+          "quantity": 20
+        }
+      ],
+      "questRequirements": [],
+      "demoFlag": null
+    },
+    {
+      "id": "sprinkler_ceiling_n1",
+      "name": "Green House Sprinkler",
+      "zhName": "温室洒水器",
+      "nameKey": "Items_DB/sprinkler_ceiling_n1/Name",
+      "sourceId": "Plantations_Recipes-6629f940b8",
+      "category": "farming",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 10
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 10
+        },
+        {
+          "id": "ressource_zerkonite",
+          "quantity": 20
+        },
+        {
+          "id": "ressource_coal",
+          "quantity": 20
+        }
+      ],
+      "questRequirements": [],
+      "demoFlag": null
+    },
+    {
+      "id": "prop_Scarecrow_00",
+      "name": "Scarecrow",
+      "zhName": "稻草人",
+      "nameKey": "Items_DB/prop_Scarecrow_00/Name",
+      "sourceId": "Plantations_Recipes-6629f940b8",
+      "category": "farming",
+      "workbench": false,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 4
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_08",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_Scarecrow_01",
+      "name": "Bob the Scarecrow",
+      "zhName": "稻草人鲍勃",
+      "nameKey": "Items_DB/prop_Scarecrow_01/Name",
+      "sourceId": "Plantations_Recipes-6629f940b8",
+      "category": "farming",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 8
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 5
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_08",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_Outdoor_Well",
+      "name": "Water Well",
+      "zhName": "水井",
+      "nameKey": "Items_DB/prop_Outdoor_Well/Name",
+      "sourceId": "Plantations_Recipes-6629f940b8",
+      "category": "farming",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 20
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 8
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 5
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_08",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_Trough_01",
+      "name": "Trough",
+      "zhName": "饲料槽",
+      "nameKey": "Items_DB/prop_Trough_01/Name",
+      "sourceId": "Plantations_Recipes-6629f940b8",
+      "category": "farming",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 8
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_14",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "wood_Fence_Country_T1",
+      "name": "Wood Fence",
+      "zhName": "木栅栏",
+      "nameKey": "Items_DB/wood_Fence_Country_T1/Name",
+      "sourceId": "Plantations_Recipes-6629f940b8",
+      "category": "farming",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 4
+        }
+      ],
+      "questRequirements": [],
+      "demoFlag": "y"
+    },
+    {
+      "id": "wood_Fence_Country_T1_Door",
+      "name": "Wood Fence Door",
+      "zhName": "木栅栏门",
+      "nameKey": "Items_DB/wood_Fence_Country_T1_Door/Name",
+      "sourceId": "Plantations_Recipes-6629f940b8",
+      "category": "farming",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 6
+        }
+      ],
+      "questRequirements": [],
+      "demoFlag": "y"
+    },
+    {
+      "id": "wood_Fence_Country_Luxe_T1",
+      "name": "Wood Fence Deluxe",
+      "zhName": "豪华木栅栏",
+      "nameKey": "Items_DB/wood_Fence_Country_Luxe_T1/Name",
+      "sourceId": "Plantations_Recipes-6629f940b8",
+      "category": "farming",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 8
+        },
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 4
+        }
+      ],
+      "questRequirements": [],
+      "demoFlag": "n"
+    },
+    {
+      "id": "wood_Fence_Country_Luxe_Door",
+      "name": "Wood Fence Gate Deluxe",
+      "zhName": "豪华木栅栏门",
+      "nameKey": "Items_DB/wood_Fence_Country_Luxe_Door/Name",
+      "sourceId": "Plantations_Recipes-6629f940b8",
+      "category": "farming",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 10
+        },
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 6
+        }
+      ],
+      "questRequirements": [],
+      "demoFlag": "n"
+    },
+    {
+      "id": "props_Chest_Storage_01",
+      "name": "Storage Chest",
+      "zhName": "储物箱",
+      "nameKey": "Items_DB/props_Chest_Storage_01/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 7
+        }
+      ],
+      "questRequirements": [],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_couch_01",
+      "name": "Pride",
+      "zhName": "普莱德沙发",
+      "nameKey": "Items_DB/prop_couch_01/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 8
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_couch_02",
+      "name": "Belvet Two",
+      "zhName": "贝尔维特二号沙发",
+      "nameKey": "Items_DB/prop_couch_02/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 8
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_couch_03",
+      "name": "Belvet One",
+      "zhName": "贝尔维特一号沙发",
+      "nameKey": "Items_DB/prop_couch_03/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 5
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_couch_04",
+      "name": "Couch de luxe - 2 Spots",
+      "zhName": "豪华双人沙发",
+      "nameKey": "Items_DB/prop_couch_04/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 8
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_couch_05",
+      "name": "Gamler",
+      "zhName": "甘勒沙发",
+      "nameKey": "Items_DB/prop_couch_05/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 5
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_couch_06",
+      "name": "Couch de luxe - 1 Spot",
+      "zhName": "豪华单人沙发",
+      "nameKey": "Items_DB/prop_couch_06/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 8
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_couch_07",
+      "name": "Soffy",
+      "zhName": "索菲沙发",
+      "nameKey": "Items_DB/prop_couch_07/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 8
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_TVCabinet_01",
+      "name": "TV Cabinet - large",
+      "zhName": "大电视柜",
+      "nameKey": "Items_DB/prop_TVCabinet_01/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 7
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_CofeeTable_01",
+      "name": "Coffee Table - Small",
+      "zhName": "小咖啡桌",
+      "nameKey": "Items_DB/prop_CofeeTable_01/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 6
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_CofeeTable_02",
+      "name": "Coffee Table",
+      "zhName": "咖啡桌",
+      "nameKey": "Items_DB/prop_CofeeTable_02/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 6
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Shelf_01",
+      "name": "BLYSTA",
+      "zhName": "布莱斯塔架子",
+      "nameKey": "Items_DB/prop_Shelf_01/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 8
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_Dresser_01",
+      "name": "WALM",
+      "zhName": "沃尔姆梳妆台",
+      "nameKey": "Items_DB/prop_Dresser_01/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 4
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Dresser_02",
+      "name": "BODISHUS",
+      "zhName": "博迪舒梳妆台",
+      "nameKey": "Items_DB/prop_Dresser_02/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 4
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_Dresser_03",
+      "name": "NORDI",
+      "zhName": "诺迪梳妆台",
+      "nameKey": "Items_DB/prop_Dresser_03/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 8
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Kitchen_Counter_01",
+      "name": "KNOXUL STORAGE",
+      "zhName": "诺克斯尔橱柜",
+      "nameKey": "Items_DB/prop_Kitchen_Counter_01/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 8
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Kitchen_Counter_02",
+      "name": "KNOXUL",
+      "zhName": "诺克斯尔橱柜",
+      "nameKey": "Items_DB/prop_Kitchen_Counter_02/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 8
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Kitchen_CounterCorner_01",
+      "name": "KNOXUL CORNER",
+      "zhName": "诺克斯尔转角柜",
+      "nameKey": "Items_DB/prop_Kitchen_CounterCorner_01/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 8
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Kitchen_CounterSink_01",
+      "name": "KNOXUL ROBINET",
+      "zhName": "诺克斯尔水龙头",
+      "nameKey": "Items_DB/prop_Kitchen_CounterSink_01/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Kitchen_CounterEnd_01",
+      "name": "KNOXUL END",
+      "zhName": "诺克斯尔端柜",
+      "nameKey": "Items_DB/prop_Kitchen_CounterEnd_01/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 8
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Kitchen_KitchenCabinet_01",
+      "name": "KNOXUL CABINET",
+      "zhName": "诺克斯尔橱柜",
+      "nameKey": "Items_DB/prop_Kitchen_KitchenCabinet_01/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 8
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_DiningChair_01",
+      "name": "BENY Chair",
+      "zhName": "贝尼餐椅",
+      "nameKey": "Items_DB/prop_DiningChair_01/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 5
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_DiningTable_01",
+      "name": "BENY Table",
+      "zhName": "贝尼餐桌",
+      "nameKey": "Items_DB/prop_DiningTable_01/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 9
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_DiningChair_02",
+      "name": "KIBI Chair",
+      "zhName": "基比餐椅",
+      "nameKey": "Items_DB/prop_DiningChair_02/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 5
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_DiningChair_03",
+      "name": "KIBI Zodio",
+      "zhName": "基比佐迪餐椅",
+      "nameKey": "Items_DB/prop_DiningChair_03/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 5
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_DiningTable_02",
+      "name": "KIBI Table",
+      "zhName": "基比餐桌",
+      "nameKey": "Items_DB/prop_DiningTable_02/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 9
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Bed_Double_01",
+      "name": "ViscoMagic Sleep Double",
+      "zhName": "维斯科魔法双人床",
+      "nameKey": "Items_DB/prop_Bed_Double_01/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 10
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 6
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Bed_Double_02",
+      "name": "Rusty Sleep Double",
+      "zhName": "拉斯特双人床",
+      "nameKey": "Items_DB/prop_Bed_Double_02/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 10
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 6
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Bed_Double_03",
+      "name": "Shore Sleep Double",
+      "zhName": "肖尔双人床",
+      "nameKey": "Items_DB/prop_Bed_Double_03/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 10
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 6
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Bed_Single_01",
+      "name": "Shore Sleep Single",
+      "zhName": "肖尔单人床",
+      "nameKey": "Items_DB/prop_Bed_Single_01/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 7
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_Bed_Single_02",
+      "name": "Rusty Sleep Single",
+      "zhName": "拉斯特单人床",
+      "nameKey": "Items_DB/prop_Bed_Single_02/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 7
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Bed_Single_03",
+      "name": "ViscoMagic Sleep Single",
+      "zhName": "维斯科魔法单人床",
+      "nameKey": "Items_DB/prop_Bed_Single_03/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 7
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Desk_01",
+      "name": "Wobili Desk",
+      "zhName": "沃比利办公桌",
+      "nameKey": "Items_DB/prop_Desk_01/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 10
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Desk_02",
+      "name": "President Desk",
+      "zhName": "总裁办公桌",
+      "nameKey": "Items_DB/prop_Desk_02/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 10
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_DeskChair_01",
+      "name": "Cherry",
+      "zhName": "切瑞椅",
+      "nameKey": "Items_DB/prop_DeskChair_01/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Bathroom_Sink_01",
+      "name": "Sinky",
+      "zhName": "水槽",
+      "nameKey": "Items_DB/prop_Bathroom_Sink_01/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 4
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Bathroom_Sink_02",
+      "name": "Vitreous",
+      "zhName": "玻璃材质",
+      "nameKey": "Items_DB/prop_Bathroom_Sink_02/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 6
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Bathroom_Bath_01",
+      "name": "Kings Cleaner",
+      "zhName": "国王牌清洁剂",
+      "nameKey": "Items_DB/prop_Bathroom_Bath_01/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 10
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 7
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Bathroom_Bath_02",
+      "name": "Queens Cleaner",
+      "zhName": "皇后牌清洁剂",
+      "nameKey": "Items_DB/prop_Bathroom_Bath_02/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 12
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 7
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Bathroom_Toilet_01",
+      "name": "Resty",
+      "zhName": "基础款马桶",
+      "nameKey": "Items_DB/prop_Bathroom_Toilet_01/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 3
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Bathroom_Toilet_02",
+      "name": "Misty",
+      "zhName": "薄雾款马桶",
+      "nameKey": "Items_DB/prop_Bathroom_Toilet_02/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 4
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Bathroom_Shower_01",
+      "name": "ShowStall",
+      "zhName": "展示摊位",
+      "nameKey": "Items_DB/prop_Bathroom_Shower_01/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 10
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 4
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Bathroom_Shower_02",
+      "name": "Pataya Bath",
+      "zhName": "芭堤雅款浴缸",
+      "nameKey": "Items_DB/prop_Bathroom_Shower_02/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 8
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Outdoor_Table_01",
+      "name": "Gardy",
+      "zhName": "嘉迪户外桌",
+      "nameKey": "Items_DB/prop_Outdoor_Table_01/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 4
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Outdoor_Table_02",
+      "name": "BARON Table",
+      "zhName": "巴伦户外桌",
+      "nameKey": "Items_DB/prop_Outdoor_Table_02/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 4
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_DiningChair_04",
+      "name": "BARON Chair",
+      "zhName": "巴伦餐椅",
+      "nameKey": "Items_DB/prop_DiningChair_04/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Deckchair_03",
+      "name": "Beach Chair",
+      "zhName": "沙滩椅",
+      "nameKey": "Items_DB/prop_Deckchair_03/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Deckchair_04",
+      "name": "Beach Chair deluxe",
+      "zhName": "豪华沙滩椅",
+      "nameKey": "Items_DB/prop_Deckchair_04/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_DiningChair_05",
+      "name": "Outy Chair",
+      "zhName": "欧蒂餐椅",
+      "nameKey": "Items_DB/prop_DiningChair_05/Name",
+      "sourceId": "Meubles_Recipes-86d1c60bcf",
+      "category": "furniture",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "house_fondation_Interior",
+      "name": "House interior Foundation",
+      "zhName": "房屋室内地基",
+      "nameKey": "Items_DB/house_fondation_Interior/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 4
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "house_wall_exterior_01",
+      "name": "Wall - Exterior",
+      "zhName": "室外墙",
+      "nameKey": "Items_DB/house_wall_exterior_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "house_wall_exterior_window_01",
+      "name": "Wall with window - Exterior",
+      "zhName": "带窗户室外墙",
+      "nameKey": "Items_DB/house_wall_exterior_window_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "house_wall_exterior_window_02",
+      "name": "Wall with big window - Exterior",
+      "zhName": "带大窗户室外墙",
+      "nameKey": "Items_DB/house_wall_exterior_window_02/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "house_wall_exterior_Door_01",
+      "name": "Wall with door - Exterior",
+      "zhName": "带门室外墙",
+      "nameKey": "Items_DB/house_wall_exterior_Door_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "house_wall_interior",
+      "name": "Wall - Interior",
+      "zhName": "室内墙",
+      "nameKey": "Items_DB/house_wall_interior/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "house_wall_interior_Door_01",
+      "name": "Wall with door - Interior",
+      "zhName": "带门室内墙",
+      "nameKey": "Items_DB/house_wall_interior_Door_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "house_fondation_DeckStep",
+      "name": "DeckStep Foundation",
+      "zhName": "露台台阶地基",
+      "nameKey": "Items_DB/house_fondation_DeckStep/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 5
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "house_Veranda_Pillar_01",
+      "name": "Veranda Pillar",
+      "zhName": "阳台立柱",
+      "nameKey": "Items_DB/house_Veranda_Pillar_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 1
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "house_Vernada_Rails_01",
+      "name": "Veranda Rails",
+      "zhName": "阳台栏杆",
+      "nameKey": "Items_DB/house_Vernada_Rails_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "house_Veronda_ceiling_01",
+      "name": "Veranda Ceiling",
+      "zhName": "阳台天花板",
+      "nameKey": "Items_DB/house_Veronda_ceiling_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 4
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "house_fondation_Garage",
+      "name": "Garage foundation",
+      "zhName": "车库地基",
+      "nameKey": "Items_DB/house_fondation_Garage/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 6
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "house_wall_exterior_garage_01",
+      "name": "Garage wall - Exterior",
+      "zhName": "室外车库墙",
+      "nameKey": "Items_DB/house_wall_exterior_garage_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "house_wall_exterior_window_garage_01",
+      "name": "Garage wall with window - Exterior",
+      "zhName": "带窗户车库室外墙",
+      "nameKey": "Items_DB/house_wall_exterior_window_garage_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "house_wall_exterior_garage_Door_01",
+      "name": "Garage wall with door - Exterior",
+      "zhName": "带门车库室外墙",
+      "nameKey": "Items_DB/house_wall_exterior_garage_Door_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "house_wall_exterior_garage_Door_Main_01",
+      "name": "Garage wall with main door - Exterior",
+      "zhName": "带主门车库室外墙",
+      "nameKey": "Items_DB/house_wall_exterior_garage_Door_Main_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 5
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 4
+        },
+        {
+          "id": "ressource_zerkonite",
+          "quantity": 1
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "house_wall_interior_garage_Door_01",
+      "name": "Garage wall with door - Interior",
+      "zhName": "带门车库室内墙",
+      "nameKey": "Items_DB/house_wall_interior_garage_Door_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "house_wall_interior_garage_01",
+      "name": "Garage wall - Interior",
+      "zhName": "车库室内墙",
+      "nameKey": "Items_DB/house_wall_interior_garage_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "house_fondation_Interior_Kitchen",
+      "name": "Kitchen foundation - interior",
+      "zhName": "室内厨房地基",
+      "nameKey": "Items_DB/house_fondation_Interior_Kitchen/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 5
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "house_ceiling_01",
+      "name": "House interior Ceiling",
+      "zhName": "房屋室内天花板",
+      "nameKey": "Items_DB/house_ceiling_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 4
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "house_ceiling_Pillar_01",
+      "name": "Terrace Pillar",
+      "zhName": "露台立柱",
+      "nameKey": "Items_DB/house_ceiling_Pillar_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 1
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "house_ceiling_Rails_01",
+      "name": "Terrace Rails",
+      "zhName": "露台栏杆",
+      "nameKey": "Items_DB/house_ceiling_Rails_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "house_Roof_LVL_01_Straight",
+      "name": "Roof Straight- Level 1",
+      "zhName": "1层屋顶直角",
+      "nameKey": "Items_DB/house_Roof_LVL_01_Straight/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "house_Roof_LVL_01_Corner",
+      "name": "Roof Corner- Level 1",
+      "zhName": "1层屋顶转角",
+      "nameKey": "Items_DB/house_Roof_LVL_01_Corner/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "house_Roof_LVL_02_Cap",
+      "name": "Roof Cap - Level 2",
+      "zhName": "屋顶盖 - 2 级",
+      "nameKey": "Items_DB/house_Roof_LVL_02_Cap/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "house_Roof_LVL_02_Straight",
+      "name": "Roof Straight - Level 2",
+      "zhName": "2层屋顶直角",
+      "nameKey": "Items_DB/house_Roof_LVL_02_Straight/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_Roof_LVL2_Window_01",
+      "name": "Roof Window - Level 2",
+      "zhName": "2层天窗",
+      "nameKey": "Items_DB/prop_Roof_LVL2_Window_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 4
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_Roof_LVL1_SkyLight_01",
+      "name": "Roof Window",
+      "zhName": "天窗",
+      "nameKey": "Items_DB/prop_Roof_LVL1_SkyLight_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Roof_LVL1_SkyLight_02",
+      "name": "Roof Window",
+      "zhName": "天窗",
+      "nameKey": "Items_DB/prop_Roof_LVL1_SkyLight_02/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Roof_LVL1_SkyLight_03",
+      "name": "Roof Window",
+      "zhName": "天窗",
+      "nameKey": "Items_DB/prop_Roof_LVL1_SkyLight_03/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "house_door_exterior_01",
+      "name": "Door - Exterior",
+      "zhName": "室外门",
+      "nameKey": "Items_DB/house_door_exterior_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 5
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "house_door_interior_01",
+      "name": "Door - Interior",
+      "zhName": "室内门",
+      "nameKey": "Items_DB/house_door_interior_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 5
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "house_door_Garage_01",
+      "name": "Garage Door",
+      "zhName": "车库门",
+      "nameKey": "Items_DB/house_door_Garage_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 4
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 5
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "House_DeckSteps_01",
+      "name": "Doorstep",
+      "zhName": "门口",
+      "nameKey": "Items_DB/House_DeckSteps_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "House_Window_01",
+      "name": "Window",
+      "zhName": "窗户",
+      "nameKey": "Items_DB/House_Window_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "house_stairs_01",
+      "name": "Stairs - Interior",
+      "zhName": "室内楼梯",
+      "nameKey": "Items_DB/house_stairs_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 7
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 5
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "house_stairs_Rails_01",
+      "name": "Stairs Rails - Interior",
+      "zhName": "室内楼梯栏杆",
+      "nameKey": "Items_DB/house_stairs_Rails_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 4
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 4
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Roof_LVL1_Chimney_01",
+      "name": "Chimney - Big",
+      "zhName": "大烟囱",
+      "nameKey": "Items_DB/prop_Roof_LVL1_Chimney_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_Roof_LVL1_Chimney_02",
+      "name": "Chimney - Small",
+      "zhName": "小烟囱",
+      "nameKey": "Items_DB/prop_Roof_LVL1_Chimney_02/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_Shelter_01",
+      "name": "Animal Shelter",
+      "zhName": "动物收容所",
+      "nameKey": "Items_DB/prop_Shelter_01/Name",
+      "sourceId": "Shelter_Recipes-17e803581a",
+      "category": "building",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 6
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 5
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_light_Outdoor_light_01",
+      "name": "RANCYSTA",
+      "zhName": "兰西斯塔灯具",
+      "nameKey": "Items_DB/prop_light_Outdoor_light_01/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_coal",
+          "quantity": 1
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "House_Window_Curtain_01",
+      "name": "Window Curtain",
+      "zhName": "窗帘",
+      "nameKey": "Items_DB/House_Window_Curtain_01/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_Tapis_01",
+      "name": "Queen's Carpet",
+      "zhName": "王后地毯",
+      "nameKey": "Items_DB/prop_Tapis_01/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_Tapis_02",
+      "name": "Dido Carpet",
+      "zhName": "迪多牌地毯",
+      "nameKey": "Items_DB/prop_Tapis_02/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_Tapis_03",
+      "name": "King's Carpet",
+      "zhName": "国王地毯",
+      "nameKey": "Items_DB/prop_Tapis_03/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Bathroom_Tapis_01",
+      "name": "BathRu",
+      "zhName": "基础款浴缸",
+      "nameKey": "Items_DB/prop_Bathroom_Tapis_01/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Bathroom_Tapis_02",
+      "name": "BathRu Deluxe",
+      "zhName": "豪华款浴缸",
+      "nameKey": "Items_DB/prop_Bathroom_Tapis_02/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [],
+      "demoFlag": null
+    },
+    {
+      "id": "prop_deco_Art_Standing_01",
+      "name": "Gatsby le magnifique - Picture",
+      "zhName": "《了不起的盖茨比》挂画",
+      "nameKey": "Items_DB/prop_deco_Art_Standing_01/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 1
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_deco_Art_Standing_02",
+      "name": "Ranchy-Lisa - Picture",
+      "zhName": "《兰西-莉萨》挂画",
+      "nameKey": "Items_DB/prop_deco_Art_Standing_02/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 1
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_deco_Art_Standing_03",
+      "name": "RedLove - Picture",
+      "zhName": "《红色爱恋》挂画",
+      "nameKey": "Items_DB/prop_deco_Art_Standing_03/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 1
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_light_LampStanding_01",
+      "name": "KINGSTA",
+      "zhName": "金斯塔落地灯",
+      "nameKey": "Items_DB/prop_light_LampStanding_01/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_light_LampStanding_02",
+      "name": "SKURUT",
+      "zhName": "斯库鲁特落地灯",
+      "nameKey": "Items_DB/prop_light_LampStanding_02/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_light_Lamp_01",
+      "name": "ARSTIB",
+      "zhName": "阿斯特布落地灯",
+      "nameKey": "Items_DB/prop_light_Lamp_01/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 1
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_light_Lamp_02",
+      "name": "ARSTIR",
+      "zhName": "阿斯特尔灯具",
+      "nameKey": "Items_DB/prop_light_Lamp_02/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 1
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_light_Lamp_03",
+      "name": "SVALLEB",
+      "zhName": "斯瓦莱布灯具",
+      "nameKey": "Items_DB/prop_light_Lamp_03/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 1
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_light_Ceiling_Light_01",
+      "name": "SAVAVIEH KRISTI",
+      "zhName": "萨瓦维赫・克里斯蒂顶灯",
+      "nameKey": "Items_DB/prop_light_Ceiling_Light_01/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_light_Ceiling_Light_02",
+      "name": "BARELO",
+      "zhName": "巴雷洛顶灯",
+      "nameKey": "Items_DB/prop_light_Ceiling_Light_02/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_light_Ceiling_Light_03",
+      "name": "Mithonia",
+      "zhName": "米索尼娅顶灯",
+      "nameKey": "Items_DB/prop_light_Ceiling_Light_03/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_light_Ceiling_Light_04",
+      "name": "Mithonia Flat",
+      "zhName": "米索尼娅扁平顶灯",
+      "nameKey": "Items_DB/prop_light_Ceiling_Light_04/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_light_Ceiling_Light_05",
+      "name": "SCABO",
+      "zhName": "斯卡博顶灯",
+      "nameKey": "Items_DB/prop_light_Ceiling_Light_05/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_light_Ceiling_Light_06",
+      "name": "BYMAX",
+      "zhName": "拜马克斯顶灯",
+      "nameKey": "Items_DB/prop_light_Ceiling_Light_06/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_light_Ceiling_Light_07",
+      "name": "BUMMER",
+      "zhName": "巴默顶灯",
+      "nameKey": "Items_DB/prop_light_Ceiling_Light_07/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_deco_Wall_Art_01",
+      "name": "Gatsby le magnifique - Painting",
+      "zhName": "《了不起的盖茨比》油画",
+      "nameKey": "Items_DB/prop_deco_Wall_Art_01/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_deco_Wall_Art_02",
+      "name": "Freedom - Painting",
+      "zhName": "《自由》油画",
+      "nameKey": "Items_DB/prop_deco_Wall_Art_02/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_deco_Wall_Art_03",
+      "name": "RedLove - Painting",
+      "zhName": "《红色爱恋》油画",
+      "nameKey": "Items_DB/prop_deco_Wall_Art_03/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_deco_Wall_Art_04",
+      "name": "Sexy & i know it - Painting",
+      "zhName": "《我知道我很性感》油画",
+      "nameKey": "Items_DB/prop_deco_Wall_Art_04/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_deco_Wall_Art_05",
+      "name": "Virgin nature - Painting",
+      "zhName": "《原始自然》油画",
+      "nameKey": "Items_DB/prop_deco_Wall_Art_05/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_deco_Wall_Art_06",
+      "name": "Winter is now - Painting",
+      "zhName": "《冬日已至》油画",
+      "nameKey": "Items_DB/prop_deco_Wall_Art_06/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_deco_Wall_Art_07",
+      "name": "Me, my self and my tie - Painting",
+      "zhName": "《我、我自己和我的领带》油画",
+      "nameKey": "Items_DB/prop_deco_Wall_Art_07/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_deco_Wall_Art_08",
+      "name": "Never go back - Painting",
+      "zhName": "《永不回头》油画",
+      "nameKey": "Items_DB/prop_deco_Wall_Art_08/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_deco_Wall_Art_09",
+      "name": "Ranchy Lisa - Painting",
+      "zhName": "《兰西-莉萨》油画",
+      "nameKey": "Items_DB/prop_deco_Wall_Art_09/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_deco_Wall_Clock_01",
+      "name": "Wall'O'Clock",
+      "zhName": "墙面挂钟",
+      "nameKey": "Items_DB/prop_deco_Wall_Clock_01/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_coal",
+          "quantity": 1
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_deco_Wall_Clock_02",
+      "name": "FirsTime",
+      "zhName": "“首时”时钟",
+      "nameKey": "Items_DB/prop_deco_Wall_Clock_02/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_coal",
+          "quantity": 1
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_deco_Wall_Mirror_01",
+      "name": "Arabic Mirror",
+      "zhName": "阿拉伯风格镜子",
+      "nameKey": "Items_DB/prop_deco_Wall_Mirror_01/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 3
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_deco_Wall_Mirror_02",
+      "name": "ReSta Mirror",
+      "zhName": "瑞斯塔镜子",
+      "nameKey": "Items_DB/prop_deco_Wall_Mirror_02/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 5
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Converter_BreadBin_01",
+      "name": "Bread Box",
+      "zhName": "面包盒",
+      "nameKey": "Items_DB/prop_Converter_BreadBin_01/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 1
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Converter_Jar_01",
+      "name": "Hamilton - Glass Jar",
+      "zhName": "汉密尔顿牌玻璃罐",
+      "nameKey": "Items_DB/prop_Converter_Jar_01/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_Converter_Jar_02",
+      "name": "Kiki - Glass Jar",
+      "zhName": "琪琪牌玻璃罐",
+      "nameKey": "Items_DB/prop_Converter_Jar_02/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_deco_Flowers_01",
+      "name": "Flowers'in'pot",
+      "zhName": "盆栽花卉",
+      "nameKey": "Items_DB/prop_deco_Flowers_01/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_deco_Flowers_02",
+      "name": "Flowers'in'pot",
+      "zhName": "盆栽花卉",
+      "nameKey": "Items_DB/prop_deco_Flowers_02/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_deco_Flowers_03",
+      "name": "Flowers'in'pot",
+      "zhName": "盆栽花卉",
+      "nameKey": "Items_DB/prop_deco_Flowers_03/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_deco_PotPlant_01",
+      "name": "Plants'in'pot",
+      "zhName": "盆栽植物",
+      "nameKey": "Items_DB/prop_deco_PotPlant_01/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_deco_PotPlant_02",
+      "name": "Plants'in'pot",
+      "zhName": "盆栽植物",
+      "nameKey": "Items_DB/prop_deco_PotPlant_02/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_deco_PotPlant_03",
+      "name": "Plants'in'pot",
+      "zhName": "盆栽植物",
+      "nameKey": "Items_DB/prop_deco_PotPlant_03/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_deco_PotPlant_04",
+      "name": "Plants'in'pot",
+      "zhName": "盆栽植物",
+      "nameKey": "Items_DB/prop_deco_PotPlant_04/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "prop_deco_PotPlant_05",
+      "name": "Plants'in'pot",
+      "zhName": "盆栽植物",
+      "nameKey": "Items_DB/prop_deco_PotPlant_05/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_deco_Plant_01",
+      "name": "Ground Plant",
+      "zhName": "地栽植物",
+      "nameKey": "Items_DB/prop_deco_Plant_01/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_deco_Plant_02",
+      "name": "Ground Plant",
+      "zhName": "地栽植物",
+      "nameKey": "Items_DB/prop_deco_Plant_02/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "prop_deco_Globe_01",
+      "name": "Flat Earth",
+      "zhName": "扁平地球",
+      "nameKey": "Items_DB/prop_deco_Globe_01/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 1
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "Deco_veronda_hangingPlant_01",
+      "name": "Hanging Plant",
+      "zhName": "悬挂植物",
+      "nameKey": "Items_DB/Deco_veronda_hangingPlant_01/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "Deco_veronda_hangingPlant_02",
+      "name": "Hanging Flowers",
+      "zhName": "悬挂花卉",
+      "nameKey": "Items_DB/Deco_veronda_hangingPlant_02/Name",
+      "sourceId": "Deco_Recipes-29c41bdd46",
+      "category": "decoration",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_11",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "n"
+    },
+    {
+      "id": "red_tent",
+      "name": "Red Tent",
+      "zhName": "红色帐篷",
+      "nameKey": "Items_DB/red_tent/Name",
+      "sourceId": "Autres_Recipes-8ea6b0aca6",
+      "category": "essentials",
+      "workbench": false,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 4
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 5
+        }
+      ],
+      "questRequirements": [],
+      "demoFlag": "y"
+    },
+    {
+      "id": "Building_Workbench_1",
+      "name": "Workbench",
+      "zhName": "工作台",
+      "nameKey": "Items_DB/Building_Workbench_1/Name",
+      "sourceId": "Autres_Recipes-8ea6b0aca6",
+      "category": "essentials",
+      "workbench": false,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 5
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 5
+        }
+      ],
+      "questRequirements": [
+        {
+          "id": "F_Quest_10",
+          "configuredState": 1
+        }
+      ],
+      "demoFlag": "y"
+    },
+    {
+      "id": "red_tent_4",
+      "name": "Red Tent for 4",
+      "zhName": "4人红色帐篷",
+      "nameKey": "Items_DB/red_tent_4/Name",
+      "sourceId": "Autres_Recipes-8ea6b0aca6",
+      "category": "essentials",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 8
+        },
+        {
+          "id": "ressource_wood",
+          "quantity": 10
+        }
+      ],
+      "questRequirements": [],
+      "demoFlag": "n"
+    },
+    {
+      "id": "tools_rope",
+      "name": "Rope",
+      "zhName": "绳子",
+      "nameKey": "Items_DB/tools_rope/Name",
+      "sourceId": "Autres_Recipes-8ea6b0aca6",
+      "category": "essentials",
+      "workbench": false,
+      "materials": [
+        {
+          "id": "ressource_straw",
+          "quantity": 1
+        }
+      ],
+      "questRequirements": [],
+      "demoFlag": "n"
+    },
+    {
+      "id": "tools_torch",
+      "name": "Torch",
+      "zhName": "火把",
+      "nameKey": "Items_DB/tools_torch/Name",
+      "sourceId": "Autres_Recipes-8ea6b0aca6",
+      "category": "essentials",
+      "workbench": false,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_straw",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [],
+      "demoFlag": "y"
+    },
+    {
+      "id": "tools_flashlight",
+      "name": "FlashLight",
+      "zhName": "手电筒",
+      "nameKey": "Items_DB/tools_flashlight/Name",
+      "sourceId": "Autres_Recipes-8ea6b0aca6",
+      "category": "essentials",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_zerkonite",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_coal",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [],
+      "demoFlag": "y"
+    },
+    {
+      "id": "weapon_bomb_lvl1",
+      "name": "Small Manual Bomb",
+      "zhName": "小型手动炸弹",
+      "nameKey": "Items_DB/weapon_bomb_lvl1/Name",
+      "sourceId": "Autres_Recipes-8ea6b0aca6",
+      "category": "essentials",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        },
+        {
+          "id": "ressource_zerkonite",
+          "quantity": 5
+        },
+        {
+          "id": "ressource_coal",
+          "quantity": 5
+        }
+      ],
+      "questRequirements": [],
+      "demoFlag": "n"
+    },
+    {
+      "id": "tools_fireextinguisher",
+      "name": "Fire extinguisher",
+      "zhName": "灭火器",
+      "nameKey": "Items_DB/tools_fireextinguisher/Name",
+      "sourceId": "Autres_Recipes-8ea6b0aca6",
+      "category": "essentials",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 1
+        },
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [],
+      "demoFlag": "y"
+    },
+    {
+      "id": "house_fondation_Exterior_Wood",
+      "name": "Wood foundation - Exterior",
+      "zhName": "室外木地基",
+      "nameKey": "Items_DB/house_fondation_Exterior_Wood/Name",
+      "sourceId": "Autres_Recipes-8ea6b0aca6",
+      "category": "essentials",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_wood",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [],
+      "demoFlag": "y"
+    },
+    {
+      "id": "house_fondation_Exterior_Concrete",
+      "name": "Concrete foundation - Exterior",
+      "zhName": "室外混凝土地基",
+      "nameKey": "Items_DB/house_fondation_Exterior_Concrete/Name",
+      "sourceId": "Autres_Recipes-8ea6b0aca6",
+      "category": "essentials",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [],
+      "demoFlag": "y"
+    },
+    {
+      "id": "house_fondation_Exterior_Rock",
+      "name": "Rocks foundation - Exterior",
+      "zhName": "室外岩石地基",
+      "nameKey": "Items_DB/house_fondation_Exterior_Rock/Name",
+      "sourceId": "Autres_Recipes-8ea6b0aca6",
+      "category": "essentials",
+      "workbench": true,
+      "materials": [
+        {
+          "id": "ressource_rock_simple",
+          "quantity": 2
+        }
+      ],
+      "questRequirements": [],
+      "demoFlag": "y"
+    }
+  ],
+  "tools": [
+    {
+      "id": "tools_rope",
+      "name": "Rope",
+      "zhName": "绳子",
+      "nameKey": "Items_DB/tools_rope/Name",
+      "sourceId": "ToolsWeapons-8a7c01dbe1",
+      "toolType": "ROPE",
+      "stackable": true,
+      "bodySlot": "Left_Hand_Weapon",
+      "energy": {
+        "consumption": 0,
+        "supply": 0
+      }
+    },
+    {
+      "id": "tools_axe_metal",
+      "name": "Axe",
+      "zhName": "斧头",
+      "nameKey": "Items_DB/tools_axe_metal/Name",
+      "sourceId": "ToolsWeapons-8a7c01dbe1",
+      "toolType": "AXE",
+      "stackable": false,
+      "bodySlot": "Right_Hand_Weapon",
+      "energy": {
+        "consumption": 4,
+        "supply": 0
+      }
+    },
+    {
+      "id": "tools_hoe_metal",
+      "name": "Hoe",
+      "zhName": "锄头",
+      "nameKey": "Items_DB/tools_hoe_metal/Name",
+      "sourceId": "ToolsWeapons-8a7c01dbe1",
+      "toolType": "HOE",
+      "stackable": false,
+      "bodySlot": "Right_Hand_Weapon",
+      "energy": {
+        "consumption": 4,
+        "supply": 0
+      }
+    },
+    {
+      "id": "tools_pick_metal",
+      "name": "Pickaxe",
+      "zhName": "镐头",
+      "nameKey": "Items_DB/tools_pick_metal/Name",
+      "sourceId": "ToolsWeapons-8a7c01dbe1",
+      "toolType": "PICK",
+      "stackable": false,
+      "bodySlot": "Right_Hand_Weapon",
+      "energy": {
+        "consumption": 4,
+        "supply": 0
+      }
+    },
+    {
+      "id": "tools_watercan_metal",
+      "name": "Watering Can",
+      "zhName": "洒水壶",
+      "nameKey": "Items_DB/tools_watercan_metal/Name",
+      "sourceId": "ToolsWeapons-8a7c01dbe1",
+      "toolType": "WATERCAN",
+      "stackable": false,
+      "bodySlot": "Right_Hand_Weapon",
+      "energy": {
+        "consumption": 4,
+        "supply": 0
+      }
+    },
+    {
+      "id": "tools_bucket_wood",
+      "name": "Bucket",
+      "zhName": "水桶",
+      "nameKey": "Items_DB/tools_bucket_wood/Name",
+      "sourceId": "ToolsWeapons-8a7c01dbe1",
+      "toolType": "BUCKET",
+      "stackable": false,
+      "bodySlot": "Right_Hand_Weapon",
+      "energy": {
+        "consumption": 2,
+        "supply": 0
+      }
+    },
+    {
+      "id": "tools_hammer_metal",
+      "name": "Hammer",
+      "zhName": "锤子",
+      "nameKey": "Items_DB/tools_hammer_metal/Name",
+      "sourceId": "ToolsWeapons-8a7c01dbe1",
+      "toolType": "HAMMER",
+      "stackable": false,
+      "bodySlot": "Right_Hand_Weapon",
+      "energy": {
+        "consumption": 4,
+        "supply": 0
+      }
+    },
+    {
+      "id": "weapon_Knife_01",
+      "name": "Kitchen Knife",
+      "zhName": "菜刀",
+      "nameKey": "Items_DB/weapon_Knife_01/Name",
+      "sourceId": "ToolsWeapons-8a7c01dbe1",
+      "toolType": null,
+      "stackable": true,
+      "bodySlot": "Right_Hand_Weapon",
+      "energy": {
+        "consumption": 2,
+        "supply": 0
+      }
+    },
+    {
+      "id": "weapon_Fork_01",
+      "name": "Fork",
+      "zhName": "叉子",
+      "nameKey": "Items_DB/weapon_Fork_01/Name",
+      "sourceId": "ToolsWeapons-8a7c01dbe1",
+      "toolType": null,
+      "stackable": true,
+      "bodySlot": "Left_Hand_Weapon",
+      "energy": {
+        "consumption": 2,
+        "supply": 0
+      }
+    },
+    {
+      "id": "tools_flashlight",
+      "name": "FlashLight",
+      "zhName": "手电筒",
+      "nameKey": "Items_DB/tools_flashlight/Name",
+      "sourceId": "ToolsWeapons-8a7c01dbe1",
+      "toolType": null,
+      "stackable": false,
+      "bodySlot": "Right_Hand_Weapon",
+      "energy": {
+        "consumption": 0,
+        "supply": 0
+      }
+    },
+    {
+      "id": "tools_torch",
+      "name": "Torch",
+      "zhName": "火把",
+      "nameKey": "Items_DB/tools_torch/Name",
+      "sourceId": "ToolsWeapons-8a7c01dbe1",
+      "toolType": null,
+      "stackable": true,
+      "bodySlot": "Left_Hand_Weapon",
+      "energy": {
+        "consumption": 0,
+        "supply": 0
+      }
+    },
+    {
+      "id": "weapon_bomb_lvl1",
+      "name": "Small Manual Bomb",
+      "zhName": "小型手动炸弹",
+      "nameKey": "Items_DB/weapon_bomb_lvl1/Name",
+      "sourceId": "ToolsWeapons-8a7c01dbe1",
+      "toolType": null,
+      "stackable": true,
+      "bodySlot": "TwoHandHolder",
+      "energy": {
+        "consumption": 0,
+        "supply": 0
+      }
+    },
+    {
+      "id": "generic_cargo",
+      "name": "Cargo",
+      "zhName": "货物",
+      "nameKey": "Items_DB/generic_cargo/Name",
+      "sourceId": "ToolsWeapons-8a7c01dbe1",
+      "toolType": null,
+      "stackable": true,
+      "bodySlot": "TwoHandHolder",
+      "energy": null
+    },
+    {
+      "id": "tools_seed_bag",
+      "name": "Seed Bag",
+      "zhName": "种子袋",
+      "nameKey": "Items_DB/tools_seed_bag/Name",
+      "sourceId": "ToolsWeapons-8a7c01dbe1",
+      "toolType": null,
+      "stackable": false,
+      "bodySlot": "Right_Hand_Weapon",
+      "energy": null
+    },
+    {
+      "id": "tools_fertilizer_box",
+      "name": "Fertilizer Box",
+      "zhName": "肥料箱",
+      "nameKey": "Items_DB/tools_fertilizer_box/Name",
+      "sourceId": "ToolsWeapons-8a7c01dbe1",
+      "toolType": null,
+      "stackable": false,
+      "bodySlot": "Right_Hand_Weapon",
+      "energy": null
+    },
+    {
+      "id": "tools_fireextinguisher",
+      "name": "Fire extinguisher",
+      "zhName": "灭火器",
+      "nameKey": "Items_DB/tools_fireextinguisher/Name",
+      "sourceId": "ToolsWeapons-8a7c01dbe1",
+      "toolType": "FIRE_EXTINGUISHER",
+      "stackable": false,
+      "bodySlot": "Right_Hand_Weapon",
+      "energy": {
+        "consumption": 1,
+        "supply": 0
+      }
+    },
+    {
+      "id": "weapon_rifle_lvl1",
+      "name": "AK-45 Advanced",
+      "zhName": "AK-45进阶款步枪",
+      "nameKey": "Items_DB/weapon_rifle_lvl1/Name",
+      "sourceId": "ToolsWeapons-8a7c01dbe1",
+      "toolType": null,
+      "stackable": false,
+      "bodySlot": "Right_Hand_Weapon",
+      "energy": {
+        "consumption": 4,
+        "supply": 0
+      }
+    },
+    {
+      "id": "weapon_revolver_lvl1",
+      "name": "Revolver",
+      "zhName": "左轮手枪",
+      "nameKey": "Items_DB/weapon_revolver_lvl1/Name",
+      "sourceId": "ToolsWeapons-8a7c01dbe1",
+      "toolType": null,
+      "stackable": false,
+      "bodySlot": "Right_Hand_Weapon",
+      "energy": {
+        "consumption": 4,
+        "supply": 0
+      }
+    }
+  ]
+}

@@ -14,6 +14,7 @@ const path = require("node:path");
 const root = path.resolve(__dirname, "..");
 const data = JSON.parse(fs.readFileSync(path.join(root, "data", "crops.json"), "utf8"));
 const { renderCropFacts, renderBuildOnlyCrops } = require('./render-database-browser.cjs');
+const shops = require('../data/build-shops.json');
 
 function escapeHtml(text) {
   return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -54,6 +55,27 @@ function renderFact(fact) {
   return `          <li${cls}>${escapeHtml(fact.text)} ${badge(fact)} ${renderSources(fact.sourceIds)}</li>`;
 }
 
+function renderFertilizerProfile(entry, locale, observations) {
+  const zh = locale === 'zh', prefix = zh ? '/zh' : '';
+  const ref = entry.buildInput;
+  const title = zh ? ref.zhName : ref.name;
+  const summary = zh ? entry.zh.summary : entry.summary;
+  const fields = [
+    [zh ? '体力消耗' : 'Energy use', ref.energy.consumption],
+    [zh ? '体力恢复' : 'Energy restored', ref.energy.restoration],
+    [zh ? '可堆叠' : 'Stackable', ref.stackable ? (zh ? '是' : 'Yes') : (zh ? '否' : 'No')],
+    [zh ? '持握位置' : 'Held in', ref.equippable && ref.heldSlot === 'Right_Hand_Weapon' ? (zh ? '右手' : 'Right hand') : (zh ? '未确认' : 'Unconfirmed')],
+  ];
+  const offers = shops.offers.filter(o => o.itemId === ref.sourceItemId);
+  const shopLinks = offers.map(o => `<a href="${prefix}/guides/resources-and-materials#offer-${o.id}">${zh ? '商店记录' : 'Shop listing'} →</a>`).join('');
+  const searchText = `${summary} ${fields.map(([label,value]) => `${label}: ${value}`).join(' · ')}. ${zh ? '实际效果尚未验证。' : 'Actual effects are unverified.'}`;
+  return `<section class="evidence-ledger animal-profile" id="${entry.id}" data-search-entry data-search-title="${escapeHtml(title)}" data-search-text="${escapeHtml(searchText)}" data-search-tags="${escapeHtml(`${entry.searchTags} ${entry.zh.searchTags} ${ref.name} ${ref.zhName}`)}" data-search-status="${zh ? '游戏文件配置 · 未实测' : 'Game-file settings · not gameplay-tested'}" aria-labelledby="${entry.id}-heading">
+<h2 id="${entry.id}-heading">${escapeHtml(zh ? `${ref.zhName} ${ref.name}` : ref.name)}</h2><p class="lead">${escapeHtml(summary)}</p>
+<div class="database-config" data-fertilizer-config><p><strong>${zh ? '游戏文件配置' : 'Game-file settings'}</strong></p><dl class="database-facts">${fields.map(([label,value]) => `<div><dt>${label}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}</dl><p class="database-browse-note">${zh ? '体力值为配置，不是单次操作实测。实际效果尚未验证；官方曾警告肥料计算错误。' : 'Energy values are configuration, not a tested per-action cost. Actual effects are unverified; official support previously warned about fertilizer calculations.'}</p><div class="database-guide-links">${shopLinks}<a href="${prefix}/guides/farming-fields#fertilizer">${zh ? '肥料警告与测试状态' : 'Fertilizer warning & test status'}</a></div></div>
+<details class="database-reference-notes"><summary>${zh ? '配置来源与说明' : 'Configuration sources & notes'}</summary><p>${zh ? '站长整理，非官方资料。用途摘要来自Fertilizers物品表；I2英中说明栏均为空，不冒充游戏界面文本。' : 'Unofficial editor-collected reference. Intended use is paraphrased from the Fertilizers item table; English and Chinese I2 description slots are empty, so it is not presented as UI text.'} ${ref.build} · Steam 24847725.</p><p>${zh ? '名称逐项核对I2原字节。种子商店表在全年分组引用此项，不保证当前库存、售价或效果。' : 'Names are checked against I2 bytes. The seed-store table references this item in its all-season group; this does not guarantee current stock, price or effects.'}</p></details>
+${observations}</section>`;
+}
+
 function renderProfile(entry, kicker) {
   const fields = entry.fields.map((field) => {
     const confirmed = field.facts.filter((f) => f.validity !== "unknown");
@@ -76,6 +98,7 @@ ${pending.map(renderFact).join("\n")}
 ${parts.join("\n")}`;
   }).join("\n");
 
+  if (entry.buildInput) return renderFertilizerProfile(entry, 'en', fields);
   return `      <section class="evidence-ledger animal-profile" id="${entry.id}" data-search-entry data-search-title="${escapeHtml(entry.name)}" data-search-tags="${escapeHtml(entry.searchTags)}" data-search-status="Database record" aria-labelledby="${entry.id}-heading">
         <div class="section-heading-row">
           <div>
@@ -102,20 +125,20 @@ function renderHistoricalTable(crops) {
 
 function renderVideoTable(crops, inputs) {
   const rows = [];
-  const push = (id, name, row) => {
+  const push = (id, name, row, profileId = null) => {
     const price = row.price ? `<td data-sort="${row.price.sort}">${escapeHtml(row.price.display)}</td>` : "<td>—</td>";
     const badgeHtml = row.status === "Video-observed"
       ? '<span class="tag evidence-video">Video-observed</span>'
       : '<span class="tag evidence-lead">Unverified lead</span>';
-    rows.push(`              <tr id="${id}" data-search-entry data-search-title="${escapeHtml(name)}" data-search-tags="${escapeHtml(row.tags)}" data-search-status="${row.status}" data-category="video">
-                <td><a class="entry-anchor" href="#${id}">${escapeHtml(name)}</a></td>
+    rows.push(`              <tr id="${id}"${profileId ? '' : ' data-search-entry'} data-search-title="${escapeHtml(name)}" data-search-tags="${escapeHtml(row.tags)}" data-search-status="${row.status}" data-category="video">
+                <td><a class="entry-anchor" href="#${profileId || id}">${escapeHtml(name)}</a></td>
                 ${price}
                 <td>${escapeHtml(row.details)}</td>
                 <td>${badgeHtml} <span title="Observed in Games Station gameplay footage (V0.8.10.455) at ${escapeHtml(row.timestamp)}">Games Station video, ${escapeHtml(row.timestamp)}</span></td>
               </tr>`);
   };
   for (const c of crops) if (c.videoRow) push(`${c.id}-seed-observed`, c.videoRow.status === "Video-observed" ? `${c.name} Seed` : `${c.name} Seed (seen in shop)`, c.videoRow);
-  for (const i of inputs) if (i.videoRow) push(`${i.id}-observed`, i.name, i.videoRow);
+  for (const i of inputs) if (i.videoRow) push(`${i.id}-observed`, i.name, i.videoRow, i.buildInput ? i.id : null);
   return rows.join("\n");
 }
 
@@ -309,7 +332,7 @@ ${renderHistoricalTable(data.crops)}
           </div>
           <a class="text-link" href="/contact">Submit a current-build correction</a>
         </div>
-        <p>These rows come from a frame-by-frame review of a public gameplay video on the current Early Access build, inside the Leafy Market "Seed &amp; Fertilizer" tab. Values are shown exactly as displayed on screen; nothing here was measured hands-on by this site.</p>
+        <p>These rows were recorded in a public gameplay video on build 0.8.10.455, inside the Leafy Market "Seed &amp; Fertilizer" tab. They are historical observations, not current prices or hands-on measurements by this site.</p>
         <div class="data-table-wrap">
           <table class="data-table evidence-table" id="crop-video-table">
             <thead>
@@ -327,7 +350,7 @@ ${renderVideoTable(data.crops, data.inputs)}
         </div>
 
         <div class="notice warning">
-          <strong>Hold off on fertilizer for now:</strong> the developers say fertilizer "is not currently calculating correctly" in this build, it is being looked into, and the official advice is to <strong>avoid investing until it is adjusted</strong> <small>Official reply, Aug 2026</small>. One player's test matches the warning — roughly 8,000C of fertilizer produced about 79C of extra sales <small>Single player report</small>. Wait for a fix before buying the 288C Rare bag, let alone premium tiers.
+          <strong>Fertilizer test status:</strong> official support warned about incorrect calculations on August 4, 2026. Current-build effects have not been retested here. The later patch notes do not announce a fertilizer fix, but that alone cannot prove behavior is unchanged. <a href="/guides/farming-fields#fertilizer">Warning and evidence</a>.
         </div>
 
         <div class="data-conflict">
@@ -498,6 +521,7 @@ function renderZhEntry(entry) {
     return `${h}${items ? `<ul class="evidence-list">${items}</ul>` : ""}${pendingBlock}`;
   }).join("");
   const decision = zh.decision ? `<div class="entity-decision"><strong>什么时候查</strong><p>${escapeHtml(zh.decision)}</p><div class="button-stack"><a class="btn btn-outline btn-compact" href="/zh/guides/farming-fields">种地实战攻略</a><a class="btn btn-outline btn-compact" href="/zh/guides/money-making#cashin">CashIn 出售</a>${entry.videoRow ? '<a class="btn btn-outline btn-compact" href="/zh/map#leafy-market">Leafy Market</a>' : ""}</div></div>` : "";
+  if (entry.buildInput) return renderFertilizerProfile(entry, 'zh', groups);
   return `    <section class="evidence-ledger animal-profile" id="${entry.id}" data-search-entry data-search-title="${escapeHtml(zh.searchTitle)}" data-search-tags="${escapeHtml(zh.searchTags)}">${head}${summary}${renderCropFacts(data, entry.id, 'zh')}${decision}${groups}</section>`;
 }
 

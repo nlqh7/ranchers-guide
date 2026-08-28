@@ -70,12 +70,16 @@ for (const relative of ["tools/ranch-checklist.html", "zh/tools/ranch-checklist.
   check(html, /data-checklist-overview/, `${relative}: checklist needs a global progress overview`);
   assert.equal((html.match(/data-checklist-panel=/g) || []).length, 7, `${relative}: checklist goal coverage drifted`);
   check(html, /data-material-checklist/);
+  check(html, /data-material-owned/);
+  assert.doesNotMatch(html, /data-material-ready/, `${relative}: material checklist should use quantities, not binary ready flags`);
   assert.equal((html.match(/data-material-requirement/g) || []).length, 2, `${relative}: confirmed material checklist drifted`);
 }
 const checklistScript = read("assets/js/ranch-checklist.js");
 check(checklistScript, /localStorage/);
 check(checklistScript, /data-check-item/);
 check(checklistScript, /data-checklist-overview/);
+check(checklistScript, /materialQuantity/);
+check(checklistScript, /data-material-owned/);
 
 for (const relative of ["map.html", "zh/map.html"]) {
   const html = read(relative);

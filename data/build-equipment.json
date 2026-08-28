@@ -1,0 +1,870 @@
+{
+  "build": "0.8.10.842",
+  "steamBuild": "24847725",
+  "evidenceLevel": "build-observed",
+  "validity": "unknown",
+  "unit": null,
+  "interval": null,
+  "seasons": [
+    "Spring",
+    "Summer",
+    "Autumn",
+    "Winter"
+  ],
+  "sources": {
+    "localization": {
+      "asset": "resources.assets",
+      "pathId": 393483,
+      "rawSha256": "2c505386fe9b1b9c2579aad1e6957907db838d8c7f87227e818fbfd4b57d5f4e",
+      "kind": "local-build",
+      "title": "Owned-build item localization",
+      "url": null
+    },
+    "PLC_EnergyGenerators-5de1fd7a70": {
+      "kind": "local-build",
+      "title": "PLC_EnergyGenerators",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12052,
+      "rawSha256": "5de1fd7a70c5ca82f6ee2007f044bb6ec724c1cb4424f0a7879bce680d930eda"
+    },
+    "PLC_Devices-9ab04c62c0": {
+      "kind": "local-build",
+      "title": "PLC_Devices",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12059,
+      "rawSha256": "9ab04c62c088e22b168ae6a22c3155eb4d7c84a2ab7a31ebe9d20a2d20bbdcbf"
+    }
+  },
+  "equipment": [
+    {
+      "id": "prop_Roof_LVL1_SolarPanel_01",
+      "name": "Roof Solar Panel",
+      "zhName": "屋顶太阳能电池板",
+      "nameKey": "Items_DB/prop_Roof_LVL1_SolarPanel_01/Name",
+      "group": "generators",
+      "sourceId": "PLC_EnergyGenerators-5de1fd7a70",
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "electricity": {
+        "supply": [
+          5,
+          6,
+          3,
+          2
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "enrg_solar_n1",
+      "name": "Solar Panel (Basic)",
+      "zhName": "基础款太阳能电池板",
+      "nameKey": "Items_DB/enrg_solar_n1/Name",
+      "group": "generators",
+      "sourceId": "PLC_EnergyGenerators-5de1fd7a70",
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "electricity": {
+        "supply": [
+          5,
+          6,
+          3,
+          2
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "enrg_solar_n1b",
+      "name": "Big Solar Panel (Basic)",
+      "zhName": "基础款大型太阳能电池板",
+      "nameKey": "Items_DB/enrg_solar_n1b/Name",
+      "group": "generators",
+      "sourceId": "PLC_EnergyGenerators-5de1fd7a70",
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "electricity": {
+        "supply": [
+          9,
+          12,
+          6,
+          3
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "enrg_solar_n2",
+      "name": "Solar Panel (Upgraded)",
+      "zhName": "升级款太阳能电池板",
+      "nameKey": "Items_DB/enrg_solar_n2/Name",
+      "group": "generators",
+      "sourceId": "PLC_EnergyGenerators-5de1fd7a70",
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "electricity": {
+        "supply": [
+          8,
+          10,
+          5,
+          3
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "enrg_solar_n2b",
+      "name": "Big Solar Panel (Upgraded)",
+      "zhName": "升级款大型太阳能电池板",
+      "nameKey": "Items_DB/enrg_solar_n2b/Name",
+      "group": "generators",
+      "sourceId": "PLC_EnergyGenerators-5de1fd7a70",
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "electricity": {
+        "supply": [
+          15,
+          20,
+          10,
+          5
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "enrg_solar_n3",
+      "name": "Solar Panel (Advanced)",
+      "zhName": "高级款太阳能电池板",
+      "nameKey": "Items_DB/enrg_solar_n3/Name",
+      "group": "generators",
+      "sourceId": "PLC_EnergyGenerators-5de1fd7a70",
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "electricity": {
+        "supply": [
+          11,
+          14,
+          7,
+          4
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "enrg_solar_n3b",
+      "name": "Big Solar Panel (Advanced)",
+      "zhName": "高级款大型太阳能电池板",
+      "nameKey": "Items_DB/enrg_solar_n3b/Name",
+      "group": "generators",
+      "sourceId": "PLC_EnergyGenerators-5de1fd7a70",
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "electricity": {
+        "supply": [
+          21,
+          28,
+          14,
+          7
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "enrg_windturbine_n2",
+      "name": "Wind Turbine (Upgraded)",
+      "zhName": "升级款风力涡轮机",
+      "nameKey": "Items_DB/enrg_windturbine_n2/Name",
+      "group": "generators",
+      "sourceId": "PLC_EnergyGenerators-5de1fd7a70",
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "electricity": {
+        "supply": [
+          30,
+          15,
+          45,
+          60
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "enrg_windturbine_n3",
+      "name": "Wind Turbine (Advanced)",
+      "zhName": "高级款风力涡轮机",
+      "nameKey": "Items_DB/enrg_windturbine_n3/Name",
+      "group": "generators",
+      "sourceId": "PLC_EnergyGenerators-5de1fd7a70",
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "electricity": {
+        "supply": [
+          40,
+          20,
+          60,
+          80
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "enrg_water_pump_n1",
+      "name": "Water Pump(Basic)",
+      "zhName": "基础款水泵",
+      "nameKey": "Items_DB/enrg_water_pump_n1/Name",
+      "group": "generators",
+      "sourceId": "PLC_EnergyGenerators-5de1fd7a70",
+      "water": {
+        "supply": [
+          17,
+          17,
+          17,
+          13
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "electricity": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          17,
+          17,
+          17,
+          17
+        ]
+      }
+    },
+    {
+      "id": "prop_TV_Flat_01",
+      "name": "Flat Television",
+      "zhName": "平板电视",
+      "nameKey": "Items_DB/prop_TV_Flat_01/Name",
+      "group": "devices",
+      "sourceId": "PLC_Devices-9ab04c62c0",
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "electricity": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          3,
+          3,
+          3,
+          3
+        ]
+      }
+    },
+    {
+      "id": "prop_Wall_Heater_01",
+      "name": "Heather",
+      "zhName": "海瑟加热器",
+      "nameKey": "Items_DB/prop_Wall_Heater_01/Name",
+      "group": "devices",
+      "sourceId": "PLC_Devices-9ab04c62c0",
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "electricity": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          1,
+          1,
+          4,
+          4
+        ]
+      }
+    },
+    {
+      "id": "prop_Wall_AirConditioner_01",
+      "name": "Air Conditioner",
+      "zhName": "空调",
+      "nameKey": "Items_DB/prop_Wall_AirConditioner_01/Name",
+      "group": "devices",
+      "sourceId": "PLC_Devices-9ab04c62c0",
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "electricity": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          4,
+          4,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "prop_Kitchen_Fridge_01",
+      "name": "LOGAN",
+      "zhName": "洛根冰箱",
+      "nameKey": "Items_DB/prop_Kitchen_Fridge_01/Name",
+      "group": "devices",
+      "sourceId": "PLC_Devices-9ab04c62c0",
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "electricity": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          4,
+          4,
+          4,
+          4
+        ]
+      }
+    },
+    {
+      "id": "prop_Kitchen_Fridge_02",
+      "name": "FRYZBAR",
+      "zhName": "福莱斯吧冰箱",
+      "nameKey": "Items_DB/prop_Kitchen_Fridge_02/Name",
+      "group": "devices",
+      "sourceId": "PLC_Devices-9ab04c62c0",
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "electricity": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          5,
+          5,
+          5,
+          5
+        ]
+      }
+    },
+    {
+      "id": "prop_Kitchen_Oven_01",
+      "name": "OVYY",
+      "zhName": "奥维烤箱",
+      "nameKey": "Items_DB/prop_Kitchen_Oven_01/Name",
+      "group": "devices",
+      "sourceId": "PLC_Devices-9ab04c62c0",
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "electricity": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          7,
+          7,
+          7,
+          7
+        ]
+      }
+    },
+    {
+      "id": "prop_Kitchen_CounterWashing_01",
+      "name": "KNOXUL WOOSH",
+      "zhName": "诺克斯尔伍什清洗台",
+      "nameKey": "Items_DB/prop_Kitchen_CounterWashing_01/Name",
+      "group": "devices",
+      "sourceId": "PLC_Devices-9ab04c62c0",
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "electricity": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "prop_Converter_CoffeeMachine_01",
+      "name": "KitchenMaid - Coffee Maker",
+      "zhName": "厨娘牌咖啡机",
+      "nameKey": "Items_DB/prop_Converter_CoffeeMachine_01/Name",
+      "group": "devices",
+      "sourceId": "PLC_Devices-9ab04c62c0",
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          3,
+          3,
+          3,
+          3
+        ]
+      },
+      "electricity": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          2,
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "id": "prop_Converter_Toaster_01",
+      "name": "Hamilton - Toaster",
+      "zhName": "汉密尔顿牌烤面包机",
+      "nameKey": "Items_DB/prop_Converter_Toaster_01/Name",
+      "group": "devices",
+      "sourceId": "PLC_Devices-9ab04c62c0",
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "electricity": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "prop_Converter_Microwave_01",
+      "name": "Hamilton - Microwave",
+      "zhName": "汉密尔顿牌微波炉",
+      "nameKey": "Items_DB/prop_Converter_Microwave_01/Name",
+      "group": "devices",
+      "sourceId": "PLC_Devices-9ab04c62c0",
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "electricity": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          3,
+          3,
+          3,
+          3
+        ]
+      }
+    },
+    {
+      "id": "prop_Computer_01",
+      "name": "Predator PC",
+      "zhName": "掠夺者牌笔记本电脑",
+      "nameKey": "Items_DB/prop_Computer_01/Name",
+      "group": "devices",
+      "sourceId": "PLC_Devices-9ab04c62c0",
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "electricity": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          2,
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "id": "prop_Roof_LVL1_SatelliteDish_01",
+      "name": "Satellite Dish",
+      "zhName": "卫星锅盖",
+      "nameKey": "Items_DB/prop_Roof_LVL1_SatelliteDish_01/Name",
+      "group": "devices",
+      "sourceId": "PLC_Devices-9ab04c62c0",
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "electricity": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          2,
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "id": "prop_Roof_LVL1_Antenna_01",
+      "name": "TV Antenna",
+      "zhName": "电视天线",
+      "nameKey": "Items_DB/prop_Roof_LVL1_Antenna_01/Name",
+      "group": "devices",
+      "sourceId": "PLC_Devices-9ab04c62c0",
+      "water": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "electricity": {
+        "supply": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumption": [
+          2,
+          2,
+          2,
+          2
+        ]
+      }
+    }
+  ]
+}
