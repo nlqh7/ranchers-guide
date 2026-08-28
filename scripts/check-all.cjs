@@ -5,6 +5,9 @@ const root = path.resolve(__dirname, "..");
 const nodeChecks = [
   ["build-animals.cjs", "--check"],
   ["build-crops.cjs", "--check"],
+  ["build-database.cjs", "--check"],
+  ["check-database-browser.cjs"],
+  ["check-item-icons.cjs"],
   ["build-locations.cjs", "--check"],
   ["build-materials.cjs", "--check"],
   ["build-knowledge-entities.cjs", "--check"],
@@ -17,6 +20,7 @@ const nodeChecks = [
   ["check-content-quality.cjs"],
   ["check-ui-system.cjs"],
   ["check-animals.cjs"],
+  ["check-animal-build-reference.cjs"],
   ["check-chicken-troubleshooter.cjs"],
   ["check-community.cjs"],
   ["check-creator-notes.cjs"],

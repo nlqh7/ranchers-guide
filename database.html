@@ -22,8 +22,9 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"CollectionPage","name":"The Ranchers Knowledge Base","url":"https://theranchersguide.com/database","description":"A source-backed index of The Ranchers items, quests, locations, systems and troubleshooting answers."}
   </script>
+<link rel="stylesheet" href="/assets/css/database-browser.css?v=20260828-4">
 </head>
-<body>
+<body class="database-surface">
   <header class="site-header">
     <nav class="nav-inner" aria-label="Main navigation">
       <a class="logo" href="/"><span class="logo-mark"><img src="../assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide<small>Unofficial fan resource</small></span></a>
@@ -42,138 +43,26 @@
   </header>
 
   <main>
-    <section class="knowledge-hero knowledge-base-hero">
-      <div class="container knowledge-hero-inner">
-        <div>
-          <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Knowledge Base</nav>
-          <span class="kicker">Current build 0.8.10.842+</span>
-          <h1>The Ranchers Knowledge Base</h1>
-          <p class="lead">Search for an item, NPC, quest, location, system or symptom. Results jump to the exact answer and show whether the evidence is official, observed or still being verified.</p>
-          <p class="knowledge-hero-meta">Current baseline: 0.8.10.842 · Last reviewed: August 22, 2026 · <a href="/methodology">How we verify</a></p>
-          <div class="answer-box"><strong>Start here:</strong> choose the player goal that matches your problem. Use <a href="/database/animals">Animals</a> for care and production, <a href="/database/crops">Crops</a> for planting and selling, <a href="/database/materials">Materials</a> for building needs, or <a href="/map">Map</a> for a person or place. Then follow the linked guide or quest route.</div>
-          <form class="knowledge-search" action="/search" method="get" role="search">
-            <label for="knowledge-query">What do you need help with?</label>
-            <div class="knowledge-search-control">
-              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-              <input id="knowledge-query" name="q" type="search" placeholder="Try: where do I get hay?" autocomplete="off">
-              <button type="submit">Search</button>
-            </div>
-          </form>
-        </div>
-        <dl class="coverage-summary">
-          <div><dt>Answer pages</dt><dd>17</dd></div>
-          <div><dt>Map entries</dt><dd>29</dd></div>
-          <div><dt>Evidence levels</dt><dd>5</dd></div>
-        </dl>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="browse-topic-title">
-      <div class="container">
-        <div class="section-head">
-          <span class="kicker">Browse the index</span>
-          <h2 id="browse-topic-title">Start with what you are trying to do</h2>
-        </div>
-        <div class="knowledge-directory">
-          <article class="knowledge-category">
-            <span class="knowledge-category-number">01</span>
-            <h3>Crops & economy</h3>
-            <p>Seed prices, growth cycles, selling routes, fertilizer and profit comparisons.</p>
-            <ul>
-              <li><a href="/database/crops">Browse the crop database</a></li>
-              <li><a href="/guides/farming-fields">Watering, harvest &amp; regrow rules</a></li>
-              <li><a href="/guides/money-making#cashin">Sell crops with CashIn</a></li>
-              <li><a href="/tools/profit-calculator">Compare profit scenarios</a></li>
-            </ul>
-          </article>
-          <article class="knowledge-category">
-            <span class="knowledge-category-number">02</span>
-            <h3>Animals & care</h3>
-            <p>Buying, feeding, housing, automation, eggs, sickness and missing animals.</p>
-            <ul>
-              <li><a href="/database/animals">Browse the animal database</a></li>
-              <li><a href="/guides/animal-guide#feeding">Feed and water</a></li>
-              <li><a href="/guides/animal-guide#automation">Automate a coop</a></li>
-              <li><a href="/tools/chicken-troubleshooter">Build a chicken troubleshooting checklist</a></li>
-            </ul>
-          </article>
-          <article class="knowledge-category">
-            <span class="knowledge-category-number">03</span>
-            <h3>Items & building</h3>
-            <p>Materials, workbench menus, blueprints, placement rules and utility setup.</p>
-            <ul>
-              <li><a href="/database/materials">Browse the materials database</a></li>
-              <li><a href="/guides/resources-and-materials">Resource routes and evidence boundaries</a></li>
-              <li><a href="/guides/building-construction#workbench-menu">Workbench reference</a></li>
-              <li><a href="/guides/electricity-power#two-paths">Electricity contract steps</a></li>
-            </ul>
-          </article>
-          <article class="knowledge-category">
-            <span class="knowledge-category-number">04</span>
-            <h3>Quests</h3>
-            <p>Walkthroughs and exact recovery paths for objectives that fail or stop advancing.</p>
-            <ul>
-              <li><a href="/database/quests">Browse the quest database</a></li>
-              <li><a href="/tools/quest-tracker">Track documented objectives locally</a></li>
-              <li><a href="/guides/gigi-large-egg-quest#eggs">Gigi's large eggs</a></li>
-              <li><a href="/guides/roof-quest-stuck#flow">Roof quest decision flow</a></li>
-              <li><a href="/problems/failed-quest-replay#before">Replay a failed quest</a></li>
-            </ul>
-          </article>
-          <article class="knowledge-category">
-            <span class="knowledge-category-number">05</span>
-            <h3>Places & travel</h3>
-            <p>Shops, services, City Hall, markets, parking, subway travel and area-level map guidance.</p>
-            <ul>
-              <li><a href="/database/npcs">Browse NPCs and services</a></li>
-              <li><a href="/map#leafy-market">Browse known locations</a></li>
-              <li><a href="/problems/fast-travel-subway#compare">Use the subway</a></li>
-              <li><a href="/problems/vehicle-recovery#parking">Safe overnight parking</a></li>
-              <li><a href="/tools/ranch-checklist">Save a local ranch checklist</a></li>
-            </ul>
-          </article>
-          <article class="knowledge-category">
-            <span class="knowledge-category-number">06</span>
-            <h3>Problems & recovery</h3>
-            <p>Start from the symptom and follow a conservative sequence that protects your save.</p>
-            <ul>
-              <li><a href="/problems/offline-mode-loading#steps">Offline loading fix</a></li>
-              <li><a href="/problems/friend-session-join#checklist">Co-op joining checklist</a></li>
-              <li><a href="/problems/vehicle-recovery#decision">Recover a vehicle</a></li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section alt" aria-labelledby="quick-lookup-title">
-      <div class="container quick-lookup">
-        <div class="section-head">
-          <span class="kicker">Direct answers</span>
-          <h2 id="quick-lookup-title">Frequently needed right now</h2>
-        </div>
-        <div class="quick-lookup-list">
-          <a href="/guides/animal-guide#feeding"><strong>What do chickens eat?</strong><span>Hay in the interior coop trough.</span></a>
-          <a href="/database/materials#zirconite"><strong>Where is zirconite sold?</strong><span>Meriam at City Hall; mines are not yet available.</span></a>
-          <a href="/guides/money-making#cashin"><strong>How do I sell crops?</strong><span>Use the CashIn chest after linking it.</span></a>
-          <a href="/problems/vehicle-recovery#decision"><strong>Where did my vehicle go?</strong><span>Check My Garage, the mechanic route and Car Pound.</span></a>
-          <a href="/guides/gigi-large-egg-quest#stuck"><strong>Why is Gigi still following me?</strong><span>Use the quest-specific stuck-point steps.</span></a>
-          <a href="/guides/electricity-power#solar-quest"><strong>Why will the solar quest not complete?</strong><span>Check the required placement and connection state.</span></a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="use-kb-title">
-      <div class="container">
-        <div class="section-head"><span class="kicker">Use the answers</span><h2 id="use-kb-title">How to check an entry without guessing</h2><p>The database is designed for a quick lookup followed by a useful next step. A missing value is kept visible rather than filled with an old Alpha number.</p></div>
-        <div class="knowledge-directory">
-          <article class="knowledge-category"><span class="knowledge-category-number">01</span><h3>Search the player question</h3><p>Use the item, NPC, quest, place or symptom you would type into a search engine. The result can jump to a named section instead of leaving you on a generic category page.</p></article>
-          <article class="knowledge-category"><span class="knowledge-category-number">02</span><h3>Read the evidence label</h3><p>Official, video-observed, community-confirmed, reported and historical records are separated. Build numbers and review dates matter more than a tidy-looking table.</p><a href="/methodology">Read the verification method</a></article>
-          <article class="knowledge-category"><span class="knowledge-category-number">03</span><h3>Continue through the game</h3><p>Use the related guide, quest or map route to act on the answer. For unresolved values, send a versioned screenshot through <a href="/contribute">Contribute</a> instead of treating a lead as a fact.</p></article>
-        </div>
-      </div>
-    </section>
-  </main>
+<!-- DATABASE BROWSER START -->
+  <div class="container database-hub">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Database</nav>
+    <div class="database-hub-intro"><div><h1>Game database</h1><p>Find a name. Get the details.</p></div>
+    <form class="knowledge-search" action="/search" method="get" role="search">
+      <label class="visually-hidden" for="knowledge-query">Search the database</label>
+      <div class="knowledge-search-control"><input id="knowledge-query" name="q" type="search" placeholder="Search animals, crops, items or quests"><button type="submit">Search</button></div>
+    </form></div>
+    <nav class="database-tabs" aria-label="Database categories"><a href="/database/animals">Animals</a><a href="/database/crops">Crops</a><a href="/database/materials">Materials</a><a href="/database/quests">Quests</a><a href="/database/npcs">People</a><a href="/map">Map</a></nav>
+    <div class="database-hub-grid"><section class="database-hub-card database-hub-animals"><div class="database-hub-heading"><h2><a href="/database/animals">Animals <span aria-hidden="true">›</span></a></h2><p>Breeds, care & products</p></div><div class="database-hub-content"><div class="database-entry-links"><a href="/database/animals#chicken"><img class="database-item-icon" src="/assets/img/items/animal_chicken_brown_female-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Chicken</span></a><a href="/database/animals#cow"><img class="database-item-icon" src="/assets/img/items/animal_cow_brown_female-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Cow</span></a><a href="/database/animals#goat"><img class="database-item-icon" src="/assets/img/items/animal_goat_white_female-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Goat</span></a><a href="/database/animals#rabbit"><img class="database-item-icon" src="/assets/img/items/animal_rabit_female-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Rabbit</span></a></div><div class="database-guide-links"><a href="/guides/animal-guide#feeding">Feed and water</a></div></div></section>
+<section class="database-hub-card database-hub-crops"><div class="database-hub-heading"><h2><a href="/database/crops">Crops <span aria-hidden="true">›</span></a></h2><p>Seasons & growing times</p></div><div class="database-hub-content"><div class="database-seasons"><div><h3>Spring</h3><div class="database-entry-links"><a href="/database/crops#red-lettuce"><img class="database-item-icon" src="/assets/img/items/vegetable_red_luttuce_normal-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Red Lettuce</span></a><a href="/database/crops#garlic"><img class="database-item-icon" src="/assets/img/items/vegetable_garlic_normal-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Garlic</span></a><a href="/database/crops#strawberry"><img class="database-item-icon" src="/assets/img/items/vegetable_strawberry_normal-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Strawberry</span></a></div></div><div><h3>Summer</h3><div class="database-entry-links"><a href="/database/crops#aubergine"><img class="database-item-icon" src="/assets/img/items/vegetable_aubergine_normal-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Aubergine</span></a><a href="/database/crops#corn"><img class="database-item-icon" src="/assets/img/items/vegetable_corn_normal-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Corn</span></a><a href="/database/crops#green-lettuce"><img class="database-item-icon" src="/assets/img/items/vegetable_green_luttuce_normal-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Green Lettuce</span></a></div></div><div><h3>Autumn</h3><div class="database-entry-links"><a href="/database/crops#pumpkin"><img class="database-item-icon" src="/assets/img/items/vegetable_pumpkin_normal-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Pumpkin</span></a><a href="/database/crops#carrot"><img class="database-item-icon" src="/assets/img/items/vegetable_carotte_normal-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Carrot</span></a><a href="/database/crops#onion"><img class="database-item-icon" src="/assets/img/items/vegetable_onion_normal-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Onion</span></a><a href="/database/crops#marrow"><img class="database-item-icon" src="/assets/img/items/vegetable_marrow_normal-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Marrow</span></a><a href="/database/crops#leek"><img class="database-item-icon" src="/assets/img/items/vegetable_leek_normal-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Leek</span></a></div></div></div><div class="database-guide-links"><a href="/guides/farming-fields">Planting guide</a><a href="/guides/money-making">Selling crops</a></div></div></section>
+<section class="database-hub-card database-hub-materials"><div class="database-hub-heading"><h2><a href="/database/materials">Materials <span aria-hidden="true">›</span></a></h2><p>Sources & building uses</p></div><div class="database-hub-content"><div class="database-entry-links"><a href="/database/materials#stone"><img class="database-item-icon" src="/assets/img/items/ressource_rock_simple-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Stone</span></a><a href="/database/materials#wood-log"><img class="database-item-icon" src="/assets/img/items/ressource_wood-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Wood Log</span></a><a href="/database/materials#hay"><img class="database-item-icon" src="/assets/img/items/ressource_straw-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Hay</span></a><a href="/database/materials#charcoal"><img class="database-item-icon" src="/assets/img/items/ressource_coal-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Charcoal</span></a><a href="/database/materials#zirconite"><img class="database-item-icon" src="/assets/img/items/ressource_zerkonite-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Zirconite</span></a></div></div></section>
+<section class="database-hub-card database-hub-quests"><div class="database-hub-heading"><h2><a href="/database/quests">Quests <span aria-hidden="true">›</span></a></h2><p>Objectives & preparation</p></div><div class="database-hub-content"><div class="database-entry-links"><a href="/database/quests#rust-to-rumbling"><span>Rust to Rumbling!</span></a><a href="/database/quests#power-to-the-bench"><span>Power to the Bench</span></a><a href="/database/quests#chicken-coop-mission"><span>Coop Dreams</span></a><a href="/database/quests#roof-building"><span>Farewell, Nylon Palace!</span></a><a href="/database/quests#real-eggs-real-evidence"><span>Real Eggs, Real Evidence!</span></a><a href="/database/quests#solar-panel-objective"><span>Tame the Meter!</span></a></div><div class="database-guide-links"><a href="/guides/gigi-large-egg-quest">Gigi’s large eggs</a></div></div></section>
+<section class="database-hub-card database-hub-npcs"><div class="database-hub-heading"><h2><a href="/database/npcs">People & services <span aria-hidden="true">›</span></a></h2><p>Shops, services & quests</p></div><div class="database-hub-content"><div class="database-entry-links"><a href="/database/npcs#victor"><span>Victor</span></a><a href="/database/npcs#angela"><span>Angela</span></a><a href="/database/npcs#gigi"><span>Gigi</span></a></div></div></section>
+      <section class="database-hub-card"><div class="database-hub-heading"><h2><a href="/map">Places & map <span aria-hidden="true">›</span></a></h2><p>Places & directions</p></div><div class="database-hub-content"><div class="database-entry-links"><a href="/map">Interactive map</a><a href="/problems">Troubleshooting</a></div></div></section>
+    </div>
+    <p class="database-browse-note">Unofficial fan reference. Sources and unverified details are labeled within each entry. <a href="/methodology">Verification method</a></p>
+  </div>
+<!-- DATABASE BROWSER END -->
+</main>
 
   <footer class="site-footer">
     <div class="container"><div class="footer-grid"><div><h4>The Ranchers Guide</h4><p>Independent, fan-made Early Access help with versioned evidence.</p><p class="disclaimer">Not affiliated with RedPilz Studio or Trophy Games.</p></div><nav aria-label="Footer guides"><h4>Help</h4><ul><li><a href="/guides/beginners-guide">Guides</a></li><li><a href="/map">Map</a></li><li><a href="/problems">Problems</a></li><li><a href="/community">Community</a></li></ul></nav><nav aria-label="Footer data"><h4>Data</h4><ul><li><a href="/database">Knowledge Base</a></li><li><a href="/database/crops">Crops</a></li><li><a href="/database/animals">Animals</a></li><li><a href="/research">Research</a></li></ul></nav><nav aria-label="Footer site"><h4>Site</h4><ul><li><a href="/search">Search</a></li><li><a href="/contribute">Contribute</a></li><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/methodology">Methodology</a></li></ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>Evidence first, guesses never.</span></div></div>

@@ -13,6 +13,7 @@ const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
 const data = JSON.parse(fs.readFileSync(path.join(root, "data", "crops.json"), "utf8"));
+const { renderCropFacts, renderBuildOnlyCrops } = require('./render-database-browser.cjs');
 
 function escapeHtml(text) {
   return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -23,6 +24,7 @@ const LEVEL_BADGES = {
   "video-observed": '<span class="tag evidence-video">Video-observed</span>',
   "community-confirmed": '<span class="tag evidence-community">Community-confirmed</span>',
   "player-tested": '<span class="tag evidence-tested">Player-tested</span>',
+  "build-observed": '<span class="tag evidence-build">Current-build data</span>',
   "unverified-lead": '<span class="tag evidence-lead">Single-source</span>',
 };
 
@@ -83,6 +85,7 @@ ${parts.join("\n")}`;
           <span class="tag">Updated ${escapeHtml(entry.lastUpdated)}</span>
         </div>
         <p class="lead">${escapeHtml(entry.summary)}</p>
+${renderCropFacts(data, entry.id, 'en')}
 ${entry.decision ? `        <div class="entity-decision"><strong>When to use this entry</strong><p>${escapeHtml(entry.decision)}</p><div class="button-stack"><a class="btn btn-outline btn-compact" href="/guides/farming-fields">Farming guide</a><a class="btn btn-outline btn-compact" href="/guides/money-making#cashin">CashIn selling</a>${entry.videoRow ? '<a class="btn btn-outline btn-compact" href="/map#leafy-market">Leafy Market</a>' : ""}</div></div>` : ""}
 ${fields}
       </section>`;
@@ -123,6 +126,49 @@ function renderRoster(rows) {
   }).join("\n");
 }
 
+function renderBuildRoster(locale) {
+  const zh = locale === "zh";
+  const roster = data.buildRoster;
+  const rows = roster.entries.map((entry) => {
+    const name = zh ? entry.zhName : entry.name;
+    const season = zh ? entry.zhSeason : entry.season;
+    const regrow = entry.regrowEveryDays
+      ? (zh ? `每 ${entry.regrowEveryDays} 天` : `Every ${entry.regrowEveryDays} days`)
+      : (zh ? "不再生" : "No regrow");
+    const dry = zh ? `${entry.daysWithoutWater} 天` : `${entry.daysWithoutWater} ${entry.daysWithoutWater === 1 ? "day" : "days"}`;
+    const vendor = entry.townSeedVendor === "listed"
+      ? (zh ? "有记录" : "Listed")
+      : (zh ? "未列入" : "Not listed");
+    return `              <tr id="build-${entry.id}">
+                <td><a class="entry-anchor" href="#${entry.id}">${escapeHtml(name)}</a></td>
+                <td>${escapeHtml(season)}</td>
+                <td>${entry.daysToFirstHarvest}</td>
+                <td>${escapeHtml(regrow)}</td>
+                <td>${escapeHtml(dry)}</td>
+                <td>${escapeHtml(vendor)}</td>
+              </tr>`;
+  }).join("\n");
+  const excluded = roster.notIncluded.map((entry) => zh ? `${entry.zhName} ${entry.name}` : entry.name).join(zh ? "、" : ", ");
+  const source = data.sources[roster.sourceIds[0]];
+  const unlisted = roster.entries.filter((entry) => entry.townSeedVendor === "not-referenced").map((entry) => zh
+    ? `Town SeedVendor 表没有引用 ${entry.name} Seed（${entry.zhName}），不能据此声称可购买。`
+    : `${entry.name} Seed is not referenced by the Town SeedVendor table; availability is not claimed.`).join(" ");
+  return `      <section class="evidence-ledger build-data-roster" id="current-build-crop-roster" aria-labelledby="current-build-crop-roster-title">
+        <div class="section-heading-row"><h2 id="current-build-crop-roster-title">${zh ? "各季节作物数据" : "Seasonal crop data"}</h2><span class="tag evidence-build">${zh ? "站长构建采集" : "Current-build data"}</span></div>
+        <p>${zh ? "以下为游戏文件中的配置值，尚未逐项实测。商店表有记录不等于当前一定能买到；价格不在此表内。" : "These are game-file configuration values, not individually tested gameplay timings. A seed-table entry does not guarantee current shop availability; prices are not included."}</p>
+        <div class="data-table-wrap" tabindex="0" role="region" aria-labelledby="current-build-crop-roster-title"><table class="data-table build-data-table"><thead><tr><th>${zh ? "作物" : "Crop"}</th><th>${zh ? "季节" : "Season"}</th><th>${zh ? "首次收获（天）" : "First harvest (days)"}</th><th>${zh ? "再生" : "Regrow"}</th><th>${zh ? "断水容忍" : "Dry tolerance"}</th><th>${zh ? "种子商店表" : "Seed shop table"}</th></tr></thead><tbody>
+${rows}
+        </tbody></table></div>
+        <details class="pending-facts"><summary>${zh ? "来源与未开放配置" : "Source and excluded profiles"}</summary>
+          <p>${escapeHtml(zh ? roster.zhSummary : roster.summary)}</p>
+          <p>${escapeHtml(unlisted)}</p>
+          <p>${escapeHtml(zh ? roster.zhPublicationBoundary : roster.publicationBoundary)}</p>
+          <p>${escapeHtml(excluded)}${zh ? " 位于 NotINCLUDED 表中，不列入上方作物表。" : " are stored in NotINCLUDED and are not merged into the roster above."}</p>
+          <p class="source-note"><strong>${zh ? "来源：" : "Source:"}</strong> ${escapeHtml(source.title)} · ${escapeHtml(source.build)} · ${zh ? "本地私有哈希清单" : "private local hash manifest"}</p>
+        </details>
+      </section>`;
+}
+
 const cropSections = data.crops.map((c) => renderProfile(c, c.category)).join("\n\n");
 const inputSections = data.inputs.map((i) => renderProfile(i, "farm input")).join("\n\n");
 const historicalCount = data.crops.filter((c) => c.historical).length;
@@ -135,7 +181,7 @@ ${e.fields.map((f) => `              <li><a href="#${e.id}-${f.key}">${escapeHtm
             </ul>
           </li>`).join("\n");
 
-const html = `<!DOCTYPE html>
+let html = `<!DOCTYPE html>
 <!-- GENERATED by scripts/build-crops.cjs from data/crops.json — do not edit directly.
      Edit data/crops.json, then run: node scripts/build-crops.cjs && node scripts/build-search-index.cjs -->
 <html lang="en">
@@ -187,7 +233,7 @@ const html = `<!DOCTYPE html>
       <h1>The Ranchers Crop Database</h1>
       <p class="meta">Current page baseline ${escapeHtml(data.meta.build)} · Video evidence recorded on ${escapeHtml(data.meta.videoBuild)} · Data last updated ${escapeHtml(data.meta.lastUpdated)} · Historical values are labeled</p>
       <div class="evidence-status">
-        <strong>Evidence status:</strong> ${confirmedCount} confirmed systems · ${videoCount} video-observed shop values · ${historicalCount} historical leads · ${pendingCount} pending rows · every fact carries its own evidence label — <a href="/methodology">How we verify →</a>
+        <strong>Evidence status:</strong> ${data.buildRoster.entries.length} current-build crop profiles · ${confirmedCount} confirmed systems · ${videoCount} video-observed shop values · ${historicalCount} historical leads · ${pendingCount} pending rows · every fact carries its own evidence label — <a href="/methodology">How we verify →</a>
       </div>
 
 
@@ -201,6 +247,8 @@ const html = `<!DOCTYPE html>
 
       <p class="lead">This living database combines official facts with clearly labeled player research. Each crop has its own anchored profile below — search an individual crop, inspect the source and build context, and never mistake an old community value for a current-build fact.</p>
 
+${renderBuildRoster("en")}
+
       <nav class="toc" aria-label="Contents">
         <div class="toctitle">Contents</div>
         <ul>
@@ -209,6 +257,7 @@ ${tocItems}
       </nav>
 
 ${cropSections}
+${renderBuildOnlyCrops(data, 'en')}
 
 ${inputSections}
 
@@ -449,7 +498,7 @@ function renderZhEntry(entry) {
     return `${h}${items ? `<ul class="evidence-list">${items}</ul>` : ""}${pendingBlock}`;
   }).join("");
   const decision = zh.decision ? `<div class="entity-decision"><strong>什么时候查</strong><p>${escapeHtml(zh.decision)}</p><div class="button-stack"><a class="btn btn-outline btn-compact" href="/zh/guides/farming-fields">种地实战攻略</a><a class="btn btn-outline btn-compact" href="/zh/guides/money-making#cashin">CashIn 出售</a>${entry.videoRow ? '<a class="btn btn-outline btn-compact" href="/zh/map#leafy-market">Leafy Market</a>' : ""}</div></div>` : "";
-  return `    <section class="evidence-ledger animal-profile" id="${entry.id}" data-search-entry data-search-title="${escapeHtml(zh.searchTitle)}" data-search-tags="${escapeHtml(zh.searchTags)}">${head}${summary}${decision}${groups}</section>`;
+  return `    <section class="evidence-ledger animal-profile" id="${entry.id}" data-search-entry data-search-title="${escapeHtml(zh.searchTitle)}" data-search-tags="${escapeHtml(zh.searchTags)}">${head}${summary}${renderCropFacts(data, entry.id, 'zh')}${decision}${groups}</section>`;
 }
 
 function renderZhExtraSection(s) {
@@ -464,6 +513,7 @@ const zhExtraById = Object.fromEntries(data.zhExtra.sections.map((s) => [s.id, s
 // Page order: zh crops → historical leads → zh inputs (fertilizer) → CashIn.
 const zhBodyParts = [
   ...data.crops.filter((e) => e.zh).map(renderZhEntry),
+  renderBuildOnlyCrops(data, 'zh'),
   renderZhExtraSection(zhExtraById["historical"]),
   ...data.inputs.filter((e) => e.zh).map(renderZhEntry),
   renderZhExtraSection(zhExtraById["cashin"]),
@@ -474,7 +524,7 @@ const zhTocItems = data.crops.filter((e) => e.zh).map((e) => `<li><a href="#${e.
   + `<li><a href="#cashin">${escapeHtml(zhExtraById["cashin"].tocLabel)}</a></li>`;
 const zhRelated = `<section class="related"><h2>继续查询</h2><p>${data.zhExtra.related.map((r) => `<a href="${escapeHtml(r.href)}">${escapeHtml(r.label)}</a>`).join(" · ")}</p></section>`;
 
-const zhHtml = `<!DOCTYPE html>
+let zhHtml = `<!DOCTYPE html>
 <!-- GENERATED by scripts/build-crops.cjs from data/crops.json (zh blocks) — do not edit directly. -->
 <html lang="zh-CN">
 <head>
@@ -490,8 +540,9 @@ const zhHtml = `<!DOCTYPE html>
   <header class="site-header"><nav class="nav-inner" aria-label="主导航"><a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide<small>非官方中文玩家指南</small></span></a><button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button><ul class="nav-links"><li><a href="/zh/guides/beginners-guide">新手</a></li><li><a class="active" href="/zh/database">知识库</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li><li><a href="/zh/search">搜索</a></li><li><a class="nav-cta" href="/contribute">投稿</a></li></ul></nav></header>
   <main><article class="article" style="max-width:980px">
     <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / <a href="/zh/database">知识库</a> / 作物</nav><h1>The Ranchers 中文作物数据库</h1><p class="meta">页面基线 ${escapeHtml(data.meta.build)} · 视频证据录制于 ${escapeHtml(data.meta.videoBuild)} · ${escapeHtml(data.meta.lastUpdated)} 更新 · 玩家单颗出售价仍未知</p>
-    <div class="evidence-status"><strong>口径：</strong>48C、144C 等是视频中看到的种子购买价；31C 是大蒜成品的商店零售价；它们都不能直接当作玩家出售收入。</div>
+    <div class="evidence-status"><strong>口径：</strong>${data.buildRoster.entries.length} 个当前构建作物配置来自本地构建数据；48C、144C 等是视频中看到的种子购买价；31C 是大蒜成品的商店零售价；它们都不能直接当作玩家出售收入。</div>
     <figure class="page-banner"><img src="/assets/img/db-crops.webp" width="800" height="450" alt="The Ranchers 温室和整齐的菜地"></figure>
+${renderBuildRoster("zh")}
     <nav class="toc" aria-label="作物目录"><strong>快速跳转：</strong><ul>${zhTocItems}</ul></nav>
 ${zhBodyParts.join("\n")}
     ${zhRelated}
@@ -499,6 +550,10 @@ ${zhBodyParts.join("\n")}
   <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>购买价、零售价、出售收入严格分开</span></div></div></footer><script src="/assets/js/main.js?v=20260810-nav1" defer></script>
 </body></html>
 `;
+
+const { decoratePage } = require('./render-database-browser.cjs');
+html = decoratePage(html, data, 'crops', 'en');
+zhHtml = decoratePage(zhHtml, data, 'crops', 'zh');
 
 const output = path.join(root, "database", "crops.html");
 const zhOutput = path.join(root, "zh", "database", "crops.html");

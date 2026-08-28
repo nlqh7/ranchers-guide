@@ -15,9 +15,9 @@ const sharedStyles = fs.readFileSync(path.join(root, "assets", "css", "style.css
 
 const LEVELS = new Set(data.meta.evidenceLevels);
 const VALIDITY = new Set(data.meta.validityValues);
-const SOURCE_KINDS = new Set(["official-news", "steam-thread", "local-video", "wiki", "local-archive", "community-scan", "store-page"]);
+const SOURCE_KINDS = new Set(["official-news", "steam-thread", "local-video", "wiki", "local-archive", "community-scan", "store-page", "first-hand-build-resource"]);
 const SOURCE_IDS = new Set(Object.keys(data.sources));
-assert.ok(LEVELS.size === 5 && VALIDITY.size === 4, "meta must enumerate evidence levels and validity values");
+assert.ok(LEVELS.size === 6 && LEVELS.has('build-observed') && VALIDITY.size === 4, "meta must enumerate evidence levels, including build observations, and validity values");
 assert.ok(Array.isArray(data.species) && data.species.length >= 4, "expected at least 4 species");
 assert.match(sharedStyles, /\.table-tools\s*\{[^}]*align-items:\s*center/s, "table controls must vertically center count badges");
 assert.match(sharedStyles, /\.table-tools \[data-table-count\][^{]*\{[^}]*border-radius:\s*(?:4px|var\(--radius-sm\))/s, "table counts must stay compact, not stretch into pills");

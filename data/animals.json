@@ -1,12 +1,13 @@
 {
   "meta": {
     "page": "database/animals.html",
-    "lastUpdated": "2026-08-22",
+    "lastUpdated": "2026-08-28",
     "build": "0.8.10.842",
     "videoBuild": "0.8.10.455",
     "evidenceLevels": [
       "official",
       "video-observed",
+      "build-observed",
       "community-confirmed",
       "player-tested",
       "unverified-lead"
@@ -19,6 +20,50 @@
     ]
   },
   "sources": {
+    "owned-build-animals": {
+      "kind": "first-hand-build-resource",
+      "title": "Owned game files: animal definitions",
+      "url": null,
+      "date": "2026-08-28",
+      "build": "0.8.10.842",
+      "steamBuild": "24847725",
+      "asset": "resources.assets",
+      "pathId": 12009,
+      "rawSha256": "8e1e4d539535138e80e3786c78c6fe61013ba261758172414d5997f42e12be84"
+    },
+    "owned-build-cattle-shop": {
+      "kind": "first-hand-build-resource",
+      "title": "Owned game files: cattle-shop directory",
+      "url": null,
+      "date": "2026-08-28",
+      "build": "0.8.10.842",
+      "steamBuild": "24847725",
+      "asset": "resources.assets",
+      "pathId": 12036,
+      "rawSha256": "4bb4d90a3b9503cdb261092e8d0b4e8ae88a6dafd55edee825eecb0d82b8a5ea"
+    },
+    "owned-build-animal-products": {
+      "kind": "first-hand-build-resource",
+      "title": "Owned game files: consumable item definitions",
+      "url": null,
+      "date": "2026-08-28",
+      "build": "0.8.10.842",
+      "steamBuild": "24847725",
+      "asset": "resources.assets",
+      "pathId": 12043,
+      "rawSha256": "3ee64d4bbcf186115b2efe318bfa3124b57b7d14eec73c2ec2e6e7f2f4c7ec50"
+    },
+    "owned-build-animal-guidance": {
+      "kind": "first-hand-build-resource",
+      "title": "Owned game files: bilingual item names and livestock tutorials",
+      "url": null,
+      "date": "2026-08-28",
+      "build": "0.8.10.842",
+      "steamBuild": "24847725",
+      "asset": "resources.assets",
+      "pathId": 393483,
+      "rawSha256": "2c505386fe9b1b9c2579aad1e6957907db838d8c7f87227e818fbfd4b57d5f4e"
+    },
     "store-page": {
       "kind": "store-page",
       "title": "The Ranchers — official Steam store page",
@@ -832,16 +877,60 @@
       "name": "Cow",
       "category": "mammal",
       "housingType": "Barn",
-      "summary": "Confirmed on the roster with milk and meat on current-build shop shelves. Purchase price, cycle and upkeep are still unmeasured — historical Alpha prices are kept as leads only.",
-      "whenNeeded": "Use this profile when deciding whether current-build cow information is enough for a purchase or production plan; price, care cycle and profit remain open.",
-      "searchTags": "cow bull calf cattle barn milk meat spotted food diet feed price buy sell",
+      "summary": "Five breeds in the cattle-shop directory, with related quest, care instructions and product names.",
+      "whenNeeded": "Use the breed list before buying, and the care checklist when settling cattle into a barn. Do not use item definitions to estimate income.",
+      "searchTags": "cow bull calf cattle barn milk meat spotted food diet feed price buy sell Bretonne Pie Noire Maine-Anjou Angeln Deutsche Rotbunte Gascon",
+      "buildReference": {
+        "evidenceLevel": "build-observed",
+        "build": "0.8.10.842",
+        "validity": "unknown",
+        "sourceIds": ["owned-build-animals", "owned-build-cattle-shop", "owned-build-animal-products", "owned-build-animal-guidance"],
+        "breeds": [
+          { "name": "Bretonne Pie Noire", "zhName": "布列塔尼黑白花牛", "itemIds": ["animal_cow_black_female", "animal_cow_black_male"], "sexes": ["female", "male"] },
+          { "name": "Maine-Anjou", "zhName": "缅因-安茹牛", "itemIds": ["animal_cow_brown_female", "animal_cow_brown_male"], "sexes": ["female", "male"] },
+          { "name": "Angeln", "zhName": "安格伦牛", "itemIds": ["animal_cow_brown_super_female_brown"], "sexes": ["female"] },
+          { "name": "Deutsche Rotbunte", "zhName": "德国红白花牛", "itemIds": ["animal_cow_brown_super_female_tache"], "sexes": ["female"] },
+          { "name": "Gascon", "zhName": "加斯科牛", "itemIds": ["animal_cow_brown_super_female_white"], "sexes": ["female"] }
+        ],
+        "quest": {
+          "id": "F_Quest_14",
+          "route": "/database/quests#chicken-coop-mission",
+          "name": "Coop Dreams",
+          "zhName": "鸡舍梦想计划",
+          "configuredState": 1,
+          "text": "The cattle-shop entries reference this quest. Check your progress if cattle are unavailable; the exact unlock state has not been decoded or gameplay-tested.",
+          "zhText": "牛的商店条目关联此任务。买不到牛时可先核对任务进度；具体解锁条件尚未解码并实测，不能保证完成任务后立即可买。"
+        },
+        "care": [
+          { "sourceKey": "GT/Barn_HowToFeed_Manually_AnimalDiet", "text": "Open the animal's information popup to check its diet before choosing feed or mixing species in a barn.", "zhText": "先打开动物信息窗口查看饮食需求，再选择饲料或安排不同物种同住。" },
+          { "sourceKey": "GT/Barn_HowToFeed_Manually_Food", "text": "Place suitable food in the barn's manger.", "zhText": "把符合饮食需求的食物放入谷仓食槽。" },
+          { "sourceKey": "GT/Barn_HowToFeed_Manually_Water", "text": "Use a watering can to refill the animals' water.", "zhText": "用洒水壶给动物补水。" },
+          { "sourceKey": "GT/Barn_HowToFeed_Manually_AnimalHapiness", "text": "Pet animals at least once a day to build the relationship, alongside meeting their food and water needs.", "zhText": "满足食物和饮水需求，并至少每天抚摸一次以增进关系。" }
+        ],
+        "equipment": [
+          { "id": "tools_rope", "name": "Rope", "zhName": "绳子" },
+          { "id": "tools_bucket_wood", "name": "Bucket", "zhName": "水桶" },
+          { "id": "ressource_straw", "name": "Hay", "zhName": "干草" },
+          { "id": "Custum_Barn_HeaterModule", "name": "Barn Heat Kit", "zhName": "谷仓加热套件" },
+          { "id": "Custum_Barn_AutoFeederModule", "name": "Barn AutoFeeder Kit", "zhName": "谷仓自动喂食器套件" }
+        ],
+        "products": [
+          { "id": "consumable_milk_small_cow", "name": "Cow Milk - Small", "zhName": "小份牛奶", "group": "milk" },
+          { "id": "consumable_milk_medium_cow", "name": "Cow Milk - Medium", "zhName": "中份牛奶", "group": "milk" },
+          { "id": "consumable_milk_large_cow", "name": "Cow Milk - Large", "zhName": "大份牛奶", "group": "milk" },
+          { "id": "consumable_milk_gold_cow", "name": "Cow Milk - Giant", "zhName": "超大份牛奶", "group": "milk" },
+          { "id": "consumable_meat_small_cow", "name": "Cow Meat - Small", "zhName": "小块牛肉", "group": "meat" },
+          { "id": "consumable_meat_medium_cow", "name": "Cow Meat - Medium", "zhName": "中块牛肉", "group": "meat" },
+          { "id": "consumable_meat_big_cow", "name": "Meat Steak - Big", "zhName": "大块牛排", "group": "meat" }
+        ]
+      },
       "fields": [
         {
           "key": "acquisition",
           "label": "Buying",
           "facts": [
             {
-              "text": "Cows are named as ranch animals in official material, but no seller, price or requirement has been verified in the current build.",
+              "text": "The shop configuration lists cattle and a quest association above, but the exact seller, visible price and unlock state still need a current-build gameplay check.",
               "evidenceLevel": "unverified-lead",
               "build": null,
               "validity": "unknown",
@@ -1028,16 +1117,16 @@
           "tags": "black spotted bull cattle barn male breeding price"
         }
       ],
-      "lastUpdated": "2026-08-08",
+      "lastUpdated": "2026-08-28",
       "zh": {
         "tocLabel": "牛",
         "kicker": null,
         "headerTag": null,
         "name": "牛 Cow",
         "searchTitle": "牛",
-        "searchTags": "牛 奶牛 公牛 牛奶 谷仓 肉",
-        "summary": "官方商店页明确列出牛属于可饲养动物。当前资料确认肉、牛奶相关生产方向，但卖家、购买价、完整饲养周期和当前版本产量仍未验证。需要判断是否现在购买或规划产出时，先以这些未知项为边界。",
-        "whenNeeded": "准备购买牛或比较牛的产出路线时查这里；当前价格、照料周期和收益仍不能作为决策数字。",
+        "searchTags": "牛 奶牛 公牛 牛奶 谷仓 肉 布列塔尼黑白花牛 缅因-安茹牛 安格伦牛 德国红白花牛 加斯科牛",
+        "summary": "查询商店目录中的五个牛品种，以及关联任务、日常照料和产物名称。",
+        "whenNeeded": "购买前对照品种，把牛带回谷仓后按照料清单检查；物品定义不能直接用于计算收益。",
         "groups": [
           {
             "heading": null,
@@ -1061,16 +1150,46 @@
       "name": "Goat",
       "category": "mammal",
       "housingType": "Barn",
-      "summary": "Officially named on the roster and added as a species in the Ranching v2 notes. No current-build care, price or production data verified yet.",
-      "whenNeeded": "Use this profile to check what is actually documented about goats before treating an older ranching note as current-build guidance.",
-      "searchTags": "goat barn mammal milk food diet feed price buy sell",
+      "summary": "Identify adult and young goats, check the adult shop references and look up goat milk and meat names. Purchase prices and production rates remain unverified.",
+      "whenNeeded": "Compare the animal name before looking for a purchase route. Young goat definitions are not entries in the reviewed livestock-shop directory.",
+      "searchTags": "goat buck doe doeling buckling kid barn mammal milk meat food diet feed price buy sell",
+      "buildReference": {
+        "evidenceLevel": "build-observed",
+        "build": "0.8.10.842",
+        "validity": "unknown",
+        "sourceIds": ["owned-build-animals", "owned-build-cattle-shop", "owned-build-animal-products", "owned-build-animal-guidance"],
+        "entries": [
+          { "id": "animal_goat_white_female", "name": "Goat Doe", "zhName": "山羊 - 母羊", "stage": "adult", "sex": "female", "shopListed": true },
+          { "id": "animal_goat_white_male", "name": "Buck", "zhName": "山羊 - 公羊", "stage": "adult", "sex": "male", "shopListed": true },
+          { "id": "animal_goat_white_baby_female", "name": "Goat Doeling", "zhName": "山羊 - 小母羊", "stage": "young", "sex": "female", "shopListed": false },
+          { "id": "animal_goat_white_baby_male", "name": "Buckling", "zhName": "山羊 - 小公羊", "stage": "young", "sex": "male", "shopListed": false }
+        ],
+        "quest": {
+          "id": "F_Quest_14",
+          "route": "/database/quests#chicken-coop-mission",
+          "name": "Coop Dreams",
+          "zhName": "鸡舍梦想计划",
+          "configuredState": 1,
+          "text": "Both adult goat shop entries reference this quest. Check your quest progress if they are unavailable; the exact unlock state and seller have not been verified. Young goats are not referenced in this shop table, so their definitions do not establish a purchase route.",
+          "zhText": "成年公羊和母羊的商店条目都关联此任务。买不到时可核对任务进度，但确切解锁状态和卖家尚未验证。幼羊未被这份商店表引用，不能仅凭动物定义给出购买路线。"
+        },
+        "care": [],
+        "equipment": [],
+        "products": [
+          { "id": "consumable_milk_small_goat", "name": "Goat Milk - Small", "zhName": "小份山羊奶", "group": "milk" },
+          { "id": "consumable_milk_medium_goat", "name": "Goat Milk - Medium", "zhName": "中份山羊奶", "group": "milk" },
+          { "id": "consumable_meat_small_goat", "name": "Goat Meat - Small", "zhName": "小块山羊肉", "group": "meat" },
+          { "id": "consumable_meat_medium_goat", "name": "Goat Meat - Medium", "zhName": "中块山羊肉", "group": "meat" },
+          { "id": "consumable_meat_big_goat", "name": "Goat Meat - Big", "zhName": "大块山羊肉", "group": "meat" }
+        ]
+      },
       "fields": [
         {
           "key": "acquisition",
           "label": "Buying",
           "facts": [
             {
-              "text": "Goats are named as ranch animals in official store copy; seller, price and requirements are unverified.",
+              "text": "The adult shop references above do not establish the current seller, purchase price or exact unlock condition; these still need a gameplay check.",
               "evidenceLevel": "unverified-lead",
               "build": null,
               "validity": "unknown",
@@ -1112,16 +1231,16 @@
         }
       ],
       "variants": [],
-      "lastUpdated": "2026-08-08",
+      "lastUpdated": "2026-08-28",
       "zh": {
         "tocLabel": "山羊",
         "kicker": null,
         "headerTag": null,
         "name": "山羊 Goat",
         "searchTitle": "山羊",
-        "searchTags": "山羊 奶 谷仓 动物",
-        "summary": "官方商店页确认山羊存在；当前卖家、价格、住所、产物周期和收益均未验证。证据不足时保持未知，不从 Alpha Wiki 抄入当前表。",
-        "whenNeeded": "想确认当前版本是否已经有可执行的山羊购买或照料路线时查这里；目前没有足够证据给出步骤。",
+        "searchTags": "山羊 公羊 母羊 小母羊 小公羊 幼羊 羊奶 羊肉 谷仓 动物",
+        "summary": "区分成年羊与幼羊，核对成年羊的商店关联，并查询羊奶、羊肉名称。购买价与实际产出周期仍未验证。",
+        "whenNeeded": "先确认动物名称再查购买路线；已核对的牲畜商店表没有幼羊条目。",
         "groups": [
           {
             "heading": "当前可用结论",

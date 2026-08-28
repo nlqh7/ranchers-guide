@@ -23,8 +23,9 @@
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
   <link rel="stylesheet" href="../assets/css/style.css?v=20260821-ui1">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/css/database-browser.css?v=20260828-4">
 </head>
-<body>
+<body class="database-surface">
   <header class="site-header">
     <nav class="nav-inner" aria-label="Main navigation">
       <a class="logo" href="/">
@@ -45,11 +46,17 @@
   </header>
 
   <main>
-    <article class="article" style="max-width: 980px;">
-      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Database / Animals</nav>
-      <h1>The Ranchers Animal Database</h1>
-      <p class="meta">Current page baseline 0.8.10.842 · Video evidence recorded on 0.8.10.455 · Data last updated 2026-08-22 · Historical values are labeled</p>
-      <nav class="toc" aria-label="Contents">
+    <article class="article database-page">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/database">Database</a> / Animals</nav>
+      <h1>Animals</h1>
+<nav class="database-tabs" aria-label="Database categories"><a href="/database/animals" aria-current="page">Animals</a><a href="/database/crops">Crops</a><a href="/database/materials">Materials</a><a href="/database/quests">Quests</a><a href="/database/npcs">People</a><a href="/map">Map</a></nav>
+    <section class="database-browser" id="browse-entries" aria-labelledby="browse-entries-title">
+      <h2 id="browse-entries-title">Choose an animal</h2>
+      <div class="database-entry-links"><a href="#chicken"><img class="database-item-icon" src="/assets/img/items/animal_chicken_brown_female-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Chicken</span></a><a href="#cow"><img class="database-item-icon" src="/assets/img/items/animal_cow_brown_female-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Cow</span></a><a href="#goat"><img class="database-item-icon" src="/assets/img/items/animal_goat_white_female-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Goat</span></a><a href="#rabbit"><img class="database-item-icon" src="/assets/img/items/animal_rabit_female-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Rabbit</span></a></div>
+      <p class="database-browse-note">Look up chicken care, cattle breeds and goat names and products. Rabbit details are still being collected.</p>
+    </section><details class="database-reference-notes"><summary>Getting started & reference notes</summary>
+      <details class="database-reference-notes"><summary>Version & reference notes</summary><p class="meta">Current page baseline 0.8.10.842 · Video evidence recorded on 0.8.10.455 · Data last updated 2026-08-28 · Historical values are labeled</p></details>
+      <details class="database-outline"><summary>Full contents</summary><nav class="toc" aria-label="Contents">
         <div class="toctitle">Contents</div>
         <ul>
           <li class="toc-cat"><a href="#chicken">Chicken</a>
@@ -93,13 +100,10 @@
             </ul>
           </li>
         </ul>
-      </nav>
-      <div class="evidence-status">
+      </nav></details>
+      <details class="database-outline"><summary>Sources and verification</summary><div class="evidence-status">
         <strong>Evidence status:</strong> 9 confirmed systems · 6 automation features · 5 video-observed shelf listings · 8 historical leads · 4 pending rows · every fact carries its own evidence label — <a href="/methodology">How we verify →</a>
-      </div>
-
-
-      <figure class="page-banner"><img src="../assets/img/db-animals.webp" width="800" height="450" alt="The Ranchers gameplay screenshot: cows grazing outside the red barn"></figure>
+      </div></details>
 
       <div class="notice">
         <strong>Current-build note:</strong> Official Steam material names chickens, bunnies, goats, and cows and now confirms several animal-management rules. It still does not publish a complete price or production table.
@@ -128,16 +132,18 @@
 
       <p class="lead">This living database combines the official roster with clearly labeled player research. Each animal has its own anchored profile below — search an individual animal, inspect its source and version context, and help replace historical values with current-build evidence.</p>
 
-      <section class="evidence-ledger animal-profile" id="chicken" data-search-entry data-search-title="Chicken" data-search-tags="chicken hen rooster chick poultry coop egg large egg hay heater angela gigi quest food diet feed price buy sell" data-search-status="Database record" aria-labelledby="chicken-heading">
+      </details>
+<section class="evidence-ledger animal-profile" id="chicken" data-search-entry data-search-title="Chicken" data-search-tags="chicken hen rooster chick poultry coop egg large egg hay heater angela gigi quest food diet feed price buy sell" data-search-status="Database record" aria-labelledby="chicken-heading"><a class="database-back" href="#browse-entries">Back to entries</a>
         <div class="section-heading-row">
           <div>
             <span class="kicker">poultry · Coop</span>
-            <h2 id="chicken-heading">Chicken</h2>
+            <h2 id="chicken-heading"><span class="database-entry-title"><img class="database-item-icon" src="/assets/img/items/animal_chicken_brown_female-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Chicken</span></span></h2>
           </div>
           <span class="tag">Updated 2026-08-11</span>
         </div>
         <p class="lead">The best-documented animal in the current build. Buy from Angela, keep hay and water in the coop trough, mount the coop heater on the outside wall, and pet daily for a shot at large eggs.</p>
-        <div class="entity-decision"><strong>When to look here</strong><p>Use this profile when you are buying your first chicken, troubleshooting care or disappearance, or checking the evidence behind the large-egg route.</p></div>
+
+
         <h3 id="chicken-acquisition">Buying &amp; bringing home</h3>
         <ul class="evidence-list">
           <li>Buy chickens from Angela, the chicken seller NPC. After purchase they do not enter your backpack — they appear in the small fenced field behind her house. Grab them manually: carry them home one by one on foot, or load them into a car boot. <span class="tag evidence-community">Community-confirmed</span> <span class="fact-source"><a href="https://steamcommunity.com/app/1501310/discussions/0/587307906418973975/" rel="noopener noreferrer">Steam thread &quot;Chicken coop mission&quot; (DJM, Yakiwi)</a></span></li>
@@ -218,21 +224,32 @@
         </ul>
       </section>
 
-      <section class="evidence-ledger animal-profile" id="cow" data-search-entry data-search-title="Cow" data-search-tags="cow bull calf cattle barn milk meat spotted food diet feed price buy sell" data-search-status="Database record" aria-labelledby="cow-heading">
+      <section class="evidence-ledger animal-profile" id="cow" data-search-entry data-search-title="Cow" data-search-tags="cow bull calf cattle barn milk meat spotted food diet feed price buy sell Bretonne Pie Noire Maine-Anjou Angeln Deutsche Rotbunte Gascon" data-search-status="Database record" aria-labelledby="cow-heading"><a class="database-back" href="#browse-entries">Back to entries</a>
         <div class="section-heading-row">
           <div>
             <span class="kicker">mammal · Barn</span>
-            <h2 id="cow-heading">Cow</h2>
+            <h2 id="cow-heading"><span class="database-entry-title"><img class="database-item-icon" src="/assets/img/items/animal_cow_brown_female-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Cow</span></span></h2>
           </div>
-          <span class="tag">Updated 2026-08-08</span>
+          <span class="tag">Updated 2026-08-28</span>
         </div>
-        <p class="lead">Confirmed on the roster with milk and meat on current-build shop shelves. Purchase price, cycle and upkeep are still unmeasured — historical Alpha prices are kept as leads only.</p>
-        <div class="entity-decision"><strong>When to look here</strong><p>Use this profile when deciding whether current-build cow information is enough for a purchase or production plan; price, care cycle and profit remain open.</p></div>
-        <h3 id="cow-acquisition">Buying</h3>
+        <p class="lead">Five breeds in the cattle-shop directory, with related quest, care instructions and product names.</p>
+
+<div class="animal-build-reference">
+        <p class="database-browse-note">Editor-collected · game-build reference · 0.8.10.842. Not gameplay-tested; configuration does not guarantee availability.</p>
+        <h3>Cattle breeds</h3><div class="data-table-wrap" tabindex="0" role="region" aria-label="Cattle breeds and sexes"><table class="data-table"><thead><tr><th scope="col">Breed</th><th scope="col">Shop entries</th></tr></thead><tbody><tr><th scope="row">Bretonne Pie Noire</th><td>Cow / Bull</td></tr><tr><th scope="row">Maine-Anjou</th><td>Cow / Bull</td></tr><tr><th scope="row">Angeln</th><td>Cow</td></tr><tr><th scope="row">Deutsche Rotbunte</th><td>Cow</td></tr><tr><th scope="row">Gascon</th><td>Cow</td></tr></tbody></table></div>
+        <p><strong>Related quest: </strong><a href="/database/quests#chicken-coop-mission">Coop Dreams</a> — The cattle-shop entries reference this quest. Check your progress if cattle are unavailable; the exact unlock state has not been decoded or gameplay-tested.</p>
+        <h3>Care checklist</h3><ol><li>Open the animal's information popup to check its diet before choosing feed or mixing species in a barn.</li><li>Place suitable food in the barn's manger.</li><li>Use a watering can to refill the animals' water.</li><li>Pet animals at least once a day to build the relationship, alongside meeting their food and water needs.</li></ol>
+        <p><strong>Equipment in the same shop directory: </strong>Rope, Bucket, Hay, Barn Heat Kit, Barn AutoFeeder Kit. A directory listing, not a required shopping list or proof of a species-specific diet.</p>
+        <h3>Product name lookup</h3>
+        <ul><li><strong>Milk: </strong>Cow Milk - Small, Cow Milk - Medium, Cow Milk - Large, Cow Milk - Giant</li><li><strong>Meat: </strong>Cow Meat - Small, Cow Meat - Medium, Meat Steak - Big</li></ul>
+        <p class="database-browse-note">These are item definitions, not guaranteed outputs for every animal. Yield, production interval and size chances remain unverified.</p>
+        <details class="database-outline"><summary>Reference sources</summary><p>Interpreted from an owned copy’s animal, shop and item tables and bilingual names and guidance. Raw game files are not distributed.</p><span class="fact-source">Owned game files: animal definitions · Owned game files: cattle-shop directory · Owned game files: consumable item definitions · Owned game files: bilingual item names and livestock tutorials</span></details>
+      </div><!-- animal-build-reference-end -->
+<details class="database-outline"><summary>Further care evidence and open questions</summary>        <h3 id="cow-acquisition">Buying</h3>
         <details class="pending-facts">
           <summary>1 item not yet verified — show</summary>
           <ul class="evidence-list pending-list">
-          <li>Cows are named as ranch animals in official material, but no seller, price or requirement has been verified in the current build. <span class="tag pending">Unknown</span> <span class="fact-source"><a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">The Ranchers — official Steam store page</a> · Community discussion scan archive (local file: community-scan-2026-08-08.md, 90 topics scanned, 44 read)</span></li>
+          <li>The shop configuration lists cattle and a quest association above, but the exact seller, visible price and unlock state still need a current-build gameplay check. <span class="tag pending">Unknown</span> <span class="fact-source"><a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">The Ranchers — official Steam store page</a> · Community discussion scan archive (local file: community-scan-2026-08-08.md, 90 topics scanned, 44 read)</span></li>
           </ul>
         </details>
         <h3 id="cow-housing">Housing</h3>
@@ -270,24 +287,35 @@
         <h3 id="cow-selling">Selling</h3>
         <ul class="evidence-list">
           <li>Selling live animals is not implemented; the meat path is the current disposal route. <span class="tag evidence-official">Official</span> <span class="fact-source">Steam thread &quot;Can't sell roosters&quot; (Jennoula, official)</span></li>
-        </ul>
+        </ul></details>
       </section>
 
-      <section class="evidence-ledger animal-profile" id="goat" data-search-entry data-search-title="Goat" data-search-tags="goat barn mammal milk food diet feed price buy sell" data-search-status="Database record" aria-labelledby="goat-heading">
+      <section class="evidence-ledger animal-profile" id="goat" data-search-entry data-search-title="Goat" data-search-tags="goat buck doe doeling buckling kid barn mammal milk meat food diet feed price buy sell" data-search-status="Database record" aria-labelledby="goat-heading"><a class="database-back" href="#browse-entries">Back to entries</a>
         <div class="section-heading-row">
           <div>
             <span class="kicker">mammal · Barn</span>
-            <h2 id="goat-heading">Goat</h2>
+            <h2 id="goat-heading"><span class="database-entry-title"><img class="database-item-icon" src="/assets/img/items/animal_goat_white_female-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Goat</span></span></h2>
           </div>
-          <span class="tag">Updated 2026-08-08</span>
+          <span class="tag">Updated 2026-08-28</span>
         </div>
-        <p class="lead">Officially named on the roster and added as a species in the Ranching v2 notes. No current-build care, price or production data verified yet.</p>
-        <div class="entity-decision"><strong>When to look here</strong><p>Use this profile to check what is actually documented about goats before treating an older ranching note as current-build guidance.</p></div>
-        <h3 id="goat-acquisition">Buying</h3>
+        <p class="lead">Identify adult and young goats, check the adult shop references and look up goat milk and meat names. Purchase prices and production rates remain unverified.</p>
+
+<div class="animal-build-reference">
+        <p class="database-browse-note">Editor-collected · game-build reference · 0.8.10.842. Not gameplay-tested; configuration does not guarantee availability.</p>
+        <h3>Adult and young goats</h3><div class="data-table-wrap" tabindex="0" role="region" aria-label="Goat names and shop references"><table class="data-table"><thead><tr><th scope="col">Game name</th><th scope="col">Shop-table reference</th></tr></thead><tbody><tr><th scope="row">Goat Doe<br><small>Adult · Female</small></th><td>Referenced</td></tr><tr><th scope="row">Buck<br><small>Adult · Male</small></th><td>Referenced</td></tr><tr><th scope="row">Goat Doeling<br><small>Young · Female</small></th><td>Not referenced</td></tr><tr><th scope="row">Buckling<br><small>Young · Male</small></th><td>Not referenced</td></tr></tbody></table></div>
+        <p><strong>Related quest: </strong><a href="/database/quests#chicken-coop-mission">Coop Dreams</a> — Both adult goat shop entries reference this quest. Check your quest progress if they are unavailable; the exact unlock state and seller have not been verified. Young goats are not referenced in this shop table, so their definitions do not establish a purchase route.</p>
+
+
+        <h3>Product name lookup</h3>
+        <ul><li><strong>Milk: </strong>Goat Milk - Small, Goat Milk - Medium</li><li><strong>Meat: </strong>Goat Meat - Small, Goat Meat - Medium, Goat Meat - Big</li></ul>
+        <p class="database-browse-note">These are item definitions, not guaranteed outputs for every animal. Yield, production interval and size chances remain unverified.</p>
+        <details class="database-outline"><summary>Reference sources</summary><p>Interpreted from an owned copy’s animal, shop and item tables and bilingual names and guidance. Raw game files are not distributed.</p><span class="fact-source">Owned game files: animal definitions · Owned game files: cattle-shop directory · Owned game files: consumable item definitions · Owned game files: bilingual item names and livestock tutorials</span></details>
+      </div><!-- animal-build-reference-end -->
+<details class="database-outline"><summary>Further care evidence and open questions</summary>        <h3 id="goat-acquisition">Buying</h3>
         <details class="pending-facts">
           <summary>1 item not yet verified — show</summary>
           <ul class="evidence-list pending-list">
-          <li>Goats are named as ranch animals in official store copy; seller, price and requirements are unverified. <span class="tag pending">Unknown</span> <span class="fact-source"><a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">The Ranchers — official Steam store page</a></span></li>
+          <li>The adult shop references above do not establish the current seller, purchase price or exact unlock condition; these still need a gameplay check. <span class="tag pending">Unknown</span> <span class="fact-source"><a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">The Ranchers — official Steam store page</a></span></li>
           </ul>
         </details>
         <h3 id="goat-feed">Feeding</h3>
@@ -297,19 +325,20 @@
         <h3 id="goat-breeding">Breeding</h3>
         <ul class="evidence-list">
           <li class="fact-historical">As a mammal, goats fall under the documented pregnancy mechanic; current-build behavior unverified. <span class="tag evidence-official">Official · pre-EA documented</span> <span class="fact-source"><a href="https://steamcommunity.com/games/1501310/announcements/detail/6839319551984984308" rel="noopener noreferrer">The Ranchers, Ranching v2 update! (official Steam announcement)</a></span></li>
-        </ul>
+        </ul></details>
       </section>
 
-      <section class="evidence-ledger animal-profile" id="rabbit" data-search-entry data-search-title="Rabbit" data-search-tags="rabbit bunny bunnies hutch lettuce food diet feed price buy sell" data-search-status="Database record" aria-labelledby="rabbit-heading">
+      <section class="evidence-ledger animal-profile" id="rabbit" data-search-entry data-search-title="Rabbit" data-search-tags="rabbit bunny bunnies hutch lettuce food diet feed price buy sell" data-search-status="Database record" aria-labelledby="rabbit-heading"><a class="database-back" href="#browse-entries">Back to entries</a>
         <div class="section-heading-row">
           <div>
             <span class="kicker">mammal · Hutch / outdoor</span>
-            <h2 id="rabbit-heading">Rabbit</h2>
+            <h2 id="rabbit-heading"><span class="database-entry-title"><img class="database-item-icon" src="/assets/img/items/animal_rabit_female-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Rabbit</span></span></h2>
           </div>
           <span class="tag">Updated 2026-08-08</span>
         </div>
         <p class="lead">Named in official store copy as bunnies and added in the Ranching v2 notes. Diet is the only community-discussed detail, and even that is unconfirmed.</p>
-        <div class="entity-decision"><strong>When to look here</strong><p>Use this profile to separate the confirmed rabbit roster entry from unverified diet, purchase and production claims.</p></div>
+
+
         <h3 id="rabbit-acquisition">Buying</h3>
         <details class="pending-facts">
           <summary>1 item not yet verified — show</summary>

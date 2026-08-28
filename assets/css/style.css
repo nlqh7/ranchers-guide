@@ -3666,6 +3666,10 @@ body.has-modal-open { overflow: hidden; }
 .evidence-video { color: #6a4a8c; background: #f0e9f7; }
 .evidence-community { color: #315b83; background: #e8f0f8; }
 .evidence-tested { color: #185d65; background: #e4f4f5; }
+.evidence-build { color: #244d6b; background: #e6f1f7; }
+.build-data-roster { scroll-margin-top: 96px; }
+.build-data-table { font-variant-numeric: tabular-nums; }
+.build-data-roster .data-table-wrap:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 3px; }
 .evidence-lead { color: #7a5714; background: #fff4d6; }
 
 .evidence-list { padding-left: 20px; }

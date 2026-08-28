@@ -294,8 +294,14 @@ function searchTags(record, locale) {
 
 function baseRecord({ type, record, dataset, route, locale, title }) {
   const factsEn = englishFacts(record);
-  const sourceIds = [...factsEn.flatMap((fact) => fact.sourceIds || []), ...(record.sourceIds || [])];
-  const facts = localizedFacts(record, locale).map((fact) => ({
+  const ref = record.buildReference;
+  const referenceFacts = ref ? [ref.quest, ...ref.care].map(row => ({
+    text: locale === 'zh' ? row.zhText : row.text,
+    group: locale === 'zh' ? '游戏构建资料（未实测）' : 'Game-build reference (not gameplay-tested)',
+    evidenceLevel: ref.evidenceLevel, validity: ref.validity, build: ref.build, sourceIds: ref.sourceIds,
+  })) : [];
+  const sourceIds = [...factsEn.flatMap((fact) => fact.sourceIds || []), ...(record.sourceIds || []), ...(ref?.sourceIds || [])];
+  const facts = [...referenceFacts, ...localizedFacts(record, locale)].map((fact) => ({
     group: fact.group || "",
     text: fact.text,
     evidenceLevel: fact.evidenceLevel || "unverified-lead",
@@ -303,7 +309,7 @@ function baseRecord({ type, record, dataset, route, locale, title }) {
     build: fact.build || dataset.meta?.build || null,
     sourceIds: fact.sourceIds || [],
   }));
-  const names = unique([record.name, record.zhName, record.buildGuide?.name, record.buildGuide?.zhName, record.zh?.name, record.locale?.en?.title, record.locale?.zh?.title, record.marker?.locale?.en?.title, record.marker?.locale?.zh?.title]);
+  const names = unique([record.name, record.zhName, record.buildGuide?.name, record.buildGuide?.zhName, record.zh?.name, record.locale?.en?.title, record.locale?.zh?.title, record.marker?.locale?.en?.title, record.marker?.locale?.zh?.title, ...[...(ref?.breeds || []), ...(ref?.entries || []), ...(ref?.products || [])].flatMap(b => [b.name, b.zhName])]);
   const tags = unique([record.searchTags, record.zhSearchTags, record.zh?.searchTags, record.locale?.en?.keywords, record.locale?.zh?.keywords]).join(" ");
   return {
     id: `${type}:${record.id}`,

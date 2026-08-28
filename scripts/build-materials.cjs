@@ -1,5 +1,6 @@
 const fs = require("node:fs");
 const path = require("node:path");
+const { decorateReferencePage } = require('./render-database-browser.cjs');
 
 const root = path.resolve(__dirname, "..");
 const data = JSON.parse(fs.readFileSync(path.join(root, "data", "materials.json"), "utf8"));
@@ -61,6 +62,17 @@ function sourceHtml(ids, locale) {
   }).join(" · ");
 }
 
+function buildingSourceHtml(target, locale) {
+  const zh = locale === "zh";
+  const source = target.source;
+  if (!source) return zh ? '来源未保留' : 'Source not retained';
+  const label = esc(zh ? source.labelZh : source.label);
+  const sourceLink = source.url
+    ? `<a href="${esc(source.url)}" rel="noopener noreferrer">${label}</a>`
+    : label;
+  return sourceLink;
+}
+
 function localizeRoute(route, zh) {
   if (!zh) return route;
   if (route === "/community") return "/zh/community";
@@ -95,20 +107,23 @@ function render(locale) {
     const related = (material.relatedRoutes || []).map((route) => {
       const label = relatedLabels[route];
       if (!label) throw new Error(`Missing related route label for ${route}`);
-      return `<a class="btn btn-outline btn-compact" href="${localizeRoute(route, zh)}">${label[zh ? "zh" : "en"]}</a>`;
+      return `<a href="${localizeRoute(route, zh)}">${label[zh ? "zh" : "en"]}</a>`;
     }).join("");
     const documentedUses = buildingData.targets.flatMap((target) => {
       const requirement = target.materials.find((entry) => entry.id === material.id);
       if (!requirement) return [];
       return [{ target, requirement }];
     });
-    const buildUse = documentedUses.length > 0 ? `<div class="entity-decision entity-build-target"><strong>${zh ? "已记录的建造用途" : "Documented build use"}</strong>${documentedUses.map(({ target, requirement }) => `<p><a href="${zh ? "/zh" : ""}/tools/ranch-checklist#build-goal">${esc(zh ? target.zhName : target.name)}</a> · ${zh ? "需要" : "Needs"} <strong>${requirement.required}</strong> ${esc(zh ? material.zhName : material.name)} · ${zh ? "来源画面版本" : "Source footage build"} ${esc(target.build)}.</p><p class="entity-decision-note">${esc(zh ? target.zhCaution : target.caution)} <span class="tag historical">${zh ? "历史参考" : "Historical reference"}</span></p>`).join("")}</div>` : "";
-    const extra = `<div class="entity-decision"><strong>${zh ? "什么时候查" : "When this matters"}</strong><p>${esc(zh ? material.zhWhenNeeded : material.whenNeeded)}</p><div class="button-stack">${related}${material.id === "zirconite" ? `<a class="btn btn-outline btn-compact" href="${prefix}/map?q=${encodeURIComponent(zh ? "锆矿" : "zirconite")}">${l.map}</a>` : material.id === "hay" ? `<a class="btn btn-outline btn-compact" href="${prefix}/guides/animal-guide#feeding">${l.animal}</a>` : ""}</div></div>${buildUse}`;
+    const buildUse = documentedUses.length > 0 ? `<h3>${zh ? "建造用途" : "Building uses"}</h3>
+        <p class="database-browse-note" id="${material.id}-build-note">${zh ? "历史配方参考；采集前请核对当前游戏配方。" : "Historical recipe references; check the current in-game recipe before gathering."}</p>
+        <div class="data-table-wrap" role="region" tabindex="0" aria-label="${zh ? '建造材料数量' : 'Building material quantities'}"><table class="data-table material-uses" aria-describedby="${material.id}-build-note"><thead><tr><th scope="col">${zh ? '建筑' : 'Building'}</th><th scope="col">${zh ? '数量' : 'Quantity'}</th><th scope="col">${l.build}</th><th scope="col">${l.source}</th></tr></thead><tbody>${documentedUses.map(({ target, requirement }) => `<tr><th scope="row"><a href="${prefix}/tools/ranch-checklist#build-goal">${esc(zh ? target.zhName : target.name)}</a></th><td>${requirement.required}</td><td>${esc(target.build)}</td><td>${buildingSourceHtml(target, locale)}</td></tr>`).join('')}</tbody></table></div>` : "";
+    const relatedLinks = `<div class="database-guide-links">${related}</div>`;
     return `      <section class="evidence-ledger material-profile" id="${material.id}" data-search-entry data-search-title="${esc(zh ? material.zhSearchTitle : material.searchTitle)}" data-search-tags="${esc(zh ? material.zhSearchTags : material.searchTags)}">
-        <div class="section-heading-row"><div><span class="kicker">${l.breadcrumb}</span><h2>${esc(zh ? material.zhName : material.name)}</h2></div><span class="tag">${data.meta.lastUpdated}</span></div>
+        <h2>${esc(zh ? material.zhName : material.name)}</h2>
         <p class="lead">${esc(zh ? material.zhSummary : material.summary)}</p>
-        ${extra}
         <ul class="evidence-list">${facts}</ul>
+        ${buildUse}
+        ${relatedLinks}
       </section>`;
   }).join("\n\n");
   const toc = data.materials.map((material) => `<li><a href="#${material.id}">${esc(zh ? material.zhName : material.name)}</a></li>`).join("");
@@ -131,14 +146,14 @@ function render(locale) {
     <p class="lead">${l.lead}</p><div class="notice warning"><strong>${zh ? "当前版本边界：" : "Current-build boundary:"}</strong> ${l.currentNote}</div>
     <nav class="toc" aria-label="${l.contents}"><strong>${l.contents}</strong><ul>${toc}</ul></nav>
 ${sections}
-    <section class="answer-box"><h2>${l.unknown}</h2><p>${l.unknownCopy}</p><a class="btn" href="${prefix}/guides/crafting-guide">${l.crafting}</a> <a class="btn btn-outline" href="${prefix}/guides/building-construction#materials">${l.building}</a></section>
+    <p class="database-browse-note">${l.unknownCopy}</p>
   </article></main><footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>${l.footer}</span></div></div></footer><script src="/assets/js/main.js?v=20260810-nav1" defer></script>
 </body></html>`;
 }
 
 const outputs = [
-  [path.join(root, "database", "materials.html"), render("en")],
-  [path.join(root, "zh", "database", "materials.html"), render("zh")]
+  [path.join(root, "database", "materials.html"), decorateReferencePage(render("en"), data, 'materials', 'en')],
+  [path.join(root, "zh", "database", "materials.html"), decorateReferencePage(render("zh"), data, 'materials', 'zh')]
 ];
 
 let drifted = false;

@@ -1,7 +1,7 @@
 {
   "meta": {
     "page": "database/crops.html",
-    "lastUpdated": "2026-08-22",
+    "lastUpdated": "2026-08-27",
     "build": "0.8.10.842",
     "videoBuild": "0.8.10.455",
     "evidenceLevels": [
@@ -9,6 +9,7 @@
       "video-observed",
       "community-confirmed",
       "player-tested",
+      "build-observed",
       "unverified-lead"
     ],
     "validityValues": [
@@ -19,6 +20,14 @@
     ]
   },
   "sources": {
+    "local-build-24847725": {
+      "kind": "first-hand-build-resource",
+      "title": "Site-owner local build collection: byte-faithful crop TextAssets and cross-table ID audit",
+      "url": null,
+      "author": "Site editor",
+      "date": "2026-08-26",
+      "build": "0.8.10.842 / Steam build 24847725"
+    },
     "store-page": {
       "kind": "store-page",
       "title": "The Ranchers — official Steam store page",
@@ -93,6 +102,200 @@
       "date": "2026-08-08",
       "build": "0.8.10.x"
     }
+  },
+  "buildRoster": {
+    "build": "0.8.10.842",
+    "steamBuild": "24847725",
+    "sourceIds": [
+      "local-build-24847725"
+    ],
+    "summary": "A byte-faithful current-build audit joins the Seeds, seasonal Seed_fruits and Town_SeedVendor TextAssets. Eleven profiles sit in the seasonal tables; only nine also have a Town SeedVendor seed reference.",
+    "zhSummary": "本站对当前构建的 Seeds、季节 Seed_fruits 与 Town_SeedVendor TextAsset 做了逐 ID 交叉核验：季节表共有 11 个配置，其中只有 9 个同时存在种子商店引用。",
+    "publicationBoundary": "These rows prove serialized configuration in this build, not guaranteed runtime availability or player-facing prices. Internal base prices and configured spawn counts are withheld because current shop footage already proves that serialized price differs from retail.",
+    "zhPublicationBoundary": "这些行能证明当前构建存在序列化配置，但不能单独证明运行时一定可获得，也不能证明玩家看到的价格。内部基础价格和配置产量暂不公开，因为现有商店画面已经证明序列化价格与零售价不同。",
+    "entries": [
+      {
+        "id": "red-lettuce",
+        "name": "Red Lettuce",
+        "zhName": "红生菜",
+        "season": "Spring",
+        "zhSeason": "春季",
+        "daysToFirstHarvest": 3,
+        "regrowEveryDays": 0,
+        "daysWithoutWater": 2,
+        "townSeedVendor": "listed",
+        "sourceTable": "Seed_fruits_Spring",
+        "evidenceLevel": "build-observed",
+        "validity": "current",
+        "build": "0.8.10.842",
+        "sourceIds": ["local-build-24847725"]
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic",
+        "zhName": "大蒜",
+        "season": "Spring",
+        "zhSeason": "春季",
+        "daysToFirstHarvest": 4,
+        "regrowEveryDays": 0,
+        "daysWithoutWater": 2,
+        "townSeedVendor": "listed",
+        "sourceTable": "Seed_fruits_Spring",
+        "evidenceLevel": "build-observed",
+        "validity": "current",
+        "build": "0.8.10.842",
+        "sourceIds": ["local-build-24847725"]
+      },
+      {
+        "id": "strawberry",
+        "name": "Strawberry",
+        "zhName": "草莓",
+        "season": "Spring",
+        "zhSeason": "春季",
+        "daysToFirstHarvest": 7,
+        "regrowEveryDays": 3,
+        "daysWithoutWater": 2,
+        "townSeedVendor": "listed",
+        "sourceTable": "Seed_fruits_Spring",
+        "evidenceLevel": "build-observed",
+        "validity": "current",
+        "build": "0.8.10.842",
+        "sourceIds": ["local-build-24847725"]
+      },
+      {
+        "id": "aubergine",
+        "name": "Aubergine",
+        "zhName": "茄子",
+        "season": "Summer",
+        "zhSeason": "夏季",
+        "daysToFirstHarvest": 7,
+        "regrowEveryDays": 7,
+        "daysWithoutWater": 2,
+        "townSeedVendor": "listed",
+        "sourceTable": "Seed_fruits_Summer",
+        "evidenceLevel": "build-observed",
+        "validity": "current",
+        "build": "0.8.10.842",
+        "sourceIds": ["local-build-24847725"]
+      },
+      {
+        "id": "corn",
+        "name": "Corn",
+        "zhName": "玉米",
+        "season": "Summer",
+        "zhSeason": "夏季",
+        "daysToFirstHarvest": 7,
+        "regrowEveryDays": 0,
+        "daysWithoutWater": 2,
+        "townSeedVendor": "listed",
+        "sourceTable": "Seed_fruits_Summer",
+        "evidenceLevel": "build-observed",
+        "validity": "current",
+        "build": "0.8.10.842",
+        "sourceIds": ["local-build-24847725"]
+      },
+      {
+        "id": "green-lettuce",
+        "name": "Green Lettuce",
+        "zhName": "绿生菜",
+        "season": "Summer",
+        "zhSeason": "夏季",
+        "daysToFirstHarvest": 4,
+        "regrowEveryDays": 0,
+        "daysWithoutWater": 1,
+        "townSeedVendor": "listed",
+        "sourceTable": "Seed_fruits_Summer",
+        "evidenceLevel": "build-observed",
+        "validity": "current",
+        "build": "0.8.10.842",
+        "sourceIds": ["local-build-24847725"]
+      },
+      {
+        "id": "pumpkin",
+        "name": "Pumpkin",
+        "zhName": "南瓜",
+        "season": "Autumn",
+        "zhSeason": "秋季",
+        "daysToFirstHarvest": 6,
+        "regrowEveryDays": 0,
+        "daysWithoutWater": 4,
+        "townSeedVendor": "listed",
+        "sourceTable": "Seed_fruits_Autumn",
+        "evidenceLevel": "build-observed",
+        "validity": "current",
+        "build": "0.8.10.842",
+        "sourceIds": ["local-build-24847725"]
+      },
+      {
+        "id": "carrot",
+        "name": "Carrot",
+        "zhName": "胡萝卜",
+        "season": "Autumn",
+        "zhSeason": "秋季",
+        "daysToFirstHarvest": 4,
+        "regrowEveryDays": 4,
+        "daysWithoutWater": 4,
+        "townSeedVendor": "listed",
+        "sourceTable": "Seed_fruits_Autumn",
+        "evidenceLevel": "build-observed",
+        "validity": "current",
+        "build": "0.8.10.842",
+        "sourceIds": ["local-build-24847725"]
+      },
+      {
+        "id": "onion",
+        "name": "Onion",
+        "zhName": "洋葱",
+        "season": "Autumn",
+        "zhSeason": "秋季",
+        "daysToFirstHarvest": 4,
+        "regrowEveryDays": 3,
+        "daysWithoutWater": 4,
+        "townSeedVendor": "listed",
+        "sourceTable": "Seed_fruits_Autumn",
+        "evidenceLevel": "build-observed",
+        "validity": "current",
+        "build": "0.8.10.842",
+        "sourceIds": ["local-build-24847725"]
+      },
+      {
+        "id": "marrow",
+        "name": "Marrow",
+        "zhName": "西葫芦",
+        "season": "Autumn",
+        "zhSeason": "秋季",
+        "daysToFirstHarvest": 6,
+        "regrowEveryDays": 0,
+        "daysWithoutWater": 2,
+        "townSeedVendor": "not-referenced",
+        "sourceTable": "Seed_fruits_Autumn",
+        "evidenceLevel": "build-observed",
+        "validity": "current",
+        "build": "0.8.10.842",
+        "sourceIds": ["local-build-24847725"]
+      },
+      {
+        "id": "leek",
+        "name": "Leek",
+        "zhName": "韭葱",
+        "season": "Autumn",
+        "zhSeason": "秋季",
+        "daysToFirstHarvest": 8,
+        "regrowEveryDays": 4,
+        "daysWithoutWater": 2,
+        "townSeedVendor": "not-referenced",
+        "sourceTable": "Seed_fruits_Autumn",
+        "evidenceLevel": "build-observed",
+        "validity": "current",
+        "build": "0.8.10.842",
+        "sourceIds": ["local-build-24847725"]
+      }
+    ],
+    "notIncluded": [
+      {"id": "peppers", "name": "Peppers", "zhName": "甜椒", "sourceTable": "Seed_fruits_NotINCLUDED"},
+      {"id": "melon", "name": "Melon", "zhName": "甜瓜", "sourceTable": "Seed_fruits_NotINCLUDED"},
+      {"id": "chili", "name": "Chili", "zhName": "辣椒", "sourceTable": "Seed_fruits_NotINCLUDED"}
+    ]
   },
   "crops": [
     {

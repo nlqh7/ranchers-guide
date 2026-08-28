@@ -169,13 +169,13 @@ assert.match(sharedScript, /pageHasMainSearch/, "pages with a primary search nee
 assert.match(sharedScript, /if \(pageHasMainSearch\)\s*\{\s*searchLink\.parentElement\.remove\(\)/s, "primary-search pages must remove the nav item instead of leaving a text link");
 assert.match(sharedScript, /target\.scrollIntoView\(\{ block: "start" \}\)/);
 assert.match(homePage, /class="hero-search"[^>]+action="\/search"/);
-assert.match(knowledgeBasePage, /<h1>The Ranchers Knowledge Base<\/h1>/);
+assert.match(knowledgeBasePage, /<h1>Game database<\/h1>/);
 assert.match(knowledgeBasePage, /href="\/guides\/animal-guide#feeding"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /"\/database"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /"\/zh\/community"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /search-index\.json/);
-assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-zh-v10/, "Chinese search cache must invalidate the previous page set");
-assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-v23/, "English search cache must invalidate the previous page set");
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-zh-v14/, "Chinese search cache must invalidate the previous page set");
+assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-v27/, "English search cache must invalidate the previous page set");
 assert.match(searchPage, /data-knowledge-dossier/, "Search page must provide an entity dossier surface");
 assert.match(searchPage, /data-entity-filters/, "Search page must provide entity answer filters");
 const chineseSearchPage = fs.readFileSync(path.join(root, "zh", "search.html"), "utf8");
@@ -205,7 +205,14 @@ assert.equal(searchDocuments(prebuiltIndex, "Angela chicken seller")[0].url, "/d
 
 const knowledgeIndex = JSON.parse(fs.readFileSync(path.join(root, "knowledge-index.json"), "utf8"));
 const chineseKnowledgeIndex = JSON.parse(fs.readFileSync(path.join(root, "zh", "knowledge-index.json"), "utf8"));
-assert.equal(knowledgeIndex.entities.length, 54, "Knowledge index should cover the current typed datasets");
+const expectedEntityIds = [
+  ['animal', 'animals', 'species'], ['crop', 'crops', 'crops'],
+  ['material', 'materials', 'materials'], ['building', 'building-checklists', 'targets'],
+  ['npc', 'npcs', 'npcs'], ['quest', 'quests', 'quests'], ['location', 'locations', 'locations'],
+].flatMap(([type, file, key]) => require(`../data/${file}.json`)[key].map(record => `${type}:${record.id}`)).sort();
+for (const index of [knowledgeIndex, chineseKnowledgeIndex]) {
+  assert.deepEqual(index.entities.map(entity => entity.id).sort(), expectedEntityIds, 'each published data record must have exactly one knowledge entry');
+}
 assert.equal(chineseKnowledgeIndex.entities.length, knowledgeIndex.entities.length, "Bilingual knowledge indexes must stay aligned");
 assert.ok(knowledgeIndex.entities.some((entity) => entity.id === "material:zirconite" && entity.facts.length >= 2));
 assert.ok(chineseKnowledgeIndex.entities.some((entity) => entity.id === "material:zirconite" && entity.label.includes("锆矿")));
