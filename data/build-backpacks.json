@@ -1,0 +1,102 @@
+{
+  "build": "0.8.10.842",
+  "steamBuild": "24847725",
+  "evidenceLevel": "build-observed",
+  "validity": "unknown",
+  "sources": {
+    "CC_BackPack-c8527fef42": {
+      "kind": "local-build",
+      "title": "CC_BackPack",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12063,
+      "rawSha256": "c8527fef429492ae5271a9c8d1ed6bc2738641bab77de183a21369df041c45e8"
+    },
+    "localization": {
+      "kind": "local-build",
+      "title": "Owned-build item localization",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 393483,
+      "rawSha256": "2c505386fe9b1b9c2579aad1e6957907db838d8c7f87227e818fbfd4b57d5f4e"
+    }
+  },
+  "items": [
+    {
+      "id": "backpack_big_simple",
+      "name": "BackPack",
+      "zhName": "背包",
+      "nameKey": "Items_DB/backpack_big_simple/Name",
+      "description": null,
+      "sourceId": "CC_BackPack-c8527fef42",
+      "classification": "OTHER",
+      "rarity": "Legend",
+      "bodySlot": "CC_BackPack",
+      "equippable": true,
+      "stackable": false,
+      "droppable": false,
+      "sellable": false,
+      "genderRestricted": false,
+      "acceptsColorCustomization": true,
+      "storageCapacity": 15,
+      "demoFlag": true
+    },
+    {
+      "id": "backpack_heavy",
+      "name": "BackPack - Big",
+      "zhName": "大号背包",
+      "nameKey": "Items_DB/backpack_heavy/Name",
+      "description": null,
+      "sourceId": "CC_BackPack-c8527fef42",
+      "classification": "OTHER",
+      "rarity": "Legend",
+      "bodySlot": "CC_BackPack",
+      "equippable": true,
+      "stackable": false,
+      "droppable": false,
+      "sellable": false,
+      "genderRestricted": false,
+      "acceptsColorCustomization": true,
+      "storageCapacity": 40,
+      "demoFlag": true
+    },
+    {
+      "id": "backpack_Medium_01",
+      "name": "BackPack - Medium",
+      "zhName": "中号背包",
+      "nameKey": "Items_DB/backpack_Medium_01/Name",
+      "description": null,
+      "sourceId": "CC_BackPack-c8527fef42",
+      "classification": "OTHER",
+      "rarity": "Legend",
+      "bodySlot": "CC_BackPack",
+      "equippable": true,
+      "stackable": false,
+      "droppable": false,
+      "sellable": false,
+      "genderRestricted": false,
+      "acceptsColorCustomization": true,
+      "storageCapacity": 25,
+      "demoFlag": true
+    },
+    {
+      "id": "backpack_Medium_02",
+      "name": "BackPack - Medium",
+      "zhName": "中号背包",
+      "nameKey": "Items_DB/backpack_Medium_02/Name",
+      "description": null,
+      "sourceId": "CC_BackPack-c8527fef42",
+      "classification": "OTHER",
+      "rarity": "Legend",
+      "bodySlot": "CC_BackPack",
+      "equippable": true,
+      "stackable": false,
+      "droppable": false,
+      "sellable": false,
+      "genderRestricted": false,
+      "acceptsColorCustomization": true,
+      "storageCapacity": 30,
+      "demoFlag": true
+    }
+  ]
+}

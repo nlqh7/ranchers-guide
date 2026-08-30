@@ -62,6 +62,10 @@ Run `node scripts/build-building-requirements.cjs` after changing the data or ta
 
 The three fertilizer inputs in `data/crops.json` retain source-linked names, intended-use descriptions, energy and held/stacking settings. Regenerate crop pages, shop references, database navigation, knowledge and search indexes after editing them. `node scripts/check-fertilizer-reference.cjs` verifies profile links and exact-name search. File descriptions are not tested effects; empty localization descriptions remain unknown, historical prices remain separate, and the official fertilizer warning stays linked.
 
+## Resource References
+
+`data/build-resources.json` stores eight exact bilingual resource definitions, inventory configuration and nullable Energy/Health fields. Run `node scripts/build-resource-reference.cjs`, `node scripts/build-materials.cjs`, `node scripts/build-shop-reference.cjs`, `node scripts/build-database.cjs`, `node scripts/build-knowledge-index.cjs` and `node scripts/build-search-index.cjs`. Material profiles join every matching recipe ID/quantity from `data/build-recipes.json`; water, energy and fuel use the existing resources guide. Internal prices remain private; flags do not establish runtime selling, and missing stats are not zero. Verify with `node scripts/check-resource-reference.cjs`.
+
 ## Local Preview Server
 
 Use the repository preview server so canonical extensionless routes behave like Cloudflare Pages:

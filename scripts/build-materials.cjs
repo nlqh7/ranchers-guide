@@ -1,6 +1,8 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { decorateReferencePage } = require('./render-database-browser.cjs');
+const { materialReference } = require('./build-resource-reference.cjs');
+const resourceData = require('../data/build-resources.json');
 
 const root = path.resolve(__dirname, "..");
 const data = JSON.parse(fs.readFileSync(path.join(root, "data", "materials.json"), "utf8"));
@@ -103,6 +105,7 @@ function render(locale) {
     ? [["/zh/guides/beginners-guide",0],["/zh/database",1],["/zh/map",2],["/zh/problems",3],["/zh/search",4],["/contribute",5]]
     : [["/guides/beginners-guide",0],["/database",1],["/map",2],["/problems",3],["/research",4],["/search",5],["/contribute",6]];
   const sections = data.materials.map((material) => {
+    const native = resourceData.items.find(i => i.materialId === material.id);
     const facts = material.facts.map((fact) => `          <li${fact.validity === "historical" ? ' class="fact-historical"' : ""}><p>${esc(zh ? fact.zhText : fact.text)} ${badge(fact, locale)}</p><p class="fact-source"><strong>${l.source}:</strong> ${sourceHtml(fact.sourceIds, locale)} · <strong>${l.build}:</strong> ${esc(fact.build || "not specified")}</p></li>`).join("\n");
     const related = (material.relatedRoutes || []).map((route) => {
       const label = relatedLabels[route];
@@ -118,11 +121,12 @@ function render(locale) {
         <p class="database-browse-note" id="${material.id}-build-note">${zh ? "历史配方参考；采集前请核对当前游戏配方。" : "Historical recipe references; check the current in-game recipe before gathering."}</p>
         <div class="data-table-wrap" role="region" tabindex="0" aria-label="${zh ? '建造材料数量' : 'Building material quantities'}"><table class="data-table material-uses" aria-describedby="${material.id}-build-note"><thead><tr><th scope="col">${zh ? '建筑' : 'Building'}</th><th scope="col">${zh ? '数量' : 'Quantity'}</th><th scope="col">${l.build}</th><th scope="col">${l.source}</th></tr></thead><tbody>${documentedUses.map(({ target, requirement }) => `<tr><th scope="row"><a href="${prefix}/tools/ranch-checklist#build-goal">${esc(zh ? target.zhName : target.name)}</a></th><td>${requirement.required}</td><td>${esc(target.build)}</td><td>${buildingSourceHtml(target, locale)}</td></tr>`).join('')}</tbody></table></div>` : "";
     const relatedLinks = `<div class="database-guide-links">${related}</div>`;
-    return `      <section class="evidence-ledger material-profile" id="${material.id}" data-search-entry data-search-title="${esc(zh ? material.zhSearchTitle : material.searchTitle)}" data-search-tags="${esc(zh ? material.zhSearchTags : material.searchTags)}">
-        <h2>${esc(zh ? material.zhName : material.name)}</h2>
+    return `      <section class="evidence-ledger material-profile" id="${material.id}" data-search-entry data-search-title="${esc(native ? (zh ? native.zhName : native.name) : (zh ? material.zhSearchTitle : material.searchTitle))}" data-search-aliases="${esc(`${material.name}|${material.zhName.replace(' '+material.name,'')}`)}" data-search-status="${zh?'游戏配置与观测':'Game configuration & observations'}" data-search-tags="${esc(`${material.searchTitle} ${material.zhSearchTitle} ${material.name} ${material.zhName} ${native?.name || ''} ${native?.zhName || ''} ${zh ? material.zhSearchTags : material.searchTags}`)}">
+        <h2>${esc(native ? (zh ? `${native.zhName} ${native.name}` : native.name) : (zh ? material.zhName : material.name))}</h2>
         <p class="lead">${esc(zh ? material.zhSummary : material.summary)}</p>
-        <ul class="evidence-list">${facts}</ul>
-        ${buildUse}
+        ${materialReference(material.id, zh)}
+        <h3>${zh ? '获取途径与观测' : 'Sources & observations'}</h3><ul class="evidence-list">${facts}</ul>
+        ${buildUse ? `<details class="resource-details"><summary>${zh?'历史建筑配方':'Historical building recipes'}</summary>${buildUse}</details>` : ''}
         ${relatedLinks}
       </section>`;
   }).join("\n\n");
@@ -138,7 +142,7 @@ function render(locale) {
   <title>${l.title}</title><meta name="description" content="${l.description}">
   <link rel="canonical" href="${canonical}"><link rel="alternate" hreflang="en" href="${alternateEn}"><link rel="alternate" hreflang="zh-CN" href="${alternateZh}"><link rel="alternate" hreflang="x-default" href="${alternateEn}">
   <meta property="og:type" content="website"><meta property="og:site_name" content="The Ranchers Guide"><meta property="og:title" content="${l.title}"><meta property="og:description" content="${l.description}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="https://theranchersguide.com/assets/img/guide-barn.webp">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260821-ui1"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260821-ui1"><link rel="stylesheet" href="/assets/css/resource-reference.css?v=20260829-1"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head><body>
   <header class="site-header"><nav class="nav-inner" aria-label="${zh ? "主导航" : "Main navigation"}"><a class="logo" href="${prefix}/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide<small>${zh ? "非官方中文玩家指南" : "Unofficial fan resource"}</small></span></a><button class="nav-toggle" aria-expanded="false" aria-label="${zh ? "展开导航" : "Toggle navigation"}">☰</button><ul class="nav-links">${nav}</ul></nav></header>
   <main><article class="article" style="max-width:980px"><nav class="breadcrumb" aria-label="${zh ? "面包屑" : "Breadcrumb"}"><a href="${prefix}/">${zh ? "首页" : "Home"}</a> / <a href="${prefix}/database">${zh ? "知识库" : "Database"}</a> / ${l.breadcrumb}</nav>

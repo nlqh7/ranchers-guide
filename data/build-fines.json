@@ -1,0 +1,206 @@
+{
+  "build": "0.8.10.842",
+  "steamBuild": "24847725",
+  "evidenceLevel": "build-observed",
+  "validity": "unknown",
+  "sources": {
+    "Fines_Services-f4b95220cc": {
+      "kind": "local-build",
+      "title": "Fines_Services",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12034,
+      "rawSha256": "f4b95220cc545d23cde8a4e75be8e879e29bc7701b6492c803b6657dbb87e1e1"
+    },
+    "localization": {
+      "kind": "local-build",
+      "title": "Owned-build item localization",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 393483,
+      "rawSha256": "2c505386fe9b1b9c2579aad1e6957907db838d8c7f87227e818fbfd4b57d5f4e"
+    }
+  },
+  "items": [
+    {
+      "id": "FINE_PLAYER_HOSPITAL_FEES",
+      "name": "Resuscitation costs",
+      "zhName": "复苏费用",
+      "nameKey": "Items_DB/FINE_PLAYER_HOSPITAL_FEES/Name",
+      "category": "services-custody",
+      "classification": "FINES",
+      "sourceId": "Fines_Services-f4b95220cc"
+    },
+    {
+      "id": "FINE_POLICE_CAPTURE_FEES",
+      "name": "Police custody expenses",
+      "zhName": "警方拘留费用",
+      "nameKey": "Items_DB/FINE_POLICE_CAPTURE_FEES/Name",
+      "category": "services-custody",
+      "classification": "FINES",
+      "sourceId": "Fines_Services-f4b95220cc"
+    },
+    {
+      "id": "FINE_POLICE_FAILER_TO_COMPLY_FEES",
+      "name": "Failure to comply with police orders",
+      "zhName": "不遵守警方命令",
+      "nameKey": "Items_DB/FINE_POLICE_FAILER_TO_COMPLY_FEES/Name",
+      "category": "services-custody",
+      "classification": "FINES",
+      "sourceId": "Fines_Services-f4b95220cc"
+    },
+    {
+      "id": "FINE_POLICE_CHASING_FEES",
+      "name": "Police chasing cost",
+      "zhName": "警方追捕费用",
+      "nameKey": "Items_DB/FINE_POLICE_CHASING_FEES/Name",
+      "category": "services-custody",
+      "classification": "FINES",
+      "sourceId": "Fines_Services-f4b95220cc"
+    },
+    {
+      "id": "FINE_HARVEST_PROHIBITED",
+      "name": "Prohibited harvest",
+      "zhName": "禁止采摘/收获",
+      "nameKey": "Items_DB/FINE_HARVEST_PROHIBITED/Name",
+      "category": "property-resources",
+      "classification": "FINES",
+      "sourceId": "Fines_Services-f4b95220cc"
+    },
+    {
+      "id": "FINE_DESTRUCTION_ENVOBJ",
+      "name": "Destruction of public property",
+      "zhName": "破坏公共财产",
+      "nameKey": "Items_DB/FINE_DESTRUCTION_ENVOBJ/Name",
+      "category": "property-resources",
+      "classification": "FINES",
+      "sourceId": "Fines_Services-f4b95220cc"
+    },
+    {
+      "id": "FINE_DESTRUCTION_OF_RENTAL_BIKE",
+      "name": "Rental bike damaged",
+      "zhName": "租赁自行车损坏",
+      "nameKey": "Items_DB/FINE_DESTRUCTION_OF_RENTAL_BIKE/Name",
+      "category": "property-resources",
+      "classification": "FINES",
+      "sourceId": "Fines_Services-f4b95220cc"
+    },
+    {
+      "id": "FINE_DESTRUCTION_OF_PLANTATION",
+      "name": "Destruction of private plantation",
+      "zhName": "破坏私人种植园",
+      "nameKey": "Items_DB/FINE_DESTRUCTION_OF_PLANTATION/Name",
+      "category": "property-resources",
+      "classification": "FINES",
+      "sourceId": "Fines_Services-f4b95220cc"
+    },
+    {
+      "id": "FINE_STOLE_PLANTATIONS_FRUITS",
+      "name": "Steal of private resource",
+      "zhName": "偷窃私人资源",
+      "nameKey": "Items_DB/FINE_STOLE_PLANTATIONS_FRUITS/Name",
+      "category": "property-resources",
+      "classification": "FINES",
+      "sourceId": "Fines_Services-f4b95220cc"
+    },
+    {
+      "id": "FINE_DESTRUCTION_OF_PLANTATION_FRUIT",
+      "name": "Destruction of private resource",
+      "zhName": "破坏私人资源",
+      "nameKey": "Items_DB/FINE_DESTRUCTION_OF_PLANTATION_FRUIT/Name",
+      "category": "property-resources",
+      "classification": "FINES",
+      "sourceId": "Fines_Services-f4b95220cc"
+    },
+    {
+      "id": "FINE_NPC_LIVESTOCK_ATTACKING",
+      "name": "Aggression of private animal",
+      "zhName": "攻击私人动物",
+      "nameKey": "Items_DB/FINE_NPC_LIVESTOCK_ATTACKING/Name",
+      "category": "animals-civilians",
+      "classification": "FINES",
+      "sourceId": "Fines_Services-f4b95220cc"
+    },
+    {
+      "id": "FINE_NPC_LIVESTOCK_KILLING",
+      "name": "Killing private animal",
+      "zhName": "杀害私人动物",
+      "nameKey": "Items_DB/FINE_NPC_LIVESTOCK_KILLING/Name",
+      "category": "animals-civilians",
+      "classification": "FINES",
+      "sourceId": "Fines_Services-f4b95220cc"
+    },
+    {
+      "id": "FINE_NPC_LIVESTOCK_STEALING",
+      "name": "Stealing private animal",
+      "zhName": "偷窃私人动物",
+      "nameKey": "Items_DB/FINE_NPC_LIVESTOCK_STEALING/Name",
+      "category": "animals-civilians",
+      "classification": "FINES",
+      "sourceId": "Fines_Services-f4b95220cc"
+    },
+    {
+      "id": "FINE_NPC_LIVESTOCK_MILKING",
+      "name": "Stealing private animal resources",
+      "zhName": "偷窃私人动物资源",
+      "nameKey": "Items_DB/FINE_NPC_LIVESTOCK_MILKING/Name",
+      "category": "animals-civilians",
+      "classification": "FINES",
+      "sourceId": "Fines_Services-f4b95220cc"
+    },
+    {
+      "id": "FINE_NPC_DESTRUCTION_BUILDING",
+      "name": "Destruction of private property",
+      "zhName": "破坏私人财产",
+      "nameKey": "Items_DB/FINE_NPC_DESTRUCTION_BUILDING/Name",
+      "category": "property-resources",
+      "classification": "FINES",
+      "sourceId": "Fines_Services-f4b95220cc"
+    },
+    {
+      "id": "FINE_VEHICULE_TRY_TO_STEAL",
+      "name": "Attempted vehicle theft",
+      "zhName": "企图盗窃车辆",
+      "nameKey": "Items_DB/FINE_VEHICULE_TRY_TO_STEAL/Name",
+      "category": "vehicles",
+      "classification": "FINES",
+      "sourceId": "Fines_Services-f4b95220cc"
+    },
+    {
+      "id": "FINE_VEHICULE_STEALING",
+      "name": "Vehicle theft",
+      "zhName": "车辆盗窃",
+      "nameKey": "Items_DB/FINE_VEHICULE_STEALING/Name",
+      "category": "vehicles",
+      "classification": "FINES",
+      "sourceId": "Fines_Services-f4b95220cc"
+    },
+    {
+      "id": "FINE_VEHICULE_DESTRUCTION",
+      "name": "Vehicle destruction",
+      "zhName": "车辆毁坏",
+      "nameKey": "Items_DB/FINE_VEHICULE_DESTRUCTION/Name",
+      "category": "vehicles",
+      "classification": "FINES",
+      "sourceId": "Fines_Services-f4b95220cc"
+    },
+    {
+      "id": "FINE_VEHICULE_POLICE_DESTRUCTION",
+      "name": "Police vehicle destruction",
+      "zhName": "警车毁坏",
+      "nameKey": "Items_DB/FINE_VEHICULE_POLICE_DESTRUCTION/Name",
+      "category": "vehicles",
+      "classification": "FINES",
+      "sourceId": "Fines_Services-f4b95220cc"
+    },
+    {
+      "id": "FINE_NPC_KILLING",
+      "name": "Injuring a civilian",
+      "zhName": "伤害平民",
+      "nameKey": "Items_DB/FINE_NPC_KILLING/Name",
+      "category": "animals-civilians",
+      "classification": "FINES",
+      "sourceId": "Fines_Services-f4b95220cc"
+    }
+  ]
+}

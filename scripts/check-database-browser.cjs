@@ -7,7 +7,7 @@ const crops = require('../data/crops.json');
 for (const prefix of ['', 'zh/']) {
   for (const suffix of ['.html', '/animals.html', '/crops.html', '/materials.html', '/quests.html', '/npcs.html']) {
     const html = fs.readFileSync(path.join(root, `${prefix}database${suffix}`), 'utf8');
-    assert.equal((html.match(/database-browser\.css\?v=20260828-4/g) || []).length, 1, 'every database loads the current shared theme once');
+    assert.equal((html.match(/database-browser\.css\?v=20260830-8/g) || []).length, 1, 'every database loads the current shared theme once');
     assert.doesNotMatch(html, /<article[^>]*style="[^"]*max-width/, `${prefix}${suffix}: page-specific inline width must not override the shared layout`);
     assert.match(html, /favicon-32\.png/, 'theme changes preserve favicon markup');
     assert.match(html, /main\.js\?v=/, 'theme changes preserve shared navigation');
@@ -68,7 +68,7 @@ for (const prefix of ['', 'zh/']) {
         assert.ok(html.includes(`id="build-${target}"`), 'old table anchors remain valid');
       }
     }
-    assert.match(html, /database-browser\.css\?v=20260828-4/);
+    assert.match(html, /database-browser\.css\?v=20260830-8/);
     assert.doesNotMatch(html, /class="entity-decision"/, 'lookup explanation must not repeat the profile summary');
     assert.match(html, /class="database-reference-notes"/, 'page metadata belongs in one secondary disclosure');
     assert.doesNotMatch(html, />1 days</, 'English one-day values use singular units');

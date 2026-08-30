@@ -5,6 +5,12 @@ const root = path.resolve(__dirname, '..');
 const file = path.join(root, 'data/build-shops.json');
 assert.ok(fs.existsSync(file), 'Shop configuration must be applied to public lookup data');
 const data = JSON.parse(fs.readFileSync(file));
+const seeds = require('../data/build-seeds.json').items;
+const produce = require('../data/build-produce.json').items;
+const placeables = require('../data/build-placeables.json').items;
+const recipes = require('../data/build-recipes.json').recipes;
+const miscItems = require('../data/build-misc-items.json').items;
+const vehicles = require('../data/build-vehicles.json').items;
 assert.equal(data.shops.length, 8);
 assert.equal(data.offers.length, 139);
 assert.equal(new Set(data.offers.map(o => o.id)).size, 139);
@@ -27,10 +33,43 @@ for (const prefix of ['', 'zh/']) {
   for (const offer of data.offers) {
     const named = Boolean(data.items.find(i => i.id === offer.itemId).name);
     const profile = require('../data/crops.json').inputs.find(i => i.buildInput?.sourceItemId === offer.itemId);
-    assert.equal(indexed.includes(`#offer-${offer.id}\"`), named && !profile, `Named offers without a full input profile remain indexed: ${offer.id}`);
+    const resource = require('../data/build-resources.json').items.find(i => i.id === offer.itemId && i.materialId);
+    const seed = seeds.find(i => i.id === offer.itemId && i.rosterStatus === 'current-roster');
+    const produceItem = produce.find(i => i.id === offer.itemId);
+    const placeable = placeables.find(i => i.id === offer.itemId);
+    const miscItem = miscItems.find(i => i.id === offer.itemId);
+    const vehicle = vehicles.find(i => i.id === offer.itemId);
+    assert.equal(indexed.includes(`#offer-${offer.id}\"`), named && !profile && !resource && !seed && !produceItem && !placeable && !miscItem && !vehicle, `Named offers without a full profile remain indexed: ${offer.id}`);
+    if (resource) {
+      assert.ok(index.some(i => i.url === `/${prefix}database/materials#${resource.materialId}`));
+      assert.ok(html.split(`id="offer-${offer.id}"`)[1]?.split('</tr>')[0].includes(`database/materials#${resource.materialId}`));
+    }
     if (profile) {
       assert.ok(index.some(i => i.url === `/${prefix}database/crops#${profile.id}`));
       assert.ok(html.split(`id="offer-${offer.id}"`)[1]?.split('</tr>')[0].includes(`database/crops#${profile.id}`));
+    }
+    if (seed) {
+      assert.ok(index.some(i => i.url === `/${prefix}database/crops#${seed.cropId}`));
+      assert.ok(html.split(`id="offer-${offer.id}"`)[1]?.split('</tr>')[0].includes(`database/crops#${seed.cropId}`));
+    }
+    if (produceItem) {
+      const target = produceItem.cropStatus === 'current-roster' ? produceItem.cropId : `seed-${produceItem.cropId}`;
+      assert.ok(index.some(i => i.url === `/${prefix}database/crops#${target}`));
+      assert.ok(html.split(`id="offer-${offer.id}"`)[1]?.split('</tr>')[0].includes(`database/crops#${target}`));
+    }
+    if (placeable) {
+      const hasRecipe = recipes.some(recipe => recipe.id === placeable.id);
+      const target = hasRecipe ? `recipe-${placeable.id}` : `placeable-${placeable.id}`;
+      assert.ok(index.some(i => i.url === `/${prefix}guides/crafting-guide#${target}`));
+      assert.ok(html.split(`id="offer-${offer.id}"`)[1]?.split('</tr>')[0].includes(`guides/crafting-guide#${target}`));
+    }
+    if (miscItem) {
+      assert.ok(index.some(i => i.url === `/${prefix}guides/crafting-guide#tool-${miscItem.id}`));
+      assert.ok(html.split(`id="offer-${offer.id}"`)[1]?.split('</tr>')[0].includes(`guides/crafting-guide#tool-${miscItem.id}`));
+    }
+    if (vehicle) {
+      assert.ok(index.some(i => i.url === `/${prefix}guides/vehicles-transport#vehicle-${vehicle.id}`));
+      assert.ok(html.split(`id="offer-${offer.id}"`)[1]?.split('</tr>')[0].includes(`guides/vehicles-transport#vehicle-${vehicle.id}`));
     }
   }
   assert.match(html, /data-shop-query/);

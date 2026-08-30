@@ -105,6 +105,7 @@ function extractEntries(mainHtml, route) {
     entries.push({
       id: attrs.id,
       title: attrs["data-search-title"] || attrs.id,
+      aliases: (attrs["data-search-aliases"] || "").split("|").map(name => name.trim()).filter(Boolean),
       text: attrs["data-search-text"] || text,
       tags: attrs["data-search-tags"] || "",
       status: attrs["data-search-status"] || (route.indexOf("/zh/") === 0 ? "社区资料" : "Community data"),

@@ -1,0 +1,56 @@
+{
+  "build": "0.8.10.842",
+  "steamBuild": "24847725",
+  "evidenceLevel": "build-observed",
+  "validity": "unknown",
+  "sources": {
+    "Projectiles-1b62fcf4ab": {
+      "kind": "local-build",
+      "title": "Projectiles",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12011,
+      "rawSha256": "1b62fcf4abeb23d2fa517ae85ddafa5f70675bf7d67058c37b582b840c8f6399"
+    },
+    "localization": {
+      "kind": "local-build",
+      "title": "Owned-build item localization",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 393483,
+      "rawSha256": "2c505386fe9b1b9c2579aad1e6957907db838d8c7f87227e818fbfd4b57d5f4e"
+    }
+  },
+  "items": [
+    {
+      "id": "weapon_Projectile_LVL0",
+      "name": "weapon_Projectile_LVL0",
+      "zhName": "0级射弹武器",
+      "nameKey": "Items_DB/weapon_Projectile_LVL0/Name",
+      "description": null,
+      "sourceId": "Projectiles-1b62fcf4ab",
+      "classification": "OTHER",
+      "rarity": "Bronze",
+      "bodySlot": "NONE",
+      "equippable": false,
+      "stackable": false,
+      "droppable": false,
+      "sellable": false
+    },
+    {
+      "id": "weapon_Missile_LVL0",
+      "name": "weapon_Missile_LVL0",
+      "zhName": "0级导弹武器",
+      "nameKey": "Items_DB/weapon_Missile_LVL0/Name",
+      "description": null,
+      "sourceId": "Projectiles-1b62fcf4ab",
+      "classification": "OTHER",
+      "rarity": "Bronze",
+      "bodySlot": "NONE",
+      "equippable": false,
+      "stackable": false,
+      "droppable": false,
+      "sellable": false
+    }
+  ]
+}

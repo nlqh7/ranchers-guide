@@ -1,7 +1,7 @@
 {
   "meta": {
     "page": "database/animals.html",
-    "lastUpdated": "2026-08-28",
+    "lastUpdated": "2026-08-30",
     "build": "0.8.10.842",
     "videoBuild": "0.8.10.455",
     "evidenceLevels": [
@@ -289,7 +289,63 @@
       "author": "Site editor",
       "date": "2026-08-08",
       "build": "0.8.10.x"
+    },
+    "owned-build-wildlife": {
+      "kind": "first-hand-build-resource",
+      "title": "Owned game files: Birds definitions",
+      "url": null,
+      "date": "2026-08-30",
+      "build": "0.8.10.842",
+      "steamBuild": "24847725",
+      "asset": "resources.assets",
+      "pathId": 12060,
+      "rawSha256": "5fd996b0ed49669580aa56808c273506891d873c4d57dcf7f7717a846c726030"
+    },
+    "owned-build-enemies": {
+      "kind": "first-hand-build-resource",
+      "title": "Owned game files: Enemies definitions",
+      "url": null,
+      "date": "2026-08-30",
+      "build": "0.8.10.842",
+      "steamBuild": "24847725",
+      "asset": "resources.assets",
+      "pathId": 12015,
+      "rawSha256": "d8aaff96b602505814776b8e02e8a59a9b67947d0e718a8acfa3fc91bfb675a5"
     }
+  },
+  "wildlifeReference": {
+    "build": "0.8.10.842",
+    "steamBuild": "24847725",
+    "evidenceLevel": "build-observed",
+    "validity": "unknown",
+    "sourceIds": ["owned-build-wildlife"],
+    "entries": [
+      { "id": "Flocking_Bird_Butterfly_Easter_Tailed_Blue", "name": "Eastern Tailed Blue", "zhName": "南美琉璃小灰蝶", "kind": "butterfly", "rarity": "Bronze" },
+      { "id": "Flocking_Bird_Crow", "name": "Crow", "zhName": "乌鸦", "kind": "bird", "rarity": "Silver" },
+      { "id": "Flocking_Bird_Parrot_Macaw_RED", "name": "Macaw Red", "zhName": "红金刚鹦鹉", "kind": "bird", "rarity": "Gold" },
+      { "id": "Flocking_Bird_Pigeon", "name": "Pigeon", "zhName": "鸽子", "kind": "bird", "rarity": "Gold" },
+      { "id": "Flocking_Bird_Seagull", "name": "Seagull", "zhName": "海鸥", "kind": "bird", "rarity": "Gold" },
+      { "id": "Flocking_Bird_Toucan", "name": "Toucan", "zhName": "巨嘴鸟", "kind": "bird", "rarity": "Gold" },
+      { "id": "Flocking_Bird_Vulture", "name": "Vulture", "zhName": "秃鹫", "kind": "bird", "rarity": "Gold" },
+      { "id": "Flocking_ButterflyAfricanMonarch", "name": "African Monarch", "zhName": "非洲君主斑蝶", "kind": "butterfly", "rarity": "Gold" },
+      { "id": "Flocking_Bird_Pigeon_Dove", "name": "Dove", "zhName": "斑鸠", "kind": "bird", "rarity": "Gold" },
+      { "id": "Flocking_Bird_Parrot_Cockatiel", "name": "Cockatiel", "zhName": "玄凤鹦鹉", "kind": "bird", "rarity": "Gold" },
+      { "id": "Flocking_Bird_Parrot_Galah", "name": "Galah", "zhName": "粉红凤头鹦鹉", "kind": "bird", "rarity": "Gold" },
+      { "id": "Flocking_Bird_Parrot_Grey", "name": "Grey", "zhName": "灰鹦鹉", "kind": "bird", "rarity": "Gold" },
+      { "id": "Flocking_Bird_Parrot_Cockatoo", "name": "Cockatoo", "zhName": "凤头鹦鹉", "kind": "bird", "rarity": "Gold" }
+    ]
+  },
+  "enemyReference": {
+    "build": "0.8.10.842",
+    "steamBuild": "24847725",
+    "evidenceLevel": "build-observed",
+    "validity": "unknown",
+    "sourceIds": ["owned-build-enemies"],
+    "entries": [
+      { "id": "Skeleton_A", "name": "Skeleton", "zhName": "骨架图案", "rarity": "Bronze" },
+      { "id": "Spider_Black_Widow", "name": "Spider_Black_Widow", "zhName": "黑寡妇蜘蛛", "rarity": "Silver" },
+      { "id": "Spider_Tarantula", "name": "Spider_Tarantula", "zhName": "狼蛛", "rarity": "Gold" }
+    ]
   },
   "species": [
     {

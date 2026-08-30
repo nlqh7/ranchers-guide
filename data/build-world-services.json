@@ -1,0 +1,85 @@
+{
+  "build": "0.8.10.842",
+  "steamBuild": "24847725",
+  "evidenceLevel": "build-observed",
+  "validity": "unknown",
+  "sources": {
+    "NetEnvObj-3c9efb80dd": {
+      "kind": "local-build",
+      "title": "NetEnvObj",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 11977,
+      "rawSha256": "3c9efb80dd6e998ca265740088825ee2b80369a28538aa8a001233cef03a1dcd"
+    },
+    "localization": {
+      "kind": "local-build",
+      "title": "Owned-build item localization",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 393483,
+      "rawSha256": "2c505386fe9b1b9c2579aad1e6957907db838d8c7f87227e818fbfd4b57d5f4e"
+    }
+  },
+  "audit": {
+    "totalRecords": 186,
+    "publicServiceRecords": 4,
+    "nonPublicRecords": 182,
+    "technicalIdentifierRecords": 179,
+    "missingLocalizationRecords": 3
+  },
+  "services": [
+    {
+      "id": "BicycleRentStation",
+      "name": "Bykii Station",
+      "zhName": "拜基站",
+      "description": "Rent a bicycle for the day, explore the roads your way.",
+      "zhDescription": "租一辆自行车，按自己的方式探索道路。",
+      "nameKey": "Items_DB/BicycleRentStation/Name",
+      "descriptionKey": "Items_DB/BicycleRentStation/Desc",
+      "category": "bicycle-rental",
+      "sourceId": "NetEnvObj-3c9efb80dd",
+      "mapLocationId": "bykii-terminal",
+      "relatedVehicleId": null
+    },
+    {
+      "id": "EnvObj_TaxiRentalStation_Buisness",
+      "name": "TaxiCo Corp - Business",
+      "zhName": "出租车公司商务出租车",
+      "description": null,
+      "zhDescription": null,
+      "nameKey": "Items_DB/EnvObj_TaxiRentalStation_Buisness/Name",
+      "descriptionKey": "Items_DB/EnvObj_TaxiRentalStation_Buisness/Desc",
+      "category": "taxi-rental",
+      "sourceId": "NetEnvObj-3c9efb80dd",
+      "mapLocationId": null,
+      "relatedVehicleId": "VIC_Taxi_01"
+    },
+    {
+      "id": "EnvObj_TaxiRentalStation_VIP",
+      "name": "TaxiCo Corp - VIP",
+      "zhName": "出租车公司VIP出租车",
+      "description": null,
+      "zhDescription": null,
+      "nameKey": "Items_DB/EnvObj_TaxiRentalStation_VIP/Name",
+      "descriptionKey": "Items_DB/EnvObj_TaxiRentalStation_VIP/Desc",
+      "category": "taxi-rental",
+      "sourceId": "NetEnvObj-3c9efb80dd",
+      "mapLocationId": null,
+      "relatedVehicleId": "VIC_Taxi_03"
+    },
+    {
+      "id": "EnvObj_TaxiRentalStation_Regular",
+      "name": "TaxiCo Corp - Regular",
+      "zhName": "出租车公司普通出租车",
+      "description": null,
+      "zhDescription": null,
+      "nameKey": "Items_DB/EnvObj_TaxiRentalStation_Regular/Name",
+      "descriptionKey": "Items_DB/EnvObj_TaxiRentalStation_Regular/Desc",
+      "category": "taxi-rental",
+      "sourceId": "NetEnvObj-3c9efb80dd",
+      "mapLocationId": null,
+      "relatedVehicleId": "VIC_Taxi_02"
+    }
+  ]
+}

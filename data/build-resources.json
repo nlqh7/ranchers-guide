@@ -1,0 +1,182 @@
+{
+  "build": "0.8.10.842",
+  "steamBuild": "24847725",
+  "evidenceLevel": "build-observed",
+  "validity": "unknown",
+  "sources": {
+    "Ressources-281b3f2379": {
+      "kind": "local-build",
+      "title": "Ressources",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12068,
+      "rawSha256": "281b3f2379ceddc3681a018d841b1482ffd6e14ea4dae33a94a7bb0e08247d62"
+    },
+    "localization": {
+      "asset": "resources.assets",
+      "pathId": 393483,
+      "rawSha256": "2c505386fe9b1b9c2579aad1e6957907db838d8c7f87227e818fbfd4b57d5f4e",
+      "kind": "local-build",
+      "title": "Owned-build item localization",
+      "url": null
+    }
+  },
+  "items": [
+    {
+      "id": "farm_water_1L",
+      "materialId": null,
+      "name": "Water",
+      "zhName": "水",
+      "nameKey": "Items_DB/farm_water_1L/Name",
+      "description": null,
+      "sourceId": "Ressources-281b3f2379",
+      "classification": "OTHER",
+      "rarity": "Bronze",
+      "bodySlot": "NONE",
+      "equippable": false,
+      "stackable": false,
+      "droppable": false,
+      "sellable": true,
+      "energy": null,
+      "health": null
+    },
+    {
+      "id": "farm_energy_1KW",
+      "materialId": null,
+      "name": "Energy",
+      "zhName": "能源",
+      "nameKey": "Items_DB/farm_energy_1KW/Name",
+      "description": null,
+      "sourceId": "Ressources-281b3f2379",
+      "classification": "OTHER",
+      "rarity": "Bronze",
+      "bodySlot": "NONE",
+      "equippable": false,
+      "stackable": false,
+      "droppable": false,
+      "sellable": true,
+      "energy": null,
+      "health": null
+    },
+    {
+      "id": "ressource_wood",
+      "materialId": "wood-log",
+      "name": "Wood Log",
+      "zhName": "木材原木",
+      "nameKey": "Items_DB/ressource_wood/Name",
+      "description": null,
+      "sourceId": "Ressources-281b3f2379",
+      "classification": "FORAGING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "energy": null,
+      "health": null
+    },
+    {
+      "id": "ressource_coal",
+      "materialId": "charcoal",
+      "name": "Charcoal",
+      "zhName": "木炭",
+      "nameKey": "Items_DB/ressource_coal/Name",
+      "description": null,
+      "sourceId": "Ressources-281b3f2379",
+      "classification": "FORAGING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "energy": null,
+      "health": null
+    },
+    {
+      "id": "ressource_straw",
+      "materialId": "hay",
+      "name": "Hay",
+      "zhName": "干草",
+      "nameKey": "Items_DB/ressource_straw/Name",
+      "description": null,
+      "sourceId": "Ressources-281b3f2379",
+      "classification": "FORAGING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "energy": {
+        "consumption": 0,
+        "restore": 0
+      },
+      "health": {
+        "consumption": 10,
+        "restore": 0
+      }
+    },
+    {
+      "id": "ressource_rock_simple",
+      "materialId": "stone",
+      "name": "Stone",
+      "zhName": "石头",
+      "nameKey": "Items_DB/ressource_rock_simple/Name",
+      "description": null,
+      "sourceId": "Ressources-281b3f2379",
+      "classification": "FORAGING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "energy": null,
+      "health": null
+    },
+    {
+      "id": "ressource_zerkonite",
+      "materialId": "zirconite",
+      "name": "Zerkonite",
+      "zhName": "钛锆钍矿石",
+      "nameKey": "Items_DB/ressource_zerkonite/Name",
+      "description": null,
+      "sourceId": "Ressources-281b3f2379",
+      "classification": "FORAGING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "energy": null,
+      "health": null
+    },
+    {
+      "id": "ressource_Fuel",
+      "materialId": null,
+      "name": "Fuel jerrycan",
+      "zhName": "燃料罐",
+      "nameKey": "Items_DB/ressource_Fuel/Name",
+      "description": null,
+      "sourceId": "Ressources-281b3f2379",
+      "classification": "OTHER",
+      "rarity": "Bronze",
+      "bodySlot": "Right_Hand_Weapon",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "energy": {
+        "consumption": 0,
+        "restore": 0
+      },
+      "health": {
+        "consumption": 0,
+        "restore": 0
+      }
+    }
+  ]
+}

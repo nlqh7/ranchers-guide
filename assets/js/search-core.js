@@ -21,6 +21,15 @@
     return Array.from(new Set(normalize(value).split(/\s+/).filter(Boolean)));
   }
 
+  function normalizeExact(value) {
+    return String(value || "")
+      .toLowerCase()
+      .normalize("NFKD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
   var QUERY_STOP_WORDS = new Set([
     "a", "an", "are", "at", "buy", "can", "do", "does", "find", "for", "get",
     "how", "i", "in", "is", "me", "my", "of", "please", "the", "to", "was", "were", "where", "with",
@@ -147,6 +156,7 @@
 
   function scoreDocument(document, query, queryTerms) {
     var title = document.title || "";
+    var titles = [title].concat(Array.isArray(document.aliases) ? document.aliases : []);
     var parentTitle = document.parentTitle || "";
     var description = document.description || "";
     var sections = document.sections || [];
@@ -158,7 +168,7 @@
         return Math.max(best, fieldScore(sectionText(section), term, 26));
       }, 0);
       var termScore = Math.max(
-        fieldScore(title, term, 70),
+        fieldScore(titles.join(" "), term, 70),
         fieldScore(parentTitle, term, 54),
         fieldScore(description, term, 42),
         sectionScore
@@ -168,10 +178,11 @@
     }
 
     var normalizedQuery = normalize(query);
-    if (normalize(title) === normalizedQuery) total += 140;
-    else if (normalize(title).indexOf(normalizedQuery) !== -1) total += 90;
+    if (titles.some(function (name) { return normalize(name) === normalizedQuery; })) total += 140;
+    else if (titles.some(function (name) { return normalize(name).indexOf(normalizedQuery) !== -1; })) total += 90;
     else if (normalize(description).indexOf(normalizedQuery) !== -1) total += 50;
     else if (sections.some(function (section) { return normalize(sectionText(section)).indexOf(normalizedQuery) !== -1; })) total += 30;
+    if (titles.some(function (name) { return normalizeExact(name) === normalizeExact(query); })) total += 20;
     return total;
   }
 
@@ -240,6 +251,7 @@
       var text = [status, entry.text || ""].filter(Boolean).join(": ");
       return {
         title: entry.title || document.title,
+        aliases: entry.aliases || [],
         url: document.url + "#" + entry.id,
         type: entryType(document.url),
         description: text,

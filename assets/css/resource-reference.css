@@ -1,0 +1,33 @@
+.resource-config { display: grid; grid-template-columns: 1fr 2fr; gap: 4px 24px; padding: 12px 16px; margin: 16px 0; background: var(--cream-200); border-radius: 4px; }
+.resource-config > .resource-note { margin: 0; }
+.resource-config > .resource-settings { max-width: 440px; }
+.resource-config > .resource-details { grid-column: 1 / -1; margin: 0; border: 0; }
+.resource-note { font-size: .875rem; color: var(--brown-700); margin: 8px 0 16px; }
+.resource-settings { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px 24px; margin: 0; }
+.resource-settings dt { color: var(--brown-700); font-size: .85rem; }
+.resource-settings dd { margin: 4px 0 0; font-weight: 600; color: var(--brown-900); }
+.resource-details { border-bottom: 1px solid var(--cream-300); margin: 8px 0; }
+.resource-details summary { display: list-item; min-height: 44px; padding: 12px 4px; cursor: pointer; font-weight: 600; color: var(--green-700); font-size: .9rem; }
+.resource-details p { font-size: .85rem; color: var(--brown-700); }
+.resource-details a, .resource-links a { display: inline-flex; align-items: center; min-height: 44px; }
+.resource-table-wrap { overflow-x: auto; }
+.resource-table-wrap:focus-visible { outline: 2px solid var(--green-700); outline-offset: 2px; }
+.article .resource-use-table { width: 100%; margin: 0 0 12px; table-layout: fixed; box-shadow: none; border-radius: 0; }
+.article .resource-use-table :is(th,td) { padding: 6px 12px; background: transparent; color: var(--brown-900); border-bottom: 1px solid var(--cream-300); font-size: .9rem; text-transform: none; letter-spacing: normal; white-space: normal; }
+.article .resource-use-table thead th { background: var(--cream-200); }
+.article .resource-use-table th:first-child { width: calc(100% - 96px); }
+.article .resource-use-table thead th:last-child, .article .resource-use-table td:last-child { width: 96px; white-space: nowrap; }
+.article .resource-use-table tbody th { font-weight: 500; }
+.article .resource-use-table tbody tr, .article .resource-use-table tbody th, .article .resource-use-table tbody td, .article .resource-use-table tbody tr:nth-child(even) td { background: var(--cream-100); }
+.article .resource-use-table tbody tr:hover :is(th,td) { background: var(--cream-200); }
+.article .resource-use-table td { font-variant-numeric: tabular-nums; }
+.resource-use-table a { overflow-wrap: anywhere; }
+.resource-links { display: flex; flex-wrap: wrap; align-items: center; gap: 0 20px; }
+.resource-links .resource-note { margin: 0; }
+.resource-profile { border-top: 1px solid var(--cream-300); margin-top: 24px; padding-top: 16px; scroll-margin-top: 110px; }
+.resource-profile h3 { margin: 0; }
+.resource-reference [id] { scroll-margin-top: 110px; }
+.resource-profile:target { outline: 2px solid var(--green-700); outline-offset: 6px; }
+@media (max-width: 600px) {
+ .resource-config { grid-template-columns: minmax(0,1fr); gap: 10px; }
+}

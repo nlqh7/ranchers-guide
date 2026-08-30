@@ -1,0 +1,129 @@
+{
+  "build": "0.8.10.842",
+  "steamBuild": "24847725",
+  "evidenceLevel": "build-observed",
+  "validity": "unknown",
+  "sources": {
+    "Equippable_Misc-01fdd0b090": {
+      "kind": "local-build",
+      "title": "Equippable_Misc",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 11980,
+      "rawSha256": "01fdd0b090b8a8cdecae5e43da50c6cbf375ca109d1fa8eeb67c795850e27e46"
+    },
+    "Misc-b472fda258": {
+      "kind": "local-build",
+      "title": "Misc",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12028,
+      "rawSha256": "b472fda258de3064f0b966b3d4f7206a367140ae4e11b89a409bce24c5ff1ece"
+    },
+    "localization": {
+      "kind": "local-build",
+      "title": "Owned-build item localization",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 393483,
+      "rawSha256": "2c505386fe9b1b9c2579aad1e6957907db838d8c7f87227e818fbfd4b57d5f4e"
+    }
+  },
+  "items": [
+    {
+      "id": "misc_GPSTracker",
+      "name": "GPS tracker",
+      "zhName": "GPS追踪器",
+      "nameKey": "Items_DB/misc_GPSTracker/Name",
+      "description": null,
+      "sourceId": "Equippable_Misc-01fdd0b090",
+      "classification": "OTHER",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "disableHoldingAnimation": false,
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "energy": {
+        "consumption": 0,
+        "supply": 0
+      },
+      "health": {
+        "consumption": 0,
+        "supply": 0
+      },
+      "shopOfferIds": []
+    },
+    {
+      "id": "misc_Guitar_01",
+      "name": "Acoustic Guitar",
+      "zhName": "原声吉他",
+      "nameKey": "Items_DB/misc_Guitar_01/Name",
+      "description": null,
+      "sourceId": "Equippable_Misc-01fdd0b090",
+      "classification": "OTHER",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "disableHoldingAnimation": true,
+      "equippable": true,
+      "stackable": false,
+      "droppable": true,
+      "sellable": true,
+      "energy": {
+        "consumption": 0,
+        "supply": 0
+      },
+      "health": {
+        "consumption": 0,
+        "supply": 0
+      },
+      "shopOfferIds": []
+    },
+    {
+      "id": "weapon_Ammo_01",
+      "name": "Devil Kiss - Cartridge",
+      "zhName": "恶魔之吻 - 子弹",
+      "nameKey": "Items_DB/weapon_Ammo_01/Name",
+      "description": null,
+      "sourceId": "Equippable_Misc-01fdd0b090",
+      "classification": "OTHER",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "disableHoldingAnimation": false,
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "energy": {
+        "consumption": 0,
+        "supply": 0
+      },
+      "health": {
+        "consumption": 0,
+        "supply": 0
+      },
+      "shopOfferIds": [
+        "seed-store-allthetime-weapon_Ammo_01"
+      ]
+    }
+  ],
+  "questItems": [
+    {
+      "id": "CarToRepair_Cimka",
+      "name": "Victor's Old Car",
+      "zhName": "维克多老爷车",
+      "nameKey": "Items_DB/CarToRepair_Cimka/Name",
+      "description": null,
+      "sourceId": "Misc-b472fda258",
+      "classification": "OTHER",
+      "rarity": "Bronze",
+      "bodySlot": "NONE",
+      "equippable": false,
+      "stackable": false,
+      "droppable": false,
+      "sellable": false,
+      "relatedQuestId": "rust-to-rumbling"
+    }
+  ]
+}

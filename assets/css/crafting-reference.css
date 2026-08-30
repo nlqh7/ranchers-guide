@@ -38,6 +38,15 @@
 .shop-recipe-link { display: flex; align-items: center; min-height: 44px; }
 .shop-unresolved { margin-block: 12px; font-size: .85rem; color: var(--brown-700); overflow-wrap: anywhere; }
 .shop-unresolved > summary { min-height: 44px; padding-block: 11px; cursor: pointer; }
+.world-service-reference { margin: 24px 0; padding-top: 20px; border-top: 1px solid var(--cream-300); scroll-margin-top: 96px; }
+.world-service-reference > h3 { margin: 0 0 8px; font-size: 1.15rem; }
+.world-service-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.world-service-grid article { min-width: 0; padding: 14px 16px; border: 1px solid var(--cream-300); border-radius: 6px; background: var(--cream-100); scroll-margin-top: 110px; }
+.world-service-grid article:target { outline: 2px solid var(--green-700); outline-offset: 2px; }
+.world-service-grid h4 { margin: 0 0 2px; color: var(--brown-900); font-size: 1rem; }
+.world-service-grid code { display: block; color: var(--brown-700); font-size: .76rem; overflow-wrap: anywhere; }
+.world-service-grid p { margin: 10px 0 4px; font-size: .88rem; }
+.world-service-grid a { display: inline-flex; align-items: center; min-height: 44px; color: var(--green-700); font-size: .88rem; font-weight: 600; }
 @media (max-width: 600px) {
   .crafting-guide.article { padding-inline: 18px; }
   .crafting-guide > h1 { font-size: 1.75rem; }
@@ -45,4 +54,5 @@
   .crafting-reference .recipe-table th, .crafting-reference .recipe-table td { padding: 8px 10px; }
   .recipe-table th:first-child { width: 43%; }
   .recipe-table .recipe-ingredients { grid-template-columns: 1fr; }
+  .world-service-grid { grid-template-columns: 1fr; }
 }

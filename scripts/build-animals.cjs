@@ -114,6 +114,31 @@ function renderBuildReference(animal, locale) {
       </div><!-- animal-build-reference-end -->`;
 }
 
+function renderWildlifeReference(locale) {
+  const ref = data.wildlifeReference;
+  if (!ref) return '';
+  const zh = locale === 'zh';
+  const kind = item => item.kind === 'butterfly' ? (zh ? '蝴蝶' : 'Butterfly') : (zh ? '鸟类' : 'Bird');
+  const entries = ref.entries.map(item => {
+    const name = escapeHtml(zh ? item.zhName : item.name);
+    const tags = escapeHtml(`${item.name} ${item.zhName} ${item.kind} wildlife bird butterfly 野生生物 鸟 蝴蝶`);
+    return `<article class="wildlife-profile" id="wildlife-${escapeHtml(item.id)}" data-search-entry data-search-title="${name}" data-search-tags="${tags}" data-search-status="${zh ? '构建资料（未实测）' : 'Build data (not gameplay-tested)'}"><h3><a href="#wildlife-${escapeHtml(item.id)}">${name}</a></h3><dl><div><dt>${zh ? '整理类别' : 'Lookup kind'}</dt><dd>${kind(item)}</dd></div><div><dt>${zh ? '源码稀有度字段' : 'Source rarity field'}</dt><dd>${escapeHtml(item.rarity)} · ${zh ? '含义未解码' : 'meaning not decoded'}</dd></div></dl></article>`;
+  }).join('');
+  return `<section class="evidence-ledger wildlife-reference" id="build-wildlife" data-wildlife-reference aria-labelledby="build-wildlife-heading"><div class="section-heading-row"><div><span class="kicker">${zh ? '站长整理 · 游戏构建资料' : 'Editor-collected · game-build reference'}</span><h2 id="build-wildlife-heading">${zh ? '野生鸟类与蝴蝶名称' : 'Wild birds and butterflies'}</h2></div><span class="tag">${escapeHtml(ref.build)}</span></div><p>${zh ? '此构建表保留 11 种鸟类和 2 种蝴蝶的双语名称。下面只公开名称与原始稀有度字段，空说明保持为空。' : 'This build table retains bilingual names for 11 birds and 2 butterflies. Only names and the original rarity field are shown; empty description slots remain empty.'}</p><div class="database-wildlife-grid">${entries}</div><p class="database-browse-note">${zh ? '源码把这些条目标为 Enemies / FISHING_HUNTING；这是内部分类，不代表敌对、掉落、生成地点或可捕猎。' : 'The source labels these entries Enemies / FISHING_HUNTING. Those internal labels do not establish hostility, drops, spawn locations or huntability.'}</p><details class="database-reference-notes"><summary>${zh ? '资料来源与边界' : 'Sources & limits'}</summary><p>${zh ? '13 个名称与 13 个空说明槽均从自购 build 24847725 的 I2 原始字节核对；原始游戏文件不提供下载。' : 'All 13 names and 13 empty description slots were checked against the original I2 bytes from owned build 24847725. Raw game files are not distributed.'}</p>${renderSources(ref.sourceIds)}</details></section>`;
+}
+
+function renderEnemyReference(locale) {
+  const ref = data.enemyReference;
+  if (!ref) return '';
+  const zh = locale === 'zh';
+  const entries = ref.entries.map(item => {
+    const name = escapeHtml(zh ? item.zhName : item.name);
+    const tags = escapeHtml(`${item.name} ${item.zhName} ${item.id} enemy creature spider skeleton 生物 蜘蛛 骨架`);
+    return `<article class="wildlife-profile" id="enemy-${escapeHtml(item.id)}" data-search-entry data-search-title="${name}" data-search-tags="${tags}" data-search-status="${zh ? '构建名称（未实测）' : 'Build name (not gameplay-tested)'}"><h3><a href="#enemy-${escapeHtml(item.id)}">${name}</a></h3><dl><div><dt>${zh ? '原生英文名称' : 'Native English name'}</dt><dd>${escapeHtml(item.name)}</dd></div><div><dt>${zh ? '源码稀有度字段' : 'Source rarity field'}</dt><dd>${escapeHtml(item.rarity)} · ${zh ? '含义未解码' : 'meaning not decoded'}</dd></div></dl></article>`;
+  }).join('');
+  return `<section class="evidence-ledger wildlife-reference" id="build-enemies" data-enemy-reference aria-labelledby="build-enemies-heading"><div class="section-heading-row"><div><span class="kicker">${zh ? '站长整理 · 游戏构建资料' : 'Editor-collected · game-build reference'}</span><h2 id="build-enemies-heading">${zh ? '原生 Enemies 表名称' : 'Names retained in the Enemies table'}</h2></div><span class="tag">${escapeHtml(ref.build)}</span></div><p>${zh ? '此构建表保留 3 个双语名称和空 I2 说明栏。“骨架图案”是构建中的原生中文名称，本站不擅自改写成另一个译名。' : 'This build table retains three bilingual names and empty I2 description slots. “Skeleton” is the build-localized English name; identifier-like spider names are preserved instead of silently rewritten.'}</p><div class="database-wildlife-grid">${entries}</div><p class="database-browse-note">${zh ? '源表名 Enemies、内部 FISHING_HUNTING 分类和 Bronze/Silver/Gold 字段不证明敌对行为、危险程度、掉落、生成地点或可狩猎，也不证明当前版本实际生成这些对象。' : 'The Enemies table name, FISHING_HUNTING classification and Bronze/Silver/Gold fields do not establish hostile behavior, danger, drops, spawn locations or huntability, nor do they prove that these objects currently spawn in gameplay.'}</p><details class="database-reference-notes"><summary>${zh ? '资料来源与边界' : 'Sources & limits'}</summary><p>${zh ? '3 个名称与 3 个空说明槽均从自购 build 24847725 的 I2 原始字节核对；原始游戏文件不提供下载。' : 'All three names and three empty description slots were checked against the original I2 bytes from owned build 24847725. Raw game files are not distributed.'}</p>${renderSources(ref.sourceIds)}</details></section>`;
+}
+
 function renderHistoricalTable(species) {
   const rows = [];
   for (const animal of species) {
@@ -248,6 +273,9 @@ ${a.fields.map((f) => `              <li><a href="#${a.id}-${f.key}">${escapeHtm
       <p class="lead">This living database combines the official roster with clearly labeled player research. Each animal has its own anchored profile below — search an individual animal, inspect its source and version context, and help replace historical values with current-build evidence.</p>
 
 ${speciesHtml}
+
+${renderWildlifeReference('en')}
+${renderEnemyReference('en')}
 
       <section class="evidence-ledger" aria-labelledby="community-animal-data">
         <div class="section-heading-row">
@@ -536,6 +564,8 @@ let zhHtml = `<!DOCTYPE html>
     </section>
     <nav class="toc" aria-label="动物目录"><strong>快速跳转：</strong><ul>${zhTocItems}</ul></nav>
 ${data.species.filter((a) => a.zh).map(renderZhEntry).join("\n")}
+${renderWildlifeReference('zh')}
+${renderEnemyReference('zh')}
 ${renderZhExtra(data.zhExtra)}
   </article></main>
   <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>证据等级与版本标注与英文页一致</span></div></div></footer><script src="/assets/js/main.js?v=20260810-nav1" defer></script>

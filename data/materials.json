@@ -1,7 +1,7 @@
 {
   "meta": {
     "build": "0.8.10.842",
-    "lastUpdated": "2026-08-22"
+    "lastUpdated": "2026-08-28"
   },
   "sources": {
     "official-mines-answer": {
@@ -129,7 +129,7 @@
           "zhText": "首发版本视频显示红帐篷配方需要 10 个原木和 8 个石头；这不能证明其他配方的材料数量。",
           "evidenceLevel": "video-observed",
           "build": "0.8.10.455",
-          "validity": "current",
+          "validity": "historical",
           "sourceIds": ["launch-video"]
         }
       ]

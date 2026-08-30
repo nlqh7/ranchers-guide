@@ -25,6 +25,7 @@
     "/database/materials",
     "/database/npcs",
     "/database/quests",
+    "/database/customization",
     "/map",
     "/problems",
     "/problems/offline-mode-loading",
@@ -67,6 +68,7 @@
     "/zh/database/materials",
     "/zh/database/npcs",
     "/zh/database/quests",
+    "/zh/database/customization",
     "/zh/map",
     "/zh/problems",
     "/zh/community",
@@ -85,7 +87,7 @@
   var IS_ZH = document.documentElement.lang.toLowerCase() === "zh-cn";
   var PAGE_PATHS = IS_ZH ? ZH_PAGE_PATHS : EN_PAGE_PATHS;
   var SEARCH_ROUTE = IS_ZH ? "/zh/search" : "/search";
-  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v19" : "ranchers-search-index-v32";
+  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v28" : "ranchers-search-index-v41";
   var documents = [];
   var form = document.querySelector("[data-search-form]");
   var input = document.querySelector("[data-search-input]");
@@ -146,6 +148,7 @@
       var entryHeading = node.querySelector("h2, h3");
       entries.push({
         id: node.id,
+        aliases: (node.dataset.searchAliases || "").split("|").map(function (name) { return name.trim(); }).filter(Boolean),
         title: node.dataset.searchTitle || (entryHeading ? entryHeading.textContent.trim() : (node.cells && node.cells[0] ? node.cells[0].textContent.trim() : node.id)),
         text: node.dataset.searchText || (node.cells
           ? Array.from(node.cells).map(function (cell) { return cell.textContent.replace(/\s+/g, " ").trim(); }).join(" · ")

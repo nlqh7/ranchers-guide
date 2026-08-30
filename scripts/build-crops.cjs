@@ -13,11 +13,21 @@ const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
 const data = JSON.parse(fs.readFileSync(path.join(root, "data", "crops.json"), "utf8"));
-const { renderCropFacts, renderBuildOnlyCrops } = require('./render-database-browser.cjs');
+const { renderCropFacts, renderBuildOnlyCrops, renderExcludedSeeds } = require('./render-database-browser.cjs');
 const shops = require('../data/build-shops.json');
+const seedItems = require('../data/build-seeds.json').items;
+const produceItems = require('../data/build-produce.json').items;
 
 function escapeHtml(text) {
   return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+function cropSearchAliases(id) {
+  const seed = seedItems.find(item => item.cropId === id && item.rosterStatus === 'current-roster');
+  if (!seed) return '';
+  const values = [seed.name, seed.zhName, seed.id];
+  for (const item of produceItems.filter(produce => produce.cropId === id)) values.push(item.name, item.zhName, item.id);
+  return ` data-search-aliases="${escapeHtml(values.join('|'))}"`;
 }
 
 const LEVEL_BADGES = {
@@ -77,6 +87,7 @@ ${observations}</section>`;
 }
 
 function renderProfile(entry, kicker) {
+  const seedAliases = cropSearchAliases(entry.id);
   const fields = entry.fields.map((field) => {
     const confirmed = field.facts.filter((f) => f.validity !== "unknown");
     const pending = field.facts.filter((f) => f.validity === "unknown");
@@ -99,7 +110,7 @@ ${parts.join("\n")}`;
   }).join("\n");
 
   if (entry.buildInput) return renderFertilizerProfile(entry, 'en', fields);
-  return `      <section class="evidence-ledger animal-profile" id="${entry.id}" data-search-entry data-search-title="${escapeHtml(entry.name)}" data-search-tags="${escapeHtml(entry.searchTags)}" data-search-status="Database record" aria-labelledby="${entry.id}-heading">
+  return `      <section class="evidence-ledger animal-profile" id="${entry.id}" data-search-entry data-search-title="${escapeHtml(entry.id === 'hay' ? 'Hay as animal feed' : entry.name)}"${seedAliases} data-search-tags="${escapeHtml(entry.searchTags)}" data-search-status="Database record" aria-labelledby="${entry.id}-heading">
         <div class="section-heading-row">
           <div>
             <span class="kicker">${escapeHtml(kicker)}</span>
@@ -281,6 +292,7 @@ ${tocItems}
 
 ${cropSections}
 ${renderBuildOnlyCrops(data, 'en')}
+${renderExcludedSeeds('en')}
 
 ${inputSections}
 
@@ -522,7 +534,8 @@ function renderZhEntry(entry) {
   }).join("");
   const decision = zh.decision ? `<div class="entity-decision"><strong>什么时候查</strong><p>${escapeHtml(zh.decision)}</p><div class="button-stack"><a class="btn btn-outline btn-compact" href="/zh/guides/farming-fields">种地实战攻略</a><a class="btn btn-outline btn-compact" href="/zh/guides/money-making#cashin">CashIn 出售</a>${entry.videoRow ? '<a class="btn btn-outline btn-compact" href="/zh/map#leafy-market">Leafy Market</a>' : ""}</div></div>` : "";
   if (entry.buildInput) return renderFertilizerProfile(entry, 'zh', groups);
-  return `    <section class="evidence-ledger animal-profile" id="${entry.id}" data-search-entry data-search-title="${escapeHtml(zh.searchTitle)}" data-search-tags="${escapeHtml(zh.searchTags)}">${head}${summary}${renderCropFacts(data, entry.id, 'zh')}${decision}${groups}</section>`;
+  const seedAliases = cropSearchAliases(entry.id);
+  return `    <section class="evidence-ledger animal-profile" id="${entry.id}" data-search-entry data-search-title="${escapeHtml(zh.searchTitle)}"${seedAliases} data-search-tags="${escapeHtml(zh.searchTags)}">${head}${summary}${renderCropFacts(data, entry.id, 'zh')}${decision}${groups}</section>`;
 }
 
 function renderZhExtraSection(s) {
@@ -538,6 +551,7 @@ const zhExtraById = Object.fromEntries(data.zhExtra.sections.map((s) => [s.id, s
 const zhBodyParts = [
   ...data.crops.filter((e) => e.zh).map(renderZhEntry),
   renderBuildOnlyCrops(data, 'zh'),
+  renderExcludedSeeds('zh'),
   renderZhExtraSection(zhExtraById["historical"]),
   ...data.inputs.filter((e) => e.zh).map(renderZhEntry),
   renderZhExtraSection(zhExtraById["cashin"]),

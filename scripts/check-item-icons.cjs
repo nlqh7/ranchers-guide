@@ -22,7 +22,9 @@ for (const icon of manifest.icons) {
     assert.ok(link?.includes(icon.src), `${prefix}${icon.id}: native icon accompanies the hub name`);
     assert.match(link, /alt=""/);
     if (prefix && icon.id === 'wood-log') {
-      assert.match(link, />原木<\/span>/, 'compact Chinese lookup keeps the English alias in the profile, not the navigation');
+      const native = require('../data/build-resources.json').items.find(i => i.materialId === icon.id);
+      assert.ok(link.includes(`>${native.zhName}</span>`), 'compact Chinese lookup uses the verified native name');
+      assert.ok(!link.includes(native.name), 'English aliases belong in the profile, not the Chinese navigation');
     }
     const profile = page.match(new RegExp(`<section[^>]*id="${icon.id}"[^>]*>[\\s\\S]*?</section>`))?.[0];
     assert.ok(profile?.match(/<h2[^>]*>[\s\S]*?<\/h2>/)?.[0].includes(icon.src), `${prefix}${icon.id}: profile uses the same icon`);

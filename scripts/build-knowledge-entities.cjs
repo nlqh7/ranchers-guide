@@ -1,6 +1,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { decorateReferencePage } = require('./render-database-browser.cjs');
+const miscItems = require('../data/build-misc-items.json');
 
 const root = path.resolve(__dirname, "..");
 const checkOnly = process.argv.includes("--check");
@@ -159,10 +160,12 @@ function questGuideHtml(dataset, record, locale) {
   const notes = guide.notes.map(note => `<li>${esc(zh ? note.zhText : note.text)}</li>`).join("");
   const facts = record.facts.map(fact => `<li><p>${esc(zh ? fact.zhText : fact.text)} ${badge(fact, locale)}</p><p class="fact-source">${sourceHtml(dataset, fact.sourceIds, locale)} · ${zh ? "证据版本" : "Evidence build"}: ${esc(fact.build || (zh ? "未标注" : "not recorded"))}</p></li>`).join("");
   const links = record.relatedRoutes.map(route => `<a class="btn btn-outline btn-compact" href="${esc(zh ? localizeRoute(route) : route)}">${esc(relatedRouteLabels[route][locale])}</a>`).join("");
+  const questVehicle = miscItems.questItems?.find(item => item.relatedQuestId === record.id);
+  const questVehicleHtml = questVehicle ? `<div class="quest-guide-notes" data-quest-vehicle-id="${esc(questVehicle.id)}"><strong>${zh ? "任务车辆定义" : "Quest vehicle definition"}</strong><p>${esc(zh ? questVehicle.zhName : questVehicle.name)} · ${zh ? "构建中的名称与物品标志；I2 说明栏为空。3,000 C 是任务资金判定，不是修理价格或任务奖励；此定义也不证明当前可驾驶。" : "Build-defined name and item flags; the I2 description slot is empty. The 3,000 C objective is not a repair price or quest reward, and this definition does not establish current drivability."}</p><a href="${zh ? "/zh" : ""}/guides/vehicles-transport#quest-vehicle-victor-old-car">${zh ? "在车辆指南中查看" : "Open the vehicle guide"} →</a></div>` : "";
   return `<section class="entity-profile quest-guide" id="${record.id}" data-search-entry data-search-title="${esc(title)}" data-search-tags="${esc([guide.name, guide.zhName, record.name, record.zhName, zh ? record.zhSearchTags : record.searchTags].join(" "))}" data-search-status="${zh ? "任务步骤" : "Quest steps"}">
 <h2>${esc(title)}</h2>
 <details class="quest-build-guide" data-quest-build-guide="${record.id}"><summary>${zh ? "查看步骤与准备" : "Steps & preparation"}</summary><p class="quest-guide-origin">${zh ? "站长收集 · 游戏任务配置整理，未逐项实测" : "Site-collected · interpreted game configuration, not fully play-tested"}</p>${steps ? `<ol>${steps}</ol>` : ''}<div class="quest-guide-notes"><strong>${zh ? "容易漏掉的地方" : "Before you move on"}</strong><ul>${notes}</ul></div></details>
-${relationsHtml(record, locale)}<div class="entity-related"><div>${links}</div></div>
+${questVehicleHtml}${relationsHtml(record, locale)}<div class="entity-related"><div>${links}</div></div>
 <details class="quest-guide-evidence"><summary>${zh ? "玩家记录与资料来源" : "Player reports & sources"}</summary><p>${zh ? "任务标题与上述步骤来自站长持有的游戏构建，按原生字段整理；不代表所有运行时任务已收录，未确认奖励不补写。" : "The title and steps above were interpreted from the editor's owned game build. This is not a complete runtime quest catalog; unverified rewards are omitted."} ${zh ? "版本" : "Build"}: ${esc(guide.build)}.</p><p>${zh ? "非官方网站；游戏内容版权归开发商所有。" : "Unofficial fan resource; game content belongs to its developer."}</p><ul class="evidence-list">${facts}</ul></details></section>`;
 }
 

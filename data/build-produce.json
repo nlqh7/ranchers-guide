@@ -1,0 +1,837 @@
+{
+  "build": "0.8.10.842",
+  "steamBuild": "24847725",
+  "evidenceLevel": "build-observed",
+  "validity": "unknown",
+  "scope": [
+    "spring",
+    "summer",
+    "autumn"
+  ],
+  "sources": {
+    "Vegetables_Spring-970e1a4c2d": {
+      "kind": "local-build",
+      "title": "Vegetables_Spring",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12049,
+      "rawSha256": "970e1a4c2deb743ec870b1e9fb5de9ca0217ffa3d83d47228e7f80b335cc6e9f"
+    },
+    "Vegetables_Summer-eb59419857": {
+      "kind": "local-build",
+      "title": "Vegetables_Summer",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 12061,
+      "rawSha256": "eb59419857f9fd657b798d917b7a206463c513c547c0207dc68ad360d3d824ca"
+    },
+    "Vegetables_Autumn-4ef4394262": {
+      "kind": "local-build",
+      "title": "Vegetables_Autumn",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 11992,
+      "rawSha256": "4ef4394262a802a6f8ac1c11b363c0c1c95e0c1ae1a7bb082da261997f9fbeef"
+    },
+    "localization": {
+      "kind": "local-build",
+      "title": "Owned-build item localization",
+      "url": null,
+      "asset": "resources.assets",
+      "pathId": 393483,
+      "rawSha256": "2c505386fe9b1b9c2579aad1e6957907db838d8c7f87227e818fbfd4b57d5f4e"
+    }
+  },
+  "items": [
+    {
+      "id": "vegetable_red_luttuce_normal",
+      "cropId": "red-lettuce",
+      "cropStatus": "current-roster",
+      "size": "normal",
+      "name": "Green Salad",
+      "zhName": "绿色沙拉菜",
+      "nameKey": "Items_DB/vegetable_red_luttuce_normal/Name",
+      "description": null,
+      "sourceId": "Vegetables_Spring-970e1a4c2d",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 20
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 30
+      },
+      "shopOfferIds": [
+        "seed-store-spring-vegetable_red_luttuce_normal"
+      ]
+    },
+    {
+      "id": "vegetable_red_luttuce_giant",
+      "cropId": "red-lettuce",
+      "cropStatus": "current-roster",
+      "size": "giant",
+      "name": "Giant Green Salad",
+      "zhName": "巨型绿叶沙拉菜",
+      "nameKey": "Items_DB/vegetable_red_luttuce_giant/Name",
+      "description": null,
+      "sourceId": "Vegetables_Spring-970e1a4c2d",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 30
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 50
+      },
+      "shopOfferIds": []
+    },
+    {
+      "id": "vegetable_peppers_normal",
+      "cropId": "peppers",
+      "cropStatus": "not-included",
+      "size": "normal",
+      "name": "Pepper",
+      "zhName": "甜椒",
+      "nameKey": "Items_DB/vegetable_peppers_normal/Name",
+      "description": null,
+      "sourceId": "Vegetables_Spring-970e1a4c2d",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 10
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 60
+      },
+      "shopOfferIds": [
+        "seed-store-spring-vegetable_peppers_normal"
+      ]
+    },
+    {
+      "id": "vegetable_peppers_giant",
+      "cropId": "peppers",
+      "cropStatus": "not-included",
+      "size": "giant",
+      "name": "Giant Pepper",
+      "zhName": "巨型甜椒",
+      "nameKey": "Items_DB/vegetable_peppers_giant/Name",
+      "description": null,
+      "sourceId": "Vegetables_Spring-970e1a4c2d",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 25
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 80
+      },
+      "shopOfferIds": []
+    },
+    {
+      "id": "vegetable_garlic_normal",
+      "cropId": "garlic",
+      "cropStatus": "current-roster",
+      "size": "normal",
+      "name": "Garlic",
+      "zhName": "大蒜",
+      "nameKey": "Items_DB/vegetable_garlic_normal/Name",
+      "description": null,
+      "sourceId": "Vegetables_Spring-970e1a4c2d",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 15
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 50
+      },
+      "shopOfferIds": [
+        "seed-store-spring-vegetable_garlic_normal",
+        "seed-store-winter-vegetable_garlic_normal"
+      ]
+    },
+    {
+      "id": "vegetable_garlic_giant",
+      "cropId": "garlic",
+      "cropStatus": "current-roster",
+      "size": "giant",
+      "name": "Giant Garlic",
+      "zhName": "巨型大蒜",
+      "nameKey": "Items_DB/vegetable_garlic_giant/Name",
+      "description": null,
+      "sourceId": "Vegetables_Spring-970e1a4c2d",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 25
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 60
+      },
+      "shopOfferIds": []
+    },
+    {
+      "id": "vegetable_strawberry_normal",
+      "cropId": "strawberry",
+      "cropStatus": "current-roster",
+      "size": "normal",
+      "name": "Strawberry",
+      "zhName": "草莓",
+      "nameKey": "Items_DB/vegetable_strawberry_normal/Name",
+      "description": null,
+      "sourceId": "Vegetables_Spring-970e1a4c2d",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 32
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 120
+      },
+      "shopOfferIds": [
+        "seed-store-spring-vegetable_strawberry_normal"
+      ]
+    },
+    {
+      "id": "vegetable_strawberry_giant",
+      "cropId": "strawberry",
+      "cropStatus": "current-roster",
+      "size": "giant",
+      "name": "Giant Strawberry",
+      "zhName": "巨型草莓",
+      "nameKey": "Items_DB/vegetable_strawberry_giant/Name",
+      "description": null,
+      "sourceId": "Vegetables_Spring-970e1a4c2d",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 53
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 140
+      },
+      "shopOfferIds": []
+    },
+    {
+      "id": "vegetable_aubergine_normal",
+      "cropId": "aubergine",
+      "cropStatus": "current-roster",
+      "size": "normal",
+      "name": "Aubergine",
+      "zhName": "茄子",
+      "nameKey": "Items_DB/vegetable_aubergine_normal/Name",
+      "description": null,
+      "sourceId": "Vegetables_Summer-eb59419857",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 30
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 140
+      },
+      "shopOfferIds": [
+        "seed-store-summer-vegetable_aubergine_normal",
+        "seed-store-winter-vegetable_aubergine_normal"
+      ]
+    },
+    {
+      "id": "vegetable_aubergine_giant",
+      "cropId": "aubergine",
+      "cropStatus": "current-roster",
+      "size": "giant",
+      "name": "Giant Aubergine",
+      "zhName": "巨型茄子",
+      "nameKey": "Items_DB/vegetable_aubergine_giant/Name",
+      "description": null,
+      "sourceId": "Vegetables_Summer-eb59419857",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 40
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 200
+      },
+      "shopOfferIds": []
+    },
+    {
+      "id": "vegetable_melon_normal",
+      "cropId": "melon",
+      "cropStatus": "not-included",
+      "size": "normal",
+      "name": "Melon",
+      "zhName": "甜瓜",
+      "nameKey": "Items_DB/vegetable_melon_normal/Name",
+      "description": null,
+      "sourceId": "Vegetables_Summer-eb59419857",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 30
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 96
+      },
+      "shopOfferIds": [
+        "seed-store-summer-vegetable_melon_normal"
+      ]
+    },
+    {
+      "id": "vegetable_melon_giant",
+      "cropId": "melon",
+      "cropStatus": "not-included",
+      "size": "giant",
+      "name": "Giant Melon",
+      "zhName": "巨型甜瓜",
+      "nameKey": "Items_DB/vegetable_melon_giant/Name",
+      "description": null,
+      "sourceId": "Vegetables_Summer-eb59419857",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 45
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 112
+      },
+      "shopOfferIds": []
+    },
+    {
+      "id": "vegetable_corn_normal",
+      "cropId": "corn",
+      "cropStatus": "current-roster",
+      "size": "normal",
+      "name": "Corn",
+      "zhName": "玉米",
+      "nameKey": "Items_DB/vegetable_corn_normal/Name",
+      "description": null,
+      "sourceId": "Vegetables_Summer-eb59419857",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 10
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 50
+      },
+      "shopOfferIds": [
+        "seed-store-summer-vegetable_corn_normal"
+      ]
+    },
+    {
+      "id": "vegetable_corn_giant",
+      "cropId": "corn",
+      "cropStatus": "current-roster",
+      "size": "giant",
+      "name": "Giant Corn",
+      "zhName": "巨型玉米",
+      "nameKey": "Items_DB/vegetable_corn_giant/Name",
+      "description": null,
+      "sourceId": "Vegetables_Summer-eb59419857",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 16
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 75
+      },
+      "shopOfferIds": []
+    },
+    {
+      "id": "vegetable_green_luttuce_normal",
+      "cropId": "green-lettuce",
+      "cropStatus": "current-roster",
+      "size": "normal",
+      "name": "Green Lettuce",
+      "zhName": "绿叶生菜",
+      "nameKey": "Items_DB/vegetable_green_luttuce_normal/Name",
+      "description": null,
+      "sourceId": "Vegetables_Summer-eb59419857",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 20
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 30
+      },
+      "shopOfferIds": [
+        "seed-store-summer-vegetable_green_luttuce_normal",
+        "seed-store-winter-vegetable_green_luttuce_normal"
+      ]
+    },
+    {
+      "id": "vegetable_green_luttuce_giant",
+      "cropId": "green-lettuce",
+      "cropStatus": "current-roster",
+      "size": "giant",
+      "name": "Giant Green Lettuce",
+      "zhName": "巨型绿叶生菜",
+      "nameKey": "Items_DB/vegetable_green_luttuce_giant/Name",
+      "description": null,
+      "sourceId": "Vegetables_Summer-eb59419857",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 25
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 55
+      },
+      "shopOfferIds": []
+    },
+    {
+      "id": "vegetable_chili_normal",
+      "cropId": "chili",
+      "cropStatus": "not-included",
+      "size": "normal",
+      "name": "Chili",
+      "zhName": "辣椒",
+      "nameKey": "Items_DB/vegetable_chili_normal/Name",
+      "description": null,
+      "sourceId": "Vegetables_Summer-eb59419857",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 5
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 70
+      },
+      "shopOfferIds": [
+        "seed-store-summer-vegetable_chili_normal"
+      ]
+    },
+    {
+      "id": "vegetable_chili_giant",
+      "cropId": "chili",
+      "cropStatus": "not-included",
+      "size": "giant",
+      "name": "Giant Chili",
+      "zhName": "巨型辣椒",
+      "nameKey": "Items_DB/vegetable_chili_giant/Name",
+      "description": null,
+      "sourceId": "Vegetables_Summer-eb59419857",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 7
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 85
+      },
+      "shopOfferIds": []
+    },
+    {
+      "id": "vegetable_pumpkin_normal",
+      "cropId": "pumpkin",
+      "cropStatus": "current-roster",
+      "size": "normal",
+      "name": "Pumpkin",
+      "zhName": "南瓜",
+      "nameKey": "Items_DB/vegetable_pumpkin_normal/Name",
+      "description": null,
+      "sourceId": "Vegetables_Autumn-4ef4394262",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 20
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 120
+      },
+      "shopOfferIds": [
+        "seed-store-autumn-vegetable_pumpkin_normal",
+        "seed-store-winter-vegetable_pumpkin_normal"
+      ]
+    },
+    {
+      "id": "vegetable_pumpkin_giant",
+      "cropId": "pumpkin",
+      "cropStatus": "current-roster",
+      "size": "giant",
+      "name": "Giant Pumpkin",
+      "zhName": "巨型南瓜",
+      "nameKey": "Items_DB/vegetable_pumpkin_giant/Name",
+      "description": null,
+      "sourceId": "Vegetables_Autumn-4ef4394262",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 30
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 240
+      },
+      "shopOfferIds": []
+    },
+    {
+      "id": "vegetable_carotte_normal",
+      "cropId": "carrot",
+      "cropStatus": "current-roster",
+      "size": "normal",
+      "name": "Carotte",
+      "zhName": "胡萝卜",
+      "nameKey": "Items_DB/vegetable_carotte_normal/Name",
+      "description": null,
+      "sourceId": "Vegetables_Autumn-4ef4394262",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 13
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 50
+      },
+      "shopOfferIds": [
+        "seed-store-autumn-vegetable_carotte_normal",
+        "seed-store-winter-vegetable_carotte_normal"
+      ]
+    },
+    {
+      "id": "vegetable_carotte_giant",
+      "cropId": "carrot",
+      "cropStatus": "current-roster",
+      "size": "giant",
+      "name": "Giant Carotte",
+      "zhName": "巨型胡萝卜",
+      "nameKey": "Items_DB/vegetable_carotte_giant/Name",
+      "description": null,
+      "sourceId": "Vegetables_Autumn-4ef4394262",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 22
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 69
+      },
+      "shopOfferIds": []
+    },
+    {
+      "id": "vegetable_leek_normal",
+      "cropId": "leek",
+      "cropStatus": "current-roster",
+      "size": "normal",
+      "name": "Leek",
+      "zhName": "韭葱",
+      "nameKey": "Items_DB/vegetable_leek_normal/Name",
+      "description": null,
+      "sourceId": "Vegetables_Autumn-4ef4394262",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 18
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 43
+      },
+      "shopOfferIds": [
+        "seed-store-autumn-vegetable_leek_normal"
+      ]
+    },
+    {
+      "id": "vegetable_leek_giant",
+      "cropId": "leek",
+      "cropStatus": "current-roster",
+      "size": "giant",
+      "name": "Giant Leek",
+      "zhName": "巨型韭葱",
+      "nameKey": "Items_DB/vegetable_leek_giant/Name",
+      "description": null,
+      "sourceId": "Vegetables_Autumn-4ef4394262",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 27
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 68
+      },
+      "shopOfferIds": []
+    },
+    {
+      "id": "vegetable_onion_normal",
+      "cropId": "onion",
+      "cropStatus": "current-roster",
+      "size": "normal",
+      "name": "Onion",
+      "zhName": "洋葱",
+      "nameKey": "Items_DB/vegetable_onion_normal/Name",
+      "description": null,
+      "sourceId": "Vegetables_Autumn-4ef4394262",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 5
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 50
+      },
+      "shopOfferIds": [
+        "seed-store-autumn-vegetable_onion_normal",
+        "seed-store-winter-vegetable_onion_normal"
+      ]
+    },
+    {
+      "id": "vegetable_onion_giant",
+      "cropId": "onion",
+      "cropStatus": "current-roster",
+      "size": "giant",
+      "name": "Giant Onion",
+      "zhName": "巨型洋葱",
+      "nameKey": "Items_DB/vegetable_onion_giant/Name",
+      "description": null,
+      "sourceId": "Vegetables_Autumn-4ef4394262",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 7
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 65
+      },
+      "shopOfferIds": []
+    },
+    {
+      "id": "vegetable_marrow_normal",
+      "cropId": "marrow",
+      "cropStatus": "current-roster",
+      "size": "normal",
+      "name": "Marrow",
+      "zhName": "西葫芦",
+      "nameKey": "Items_DB/vegetable_marrow_normal/Name",
+      "description": null,
+      "sourceId": "Vegetables_Autumn-4ef4394262",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 12
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 20
+      },
+      "shopOfferIds": [
+        "seed-store-autumn-vegetable_marrow_normal"
+      ]
+    },
+    {
+      "id": "vegetable_marrow_giant",
+      "cropId": "marrow",
+      "cropStatus": "current-roster",
+      "size": "giant",
+      "name": "Giant Marrow",
+      "zhName": "巨型西葫芦",
+      "nameKey": "Items_DB/vegetable_marrow_giant/Name",
+      "description": null,
+      "sourceId": "Vegetables_Autumn-4ef4394262",
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "bodySlot": "TwoHandHolder",
+      "equippable": true,
+      "stackable": true,
+      "droppable": true,
+      "sellable": true,
+      "health": {
+        "consumption": 0,
+        "restore": 18
+      },
+      "energy": {
+        "consumption": 0,
+        "restore": 30
+      },
+      "shopOfferIds": []
+    }
+  ]
+}

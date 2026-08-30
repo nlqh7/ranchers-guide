@@ -342,7 +342,24 @@ function addRoute(record, route, locale, label, kind) {
 }
 
 const materials = readJson("materials.json");
+const resources = readJson("build-resources.json");
+materials.sources = {...materials.sources, ...resources.sources};
+for (const record of materials.materials) {
+  const item = resources.items.find(i => i.materialId === record.id);
+  if (!item) continue;
+  const slot = {TwoHandHolder:['both hands','双手'],Right_Hand_Weapon:['right hand','右手'],NONE:['none','无']}[item.bodySlot];
+  record.lookupAliases = [item.name, item.zhName];
+  record.sourceIds = [...(record.sourceIds || []), item.sourceId, 'localization'];
+  record.lookupFacts = [{
+    text: `Game-file settings: stackable ${item.stackable ? 'yes' : 'no'}; held slot ${slot[0]}. Recipe quantities are listed in the material profile; runtime inventory behavior is not tested.`,
+    zhText: `游戏文件配置：可堆叠${item.stackable ? '是' : '否'}，持握位置${slot[1]}。材料词条列出逐项配方数量；运行时背包行为未实测。`,
+    evidenceLevel: resources.evidenceLevel, validity: resources.validity, build: resources.build,
+    sourceIds: [item.sourceId, 'localization'], group: 'Game-build configuration'
+  }];
+}
 const crops = readJson("crops.json");
+const seeds = readJson("build-seeds.json");
+const produce = readJson("build-produce.json");
 const animals = readJson("animals.json");
 const npcs = readJson("npcs.json");
 const quests = readJson("quests.json");
@@ -351,9 +368,13 @@ const buildings = readJson("building-checklists.json");
 
 const cropLookup = {
   ...crops,
+  sources: {...crops.sources, ...seeds.sources, ...produce.sources},
   crops: [...crops.crops, ...crops.inputs.filter(input => input.buildInput), ...crops.buildRoster.entries.filter(entry => !crops.crops.some(crop => crop.id === entry.id))].map(record => {
     const entry = crops.buildRoster.entries.find(crop => crop.id === record.id);
     if (!entry) return record;
+    const seed = seeds.items.find(item => item.cropId === entry.id && item.rosterStatus === 'current-roster');
+    if (!seed) throw new Error(`Missing seed reference for crop ${entry.id}`);
+    const produceForCrop = produce.items.filter(item => item.cropId === entry.id && item.cropStatus === 'current-roster');
     const days = n => `${n} ${n === 1 ? 'day' : 'days'}`;
     const availability = entry.townSeedVendor === 'listed'
       ? ['Referenced by the seed-shop table; current availability is not guaranteed.', '种子商店表有引用，不保证当前可购买。']
@@ -362,14 +383,21 @@ const cropLookup = {
       [`Configuration (not gameplay-tested): ${entry.season}; first harvest after ${days(entry.daysToFirstHarvest)}; ${entry.regrowEveryDays ? `regrow interval ${days(entry.regrowEveryDays)}` : 'no regrow'}.`, `构建配置（未实测）：${entry.zhSeason}；首次收获 ${entry.daysToFirstHarvest} 天；${entry.regrowEveryDays ? `再生间隔 ${entry.regrowEveryDays} 天` : '不再生'}。`],
       [`Configured dry tolerance: ${days(entry.daysWithoutWater)}. This is not a tested watering schedule.`, `配置断水容忍为 ${entry.daysWithoutWater} 天，不等于经过实测的浇水方案。`],
       availability,
+      [`Seed item: ${seed.name}. Game-file inventory settings enable equipping, stacking, dropping and selling; Energy consumption is 1. These settings do not prove runtime behavior or a retail price.`, `种子物品：${seed.zhName}（${seed.name}）。游戏文件启用了装备、堆叠、丢弃和出售标记，体力消耗配置为 1；这些设置不能证明运行时行为或零售价。`],
     ];
+    const produceFacts = produceForCrop.length ? [{
+      text: `Produce item settings (not gameplay-tested): ${produceForCrop.map(item => `${item.name} — Health restore ${item.health.restore}, Energy restore ${item.energy.restore}`).join('; ')}. Internal prices and sell flags are not player income or availability evidence.`,
+      zhText: `农产品物品配置（未实测）：${produceForCrop.map(item => `${item.zhName}（${item.name}）— 生命恢复 ${item.health.restore}、体力恢复 ${item.energy.restore}`).join('；')}。内部价格和出售标志不代表玩家收入或当前可获得性。`,
+      group: 'Game-build configuration', evidenceLevel: produce.evidenceLevel, validity: produce.validity,
+      build: produce.build, sourceIds: [produceForCrop[0].sourceId, 'localization'],
+    }] : [];
     return {
       ...record,
       summary: record.summary || `Look up ${entry.name} growing configuration. ${availability[0]}`,
       zhSummary: record.zhSummary || record.zh?.summary || `查询${entry.zhName}的生长配置。${availability[1]}`,
-      lookupAliases: [entry.name, entry.zhName],
-      sourceIds: unique([...(record.sourceIds || []), ...entry.sourceIds]),
-      lookupFacts: facts.map(([text, zhText]) => ({text, zhText, group: 'Game-build configuration', evidenceLevel: entry.evidenceLevel, validity: entry.validity, build: entry.build, sourceIds: entry.sourceIds})),
+      lookupAliases: [entry.name, entry.zhName, seed.name, seed.zhName, seed.id, ...produceForCrop.flatMap(item => [item.name, item.zhName, item.id])],
+      sourceIds: unique([...(record.sourceIds || []), ...entry.sourceIds, seed.sourceId, seed.seasonSourceId, ...produceForCrop.map(item => item.sourceId), 'localization']),
+      lookupFacts: [...facts.map(([text, zhText], index) => ({text, zhText, group: 'Game-build configuration', evidenceLevel: index === facts.length - 1 ? seeds.evidenceLevel : entry.evidenceLevel, validity: index === facts.length - 1 ? seeds.validity : entry.validity, build: entry.build, sourceIds: index === facts.length - 1 ? [seed.sourceId, 'localization'] : entry.sourceIds})), ...produceFacts],
     };
   }),
 };

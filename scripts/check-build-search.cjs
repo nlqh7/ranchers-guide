@@ -12,8 +12,10 @@ for (const locale of ['en', 'zh']) {
     assert.equal(entity.route, `${locale === 'zh' ? '/zh' : ''}/database/crops#${crop.id}`);
     assert.ok(entity.aliases.includes(crop.name) && entity.aliases.includes(crop.zhName));
     const facts = entity.facts.filter(f => f.evidenceLevel === 'build-observed');
+    const cropFacts = facts.filter(f => f.sourceIds.includes('local-build-24847725'));
     assert.ok(facts.some(f => f.text.includes(String(crop.daysToFirstHarvest))), 'first-harvest configuration must be accessible in search');
-    assert.ok(facts.every(f => f.build === crop.build && f.sourceIds.includes('local-build-24847725')));
+    assert.ok(facts.every(f => f.build === crop.build && f.sourceIds.length > 0), 'every build fact needs its own source');
+    assert.ok(cropFacts.length >= 3, 'crop timing and shop facts keep their crop-table source');
     assert.ok(facts.some(f => f.text.includes(locale === 'zh' ? '未实测' : 'not gameplay-tested')));
     if (crop.townSeedVendor !== 'listed') assert.ok(facts.some(f => f.text.includes(locale === 'zh' ? '购买途径未确认' : 'acquisition is unconfirmed')));
   }
