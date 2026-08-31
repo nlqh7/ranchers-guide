@@ -4,13 +4,15 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const animals = require('../data/animals.json');
 const crops = require('../data/crops.json');
+const vehicles = require('../data/build-vehicles.json');
 for (const prefix of ['', 'zh/']) {
-  for (const suffix of ['.html', '/animals.html', '/crops.html', '/materials.html', '/quests.html', '/npcs.html']) {
+  for (const suffix of ['.html', '/animals.html', '/crops.html', '/materials.html', '/quests.html', '/npcs.html', '/customization.html']) {
     const html = fs.readFileSync(path.join(root, `${prefix}database${suffix}`), 'utf8');
-    assert.equal((html.match(/database-browser\.css\?v=20260830-8/g) || []).length, 1, 'every database loads the current shared theme once');
+    assert.equal((html.match(/database-browser\.css\?v=20260831-1/g) || []).length, 1, 'every database loads the current shared theme once');
     assert.doesNotMatch(html, /<article[^>]*style="[^"]*max-width/, `${prefix}${suffix}: page-specific inline width must not override the shared layout`);
     assert.match(html, /favicon-32\.png/, 'theme changes preserve favicon markup');
     assert.match(html, /main\.js\?v=/, 'theme changes preserve shared navigation');
+    assert.ok(html.includes(`/${prefix}guides/vehicles-transport#vehicle-catalog`), `${prefix}${suffix}: shared categories expose the vehicle catalogue`);
   }
 }
 for (const prefix of ['', 'zh/']) {
@@ -68,7 +70,7 @@ for (const prefix of ['', 'zh/']) {
         assert.ok(html.includes(`id="build-${target}"`), 'old table anchors remain valid');
       }
     }
-    assert.match(html, /database-browser\.css\?v=20260830-8/);
+    assert.match(html, /database-browser\.css\?v=20260831-1/);
     assert.doesNotMatch(html, /class="entity-decision"/, 'lookup explanation must not repeat the profile summary');
     assert.match(html, /class="database-reference-notes"/, 'page metadata belongs in one secondary disclosure');
     assert.doesNotMatch(html, />1 days</, 'English one-day values use singular units');
@@ -79,6 +81,7 @@ for (const prefix of ['', 'zh/']) {
   const browse = html.match(/<!-- DATABASE BROWSER START -->[\s\S]*?<!-- DATABASE BROWSER END -->/)?.[0];
   assert.ok(browse, `${prefix}database: generated direct-entry directory required`);
   for (const animal of animals.species) assert.ok(browse.includes(`/${prefix}database/animals#${animal.id}`));
+  for (const vehicle of vehicles.items) assert.ok(browse.includes(`/${prefix}guides/vehicles-transport#vehicle-${vehicle.id}`), `${prefix}database: ${vehicle.id} has a direct vehicle profile link`);
   for (const category of ['animals', 'crops', 'materials', 'quests', 'npcs']) assert.ok(browse.includes(`/${prefix}database/${category}`));
   assert.doesNotMatch(browse, /coverage-summary|knowledge-category-number/);
   assert.match(browse, /class="database-hub-heading"/, 'category labels have a consistent alignment column');

@@ -33,15 +33,26 @@ function renderTabs(locale, current) {
   const categories = [
     ['animals', 'Animals', '动物'], ['crops', 'Crops', '作物'],
     ['materials', 'Materials', '材料'], ['quests', 'Quests', '任务'],
-    ['npcs', 'People', '人物'], ['customization', 'Customization', '外观'], ['map', 'Map', '地图'],
+    ['npcs', 'People', '人物'], ['vehicles', 'Vehicles', '车辆'],
+    ['customization', 'Customization', '外观'], ['map', 'Map', '地图'],
   ];
   return `<nav class="database-tabs" aria-label="${zh ? '资料分类' : 'Database categories'}">${categories.map(([id, en, cn]) =>
-    `<a href="${prefix}/${id === 'map' ? 'map' : `database/${id}`}"${id === current ? ' aria-current="page"' : ''}>${zh ? cn : en}</a>`).join('')}</nav>`;
+    `<a href="${prefix}/${id === 'map' ? 'map' : id === 'vehicles' ? 'guides/vehicles-transport#vehicle-catalog' : `database/${id}`}"${id === current ? ' aria-current="page"' : ''}>${zh ? cn : en}</a>`).join('')}</nav>`;
 }
 
 function renderEntries(data, kind, locale, base = '') {
   const zh = locale === 'zh';
   const link = (id, name) => `<a href="${base}#${escapeHtml(id)}">${renderIcon(kind, id)}<span>${escapeHtml(name)}</span></a>`;
+  if (kind === 'vehicles') {
+    const groups = [
+      [true, zh ? '有经销商记录' : 'Dealer-linked definitions'],
+      [false, zh ? '无匹配经销商记录' : 'No matched dealer record'],
+    ];
+    return `<div class="database-seasons">${groups.map(([listed, title]) => {
+      const entries = data.items.filter(item => Boolean(item.shopOfferIds.length) === listed);
+      return `<div><h3>${title}</h3><div class="database-entry-links">${entries.map(item => link(`vehicle-${item.id}`, zh ? item.zhName : item.name)).join('')}</div></div>`;
+    }).join('')}</div>`;
+  }
   if (kind === 'animals') {
     const wildlife = data.wildlifeReference?.entries || [];
     const enemies = data.enemyReference?.entries || [];
@@ -92,7 +103,7 @@ function decorateReferencePage(html, data, kind, locale) {
   const meta = html.match(/<p class="meta">[\s\S]*?<\/p>/)?.[0] || '';
   const serviceDirectory = html.match(/<details class="database-reference-notes dialogue-service-directory">[\s\S]*?<\/details>/)?.[0] || '';
   return decorateEntryHeadings(html, kind)
-    .replace('</head>', '<link rel="stylesheet" href="/assets/css/database-browser.css?v=20260830-8"></head>')
+    .replace('</head>', '<link rel="stylesheet" href="/assets/css/database-browser.css?v=20260831-1"></head>')
     .replace('<body>', '<body class="database-surface">')
     .replace(/class="article([^"]*)"(?: style="max-width:980px")?/, `class="article$1 database-page database-${kind}"`)
     .replace(/<h1>[\s\S]*?<\/h1>[\s\S]*?(?=<section class="(?:evidence-ledger )?(?:material|entity)-profile\b)/,
@@ -104,7 +115,7 @@ function decorateReferencePage(html, data, kind, locale) {
 
 function decoratePage(html, data, kind, locale) {
   const zh = locale === 'zh';
-  const cssVersion = '20260830-8';
+  const cssVersion = '20260831-1';
   return decorateEntryHeadings(html, kind)
     .replace('</head>', `  <link rel="stylesheet" href="/assets/css/database-browser.css?v=${cssVersion}">\n</head>`)
     .replace('<body>', '<body class="database-surface">')

@@ -1,7 +1,7 @@
 {
   "meta": {
     "page": "database/animals.html",
-    "lastUpdated": "2026-08-30",
+    "lastUpdated": "2026-08-31",
     "build": "0.8.10.842",
     "videoBuild": "0.8.10.455",
     "evidenceLevels": [
@@ -119,6 +119,14 @@
       "url": "https://steamcommunity.com/app/1501310/discussions/0/587307906418973975/",
       "author": "Devils Titan / DJM / Yakiwi",
       "date": "2026-08-02",
+      "build": "0.8.10.x"
+    },
+    "thread-chickens-missing-official": {
+      "kind": "steam-thread",
+      "title": "Steam thread: missing-chicken troubleshooting checklist",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587307906418888142/",
+      "author": "Jennoula · official moderator reply",
+      "date": "2026-08-01",
       "build": "0.8.10.x"
     },
     "thread-gigi-eggs": {
@@ -589,7 +597,7 @@
       "category": "poultry",
       "housingType": "Coop",
       "summary": "The best-documented animal in the current build. Buy from Angela, keep hay and water in the coop trough, mount the coop heater on the outside wall, and pet daily for a shot at large eggs.",
-      "whenNeeded": "Use this profile when you are buying your first chicken, troubleshooting care or disappearance, or checking the evidence behind the large-egg route.",
+      "whenNeeded": "Use this profile when you are buying your first chicken, troubleshooting care or disappearance, or checking the evidence behind the large-egg route. If a bird disappears, check the coop linked count, enclosed fence, daily report and green dots across the map before assuming a bug.",
       "searchTags": "chicken hen rooster chick poultry coop egg large egg hay heater angela gigi quest food diet feed price buy sell",
       "fields": [
         {
@@ -975,6 +983,15 @@
               ]
             },
             {
+              "text": "Before treating a missing chicken as a bug, the official moderator checklist is to verify the coop linked count, whether the door opens into a fully enclosed fence, any daily report notices, and green dots anywhere on the full map. These observations narrow the cause; none alone proves player error or a game bug.",
+              "evidenceLevel": "official",
+              "build": "0.8.10.x",
+              "validity": "current",
+              "sourceIds": [
+                "thread-chickens-missing-official"
+              ]
+            },
+            {
               "text": "No fence plus an open door lets chickens wander off for good.",
               "evidenceLevel": "community-confirmed",
               "build": "0.8.10.x",
@@ -1070,7 +1087,7 @@
           "tags": "brown chicken hen poultry coop egg price"
         }
       ],
-      "lastUpdated": "2026-08-11",
+      "lastUpdated": "2026-08-31",
       "zh": {
         "tocLabel": "鸡",
         "kicker": "当前资料最完整",
@@ -1079,7 +1096,7 @@
         "searchTitle": "鸡的完整照料",
         "searchTags": "鸡 母鸡 公鸡 鸡舍 干草 食槽 水 温控 蛋 大鸡蛋",
         "summary": "当前证据最完整的动物条目：从 Angela 买鸡，鸡舍食槽补干草和水，鸡舍专用暖气装在外墙；每天抚摸只能提高大鸡蛋出现机会，不能保证下一枚就是大鸡蛋。",
-        "whenNeeded": "第一次买鸡、排查照料或消失问题，或需要核对大鸡蛋任务路线时查这里。",
+        "whenNeeded": "第一次买鸡、排查照料或消失问题，或需要核对大鸡蛋任务路线时查这里。鸡不见时，先查鸡舍关联数量、封闭围栏、每日报告和全地图绿点，再判断是否是 bug。",
         "groups": [
           {
             "heading": "喂食与饮水",
@@ -1157,6 +1174,17 @@
               {
                 "text": "目前没有可靠的生病通知，建议每天查看动物状态。",
                 "badge": "lead"
+              }
+            ]
+          },
+          {
+            "heading": "鸡不见时先检查",
+            "id": "missing-checklist",
+            "facts": [
+              {
+                "text": "官方管理员建议先核对鸡舍关联数量、门口是否接入完整封闭围栏、每日报告有没有通知，以及全地图是否仍有绿点。这些可观察结果用于缩小原因，单独一项不能证明一定是玩家操作或游戏 bug。",
+                "badge": "official",
+                "sourceIds": ["thread-chickens-missing-official"]
               }
             ]
           }

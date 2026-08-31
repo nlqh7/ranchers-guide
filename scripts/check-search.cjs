@@ -173,9 +173,16 @@ assert.match(knowledgeBasePage, /<h1>Game database<\/h1>/);
 assert.match(knowledgeBasePage, /href="\/guides\/animal-guide#feeding"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /"\/database"/);
 assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /"\/zh\/community"/);
-assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /search-index\.json/);
-assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-zh-v29/, "Chinese search cache must invalidate the previous page set");
-assert.match(fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8"), /ranchers-search-index-v42/, "English search cache must invalidate the previous page set");
+const searchSource = fs.readFileSync(path.join(root, "assets", "js", "search.js"), "utf8");
+assert.match(searchSource, /search-index\.json/);
+for (const listName of ["EN_PAGE_PATHS", "ZH_PAGE_PATHS"]) {
+  const block = searchSource.match(new RegExp(`${listName} = \\[([\\s\\S]*?)\\];`));
+  assert.ok(block, `${listName} must be declared`);
+  const routes = [...block[1].matchAll(/"([^"]+)"/g)].map((match) => match[1]);
+  assert.equal(new Set(routes).size, routes.length, `${listName} must not contain duplicate routes`);
+}
+assert.match(searchSource, /ranchers-search-index-zh-v29/, "Chinese search cache must invalidate the previous page set");
+assert.match(searchSource, /ranchers-search-index-v43/, "English search cache must invalidate the previous page set");
 assert.match(searchPage, /data-knowledge-dossier/, "Search page must provide an entity dossier surface");
 assert.match(searchPage, /data-entity-filters/, "Search page must provide entity answer filters");
 const chineseSearchPage = fs.readFileSync(path.join(root, "zh", "search.html"), "utf8");

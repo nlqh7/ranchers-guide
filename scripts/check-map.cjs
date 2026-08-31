@@ -482,7 +482,7 @@ assert.equal(mapCore.buildQueryString("", "all"), "");
 
 const search = read("assets/js/search.js");
 assert.match(search, /"\/map"/);
-assert.match(search, /ranchers-search-index-v42/);
+assert.match(search, /ranchers-search-index-v43/);
 assert.match(search, /ranchers-search-index-zh-v29/);
 assert.match(search, /node\.querySelector\("h2, h3"\)/);
 

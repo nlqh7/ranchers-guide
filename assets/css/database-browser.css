@@ -68,6 +68,8 @@ html:lang(zh) :is(.database-page, .database-hub) :is(h1, h2, h3) { font-family: 
 .database-hub-content { min-width: 0; }
 .database-hub-quests .database-entry-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .database-hub-npcs .database-entry-links { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.database-hub-vehicles .database-seasons { grid-template-columns: 1fr; }
+.database-hub-vehicles .database-seasons .database-entry-links { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .database-guide-links { display: flex; flex-wrap: wrap; gap: 0 20px; margin-top: 8px; }
 .database-guide-links a { display: inline-flex; align-items: center; min-height: 44px; font-size: .875rem; text-underline-offset: 3px; }
 .database-config { background: var(--db-soft); border-radius: 4px; padding: 20px; margin: 20px 0; }
@@ -162,6 +164,7 @@ html:lang(zh) :is(.database-page, .database-hub) :is(h1, h2, h3) { font-family: 
   .database-entry-links, .database-hub-npcs .database-entry-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .database-seasons { grid-template-columns: 1fr; gap: 16px; }
   .database-seasons .database-entry-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .database-hub-vehicles .database-seasons .database-entry-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .database-hub-quests .database-entry-links { grid-template-columns: 1fr; }
   .database-quests .database-entry-links { grid-template-columns: 1fr; }
   .database-materials .database-entry-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }

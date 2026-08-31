@@ -38,9 +38,6 @@
     "/updates",
     "/updates/launch-hotfix-0-8-10-455",
     "/updates/transport-update",
-    "/guides/building-construction",
-    "/guides/multiplayer-coop",
-    "/problems/fast-travel-subway",
     "/research",
     "/tools/profit-calculator",
     "/tools/field-notes",
@@ -87,7 +84,7 @@
   var IS_ZH = document.documentElement.lang.toLowerCase() === "zh-cn";
   var PAGE_PATHS = IS_ZH ? ZH_PAGE_PATHS : EN_PAGE_PATHS;
   var SEARCH_ROUTE = IS_ZH ? "/zh/search" : "/search";
-  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v29" : "ranchers-search-index-v42";
+  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v29" : "ranchers-search-index-v43";
   var documents = [];
   var form = document.querySelector("[data-search-form]");
   var input = document.querySelector("[data-search-input]");

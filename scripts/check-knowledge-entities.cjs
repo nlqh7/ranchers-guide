@@ -34,7 +34,9 @@ function validateDataset(relative, recordsKey, minimumRecords) {
     for (const fact of record.facts) {
       assert.ok(fact.text && fact.zhText, `${record.id} has an untranslated fact`);
       assert.ok(["official", "video-observed", "community-confirmed", "unverified-lead", "build-observed"].includes(fact.evidenceLevel));
-      if (fact.evidenceLevel === 'build-observed') assert.equal(fact.validity, 'unknown');
+      if (fact.evidenceLevel === 'build-observed' && fact.validity === 'current') {
+        assert.equal(fact.build, data.meta.build, `${record.id} current build fact must match the dataset baseline`);
+      }
       assert.ok(["current", "historical", "unknown"].includes(fact.validity));
       assert.ok(fact.sourceIds.length > 0, `${record.id} fact lacks sources`);
       for (const sourceId of fact.sourceIds) assert.ok(data.sources[sourceId], `${record.id} references missing source ${sourceId}`);

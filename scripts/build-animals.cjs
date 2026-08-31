@@ -76,7 +76,7 @@ ${parts.join("\n")}`;
   }).join("\n");
 
   return `      <section class="evidence-ledger animal-profile" aria-labelledby="${animal.id}-heading">
-        <div id="${animal.id}" data-search-entry data-search-title="${escapeHtml(animal.name)}" data-search-tags="${escapeHtml(animal.searchTags)}" data-search-status="Database record">
+        <div id="${animal.id}" data-search-entry data-search-title="${escapeHtml(animal.name)}" data-search-text="${escapeHtml([animal.summary, animal.whenNeeded].filter(Boolean).join(' '))}" data-search-tags="${escapeHtml(animal.searchTags)}" data-search-status="Database record">
         <div class="section-heading-row">
           <div>
             <span class="kicker">${escapeHtml(animal.category)} · ${escapeHtml(animal.housingType)}</span>
@@ -546,7 +546,7 @@ function renderZhEntry(entry) {
     return `${h}${items ? `<ul class="evidence-list">${items}</ul>` : ""}${pendingBlock}`;
   }).join("");
   const decision = zh.whenNeeded ? `<div class="entity-decision"><strong>什么时候查</strong><p>${escapeHtml(zh.whenNeeded)}</p></div>` : "";
-  return `    <section class="evidence-ledger animal-profile"><div id="${entry.id}" data-search-entry data-search-title="${escapeHtml(zh.searchTitle)}" data-search-tags="${escapeHtml(zh.searchTags)}">${head}${summary}${decision}</div>${renderNativeAnimalReference(entry, 'zh')}${renderBuildReference(entry, 'zh')}${entry.buildReference ? `<details class="database-outline"><summary>更多照料证据与待验证项</summary>${groups}</details>` : groups}</section>`;
+  return `    <section class="evidence-ledger animal-profile"><div id="${entry.id}" data-search-entry data-search-title="${escapeHtml(zh.searchTitle)}" data-search-text="${escapeHtml([zh.summary, zh.whenNeeded].filter(Boolean).join(' '))}" data-search-tags="${escapeHtml(zh.searchTags)}">${head}${summary}${decision}</div>${renderNativeAnimalReference(entry, 'zh')}${renderBuildReference(entry, 'zh')}${entry.buildReference ? `<details class="database-outline"><summary>更多照料证据与待验证项</summary>${groups}</details>` : groups}</section>`;
 }
 
 function renderZhExtra(extra) {

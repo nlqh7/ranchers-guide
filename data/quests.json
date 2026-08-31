@@ -79,6 +79,26 @@
       "author": "sagatarious / FIDELIS",
       "date": "2026-08-05",
       "build": "0.8.10.x"
+    },
+    "scarecrow-workbench-official-thread": {
+      "kind": "steam-thread",
+      "title": "Steam thread: Scarecrow quest before Workbench unlock",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/797837596195642212/",
+      "author": "Jennoula · official moderator reply",
+      "date": "2026-03-05",
+      "build": null
+    },
+    "owned-build-plantations-recipes": {
+      "kind": "local-build",
+      "title": "Site-collected Plantations_Recipes configuration · owned game build",
+      "url": null,
+      "author": "Site editor",
+      "date": "2026-08-29",
+      "build": "0.8.10.842",
+      "steamBuild": "24847725",
+      "asset": "resources.assets",
+      "pathId": 12000,
+      "rawSha256": "6629f940b80ee142611bdde4271ba15b1441492a1f297c338a2b72817496f2b1"
     }
   },
   "quests": [
@@ -1208,8 +1228,8 @@
       "category": "farming",
       "zhCategory": "种植",
       "nameConfidence": "exact-build",
-      "searchTags": "Feathered Foes",
-      "zhSearchTags": "长着羽毛的敌人",
+      "searchTags": "Feathered Foes scarecrow workbench locked lower tier Bob",
+      "zhSearchTags": "长着羽毛的敌人 稻草人 工作台 未解锁 普通款 鲍勃",
       "summary": "Craft and build a scarecrow, checking which variant the placement objective accepts.",
       "zhSummary": "制作并建造稻草人，注意放置目标接受的具体款式。",
       "facts": [
@@ -1241,6 +1261,33 @@
           "validity": "unknown",
           "sourceIds": [
             "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "In March 2026, official moderator guidance for this Workbench deadlock was to craft the lower-tier ordinary Scarecrow, not Bob the Scarecrow.",
+          "zhText": "2026 年 3 月的官方管理员答复说明：遇到工作台解锁死循环时，应制作低阶普通稻草人，不要制作稻草人鲍勃。",
+          "sourceFields": [
+            "Official moderator reply"
+          ],
+          "evidenceLevel": "official",
+          "build": "pre-EA-2026-03",
+          "validity": "historical",
+          "sourceIds": [
+            "scarecrow-workbench-official-thread"
+          ]
+        },
+        {
+          "text": "The current-build recipe configuration independently corroborates that route: the ordinary Scarecrow does not require a workbench, while Bob the Scarecrow does. This does not establish the exact unlock timing.",
+          "zhText": "当前构建配方配置独立支持这条路线：普通稻草人不需要工作台，稻草人鲍勃需要。该配置不能证明工作台的准确解锁时机。",
+          "sourceFields": [
+            "Plantations_Recipes prop_Scarecrow_00 workbench",
+            "Plantations_Recipes prop_Scarecrow_01 workbench"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "current",
+          "sourceIds": [
+            "owned-build-plantations-recipes"
           ]
         },
         {
@@ -1306,6 +1353,14 @@
           }
         ],
         "notes": [
+          {
+            "text": "If the Workbench is still locked, craft the ordinary Scarecrow, not Bob the Scarecrow; the ordinary current-build recipe does not require a workbench.",
+            "zhText": "如果工作台仍未解锁，请制作普通稻草人，不要制作稻草人鲍勃；当前构建的普通款配方不需要工作台。",
+            "sourceFields": [
+              "Official moderator reply",
+              "Plantations_Recipes workbench flags"
+            ]
+          },
           {
             "text": "The two checks accept different variants. Bob satisfies the first condition but is not listed in the final build condition.",
             "zhText": "前后两项接受的款式不同：鲍勃符合第一项，但未列在最后建造判定中。",
