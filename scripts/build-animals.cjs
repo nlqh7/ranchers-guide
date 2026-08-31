@@ -75,7 +75,8 @@ ${pending.map(renderFact).join("\n")}
 ${parts.join("\n")}`;
   }).join("\n");
 
-  return `      <section class="evidence-ledger animal-profile" id="${animal.id}" data-search-entry data-search-title="${escapeHtml(animal.name)}" data-search-tags="${escapeHtml(animal.searchTags)}" data-search-status="Database record" aria-labelledby="${animal.id}-heading">
+  return `      <section class="evidence-ledger animal-profile" aria-labelledby="${animal.id}-heading">
+        <div id="${animal.id}" data-search-entry data-search-title="${escapeHtml(animal.name)}" data-search-tags="${escapeHtml(animal.searchTags)}" data-search-status="Database record">
         <div class="section-heading-row">
           <div>
             <span class="kicker">${escapeHtml(animal.category)} · ${escapeHtml(animal.housingType)}</span>
@@ -85,9 +86,40 @@ ${parts.join("\n")}`;
         </div>
         <p class="lead">${escapeHtml(animal.summary)}</p>
 ${animal.whenNeeded ? `        <div class="entity-decision"><strong>When to look here</strong><p>${escapeHtml(animal.whenNeeded)}</p></div>` : ""}
+        </div>
+${renderNativeAnimalReference(animal, 'en')}
 ${renderBuildReference(animal, 'en')}
 ${animal.buildReference ? `<details class="database-outline"><summary>Further care evidence and open questions</summary>${fields}</details>` : fields}
       </section>`;
+}
+
+function renderNativeAnimalReference(animal, locale) {
+  const ref = data.nativeAnimalReference;
+  if (!ref) return '';
+  const rows = ref.entries.filter(entry => entry.speciesId === animal.id);
+  if (rows.length === 0) return '';
+
+  const zh = locale === 'zh';
+  const stageLabel = value => zh
+    ? (value === 'young' ? '幼年' : '成年')
+    : (value === 'young' ? 'Young' : 'Adult');
+  const sexLabel = value => zh
+    ? (value === 'female' ? '雌性' : '雄性')
+    : (value === 'female' ? 'Female' : 'Male');
+  const settings = ref.sharedConfiguration;
+  const body = rows.map(row => {
+    const name = escapeHtml(zh ? row.zhName : row.name);
+    const aliases = escapeHtml(`${row.id}|${row.name}|${row.zhName}`);
+    const tags = escapeHtml(`${row.id} ${row.name} ${row.zhName} ${row.stage} ${row.sex} ${animal.id}`);
+    return `<tr id="native-animal-${escapeHtml(row.id)}" data-search-entry data-search-title="${name}" data-search-aliases="${aliases}" data-search-tags="${tags}" data-search-status="${zh ? '当前构建名称' : 'Current-build name'}"><th scope="row"><a class="entry-anchor" href="#native-animal-${escapeHtml(row.id)}">${name}</a></th><td>${stageLabel(row.stage)} · ${sexLabel(row.sex)}</td><td><code>${escapeHtml(row.id)}</code></td></tr>`;
+  }).join('');
+
+  return `<div class="native-animal-reference">
+        <h3>${zh ? '当前构建名称' : 'Current-build names'}</h3>
+        <p class="database-browse-note">${zh ? `自有 build ${escapeHtml(ref.build)} 中与本物种匹配的 ${rows.length} 个原生定义。名称可用于核对对象；空的 I2 说明栏保持为空。` : `${rows.length} native definitions matched to this species in owned build ${escapeHtml(ref.build)}. Use the names to identify an object; empty I2 description slots remain empty.`}</p>
+        <div class="data-table-wrap" tabindex="0" role="region" aria-label="${zh ? `${escapeHtml(animal.zh?.tocLabel || animal.name)}当前构建名称` : `${escapeHtml(animal.name)} current-build names`}"><table class="data-table"><thead><tr><th scope="col">${zh ? '游戏内名称' : 'Game name'}</th><th scope="col">${zh ? '阶段与性别' : 'Stage and sex'}</th><th scope="col">${zh ? '来源 ID' : 'Source ID'}</th></tr></thead><tbody>${body}</tbody></table></div>
+        <details class="database-reference-notes"><summary>${zh ? '共用配置与资料边界' : 'Shared configuration and limits'}</summary><p>${zh ? `源表共同字段：${escapeHtml(settings.classification)} 分类、${escapeHtml(settings.rarity)} 稀有度、不可装备、不可堆叠、不可丢弃，并带有可出售标志。配置不证明当前可购买、可出售活体、可繁殖或会在存档中生成。` : `Shared source fields: ${escapeHtml(settings.classification)} classification, ${escapeHtml(settings.rarity)} rarity, not equippable, not stackable, not droppable, with the sellable flag set. This configuration does not prove current purchase, live-animal sale, breeding or save availability.`}</p>${renderSources(ref.sourceIds)}</details>
+      </div>`;
 }
 
 function renderBuildReference(animal, locale) {
@@ -514,7 +546,7 @@ function renderZhEntry(entry) {
     return `${h}${items ? `<ul class="evidence-list">${items}</ul>` : ""}${pendingBlock}`;
   }).join("");
   const decision = zh.whenNeeded ? `<div class="entity-decision"><strong>什么时候查</strong><p>${escapeHtml(zh.whenNeeded)}</p></div>` : "";
-  return `    <section class="evidence-ledger animal-profile" id="${entry.id}" data-search-entry data-search-title="${escapeHtml(zh.searchTitle)}" data-search-tags="${escapeHtml(zh.searchTags)}">${head}${summary}${decision}${renderBuildReference(entry, 'zh')}${entry.buildReference ? `<details class="database-outline"><summary>更多照料证据与待验证项</summary>${groups}</details>` : groups}</section>`;
+  return `    <section class="evidence-ledger animal-profile"><div id="${entry.id}" data-search-entry data-search-title="${escapeHtml(zh.searchTitle)}" data-search-tags="${escapeHtml(zh.searchTags)}">${head}${summary}${decision}</div>${renderNativeAnimalReference(entry, 'zh')}${renderBuildReference(entry, 'zh')}${entry.buildReference ? `<details class="database-outline"><summary>更多照料证据与待验证项</summary>${groups}</details>` : groups}</section>`;
 }
 
 function renderZhExtra(extra) {

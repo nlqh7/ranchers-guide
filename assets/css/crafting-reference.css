@@ -13,7 +13,7 @@
 .crafting-reference .recipe-table th { background: var(--cream-100); color: var(--brown-900); font: inherit; font-weight: 600; letter-spacing: normal; text-transform: none; }
 .crafting-reference .recipe-table thead th { background: var(--cream-200); padding-block: 12px; }
 .recipe-table th:first-child { width: 32%; }
-.recipe-table tr[id], .crafting-reference h2[id] { scroll-margin-top: 110px; }
+.recipe-table tr[id], .crafting-reference h2[id], .recipe-item-settings[id] { scroll-margin-top: 110px; }
 .recipe-table tr:target { outline: 2px solid var(--green-700); outline-offset: -2px; background: var(--cream-200); }
 .recipe-table th > a { display: flex; align-items: center; min-height: 44px; color: var(--green-700); text-decoration: none; overflow-wrap: anywhere; }
 .recipe-table th small { display: block; color: var(--brown-700); font-size: .76rem; font-weight: 400; line-height: 1.5; }

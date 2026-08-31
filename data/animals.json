@@ -313,6 +313,241 @@
       "rawSha256": "d8aaff96b602505814776b8e02e8a59a9b67947d0e718a8acfa3fc91bfb675a5"
     }
   },
+  "nativeAnimalReference": {
+    "build": "0.8.10.842",
+    "steamBuild": "24847725",
+    "sourceIds": [
+      "owned-build-animals",
+      "owned-build-animal-guidance"
+    ],
+    "sharedConfiguration": {
+      "classification": "FARMING",
+      "rarity": "Bronze",
+      "equippable": false,
+      "bodySlot": "NONE",
+      "stackable": false,
+      "droppable": false,
+      "sellableFlag": true
+    },
+    "entries": [
+      {
+        "id": "animal_chicken_chick_female",
+        "speciesId": "chicken",
+        "name": "Chick",
+        "zhName": "雌雏鸡",
+        "stage": "young",
+        "sex": "female"
+      },
+      {
+        "id": "animal_chicken_chick_male",
+        "speciesId": "chicken",
+        "name": "Chick",
+        "zhName": "雄雏鸡",
+        "stage": "young",
+        "sex": "male"
+      },
+      {
+        "id": "animal_chicken_rooster_male_red",
+        "speciesId": "chicken",
+        "name": "Red Rooster",
+        "zhName": "红羽公鸡",
+        "stage": "adult",
+        "sex": "male"
+      },
+      {
+        "id": "animal_chicken_rooster_male_white",
+        "speciesId": "chicken",
+        "name": "White Rooster",
+        "zhName": "白羽公鸡",
+        "stage": "adult",
+        "sex": "male"
+      },
+      {
+        "id": "animal_chicken_rooster_male_multiclr",
+        "speciesId": "chicken",
+        "name": "Rainbow Rooster",
+        "zhName": "彩虹公鸡",
+        "stage": "adult",
+        "sex": "male"
+      },
+      {
+        "id": "animal_chicken_brown_female",
+        "speciesId": "chicken",
+        "name": "Brown Chicken",
+        "zhName": "棕羽鸡",
+        "stage": "adult",
+        "sex": "female"
+      },
+      {
+        "id": "animal_chicken_black_female",
+        "speciesId": "chicken",
+        "name": "Black Chicken",
+        "zhName": "黑羽鸡",
+        "stage": "adult",
+        "sex": "female"
+      },
+      {
+        "id": "animal_chicken_white_female",
+        "speciesId": "chicken",
+        "name": "White Chicken",
+        "zhName": "白羽鸡",
+        "stage": "adult",
+        "sex": "female"
+      },
+      {
+        "id": "animal_cow_black_male",
+        "speciesId": "cow",
+        "name": "Bretonne Pie Noire - BULL",
+        "zhName": "布列塔尼黑白花牛 - 公牛",
+        "stage": "adult",
+        "sex": "male"
+      },
+      {
+        "id": "animal_cow_black_female",
+        "speciesId": "cow",
+        "name": "Bretonne Pie Noire - COW",
+        "zhName": "布列塔尼黑白花牛 - 母牛",
+        "stage": "adult",
+        "sex": "female"
+      },
+      {
+        "id": "animal_cow_brown_male",
+        "speciesId": "cow",
+        "name": "Maine-Anjou - BULL",
+        "zhName": "缅因-安茹牛 - 公牛",
+        "stage": "adult",
+        "sex": "male"
+      },
+      {
+        "id": "animal_cow_brown_female",
+        "speciesId": "cow",
+        "name": "Maine-Anjou - COW",
+        "zhName": "缅因-安茹牛 - 母牛",
+        "stage": "adult",
+        "sex": "female"
+      },
+      {
+        "id": "animal_cow_brown_super_female_brown",
+        "speciesId": "cow",
+        "name": "Angeln - COW",
+        "zhName": "安格伦牛 - 母牛",
+        "stage": "adult",
+        "sex": "female"
+      },
+      {
+        "id": "animal_cow_brown_super_female_tache",
+        "speciesId": "cow",
+        "name": "Deutsche Rotbunte - COW",
+        "zhName": "德国红白花牛 - 母牛",
+        "stage": "adult",
+        "sex": "female"
+      },
+      {
+        "id": "animal_cow_brown_super_female_white",
+        "speciesId": "cow",
+        "name": "Gascon - COW",
+        "zhName": "加斯科牛 - 母牛",
+        "stage": "adult",
+        "sex": "female"
+      },
+      {
+        "id": "animal_cow_black_baby_female",
+        "speciesId": "cow",
+        "name": "Bretonne Pie Noire - Heifer",
+        "zhName": "布列塔尼黑白花牛 - 小母牛",
+        "stage": "young",
+        "sex": "female"
+      },
+      {
+        "id": "animal_cow_black_baby_male",
+        "speciesId": "cow",
+        "name": "Bretonne Pie Noire - Bull Calf",
+        "zhName": "布列塔尼黑白花牛 - 小公牛",
+        "stage": "young",
+        "sex": "male"
+      },
+      {
+        "id": "animal_cow_brown_baby_female",
+        "speciesId": "cow",
+        "name": "Maine-Anjou - Heifer",
+        "zhName": "缅因-安茹牛 - 小母牛",
+        "stage": "young",
+        "sex": "female"
+      },
+      {
+        "id": "animal_cow_brown_baby_male",
+        "speciesId": "cow",
+        "name": "Maine-Anjou - Bull Calf",
+        "zhName": "缅因-安茹牛 - 小公牛",
+        "stage": "young",
+        "sex": "male"
+      },
+      {
+        "id": "animal_ram_male",
+        "speciesId": "sheep",
+        "name": "Ram",
+        "zhName": "公绵羊",
+        "stage": "adult",
+        "sex": "male"
+      },
+      {
+        "id": "animal_sheep_female",
+        "speciesId": "sheep",
+        "name": "Sheep",
+        "zhName": "母绵羊",
+        "stage": "adult",
+        "sex": "female"
+      },
+      {
+        "id": "animal_goat_white_male",
+        "speciesId": "goat",
+        "name": "Buck",
+        "zhName": "山羊 - 公羊",
+        "stage": "adult",
+        "sex": "male"
+      },
+      {
+        "id": "animal_goat_white_female",
+        "speciesId": "goat",
+        "name": "Goat Doe",
+        "zhName": "山羊 - 母羊",
+        "stage": "adult",
+        "sex": "female"
+      },
+      {
+        "id": "animal_goat_white_baby_female",
+        "speciesId": "goat",
+        "name": "Goat Doeling",
+        "zhName": "山羊 - 小母羊",
+        "stage": "young",
+        "sex": "female"
+      },
+      {
+        "id": "animal_goat_white_baby_male",
+        "speciesId": "goat",
+        "name": "Buckling",
+        "zhName": "山羊 - 小公羊",
+        "stage": "young",
+        "sex": "male"
+      },
+      {
+        "id": "animal_rabit_female",
+        "speciesId": "rabbit",
+        "name": "Rabbit Doe",
+        "zhName": "兔子 - 母兔",
+        "stage": "adult",
+        "sex": "female"
+      },
+      {
+        "id": "animal_rabit_male",
+        "speciesId": "rabbit",
+        "name": "Rabbit Buck",
+        "zhName": "兔子 - 公兔",
+        "stage": "adult",
+        "sex": "male"
+      }
+    ]
+  },
   "wildlifeReference": {
     "build": "0.8.10.842",
     "steamBuild": "24847725",
@@ -1309,6 +1544,61 @@
               {
                 "text": "旧版 Ranching v2 记录提到哺乳动物繁殖机制；这只是历史资料，不能直接当作 0.8.10.562 的山羊行为。",
                 "badge": "historical"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "sheep",
+      "name": "Sheep",
+      "category": "mammal",
+      "housingType": "Unverified",
+      "summary": "The owned current build contains separate Ram and Sheep definitions. Those records establish names, stage and sex only; seller, housing, feed, breeding, products and runtime availability remain unverified.",
+      "whenNeeded": "Use this profile to identify the two source-defined sheep entries without treating file membership as a complete husbandry guide.",
+      "searchTags": "sheep ram ewe mammal animal livestock adult male female 公绵羊 母绵羊 绵羊",
+      "fields": [
+        {
+          "key": "availability",
+          "label": "Availability and care",
+          "facts": [
+            {
+              "text": "The current-build definitions do not establish a seller, purchase route, housing, feed, breeding, products or current save availability.",
+              "evidenceLevel": "unverified-lead",
+              "build": "0.8.10.842",
+              "validity": "unknown",
+              "sourceIds": [
+                "owned-build-animals",
+                "owned-build-animal-guidance"
+              ]
+            }
+          ]
+        }
+      ],
+      "variants": [],
+      "lastUpdated": "2026-08-30",
+      "zh": {
+        "tocLabel": "绵羊",
+        "kicker": "构建名称资料",
+        "headerTag": "0.8.10.842",
+        "name": "绵羊 Sheep",
+        "searchTitle": "绵羊与公绵羊",
+        "searchTags": "绵羊 公绵羊 母绵羊 Ram Sheep 动物 牲畜",
+        "summary": "自有当前构建包含公绵羊和母绵羊两个独立定义；这些记录只能确认名称、阶段和性别，不能证明当前存档可购买、住所、饲料、繁殖或产物。",
+        "whenNeeded": "需要核对原生名称和来源 ID 时查这里；当前还不能当作完整饲养指南。",
+        "groups": [
+          {
+            "heading": "当前边界",
+            "id": "sheep-availability",
+            "facts": [
+              {
+                "text": "当前构建文件保留公绵羊与母绵羊名称，但没有由此得到可执行的购买、住所、饲料、繁殖、产物或售价结论。",
+                "badge": "unknown",
+                "sourceIds": [
+                  "owned-build-animals",
+                  "owned-build-animal-guidance"
+                ]
               }
             ]
           }

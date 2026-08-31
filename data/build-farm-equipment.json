@@ -5,6 +5,18 @@
   "validity": "unknown",
   "unit": null,
   "interval": null,
+  "sharedConfiguration": {
+    "type": "Placeable",
+    "classification": "OTHER",
+    "rarity": "Bronze",
+    "equippable": false,
+    "bodySlot": "NONE",
+    "stackable": true,
+    "droppable": true,
+    "sellableFlag": true,
+    "hasInteriorFeatures": false,
+    "interiorConsumesFarmEnergy": false
+  },
   "seasons": [
     "Spring",
     "Summer",
@@ -36,10 +48,16 @@
       "zhName": "基础款洒水器",
       "nameKey": "Items_DB/sprinkler_n1/Name",
       "sourceId": "PLC_FarmTools-d5ed0c2389",
+      "objectCategory": "SPRINKLERS",
+      "building": {
+        "defaultHealth": 1,
+        "buildSteps": 0
+      },
       "grid": {
         "x": 1,
         "y": 1,
-        "z": 1
+        "z": 1,
+        "showGrid": true
       },
       "water": {
         "supply": [
@@ -76,10 +94,16 @@
       "zhName": "进阶款洒水器",
       "nameKey": "Items_DB/sprinkler_n2/Name",
       "sourceId": "PLC_FarmTools-d5ed0c2389",
+      "objectCategory": "SPRINKLERS",
+      "building": {
+        "defaultHealth": 1,
+        "buildSteps": 0
+      },
       "grid": {
         "x": 2,
         "y": 2,
-        "z": 2
+        "z": 2,
+        "showGrid": true
       },
       "water": {
         "supply": [
@@ -116,10 +140,16 @@
       "zhName": "稻草人鲍勃",
       "nameKey": "Items_DB/prop_Scarecrow_01/Name",
       "sourceId": "PLC_FarmTools-d5ed0c2389",
+      "objectCategory": "SCARECREWS",
+      "building": {
+        "defaultHealth": 1,
+        "buildSteps": 1
+      },
       "grid": {
         "x": 4,
         "y": 4,
-        "z": 4
+        "z": 4,
+        "showGrid": true
       },
       "water": null,
       "electricity": null
@@ -130,10 +160,16 @@
       "zhName": "稻草人",
       "nameKey": "Items_DB/prop_Scarecrow_00/Name",
       "sourceId": "PLC_FarmTools-d5ed0c2389",
+      "objectCategory": "SCARECREWS",
+      "building": {
+        "defaultHealth": 1,
+        "buildSteps": 1
+      },
       "grid": {
         "x": 2,
         "y": 2,
-        "z": 2
+        "z": 2,
+        "showGrid": true
       },
       "water": null,
       "electricity": null
@@ -144,6 +180,11 @@
       "zhName": "水井",
       "nameKey": "Items_DB/prop_Outdoor_Well/Name",
       "sourceId": "PLC_FarmTools-d5ed0c2389",
+      "objectCategory": null,
+      "building": {
+        "defaultHealth": 5,
+        "buildSteps": 2
+      },
       "grid": null,
       "water": null,
       "electricity": null
@@ -154,10 +195,16 @@
       "zhName": "温室洒水器",
       "nameKey": "Items_DB/sprinkler_ceiling_n1/Name",
       "sourceId": "PLC_FarmTools-d5ed0c2389",
+      "objectCategory": "SPRINKLERS",
+      "building": {
+        "defaultHealth": 1,
+        "buildSteps": 0
+      },
       "grid": {
         "x": 1,
         "y": 1,
-        "z": 1
+        "z": 1,
+        "showGrid": true
       },
       "water": {
         "supply": [
@@ -194,6 +241,11 @@
       "zhName": "饲料槽",
       "nameKey": "Items_DB/prop_Trough_01/Name",
       "sourceId": "PLC_FarmTools-d5ed0c2389",
+      "objectCategory": null,
+      "building": {
+        "defaultHealth": 5,
+        "buildSteps": 0
+      },
       "grid": null,
       "water": null,
       "electricity": null

@@ -12,11 +12,19 @@ function renderIcon(kind, id) {
 }
 
 function decorateEntryHeadings(html, kind) {
-  return html.replace(/(<section[^>]*id="([^"]+)"[^>]*>[\s\S]*?<h2[^>]*>)([\s\S]*?)(<\/h2>)/g,
+  let decorated = html.replace(/(<section[^>]*id="([^"]+)"[^>]*>[\s\S]*?<h2[^>]*>)([\s\S]*?)(<\/h2>)/g,
     (match, start, id, title, end) => {
       const icon = renderIcon(kind, id);
       return icon ? `${start}<span class="database-entry-title">${icon}<span>${title}</span></span>${end}` : match;
     });
+  if (kind === 'animals') {
+    decorated = decorated.replace(/(<section class="evidence-ledger animal-profile"[^>]*>[\s\S]*?<div id="([^"]+)"[^>]*>[\s\S]*?<h2[^>]*>)([\s\S]*?)(<\/h2>)/g,
+      (match, start, id, title, end) => {
+        const icon = renderIcon(kind, id);
+        return icon ? `${start}<span class="database-entry-title">${icon}<span>${title}</span></span>${end}` : match;
+      });
+  }
+  return decorated;
 }
 
 function renderTabs(locale, current) {
@@ -82,12 +90,13 @@ function decorateReferencePage(html, data, kind, locale) {
   const titles = { materials: ['Materials', '材料资料'], quests: ['Quests', '任务资料'], npcs: ['People & services', '人物与服务'] };
   const note = html.match(/<div class="notice (?:warning|info)">[\s\S]*?<\/div>/)?.[0] || '';
   const meta = html.match(/<p class="meta">[\s\S]*?<\/p>/)?.[0] || '';
+  const serviceDirectory = html.match(/<details class="database-reference-notes dialogue-service-directory">[\s\S]*?<\/details>/)?.[0] || '';
   return decorateEntryHeadings(html, kind)
     .replace('</head>', '<link rel="stylesheet" href="/assets/css/database-browser.css?v=20260830-8"></head>')
     .replace('<body>', '<body class="database-surface">')
     .replace(/class="article([^"]*)"(?: style="max-width:980px")?/, `class="article$1 database-page database-${kind}"`)
     .replace(/<h1>[\s\S]*?<\/h1>[\s\S]*?(?=<section class="(?:evidence-ledger )?(?:material|entity)-profile\b)/,
-      `<h1>${titles[kind][zh ? 1 : 0]}</h1>${renderLookup(data, kind, locale)}<details class="database-reference-notes"><summary>${zh ? '版本与资料说明' : 'Version & reference notes'}</summary>${meta}${note}</details>`)
+      `<h1>${titles[kind][zh ? 1 : 0]}</h1>${renderLookup(data, kind, locale)}${serviceDirectory}<details class="database-reference-notes"><summary>${zh ? '版本与资料说明' : 'Version & reference notes'}</summary>${meta}${note}</details>`)
     .replace(/(<section class="(?:evidence-ledger )?(?:material|entity)-profile\b[^>]*>)/g,
       `$1<a class="database-back" href="#browse-entries">${zh ? '返回条目目录' : 'Back to entries'}</a>`)
     .replace(/[\t ]+$/gm, '');

@@ -45,8 +45,60 @@ function validateDataset(relative, recordsKey, minimumRecords) {
 
 const npcs = validateDataset("data/npcs.json", "npcs", 3);
 const quests = validateDataset("data/quests.json", "quests", 6);
-assert.equal(quests.quests.length, 16, 'All sixteen decoded static quests must reach the website');
-assert.deepEqual(quests.quests.map(q => q.buildGuide.questId).sort(), Array.from({length:16}, (_, i) => `F_Quest_${String(i + 1).padStart(2, '0')}`));
+const dialogueServices = readJson('data/dialogue-services.json');
+assert.equal(dialogueServices.services.length, 15);
+assert.equal(new Set(dialogueServices.services.map(service=>service.id)).size, 15);
+for (const service of dialogueServices.services) {
+  assert.ok(service.name && service.zhName && service.summary && service.zhSummary);
+  assert.ok(service.sourceNodes.length > 0);
+  assert.ok(service.relatedRoute.startsWith('/'));
+  assert.equal(service.evidenceLevel, 'build-observed');
+  assert.equal(service.validity, 'unknown');
+}
+assert.deepEqual(dialogueServices.services.find(service => service.id === 'bicycle-rental-actions').dialogueListedCosts, [{kind:'rental',currency:1},{kind:'damage-penalty',currency:100}]);
+assert.deepEqual(dialogueServices.services.find(service => service.id === 'taxi-rental-actions').dialogueListedCosts, [{kind:'rental',currency:10},{kind:'damage-penalty',currency:100}]);
+assert.deepEqual(dialogueServices.services.find(service => service.id === 'subway-travel-actions').dialogueListedCosts, [{kind:'local-ticket',currency:3}]);
+assert.deepEqual(dialogueServices.services.find(service => service.id === 'additional-land-purchase').dialogueListedCosts, [{kind:'additional-plot',currency:300000}]);
+assert.deepEqual(dialogueServices.services.find(service => service.id === 'vehicle-repair-actions').sourceNodes, ['31/12', '33/15', '33/16']);
+assert.deepEqual(dialogueServices.services.find(service => service.id === 'animal-treatment-actions').sourceNodes, ['47/15', '47/16', '48/3']);
+assert.equal(quests.quests.length, 18, 'Sixteen static quests and two dialogue-defined quest leads must reach the website');
+const staticQuests = quests.quests.filter(q => q.buildGuide.sourceKind !== 'dialogue-defined');
+assert.equal(staticQuests.length, 16);
+assert.deepEqual(staticQuests.map(q => q.buildGuide.questId).sort(), Array.from({length:16}, (_, i) => `F_Quest_${String(i + 1).padStart(2, '0')}`));
+for (const quest of quests.quests) {
+  const flow = quest.buildGuide.flow;
+  assert.ok(flow, `${quest.id}: missing reviewed failure/continuation flow`);
+  assert.ok(Array.isArray(flow.failureTriggers));
+  assert.ok(['restart-current','follow-up-call','none'].includes(flow.failureContinuation));
+  assert.ok(flow.successContinuation === null || ['next-quest','follow-up-call','message'].includes(flow.successContinuation.type));
+  assert.equal(flow.explicitRewardField, false, `${quest.id}: quest table must not invent a reward field`);
+  assert.ok(flow.sourceFields.length > 0);
+}
+const introFlow = quests.quests.find(q => q.id === 'a-new-beginning').buildGuide.flow;
+assert.deepEqual(introFlow.failureTriggers, ['player-death','player-imprisonment','quest-actor-death','quest-vehicle-destroyed','game-time-threshold']);
+assert.equal(introFlow.gameTimeThreshold, 19);
+assert.deepEqual(introFlow.successContinuation, {type:'next-quest',targetQuestId:'F_Quest_03'});
+assert.equal(quests.quests.find(q => q.id === 'from-blueprint-to-bed').buildGuide.flow.failureContinuation, 'restart-current');
+const coalLead = quests.quests.find(q => q.id === 'coal-delivery-dialogue');
+const farmProductLead = quests.quests.find(q => q.id === 'farm-products-dialogue');
+assert.equal(coalLead.buildGuide.sourceKind, 'dialogue-defined');
+assert.deepEqual(coalLead.buildGuide.configuredRewards, [{choice:'completion',currency:300000}]);
+assert.deepEqual(farmProductLead.buildGuide.configuredRewards, [{choice:'ask-for-money',currency:100000},{choice:'decline-money',currency:200000}]);
+const staticRewardActions = Object.fromEntries(staticQuests.filter(q => q.buildGuide.configuredRewardActions).map(q => [q.buildGuide.questId, q.buildGuide.configuredRewardActions]));
+assert.deepEqual(Object.keys(staticRewardActions).sort(), ['F_Quest_02', 'F_Quest_06', 'F_Quest_10', 'F_Quest_16']);
+assert.deepEqual(staticRewardActions.F_Quest_02[0].grants.map(grant => [grant.itemId, grant.quantity, grant.rarity]), [
+  ['tools_hammer_metal', 1, 'Bronze'], ['red_tent', 1, 'Bronze'], ['vegetable_strawberry_normal', 10, 'Bronze'],
+]);
+assert.equal(staticRewardActions.F_Quest_06.length, 2);
+assert.deepEqual(staticRewardActions.F_Quest_06[0].grants.map(grant => [grant.itemId, grant.quantity, grant.rarity]), [
+  ['tools_watercan_metal', 1, 'Bronze'], ['seed_garlic', 8, 'Bronze'], ['seed_garlic', 8, 'Silver'],
+]);
+assert.deepEqual(staticRewardActions.F_Quest_06[1].grants.map(grant => grant.itemId), ['tools_hoe_metal']);
+assert.deepEqual(staticRewardActions.F_Quest_10[0].grants.map(grant => grant.itemId), ['tools_fireextinguisher']);
+assert.deepEqual(staticRewardActions.F_Quest_16[0].grants, [{currency:20000}]);
+assert.match(staticRewardActions.F_Quest_16[0].triggerText, /2 Chicken Egg - Large/);
+assert.match(coalLead.buildGuide.notes[0].text, /runtime availability.*unknown/i);
+assert.deepEqual(farmProductLead.buildGuide.steps.map(step=>step.entry), [1,2]);
 const locations = readJson("data/locations.json");
 const entityTargets = new Set([
   ...npcs.npcs.map((record) => `npc:${record.id}`),
@@ -110,12 +162,51 @@ assert.doesNotMatch(questHtml, /Open related answer \d/);
 assert.match(questHtml, />Electricity contracts &amp; power<\/a>/);
 const zhQuestHtml = read("zh/database/quests.html");
 const zhNpcHtml = read("zh/database/npcs.html");
+for (const html of [npcHtml, zhNpcHtml]) {
+  assert.equal((html.match(/data-dialogue-service=/g) || []).length, 15);
+  assert.equal((html.match(/id="dialogue-service-[^"]+" data-dialogue-service=[^>]+data-search-entry/g) || []).length, 15);
+  assert.doesNotMatch(html, /Marchant_|RepairMarchant_|SubWay_|State_SetMoney/);
+}
+assert.match(npcHtml, /Electricity contract actions/);
+assert.match(npcHtml, /Bicycle rental terminal/);
+assert.match(npcHtml, /Clothing and accessories catalogues/);
+assert.match(npcHtml, /Additional land purchase/);
+assert.match(npcHtml, /Meriam blueprint catalogue and selling/);
+assert.match(npcHtml, /Animal infection treatment/);
+assert.match(zhNpcHtml, /电力合同操作/);
+assert.match(zhNpcHtml, /自行车租赁终端/);
+assert.match(zhNpcHtml, /服装与配饰目录/);
+assert.match(zhNpcHtml, /购买额外土地/);
+assert.match(zhNpcHtml, /Meriam 蓝图目录与出售/);
+assert.match(zhNpcHtml, /动物感染治疗/);
 for (const html of [questHtml, zhQuestHtml]) {
-  assert.equal((html.match(/data-quest-build-guide=/g) || []).length, 16, "all sixteen static guides must reach the actual page");
-  assert.equal((html.match(/data-quest-objective=/g) || []).length, 71, "all 71 reviewed objectives must be rendered");
-  assert.match(html, /quest-guide\.css\?v=20260827-1/);
+  assert.equal((html.match(/data-quest-build-guide=/g) || []).length, 18, "static and dialogue-defined guides must reach the actual page");
+  assert.equal((html.match(/data-quest-flow/g) || []).length, 18, "all published guides must render failure and continuation data");
+  assert.equal((html.match(/data-dialogue-defined-quest/g) || []).length, 2, "dialogue-defined leads need a distinct visible boundary");
+  assert.equal((html.match(/data-configured-reward-action=/g) || []).length, 5, "five source-matched static quest reward actions must render");
+  assert.equal((html.match(/data-quest-objective=/g) || []).length, 74, "all 71 static and 3 dialogue-defined objectives must be rendered");
+  assert.match(html, /quest-guide\.css\?v=20260830-1/);
   assert.doesNotMatch(html, /State_HasMoney|InventoryGetItemCount|Quest_Concrd|F_Quest_/);
 }
+assert.match(questHtml, /Hammer × 1 · Bronze/);
+assert.match(questHtml, /Garlic Seed × 8 · Silver/);
+assert.match(questHtml, /After handing over 2 Chicken Egg - Large/);
+assert.match(zhQuestHtml, /锤子 × 1 · 铜级/);
+assert.match(zhQuestHtml, /大蒜种子 × 8 · 银级/);
+assert.match(zhQuestHtml, /交付 2 个大号鸡蛋后/);
+assert.doesNotMatch(questHtml + zhQuestHtml, /Inventory_AddItem|State_SetMoney\(20000\)/);
+assert.match(questHtml, /Quest-level failure configuration/);
+assert.match(questHtml, /Player death/);
+assert.match(questHtml, /Starts <a href="#from-blueprint-to-bed">From Blueprint to Bed<\/a>/);
+assert.match(zhQuestHtml, /任务级失败配置/);
+assert.match(zhQuestHtml, /玩家死亡/);
+assert.match(zhQuestHtml, /接续 <a href="#from-blueprint-to-bed">从蓝图到床铺<\/a>/);
+assert.match(questHtml, /Configured dialogue reward: 300,000 C/);
+assert.match(questHtml, /Ask for money: 100,000 C/);
+assert.match(questHtml, /Decline money: 200,000 C/);
+assert.match(zhQuestHtml, /对话配置奖励：300,000 C/);
+assert.match(zhQuestHtml, /选择要钱：100,000 C/);
+assert.match(zhQuestHtml, /选择不要钱：200,000 C/);
 assert.match(questHtml, /Coop Dreams/);
 assert.match(zhQuestHtml, /鸡舍梦想计划/);
 assert.match(zhQuestHtml, /站长收集/);

@@ -4,6 +4,7 @@ const vehicles = require('../data/build-vehicles.json');
 const shops = require('../data/build-shops.json');
 const miscItems = require('../data/build-misc-items.json');
 const worldServices = require('../data/build-world-services.json');
+const dialogueServices = require('../data/dialogue-services.json');
 
 const root = path.resolve(__dirname, '..');
 const esc = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[char]));
@@ -20,10 +21,18 @@ function render(locale) {
     const shop = shops.shops.find(entry => entry.id === id);
     return shop ? (zh ? shop.zhName : shop.name) : id;
   };
+  const transportDialogueIds = ['bicycle-rental-actions', 'taxi-rental-actions', 'vehicle-repair-actions', 'subway-travel-actions', 'remote-portal-action'];
+  const transportDialogueServices = transportDialogueIds.map(id => {
+    const service = dialogueServices.services.find(entry => entry.id === id);
+    if (!service) throw new Error(`Missing dialogue transport service: ${id}`);
+    return service;
+  });
+  const renderDialogueTransportServices = () => `<details class="recipe-item-settings" id="dialogue-transport-services"><summary>${zh ? '租赁、维修与出行条件' : 'Rental, repair & travel terms'}</summary><p class="recipe-boundary">${zh ? '以下内容来自当前构建的双语对话与相符动作。金额是对话列出的条件，不代表已逐项实测；营业状态与完整目的地仍未知。' : 'These terms come from current-build bilingual dialogue and matching actions. Listed amounts are not individually gameplay-tested; current operation and complete destinations remain unknown.'}</p><ul class="evidence-list">${transportDialogueServices.map(service => `<li data-dialogue-transport-service="${esc(service.id)}"><strong>${esc(zh ? service.zhName : service.name)}</strong><p>${esc(zh ? service.zhSummary : service.summary)}</p></li>`).join('')}</ul></details>`;
   const renderWorldServices = () => `<!-- BEGIN WORLD SERVICE REFERENCE -->
   <section class="world-service-reference" id="transport-service-objects" aria-labelledby="transport-service-objects-title">
     <h3 id="transport-service-objects-title">${zh ? '交通服务对象' : 'Transport service objects'}</h3>
-    <p class="recipe-boundary">${zh ? `NetEnvObj 的 186 条环境定义中，只有 4 条带有可供玩家查阅的交通名称；其余 ${worldServices.audit.nonPublicRecords} 条是内部标识或缺少本地化，不发布成地点。这里不推断精确坐标、租赁价格、当前营业或可用性。` : `Only 4 of 186 NetEnvObj environment definitions have player-readable transport names. The other ${worldServices.audit.nonPublicRecords} are internal identifiers or lack localization, so they are not promoted to places. No exact coordinates, rental prices, current operation or availability are inferred.`}</p>
+    <p class="recipe-boundary">${zh ? `NetEnvObj 的 186 条环境定义中，只有 4 条带有可供玩家查阅的交通名称；其余 ${worldServices.audit.nonPublicRecords} 条是内部标识或缺少本地化，不发布成地点。环境对象名称本身不证明精确坐标、价格、当前营业或可用性；对话条件在下方单独列出。` : `Only 4 of 186 NetEnvObj environment definitions have player-readable transport names. The other ${worldServices.audit.nonPublicRecords} are internal identifiers or lack localization, so they are not promoted to places. Environment-object names alone do not establish exact coordinates, prices, current operation or availability; dialogue terms are listed separately below.`}</p>
+    ${renderDialogueTransportServices()}
     <div class="world-service-grid">${worldServices.services.map(service => {
       const serviceName = zh ? service.zhName : service.name;
       const descriptionText = zh ? service.zhDescription : service.description;

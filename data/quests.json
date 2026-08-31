@@ -1,7 +1,7 @@
 {
   "meta": {
     "build": "0.8.10.842",
-    "lastUpdated": "2026-08-28"
+    "lastUpdated": "2026-08-31"
   },
   "sources": {
     "owned-build-dialogue": {
@@ -184,7 +184,24 @@
               "Quest_OnSuccess_StartQuest"
             ]
           }
-        ]
+        ],
+        "flow": {
+          "failureTriggers": [
+            "quest-actor-death"
+          ],
+          "gameTimeThreshold": null,
+          "failureContinuation": "follow-up-call",
+          "successContinuation": {
+            "type": "next-quest",
+            "targetQuestId": "F_Quest_02"
+          },
+          "explicitRewardField": false,
+          "sourceFields": [
+            "Q_CanFail_ActorDeath",
+            "Quest_OnFailed_StartPhoneCall",
+            "Quest_OnSuccess_StartQuest"
+          ]
+        }
       },
       "relatedRoutes": [
         "/guides/beginners-guide"
@@ -326,6 +343,67 @@
               "QuestFor_FarmOwnerOnly"
             ]
           }
+        ],
+        "flow": {
+          "failureTriggers": [
+            "player-death",
+            "player-imprisonment",
+            "quest-actor-death",
+            "quest-vehicle-destroyed",
+            "game-time-threshold"
+          ],
+          "gameTimeThreshold": 19,
+          "failureContinuation": "follow-up-call",
+          "successContinuation": {
+            "type": "next-quest",
+            "targetQuestId": "F_Quest_03"
+          },
+          "explicitRewardField": false,
+          "sourceFields": [
+            "Q_CanFail_PlayerDeath",
+            "Q_CanFail_PlayerInPrison",
+            "Q_CanFail_ActorDeath",
+            "Q_CanFail_VecDestroyed",
+            "Q_CanFail_GameTimeSuperiorTo",
+            "Quest_OnFailed_StartPhoneCall",
+            "Quest_OnSuccess_StartQuest"
+          ]
+        },
+        "configuredRewardActions": [
+          {
+            "sourceNode": "52/18",
+            "triggerText": "After the completion dialogue",
+            "zhTriggerText": "完成对话后",
+            "grants": [
+              {
+                "itemId": "tools_hammer_metal",
+                "name": "Hammer",
+                "zhName": "锤子",
+                "quantity": 1,
+                "rarity": "Bronze"
+              },
+              {
+                "itemId": "red_tent",
+                "name": "Red Tent",
+                "zhName": "红色帐篷",
+                "quantity": 1,
+                "rarity": "Bronze"
+              },
+              {
+                "itemId": "vegetable_strawberry_normal",
+                "name": "Strawberry",
+                "zhName": "草莓",
+                "quantity": 10,
+                "rarity": "Bronze"
+              }
+            ],
+            "sourceFields": [
+              "Conversation 52 Entry 11 conditions",
+              "Conversation 52 Entry 18 en",
+              "Conversation 52 Entry 18 zh-CN",
+              "Conversation 52 Entry 18 script"
+            ]
+          }
         ]
       },
       "relatedRoutes": [
@@ -452,7 +530,20 @@
               "Entry 3 LUA_OnCondition"
             ]
           }
-        ]
+        ],
+        "flow": {
+          "failureTriggers": [],
+          "gameTimeThreshold": null,
+          "failureContinuation": "restart-current",
+          "successContinuation": {
+            "type": "follow-up-call"
+          },
+          "explicitRewardField": false,
+          "sourceFields": [
+            "Quest_OnFailed_StartQuest",
+            "Quest_OnSuccess_StartPhoneCall"
+          ]
+        }
       },
       "relatedRoutes": [
         "/guides/crafting-guide#recipe-red_tent",
@@ -601,7 +692,23 @@
               "Description zh-CN"
             ]
           }
-        ]
+        ],
+        "flow": {
+          "failureTriggers": [
+            "quest-actor-death"
+          ],
+          "gameTimeThreshold": null,
+          "failureContinuation": "restart-current",
+          "successContinuation": {
+            "type": "follow-up-call"
+          },
+          "explicitRewardField": false,
+          "sourceFields": [
+            "Q_CanFail_ActorDeath",
+            "Quest_OnFailed_StartQuest",
+            "Quest_OnSuccess_StartPhoneCall"
+          ]
+        }
       },
       "relatedRoutes": [
         "/guides/crafting-guide#recipes-tools",
@@ -707,7 +814,24 @@
               "QuestFor_FarmOwnerOnly"
             ]
           }
-        ]
+        ],
+        "flow": {
+          "failureTriggers": [
+            "quest-actor-death"
+          ],
+          "gameTimeThreshold": null,
+          "failureContinuation": "restart-current",
+          "successContinuation": {
+            "type": "next-quest",
+            "targetQuestId": "F_Quest_06"
+          },
+          "explicitRewardField": false,
+          "sourceFields": [
+            "Q_CanFail_ActorDeath",
+            "Quest_OnFailed_StartQuest",
+            "Quest_OnSuccess_StartQuest"
+          ]
+        }
       },
       "relatedRoutes": [
         "/guides/money-making#cashin"
@@ -831,6 +955,81 @@
             "zhText": "成功配置衔接“成功的种子”。",
             "sourceFields": [
               "Quest_OnSuccess_StartQuest"
+            ]
+          }
+        ],
+        "flow": {
+          "failureTriggers": [
+            "quest-actor-death",
+            "secondary-quest-actor-death"
+          ],
+          "gameTimeThreshold": null,
+          "failureContinuation": "restart-current",
+          "successContinuation": {
+            "type": "next-quest",
+            "targetQuestId": "F_Quest_07"
+          },
+          "explicitRewardField": false,
+          "sourceFields": [
+            "Q_CanFail_ActorDeath",
+            "Q_CanFail_Sec_ActorDeath",
+            "Quest_OnFailed_StartQuest",
+            "Quest_OnSuccess_StartQuest"
+          ]
+        },
+        "configuredRewardActions": [
+          {
+            "sourceNode": "51/24",
+            "triggerText": "After Gigi’s quest dialogue",
+            "zhTriggerText": "完成 Gigi 的任务对话后",
+            "grants": [
+              {
+                "itemId": "tools_watercan_metal",
+                "name": "Watering Can",
+                "zhName": "洒水壶",
+                "quantity": 1,
+                "rarity": "Bronze"
+              },
+              {
+                "itemId": "seed_garlic",
+                "name": "Garlic Seed",
+                "zhName": "大蒜种子",
+                "quantity": 8,
+                "rarity": "Bronze"
+              },
+              {
+                "itemId": "seed_garlic",
+                "name": "Garlic Seed",
+                "zhName": "大蒜种子",
+                "quantity": 8,
+                "rarity": "Silver"
+              }
+            ],
+            "sourceFields": [
+              "Conversation 51 Entry 13 conditions",
+              "Conversation 51 Entry 24 en",
+              "Conversation 51 Entry 24 zh-CN",
+              "Conversation 51 Entry 24 script"
+            ]
+          },
+          {
+            "sourceNode": "56/39",
+            "triggerText": "After Scott’s quest dialogue",
+            "zhTriggerText": "完成 Scott 的任务对话后",
+            "grants": [
+              {
+                "itemId": "tools_hoe_metal",
+                "name": "Hoe",
+                "zhName": "锄头",
+                "quantity": 1,
+                "rarity": "Bronze"
+              }
+            ],
+            "sourceFields": [
+              "Conversation 56 Entry 28 conditions",
+              "Conversation 56 Entry 39 en",
+              "Conversation 56 Entry 39 zh-CN",
+              "Conversation 56 Entry 39 script"
             ]
           }
         ]
@@ -983,7 +1182,20 @@
               "Entry 6 LUA_OnCondition"
             ]
           }
-        ]
+        ],
+        "flow": {
+          "failureTriggers": [],
+          "gameTimeThreshold": null,
+          "failureContinuation": "restart-current",
+          "successContinuation": {
+            "type": "message"
+          },
+          "explicitRewardField": false,
+          "sourceFields": [
+            "Quest_OnFailed_StartQuest",
+            "Quest_OnSuccess_SendSMS"
+          ]
+        }
       },
       "relatedRoutes": [
         "/guides/farming-fields"
@@ -1110,7 +1322,20 @@
               "Description zh-CN"
             ]
           }
-        ]
+        ],
+        "flow": {
+          "failureTriggers": [],
+          "gameTimeThreshold": null,
+          "failureContinuation": "restart-current",
+          "successContinuation": {
+            "type": "follow-up-call"
+          },
+          "explicitRewardField": false,
+          "sourceFields": [
+            "Quest_OnFailed_StartQuest",
+            "Quest_OnSuccess_StartPhoneCall"
+          ]
+        }
       },
       "relatedRoutes": [
         "/guides/crafting-guide#recipe-prop_Scarecrow_00",
@@ -1248,7 +1473,20 @@
               "Entry 1 LUA_OnCondition"
             ]
           }
-        ]
+        ],
+        "flow": {
+          "failureTriggers": [],
+          "gameTimeThreshold": null,
+          "failureContinuation": "none",
+          "successContinuation": {
+            "type": "follow-up-call"
+          },
+          "explicitRewardField": false,
+          "sourceFields": [
+            "Quest_OnFailed_StartQuest",
+            "Quest_OnSuccess_StartPhoneCall"
+          ]
+        }
       },
       "relatedRoutes": [
         "/problems/vehicle-recovery"
@@ -1393,6 +1631,41 @@
             "zhText": "最后一步检查的是电表应用是否打开，不是工作台是否建成。",
             "sourceFields": [
               "Entry 5 LUA_OnCondition"
+            ]
+          }
+        ],
+        "flow": {
+          "failureTriggers": [],
+          "gameTimeThreshold": null,
+          "failureContinuation": "restart-current",
+          "successContinuation": {
+            "type": "follow-up-call"
+          },
+          "explicitRewardField": false,
+          "sourceFields": [
+            "Quest_OnFailed_StartQuest",
+            "Quest_OnSuccess_StartPhoneCall"
+          ]
+        },
+        "configuredRewardActions": [
+          {
+            "sourceNode": "57/49",
+            "triggerText": "After Scott’s completion dialogue",
+            "zhTriggerText": "完成 Scott 的结束对话后",
+            "grants": [
+              {
+                "itemId": "tools_fireextinguisher",
+                "name": "Fire extinguisher",
+                "zhName": "灭火器",
+                "quantity": 1,
+                "rarity": "Bronze"
+              }
+            ],
+            "sourceFields": [
+              "Conversation 57 Entry 40 conditions",
+              "Conversation 57 Entry 49 en",
+              "Conversation 57 Entry 49 zh-CN",
+              "Conversation 57 Entry 49 script"
             ]
           }
         ]
@@ -1568,7 +1841,20 @@
               "Entry 7 LUA_OnCondition"
             ]
           }
-        ]
+        ],
+        "flow": {
+          "failureTriggers": [],
+          "gameTimeThreshold": null,
+          "failureContinuation": "restart-current",
+          "successContinuation": {
+            "type": "follow-up-call"
+          },
+          "explicitRewardField": false,
+          "sourceFields": [
+            "Quest_OnFailed_StartQuest",
+            "Quest_OnSuccess_StartPhoneCall"
+          ]
+        }
       },
       "relatedRoutes": [
         "/guides/roof-quest-stuck#flow",
@@ -1759,7 +2045,26 @@
               "Quest_OnSuccess_StartQuest"
             ]
           }
-        ]
+        ],
+        "flow": {
+          "failureTriggers": [
+            "quest-actor-death",
+            "secondary-quest-actor-death"
+          ],
+          "gameTimeThreshold": null,
+          "failureContinuation": "restart-current",
+          "successContinuation": {
+            "type": "next-quest",
+            "targetQuestId": "F_Quest_13"
+          },
+          "explicitRewardField": false,
+          "sourceFields": [
+            "Q_CanFail_ActorDeath",
+            "Q_CanFail_Sec_ActorDeath",
+            "Quest_OnFailed_StartQuest",
+            "Quest_OnSuccess_StartQuest"
+          ]
+        }
       },
       "relatedRoutes": [
         "/guides/farming-fields",
@@ -1874,7 +2179,20 @@
               "Entry 1 LUA_OnCondition"
             ]
           }
-        ]
+        ],
+        "flow": {
+          "failureTriggers": [],
+          "gameTimeThreshold": null,
+          "failureContinuation": "restart-current",
+          "successContinuation": {
+            "type": "follow-up-call"
+          },
+          "explicitRewardField": false,
+          "sourceFields": [
+            "Quest_OnFailed_StartQuest",
+            "Quest_OnSuccess_StartPhoneCall"
+          ]
+        }
       },
       "relatedRoutes": [
         "/guides/farming-fields",
@@ -2061,7 +2379,20 @@
               "Entry 9 LUA_OnCondition"
             ]
           }
-        ]
+        ],
+        "flow": {
+          "failureTriggers": [],
+          "gameTimeThreshold": null,
+          "failureContinuation": "restart-current",
+          "successContinuation": {
+            "type": "follow-up-call"
+          },
+          "explicitRewardField": false,
+          "sourceFields": [
+            "Quest_OnFailed_StartQuest",
+            "Quest_OnSuccess_StartPhoneCall"
+          ]
+        }
       },
       "relatedRoutes": [
         "/guides/animal-guide#getting",
@@ -2180,7 +2511,20 @@
               "Entry 3 LUA_OnCondition"
             ]
           }
-        ]
+        ],
+        "flow": {
+          "failureTriggers": [],
+          "gameTimeThreshold": null,
+          "failureContinuation": "restart-current",
+          "successContinuation": {
+            "type": "follow-up-call"
+          },
+          "explicitRewardField": false,
+          "sourceFields": [
+            "Quest_OnFailed_StartQuest",
+            "Quest_OnSuccess_StartPhoneCall"
+          ]
+        }
       },
       "relatedRoutes": [
         "/guides/electricity-power#solar-quest"
@@ -2335,11 +2679,316 @@
               "Entry 5 LUA_OnCondition"
             ]
           }
+        ],
+        "flow": {
+          "failureTriggers": [
+            "player-death",
+            "player-imprisonment",
+            "quest-actor-death"
+          ],
+          "gameTimeThreshold": null,
+          "failureContinuation": "follow-up-call",
+          "successContinuation": null,
+          "explicitRewardField": false,
+          "sourceFields": [
+            "Q_CanFail_PlayerDeath",
+            "Q_CanFail_PlayerInPrison",
+            "Q_CanFail_ActorDeath",
+            "Quest_OnFailed_StartPhoneCall",
+            "Quest_OnSuccess_StartQuest"
+          ]
+        },
+        "configuredRewardActions": [
+          {
+            "sourceNode": "51/57",
+            "triggerText": "After handing over 2 Chicken Egg - Large",
+            "zhTriggerText": "交付 2 个大号鸡蛋后",
+            "grants": [
+              {
+                "currency": 20000
+              }
+            ],
+            "sourceFields": [
+              "Conversation 51 Entry 54 conditions",
+              "Conversation 51 Entry 57 conditions",
+              "Conversation 51 Entry 57 en",
+              "Conversation 51 Entry 57 zh-CN",
+              "Conversation 51 Entry 57 script"
+            ]
+          }
         ]
       },
       "relatedRoutes": [
         "/guides/gigi-large-egg-quest",
         "/guides/police-wanted-levels"
+      ]
+    },
+    {
+      "id": "coal-delivery-dialogue",
+      "name": "Coal delivery (dialogue-defined)",
+      "zhName": "交付木炭（对话配置）",
+      "category": "dialogue-side-quest",
+      "zhCategory": "对话支线",
+      "nameConfidence": "descriptive",
+      "searchTags": "Coal delivery (dialogue-defined)",
+      "zhSearchTags": "交付木炭（对话配置）",
+      "summary": "A current-build dialogue checks for eight Charcoal, removes them on handoff and configures a 300,000 C completion payment.",
+      "zhSummary": "当前构建对话会检查 8 份木炭，交付时扣除，并配置 300,000 C 完成款。",
+      "facts": [
+        {
+          "text": "Bring at least 8 Charcoal and choose the handoff response; the script removes 8.",
+          "zhText": "携带至少 8 份木炭并选择交付；脚本会扣除 8 份。",
+          "sourceFields": [
+            "Conversation 29 Entry 11 conditions",
+            "Conversation 29 Entry 11 script"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "This lead is defined in dialogue, not the static quest table; runtime availability and its starting trigger remain unknown.",
+          "zhText": "此线索定义在对话中，不在静态任务表内；运行时是否可接取及其起始触发仍未知。",
+          "sourceFields": [
+            "Conversation 29 Entry 9 conditions"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "The completion dialogue and script both configure 300,000 C; this is build configuration, not a guaranteed live reward.",
+          "zhText": "完成对话与脚本都配置了 300,000 C；这是构建配置，不是保证可领取的在线奖励。",
+          "sourceFields": [
+            "Conversation 29 Entry 14 en",
+            "Conversation 29 Entry 14 zh-CN",
+            "Conversation 29 Entry 14 script"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        }
+      ],
+      "relations": [],
+      "buildGuide": {
+        "questId": "09_SteveWantCoal",
+        "name": "Coal delivery (dialogue-defined)",
+        "zhName": "交付木炭（对话配置）",
+        "evidenceLevel": "build-observed",
+        "build": "0.8.10.842",
+        "validity": "unknown",
+        "sourceIds": [
+          "owned-build-dialogue"
+        ],
+        "sourceKind": "dialogue-defined",
+        "steps": [
+          {
+            "entry": 1,
+            "text": "Bring at least 8 Charcoal and choose the handoff response; the script removes 8.",
+            "zhText": "携带至少 8 份木炭并选择交付；脚本会扣除 8 份。",
+            "sourceFields": [
+              "Conversation 29 Entry 11 conditions",
+              "Conversation 29 Entry 11 script"
+            ]
+          }
+        ],
+        "notes": [
+          {
+            "text": "This lead is defined in dialogue, not the static quest table; runtime availability and its starting trigger remain unknown.",
+            "zhText": "此线索定义在对话中，不在静态任务表内；运行时是否可接取及其起始触发仍未知。",
+            "sourceFields": [
+              "Conversation 29 Entry 9 conditions"
+            ]
+          },
+          {
+            "text": "The completion dialogue and script both configure 300,000 C; this is build configuration, not a guaranteed live reward.",
+            "zhText": "完成对话与脚本都配置了 300,000 C；这是构建配置，不是保证可领取的在线奖励。",
+            "sourceFields": [
+              "Conversation 29 Entry 14 en",
+              "Conversation 29 Entry 14 zh-CN",
+              "Conversation 29 Entry 14 script"
+            ]
+          },
+          {
+            "text": "Completion also schedules builder and clothing-store follow-up messages; exact timing and availability are unverified.",
+            "zhText": "完成后还配置了建筑商店与服装店后续消息；具体时间与可用性未验证。",
+            "sourceFields": [
+              "Conversation 29 Entry 14 script"
+            ]
+          }
+        ],
+        "flow": {
+          "failureTriggers": [],
+          "gameTimeThreshold": null,
+          "failureContinuation": "none",
+          "successContinuation": {
+            "type": "message"
+          },
+          "explicitRewardField": false,
+          "sourceFields": [
+            "Conversation 29 Entry 11 conditions",
+            "Conversation 29 Entry 11 script",
+            "Conversation 29 Entry 14 en",
+            "Conversation 29 Entry 14 script",
+            "Conversation 29 Entry 14 zh-CN",
+            "Conversation 29 Entry 9 conditions"
+          ]
+        },
+        "configuredRewards": [
+          {
+            "choice": "completion",
+            "currency": 300000
+          }
+        ]
+      },
+      "relatedRoutes": [
+        "/database/materials#charcoal"
+      ]
+    },
+    {
+      "id": "farm-products-dialogue",
+      "name": "Farm product order (dialogue-defined)",
+      "zhName": "农产品订单（对话配置）",
+      "category": "dialogue-side-quest",
+      "zhCategory": "对话支线",
+      "nameConfidence": "descriptive",
+      "searchTags": "Farm product order (dialogue-defined)",
+      "zhSearchTags": "农产品订单（对话配置）",
+      "summary": "A current-build clothing-store dialogue asks for three Large Chicken Eggs and one Giant Cow Milk, consuming each handoff.",
+      "zhSummary": "当前构建的服装店对话要求 3 个大号鸡蛋和 1 份超大份牛奶，并在交付时分别扣除。",
+      "facts": [
+        {
+          "text": "Hand over 3 Chicken Egg - Large; the dialogue checks the amount and removes 3.",
+          "zhText": "交付 3 个大号鸡蛋；对话会检查数量并扣除 3 个。",
+          "sourceFields": [
+            "Conversation 34 Entry 20 conditions",
+            "Conversation 34 Entry 20 script"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "Hand over 1 Cow Milk - Giant; the dialogue checks the amount and removes 1.",
+          "zhText": "交付 1 份超大份牛奶；对话会检查数量并扣除 1 份。",
+          "sourceFields": [
+            "Conversation 34 Entry 21 conditions",
+            "Conversation 34 Entry 21 script"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        },
+        {
+          "text": "This lead is defined in dialogue, not the static quest table; runtime availability and its starting trigger remain unknown.",
+          "zhText": "此线索定义在对话中，不在静态任务表内；运行时是否可接取及其起始触发仍未知。",
+          "sourceFields": [
+            "Conversation 34 Entry 19 conditions"
+          ],
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-dialogue"
+          ]
+        }
+      ],
+      "relations": [],
+      "buildGuide": {
+        "questId": "10_ClothShopNeedFarmProduct",
+        "name": "Farm product order (dialogue-defined)",
+        "zhName": "农产品订单（对话配置）",
+        "evidenceLevel": "build-observed",
+        "build": "0.8.10.842",
+        "validity": "unknown",
+        "sourceIds": [
+          "owned-build-dialogue"
+        ],
+        "sourceKind": "dialogue-defined",
+        "steps": [
+          {
+            "entry": 1,
+            "text": "Hand over 3 Chicken Egg - Large; the dialogue checks the amount and removes 3.",
+            "zhText": "交付 3 个大号鸡蛋；对话会检查数量并扣除 3 个。",
+            "sourceFields": [
+              "Conversation 34 Entry 20 conditions",
+              "Conversation 34 Entry 20 script"
+            ]
+          },
+          {
+            "entry": 2,
+            "text": "Hand over 1 Cow Milk - Giant; the dialogue checks the amount and removes 1.",
+            "zhText": "交付 1 份超大份牛奶；对话会检查数量并扣除 1 份。",
+            "sourceFields": [
+              "Conversation 34 Entry 21 conditions",
+              "Conversation 34 Entry 21 script"
+            ]
+          }
+        ],
+        "notes": [
+          {
+            "text": "This lead is defined in dialogue, not the static quest table; runtime availability and its starting trigger remain unknown.",
+            "zhText": "此线索定义在对话中，不在静态任务表内；运行时是否可接取及其起始触发仍未知。",
+            "sourceFields": [
+              "Conversation 34 Entry 19 conditions"
+            ]
+          },
+          {
+            "text": "The reward branch configures 100,000 C when asking for money and 200,000 C after declining; neither branch is runtime-tested.",
+            "zhText": "奖励分支配置为选择要钱时 100,000 C、选择不要钱后 200,000 C；两个分支都未做运行时实测。",
+            "sourceFields": [
+              "Conversation 34 Entry 27 script",
+              "Conversation 34 Entry 29 script"
+            ]
+          }
+        ],
+        "flow": {
+          "failureTriggers": [],
+          "gameTimeThreshold": null,
+          "failureContinuation": "none",
+          "successContinuation": {
+            "type": "message"
+          },
+          "explicitRewardField": false,
+          "sourceFields": [
+            "Conversation 34 Entry 19 conditions",
+            "Conversation 34 Entry 20 conditions",
+            "Conversation 34 Entry 20 script",
+            "Conversation 34 Entry 21 conditions",
+            "Conversation 34 Entry 21 script",
+            "Conversation 34 Entry 27 script",
+            "Conversation 34 Entry 29 script"
+          ]
+        },
+        "configuredRewards": [
+          {
+            "choice": "ask-for-money",
+            "currency": 100000
+          },
+          {
+            "choice": "decline-money",
+            "currency": 200000
+          }
+        ]
+      },
+      "relatedRoutes": [
+        "/database/animals#chicken",
+        "/database/animals#cow"
       ]
     }
   ]

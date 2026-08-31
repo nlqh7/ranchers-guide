@@ -3,6 +3,53 @@
   "steamBuild": "24847725",
   "evidenceLevel": "build-observed",
   "validity": "unknown",
+  "unresolvedReferences": [
+    {
+      "id": "VIC_LadiesBike-02",
+      "shopSection": "two-wheel",
+      "i2Name": false,
+      "vehicleDefinition": false,
+      "spriteAsset": true,
+      "itemGraphicHeader": false,
+      "disposition": "id-only-unresolved"
+    },
+    {
+      "id": "VIC_DirtBike_01",
+      "shopSection": "two-wheel",
+      "i2Name": false,
+      "vehicleDefinition": false,
+      "spriteAsset": true,
+      "itemGraphicHeader": false,
+      "disposition": "id-only-unresolved"
+    },
+    {
+      "id": "VIC_DirtBike_02",
+      "shopSection": "two-wheel",
+      "i2Name": false,
+      "vehicleDefinition": false,
+      "spriteAsset": true,
+      "itemGraphicHeader": false,
+      "disposition": "id-only-unresolved"
+    },
+    {
+      "id": "VIC_CamperVan_04",
+      "shopSection": "four-wheel",
+      "i2Name": false,
+      "vehicleDefinition": false,
+      "spriteAsset": true,
+      "itemGraphicHeader": true,
+      "disposition": "id-only-unresolved"
+    },
+    {
+      "id": "VIC_4x4_01",
+      "shopSection": "vip",
+      "i2Name": false,
+      "vehicleDefinition": false,
+      "spriteAsset": true,
+      "itemGraphicHeader": true,
+      "disposition": "id-only-unresolved"
+    }
+  ],
   "sources": {
     "localization": {
       "asset": "resources.assets",

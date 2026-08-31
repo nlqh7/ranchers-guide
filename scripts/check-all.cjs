@@ -6,6 +6,7 @@ const nodeChecks = [
   ["build-animals.cjs", "--check"],
   ["check-wildlife-reference.cjs"],
   ["check-enemy-reference.cjs"],
+  ["check-native-animal-reference.cjs"],
   ["build-crops.cjs", "--check"],
   ["build-database.cjs", "--check"],
   ["check-database-browser.cjs"],

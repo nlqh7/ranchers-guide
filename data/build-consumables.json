@@ -3,6 +3,18 @@
   "steamBuild": "24847725",
   "evidenceLevel": "build-observed",
   "validity": "unknown",
+  "sharedConfiguration": {
+    "defaultClassification": "FARMING",
+    "rarity": "Bronze",
+    "equippable": true,
+    "bodySlot": "TwoHandHolder",
+    "stackable": true,
+    "droppable": true,
+    "sellableFlag": true
+  },
+  "classificationExceptions": {
+    "consumable_bird_meat": "HUNTING"
+  },
   "sources": {
     "localization": {
       "asset": "resources.assets",
@@ -302,6 +314,10 @@
       "category": "other",
       "sourceId": "Consumables-3ee64d4bbc",
       "isDrink": null,
+      "sourceIntent": {
+        "en": "The developer description associates this item with caring for sick animals while veterinary care is unavailable.",
+        "zh": "开发者说明把这个物品与兽医服务不可用时照料生病动物联系起来。"
+      },
       "energy": {
         "consumption": 0,
         "restore": 13

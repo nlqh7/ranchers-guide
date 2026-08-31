@@ -13,6 +13,12 @@ assert.equal(tent.workbench, false);
 assert.equal(data.evidenceLevel, 'build-observed');
 assert.equal(data.validity, 'unknown');
 assert.deepEqual(data.tools.find(t=>t.id==='tools_axe_metal').energy, {consumption:4,supply:0});
+assert.deepEqual(data.toolSourceConfiguration.shared,{classification:'OTHER',rarity:'Bronze',droppable:null});
+assert.equal(data.toolSourceConfiguration.types.Tools.length,11);
+assert.equal(data.toolSourceConfiguration.types.Weapon.length,7);
+assert.deepEqual(data.toolSourceConfiguration.equippable,{default:true,exceptions:{generic_cargo:false}});
+assert.deepEqual(data.toolSourceConfiguration.sellableFlag,{default:true,exceptions:{generic_cargo:false,tools_seed_bag:false,tools_fertilizer_box:false}});
+assert.equal(Object.keys(data.toolSourceConfiguration.sourceIntents).length,6);
 for (const tool of data.tools) {
   if (['generic_cargo','tools_seed_bag','tools_fertilizer_box'].includes(tool.id)) assert.equal(tool.energy,null,'Absent energy must not become zero consumption');
   else {
@@ -37,6 +43,20 @@ for (const prefix of ['', 'zh/']) {
     assert.ok(row, `Missing tool: ${tool.id}`);
     assert.ok(row.includes('tool-settings'), `Missing tool settings: ${tool.id}`);
     assert.ok(row.includes(tool.energy ? `data-energy-consumption="${tool.energy.consumption}"` : 'data-energy-missing'));
+    const sourceType=data.toolSourceConfiguration.types.Weapon.includes(tool.id)?'Weapon':'Tools';
+    assert.ok(row.includes(`${prefix?'来源类型':'Source type'}: ${sourceType}`));
+    assert.ok(row.includes(`${prefix?'来源分类':'Source classification'}: OTHER`));
+    assert.ok(row.includes(`${prefix?'来源稀有度':'Source rarity'}: Bronze`));
+    assert.ok(row.includes(prefix?'可丢弃字段：未收录':'Droppable field: not listed'));
+    const expectedEquip=tool.id==='generic_cargo'?false:true;
+    const expectedSell=['generic_cargo','tools_seed_bag','tools_fertilizer_box'].includes(tool.id)?false:true;
+    assert.ok(row.includes(`${prefix?'可装备':'Equippable'}: ${expectedEquip?(prefix?'是':'Yes'):(prefix?'否':'No')}`));
+    assert.ok(row.includes(`${prefix?'可出售标志':'Sellable flag'}: ${expectedSell?(prefix?'是':'Yes'):(prefix?'否':'No')}`));
+    const intent=data.toolSourceConfiguration.sourceIntents[tool.id];
+    if(intent) {
+      assert.ok(row.includes(prefix?intent.zh:intent.en));
+      assert.ok(row.includes(prefix?'来源用途线索，不是运行时验证':'Source-use clue, not runtime verification'));
+    }
     if (data.recipes.some(r=>r.id===tool.id)) {
       const recipeRow = html.split(`id="recipe-${tool.id}"`)[1]?.split('</tr>')[0];
       assert.ok(recipeRow.includes(`#tool-${tool.id}`), 'A recipe search result must expose its tool attributes');
@@ -52,5 +72,6 @@ for (const row of [...data.recipes, ...data.tools]) {
   assert.ok(row.name && row.zhName && row.nameKey === `Items_DB/${row.id}/Name`);
   assert.match(data.sources[row.sourceId].rawSha256, /^[a-f0-9]{64}$/);
   assert.ok(!Object.hasOwn(row, 'price'), 'Internal prices must not become player-facing prices');
+  assert.ok(!Object.hasOwn(row, 'rawDescription'), 'Raw developer descriptions stay private');
 }
 console.log('PASS: native recipe requirements preserve their configuration boundary.');

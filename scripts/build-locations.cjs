@@ -376,10 +376,10 @@ function replaceGenerated(html, data, locale) {
   const markerBody = `\n                <!-- MAP_MARKERS:START -->\n${markers}\n                <!-- MAP_MARKERS:END -->`;
   const entryBody = `\n        <!-- LOCATION_DIRECTORY:START -->\n${entries}\n        <!-- LOCATION_DIRECTORY:END -->`;
 
-  const markerPattern = /(<div class="map-marker-layer"[^>]*>)([\s\S]*?)(\n[ \t]*<\/div>\n[ \t]*<div class="map-pin-layer")/;
+  const markerPattern = /(<div class="map-marker-layer"[^>]*>)([\s\S]*?)(\r?\n[ \t]*<\/div>\r?\n[ \t]*<div class="map-pin-layer")/;
   if (!markerPattern.test(html)) throw new Error(`Generated marker section missing in ${locale} map`);
   let output = html.replace(markerPattern, `$1${markerBody}$3`);
-  const directoryPattern = /(<div class="location-list"[^>]*>)([\s\S]*?)(\n[ \t]*<\/div>\s*<div class="search-empty")/;
+  const directoryPattern = /(<div class="location-list"[^>]*>)([\s\S]*?)(\r?\n[ \t]*<\/div>\s*<div class="search-empty")/;
   if (!directoryPattern.test(output)) throw new Error(`Generated ${locale} directory section missing`);
   output = output.replace(directoryPattern, `$1${entryBody}$3`);
   const progressPattern = /(<span data-map-progress-count>)[^<]*(<\/span>)/;

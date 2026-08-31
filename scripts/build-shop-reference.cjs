@@ -53,12 +53,20 @@ function render(locale, buildingOnly=false) {
     return `<tr id="${id}" data-shop-row data-query="${esc(query)}"${searchAttrs}><th scope="row"><a href="${link}">${image(entry.id)}<span>${esc(name(entry))}</span></a></th><td>${buildingOnly ? '' : `<span class="recipe-muted">${sections[offer.section][zh?1:0]} · ${seasons[offer.season][zh?1:0]}</span>`}${offer.materials.length ? materials(offer) : ''}${offer.questRequirements.length ? `<small class="shop-condition">${zh ? '含任务条件，解锁时机未确认' : 'Quest condition; unlock timing unverified'}</small>` : ''}${equipmentLink}${consumableLink}${farmInputLink}${resourceLink}${seedLink}${produceLink}${miscLink}${placeableLink}${vehicleLink}${hasRecipe && !buildingOnly ? `<a class="shop-recipe-link" href="${prefix}/guides/crafting-guide#recipe-${entry.id}">${zh ? '查看制作材料' : 'Crafting ingredients'} →</a>` : ''}</td></tr>`;
   };
   const table = (offers,title) => `<div class="recipe-table-wrap" role="region" aria-label="${esc(title)}" tabindex="0"><table class="recipe-table"><thead><tr><th scope="col">${zh?'物品':'Item'}</th><th scope="col">${buildingOnly ? (zh?'所需材料':'Materials needed') : (zh?'分类、季节与条件':'Category, season & conditions')}</th></tr></thead><tbody>${offers.map(row).join('\n')}</tbody></table></div>`;
+  const unresolvedReference = offer => {
+    const reference = data.unresolvedReferences.find(entry => entry.id === offer.itemId);
+    if (!reference) throw new Error(`Missing unresolved-reference disposition: ${offer.itemId}`);
+    const trace = reference.itemGraphicHeader
+      ? (zh ? 'Sprite 与物品图形头记录' : 'Sprite and item-graphic header records')
+      : (zh ? '仅 Sprite 资源' : 'Sprite asset only');
+    return `<li id="offer-${offer.id}"><code>${esc(offer.itemId)}</code><small>${trace}</small></li>`;
+  };
   const title = buildingOnly ? (zh?'建筑商店材料表':'Building-store material requirements') : (zh?'商店商品查阅':'Shop item lookup');
   const body = buildingOnly ? table(data.offers.filter(o=>o.materials.length),title) : `<div class="recipe-controls"><label>${zh?'查找物品或材料':'Find an item or material'}<input type="search" data-shop-query placeholder="${zh?'例如：鸡舍、太阳能、草莓':'e.g. Coop, Solar, Strawberry'}"></label><label>${zh?'商店':'Shop'}<select data-shop-category><option value="all">${zh?'全部商店':'All shops'}</option>${data.shops.map(s=>`<option value="${s.id}">${esc(name(s))}</option>`).join('')}</select></label></div><p data-shop-empty hidden role="status">${zh?'没有匹配的商品。':'No matching listings.'}</p>${data.shops.map((shop,index)=>{
     const offers = data.offers.filter(o=>o.shopId===shop.id);
     const named = offers.filter(o=>item(o.itemId).name);
     const unresolved = offers.filter(o=>!item(o.itemId).name);
-    return `<details class="shop-group" id="shop-${shop.id}" data-shop-group="${shop.id}"${index===0?' open':''}><summary>${esc(name(shop))}</summary>${table(named,name(shop))}${unresolved.length ? `<details class="shop-unresolved"><summary>${zh?'未匹配名称的车辆引用':'Unresolved vehicle references'}</summary><p>${zh?'商店表还引用以下内部ID，但没有匹配的物品定义与名称；不将它们当作已确认车型。':'These shop IDs have no matching item definition or name. They are not confirmed vehicle models.'}</p><ul>${unresolved.map(o=>`<li id="offer-${o.id}"><code>${esc(o.itemId)}</code></li>`).join('')}</ul></details>`:''}</details>`;
+    return `<details class="shop-group" id="shop-${shop.id}" data-shop-group="${shop.id}"${index===0?' open':''}><summary>${esc(name(shop))}</summary>${table(named,name(shop))}${unresolved.length ? `<details class="shop-unresolved"><summary>${zh?'未匹配名称的车辆引用':'Unresolved vehicle references'}</summary><p>${zh?'商店表仍引用这些内部 ID，但双语名称表与车辆定义中均无匹配项。':'These internal IDs remain in the shop table, but neither the bilingual name table nor vehicle definitions contain a match.'}</p><ul>${unresolved.map(unresolvedReference).join('')}</ul><p>${zh?'技术资源痕迹不证明车型名称、可驾驶、可购买或当前生成。':'Technical asset traces do not establish a model name, drivability, purchase availability or current spawning.'}</p></details>`:''}</details>`;
   }).join('\n')}`;
   return `<!-- BEGIN SHOP REFERENCE -->
 <section class="crafting-reference shop-reference"${buildingOnly?'':' data-shop-reference'} aria-label="${title}">

@@ -5,6 +5,7 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const data = require('../data/build-world-services.json');
 const vehicles = require('../data/build-vehicles.json');
+const dialogueServices = require('../data/dialogue-services.json');
 const searchCore = require('../assets/js/search-core.js');
 const css = fs.readFileSync(path.join(root, 'assets/css/crafting-reference.css'), 'utf8');
 const expectedIds = [
@@ -13,6 +14,7 @@ const expectedIds = [
   'EnvObj_TaxiRentalStation_VIP',
   'EnvObj_TaxiRentalStation_Regular',
 ];
+const transportDialogueIds = ['bicycle-rental-actions', 'taxi-rental-actions', 'vehicle-repair-actions', 'subway-travel-actions', 'remote-portal-action'];
 
 assert.equal(data.audit.totalRecords, 186);
 assert.equal(data.audit.publicServiceRecords, 4);
@@ -39,6 +41,10 @@ for (const prefix of ['', 'zh/']) {
   const index = JSON.parse(fs.readFileSync(path.join(root, prefix, 'search-index.json'), 'utf8'));
   const block = html.match(/<!-- BEGIN WORLD SERVICE REFERENCE -->[\s\S]*?<!-- END WORLD SERVICE REFERENCE -->/)?.[0];
   assert.ok(block, `${prefix || 'en/'}: source-bounded world-service reference exists`);
+  assert.match(block, /id="dialogue-transport-services"/);
+  for (const id of transportDialogueIds) assert.match(block, new RegExp(`data-dialogue-transport-service="${id}"`));
+  assert.equal((block.match(/data-dialogue-transport-service=/g) || []).length, transportDialogueIds.length);
+  assert.doesNotMatch(block, /BicycleRentStation_ASK|RepairMarchant_|SubWay_|RemotePortal_/);
   for (const service of data.services) {
     assert.ok(block.includes(`id="world-service-${service.id}"`), `${service.id}: public service has a direct destination`);
   }
@@ -52,8 +58,10 @@ for (const prefix of ['', 'zh/']) {
     assert.equal(searchCore.searchDocuments(index, prefix ? vehicle.zhName : vehicle.name, 12)[0]?.url, `/${prefix}guides/vehicles-transport#vehicle-${vehicle.id}`, `${prefix}: native taxi name keeps the richer vehicle profile first`);
   }
   for (const id of excludedExamples) assert.doesNotMatch(block, new RegExp(id), `${id}: internal object is not promoted to a player entry`);
-  assert.match(block, prefix ? /不推断精确坐标、租赁价格、当前营业或可用性/ : /No exact coordinates, rental prices, current operation or availability are inferred/);
+  assert.match(block, prefix ? /环境对象名称本身不证明精确坐标、价格、当前营业或可用性/ : /Environment-object names alone do not establish exact coordinates, prices, current operation or availability/);
   assert.doesNotMatch(block, /(?:has exact coordinates|currently available|rental price is|spawns at)/i);
 }
+
+for (const id of transportDialogueIds) assert.ok(dialogueServices.services.some(service => service.id === id));
 
 console.log('PASS: 4 player-facing world services are separated from 182 internal environment records.');

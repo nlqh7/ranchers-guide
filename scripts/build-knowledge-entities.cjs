@@ -2,6 +2,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { decorateReferencePage } = require('./render-database-browser.cjs');
 const miscItems = require('../data/build-misc-items.json');
+const dialogueServices = require('../data/dialogue-services.json');
 
 const root = path.resolve(__dirname, "..");
 const checkOnly = process.argv.includes("--check");
@@ -20,6 +21,9 @@ function localizeRoute(route) {
     "/tools/chicken-troubleshooter": "/zh/tools/chicken-troubleshooter",
     "/database/npcs": "/zh/database/npcs",
     "/database/quests": "/zh/database/quests",
+    "/database/crops": "/zh/database/crops",
+    "/database/animals": "/zh/database/animals",
+    "/database/customization": "/zh/database/customization",
   };
   const base = route.split(/[?#]/)[0];
   const suffix = route.slice(base.length);
@@ -82,6 +86,9 @@ const relatedRouteLabels = {
   "/problems/failed-quest-replay": { en: "Failed quest recovery", zh: "失败任务恢复" },
   "/guides/gigi-large-egg-quest": { en: "Gigi large-egg route", zh: "Gigi 大鸡蛋路线" },
   "/guides/police-wanted-levels": { en: "Police chase and wanted levels", zh: "警察追捕与警星" },
+  "/database/materials#charcoal": { en: "Charcoal details", zh: "木炭资料" },
+  "/database/animals#chicken": { en: "Chicken products", zh: "鸡与产品" },
+  "/database/animals#cow": { en: "Cow products", zh: "牛与产品" },
 };
 
 function entityRecord(target, locale) {
@@ -158,24 +165,79 @@ function questGuideHtml(dataset, record, locale) {
   const title = zh ? guide.zhName : guide.name;
   const steps = guide.steps.map(step => `<li data-quest-objective="${step.entry}">${esc(zh ? step.zhText : step.text)}</li>`).join("");
   const notes = guide.notes.map(note => `<li>${esc(zh ? note.zhText : note.text)}</li>`).join("");
+  const flow = guide.flow;
+  const triggerLabels = {
+    'player-death': zh ? '玩家死亡' : 'Player death',
+    'player-pursuit': zh ? '玩家被追捕' : 'Player pursuit',
+    'player-imprisonment': zh ? '玩家入狱' : 'Player imprisonment',
+    'quest-actor-death': zh ? '主要任务 NPC 死亡' : 'Primary quest NPC death',
+    'secondary-quest-actor-death': zh ? '次要任务 NPC 死亡' : 'Secondary quest NPC death',
+    'quest-vehicle-destroyed': zh ? '任务车辆损毁' : 'Quest vehicle destroyed',
+    'game-time-threshold': zh ? `游戏时间阈值配置值 ${flow.gameTimeThreshold}` : `Game-time threshold configuration value ${flow.gameTimeThreshold}`,
+  };
+  const failureTriggers = flow.failureTriggers.length
+    ? flow.failureTriggers.map(trigger => triggerLabels[trigger]).join(zh ? '、' : ', ')
+    : (zh ? '未配置带明确目标的任务级触发项' : 'No quest-level trigger with a named target');
+  const failureContinuation = flow.failureContinuation === 'restart-current'
+    ? (zh ? '重新启动当前任务' : 'Restarts this quest')
+    : flow.failureContinuation === 'follow-up-call'
+      ? (zh ? '启动已配置的后续电话' : 'Starts a configured follow-up call')
+      : (zh ? '未列出自动后续动作' : 'No automatic follow-up is listed');
+  let successContinuation = zh ? '未列出自动后续动作' : 'No automatic follow-up is listed';
+  if (flow.successContinuation?.type === 'next-quest') {
+    const target = dataset.quests.find(quest => quest.buildGuide?.questId === flow.successContinuation.targetQuestId);
+    if (!target) throw new Error(`Missing quest continuation target: ${flow.successContinuation.targetQuestId}`);
+    const targetName = zh ? target.buildGuide.zhName : target.buildGuide.name;
+    successContinuation = `${zh ? '接续' : 'Starts'} <a href="#${esc(target.id)}">${esc(targetName)}</a>`;
+  } else if (flow.successContinuation?.type === 'follow-up-call') {
+    successContinuation = zh ? '启动已配置的后续电话' : 'Starts a configured follow-up call';
+  } else if (flow.successContinuation?.type === 'message') {
+    successContinuation = zh ? '发送已配置的后续消息' : 'Sends a configured follow-up message';
+  }
+  const configuredRewards = guide.configuredRewards || [];
+  let rewardHtml = zh ? '任务表没有独立奖励字段；成功脚本只按后续动作整理，不当作已验证奖励。' : 'The quest table has no explicit reward field; success scripts are treated as continuation actions, not verified rewards.';
+  if (configuredRewards.length === 1) {
+    rewardHtml = `${zh ? '对话配置奖励：' : 'Configured dialogue reward: '}${configuredRewards[0].currency.toLocaleString('en-US')} C`;
+  } else if (configuredRewards.length) {
+    const choices = {'ask-for-money':zh ? '选择要钱' : 'Ask for money','decline-money':zh ? '选择不要钱' : 'Decline money'};
+    rewardHtml = configuredRewards.map(reward => `${choices[reward.choice]}${zh ? '：' : ': '}${reward.currency.toLocaleString('en-US')} C`).join(zh ? '；' : '; ');
+  }
+  const rarityLabels = { Bronze: zh ? '铜级' : 'Bronze', Silver: zh ? '银级' : 'Silver', Gold: zh ? '金级' : 'Gold' };
+  const configuredRewardActions = guide.configuredRewardActions || [];
+  const rewardActionsHtml = configuredRewardActions.length ? `<div class="quest-guide-notes quest-configured-rewards"><strong>${zh ? '对话中的奖励动作' : 'Reward actions in dialogue'}</strong><ul>${configuredRewardActions.map((action, index) => {
+    const grants = action.grants.map((grant) => grant.currency
+      ? `${Number(grant.currency).toLocaleString('en-US')} C`
+      : `${esc(zh ? grant.zhName : grant.name)} × ${grant.quantity}${grant.rarity ? ` · ${esc(rarityLabels[grant.rarity] || grant.rarity)}` : ''}`).join(zh ? '；' : '; ');
+    return `<li data-configured-reward-action="${esc(action.sourceNode || index + 1)}"><strong>${esc(zh ? action.zhTriggerText : action.triggerText)}：</strong> ${grants}</li>`;
+  }).join('')}</ul><p>${zh ? '这些是与具名任务路径相连的构建脚本动作；尚未逐项运行时实测，不保证实际到账。' : 'These are build-script actions tied to named quest paths. They are not individually runtime-tested and do not guarantee delivery.'}</p></div>` : '';
+  const flowHtml = `<div class="quest-guide-flow" data-quest-flow><strong>${zh ? '失败与后续' : 'Failure & continuation'}</strong><dl><div><dt>${zh ? '任务级失败配置' : 'Quest-level failure configuration'}</dt><dd>${esc(failureTriggers)}</dd></div><div><dt>${zh ? '失败后' : 'After failure'}</dt><dd>${esc(failureContinuation)}</dd></div><div><dt>${zh ? '成功后' : 'After success'}</dt><dd>${successContinuation}</dd></div></dl><p>${esc(rewardHtml)}${configuredRewards.length ? (zh ? '。对话文字与金额脚本一致，但尚未运行时实测。' : '. Dialogue text and matching money-action scripts agree, but runtime delivery is untested.') : ''}</p>${rewardActionsHtml}</div>`;
   const facts = record.facts.map(fact => `<li><p>${esc(zh ? fact.zhText : fact.text)} ${badge(fact, locale)}</p><p class="fact-source">${sourceHtml(dataset, fact.sourceIds, locale)} · ${zh ? "证据版本" : "Evidence build"}: ${esc(fact.build || (zh ? "未标注" : "not recorded"))}</p></li>`).join("");
   const links = record.relatedRoutes.map(route => `<a class="btn btn-outline btn-compact" href="${esc(zh ? localizeRoute(route) : route)}">${esc(relatedRouteLabels[route][locale])}</a>`).join("");
   const questVehicle = miscItems.questItems?.find(item => item.relatedQuestId === record.id);
   const questVehicleHtml = questVehicle ? `<div class="quest-guide-notes" data-quest-vehicle-id="${esc(questVehicle.id)}"><strong>${zh ? "任务车辆定义" : "Quest vehicle definition"}</strong><p>${esc(zh ? questVehicle.zhName : questVehicle.name)} · ${zh ? "构建中的名称与物品标志；I2 说明栏为空。3,000 C 是任务资金判定，不是修理价格或任务奖励；此定义也不证明当前可驾驶。" : "Build-defined name and item flags; the I2 description slot is empty. The 3,000 C objective is not a repair price or quest reward, and this definition does not establish current drivability."}</p><a href="${zh ? "/zh" : ""}/guides/vehicles-transport#quest-vehicle-victor-old-car">${zh ? "在车辆指南中查看" : "Open the vehicle guide"} →</a></div>` : "";
-  return `<section class="entity-profile quest-guide" id="${record.id}" data-search-entry data-search-title="${esc(title)}" data-search-tags="${esc([guide.name, guide.zhName, record.name, record.zhName, zh ? record.zhSearchTags : record.searchTags].join(" "))}" data-search-status="${zh ? "任务步骤" : "Quest steps"}">
+  return `<section class="entity-profile quest-guide" id="${record.id}"${guide.sourceKind === 'dialogue-defined' ? ' data-dialogue-defined-quest' : ''} data-search-entry data-search-title="${esc(title)}" data-search-tags="${esc([guide.name, guide.zhName, record.name, record.zhName, zh ? record.zhSearchTags : record.searchTags].join(" "))}" data-search-status="${guide.sourceKind === 'dialogue-defined' ? (zh ? '对话配置线索' : 'Dialogue-defined lead') : (zh ? "任务步骤" : "Quest steps")}">
 <h2>${esc(title)}</h2>
-<details class="quest-build-guide" data-quest-build-guide="${record.id}"><summary>${zh ? "查看步骤与准备" : "Steps & preparation"}</summary><p class="quest-guide-origin">${zh ? "站长收集 · 游戏任务配置整理，未逐项实测" : "Site-collected · interpreted game configuration, not fully play-tested"}</p>${steps ? `<ol>${steps}</ol>` : ''}<div class="quest-guide-notes"><strong>${zh ? "容易漏掉的地方" : "Before you move on"}</strong><ul>${notes}</ul></div></details>
+<details class="quest-build-guide" data-quest-build-guide="${record.id}"><summary>${zh ? "查看步骤与准备" : "Steps & preparation"}</summary><p class="quest-guide-origin">${guide.sourceKind === 'dialogue-defined' ? (zh ? '站长收集 · 对话配置线索，运行时可用性未知' : 'Site-collected · dialogue-defined lead; runtime availability unknown') : (zh ? "站长收集 · 游戏任务配置整理，未逐项实测" : "Site-collected · interpreted game configuration, not fully play-tested")}</p>${steps ? `<ol>${steps}</ol>` : ''}<div class="quest-guide-notes"><strong>${zh ? "容易漏掉的地方" : "Before you move on"}</strong><ul>${notes}</ul></div>${flowHtml}</details>
 ${questVehicleHtml}${relationsHtml(record, locale)}<div class="entity-related"><div>${links}</div></div>
 <details class="quest-guide-evidence"><summary>${zh ? "玩家记录与资料来源" : "Player reports & sources"}</summary><p>${zh ? "任务标题与上述步骤来自站长持有的游戏构建，按原生字段整理；不代表所有运行时任务已收录，未确认奖励不补写。" : "The title and steps above were interpreted from the editor's owned game build. This is not a complete runtime quest catalog; unverified rewards are omitted."} ${zh ? "版本" : "Build"}: ${esc(guide.build)}.</p><p>${zh ? "非官方网站；游戏内容版权归开发商所有。" : "Unofficial fan resource; game content belongs to its developer."}</p><ul class="evidence-list">${facts}</ul></details></section>`;
 }
 
 function questPage(html, locale) {
   const zh = locale === "zh";
-  return html.replace("</head>", '<link rel="stylesheet" href="/assets/css/quest-guide.css?v=20260827-1"></head>')
+  return html.replace("</head>", '<link rel="stylesheet" href="/assets/css/quest-guide.css?v=20260830-1"></head>')
     .replace('class="article entity-directory"', 'class="article entity-directory quest-directory"')
     .replace(/<p class="lead">[\s\S]*?<\/p>/, `<p class="lead">${zh ? "按游戏里的任务名查步骤、准备物品和卡关处理。原有的社区称呼仍可搜索。" : "Find your in-game quest, check what to prepare, and follow the steps or stuck-point guide. Earlier community names remain searchable."}</p>`)
     .replace(/<div class="notice info">[\s\S]*?<\/div>/, "")
     .replace(/<section class="answer-box quest-lookup-guide">[\s\S]*?<\/section>/, "");
+}
+
+function serviceDirectory(locale) {
+  const zh = locale === "zh";
+  const entries = dialogueServices.services.map((service) => {
+    const href = zh ? localizeRoute(service.relatedRoute) : service.relatedRoute;
+    return `<li id="dialogue-service-${esc(service.id)}" data-dialogue-service="${esc(service.id)}" data-search-entry data-search-title="${esc(zh ? service.zhName : service.name)}" data-search-aliases="${esc(`${service.name}|${service.zhName}`)}" data-search-tags="${esc(zh ? service.zhSummary : service.summary)}" data-search-status="${zh ? '游戏构建对话' : 'Game-build dialogue'}"><p><strong>${esc(zh ? service.zhName : service.name)}</strong> ${badge(service, locale)}</p><p>${esc(zh ? service.zhSummary : service.summary)}</p><p><a class="btn btn-outline btn-compact" href="${esc(href)}">${zh ? "查看相关资料" : "Open related guide"} →</a></p></li>`;
+  }).join("");
+  return `<details class="database-reference-notes dialogue-service-directory"><summary>${zh ? "NPC 与站点服务" : "NPC & station services"} · ${dialogueServices.services.length}</summary><p>${zh ? "以下内容来自当前构建的双语对话与相符动作脚本。配置数值不等同于已实测价格；未从这些节点推断营业时间、地点、当前可用性或目的地。" : "These entries come from current-build bilingual dialogue and matching action scripts. Configuration values are not verified prices; hours, locations, current availability and destinations are not inferred from these nodes."}</p><ul class="evidence-list">${entries}</ul></details>`;
 }
 
 function render(dataset, recordsKey, locale) {
@@ -200,7 +262,8 @@ function render(dataset, recordsKey, locale) {
     return `<section class="evidence-ledger entity-profile" id="${record.id}" data-search-entry data-search-title="${esc(zh ? record.zhName : record.name)}" data-search-tags="${esc(zh ? record.zhSearchTags : record.searchTags)}" data-search-status="${zh ? "结构化资料" : "Structured record"}"><div class="section-heading-row"><h2>${esc(zh ? record.zhName : record.name)}</h2>${confidence}</div><p class="lead">${esc(zh ? record.zhSummary : record.summary)}</p><ul class="evidence-list">${facts}</ul>${relationsHtml(record, locale)}${backlinksHtml(recordsKey, record, locale)}${related}</section>`;
   }).join("\n");
   const lookupGuide = recordsKey === "npcs" ? npcLookupGuide(locale) : recordsKey === "quests" ? questLookupGuide(locale) : "";
-  return `<!DOCTYPE html>\n<!-- GENERATED by scripts/build-knowledge-entities.cjs from data/${recordsKey}.json — do not edit directly. -->\n<html lang="${zh ? "zh-CN" : "en"}"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${c.title}</title><meta name="description" content="${c.description}"><link rel="canonical" href="${zh ? zhUrl : enUrl}"><link rel="alternate" hreflang="en" href="${enUrl}"><link rel="alternate" hreflang="zh-CN" href="${zhUrl}"><link rel="alternate" hreflang="x-default" href="${enUrl}"><meta property="og:type" content="website"><meta property="og:site_name" content="The Ranchers Guide"><meta property="og:title" content="${c.title}"><meta property="og:description" content="${c.description}"><meta property="og:url" content="${zh ? zhUrl : enUrl}"><meta property="og:image" content="https://theranchersguide.com/assets/img/guide-barn.webp"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260821-ui1"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script></head><body><header class="site-header"><nav class="nav-inner" aria-label="${zh ? "主导航" : "Main navigation"}"><a class="logo" href="${zh ? "/zh/" : "/"}"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide<small>${zh ? "非官方中文玩家指南" : "Unofficial fan resource"}</small></span></a><button class="nav-toggle" aria-expanded="false" aria-label="${zh ? "展开导航" : "Toggle navigation"}">☰</button><ul class="nav-links">${nav(locale)}</ul></nav></header><main><article class="article entity-directory"><nav class="breadcrumb" aria-label="${zh ? "面包屑" : "Breadcrumb"}"><a href="${zh ? "/zh/" : "/"}">${zh ? "首页" : "Home"}</a> / <a href="${zh ? "/zh/database" : "/database"}">${zh ? "知识库" : "Database"}</a> / ${c.noun}</nav><h1>${c.heading}</h1><p class="meta">${zh ? "页面基线" : "Page baseline"}: ${dataset.meta.build} · ${zh ? "更新" : "Updated"} ${dataset.meta.lastUpdated}</p><p class="lead">${c.lead}</p><div class="notice info"><strong>${zh ? "发布边界：" : "Publication boundary:"}</strong> ${c.boundary}</div>${lookupGuide}<nav class="toc" aria-label="${c.noun}"><strong>${c.noun}</strong><ul>${toc}</ul></nav>${sections}</article></main><footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>${zh ? "证据不足的实体不会自动发布" : "Evidence gates prevent thin entity pages"}</span></div></div></footer><script src="/assets/js/main.js?v=20260810-nav1" defer></script></body></html>`;
+  const services = recordsKey === "npcs" ? serviceDirectory(locale) : "";
+  return `<!DOCTYPE html>\n<!-- GENERATED by scripts/build-knowledge-entities.cjs from data/${recordsKey}.json — do not edit directly. -->\n<html lang="${zh ? "zh-CN" : "en"}"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${c.title}</title><meta name="description" content="${c.description}"><link rel="canonical" href="${zh ? zhUrl : enUrl}"><link rel="alternate" hreflang="en" href="${enUrl}"><link rel="alternate" hreflang="zh-CN" href="${zhUrl}"><link rel="alternate" hreflang="x-default" href="${enUrl}"><meta property="og:type" content="website"><meta property="og:site_name" content="The Ranchers Guide"><meta property="og:title" content="${c.title}"><meta property="og:description" content="${c.description}"><meta property="og:url" content="${zh ? zhUrl : enUrl}"><meta property="og:image" content="https://theranchersguide.com/assets/img/guide-barn.webp"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260821-ui1"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script></head><body><header class="site-header"><nav class="nav-inner" aria-label="${zh ? "主导航" : "Main navigation"}"><a class="logo" href="${zh ? "/zh/" : "/"}"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide<small>${zh ? "非官方中文玩家指南" : "Unofficial fan resource"}</small></span></a><button class="nav-toggle" aria-expanded="false" aria-label="${zh ? "展开导航" : "Toggle navigation"}">☰</button><ul class="nav-links">${nav(locale)}</ul></nav></header><main><article class="article entity-directory"><nav class="breadcrumb" aria-label="${zh ? "面包屑" : "Breadcrumb"}"><a href="${zh ? "/zh/" : "/"}">${zh ? "首页" : "Home"}</a> / <a href="${zh ? "/zh/database" : "/database"}">${zh ? "知识库" : "Database"}</a> / ${c.noun}</nav><h1>${c.heading}</h1><p class="meta">${zh ? "页面基线" : "Page baseline"}: ${dataset.meta.build} · ${zh ? "更新" : "Updated"} ${dataset.meta.lastUpdated}</p><p class="lead">${c.lead}</p><div class="notice info"><strong>${zh ? "发布边界：" : "Publication boundary:"}</strong> ${c.boundary}</div>${lookupGuide}${services}<nav class="toc" aria-label="${c.noun}"><strong>${c.noun}</strong><ul>${toc}</ul></nav>${sections}</article></main><footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>${zh ? "证据不足的实体不会自动发布" : "Evidence gates prevent thin entity pages"}</span></div></div></footer><script src="/assets/js/main.js?v=20260810-nav1" defer></script></body></html>`;
 }
 
 const npcData = JSON.parse(fs.readFileSync(path.join(root, "data", "npcs.json"), "utf8"));
@@ -246,17 +309,37 @@ for (const locale of ['en', 'zh']) {
   const prefix = zh ? '/zh' : '';
   const file = path.join(root, zh ? 'zh/map.html' : 'map.html');
   const before = fs.readFileSync(file, 'utf8');
-  const native = questData.quests.filter(q => q.nameConfidence === 'exact-build');
-  const cards = native.map(q => {
+  const native = questData.quests.filter(q => q.buildGuide);
+  const renderTaskCard = q => {
     const place = q.relations.find(r => r.target.type === 'location');
     const status = place ? 'directory' : 'unresolved';
     const text = zh ? (place ? '配置关联地点；不代表任务步骤的精确坐标。' : '查看任务步骤与准备；暂无可靠任务坐标。') : (place ? 'A configured related place, not an exact objective coordinate.' : 'Read the steps and preparation; no reliable objective coordinate is recorded.');
     return `<article class="map-task-relation-card" data-map-task-relation-card data-native-task data-map-task-id="${q.id}" data-map-task-status="${status}"><div class="map-task-relation-copy"><span class="map-task-status is-${status}">${zh ? (place ? '关联地点' : '暂无任务坐标') : (place ? 'Related place' : 'No task coordinate')}</span><h3>${esc(zh ? q.buildGuide.zhName : q.buildGuide.name)}</h3><p>${text}</p></div><div class="map-task-relation-actions">${place ? `<button type="button" data-map-task-action="directory" data-map-task-target="${place.target.id}">${zh ? '查看关联地点' : 'Open related place'}</button>` : ''}<a href="${prefix}/database/quests#${q.id}">${zh ? '任务详情' : 'Task details'}&nbsp;→</a></div></article>`;
-  }).join('\n');
-  const after = before.replace(/(data-map-task-relations>)[\s\S]*?(<div class="map-task-relation-list">)/, `$1\n              <summary>${zh ? '任务地点' : 'Task locations'}</summary>\n              $2`).replace(/(<div class="map-task-relation-list">)([\s\S]*?)(\s*<\/div>\s*<\/details>)/, (_, start, body, end) => {
-    const retained = body.replace(/\s*<article\b[^>]*\bdata-native-task\b[\s\S]*?<\/article>/g, '').trimEnd();
-    return `${start}${retained}\n${cards}${end}`;
-  });
+  };
+  const taskBlocks = before.match(/<details\b[^>]*data-map-task-relations[^>]*>[\s\S]*?<\/details>/g) || [];
+  if (taskBlocks.length !== 1) throw new Error(`Expected one task-location directory in ${locale} map, found ${taskBlocks.length}.`);
+  const newline = taskBlocks[0].includes('\r\n') ? '\r\n' : '\n';
+  const listOpen = '<div class="map-task-relation-list">';
+  const listStart = taskBlocks[0].indexOf(listOpen);
+  const listEnd = taskBlocks[0].lastIndexOf('</div>');
+  if (listStart < 0 || listEnd <= listStart) throw new Error(`Task-location list boundary missing in ${locale} map.`);
+  const bodyStart = listStart + listOpen.length;
+  const retained = taskBlocks[0].slice(bodyStart, listEnd)
+    .replace(/\s*<article\b[^>]*\bdata-native-task\b[\s\S]*?<\/article>/g, '')
+    .trimEnd();
+  const retainedIds = new Set(Array.from(retained.matchAll(/data-map-task-id="([^"]+)"/g), match => match[1]));
+  const cards = native.filter(q => !retainedIds.has(q.id)).map(renderTaskCard).join(newline);
+  const summary = `<summary>${zh ? '任务地点' : 'Task locations'}</summary>`;
+  const rebuiltBlock = `${taskBlocks[0].slice(0, listStart).replace(/<summary>[\s\S]*?<\/summary>/, summary)}${listOpen}${retained}${newline}${cards}${newline}${taskBlocks[0].slice(listEnd)}`;
+  const taskIds = Array.from(rebuiltBlock.matchAll(/data-map-task-id="([^"]+)"/g), match => match[1]);
+  const expectedTaskIds = new Set(questData.quests.map(q => q.id));
+  if (taskIds.length !== expectedTaskIds.size || new Set(taskIds).size !== taskIds.length || taskIds.some(id => !expectedTaskIds.has(id))) {
+    throw new Error(`Task-location directory in ${locale} map must contain each quest exactly once.`);
+  }
+  const after = before.replace(taskBlocks[0], rebuiltBlock);
+  if (!after.includes('<!-- MAP_MARKERS:START -->') || !after.includes('<!-- MAP_MARKERS:END -->')) {
+    throw new Error(`Map marker boundaries were lost while updating ${locale} task locations.`);
+  }
   if (checkOnly) { if (before !== after) drifted = true; }
   else fs.writeFileSync(file, after);
 }

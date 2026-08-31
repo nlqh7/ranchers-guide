@@ -33,17 +33,27 @@ for (const locale of ['en', 'zh']) {
 }
 console.log('PASS: cow build reference has bilingual breed and requirement lookup.');
 
+function profileContaining(html, id) {
+  const anchor = html.indexOf(`id="${id}"`);
+  assert.notEqual(anchor, -1, `missing ${id} profile anchor`);
+  const start = html.lastIndexOf('<section', anchor);
+  const end = html.indexOf('</section>', anchor);
+  assert.ok(start >= 0 && end > anchor, `missing ${id} profile section`);
+  return html.slice(start, end + '</section>'.length);
+}
+
 for (const locale of ['en', 'zh']) {
   const html = fs.readFileSync(path.join(root, locale === 'zh' ? 'zh/database/animals.html' : 'database/animals.html'), 'utf8');
-  const profile = html.match(/<section[^>]*id="goat"[^>]*>[\s\S]*?<\/section>/)?.[0];
-  assert.match(profile, /class="animal-build-reference"/, `${locale}: goat lookup must expose interpreted game data`);
-  const rows = profile.match(/<tbody>([\s\S]*?)<\/tbody>/)?.[1] || '';
+  const profile = profileContaining(html, 'goat');
+  const buildBlock = profile.match(/<div class="animal-build-reference"[\s\S]*?<!-- animal-build-reference-end -->/)?.[0];
+  assert.match(buildBlock, /class="animal-build-reference"/, `${locale}: goat lookup must expose interpreted game data`);
+  const rows = buildBlock.match(/<tbody>([\s\S]*?)<\/tbody>/)?.[1] || '';
   for (const name of locale === 'zh' ? ['山羊 - 公羊', '山羊 - 母羊', '山羊 - 小母羊', '山羊 - 小公羊'] : ['Buck', 'Goat Doe', 'Goat Doeling', 'Buckling']) assert.ok(rows.includes(name));
   assert.equal((rows.match(new RegExp(locale === 'zh' ? '>有引用<' : '>Referenced<', 'g')) || []).length, 2);
   assert.equal((rows.match(new RegExp(locale === 'zh' ? '>未引用<' : '>Not referenced<', 'g')) || []).length, 2);
-  assert.match(profile, /\/database\/quests#chicken-coop-mission/);
-  assert.ok(profile.includes(locale === 'zh' ? '不保证当前可购买' : 'does not guarantee availability'));
-  assert.doesNotMatch(profile, /14[,.]?400|7[,.]?200|issellable/);
+  assert.match(buildBlock, /\/database\/quests#chicken-coop-mission/);
+  assert.ok(buildBlock.includes(locale === 'zh' ? '不保证当前可购买' : 'does not guarantee availability'));
+  assert.doesNotMatch(buildBlock, /14[,.]?400|7[,.]?200|issellable/);
 }
 console.log('PASS: goat names distinguish adult shop references from young animal definitions.');
 

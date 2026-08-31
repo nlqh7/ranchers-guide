@@ -3,6 +3,14 @@ const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
 const root = path.resolve(__dirname, '..');
+function profileContaining(page, id) {
+  const anchor = page.indexOf(`id="${id}"`);
+  assert.notEqual(anchor, -1, `missing ${id} profile anchor`);
+  const start = page.lastIndexOf('<section', anchor);
+  const end = page.indexOf('</section>', anchor);
+  assert.ok(start >= 0 && end > anchor, `missing ${id} profile section`);
+  return page.slice(start, end + '</section>'.length);
+}
 assert.ok(fs.existsSync(path.join(root, 'data/item-icons.json')), 'named entries need a verified native icon manifest');
 const manifest = require('../data/item-icons.json');
 assert.equal(manifest.icons.length, 20);
@@ -26,7 +34,7 @@ for (const icon of manifest.icons) {
       assert.ok(link.includes(`>${native.zhName}</span>`), 'compact Chinese lookup uses the verified native name');
       assert.ok(!link.includes(native.name), 'English aliases belong in the profile, not the Chinese navigation');
     }
-    const profile = page.match(new RegExp(`<section[^>]*id="${icon.id}"[^>]*>[\\s\\S]*?</section>`))?.[0];
+    const profile = profileContaining(page, icon.id);
     assert.ok(profile?.match(/<h2[^>]*>[\s\S]*?<\/h2>/)?.[0].includes(icon.src), `${prefix}${icon.id}: profile uses the same icon`);
     assert.doesNotMatch(hub, /coverage-summary|knowledge-category-number|ANSWER PAGES|EVIDENCE LEVELS|hero-stats/i);
   }

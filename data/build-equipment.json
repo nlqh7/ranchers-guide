@@ -5,6 +5,42 @@
   "validity": "unknown",
   "unit": null,
   "interval": null,
+  "sharedConfiguration": {
+    "type": "Placeable",
+    "classification": "OTHER",
+    "rarity": "Bronze",
+    "equippable": false,
+    "bodySlot": "NONE",
+    "droppable": true,
+    "sellableFlag": true,
+    "hasInteriorFeatures": false,
+    "interiorConsumesFarmEnergy": false,
+    "stackableByGroup": {
+      "generators": true,
+      "devices": false
+    }
+  },
+  "buildingConfiguration": {
+    "defaultHealthByGroup": {
+      "generators": 3,
+      "devices": 1
+    },
+    "defaultBuildStepsByGroup": {
+      "generators": 2,
+      "devices": 0
+    },
+    "buildStepExceptions": {
+      "prop_Roof_LVL1_SolarPanel_01": 0,
+      "enrg_solar_n1": 1,
+      "enrg_water_pump_n1": 0
+    }
+  },
+  "sourceNotes": {
+    "prop_Kitchen_CounterWashing_01": {
+      "en": "The developer description mentions 12 storage slots while also saying the object does not wash dishes.",
+      "zh": "开发者说明提到 12 个储物槽，同时写明该物品不会清洗餐具。"
+    }
+  },
   "seasons": [
     "Spring",
     "Summer",

@@ -4114,6 +4114,77 @@
       "demoFlag": "y"
     }
   ],
+  "toolSourceConfiguration": {
+    "shared": {
+      "classification": "OTHER",
+      "rarity": "Bronze",
+      "droppable": null
+    },
+    "types": {
+      "Tools": [
+        "tools_rope",
+        "tools_axe_metal",
+        "tools_hoe_metal",
+        "tools_pick_metal",
+        "tools_watercan_metal",
+        "tools_bucket_wood",
+        "tools_hammer_metal",
+        "generic_cargo",
+        "tools_seed_bag",
+        "tools_fertilizer_box",
+        "tools_fireextinguisher"
+      ],
+      "Weapon": [
+        "weapon_Knife_01",
+        "weapon_Fork_01",
+        "tools_flashlight",
+        "tools_torch",
+        "weapon_bomb_lvl1",
+        "weapon_rifle_lvl1",
+        "weapon_revolver_lvl1"
+      ]
+    },
+    "equippable": {
+      "default": true,
+      "exceptions": {
+        "generic_cargo": false
+      }
+    },
+    "sellableFlag": {
+      "default": true,
+      "exceptions": {
+        "generic_cargo": false,
+        "tools_seed_bag": false,
+        "tools_fertilizer_box": false
+      }
+    },
+    "sourceIntents": {
+      "tools_pick_metal": {
+        "en": "The developer description associates this item with breaking stones.",
+        "zh": "开发者说明把这个物品与破碎石块联系起来。"
+      },
+      "tools_watercan_metal": {
+        "en": "The developer description associates this item with irrigating plantations.",
+        "zh": "开发者说明把这个物品与灌溉种植地联系起来。"
+      },
+      "tools_bucket_wood": {
+        "en": "The developer description associates this item with collecting resources from animals.",
+        "zh": "开发者说明把这个物品与从动物处收集资源联系起来。"
+      },
+      "tools_flashlight": {
+        "en": "The developer description associates this item with lighting dark areas.",
+        "zh": "开发者说明把这个物品与照亮黑暗区域联系起来。"
+      },
+      "tools_torch": {
+        "en": "The developer description associates this item with lighting dark areas.",
+        "zh": "开发者说明把这个物品与照亮黑暗区域联系起来。"
+      },
+      "tools_fireextinguisher": {
+        "en": "The developer description associates this item with extinguishing fire.",
+        "zh": "开发者说明把这个物品与灭火联系起来。"
+      }
+    }
+  },
   "tools": [
     {
       "id": "tools_rope",

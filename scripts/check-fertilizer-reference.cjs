@@ -11,6 +11,11 @@ for (const [index, id] of ids.entries()) {
   assert.ok(item?.buildInput, `${id}: source configuration must reach the existing crop input`);
   assert.equal(item.buildInput.intendedUse, expectedUses[index]);
   assert.deepEqual(item.buildInput.energy, {consumption: 1, restoration: 0});
+  assert.equal(item.buildInput.classification, 'FARMING');
+  assert.equal(item.buildInput.rarity, 'Bronze');
+  assert.equal(item.buildInput.droppable, true);
+  assert.equal(item.buildInput.sellableFlag, true);
+  assert.ok(!('price' in item.buildInput) && !('sharedGO' in item.buildInput), 'Internal price and rendering metadata stay private');
   assert.equal(item.buildInput.localizedDescription, null, 'An empty localization slot must not be filled with the native table description');
   assert.equal(item.buildInput.evidenceLevel, 'build-observed');
   assert.equal(item.buildInput.validity, 'unknown');
@@ -25,6 +30,7 @@ for (const [index, id] of ids.entries()) {
     assert.ok(profile.includes(prefix ? '体力消耗' : 'Energy use'));
     assert.ok(profile.includes('<dd>1</dd>') && profile.includes('<dd>0</dd>'));
     assert.ok(profile.includes(prefix ? '实际效果尚未验证' : 'Actual effects are unverified'));
+    assert.match(profile, prefix ? /共同配置：FARMING.*Bronze.*可丢弃.*可出售标志/ : /Shared settings: FARMING.*Bronze.*droppable.*sellable flag/);
     assert.ok(profile.includes('farming-fields#fertilizer'));
     const lookup = html.split('id="browse-entries"')[1]?.split('</section>')[0];
     assert.ok(lookup?.includes(`href="#${id}"`), `${id}: named entry must be in the visible crop directory`);
