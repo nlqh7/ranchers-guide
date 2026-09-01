@@ -18,13 +18,24 @@ function render(locale) {
 
 let stale = false;
 for (const locale of ['en', 'zh']) {
-  const file = path.join(root, locale === 'zh' ? 'zh' : '', 'guides/beginners-guide.html');
-  const before = fs.readFileSync(file, 'utf8');
-  const withoutBlock = before.replace(/\s*<!-- BEGIN BACKPACK REFERENCE -->[\s\S]*?<!-- END BACKPACK REFERENCE -->\s*/g, '\n');
-  const anchor = locale === 'zh' ? '<section id="systems"' : '<h2 id="expand"';
-  if (!withoutBlock.includes(anchor)) throw new Error(`Missing backpack insertion anchor: ${file}`);
-  const after = withoutBlock.replace(anchor, `${locale === 'zh' ? '    ' : '      '}${render(locale).replace(/\n/g, `\n${locale === 'zh' ? '    ' : '      '}`)}\n\n${anchor}`);
-  if (before !== after) {
+  const prefix = locale === 'zh' ? 'zh' : '';
+  const beginnerFile = path.join(root, prefix, 'guides/beginners-guide.html');
+  const craftingFile = path.join(root, prefix, 'guides/crafting-guide.html');
+  const beginnerBefore = fs.readFileSync(beginnerFile, 'utf8');
+  const craftingBefore = fs.readFileSync(craftingFile, 'utf8');
+  const removeBlock = value => value.replace(/^[ \t]*<!-- BEGIN BACKPACK REFERENCE -->\r?\n[\s\S]*?^[ \t]*<!-- END BACKPACK REFERENCE -->[ \t]*(?:\r?\n){0,2}/gm, '');
+  const beginnerAfter = removeBlock(beginnerBefore);
+  const craftingWithoutBlock = removeBlock(craftingBefore);
+  const anchor = '    <h2 id="report">';
+  if (!craftingWithoutBlock.includes(anchor)) throw new Error(`Missing backpack insertion anchor: ${craftingFile}`);
+  const block = `    ${render(locale).replace(/\n/g, '\n    ')}\n\n`;
+  const craftingAfter = craftingWithoutBlock.replace(anchor, `${block}${anchor}`);
+
+  for (const [file, before, after] of [
+    [beginnerFile, beginnerBefore, beginnerAfter],
+    [craftingFile, craftingBefore, craftingAfter]
+  ]) {
+    if (before === after) continue;
     if (process.argv.includes('--check')) { console.error(`STALE: ${file}`); stale = true; }
     else fs.writeFileSync(file, after);
   }

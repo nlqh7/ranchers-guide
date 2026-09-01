@@ -51,6 +51,7 @@ const nodeChecks = [
   ["build-search-index.cjs", "--check"],
   ["check-site-audit.cjs"],
   ["check-content-quality.cjs"],
+  ["check-beginners-guide.cjs"],
   ["check-ui-system.cjs"],
   ["check-animals.cjs"],
   ["check-animal-build-reference.cjs"],

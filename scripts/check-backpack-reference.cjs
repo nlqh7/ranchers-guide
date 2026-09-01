@@ -1,4 +1,5 @@
 const assert = require('node:assert/strict');
+const { spawnSync } = require('node:child_process');
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -15,7 +16,7 @@ for (const item of data.items) {
 }
 
 for (const prefix of ['', 'zh/']) {
-  const html = fs.readFileSync(path.join(root, prefix, 'guides/beginners-guide.html'), 'utf8');
+  const html = fs.readFileSync(path.join(root, prefix, 'guides/crafting-guide.html'), 'utf8');
   const index = JSON.parse(fs.readFileSync(path.join(root, prefix, 'search-index.json'), 'utf8'));
   const block = html.split('data-backpack-reference')[1]?.split('</details>')[0];
   assert.ok(block);
@@ -25,8 +26,14 @@ for (const prefix of ['', 'zh/']) {
     const title = prefix ? `${item.zhName} · 容量配置 ${item.storageCapacity}` : `${item.name} · Capacity setting ${item.storageCapacity}`;
     assert.ok(block.includes(`id="${anchor}"`));
     assert.ok(block.includes(title));
-    assert.equal(searchCore.searchDocuments(index, title, 12)[0]?.url, `/${prefix}guides/beginners-guide#${anchor}`);
+    assert.equal(searchCore.searchDocuments(index, title, 12)[0]?.url, `/${prefix}guides/crafting-guide#${anchor}`);
   }
 }
 
-console.log('PASS: 4 source-defined backpacks reach a bilingual capacity lookup with duplicate medium names distinguished.');
+const generatorCheck = spawnSync(process.execPath, [path.join(root, 'scripts/build-backpack-reference.cjs'), '--check'], {
+  cwd: root,
+  encoding: 'utf8'
+});
+assert.equal(generatorCheck.status, 0, generatorCheck.stderr || generatorCheck.stdout);
+
+console.log('PASS: 4 source-defined backpacks reach a bilingual crafting lookup with duplicate medium names distinguished.');
