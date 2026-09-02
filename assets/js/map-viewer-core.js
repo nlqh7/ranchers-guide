@@ -6,10 +6,10 @@
   "use strict";
 
   var views = {
-    // Open on the complete square texture. Players can zoom or choose a region
-    // after orienting themselves, without starting on a cropped corner.
-    overview: { scale: 1, x: 0, y: 0 },
-    "overview-mobile": { scale: 1, x: 0, y: 0 },
+    // Open on the populated lower-right land area. The separate full view keeps
+    // the complete square texture available through the Fit control.
+    overview: { scale: 3.2, x: -57.6, y: -76.8 },
+    "overview-mobile": { scale: 3.2, x: -57.6, y: -76.8 },
     full: { scale: 1, x: 0, y: 0 },
     rural: { scale: 2, x: -8, y: -50 },
     city: { scale: 2, x: -46, y: -50 },
@@ -20,12 +20,35 @@
   };
 
   function clampZoom(value) {
-    return Math.min(3, Math.max(1, Number(value) || 1));
+    return Math.min(8, Math.max(1, Number(value) || 1));
   }
 
   function getView(name) {
     var view = views[name] || views.overview;
     return { scale: view.scale, x: view.x, y: view.y };
+  }
+
+  function getMarkerMetrics(scale) {
+    var inverse = 1 / clampZoom(scale);
+    return { iconScale: inverse, hitSize: 44 * inverse };
+  }
+
+  function pickMarker(candidates, point) {
+    var painted = null;
+    var nearest = null;
+    var distance = Infinity;
+    candidates.forEach(function (candidate) {
+      var dx = Math.abs(point.x - candidate.x);
+      var dy = Math.abs(point.y - candidate.y);
+      if (dx <= candidate.size / 2 && dy <= candidate.size / 2 &&
+          (!painted || candidate.z >= painted.z)) painted = candidate;
+      var nextDistance = Math.hypot(dx, dy);
+      if (dx <= 22 && dy <= 22 && nextDistance < distance) {
+        nearest = candidate;
+        distance = nextDistance;
+      }
+    });
+    return painted || nearest;
   }
 
   function pan(view, direction) {
@@ -36,6 +59,11 @@
     if (direction === "up") next.y += step;
     if (direction === "down") next.y -= step;
     return clampXY(next);
+  }
+
+  function viewportToCanvas(point, viewport, canvas) {
+    return { sx: 0.5 + (point.sx - 0.5) * viewport.width / canvas.width,
+      sy: 0.5 + (point.sy - 0.5) * viewport.height / canvas.height };
   }
 
   function stageToImage(stagePoint, view) {
@@ -80,5 +108,5 @@
     return clampXY({ scale: s, x: 100 * s * (0.5 - (Number(mx) || 0) / 100), y: 100 * s * (0.5 - (Number(my) || 0) / 100) });
   }
 
-  return { clampZoom: clampZoom, getView: getView, pan: pan, stageToImage: stageToImage, clampXY: clampXY, zoomAt: zoomAt, panBy: panBy, focus: focus };
+  return { clampZoom: clampZoom, getView: getView, getMarkerMetrics: getMarkerMetrics, pickMarker: pickMarker, viewportToCanvas: viewportToCanvas, pan: pan, stageToImage: stageToImage, clampXY: clampXY, zoomAt: zoomAt, panBy: panBy, focus: focus };
 });

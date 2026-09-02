@@ -3,6 +3,7 @@
 
   var search = document.querySelector("[data-location-search]");
   var category = document.querySelector("[data-location-category]");
+  var locationFinder = document.querySelector("[data-location-finder]");
   var entries = Array.from(document.querySelectorAll("[data-location-entry]"));
   var locationGroups = Array.from(document.querySelectorAll("[data-location-group]"));
   var count = document.querySelector("[data-location-count]");
@@ -10,6 +11,7 @@
   var mapStage = document.querySelector("[data-map-stage]");
   var mapImage = document.querySelector("[data-map-image]");
   var inspector = document.querySelector("[data-map-inspector]");
+  var mapViewerLayout = document.querySelector(".map-viewer-layout");
   var regionButtons = Array.from(document.querySelectorAll("[data-map-region]:not([data-location-map])"));
   var locationButtons = Array.from(document.querySelectorAll("[data-location-map]"));
   var markerFocusButtons = Array.from(document.querySelectorAll("[data-marker-focus]"));
@@ -26,17 +28,14 @@
   var markerStackByElement = new Map();
   var markerStackHitByElement = new Map();
   var knownLocationIds = [];
-  var markerFilterButtons = Array.from(document.querySelectorAll("[data-map-pin-filter]"));
-  var layerToggleButtons = Array.from(document.querySelectorAll("[data-map-layer-toggle]"));
-  var layerActionButtons = Array.from(document.querySelectorAll("[data-map-layer-action]"));
-  var stackActionButton = document.querySelector("[data-map-stack-action]");
-  var layerSummary = document.querySelector("[data-map-layer-summary]");
   var evidenceFilterButtons = Array.from(document.querySelectorAll("[data-map-evidence-filter]"));
   var relationFilterButtons = Array.from(document.querySelectorAll("[data-map-relation-filter]"));
   var progressCount = document.querySelector("[data-map-progress-count]");
   var discoveryToggle = document.querySelector("[data-map-discovery-toggle]");
   var progressReset = document.querySelector("[data-map-progress-reset]");
   var inspectorLink = inspector ? inspector.querySelector("[data-map-inspector-link]") : null;
+  var inspectorRelated = inspector ? inspector.querySelector("[data-map-inspector-related]") : null;
+  var inspectorRelatedContent = inspectorRelated ? inspectorRelated.querySelector(".map-inspector-related-content") : null;
   var inspectorConnections = inspector ? inspector.querySelector("[data-map-inspector-connections]") : null;
   var inspectorConnectionList = inspector ? inspector.querySelector("[data-map-inspector-connection-list]") : null;
   var inspectorJourney = inspector ? inspector.querySelector("[data-map-inspector-journey]") : null;
@@ -262,30 +261,6 @@
     updateMarkerStackBadges();
   }
 
-  function toggleAllMarkerStacks() {
-    if (!mapStage) return;
-    var visibleStacks = markerStackGroups.filter(function (stack) {
-      return stack.members.filter(function (marker) { return !marker.hidden; }).length >= 2;
-    });
-    if (!visibleStacks.length) {
-      updateMarkerStackBadges();
-      return;
-    }
-    var shouldOpen = visibleStacks.some(function (stack) { return !stack.fanned; });
-    visibleStacks.forEach(function (stack) {
-      var visible = stack.members.filter(function (marker) { return !marker.hidden; });
-      if (shouldOpen) {
-        stack.autoFanned = false;
-        stack.fanned = true;
-        applyMarkerStackFan(stack, visible);
-      } else {
-        clearMarkerStackFan(stack);
-        stack.autoFanned = false;
-      }
-    });
-    updateMarkerStackBadges();
-  }
-
   function collapseFannedStack(restoreFocus) {
     var openStacks = markerStackGroups.filter(function (stack) { return stack.fanned; });
     if (!openStacks.length) return false;
@@ -319,22 +294,6 @@
       if (stack.fanned) applyMarkerStackFan(stack, visible);
     });
     if (mapStage) mapStage.classList.toggle("map-stack-fan-open", markerStackGroups.some(function (stack) { return stack.fanned; }));
-    if (stackActionButton) {
-      var visibleStacks = markerStackGroups.filter(function (stack) {
-        return stack.members.filter(function (marker) { return !marker.hidden; }).length >= 2;
-      });
-      var allVisibleStacksFanned = visibleStacks.length > 0 && visibleStacks.every(function (stack) { return stack.fanned; });
-      var allIconsVisible = visibleStacks.length > 0 && allVisibleStacksFanned;
-      stackActionButton.disabled = visibleStacks.length === 0;
-      stackActionButton.classList.toggle("active", allVisibleStacksFanned);
-      stackActionButton.setAttribute("aria-pressed", allVisibleStacksFanned ? "true" : "false");
-      stackActionButton.textContent = isChinese
-        ? (allIconsVisible ? "收起全部图标" : "展开全部图标")
-        : (allIconsVisible ? "Collapse all icons" : "Spread all icons");
-      stackActionButton.title = isChinese
-        ? (allIconsVisible ? "收起所有密集点位" : "展开当前筛选下的所有密集点位")
-        : (allIconsVisible ? "Collapse every dense point" : "Spread every dense point in the current filters");
-    }
     scheduleMarkerLabelPlacement();
   }
 
@@ -348,19 +307,17 @@
   }
 
   function nearestVisibleMarker(clientX, clientY) {
-    var nearest = null;
-    var nearestDistance = Infinity;
+    var candidates = [];
     markers.forEach(function (candidate) {
       if (candidate.hidden) return;
       var rect = candidate.getBoundingClientRect();
       if (!rect.width || !rect.height) return;
-      var distance = Math.hypot(clientX - (rect.left + rect.width / 2), clientY - (rect.top + rect.height / 2));
-      if (distance < nearestDistance) {
-        nearest = candidate;
-        nearestDistance = distance;
-      }
+      var symbol = getComputedStyle(candidate, "::after");
+      candidates.push({ element: candidate, x: rect.left + rect.width / 2, y: rect.top + rect.height / 2,
+        size: parseFloat(symbol.width), z: parseInt(getComputedStyle(candidate).zIndex, 10) || 0 });
     });
-    return nearest;
+    var picked = window.RanchersMapViewer.pickMarker(candidates, { x: clientX, y: clientY });
+    return picked && picked.element;
   }
 
   buildMarkerStacks();
@@ -386,7 +343,8 @@
     inspectorJourneyList = document.createElement("div");
     inspectorJourneyList.dataset.mapInspectorJourneyList = "";
     inspectorJourney.append(journeyHeading, inspectorJourneyList);
-    if (inspectorConnections) inspector.insertBefore(inspectorJourney, inspectorConnections);
+    if (inspectorConnections && inspectorConnections.parentNode) inspectorConnections.parentNode.insertBefore(inspectorJourney, inspectorConnections);
+    else if (inspectorRelatedContent) inspectorRelatedContent.appendChild(inspectorJourney);
     else inspector.appendChild(inspectorJourney);
   }
 
@@ -493,11 +451,11 @@
     if (!mapImage) return;
     var host = mapStage || mapImage;
     var mapLabelScale = viewState.scale > 0 ? 1 / viewState.scale : 1;
-    // Keep native glyphs from becoming pinpricks in the detailed views. Labels
-    // use the exact inverse scale so their type remains tied to the map zoom.
-    var mapMarkerScale = Math.max(0.5, mapLabelScale);
+    var markerMetrics = window.RanchersMapViewer.getMarkerMetrics(viewState.scale);
+    var mapMarkerScale = markerMetrics.iconScale;
     host.style.setProperty("--map-scale", viewState.scale);
     host.style.setProperty("--map-marker-scale", mapMarkerScale);
+    host.style.setProperty("--map-marker-hit-size", markerMetrics.hitSize + "px");
     host.style.setProperty("--map-label-scale", mapLabelScale);
     host.style.setProperty("--map-x", viewState.x + "%");
     host.style.setProperty("--map-y", viewState.y + "%");
@@ -659,6 +617,10 @@
     if (inspectorStackList) inspectorStackList.replaceChildren();
     if (inspectorConnections) inspectorConnections.hidden = true;
     if (inspectorJourney) inspectorJourney.hidden = true;
+    if (inspectorRelated) {
+      inspectorRelated.hidden = true;
+      inspectorRelated.open = false;
+    }
   }
 
   function cleanMapCopy(value) {
@@ -740,11 +702,25 @@
     markers.forEach(function (marker) { marker.classList.remove("active"); });
     updateMapStageSelection(null);
     if (inspectorStack) inspectorStack.hidden = true;
+    if (inspector) inspector.hidden = true;
+    if (inspectorRelated) {
+      inspectorRelated.hidden = true;
+      inspectorRelated.open = false;
+    }
+    if (mapViewerLayout) mapViewerLayout.classList.remove("has-map-selection");
     updateProgress();
   }
 
   function markerRoute(marker) {
     return marker && marker.dataset.markerId ? (isChinese ? "/zh/map#" : "/map#") + marker.dataset.markerId : "";
+  }
+
+  function updateInspectorRelatedVisibility() {
+    if (!inspectorRelated) return;
+    var hasJourney = !!(inspectorJourney && !inspectorJourney.hidden);
+    var hasConnections = !!(inspectorConnections && !inspectorConnections.hidden);
+    inspectorRelated.hidden = !(hasJourney || hasConnections);
+    if (inspectorRelated.hidden) inspectorRelated.open = false;
   }
 
   function renderInspectorConnections(marker) {
@@ -758,6 +734,7 @@
     inspectorConnectionList.replaceChildren();
     if (!matches.length) {
       inspectorConnections.hidden = true;
+      updateInspectorRelatedVisibility();
       return;
     }
     matches.forEach(function (entity) {
@@ -772,6 +749,7 @@
       inspectorConnectionList.appendChild(link);
     });
     inspectorConnections.hidden = false;
+    updateInspectorRelatedVisibility();
   }
 
   function renderInspectorJourney(marker) {
@@ -783,6 +761,7 @@
     inspectorJourneyList.replaceChildren();
     if (!steps.length) {
       inspectorJourney.hidden = true;
+      updateInspectorRelatedVisibility();
       return;
     }
     steps.forEach(function (step, index) {
@@ -802,6 +781,7 @@
       inspectorJourneyList.appendChild(link);
     });
     inspectorJourney.hidden = false;
+    updateInspectorRelatedVisibility();
   }
 
   function markerHasRelation(marker, type) {
@@ -843,6 +823,8 @@
     updateProgress();
     if (historyMode !== false) writeLocationUrl(marker, historyMode || "pushState");
     if (!inspector) return;
+    inspector.hidden = false;
+    if (mapViewerLayout) mapViewerLayout.classList.add("has-map-selection");
     var pointLabel = marker.dataset.markerPointLabel || "";
     inspector.querySelector("[data-map-inspector-title]").textContent = marker.dataset.markerTitle + (pointLabel ? " · " + pointLabel : "");
     var confidence = marker.dataset.markerConfidence || (isChinese ? "大致区域" : "Approximate");
@@ -866,10 +848,16 @@
   }
 
   markers.forEach(function (marker) {
+    marker.addEventListener("keydown", function (event) {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      event.stopPropagation();
+      selectMarker(marker);
+    });
     marker.addEventListener("click", function (event) {
       event.stopPropagation();
       var clickedLabel = event.target && event.target.closest && event.target.closest("span:not(.map-marker-stack-tether)");
-      var resolvedMarker = clickedLabel ? marker : (nearestVisibleMarker(event.clientX, event.clientY) || marker);
+      var resolvedMarker = event.detail === 0 || clickedLabel ? marker : (nearestVisibleMarker(event.clientX, event.clientY) || marker);
       selectMarker(resolvedMarker);
     });
   });
@@ -937,38 +925,28 @@
       }
       var label = document.createElement("span");
       label.textContent = markerTypeLabel(type);
-      var count = document.createElement("small");
-      count.dataset.mapMarkerTypeCount = type;
-      button.append(label, count);
+      button.appendChild(label);
       markerTypeList.appendChild(button);
     });
     markerTypeList.querySelectorAll("[data-map-marker-type]").forEach(function (button) {
       button.addEventListener("click", function () {
         activeMarkerTypeFilter = button.dataset.mapMarkerType;
+        activeCategoryLayers = markerCategories.slice();
+        if (mapInteractionState && window.RanchersMapState) {
+          mapInteractionState = window.RanchersMapState.setCategory(mapInteractionState, "all", markerStateData(selectedMarker));
+        }
+        if (hasDirectory) {
+          category.value = "all";
+          render();
+          updateQueryUrl();
+        }
         renderMarkerLayers();
       });
     });
   }
 
-  function layerCountCopy(visible, total) {
-    return isChinese ? "显示 " + visible + " / " + total : visible + " / " + total + " visible";
-  }
-
   function renderMarkerLayers() {
     if (markerLayer) markerLayer.hidden = activeCategoryLayers.length === 0;
-    layerToggleButtons.forEach(function (button) {
-      var active = activeCategoryLayers.includes(button.dataset.mapLayerToggle);
-      button.classList.toggle("active", active);
-      button.setAttribute("aria-pressed", active ? "true" : "false");
-    });
-    layerActionButtons.forEach(function (button) {
-      var action = button.dataset.mapLayerAction;
-      var active = action === "all"
-        ? activeCategoryLayers.length === markerCategories.length && activeEvidenceFilter === "all" && activeMarkerTypeFilter === "all"
-        : activeCategoryLayers.length === 0;
-      button.classList.toggle("active", active);
-      button.setAttribute("aria-pressed", active ? "true" : "false");
-    });
     evidenceFilterButtons.forEach(function (button) {
       var active = button.dataset.mapEvidenceFilter === activeEvidenceFilter;
       button.classList.toggle("active", active);
@@ -997,34 +975,6 @@
     });
     updateMarkerStackBadges();
     scheduleMarkerLabelPlacement();
-    markerCategories.forEach(function (markerCategory) {
-      var output = document.querySelector('[data-map-layer-count="' + markerCategory + '"]');
-      if (!output) return;
-      var categoryMarkers = markers.filter(function (marker) { return marker.dataset.markerCategory === markerCategory; });
-      var visible = categoryMarkers.filter(function (marker) { return !marker.hidden; }).length;
-      output.textContent = layerCountCopy(visible, categoryMarkers.length);
-    });
-    if (markerTypeList) {
-      markerTypeList.querySelectorAll("[data-map-marker-type-count]").forEach(function (output) {
-        var type = output.dataset.mapMarkerTypeCount;
-        var typeMarkers = markers.filter(function (marker) { return marker.dataset.markerIcon === type; });
-        var visible = typeMarkers.filter(function (marker) { return !marker.hidden; }).length;
-        output.textContent = layerCountCopy(visible, typeMarkers.length);
-      });
-      var allTypeCount = markerTypeList.querySelector('[data-map-marker-type="all"] small');
-      if (allTypeCount) allTypeCount.textContent = layerCountCopy(markers.filter(function (marker) { return !marker.hidden; }).length, markers.length);
-    }
-    if (layerSummary) {
-      var visibleCount = markers.filter(function (marker) { return !marker.hidden; }).length;
-      var evidenceLabel = activeEvidenceFilter === "all"
-        ? (isChinese ? "全部证据" : "all evidence")
-        : activeEvidenceFilter === "supported"
-          ? (isChinese ? "来源支持" : "source-backed")
-          : activeEvidenceFilter === "reported"
-            ? (isChinese ? "站长采集/报告" : "site-collected / reported")
-            : (isChinese ? "计划中" : "planned");
-      layerSummary.textContent = isChinese ? "显示 " + visibleCount + " 个 · " + evidenceLabel : visibleCount + " visible · " + evidenceLabel;
-    }
     if (selectedMarker && selectedMarker.hidden) {
       clearSelectedMarker();
       writeLocationUrl(null, "replaceState");
@@ -1034,28 +984,18 @@
 
   function applyMarkerFilter(filter, includeAllEvidence) {
     var hadSelection = !!selectedMarker;
-    if (filter === "all" && includeAllEvidence === true) {
-      activeEvidenceFilter = "all";
-      activeMarkerTypeFilter = "all";
-    }
+    activeMarkerTypeFilter = "all";
+    if (includeAllEvidence === true) activeEvidenceFilter = "all";
     if (mapInteractionState && window.RanchersMapState) {
-      mapInteractionState = filter === "all" || filter === "none"
-        ? window.RanchersMapState.setAllLayers(mapInteractionState, filter === "all", markerStateData(selectedMarker))
-        : window.RanchersMapState.toggleLayer(mapInteractionState, filter, markerStateData(selectedMarker));
+      mapInteractionState = window.RanchersMapState.setCategory(mapInteractionState, filter, markerStateData(selectedMarker));
       activeCategoryLayers = mapInteractionState.layers.slice();
       if (hadSelection && !mapInteractionState.selectedLocationId) {
         clearSelectedMarker();
         writeLocationUrl(null, "replaceState");
         setInspector(isChinese ? "未选择地点" : "No location selected", isChinese ? "筛选已更新" : "Filters updated", isChinese ? "先前地点已被当前筛选隐藏，请选择一个可见标记。" : "The previous location is hidden by the current filters. Select a visible marker to continue.");
       }
-    } else if (filter === "all") {
-      activeCategoryLayers = markerCategories.slice();
-    } else if (filter === "none") {
-      activeCategoryLayers = [];
     } else {
-      activeCategoryLayers = activeCategoryLayers.includes(filter)
-        ? activeCategoryLayers.filter(function (item) { return item !== filter; })
-        : activeCategoryLayers.concat(filter);
+      activeCategoryLayers = filter === "all" ? markerCategories.slice() : (filter === "none" ? [] : [filter]);
     }
     renderMarkerLayers();
   }
@@ -1074,12 +1014,6 @@
     renderMarkerLayers();
   }
 
-  markerFilterButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
-      applyMarkerFilter(button.dataset.mapPinFilter, button.dataset.mapPinFilter === "all");
-    });
-  });
-  if (stackActionButton) stackActionButton.addEventListener("click", toggleAllMarkerStacks);
   evidenceFilterButtons.forEach(function (button) {
     button.addEventListener("click", function () {
       applyEvidenceFilter(button.dataset.mapEvidenceFilter);
@@ -1093,7 +1027,7 @@
     });
   });
   renderMarkerTypeFilters();
-  applyMarkerFilter("all", true);
+  applyMarkerFilter(hasDirectory ? category.value : "all", true);
   if (labelToggle) {
     labelToggle.addEventListener("click", function () {
       setMarkerLabels(!mapStage.classList.contains("map-labels-visible"));
@@ -1149,6 +1083,7 @@
   }
 
   if (hasDirectory) {
+    if (locationFinder) locationFinder.addEventListener("submit", function (event) { event.preventDefault(); });
     search.addEventListener("input", function () {
       var currentQuery = new URLSearchParams(window.location.search).get("q") || "";
       var shouldCreateBoundary = window.RanchersMapState
@@ -1180,14 +1115,7 @@
       }
     });
     category.addEventListener("change", function () {
-      var keepsSelection = window.RanchersMapState
-        ? window.RanchersMapState.directoryFilterKeepsSelection(markerStateData(selectedMarker), category.value)
-        : !selectedMarker || category.value === "all" || selectedMarker.dataset.markerCategory === category.value;
-      if (!keepsSelection) {
-        clearSelectedMarker();
-        writeLocationUrl(null, "replaceState");
-        setInspector(isChinese ? "未选择地点" : "No location selected", isChinese ? "分类已更新" : "Category updated", isChinese ? "先前地点已被当前目录分类隐藏，请选择一个可见地点。" : "The previous location is hidden by the current directory category. Select a visible place to continue.");
-      }
+      applyMarkerFilter(category.value, category.value === "all");
       render();
       updateQueryUrl();
     });
@@ -1326,6 +1254,13 @@
     }, { passive: true });
   }
 
+  function zoomFromCenter(delta) {
+    var viewer = window.RanchersMapViewer;
+    if (!viewer) return;
+    viewState = viewer.zoomAt(viewState, viewer.clampZoom(viewState.scale + delta) / viewState.scale, { sx: 0.5, sy: 0.5 });
+    applyMapView();
+  }
+
   zoomButtons.forEach(function (button) {
     button.addEventListener("click", function () {
       var action = button.dataset.mapZoom;
@@ -1337,8 +1272,7 @@
         return;
       }
       var delta = action === "in" ? 0.25 : -0.25;
-      viewState.scale = window.RanchersMapViewer ? window.RanchersMapViewer.clampZoom(viewState.scale + delta) : Math.max(1, Math.min(3, viewState.scale + delta));
-      applyMapView();
+      zoomFromCenter(delta);
     });
   });
 
@@ -1360,13 +1294,11 @@
       }
       if ((event.key === "+" || event.key === "=") && window.RanchersMapViewer) {
         event.preventDefault();
-        viewState.scale = window.RanchersMapViewer.clampZoom(viewState.scale + 0.25);
-        applyMapView();
+        zoomFromCenter(0.25);
       }
       if (event.key === "-" && window.RanchersMapViewer) {
         event.preventDefault();
-        viewState.scale = window.RanchersMapViewer.clampZoom(viewState.scale - 0.25);
-        applyMapView();
+        zoomFromCenter(-0.25);
       }
     });
   }
@@ -1513,7 +1445,10 @@
 
   function stagePointFromClient(clientX, clientY) {
     var rect = mapStage.getBoundingClientRect();
-    return { sx: (clientX - rect.left) / rect.width, sy: (clientY - rect.top) / rect.height };
+    var canvas = mapStage.querySelector(".map-canvas");
+    return window.RanchersMapViewer.viewportToCanvas(
+      { sx: (clientX - rect.left) / rect.width, sy: (clientY - rect.top) / rect.height },
+      rect, { width: canvas.offsetWidth, height: canvas.offsetHeight });
   }
 
   function isMapControl(target) {
@@ -1521,6 +1456,31 @@
   }
 
   if (mapStage) {
+    var hoverFrame = 0;
+    var hoverPoint = null;
+    var hoveredMarker = null;
+    function clearMarkerHover() {
+      hoverPoint = null;
+      if (hoveredMarker) hoveredMarker.classList.remove("is-pointer-target");
+      hoveredMarker = null;
+    }
+    mapStage.addEventListener("pointerleave", clearMarkerHover);
+    mapStage.addEventListener("pointermove", function (event) {
+      if (event.pointerType !== "mouse" || event.buttons) {
+        clearMarkerHover();
+        return;
+      }
+      hoverPoint = { x: event.clientX, y: event.clientY };
+      if (hoverFrame) return;
+      hoverFrame = requestAnimationFrame(function () {
+        hoverFrame = 0;
+        var next = hoverPoint && nearestVisibleMarker(hoverPoint.x, hoverPoint.y);
+        if (next === hoveredMarker) return;
+        if (hoveredMarker) hoveredMarker.classList.remove("is-pointer-target");
+        hoveredMarker = next;
+        if (hoveredMarker) hoveredMarker.classList.add("is-pointer-target");
+      });
+    });
     mapStage.addEventListener("dragstart", function (event) { event.preventDefault(); });
     mapStage.addEventListener("wheel", function (event) {
       event.preventDefault();
@@ -1557,9 +1517,9 @@
         return;
       }
       if (pointers.size === 1 && dragStart) {
-        var rect = mapStage.getBoundingClientRect();
-        var dx = (event.clientX - dragStart.x) / rect.width;
-        var dy = (event.clientY - dragStart.y) / rect.height;
+        var canvas = mapStage.querySelector(".map-canvas");
+        var dx = (event.clientX - dragStart.x) / canvas.offsetWidth;
+        var dy = (event.clientY - dragStart.y) / canvas.offsetHeight;
         if (Math.hypot(dx, dy) > 0.02) {
           dragMoved = true;
           if (mapStage) mapStage.classList.add("is-panning");
@@ -1637,6 +1597,7 @@
       var restoredCategory = params.get("category") || "all";
       if (!Array.from(category.options).some(function (option) { return option.value === restoredCategory; })) restoredCategory = "all";
       category.value = restoredCategory;
+      applyMarkerFilter(restoredCategory, restoredCategory === "all");
       render();
     }
     var queryId = params.get("location") || "";

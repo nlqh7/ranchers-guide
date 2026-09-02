@@ -1,0 +1,605 @@
+{
+  "build": "0.8.10.842",
+  "steamBuild": "24847725",
+  "source": {
+    "id": "owned-build-smartphone-ui",
+    "kind": "first-hand-build-resource",
+    "localizationAsset": "resources.assets",
+    "localizationPathId": 393483,
+    "localizationRawSha256": "2c505386fe9b1b9c2579aad1e6957907db838d8c7f87227e818fbfd4b57d5f4e",
+    "objectScene": "TheRanchers_Data/level6",
+    "evidence": "build-serialized-localization-and-active-ui-objects; not runtime-tested"
+  },
+  "labels": [
+    {
+      "key": "S/APP_ALERT",
+      "name": "Notifications",
+      "zhName": "通知",
+      "category": "supporting-ui",
+      "disposition": "notification-window"
+    },
+    {
+      "key": "S/APP_BETA_WARNING",
+      "name": "EARLY ACCESS • IN ACTIVE DEVELOPMENT",
+      "zhName": "抢先体验 • 正在积极开发中",
+      "category": "non-app-label",
+      "disposition": "development-warning"
+    },
+    {
+      "key": "S/APP_BOOKBOOK",
+      "name": "Book",
+      "zhName": "书书",
+      "category": "unmatched-app-candidate",
+      "disposition": "No active level6 UI_SmartPhone_App icon matched this label."
+    },
+    {
+      "key": "S/APP_CHALLENGE",
+      "name": "Challenges",
+      "zhName": "挑战",
+      "category": "navigation-planning",
+      "disposition": "confirmed-app"
+    },
+    {
+      "key": "S/APP_CHECK_LASTVERSION",
+      "name": "Checking the Integrity of the current version...",
+      "zhName": "正在检查当前版本的完整性……",
+      "category": "non-app-label",
+      "disposition": "version-check-status"
+    },
+    {
+      "key": "S/APP_CRAFT",
+      "name": "Craft",
+      "zhName": "制作",
+      "category": "ranch-tools",
+      "disposition": "confirmed-app"
+    },
+    {
+      "key": "S/APP_DELIVERY",
+      "name": "Delivery",
+      "zhName": "交付",
+      "category": "ranch-tools",
+      "disposition": "confirmed-app"
+    },
+    {
+      "key": "S/APP_DEMO_WARNING",
+      "name": "THIS DEMO IS A WORK IN PROGRESS AND DOES NOT REFLECT THE FINAL GAME",
+      "zhName": "本试玩版仍在开发中，不代表最终游戏内容",
+      "category": "non-app-label",
+      "disposition": "demo-warning"
+    },
+    {
+      "key": "S/APP_DLC_SHOP",
+      "name": "Store",
+      "zhName": "商店",
+      "category": "unmatched-app-candidate",
+      "disposition": "No active level6 UI_SmartPhone_App icon matched this label."
+    },
+    {
+      "key": "S/APP_ENERGYCOUNTER",
+      "name": "Zesty Metrix",
+      "zhName": "活力矩阵",
+      "category": "ranch-tools",
+      "disposition": "confirmed-app"
+    },
+    {
+      "key": "S/APP_GIVE_FEEDBACK",
+      "name": "Rate your experience",
+      "zhName": "评价您的体验",
+      "category": "system-controls",
+      "disposition": "confirmed-app"
+    },
+    {
+      "key": "S/APP_LOADING_DB",
+      "name": "Intializing game data...",
+      "zhName": "正在初始化游戏数据……",
+      "category": "non-app-label",
+      "disposition": "loading-status"
+    },
+    {
+      "key": "S/APP_MAP",
+      "name": "Maps",
+      "zhName": "地图",
+      "category": "navigation-planning",
+      "disposition": "confirmed-app"
+    },
+    {
+      "key": "S/APP_MAP_LandMark_CenterMap",
+      "name": "Center the map",
+      "zhName": "将地图居中",
+      "category": "map-control",
+      "disposition": "center-map"
+    },
+    {
+      "key": "S/APP_MAP_LandMark_Delete",
+      "name": "Remove marker",
+      "zhName": "移除标记",
+      "category": "map-control",
+      "disposition": "remove-marker"
+    },
+    {
+      "key": "S/APP_MAP_LandMark_Place",
+      "name": "Place a landmark",
+      "zhName": "放置地标",
+      "category": "map-control",
+      "disposition": "place-landmark"
+    },
+    {
+      "key": "S/APP_MARKET",
+      "name": "My Market",
+      "zhName": "我的市场",
+      "category": "ranch-tools",
+      "disposition": "confirmed-app"
+    },
+    {
+      "key": "S/APP_MECHANICS",
+      "name": "My Garage",
+      "zhName": "我的车库",
+      "category": "ranch-tools",
+      "disposition": "confirmed-app"
+    },
+    {
+      "key": "S/APP_Maps_NOGPS",
+      "name": "Mapping is unavailable due to a weak GPS signal.",
+      "zhName": "由于GPS信号弱，地图不可用。",
+      "category": "map-control",
+      "disposition": "weak-gps-status"
+    },
+    {
+      "key": "S/APP_NEWUPDATEAVAILABLE_SHOULD_RESTART",
+      "name": "New game update available!\n\nPlease install the latest update and relaunch the game.",
+      "zhName": "有新的游戏更新可用！\n\n请安装最新更新，然后重启游戏。",
+      "category": "non-app-label",
+      "disposition": "update-warning"
+    },
+    {
+      "key": "S/APP_PAUSE_GAME",
+      "name": "Pause the game",
+      "zhName": "暂停游戏",
+      "category": "system-controls",
+      "disposition": "confirmed-app"
+    },
+    {
+      "key": "S/APP_PREWARMSHADERS",
+      "name": "Saddling up the shaders..",
+      "zhName": "正在准备着色器……",
+      "category": "non-app-label",
+      "disposition": "loading-status"
+    },
+    {
+      "key": "S/APP_QUESTS",
+      "name": "Quests",
+      "zhName": "任务",
+      "category": "navigation-planning",
+      "disposition": "confirmed-app"
+    },
+    {
+      "key": "S/APP_SETTINGS",
+      "name": "Settings",
+      "zhName": "设置",
+      "category": "system-controls",
+      "disposition": "confirmed-app"
+    },
+    {
+      "key": "S/APP_SKILLS",
+      "name": "Skills",
+      "zhName": "技能",
+      "category": "navigation-planning",
+      "disposition": "confirmed-app"
+    },
+    {
+      "key": "S/APP_SMS",
+      "name": "BlaBlaApp",
+      "zhName": "BlaBlaApp",
+      "category": "communication",
+      "disposition": "confirmed-app"
+    },
+    {
+      "key": "S/APP_UPDATING_CONTENT",
+      "name": "Downloading the latest contents update ...",
+      "zhName": "正在下载最新内容更新...",
+      "category": "non-app-label",
+      "disposition": "update-status"
+    },
+    {
+      "key": "S/APP_WEATHER",
+      "name": "Weather",
+      "zhName": "天气",
+      "category": "navigation-planning",
+      "disposition": "confirmed-app"
+    },
+    {
+      "key": "S/App_ExitingGame",
+      "name": "Disconnecting ...",
+      "zhName": "正在断开连接……",
+      "category": "non-app-label",
+      "disposition": "connection-status"
+    },
+    {
+      "key": "S/App_Weather_Warning",
+      "name": "Making decisions based on the forecasts of the weather services of {0} is the sole decision of everyone and does not engage - in any case - the legal responsibility of {0}.",
+      "zhName": "根据{0}气象服务的预报做决策，完全由个人决定，在任何情况下，{0}都不承担法律责任。",
+      "category": "non-app-label",
+      "disposition": "weather-disclaimer"
+    }
+  ],
+  "confirmedApps": [
+    {
+      "key": "S/APP_SMS",
+      "name": "BlaBlaApp",
+      "zhName": "BlaBlaApp",
+      "group": "communication",
+      "evidenceLevel": "build-observed",
+      "validity": "unknown",
+      "object": {
+        "source": "TheRanchers_Data/level6",
+        "componentPathId": 42758,
+        "gameObjectPathId": 958,
+        "gameObjectName": "app-SMS",
+        "script": "UI_SmartPhone_App",
+        "active": true,
+        "bytes": 236,
+        "rawSha256": "759f0e2eadf08878b411a79fdbd82f4dc0ff48bbd2e1b48e11e4362b825a4cdc"
+      }
+    },
+    {
+      "key": "S/APP_MAP",
+      "name": "Maps",
+      "zhName": "地图",
+      "group": "navigation-planning",
+      "evidenceLevel": "build-observed",
+      "validity": "unknown",
+      "object": {
+        "source": "TheRanchers_Data/level6",
+        "componentPathId": 37347,
+        "gameObjectPathId": 6307,
+        "gameObjectName": "app-Carte",
+        "script": "UI_SmartPhone_App",
+        "active": true,
+        "bytes": 236,
+        "rawSha256": "cf34cd1b4f87a1898066870f3ee82c6c7599e9922cefb3dbee4b23c455413dad"
+      }
+    },
+    {
+      "key": "S/APP_WEATHER",
+      "name": "Weather",
+      "zhName": "天气",
+      "group": "navigation-planning",
+      "evidenceLevel": "build-observed",
+      "validity": "unknown",
+      "object": {
+        "source": "TheRanchers_Data/level6",
+        "componentPathId": 37348,
+        "gameObjectPathId": 6308,
+        "gameObjectName": "app-Meteo",
+        "script": "UI_SmartPhone_App",
+        "active": true,
+        "bytes": 236,
+        "rawSha256": "292ce09ae634a318da4b170e4633a471f08561154bba51c7f3ab5b073663bbb5"
+      }
+    },
+    {
+      "key": "S/APP_QUESTS",
+      "name": "Quests",
+      "zhName": "任务",
+      "group": "navigation-planning",
+      "evidenceLevel": "build-observed",
+      "validity": "unknown",
+      "object": {
+        "source": "TheRanchers_Data/level6",
+        "componentPathId": 37349,
+        "gameObjectPathId": 6310,
+        "gameObjectName": "app-Quests",
+        "script": "UI_SmartPhone_App",
+        "active": true,
+        "bytes": 236,
+        "rawSha256": "935337189e15eb9fd46f1ce36404b6f5115314d6033d3e8cca954e2317cc7fc2"
+      }
+    },
+    {
+      "key": "S/APP_CHALLENGE",
+      "name": "Challenges",
+      "zhName": "挑战",
+      "group": "navigation-planning",
+      "evidenceLevel": "build-observed",
+      "validity": "unknown",
+      "object": {
+        "source": "TheRanchers_Data/level6",
+        "componentPathId": 37351,
+        "gameObjectPathId": 6311,
+        "gameObjectName": "app-Challenge",
+        "script": "UI_SmartPhone_App",
+        "active": true,
+        "bytes": 236,
+        "rawSha256": "f2212b4b344ae18f26e847f1a9d8f1981c0206488fcc9b544c4ac08a59fd4200"
+      }
+    },
+    {
+      "key": "S/APP_SKILLS",
+      "name": "Skills",
+      "zhName": "技能",
+      "group": "navigation-planning",
+      "evidenceLevel": "build-observed",
+      "validity": "unknown",
+      "object": {
+        "source": "TheRanchers_Data/level6",
+        "componentPathId": 37340,
+        "gameObjectPathId": 6322,
+        "gameObjectName": "app-Skills",
+        "script": "UI_SmartPhone_App",
+        "active": true,
+        "bytes": 236,
+        "rawSha256": "c28c85df391353531ee8dfb174e48fe4cceaece34595ced6c7cfeb82f08f70dc"
+      }
+    },
+    {
+      "key": "S/APP_CRAFT",
+      "name": "Craft",
+      "zhName": "制作",
+      "group": "ranch-tools",
+      "evidenceLevel": "build-observed",
+      "validity": "unknown",
+      "object": {
+        "source": "TheRanchers_Data/level6",
+        "componentPathId": 37343,
+        "gameObjectPathId": 6325,
+        "gameObjectName": "app-Craft",
+        "script": "UI_SmartPhone_App",
+        "active": true,
+        "bytes": 236,
+        "rawSha256": "0497615babe31d3438337c5996e948cdd7971d36ed8511e21cd1c2b353c015c1"
+      }
+    },
+    {
+      "key": "S/APP_DELIVERY",
+      "name": "Delivery",
+      "zhName": "交付",
+      "group": "ranch-tools",
+      "evidenceLevel": "build-observed",
+      "validity": "unknown",
+      "object": {
+        "source": "TheRanchers_Data/level6",
+        "componentPathId": 37341,
+        "gameObjectPathId": 6323,
+        "gameObjectName": "app-Delivrey",
+        "script": "UI_SmartPhone_App",
+        "active": true,
+        "bytes": 236,
+        "rawSha256": "c2943e249a57486021bc2b1c85531a43234cda161008ed70859a21c9b48bc67c"
+      }
+    },
+    {
+      "key": "S/APP_MARKET",
+      "name": "My Market",
+      "zhName": "我的市场",
+      "group": "ranch-tools",
+      "evidenceLevel": "build-observed",
+      "validity": "unknown",
+      "object": {
+        "source": "TheRanchers_Data/level6",
+        "componentPathId": 37350,
+        "gameObjectPathId": 6309,
+        "gameObjectName": "app-Market",
+        "script": "UI_SmartPhone_App",
+        "active": true,
+        "bytes": 236,
+        "rawSha256": "2a005f613c42a6a5bc91eb02c224c272a2c93a40f95e4440804d955c1fad3886"
+      }
+    },
+    {
+      "key": "S/APP_ENERGYCOUNTER",
+      "name": "Zesty Metrix",
+      "zhName": "活力矩阵",
+      "group": "ranch-tools",
+      "evidenceLevel": "build-observed",
+      "validity": "unknown",
+      "object": {
+        "source": "TheRanchers_Data/level6",
+        "componentPathId": 37345,
+        "gameObjectPathId": 6313,
+        "gameObjectName": "app-EnergyCounter",
+        "script": "UI_SmartPhone_App",
+        "active": true,
+        "bytes": 236,
+        "rawSha256": "664f0d589d2056bb8a5de1875336d7052fe0f74f42b24c4994f0511f473808a8"
+      }
+    },
+    {
+      "key": "S/APP_MECHANICS",
+      "name": "My Garage",
+      "zhName": "我的车库",
+      "group": "ranch-tools",
+      "evidenceLevel": "build-observed",
+      "validity": "unknown",
+      "object": {
+        "source": "TheRanchers_Data/level6",
+        "componentPathId": 37338,
+        "gameObjectPathId": 6328,
+        "gameObjectName": "app-Mechanic",
+        "script": "UI_SmartPhone_App",
+        "active": true,
+        "bytes": 236,
+        "rawSha256": "d132b3cc54e6475288af46d952d63908823cdf1c3960df5c5924b0a4aea6f55b"
+      }
+    },
+    {
+      "key": "S/APP_SETTINGS",
+      "name": "Settings",
+      "zhName": "设置",
+      "group": "system-controls",
+      "evidenceLevel": "build-observed",
+      "validity": "unknown",
+      "object": {
+        "source": "TheRanchers_Data/level6",
+        "componentPathId": 37346,
+        "gameObjectPathId": 6315,
+        "gameObjectName": "app-Settings",
+        "script": "UI_SmartPhone_App",
+        "active": true,
+        "bytes": 236,
+        "rawSha256": "adbaa396e73ced2775dc561a5d85a0838687117c39827928f0334637db29153e"
+      }
+    },
+    {
+      "key": "S/APP_PAUSE_GAME",
+      "name": "Pause the game",
+      "zhName": "暂停游戏",
+      "group": "system-controls",
+      "evidenceLevel": "build-observed",
+      "validity": "unknown",
+      "object": {
+        "source": "TheRanchers_Data/level6",
+        "componentPathId": 37339,
+        "gameObjectPathId": 6321,
+        "gameObjectName": "app-PauseGame",
+        "script": "UI_SmartPhone_App",
+        "active": true,
+        "bytes": 380,
+        "rawSha256": "149dd973ec483b56591a1b6992c359fcfe97b85dac1f97b30b880845fbf45101"
+      }
+    },
+    {
+      "key": "S/APP_GIVE_FEEDBACK",
+      "name": "Rate your experience",
+      "zhName": "评价您的体验",
+      "group": "system-controls",
+      "evidenceLevel": "build-observed",
+      "validity": "unknown",
+      "object": {
+        "source": "TheRanchers_Data/level6",
+        "componentPathId": 37344,
+        "gameObjectPathId": 6327,
+        "gameObjectName": "app-GiveFeedback",
+        "script": "UI_SmartPhone_App",
+        "active": true,
+        "bytes": 236,
+        "rawSha256": "55e90ed965379d7c0438d81ff87973ce93a05a8e82702c1a6d01e84daeec4f26"
+      }
+    }
+  ],
+  "mapControls": [
+    {
+      "key": "S/APP_MAP_LandMark_CenterMap",
+      "name": "Center the map",
+      "zhName": "将地图居中",
+      "category": "map-control",
+      "disposition": "center-map"
+    },
+    {
+      "key": "S/APP_MAP_LandMark_Place",
+      "name": "Place a landmark",
+      "zhName": "放置地标",
+      "category": "map-control",
+      "disposition": "place-landmark"
+    },
+    {
+      "key": "S/APP_MAP_LandMark_Delete",
+      "name": "Remove marker",
+      "zhName": "移除标记",
+      "category": "map-control",
+      "disposition": "remove-marker"
+    },
+    {
+      "key": "S/APP_Maps_NOGPS",
+      "name": "Mapping is unavailable due to a weak GPS signal.",
+      "zhName": "由于GPS信号弱，地图不可用。",
+      "category": "map-control",
+      "disposition": "weak-gps-status"
+    }
+  ],
+  "supportingUi": [
+    {
+      "key": "S/APP_ALERT",
+      "name": "Notifications",
+      "zhName": "通知",
+      "category": "supporting-ui",
+      "disposition": "notification-window"
+    }
+  ],
+  "unmatchedAppCandidates": [
+    {
+      "key": "S/APP_BOOKBOOK",
+      "name": "Book",
+      "zhName": "书书",
+      "category": "unmatched-app-candidate",
+      "disposition": "not-published-as-app",
+      "reason": "No active level6 UI_SmartPhone_App icon matched this label."
+    },
+    {
+      "key": "S/APP_DLC_SHOP",
+      "name": "Store",
+      "zhName": "商店",
+      "category": "unmatched-app-candidate",
+      "disposition": "not-published-as-app",
+      "reason": "No active level6 UI_SmartPhone_App icon matched this label."
+    }
+  ],
+  "nonAppLabels": [
+    {
+      "key": "S/APP_BETA_WARNING",
+      "name": "EARLY ACCESS • IN ACTIVE DEVELOPMENT",
+      "zhName": "抢先体验 • 正在积极开发中",
+      "category": "non-app-label",
+      "disposition": "development-warning"
+    },
+    {
+      "key": "S/APP_CHECK_LASTVERSION",
+      "name": "Checking the Integrity of the current version...",
+      "zhName": "正在检查当前版本的完整性……",
+      "category": "non-app-label",
+      "disposition": "version-check-status"
+    },
+    {
+      "key": "S/APP_DEMO_WARNING",
+      "name": "THIS DEMO IS A WORK IN PROGRESS AND DOES NOT REFLECT THE FINAL GAME",
+      "zhName": "本试玩版仍在开发中，不代表最终游戏内容",
+      "category": "non-app-label",
+      "disposition": "demo-warning"
+    },
+    {
+      "key": "S/APP_LOADING_DB",
+      "name": "Intializing game data...",
+      "zhName": "正在初始化游戏数据……",
+      "category": "non-app-label",
+      "disposition": "loading-status"
+    },
+    {
+      "key": "S/APP_NEWUPDATEAVAILABLE_SHOULD_RESTART",
+      "name": "New game update available!\n\nPlease install the latest update and relaunch the game.",
+      "zhName": "有新的游戏更新可用！\n\n请安装最新更新，然后重启游戏。",
+      "category": "non-app-label",
+      "disposition": "update-warning"
+    },
+    {
+      "key": "S/APP_PREWARMSHADERS",
+      "name": "Saddling up the shaders..",
+      "zhName": "正在准备着色器……",
+      "category": "non-app-label",
+      "disposition": "loading-status"
+    },
+    {
+      "key": "S/APP_UPDATING_CONTENT",
+      "name": "Downloading the latest contents update ...",
+      "zhName": "正在下载最新内容更新...",
+      "category": "non-app-label",
+      "disposition": "update-status"
+    },
+    {
+      "key": "S/App_ExitingGame",
+      "name": "Disconnecting ...",
+      "zhName": "正在断开连接……",
+      "category": "non-app-label",
+      "disposition": "connection-status"
+    },
+    {
+      "key": "S/App_Weather_Warning",
+      "name": "Making decisions based on the forecasts of the weather services of {0} is the sole decision of everyone and does not engage - in any case - the legal responsibility of {0}.",
+      "zhName": "根据{0}气象服务的预报做决策，完全由个人决定，在任何情况下，{0}都不承担法律责任。",
+      "category": "non-app-label",
+      "disposition": "weather-disclaimer"
+    }
+  ],
+  "boundary": {
+    "en": "An active serialized app icon and a matching localized label prove current-build UI configuration, not unlock timing or independent runtime availability. Book and Store remain unmatched label candidates.",
+    "zh": "启用的序列化应用图标与匹配本地化名称只能证明当前构建 UI 配置，不能证明解锁时点或独立运行时可用性；“书书”和“商店”仍是未匹配标签候选。"
+  }
+}

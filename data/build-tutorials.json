@@ -1,0 +1,545 @@
+{
+  "build": "0.8.10.842",
+  "steamBuild": "24847725",
+  "source": {
+    "id": "owned-build-tutorial-localization",
+    "kind": "first-hand-build-resource",
+    "asset": "resources.assets",
+    "pathId": 393483,
+    "rawSha256": "2c505386fe9b1b9c2579aad1e6957907db838d8c7f87227e818fbfd4b57d5f4e",
+    "evidence": "build-serialized-localization; not runtime-tested"
+  },
+  "families": [
+    {
+      "id": "sleep-save-fainting",
+      "evidenceLevel": "build-observed",
+      "validity": "unknown",
+      "sourceKeys": [
+        "GT/SleepMechanic_Title",
+        "GT/SleepMechanic_die_respawn_hospital",
+        "GT/SleepMechanic_energy_health_die",
+        "GT/SleepMechanic_howto",
+        "GT/SleepMechanic_staylate_die"
+      ],
+      "content": {
+        "en": {
+          "title": "How saving, sleep and fainting work",
+          "summary": "Sleep in a tent, bed, motel or motorhome before 3 a.m. Sleeping saves progress and restores health and energy; the amount depends on sleep quality.",
+          "steps": [
+            {
+              "label": "Choose a sleep point",
+              "text": "Use a tent, bed, motel or an eligible vehicle such as a motorhome."
+            },
+            {
+              "label": "Save before the cutoff",
+              "text": "Sleeping saves progress. Staying awake past 3 a.m. makes the player faint."
+            },
+            {
+              "label": "Watch both status bars",
+              "text": "Reaching 0 energy or 0 health can cause fainting or death."
+            },
+            {
+              "label": "Recover after a collapse",
+              "text": "After fainting or death, the player respawns at the nearest hospital and pays a fee."
+            }
+          ],
+          "boundary": "The source does not state the hospital fee, exact restoration values, or which individual beds and vehicles are currently usable."
+        },
+        "zh": {
+          "title": "保存、睡眠和晕倒机制",
+          "summary": "在凌晨 3 点前使用帐篷、床、汽车旅馆或房车睡觉。睡眠会保存进度并恢复生命和体力，恢复量取决于睡眠地点的质量。",
+          "steps": [
+            {
+              "label": "先找睡眠点",
+              "text": "可以使用帐篷、床、汽车旅馆，或房车等符合条件的车辆。"
+            },
+            {
+              "label": "在截止时间前保存",
+              "text": "睡觉会保存进度；熬到凌晨 3 点后会晕倒。"
+            },
+            {
+              "label": "同时留意两条状态",
+              "text": "体力或生命降到 0 都可能导致晕倒或死亡。"
+            },
+            {
+              "label": "倒下后的去向",
+              "text": "晕倒或死亡后会在最近的医院重生，并支付一笔费用。"
+            }
+          ],
+          "boundary": "来源没有给出医院费用金额、精确恢复数值，也没有逐个证明哪些床和车辆在当前流程中可用。"
+        }
+      },
+      "sleepLocations": [
+        "tent",
+        "bed",
+        "motel",
+        "motorhome"
+      ],
+      "cutoff": {
+        "hour": 3,
+        "period": "a.m."
+      }
+    },
+    {
+      "id": "cashin-selling",
+      "evidenceLevel": "build-observed",
+      "validity": "unknown",
+      "sourceKeys": [
+        "GT/CashInBox_OnOpen_DragOneItem",
+        "GT/CashInBox_OnOpen_DragOneItem_Joystick",
+        "GT/CashInBox_OnOpen_DragToDeposit",
+        "GT/CashInBox_OnOpen_DragToDeposit_Joystick",
+        "GT/CashInBox_OnOpen_PayNextDay",
+        "GT/CashInBox_OnOpen_PriceFluctiation",
+        "GT/CashInBox_OnOpen_Title"
+      ],
+      "content": {
+        "en": {
+          "title": "CashIn: how to sell and get paid next day",
+          "summary": "Move the items you want to sell into the CashIn box. Deposits pay out the next day, and better-quality items pay more.",
+          "steps": [
+            {
+              "label": "Choose the amount",
+              "text": "Transfer a full stack, or use Take 1 item when you want to deposit a single unit."
+            },
+            {
+              "label": "Put it in CashIn",
+              "text": "Drag the selected items into the box with mouse controls, or use Move with controller controls."
+            },
+            {
+              "label": "Wait for payment",
+              "text": "The deposit does not pay immediately. CashIn Corp pays it out the next day."
+            },
+            {
+              "label": "Compare like with like",
+              "text": "Quality affects the payout: better quality means higher pay."
+            }
+          ],
+          "boundary": "The source does not provide an accepted-item list, exact item prices, payout time of day, fees, or a numerical quality multiplier."
+        },
+        "zh": {
+          "title": "CashIn 出售：怎么放入物品和第二天打款",
+          "summary": "把要卖的物品放进 CashIn 箱子；存入后第二天才付款，品质更好的物品收入更高。",
+          "steps": [
+            {
+              "label": "选择数量",
+              "text": "可以转移整堆物品；只想放一个时，使用“拿 1 个”。"
+            },
+            {
+              "label": "放进 CashIn",
+              "text": "鼠标操作可拖入箱子，手柄操作则选择物品后使用“移动”。"
+            },
+            {
+              "label": "等待打款",
+              "text": "存入时不会立即到账；CashIn 公司会在第二天付款。"
+            },
+            {
+              "label": "同品质再比较",
+              "text": "品质会影响收入：品质越高，获得的钱越多。"
+            }
+          ],
+          "boundary": "来源没有给出可接收物品清单、单件价格、第二天的具体到账时点、手续费或品质倍率。"
+        }
+      },
+      "depositActions": [
+        "drag",
+        "move"
+      ],
+      "quantityChoices": [
+        "single-unit",
+        "full-stack"
+      ],
+      "payoutTiming": "next-day",
+      "qualityRule": "better-quality-higher-pay"
+    },
+    {
+      "id": "hoe-planting",
+      "evidenceLevel": "build-observed",
+      "validity": "unknown",
+      "sourceKeys": [
+        "GT/hoe_how_to_use_KeepItClean",
+        "GT/hoe_how_to_use_PlacementValidation",
+        "GT/hoe_how_to_use_PlantSeeds",
+        "GT/hoe_how_to_use_Title",
+        "GT/hoe_how_to_use_WaterDaily"
+      ],
+      "content": {
+        "en": {
+          "title": "Starting your first plantation with the hoe",
+          "summary": "Till land you own when the hoe square is white, then plant a seed and water it. Keep the season right, water every day, remove weeds and stop birds from stealing seeds.",
+          "steps": [
+            {
+              "label": "Find a valid spot",
+              "text": "Move onto land you own. A red hoe-placement square means an obstacle blocks the spot; white means it is ready."
+            },
+            {
+              "label": "Prepare the soil",
+              "text": "When the placement square is white, use the hoe to till the ground."
+            },
+            {
+              "label": "Plant and water",
+              "text": "Equip a seed, stand over the tilled soil, press the use button, then water it with the watering can."
+            },
+            {
+              "label": "Maintain the plot",
+              "text": "Use the correct season, water every day, remove weeds from existing plantations with the hoe, and keep birds from stealing the seeds."
+            }
+          ],
+          "boundary": "The source does not state growth times, what one missed watering day does, how to obtain the tools, which crops belong to each season, how to stop birds, crop yield, or profit."
+        },
+        "zh": {
+          "title": "用锄头开启第一块种植地",
+          "summary": "在自己的土地上等锄头放置框变白后翻地，再播种并浇水。注意季节、每天浇水、清除杂草，并防止小鸟偷走种子。",
+          "steps": [
+            {
+              "label": "找到可翻的位置",
+              "text": "移动到自己的土地上；锄头放置框变红表示有障碍，变白才可以操作。"
+            },
+            {
+              "label": "用锄头松土",
+              "text": "放置框为白色时使用锄头，把地面准备成可播种的土。"
+            },
+            {
+              "label": "播种并首次浇水",
+              "text": "准备好种子，站在松好的土上按使用键，然后用洒水壶浇水。"
+            },
+            {
+              "label": "维持生长条件",
+              "text": "选择正确季节、每天浇水，用锄头给已有种植区除草，并防止小鸟偷走种子。"
+            }
+          ],
+          "boundary": "来源没有给出生长天数、漏浇一天的后果、工具获取方式、各作物季节表、防鸟方法、收获数量或收益。"
+        }
+      },
+      "placementIndicators": [
+        "red-blocked",
+        "white-ready"
+      ],
+      "tillableLand": "owned-only",
+      "growthConditions": [
+        "correct-season",
+        "daily-watering",
+        "no-weeds",
+        "not-stolen-by-birds"
+      ]
+    },
+    {
+      "id": "blueprint-building",
+      "evidenceLevel": "build-observed",
+      "validity": "unknown",
+      "sourceKeys": [
+        "GT/Build_HowToBuild_BluePrint_BuiltIt",
+        "GT/Build_HowToBuild_BluePrint_BuiltIt_Joystick",
+        "GT/Build_HowToBuild_BluePrint_Demolishit",
+        "GT/Build_HowToBuild_BluePrint_Placement",
+        "GT/Build_HowToBuild_Hammer_EnergyConsumption",
+        "GT/Build_HowToBuild_Title"
+      ],
+      "content": {
+        "en": {
+          "title": "Blueprint building: place, build and edit",
+          "summary": "Position and rotate the blueprint, confirm placement, then equip the hammer and press the build control until every step is complete. Use the hammer edit control on a built piece for options such as demolish.",
+          "steps": [
+            {
+              "label": "Place the blueprint",
+              "text": "Move the build cursor to the location you want, adjust its position and rotation, then confirm placement."
+            },
+            {
+              "label": "Equip the hammer and aim",
+              "text": "Equip the hammer and aim at the placed blueprint. With controller controls, hold the selection button while aiming."
+            },
+            {
+              "label": "Complete every build step",
+              "text": "Press the build control repeatedly until all of the blueprint steps are complete."
+            },
+            {
+              "label": "Edit a built piece",
+              "text": "Aim at the completed piece and use the hammer edit control to open options such as demolish. Building and editing consume energy; the number of steps and hammer quality affect energy use and build speed."
+            }
+          ],
+          "boundary": "The source does not provide an exact energy cost, build-step count for each object, material requirements, key bindings, the complete edit-option list, a demolition refund, or current unlock and availability rules."
+        },
+        "zh": {
+          "title": "蓝图建造：放置、施工与编辑",
+          "summary": "先调整蓝图的位置与旋转方向并确认放置，再装备锤子，反复按建造键直到所有步骤完成。对准建好的部件使用锤子编辑键，可打开拆除等选项。",
+          "steps": [
+            {
+              "label": "放置蓝图",
+              "text": "把建造光标移动到目标位置，调整位置和旋转方向，然后确认放置。"
+            },
+            {
+              "label": "装备锤子并对准",
+              "text": "装备锤子后对准已放置的蓝图；使用手柄时，瞄准过程中需要长按选择键。"
+            },
+            {
+              "label": "完成所有建造步骤",
+              "text": "反复按建造键，直到蓝图的所有步骤全部完成。"
+            },
+            {
+              "label": "编辑建好的部件",
+              "text": "对准已完成的部件，使用锤子编辑键打开拆除等选项。建造和编辑会消耗体力；步骤数量和锤子质量会影响体力消耗与建造速度。"
+            }
+          ],
+          "boundary": "来源没有给出精确体力消耗、每个物件的建造步骤数、材料需求、具体按键绑定、完整编辑选项、拆除返还，也没有证明当前解锁与可用条件。"
+        }
+      },
+      "placementActions": [
+        "move",
+        "rotate",
+        "confirm"
+      ],
+      "buildActions": [
+        "aim",
+        "repeat-build"
+      ],
+      "controllerSelection": "hold-selection-button",
+      "editAccess": "hammer-edit-button",
+      "energyFactors": [
+        "build-step-count",
+        "hammer-quality"
+      ]
+    },
+    {
+      "id": "police-pursuit",
+      "evidenceLevel": "build-observed",
+      "validity": "unknown",
+      "sourceKeys": [
+        "GT/Police_Pursuit_DroneBehaviour",
+        "GT/Police_Pursuit_JailTime",
+        "GT/Police_Pursuit_LevelHUD",
+        "GT/Police_Pursuit_PayFine",
+        "GT/Police_Pursuit_Title"
+      ],
+      "content": {
+        "en": {
+          "title": "Police pursuit: trigger, HUD and your three choices",
+          "summary": "A pursuit starts when police spot crimes such as stealing a vehicle, taking a farm animal or killing another character. Check the wanted level in the HUD, then choose whether to pay the fine, surrender or try to escape.",
+          "steps": [
+            {
+              "label": "Know what starts a pursuit",
+              "text": "Being spotted stealing a vehicle, taking a farm animal or killing another character can start a police pursuit."
+            },
+            {
+              "label": "Read the HUD",
+              "text": "Your wanted level appears in the HUD. As it rises, police cars and drones become more aggressive."
+            },
+            {
+              "label": "Choose a response",
+              "text": "During the pursuit, choose to pay the fine, surrender or try to escape. Your choice and wanted level affect the judge's jail-time decision."
+            },
+            {
+              "label": "Check the star outcome",
+              "text": "At 1 star, paying the fine lets you continue your day. With more than 1 star, paying the fine also leads to time in police custody."
+            }
+          ],
+          "boundary": "The source does not provide fine amounts, button bindings or prompts, custody duration, the judge formula, exact star increases for each crime, or independent runtime validation."
+        },
+        "zh": {
+          "title": "警方追捕：触发条件、HUD 与三种选择",
+          "summary": "警察看到你偷车、带走农场动物，或攻击/杀死其他角色时会开始追捕。先看 HUD 中的通缉等级，再选择交罚款、自首或尝试逃跑。",
+          "steps": [
+            {
+              "label": "先看哪些行为会触发追捕",
+              "text": "被看到偷车、带走农场动物，或攻击/杀死其他角色时，警方可能开始追捕。英中原始提示对最后一项分别使用“杀死”和“攻击”措辞。"
+            },
+            {
+              "label": "查看 HUD",
+              "text": "通缉等级显示在 HUD 中；等级越高，警车和无人机就越激进。"
+            },
+            {
+              "label": "选择应对方式",
+              "text": "追捕中可以交罚款、自首或尝试逃跑；你的选择与通缉等级会影响法官对拘留时间的判定。"
+            },
+            {
+              "label": "按警星判断付款结果",
+              "text": "1 星时交罚款可以继续活动；超过 1 星时，交罚款后还会进入警方拘留。"
+            }
+          ],
+          "boundary": "来源没有给出罚款金额、具体按键或界面提示、拘留时长、法官计算公式、每种行为的精确升星值，也没有独立证明当前运行时表现。"
+        }
+      },
+      "pursuitTriggers": [
+        "vehicle-theft",
+        "farm-animal-theft",
+        "character-killing"
+      ],
+      "wantedDisplay": "hud",
+      "responses": [
+        "pay-fine",
+        "surrender",
+        "escape"
+      ],
+      "escalation": [
+        "police-cars",
+        "police-drones"
+      ],
+      "oneStarOutcome": "pay-and-continue",
+      "multiStarOutcome": "pay-and-custody"
+    },
+    {
+      "id": "smartphone-apps",
+      "evidenceLevel": "build-observed",
+      "validity": "unknown",
+      "sourceKeys": [
+        "GT/SmartPhone_HowToOpen",
+        "GT/SmartPhone_MoreAppsInFuture",
+        "GT/SmartPhone_Title",
+        "GT/SmartPhone_UseApps"
+      ],
+      "content": {
+        "en": {
+          "title": "Smartphone: open it and use the core apps",
+          "summary": "Click the icon at the bottom left to open the smartphone at any time. Its apps cover local messages, map navigation, pausing and exiting; more apps unlock as you settle in and explore.",
+          "steps": [
+            {
+              "label": "Open the phone",
+              "text": "Click the smartphone icon at the bottom left. The tutorial says this opens the phone at any time."
+            },
+            {
+              "label": "Read messages and navigate",
+              "text": "Use the phone apps to read messages from locals, or open the Map app to navigate Ranchers Country."
+            },
+            {
+              "label": "Pause or exit",
+              "text": "The phone also has the appropriate apps for pausing or exiting the game."
+            },
+            {
+              "label": "Unlock more apps",
+              "text": "New apps unlock as you settle into Ranchers Country and explore more of its world."
+            }
+          ],
+          "boundary": "The source does not provide a complete app list, exact unlock order or timing, alternative button bindings, or independent runtime availability for every app."
+        },
+        "zh": {
+          "title": "手机：怎么打开和使用核心应用",
+          "summary": "点击左下角图标即可随时打开手机。手机应用可查看当地人消息、用地图导航、暂停或退出游戏；继续安顿和探索还会解锁新应用。",
+          "steps": [
+            {
+              "label": "打开手机",
+              "text": "点击左下角的手机图标；教程说明这样可以随时打开手机。"
+            },
+            {
+              "label": "查看消息和地图导航",
+              "text": "通过手机应用读取当地人发来的消息，或打开地图应用在 Ranchers Country 导航。"
+            },
+            {
+              "label": "暂停或退出",
+              "text": "手机里也有用于暂停和退出游戏的相应应用。"
+            },
+            {
+              "label": "继续解锁应用",
+              "text": "在 Ranchers Country 安顿下来并进一步探索世界时，会解锁新的手机应用。"
+            }
+          ],
+          "boundary": "来源没有给出完整应用清单、精确解锁顺序或时点、其他按键绑定，也没有逐项证明每个应用的当前运行时可用性。"
+        }
+      },
+      "openControl": "bottom-left-icon",
+      "appUses": [
+        "messages",
+        "map-navigation",
+        "pause",
+        "exit"
+      ],
+      "unlockProgress": [
+        "settle-in-ranchers-country",
+        "explore-world"
+      ]
+    },
+    {
+      "id": "vehicle-operation",
+      "evidenceLevel": "build-observed",
+      "validity": "unknown",
+      "sourceKeys": [
+        "GT/Vehicules_Fuel_FuelWork_Desc",
+        "GT/Vehicules_Fuel_Refill",
+        "GT/Vehicules_Fuel_Title",
+        "GT/Vehicules_Ground_Damage_Desc",
+        "GT/Vehicules_Ground_Repair_Desc",
+        "GT/Vehicules_PlayerEnergy_Desc",
+        "GT/Vehicules_PlayerEnergy_Title"
+      ],
+      "content": {
+        "en": {
+          "title": "Vehicle basics: fuel, damage, repair and player energy",
+          "summary": "Watch the top-left fuel and damage gauges while driving. Refill fuel vehicles at a petrol station, repair damage at QuickFix, and restore player energy when a vehicle uses it instead of fuel.",
+          "steps": [
+            {
+              "label": "Read the top-left gauges",
+              "text": "A fuel vehicle shows its fuel gauge at the top left; it goes down as you drive. Consumption varies with vehicle type and performance. The damage gauge is also shown at the top left."
+            },
+            {
+              "label": "Refill before fuel runs low",
+              "text": "Take a fuel vehicle to any petrol station to refill. The tutorial describes petrol stations as open 24/7."
+            },
+            {
+              "label": "Limit impact damage and use QuickFix",
+              "text": "Crashing into objects damages the vehicle, and a faster hit causes more damage. Heavy damage can affect stability and turning. QuickFix repairs vehicles 24/7, including during a police chase; cost depends on the damage level."
+            },
+            {
+              "label": "Recover player energy when required",
+              "text": "Some vehicles use player energy while you drive. Longer driving drains more; eating, resting or sleeping restores it, and vehicle efficiency affects consumption."
+            }
+          ],
+          "boundary": "The source does not provide fuel capacity, exact consumption rates, damage thresholds, repair amounts, a vehicle-by-vehicle energy mapping, service coordinates, or independent runtime availability."
+        },
+        "zh": {
+          "title": "车辆基础：燃油、损坏、修理与人物体力",
+          "summary": "驾驶时留意左上角的油表和损坏仪表。燃油车去加油站补充，受损车辆去 QuickFix 修理；如果车辆消耗玩家体力，则通过吃东西、休息或睡觉恢复。",
+          "steps": [
+            {
+              "label": "查看左上角仪表",
+              "text": "燃油车的油表在左上角，燃油会随着驾驶而减少；车型和性能会影响耗油量。车辆损坏仪表也显示在左上角。"
+            },
+            {
+              "label": "燃油不足前去加油",
+              "text": "燃油车可以到任意加油站补充；教程将加油站描述为全天 24 小时营业。"
+            },
+            {
+              "label": "减少碰撞并用 QuickFix 修理",
+              "text": "撞上物体会损坏车辆，碰撞速度越高，损坏越重；严重损坏会影响稳定性和转弯。QuickFix 全天 24 小时修车，警方追捕期间也可使用，费用取决于损坏程度。"
+            },
+            {
+              "label": "需要时恢复玩家体力",
+              "text": "部分车辆驾驶时消耗玩家体力；开得越久消耗越多。吃东西、休息或睡觉可以恢复，车辆能效会影响消耗量。"
+            }
+          ],
+          "boundary": "来源没有给出燃油容量、精确消耗率、损坏阈值、维修金额、逐车型能源对应、服务坐标，也没有独立证明当前运行时可用性。"
+        }
+      },
+      "fuelGaugePosition": "top-left",
+      "fuelConsumptionFactors": [
+        "vehicle-type",
+        "vehicle-performance"
+      ],
+      "refillService": {
+        "id": "gas-station",
+        "availability": "24/7"
+      },
+      "damageGaugePosition": "top-left",
+      "damageFactors": [
+        "collision",
+        "impact-speed"
+      ],
+      "heavyDamageEffects": [
+        "stability",
+        "turning"
+      ],
+      "repairService": {
+        "id": "quickfix",
+        "availability": "24/7",
+        "duringPoliceChase": true,
+        "costFactor": "damage-level"
+      },
+      "playerEnergyRecovery": [
+        "eating",
+        "resting",
+        "sleeping"
+      ],
+      "playerEnergyConsumptionFactors": [
+        "driving-duration",
+        "vehicle-efficiency"
+      ]
+    }
+  ]
+}

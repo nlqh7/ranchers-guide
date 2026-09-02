@@ -1,7 +1,7 @@
 {
   "meta": {
     "page": "database/animals.html",
-    "lastUpdated": "2026-08-31",
+    "lastUpdated": "2026-09-01",
     "build": "0.8.10.842",
     "videoBuild": "0.8.10.455",
     "evidenceLevels": [
@@ -319,6 +319,64 @@
       "asset": "resources.assets",
       "pathId": 12015,
       "rawSha256": "d8aaff96b602505814776b8e02e8a59a9b67947d0e718a8acfa3fc91bfb675a5"
+    },
+    "owned-build-animal-diets": {
+      "kind": "first-hand-build-resource",
+      "title": "Owned game files: animal food and water definitions",
+      "url": null,
+      "date": "2026-09-01",
+      "build": "0.8.10.842",
+      "steamBuild": "24847725",
+      "asset": "resources.assets",
+      "objects": [
+        {
+          "name": "Deadly_NPC_Food_DEF_Chickens",
+          "pathId": 392353,
+          "bytes": 108,
+          "rawSha256": "18a1980ec65b7c19b68071f92cae52b3f5dc4f8a68724e5165539bf93508f188"
+        },
+        {
+          "name": "Deadly_NPC_Food_DEF_COWS",
+          "pathId": 392362,
+          "bytes": 104,
+          "rawSha256": "514815a4b3a235b4eb7003378b29eebf1edbaf785e3937170477b376e3be4bd7"
+        },
+        {
+          "name": "Deadly_NPC_Food_DEF_GOAT",
+          "pathId": 392375,
+          "bytes": 200,
+          "rawSha256": "3c906e0dce4a62b1dd010cf8af2a42353a204e6c3334482aa4b08bcf400452ec"
+        },
+        {
+          "name": "Deadly_NPC_Food_DEF_RABIT",
+          "pathId": 392380,
+          "bytes": 184,
+          "rawSha256": "e28f3303e26a7f50d724b22dc2ccf5dfd081889a1ea2268424f47fdfa536af88"
+        },
+        {
+          "name": "Deadly_NPC_Food_DEF_RAM",
+          "pathId": 392383,
+          "bytes": 104,
+          "rawSha256": "b56c0148c3ec8ac6e286b456f92d0e50b976bc60b074babb79a75bc4e2983741"
+        },
+        {
+          "name": "AnimalsTroughtsManager_Food_DEF",
+          "pathId": 392741,
+          "bytes": 304,
+          "rawSha256": "44841928391749d63889ac150463573598a38b4e6a3f6b5d7f55ae24430b6de5"
+        }
+      ]
+    },
+    "owned-build-animal-delivery": {
+      "kind": "first-hand-build-resource",
+      "title": "Owned game files: small-animal delivery tutorial definition",
+      "url": null,
+      "date": "2026-09-01",
+      "build": "0.8.10.842",
+      "steamBuild": "24847725",
+      "asset": "resources.assets",
+      "pathId": 392824,
+      "rawSha256": "cc00971e064b9ec61c12322b58df1cd14ee0e119863c254513f86b7fc67cb0e6"
     }
   },
   "nativeAnimalReference": {
@@ -561,21 +619,101 @@
     "steamBuild": "24847725",
     "evidenceLevel": "build-observed",
     "validity": "unknown",
-    "sourceIds": ["owned-build-wildlife"],
+    "sourceIds": [
+      "owned-build-wildlife"
+    ],
     "entries": [
-      { "id": "Flocking_Bird_Butterfly_Easter_Tailed_Blue", "name": "Eastern Tailed Blue", "zhName": "南美琉璃小灰蝶", "kind": "butterfly", "rarity": "Bronze" },
-      { "id": "Flocking_Bird_Crow", "name": "Crow", "zhName": "乌鸦", "kind": "bird", "rarity": "Silver" },
-      { "id": "Flocking_Bird_Parrot_Macaw_RED", "name": "Macaw Red", "zhName": "红金刚鹦鹉", "kind": "bird", "rarity": "Gold" },
-      { "id": "Flocking_Bird_Pigeon", "name": "Pigeon", "zhName": "鸽子", "kind": "bird", "rarity": "Gold" },
-      { "id": "Flocking_Bird_Seagull", "name": "Seagull", "zhName": "海鸥", "kind": "bird", "rarity": "Gold" },
-      { "id": "Flocking_Bird_Toucan", "name": "Toucan", "zhName": "巨嘴鸟", "kind": "bird", "rarity": "Gold" },
-      { "id": "Flocking_Bird_Vulture", "name": "Vulture", "zhName": "秃鹫", "kind": "bird", "rarity": "Gold" },
-      { "id": "Flocking_ButterflyAfricanMonarch", "name": "African Monarch", "zhName": "非洲君主斑蝶", "kind": "butterfly", "rarity": "Gold" },
-      { "id": "Flocking_Bird_Pigeon_Dove", "name": "Dove", "zhName": "斑鸠", "kind": "bird", "rarity": "Gold" },
-      { "id": "Flocking_Bird_Parrot_Cockatiel", "name": "Cockatiel", "zhName": "玄凤鹦鹉", "kind": "bird", "rarity": "Gold" },
-      { "id": "Flocking_Bird_Parrot_Galah", "name": "Galah", "zhName": "粉红凤头鹦鹉", "kind": "bird", "rarity": "Gold" },
-      { "id": "Flocking_Bird_Parrot_Grey", "name": "Grey", "zhName": "灰鹦鹉", "kind": "bird", "rarity": "Gold" },
-      { "id": "Flocking_Bird_Parrot_Cockatoo", "name": "Cockatoo", "zhName": "凤头鹦鹉", "kind": "bird", "rarity": "Gold" }
+      {
+        "id": "Flocking_Bird_Butterfly_Easter_Tailed_Blue",
+        "name": "Eastern Tailed Blue",
+        "zhName": "南美琉璃小灰蝶",
+        "kind": "butterfly",
+        "rarity": "Bronze"
+      },
+      {
+        "id": "Flocking_Bird_Crow",
+        "name": "Crow",
+        "zhName": "乌鸦",
+        "kind": "bird",
+        "rarity": "Silver"
+      },
+      {
+        "id": "Flocking_Bird_Parrot_Macaw_RED",
+        "name": "Macaw Red",
+        "zhName": "红金刚鹦鹉",
+        "kind": "bird",
+        "rarity": "Gold"
+      },
+      {
+        "id": "Flocking_Bird_Pigeon",
+        "name": "Pigeon",
+        "zhName": "鸽子",
+        "kind": "bird",
+        "rarity": "Gold"
+      },
+      {
+        "id": "Flocking_Bird_Seagull",
+        "name": "Seagull",
+        "zhName": "海鸥",
+        "kind": "bird",
+        "rarity": "Gold"
+      },
+      {
+        "id": "Flocking_Bird_Toucan",
+        "name": "Toucan",
+        "zhName": "巨嘴鸟",
+        "kind": "bird",
+        "rarity": "Gold"
+      },
+      {
+        "id": "Flocking_Bird_Vulture",
+        "name": "Vulture",
+        "zhName": "秃鹫",
+        "kind": "bird",
+        "rarity": "Gold"
+      },
+      {
+        "id": "Flocking_ButterflyAfricanMonarch",
+        "name": "African Monarch",
+        "zhName": "非洲君主斑蝶",
+        "kind": "butterfly",
+        "rarity": "Gold"
+      },
+      {
+        "id": "Flocking_Bird_Pigeon_Dove",
+        "name": "Dove",
+        "zhName": "斑鸠",
+        "kind": "bird",
+        "rarity": "Gold"
+      },
+      {
+        "id": "Flocking_Bird_Parrot_Cockatiel",
+        "name": "Cockatiel",
+        "zhName": "玄凤鹦鹉",
+        "kind": "bird",
+        "rarity": "Gold"
+      },
+      {
+        "id": "Flocking_Bird_Parrot_Galah",
+        "name": "Galah",
+        "zhName": "粉红凤头鹦鹉",
+        "kind": "bird",
+        "rarity": "Gold"
+      },
+      {
+        "id": "Flocking_Bird_Parrot_Grey",
+        "name": "Grey",
+        "zhName": "灰鹦鹉",
+        "kind": "bird",
+        "rarity": "Gold"
+      },
+      {
+        "id": "Flocking_Bird_Parrot_Cockatoo",
+        "name": "Cockatoo",
+        "zhName": "凤头鹦鹉",
+        "kind": "bird",
+        "rarity": "Gold"
+      }
     ]
   },
   "enemyReference": {
@@ -583,11 +721,28 @@
     "steamBuild": "24847725",
     "evidenceLevel": "build-observed",
     "validity": "unknown",
-    "sourceIds": ["owned-build-enemies"],
+    "sourceIds": [
+      "owned-build-enemies"
+    ],
     "entries": [
-      { "id": "Skeleton_A", "name": "Skeleton", "zhName": "骨架图案", "rarity": "Bronze" },
-      { "id": "Spider_Black_Widow", "name": "Spider_Black_Widow", "zhName": "黑寡妇蜘蛛", "rarity": "Silver" },
-      { "id": "Spider_Tarantula", "name": "Spider_Tarantula", "zhName": "狼蛛", "rarity": "Gold" }
+      {
+        "id": "Skeleton_A",
+        "name": "Skeleton",
+        "zhName": "骨架图案",
+        "rarity": "Bronze"
+      },
+      {
+        "id": "Spider_Black_Widow",
+        "name": "Spider_Black_Widow",
+        "zhName": "黑寡妇蜘蛛",
+        "rarity": "Silver"
+      },
+      {
+        "id": "Spider_Tarantula",
+        "name": "Spider_Tarantula",
+        "zhName": "狼蛛",
+        "rarity": "Gold"
+      }
     ]
   },
   "species": [
@@ -1127,17 +1282,23 @@
               {
                 "text": "鸡需要鸡舍；温控必须使用 Angela 出售的鸡舍/谷仓专用设备，市政厅出售的住宅装饰暖气或空调对鸡舍无效。",
                 "badge": "official",
-                "sourceIds": ["thread-big-chicken-eggs"]
+                "sourceIds": [
+                  "thread-big-chicken-eggs"
+                ]
               },
               {
                 "text": "鸡舍暖气应安装在鸡舍外墙。该位置有两条独立当前期报告支持。",
                 "badge": "community",
-                "sourceIds": ["thread-big-chicken-eggs"]
+                "sourceIds": [
+                  "thread-big-chicken-eggs"
+                ]
               },
               {
                 "text": "没有 Angela 温控设备时，鸡可能因高温或低温死亡。",
                 "badge": "community",
-                "sourceIds": ["thread-big-chicken-eggs"]
+                "sourceIds": [
+                  "thread-big-chicken-eggs"
+                ]
               }
             ]
           },
@@ -1184,12 +1345,40 @@
               {
                 "text": "官方管理员建议先核对鸡舍关联数量、门口是否接入完整封闭围栏、每日报告有没有通知，以及全地图是否仍有绿点。这些可观察结果用于缩小原因，单独一项不能证明一定是玩家操作或游戏 bug。",
                 "badge": "official",
-                "sourceIds": ["thread-chickens-missing-official"]
+                "sourceIds": [
+                  "thread-chickens-missing-official"
+                ]
               }
             ]
           }
         ]
-      }
+      },
+      "lookupFacts": [
+        {
+          "nativeCareId": "chicken-feed",
+          "text": "The current-build Chicken food definition lists Hay.",
+          "zhText": "当前构建的鸡食物配置列出：干草。",
+          "group": "Game-build diet configuration",
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-animal-diets"
+          ]
+        },
+        {
+          "nativeCareId": "chicken-water",
+          "text": "The current-build Chicken water array lists Water.",
+          "zhText": "当前构建的鸡饮水配置列出：水。",
+          "group": "Game-build diet configuration",
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-animal-diets"
+          ]
+        }
+      ]
     },
     {
       "id": "cow",
@@ -1203,13 +1392,67 @@
         "evidenceLevel": "build-observed",
         "build": "0.8.10.842",
         "validity": "unknown",
-        "sourceIds": ["owned-build-animals", "owned-build-cattle-shop", "owned-build-animal-products", "owned-build-animal-guidance"],
+        "sourceIds": [
+          "owned-build-animals",
+          "owned-build-cattle-shop",
+          "owned-build-animal-products",
+          "owned-build-animal-guidance"
+        ],
         "breeds": [
-          { "name": "Bretonne Pie Noire", "zhName": "布列塔尼黑白花牛", "itemIds": ["animal_cow_black_female", "animal_cow_black_male"], "sexes": ["female", "male"] },
-          { "name": "Maine-Anjou", "zhName": "缅因-安茹牛", "itemIds": ["animal_cow_brown_female", "animal_cow_brown_male"], "sexes": ["female", "male"] },
-          { "name": "Angeln", "zhName": "安格伦牛", "itemIds": ["animal_cow_brown_super_female_brown"], "sexes": ["female"] },
-          { "name": "Deutsche Rotbunte", "zhName": "德国红白花牛", "itemIds": ["animal_cow_brown_super_female_tache"], "sexes": ["female"] },
-          { "name": "Gascon", "zhName": "加斯科牛", "itemIds": ["animal_cow_brown_super_female_white"], "sexes": ["female"] }
+          {
+            "name": "Bretonne Pie Noire",
+            "zhName": "布列塔尼黑白花牛",
+            "itemIds": [
+              "animal_cow_black_female",
+              "animal_cow_black_male"
+            ],
+            "sexes": [
+              "female",
+              "male"
+            ]
+          },
+          {
+            "name": "Maine-Anjou",
+            "zhName": "缅因-安茹牛",
+            "itemIds": [
+              "animal_cow_brown_female",
+              "animal_cow_brown_male"
+            ],
+            "sexes": [
+              "female",
+              "male"
+            ]
+          },
+          {
+            "name": "Angeln",
+            "zhName": "安格伦牛",
+            "itemIds": [
+              "animal_cow_brown_super_female_brown"
+            ],
+            "sexes": [
+              "female"
+            ]
+          },
+          {
+            "name": "Deutsche Rotbunte",
+            "zhName": "德国红白花牛",
+            "itemIds": [
+              "animal_cow_brown_super_female_tache"
+            ],
+            "sexes": [
+              "female"
+            ]
+          },
+          {
+            "name": "Gascon",
+            "zhName": "加斯科牛",
+            "itemIds": [
+              "animal_cow_brown_super_female_white"
+            ],
+            "sexes": [
+              "female"
+            ]
+          }
         ],
         "quest": {
           "id": "F_Quest_14",
@@ -1221,26 +1464,97 @@
           "zhText": "牛的商店条目关联此任务。买不到牛时可先核对任务进度；具体解锁条件尚未解码并实测，不能保证完成任务后立即可买。"
         },
         "care": [
-          { "sourceKey": "GT/Barn_HowToFeed_Manually_AnimalDiet", "text": "Open the animal's information popup to check its diet before choosing feed or mixing species in a barn.", "zhText": "先打开动物信息窗口查看饮食需求，再选择饲料或安排不同物种同住。" },
-          { "sourceKey": "GT/Barn_HowToFeed_Manually_Food", "text": "Place suitable food in the barn's manger.", "zhText": "把符合饮食需求的食物放入谷仓食槽。" },
-          { "sourceKey": "GT/Barn_HowToFeed_Manually_Water", "text": "Use a watering can to refill the animals' water.", "zhText": "用洒水壶给动物补水。" },
-          { "sourceKey": "GT/Barn_HowToFeed_Manually_AnimalHapiness", "text": "Pet animals at least once a day to build the relationship, alongside meeting their food and water needs.", "zhText": "满足食物和饮水需求，并至少每天抚摸一次以增进关系。" }
+          {
+            "sourceKey": "GT/Barn_HowToFeed_Manually_AnimalDiet",
+            "text": "Open the animal's information popup to check its diet before choosing feed or mixing species in a barn.",
+            "zhText": "先打开动物信息窗口查看饮食需求，再选择饲料或安排不同物种同住。"
+          },
+          {
+            "sourceKey": "GT/Barn_HowToFeed_Manually_Food",
+            "text": "Place suitable food in the barn's manger.",
+            "zhText": "把符合饮食需求的食物放入谷仓食槽。"
+          },
+          {
+            "sourceKey": "GT/Barn_HowToFeed_Manually_Water",
+            "text": "Use a watering can to refill the animals' water.",
+            "zhText": "用洒水壶给动物补水。"
+          },
+          {
+            "sourceKey": "GT/Barn_HowToFeed_Manually_AnimalHapiness",
+            "text": "Pet animals at least once a day to build the relationship, alongside meeting their food and water needs.",
+            "zhText": "满足食物和饮水需求，并至少每天抚摸一次以增进关系。"
+          }
         ],
         "equipment": [
-          { "id": "tools_rope", "name": "Rope", "zhName": "绳子" },
-          { "id": "tools_bucket_wood", "name": "Bucket", "zhName": "水桶" },
-          { "id": "ressource_straw", "name": "Hay", "zhName": "干草" },
-          { "id": "Custum_Barn_HeaterModule", "name": "Barn Heat Kit", "zhName": "谷仓加热套件" },
-          { "id": "Custum_Barn_AutoFeederModule", "name": "Barn AutoFeeder Kit", "zhName": "谷仓自动喂食器套件" }
+          {
+            "id": "tools_rope",
+            "name": "Rope",
+            "zhName": "绳子"
+          },
+          {
+            "id": "tools_bucket_wood",
+            "name": "Bucket",
+            "zhName": "水桶"
+          },
+          {
+            "id": "ressource_straw",
+            "name": "Hay",
+            "zhName": "干草"
+          },
+          {
+            "id": "Custum_Barn_HeaterModule",
+            "name": "Barn Heat Kit",
+            "zhName": "谷仓加热套件"
+          },
+          {
+            "id": "Custum_Barn_AutoFeederModule",
+            "name": "Barn AutoFeeder Kit",
+            "zhName": "谷仓自动喂食器套件"
+          }
         ],
         "products": [
-          { "id": "consumable_milk_small_cow", "name": "Cow Milk - Small", "zhName": "小份牛奶", "group": "milk" },
-          { "id": "consumable_milk_medium_cow", "name": "Cow Milk - Medium", "zhName": "中份牛奶", "group": "milk" },
-          { "id": "consumable_milk_large_cow", "name": "Cow Milk - Large", "zhName": "大份牛奶", "group": "milk" },
-          { "id": "consumable_milk_gold_cow", "name": "Cow Milk - Giant", "zhName": "超大份牛奶", "group": "milk" },
-          { "id": "consumable_meat_small_cow", "name": "Cow Meat - Small", "zhName": "小块牛肉", "group": "meat" },
-          { "id": "consumable_meat_medium_cow", "name": "Cow Meat - Medium", "zhName": "中块牛肉", "group": "meat" },
-          { "id": "consumable_meat_big_cow", "name": "Meat Steak - Big", "zhName": "大块牛排", "group": "meat" }
+          {
+            "id": "consumable_milk_small_cow",
+            "name": "Cow Milk - Small",
+            "zhName": "小份牛奶",
+            "group": "milk"
+          },
+          {
+            "id": "consumable_milk_medium_cow",
+            "name": "Cow Milk - Medium",
+            "zhName": "中份牛奶",
+            "group": "milk"
+          },
+          {
+            "id": "consumable_milk_large_cow",
+            "name": "Cow Milk - Large",
+            "zhName": "大份牛奶",
+            "group": "milk"
+          },
+          {
+            "id": "consumable_milk_gold_cow",
+            "name": "Cow Milk - Giant",
+            "zhName": "超大份牛奶",
+            "group": "milk"
+          },
+          {
+            "id": "consumable_meat_small_cow",
+            "name": "Cow Meat - Small",
+            "zhName": "小块牛肉",
+            "group": "meat"
+          },
+          {
+            "id": "consumable_meat_medium_cow",
+            "name": "Cow Meat - Medium",
+            "zhName": "中块牛肉",
+            "group": "meat"
+          },
+          {
+            "id": "consumable_meat_big_cow",
+            "name": "Meat Steak - Big",
+            "zhName": "大块牛排",
+            "group": "meat"
+          }
         ]
       },
       "fields": [
@@ -1462,7 +1776,33 @@
             ]
           }
         ]
-      }
+      },
+      "lookupFacts": [
+        {
+          "nativeCareId": "cow-feed",
+          "text": "The current-build Cow food definition lists Hay.",
+          "zhText": "当前构建的牛食物配置列出：干草。",
+          "group": "Game-build diet configuration",
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-animal-diets"
+          ]
+        },
+        {
+          "nativeCareId": "cow-water",
+          "text": "The current-build Cow water array lists Water.",
+          "zhText": "当前构建的牛饮水配置列出：水。",
+          "group": "Game-build diet configuration",
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-animal-diets"
+          ]
+        }
+      ]
     },
     {
       "id": "goat",
@@ -1476,12 +1816,45 @@
         "evidenceLevel": "build-observed",
         "build": "0.8.10.842",
         "validity": "unknown",
-        "sourceIds": ["owned-build-animals", "owned-build-cattle-shop", "owned-build-animal-products", "owned-build-animal-guidance"],
+        "sourceIds": [
+          "owned-build-animals",
+          "owned-build-cattle-shop",
+          "owned-build-animal-products",
+          "owned-build-animal-guidance"
+        ],
         "entries": [
-          { "id": "animal_goat_white_female", "name": "Goat Doe", "zhName": "山羊 - 母羊", "stage": "adult", "sex": "female", "shopListed": true },
-          { "id": "animal_goat_white_male", "name": "Buck", "zhName": "山羊 - 公羊", "stage": "adult", "sex": "male", "shopListed": true },
-          { "id": "animal_goat_white_baby_female", "name": "Goat Doeling", "zhName": "山羊 - 小母羊", "stage": "young", "sex": "female", "shopListed": false },
-          { "id": "animal_goat_white_baby_male", "name": "Buckling", "zhName": "山羊 - 小公羊", "stage": "young", "sex": "male", "shopListed": false }
+          {
+            "id": "animal_goat_white_female",
+            "name": "Goat Doe",
+            "zhName": "山羊 - 母羊",
+            "stage": "adult",
+            "sex": "female",
+            "shopListed": true
+          },
+          {
+            "id": "animal_goat_white_male",
+            "name": "Buck",
+            "zhName": "山羊 - 公羊",
+            "stage": "adult",
+            "sex": "male",
+            "shopListed": true
+          },
+          {
+            "id": "animal_goat_white_baby_female",
+            "name": "Goat Doeling",
+            "zhName": "山羊 - 小母羊",
+            "stage": "young",
+            "sex": "female",
+            "shopListed": false
+          },
+          {
+            "id": "animal_goat_white_baby_male",
+            "name": "Buckling",
+            "zhName": "山羊 - 小公羊",
+            "stage": "young",
+            "sex": "male",
+            "shopListed": false
+          }
         ],
         "quest": {
           "id": "F_Quest_14",
@@ -1495,11 +1868,36 @@
         "care": [],
         "equipment": [],
         "products": [
-          { "id": "consumable_milk_small_goat", "name": "Goat Milk - Small", "zhName": "小份山羊奶", "group": "milk" },
-          { "id": "consumable_milk_medium_goat", "name": "Goat Milk - Medium", "zhName": "中份山羊奶", "group": "milk" },
-          { "id": "consumable_meat_small_goat", "name": "Goat Meat - Small", "zhName": "小块山羊肉", "group": "meat" },
-          { "id": "consumable_meat_medium_goat", "name": "Goat Meat - Medium", "zhName": "中块山羊肉", "group": "meat" },
-          { "id": "consumable_meat_big_goat", "name": "Goat Meat - Big", "zhName": "大块山羊肉", "group": "meat" }
+          {
+            "id": "consumable_milk_small_goat",
+            "name": "Goat Milk - Small",
+            "zhName": "小份山羊奶",
+            "group": "milk"
+          },
+          {
+            "id": "consumable_milk_medium_goat",
+            "name": "Goat Milk - Medium",
+            "zhName": "中份山羊奶",
+            "group": "milk"
+          },
+          {
+            "id": "consumable_meat_small_goat",
+            "name": "Goat Meat - Small",
+            "zhName": "小块山羊肉",
+            "group": "meat"
+          },
+          {
+            "id": "consumable_meat_medium_goat",
+            "name": "Goat Meat - Medium",
+            "zhName": "中块山羊肉",
+            "group": "meat"
+          },
+          {
+            "id": "consumable_meat_big_goat",
+            "name": "Goat Meat - Big",
+            "zhName": "大块山羊肉",
+            "group": "meat"
+          }
         ]
       },
       "fields": [
@@ -1576,7 +1974,33 @@
             ]
           }
         ]
-      }
+      },
+      "lookupFacts": [
+        {
+          "nativeCareId": "goat-feed",
+          "text": "The current-build Goat food definition lists Hay, Green Lettuce, Green Salad, Carotte.",
+          "zhText": "当前构建的山羊食物配置列出：干草、绿叶生菜、绿色沙拉菜、胡萝卜。",
+          "group": "Game-build diet configuration",
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-animal-diets"
+          ]
+        },
+        {
+          "nativeCareId": "goat-water",
+          "text": "The current-build Goat water array lists Water.",
+          "zhText": "当前构建的山羊饮水配置列出：水。",
+          "group": "Game-build diet configuration",
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-animal-diets"
+          ]
+        }
+      ]
     },
     {
       "id": "sheep",
@@ -1631,7 +2055,33 @@
             ]
           }
         ]
-      }
+      },
+      "lookupFacts": [
+        {
+          "nativeCareId": "ram-feed",
+          "text": "The current-build Ram food definition lists Hay. This source does not establish the ewe diet.",
+          "zhText": "当前构建的公绵羊（RAM）食物配置列出：干草。该来源不能证明母绵羊使用相同饮食。",
+          "group": "Game-build diet configuration",
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-animal-diets"
+          ]
+        },
+        {
+          "nativeCareId": "ram-water",
+          "text": "The current-build Ram water array lists Water. This source does not establish the ewe water configuration.",
+          "zhText": "当前构建的公绵羊（RAM）饮水配置列出：水。该来源不能证明母绵羊使用相同饮水配置。",
+          "group": "Game-build diet configuration",
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-animal-diets"
+          ]
+        }
+      ]
     },
     {
       "id": "rabbit",
@@ -1701,7 +2151,33 @@
             ]
           }
         ]
-      }
+      },
+      "lookupFacts": [
+        {
+          "nativeCareId": "rabbit-feed",
+          "text": "The current-build Rabbit food definition lists Green Salad, Green Lettuce, Carotte.",
+          "zhText": "当前构建的兔子食物配置列出：绿色沙拉菜、绿叶生菜、胡萝卜。",
+          "group": "Game-build diet configuration",
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-animal-diets"
+          ]
+        },
+        {
+          "nativeCareId": "rabbit-water",
+          "text": "The current-build Rabbit water array lists Water.",
+          "zhText": "当前构建的兔子饮水配置列出：水。",
+          "group": "Game-build diet configuration",
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-animal-diets"
+          ]
+        }
+      ]
     }
   ],
   "sharedSystems": [
@@ -1927,5 +2403,136 @@
         "href": "/database/animals"
       }
     ]
+  },
+  "nativeAnimalCareReference": {
+    "build": "0.8.10.842",
+    "steamBuild": "24847725",
+    "evidenceLevel": "build-observed",
+    "validity": "unknown",
+    "sourceIds": [
+      "owned-build-animal-diets",
+      "owned-build-animal-delivery",
+      "owned-build-animal-guidance"
+    ],
+    "foods": [
+      {
+        "id": "ressource_straw",
+        "name": "Hay",
+        "zhName": "干草"
+      },
+      {
+        "id": "vegetable_green_luttuce_normal",
+        "name": "Green Lettuce",
+        "zhName": "绿叶生菜"
+      },
+      {
+        "id": "vegetable_red_luttuce_normal",
+        "name": "Green Salad",
+        "zhName": "绿色沙拉菜"
+      },
+      {
+        "id": "vegetable_carotte_normal",
+        "name": "Carotte",
+        "zhName": "胡萝卜"
+      },
+      {
+        "id": "farm_water_1L",
+        "name": "Water",
+        "zhName": "水"
+      }
+    ],
+    "diets": [
+      {
+        "id": "chicken",
+        "sourceObject": "Deadly_NPC_Food_DEF_Chickens",
+        "speciesId": "chicken",
+        "foodIds": [
+          "ressource_straw"
+        ],
+        "waterIds": [
+          "farm_water_1L"
+        ]
+      },
+      {
+        "id": "cow",
+        "sourceObject": "Deadly_NPC_Food_DEF_COWS",
+        "speciesId": "cow",
+        "foodIds": [
+          "ressource_straw"
+        ],
+        "waterIds": [
+          "farm_water_1L"
+        ]
+      },
+      {
+        "id": "goat",
+        "sourceObject": "Deadly_NPC_Food_DEF_GOAT",
+        "speciesId": "goat",
+        "foodIds": [
+          "ressource_straw",
+          "vegetable_green_luttuce_normal",
+          "vegetable_red_luttuce_normal",
+          "vegetable_carotte_normal"
+        ],
+        "waterIds": [
+          "farm_water_1L"
+        ]
+      },
+      {
+        "id": "rabbit",
+        "sourceObject": "Deadly_NPC_Food_DEF_RABIT",
+        "speciesId": "rabbit",
+        "foodIds": [
+          "vegetable_red_luttuce_normal",
+          "vegetable_green_luttuce_normal",
+          "vegetable_carotte_normal"
+        ],
+        "waterIds": [
+          "farm_water_1L"
+        ]
+      },
+      {
+        "id": "ram",
+        "sourceObject": "Deadly_NPC_Food_DEF_RAM",
+        "speciesId": "sheep",
+        "entryIds": [
+          "animal_ram_male"
+        ],
+        "foodIds": [
+          "ressource_straw"
+        ],
+        "waterIds": [
+          "farm_water_1L"
+        ]
+      }
+    ],
+    "delivery": {
+      "titleSourceKey": "GT/Animals_Pickable_FromDeliveryToBarn_Title",
+      "title": "Bringing small animals home",
+      "zhTitle": "带小动物回家",
+      "steps": [
+        {
+          "sourceKey": "GT/Animals_Pickable_FromDeliveryToBarn_DeliveryZone",
+          "text": "Pick up purchased animals from the shop's Delivery Zone.",
+          "zhText": "到商店取货区领取已经购买的动物。"
+        },
+        {
+          "sourceKey": "GT/Animals_Pickable_FromDeliveryToBarn_GetInVec",
+          "text": "If you have a vehicle, use Get Animal In to load them into the boot.",
+          "zhText": "有车时使用“抱动物上车”把动物装入后备箱。"
+        },
+        {
+          "sourceKey": "GT/Animals_Pickable_FromDeliveryToBarn_GetOutVec",
+          "text": "At the ranch, open the boot and choose an animal to unload.",
+          "zhText": "回到牧场后打开后备箱，选择要卸下的动物。"
+        },
+        {
+          "sourceKey": "GT/Animals_Pickable_FromDeliveryToBarn_AssociateWithBarn",
+          "text": "Carry the animal into the correct barn or coop and release it inside to assign its home.",
+          "zhText": "把动物抱进对应的畜棚或鸡舍，并在里面放下以完成住所分配。"
+        }
+      ]
+    },
+    "boundary": "Serialized diet arrays and tutorial text establish configured choices and an intended action path. They do not establish quantities, feeding frequency, seller, stock, price, runtime availability or animal output."
   }
 }

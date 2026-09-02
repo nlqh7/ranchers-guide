@@ -85,7 +85,8 @@ for (const relative of ["map.html", "zh/map.html"]) {
   const html = read(relative);
   for (const pattern of [
     /data-map-marker-layer/,
-    /data-map-pin-filter="all"/,
+    /data-location-category/,
+    /data-map-marker-type-list/,
     /data-map-evidence-filter="supported"/,
     /data-map-evidence-filter="reported"/,
     /data-map-evidence-filter="planned"/,

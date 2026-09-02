@@ -46,8 +46,9 @@ assert.match(mapScript, /addEventListener\("resize"[\s\S]*?buildMarkerStacks\(\)
 assert.match(mapScript, /dataset\.markerId\s*!==\s*current\.dataset\.markerId/, "compact mobile stacks must not merge unrelated POI types into one misleading badge");
 
 const styles = read("assets/css/style.css");
-const mapStyles = styles.slice(styles.indexOf(".map-layer-panel"), styles.indexOf("/* ---------- Problem finder ---------- */"));
-assert.match(styles, /\.map-stage\s*\{[\s\S]*?aspect-ratio:\s*1\s*\/\s*1;/, "the complete native map must retain its square aspect ratio");
+const mapStyles = styles.slice(styles.indexOf(".map-viewer-layout"), styles.indexOf("/* ---------- Problem finder ---------- */"));
+assert.match(styles, /\.map-viewer-panel:not\(\.is-map-fullscreen\) \.map-stage\s*\{[^}]*aspect-ratio:\s*16\s*\/\s*10;/, "the embedded viewport must avoid wasting a full screen on the square source texture");
+assert.match(styles, /\.map-viewer-panel:not\(\.is-map-fullscreen\) \.map-canvas\s*\{[^}]*aspect-ratio:\s*1\s*\/\s*1;/, "the source map itself must remain square inside the shortened viewport");
 assert.match(styles, /\.map-marker-native-icon\s*\{[\s\S]*?pointer-events:\s*none;/, "native glyphs must not steal marker interaction");
 assert.doesNotMatch(styles, /map-marker-stack-count/, "dense native POI stacks must not add a numeric overlay to native icons");
 assert.doesNotMatch(styles, /\.map-marker\s*\{[\s\S]*?transform:\s*scale\(calc\(1\s*\/\s*var\(--map-scale/, "map markers must scale with the map instead of shrinking relative to it");
@@ -68,9 +69,10 @@ assert.match(styles, /\.map-viewer-panel\.is-map-fullscreen \.map-secondary-acti
 assert.match(styles, /\.map-region-tabs\s*\{[\s\S]*?border-radius:\s*10px;[\s\S]*?background:/, "region tabs must read as one segmented control");
 assert.match(styles, /\.map-pan-controls,\s*\.map-zoom-controls\s*\{[\s\S]*?border-radius:\s*10px;[\s\S]*?background:/, "pan and zoom controls must read as grouped controls");
 assert.match(styles, /\.map-expand-toggle\s*\{[\s\S]*?background:\s*var\(--green-700\);[\s\S]*?color:\s*#fff;/, "expand map must be the primary toolbar action");
-assert.match(mapStyles, /\.map-layer-grid button\s*\{[\s\S]*?background:\s*var\(--color-surface\);/, "layer cards must use a defined surface token");
-assert.match(mapStyles, /\.map-layer-grid button\.active\s*\{[\s\S]*?var\(--color-surface\)/, "active layer cards must retain a visible surface behind the tint");
-assert.doesNotMatch(mapStyles, /var\(--cream-400\)/, "map layer panel must not depend on an undefined border token");
+assert.match(styles, /\.map-type-filters\s*\{[^}]*background:\s*var\(--color-surface\);/, "the unified native-icon filter must use a defined surface token");
+assert.match(styles, /\.map-marker-type-filter\s*\{[^}]*background:\s*var\(--color-surface\);/, "native-icon filter buttons must retain a visible surface");
+assert.match(styles, /\.map-marker-type-filter:hover,[\s\S]*?\.map-marker-type-filter\.active\s*\{[^}]*background:\s*var\(--cream-100\);/, "the active native-icon filter must use a defined selected surface");
+assert.doesNotMatch(mapStyles, /var\(--cream-400\)/, "map controls must not depend on an undefined border token");
 assert.match(styles, /-webkit-touch-callout:\s*none;/, "protected game art should deter long-press copying");
 
 console.log("PASS: complete native map, exact POI layers and game-art safeguards are wired.");
