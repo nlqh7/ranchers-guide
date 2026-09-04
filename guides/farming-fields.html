@@ -26,7 +26,7 @@
     <nav class="nav-inner" aria-label="Main navigation">
       <a class="logo" href="/">
         <span class="logo-mark"><img src="../assets/img/logo.png" alt="" width="34" height="34"></span>
-        <span>The Ranchers Guide<small>Unofficial fan resource</small></span>
+        <span>The Ranchers Guide</span>
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
       <ul class="nav-links">
@@ -66,7 +66,7 @@
       <section class="answer-box">
         <h2>Answer first</h2>
         <ul>
-          <li><strong>There is currently no manual delete tool for a field plot.</strong> Leave it empty and unseeded, stop watering it, and wait a few dry days for it to revert; rain can slow the process. This is post-launch guidance from an official forum moderator. The watering interval for a planted crop is still unverified <span class="evidence-badge evidence-official">Official moderator guidance</span>.</li>
+          <li><strong>There is currently no manual delete tool for a field plot.</strong> Leave it empty and unseeded, stop watering it, and wait a few dry days for it to revert; rain can slow the process. This is post-launch guidance from an official forum moderator. <span class="evidence-badge evidence-official">Official moderator guidance</span></li>
           <li><strong>Forgetting to harvest does not destroy your crop.</strong> Fruit and vegetables stay on the plant; seeds are only lost when the plant itself dies <span class="evidence-badge evidence-official">Official</span> <em>pre-EA update, not yet re-tested on 0.8.10.842</em>.</li>
           <li><strong>Players report seasonal crops disappearing at a season change.</strong> One reply identifies day 30 as the last harvest day and day 1 as the rollover; treat that exact cutoff as a reported rule until it is reproduced <span class="evidence-badge evidence-reported">Current-build reports</span>.</li>
           <li><strong>Sell through the CashIn chest</strong> — full workflow in the <a href="/guides/money-making#cashin">money-making guide</a>.</li>
@@ -75,17 +75,19 @@
         </ul>
       </section>
 
-      <section class="answer-box" id="start-farming">
-        <h2>What to do on a new save</h2>
-        <p>This is a practical sequence, not a mandatory progression line. It keeps early decisions reversible while the current-build tilling and greenhouse steps are still open.</p>
-        <ol>
-          <li><strong>Start with a small test plot.</strong> Use the crop database to check the seed's season and observed timing before spending your whole balance.</li>
-          <li><strong>Do not plant at the end of a season.</strong> Current reports place the last harvest around day 30, but the exact cutoff still needs reproduction; leave room for the crop to mature.</li>
-          <li><strong>Use CashIn for the first harvest.</strong> The money arrives in the end-of-day Farming line, so do not mistake a delayed settlement for a failed sale.</li>
-          <li><strong>Skip a large fertilizer purchase for now.</strong> The official calculation warning is still unresolved on the latest reviewed build.</li>
-          <li><strong>Do not follow an old greenhouse or hoe tutorial as a confirmed route.</strong> Keep those steps on hold until a current-build observation records the exact prompt and unlock path.</li>
-        </ol>
-      </section>
+      <!-- BEGIN HOE TUTORIAL REFERENCE -->
+<section class="answer-box tutorial-reference" id="start-farming" aria-labelledby="start-farming-title" data-search-entry data-search-title="Starting your first plantation with the hoe" data-search-tags="how to start first plantation hoe till soil red white obstacle owned land plant seed use button watering can water every day weeds birds season" data-search-status="Game-build guidance">
+  <h2 id="start-farming-title">Starting your first plantation with the hoe</h2>
+  <p><strong>Short answer: </strong>Till land you own when the hoe square is white, then plant a seed and water it. Keep the season right, water every day, remove weeds and stop birds from stealing seeds.</p>
+  <ol>
+    <li><strong>Find a valid spot:</strong> Move onto land you own. A red hoe-placement square means an obstacle blocks the spot; white means it is ready.</li>
+    <li><strong>Prepare the soil:</strong> When the placement square is white, use the hoe to till the ground.</li>
+    <li><strong>Plant and water:</strong> Equip a seed, stand over the tilled soil, press the use button, then water it with the watering can.</li>
+    <li><strong>Maintain the plot:</strong> Use the correct season, water every day, remove weeds from existing plantations with the hoe, and keep birds from stealing the seeds.</li>
+  </ol>
+  <p class="recipe-boundary"><span class="evidence-badge evidence-build">Game files</span> The source does not state growth times, what one missed watering day does, how to obtain the tools, which crops belong to each season, how to stop birds, crop yield, or profit. Checked against 0.8.10.842.</p>
+</section>
+<!-- END HOE TUTORIAL REFERENCE -->
 
       <nav class="toc" aria-label="Table of contents">
         <strong>In this guide</strong>
@@ -93,11 +95,11 @@
           <li><a href="#harvest-rules">Forgetting to harvest &amp; when seeds disappear</a></li>
           <li><a href="#season-change">Season change wipes seasonal crops</a></li>
           <li><a href="#regrow">Regrow vs one-time crops</a></li>
-          <li><a href="#watering">Watering: not a daily chore</a></li>
+          <li><a href="#watering">Watering planted crops every day</a></li>
           <li><a href="#selling">Selling your harvest</a></li>
           <li><a href="#fertilizer">Fertilizer: official warning still active</a></li>
           <li><a href="#start-farming">What to do on a new save</a></li>
-          <li><a href="#unverified">Not yet verified: tilling &amp; greenhouses</a></li>
+          <li><a href="#unverified">Greenhouse unlock questions</a></li>
           <li><a href="#limitations">Known limitations</a></li>
           <li><a href="#faq">Farming FAQ</a></li>
         </ul>
@@ -132,12 +134,13 @@
       <p><span class="evidence-badge evidence-official">Official moderator guidance</span> <span class="evidence-badge evidence-corroborated">Players reproduced the dry-out</span> <em>post-launch, Jul 31-Aug 2, 2026</em></p>
       <p><strong>There is currently no manual delete tool.</strong> In <a href="https://steamcommunity.com/app/1501310/discussions/0/587307627624745847/" rel="noopener noreferrer">"How to destroy the farming plots?"</a> (Jul 31), official moderator Jennoula says an empty plot will vanish after a few dry days without seeding or watering and that rain can slow the process. The moderator repeated the same rule in <a href="https://steamcommunity.com/app/1501310/discussions/0/587307906418985589/" rel="noopener noreferrer">"Crops tiles"</a> (Aug 2). Players in separate threads report the same result, with one estimating roughly three dry days. The exact timer can vary with rain, so use "a few dry days," not a guaranteed three-day countdown.</p>
       <p>This answer applies to <strong>empty tilled plots</strong>. It does <strong>not</strong> establish how often a planted crop must be watered, so the plot-removal timer must not be used as crop-care advice.</p>
+      <p>The current-build tutorial text separately tells players to water planted seeds every day. The exact penalty or recovery after one missed day is not stated, so daily watering is the safe documented routine while the empty-plot dry-out rule remains separate.</p>
       <p>The same Dec 2, 2025 official update also confirms the watering toolset exists and was tuned: <strong>sprinkler timings adjusted to water plantations more quickly</strong>, and a <strong>larger area of effect for the watering can</strong> <span class="evidence-badge evidence-official">Official</span> <em>pre-EA</em>. Launch-build footage shows three sprinkler tiers and a water well in the crafting menu's farming tab <span class="evidence-badge evidence-video">Video-observed</span> <em>build 0.8.10.455</em>. One German-language player report mentions a watering can covering about 7 fields and an advanced sprinkler covering 25 — a <span class="evidence-badge evidence-reported">Single report</span> we have not corroborated.</p>
       <p><strong>What we do not know yet:</strong> how a sprinkler connects to water or power (pipe, cable, well radius or none) is not shown in any retained source, so we deliberately do not print hookup instructions. Treat sprinkler placement as finicky too — one player calls placement "still wonky" (<a href="https://steamcommunity.com/app/1501310/discussions/0/587307627624786953/" rel="noopener noreferrer">same thread</a>, single report).</p>
 
       <h2 id="selling">Selling your harvest</h2>
       <p><span class="evidence-badge evidence-video">Video-observed</span> <em>recorded on build 0.8.10.455</em></p>
-      <p>Harvests are sold through the <strong>CashIn chest</strong>: deposit produce during the day and the money lands as the "Farming" line of the end-of-day settlement, which does not break down per crop. The full observed workflow — linking the chest, depositing, and reading the bill — is documented step by step in the <a href="/guides/money-making#cashin">money-making guide's CashIn section</a>, so we do not repeat it here.</p>
+      <p>Harvests are sold through the <strong>CashIn chest</strong>: deposit produce during the day and collect the payment the next day. The older settlement recording grouped crop income under one "Farming" line and did not break down individual crop prices. See the <a href="/guides/money-making#cashin">money-making guide's CashIn section</a> for the complete current route.</p>
       <p>The Dec 2, 2025 update also mentions an economy pass with <strong>fruit, vegetable and seed prices adjusted</strong> <span class="evidence-badge evidence-official">Official</span> <em>pre-EA</em>, which is why we never quote Alpha-era price lists as current values. Per-crop sell prices remain unknown while the settlement screen stays aggregated — see the <a href="/database/crops">crop database</a> for what is measured versus pending.</p>
 
       <h2 id="fertilizer">Fertilizer: official warning, current behavior pending</h2>
@@ -145,12 +148,8 @@
       <p>In <a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364355575/" rel="noopener noreferrer">"Furtilizer not worth it"</a> (Aug 3, 2026), a player documented spending 8,000C on legendary fertilizer that covered 8 of 24 plots and netted only 79C of extra profit. Support moderator Jennoula replied on Aug 4, 2026: <em>"we are aware that the fertilizer is not currently calculating correctly and it is being looked into, so for now just avoid investing in fertilizer until we get it adjusted again."</em></p>
       <p>The <strong>0.8.10.842 hotfix notes (Aug 21, 2026) do not announce a fertilizer fix</strong>, but omission from patch notes is not proof that behavior stayed unchanged. We have not re-tested fertilizer on 0.8.10.842. Until a current-build test or official reply confirms the calculation was adjusted, the cautious recommendation is to <strong>avoid a large fertilizer investment</strong>. Fertilizer is still visible in the shop (Leafy Market's Seed &amp; Fertilizer tab, video-observed on 0.8.10.455) — availability does not verify its return.</p>
 
-      <h2 id="unverified">Not yet verified: tilling &amp; greenhouses</h2>
-      <p>These two topics decide how you <em>start</em> and <em>extend</em> a farm, but our evidence for the current build is not strong enough to print instructions. Rather than copying 2022 Alpha tutorials, we hold both:</p>
-      <h3>How do you open a new field? (Hold)</h3>
-      <p><span class="evidence-badge evidence-historical">Historical</span> <span class="evidence-badge evidence-lead">Unverified lead</span></p>
-      <p>The only hoe-based tilling account on record is from the <strong>2022 Alpha</strong> (a player buying seeds and a hoe, planting and watering daily) — useful as a hint that a hoe tool is involved, but two major versions out of date. Current-build evidence only proves the mechanic is <em>called</em> "tilling" and that tilled plots revert to normal ground on their own (a feedback thread asks for a way to undo tilling, Aug 6, 2026; the dry-out threads above). Launch-build footage shows three "foundation"-type items in the crafting menu's farming tab <span class="evidence-badge evidence-video">Video-observed</span> <em>build 0.8.10.455</em>, but whether they are related to opening a field is unproven.</p>
-      <p><strong>Planned verification (not yet done):</strong> buy the hoe at the seed shop, use it on open ground, record the exact prompts and whether a plot appears; then place each of the three farming-tab "foundation" items and document what they create. Until that is recorded, any step-by-step "how to till" you read elsewhere — including anything we could write — is unverified.</p>
+      <h2 id="unverified">Greenhouse unlock questions</h2>
+      <p>The current hoe and field-starting route is documented above from current-build tutorial text. The greenhouse unlock path still needs a current-build source.</p>
       <h3>What is the greenhouse and how do you unlock it? (Hold)</h3>
       <p><span class="evidence-badge evidence-historical">Historical</span> <span class="evidence-badge evidence-reported">Single report</span></p>
       <p>The greenhouse appears in official materials as one of the ways to build out the farm, and one current-build player (Mancer, in the <a href="https://steamcommunity.com/app/1501310/discussions/0/587307906419070201/" rel="noopener noreferrer">eggplant thread</a>) reports that <strong>greenhouses allow out-of-season planting</strong>, saying they tested planting in winter with one — a single self-reported test, not yet corroborated. The only unlock-path evidence on record is from <strong>November 2022</strong>: the developers confirmed back then that the greenhouse blueprint was sold by Lina and required both materials and money. Whether that vendor, price and requirement survived into Early Access is unknown.</p>
@@ -167,7 +166,7 @@
       <h2 id="faq">Farming FAQ</h2>
       <details class="faq-item">
         <summary>Do I have to water crops every day?</summary>
-        <div class="faq-body"><p>Not verified yet for planted crops. Corroborated player reports only establish that an <strong>empty, unseeded tilled plot</strong> can revert after roughly three dry days and that rain counts. Do not use that timer as a crop-watering schedule until a current-build test records plant condition over several days.</p></div>
+        <div class="faq-body"><p>Yes—the current-build tutorial tells players to water planted seeds every day. It does not state the exact penalty or recovery after one missed day. The separate “few dry days” rule applies only to empty, unseeded tilled plots.</p></div>
       </details>
       <details class="faq-item">
         <summary>What happens if I forget to harvest?</summary>
@@ -234,6 +233,7 @@
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>
             <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
             <li><a href="/methodology">Methodology</a></li>
           </ul>
         </nav>

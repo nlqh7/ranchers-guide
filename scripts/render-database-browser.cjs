@@ -128,7 +128,7 @@ function decoratePage(html, data, kind, locale) {
     .replace(/<nav class="toc"[\s\S]*?<\/nav>/g, toc => `<details class="database-outline"><summary>${zh ? '完整目录' : 'Full contents'}</summary>${toc}</details>`)
     .replace(/<p class="meta">([\s\S]*?)<\/p>/, (_, meta) => `<details class="database-reference-notes"><summary>${zh ? '版本与资料说明' : 'Version & reference notes'}</summary><p class="meta">${meta}</p></details>`)
     .replace(/<div class="evidence-status">[\s\S]*?<\/div>/, notice => `<details class="database-outline"><summary>${zh ? '资料来源与验证说明' : 'Sources and verification'}</summary>${notice}</details>`)
-    .replace(/(<section class="database-browser"[\s\S]*?<\/section>)([\s\S]*?)(?=<section class="evidence-ledger animal-profile")/, (_, browser, intro) => {
+    .replace(/(<section class="database-browser"[\s\S]*?<\/section>)([\s\S]*?)(?=<section class="evidence-ledger (?:native-animal-care-reference|animal-profile)")/, (_, browser, intro) => {
       const delivery = intro.match(/<section class="evidence-ledger" id="bringing-small-animals-home"[\s\S]*?<\/section>/)?.[0] || '';
       const referenceIntro = delivery ? intro.replace(delivery, '') : intro;
       return `${browser}${delivery ? `\n${delivery}` : ''}<details class="database-reference-notes"><summary>${zh ? '使用指南与资料说明' : 'Getting started & reference notes'}</summary>${referenceIntro}</details>\n`;

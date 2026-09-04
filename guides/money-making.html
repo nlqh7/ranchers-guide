@@ -25,7 +25,7 @@
     <nav class="nav-inner" aria-label="Main navigation">
       <a class="logo" href="/">
         <span class="logo-mark"><img src="../assets/img/logo.png" alt="" width="34" height="34"></span>
-        <span>The Ranchers Guide<small>Unofficial fan resource</small></span>
+        <span>The Ranchers Guide</span>
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
       <ul class="nav-links">
@@ -197,18 +197,21 @@
         <li>Repeat time-sensitive observations before describing a stable price pattern.</li>
       </ul>
 
-      <h2 id="cashin">How to sell crops: the CashIn chest</h2>
-      <p><strong>Quick answer:</strong> sell your harvest through the <strong>CashIn Export Storage Chest</strong> next to the Cargo/helipad paved area on your ranch. <strong>Depositing crops pays nothing on the spot</strong> — the money arrives in that day's end-of-day settlement, on the <strong>Farming</strong> line. <small>Observed in EA 0.8.10.455.</small></p>
-      <ol>
-        <li><strong>Harvest and carry</strong> your crops to the CashIn chest by the Cargo/helipad area.</li>
-        <li><strong>Transfer them into the chest</strong> — your wallet does not change at this point, and that is normal, not a bug.</li>
-        <li><strong>Sleep and check the settlement screen.</strong> Crop income appears as one combined Farming total (observed example: Day 8, Farming +1,534).</li>
-      </ol>
-      <p>Two consequences worth knowing before you go price-hunting. First, the settlement <strong>does not break the Farming line down per crop</strong>, so per-crop sell prices cannot be read off it — which is why no per-crop sell prices are published on this site yet. Second, if you deposited crops and "got no money," check the next morning's settlement before assuming a bug.</p>
-      <p>One more possible channel: Meriam, the architect at City Hall, has a <strong>"Sell items"</strong> dialogue option. It was not used in the observed playthrough, so treat it as an unverified lead, not a confirmed shop. <small>Observed in EA 0.8.10.455.</small></p>
-      <p class="source-note">Map entry: <a href="/map#cash-in-box">Cash-In box on the Sunvale map</a>.</p>
-
-      <h2 id="energy">Utility income: selling surplus power</h2>
+      <!-- BEGIN CASHIN TUTORIAL REFERENCE -->
+<section class="answer-box tutorial-reference" id="cashin" aria-labelledby="cashin-title" data-search-entry data-search-title="CashIn: how to sell and get paid next day" data-search-tags="CashIn how to sell crops items drag move take 1 single item full stack next day payout quality price" data-search-status="Game-build guidance">
+  <h2 id="cashin-title">CashIn: how to sell and get paid next day</h2>
+  <p><strong>Short answer: </strong>Move the items you want to sell into the CashIn box. Deposits pay out the next day, and better-quality items pay more.</p>
+  <ol>
+    <li><strong>Choose the amount:</strong> Transfer a full stack, or use Take 1 item when you want to deposit a single unit.</li>
+    <li><strong>Put it in CashIn:</strong> Drag the selected items into the box with mouse controls, or use Move with controller controls.</li>
+    <li><strong>Wait for payment:</strong> The deposit does not pay immediately. CashIn Corp pays it out the next day.</li>
+    <li><strong>Compare like with like:</strong> Quality affects the payout: better quality means higher pay.</li>
+  </ol>
+  <p>An older settlement-screen observation showed the eventual crop payout as one combined Farming total, so it cannot establish a per-crop sell price.</p>
+  <p class="source-note">Location: <a href="/map#cash-in-box">Open the Cash-In box on the map</a>.</p>
+  <p class="recipe-boundary"><span class="evidence-badge evidence-build">Game files</span> The source does not provide an accepted-item list, exact item prices, payout time of day, fees, or a numerical quality multiplier. Checked against 0.8.10.842.</p>
+</section>
+<!-- END CASHIN TUTORIAL REFERENCE --><h2 id="energy">Utility income: selling surplus power</h2>
       <p>The official Steam description says players can use wells, wind turbines, and solar panels, and can sell surplus power <span class="evidence-badge evidence-official">Official</span>. To evaluate that system, record equipment cost, output by time and weather, ranch consumption, sale rate, maintenance, and grid limits.</p>
       <p>Only surplus is revenue. Power consumed by sprinklers, buildings, or other equipment is an avoided purchase or operating benefit, not a second sale. Keep those two benefits separate to avoid double-counting. Player reports that surplus sale payouts are unclear remain open <span class="evidence-badge evidence-reported">Unverified lead</span> — see the <a href="/research#excess-electricity">research queue</a> and the <a href="/guides/electricity-power">electricity guide</a>.</p>
 
@@ -338,7 +341,7 @@
         <li><a href="/updates">Update Impact Notes</a> — patch changes that shift prices, costs or mechanics.</li>
       </ul>
 
-      
+
 
       <aside class="author-card" aria-label="About the author">
         <div class="author-card-id">
@@ -351,7 +354,8 @@
       <!-- Ad slot placeholder
       <div class="ad-slot">Advertisement</div>
       -->
-    </article>
+
+</article>
   </main>
 
   <footer class="site-footer">
@@ -388,6 +392,7 @@
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>
             <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
             <li><a href="/methodology">Methodology</a></li>
           </ul>
         </nav>

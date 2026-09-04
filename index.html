@@ -70,7 +70,7 @@
     <nav class="nav-inner" aria-label="Main navigation">
       <a class="logo" href="/">
         <span class="logo-mark"><img src="assets/img/logo.png" alt="" width="34" height="34"></span>
-        <span>The Ranchers Guide<small>Unofficial fan resource</small></span>
+        <span>The Ranchers Guide</span>
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
       <ul class="nav-links">
@@ -109,32 +109,38 @@
     </section>
 
     <!-- Hero entry cards -->
-    <section class="section hero-cards" aria-label="Choose where to start">
+    <section class="section hero-cards" id="player-routes" aria-label="Choose what you need to do">
       <div class="container">
         <div class="card-grid cols-3">
           <article class="card">
-            <div class="card-icon">🆘</div>
-            <h3><a class="stretched" href="/problems">I'm stuck</a></h3>
-            <p>Quest bugs, animal problems, missing items.</p>
-            <a class="card-link" href="/problems">Problems &amp; Fixes →</a>
+            <h3><a class="stretched" href="/guides/beginners-guide">Start a new ranch</a></h3>
+            <p>Follow the first-day route from controls and saving to fields, selling and transport.</p>
+            <a class="card-link" href="/guides/beginners-guide">Beginner route →</a>
           </article>
           <article class="card">
-            <div class="card-icon">📖</div>
-            <h3><a class="stretched" href="/database">I want to learn</a></h3>
-            <p>Animals, crops, materials, NPCs, quests.</p>
-            <a class="card-link" href="/database">Wiki / Database →</a>
+            <h3><a class="stretched" href="/guides/money-making">Sell and make money</a></h3>
+            <p>Use CashIn correctly, compare early routes and avoid wasting a full game day.</p>
+            <a class="card-link" href="/guides/money-making">Money guide →</a>
           </article>
           <article class="card">
-            <div class="card-icon">🗺</div>
-            <h3><a class="stretched" href="/map">I want to explore</a></h3>
-            <p>Locations, shops, NPCs, services.</p>
-            <a class="card-link" href="/map">Interactive Map →</a>
+            <h3><a class="stretched" href="/guides/building-construction">Build and upgrade</a></h3>
+            <p>Check placement, hammer steps and complete material requirements before you build.</p>
+            <a class="card-link" href="/guides/building-construction">Building guide →</a>
           </article>
           <article class="card">
-            <div class="card-icon" aria-hidden="true">✓</div>
-            <h3><a class="stretched" href="/tools/ranch-checklist">I want a plan</a></h3>
-            <p>Track your next ranch goals and material gaps locally.</p>
-            <a class="card-link" href="/tools/ranch-checklist">Open Ranch Checklist →</a>
+            <h3><a class="stretched" href="/map">Find a place</a></h3>
+            <p>Locate shops, services, transport and landmarks on the interactive map.</p>
+            <a class="card-link" href="/map">Open map →</a>
+          </article>
+          <article class="card">
+            <h3><a class="stretched" href="/guides/animal-guide">Care for animals</a></h3>
+            <p>Check housing, feed, water, delivery and common chicken problems in one route.</p>
+            <a class="card-link" href="/guides/animal-guide">Animal guide →</a>
+          </article>
+          <article class="card">
+            <h3><a class="stretched" href="/problems">Fix a problem</a></h3>
+            <p>Start from the symptom for stuck quests, missing vehicles, loading and co-op issues.</p>
+            <a class="card-link" href="/problems">Problems and fixes →</a>
           </article>
         </div>
       </div>
@@ -250,8 +256,15 @@
             <p>The confirmed construction scope, the parts system, and the roof, furniture and wall placement reports that still need testing.</p>
             <a class="card-link" href="/guides/building-construction">Build smarter →</a>
           </article>
+          <article class="card">
+            <div class="card-img"><img src="assets/img/hero.webp" width="1920" height="620" alt="The Ranchers official artwork: a rancher and dog overlooking the ranch" loading="lazy"></div>
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M9 7h6M9 11h4"/></svg></div>
+            <h3><a class="stretched" href="/guides/review">Early Access Review</a></h3>
+            <p>Is It Worth Playing Now? What's actually playable, what's still planned, and who should buy now versus wait for updates.</p>
+            <a class="card-link" href="/guides/review">Read the review →</a>
+          </article>
         </div>
-      </div>
+        </div>
     </section>
 
     <!-- Latest updates -->
@@ -360,6 +373,7 @@
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>
             <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
             <li><a href="/methodology">Methodology</a></li>
           </ul>
         </nav>

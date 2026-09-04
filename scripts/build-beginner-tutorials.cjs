@@ -154,11 +154,26 @@ function renderVehicleOperation(zh) {
 }
 
 let stale = false;
+function upsertReference(before, markerPattern, rendered, legacyPattern = null) {
+  const clean = value => value.replace(/[ \t]+$/gm, '');
+  if (markerPattern.test(before)) return clean(before.replace(markerPattern, rendered));
+  if (legacyPattern?.test(before)) return clean(before.replace(legacyPattern, rendered));
+  const articleEnd = before.lastIndexOf('</article>');
+  if (articleEnd === -1) throw new Error('Missing article insertion target');
+  return clean(`${before.slice(0, articleEnd)}${rendered}\n${before.slice(articleEnd)}`);
+}
+
+function ensureTocLink(html, id, label) {
+  if (html.includes(`href="#${id}"`)) return html;
+  return html.replace(/(<nav class="toc"[\s\S]*?<ul>)([\s\S]*?)(<\/ul>[\s\S]*?<\/nav>)/,
+    (_, start, items, end) => `${start}${items}\n          <li><a href="#${id}">${label}</a></li>${end}`);
+}
+
 for (const zh of [false, true]) {
   const file = path.join(root, zh ? 'zh' : '', 'guides/beginners-guide.html');
   const before = fs.readFileSync(file, 'utf8');
-  if (!before.includes('<!-- BEGIN SLEEP TUTORIAL REFERENCE -->')) throw new Error(`Missing sleep tutorial block: ${file}`);
-  const after = before.replace(/<!-- BEGIN SLEEP TUTORIAL REFERENCE -->[\s\S]*?<!-- END SLEEP TUTORIAL REFERENCE -->/, renderSleep(zh));
+  const markerPattern = /<!-- BEGIN SLEEP TUTORIAL REFERENCE -->[\s\S]*?<!-- END SLEEP TUTORIAL REFERENCE -->/;
+  const after = upsertReference(before, markerPattern, renderSleep(zh));
   if (before === after) continue;
   if (process.argv.includes('--check')) {
     stale = true;
@@ -172,8 +187,7 @@ for (const zh of [false, true]) {
   const file = path.join(root, zh ? 'zh' : '', 'guides/beginners-guide.html');
   const before = fs.readFileSync(file, 'utf8');
   const markerPattern = /<!-- BEGIN SMARTPHONE TUTORIAL REFERENCE -->[\s\S]*?<!-- END SMARTPHONE TUTORIAL REFERENCE -->/;
-  if (!markerPattern.test(before)) throw new Error(`Missing smartphone tutorial block: ${file}`);
-  const after = before.replace(markerPattern, renderSmartphone(zh));
+  const after = upsertReference(before, markerPattern, renderSmartphone(zh));
   if (before === after) continue;
   if (process.argv.includes('--check')) {
     stale = true;
@@ -186,8 +200,13 @@ for (const zh of [false, true]) {
 for (const zh of [false, true]) {
   const file = path.join(root, zh ? 'zh' : '', 'guides/money-making.html');
   const before = fs.readFileSync(file, 'utf8');
-  if (!before.includes('<!-- BEGIN CASHIN TUTORIAL REFERENCE -->')) throw new Error(`Missing CashIn tutorial block: ${file}`);
-  const after = before.replace(/<!-- BEGIN CASHIN TUTORIAL REFERENCE -->[\s\S]*?<!-- END CASHIN TUTORIAL REFERENCE -->/, renderCashin(zh));
+  const markerPattern = /<!-- BEGIN CASHIN TUTORIAL REFERENCE -->[\s\S]*?<!-- END CASHIN TUTORIAL REFERENCE -->/;
+  const legacyPattern = zh
+    ? /<section id="cashin"[^>]*>[\s\S]*?<\/section>/
+    : /<h2 id="cashin">[\s\S]*?(?=<h2 id="energy">)/;
+  let cashinBase = before;
+  if (legacyPattern.test(cashinBase)) cashinBase = cashinBase.replace(markerPattern, '');
+  const after = upsertReference(cashinBase, markerPattern, renderCashin(zh), legacyPattern);
   if (before === after) continue;
   if (process.argv.includes('--check')) {
     stale = true;
@@ -202,9 +221,7 @@ for (const zh of [false, true]) {
   const before = fs.readFileSync(file, 'utf8');
   const markerPattern = /<!-- BEGIN HOE TUTORIAL REFERENCE -->[\s\S]*?<!-- END HOE TUTORIAL REFERENCE -->/;
   const legacyPattern = /<section class="answer-box" id="start-farming">[\s\S]*?<\/section>/;
-  const pattern = markerPattern.test(before) ? markerPattern : legacyPattern;
-  if (!pattern.test(before)) throw new Error(`Missing hoe tutorial target: ${file}`);
-  const after = before.replace(pattern, renderHoe(zh));
+  const after = upsertReference(before, markerPattern, renderHoe(zh), legacyPattern);
   if (before === after) continue;
   if (process.argv.includes('--check')) {
     stale = true;
@@ -218,8 +235,8 @@ for (const zh of [false, true]) {
   const file = path.join(root, zh ? 'zh' : '', 'guides/building-construction.html');
   const before = fs.readFileSync(file, 'utf8');
   const markerPattern = /<!-- BEGIN BLUEPRINT TUTORIAL REFERENCE -->[\s\S]*?<!-- END BLUEPRINT TUTORIAL REFERENCE -->/;
-  if (!markerPattern.test(before)) throw new Error(`Missing blueprint tutorial block: ${file}`);
-  const after = before.replace(markerPattern, renderBlueprint(zh));
+  const withReference = upsertReference(before, markerPattern, renderBlueprint(zh));
+  const after = ensureTocLink(withReference, 'blueprint-building', zh ? '蓝图建造步骤' : 'Blueprint building steps');
   if (before === after) continue;
   if (process.argv.includes('--check')) {
     stale = true;
@@ -233,8 +250,8 @@ for (const zh of [false, true]) {
   const file = path.join(root, zh ? 'zh' : '', 'guides/police-wanted-levels.html');
   const before = fs.readFileSync(file, 'utf8');
   const markerPattern = /<!-- BEGIN POLICE PURSUIT TUTORIAL REFERENCE -->[\s\S]*?<!-- END POLICE PURSUIT TUTORIAL REFERENCE -->/;
-  if (!markerPattern.test(before)) throw new Error(`Missing police pursuit tutorial block: ${file}`);
-  const after = before.replace(markerPattern, renderPolicePursuit(zh));
+  const withReference = upsertReference(before, markerPattern, renderPolicePursuit(zh));
+  const after = ensureTocLink(withReference, 'police-pursuit-current-build', zh ? '当前版本追捕与投降路线' : 'Current-build pursuit and surrender path');
   if (before === after) continue;
   if (process.argv.includes('--check')) {
     stale = true;
@@ -248,8 +265,8 @@ for (const zh of [false, true]) {
   const file = path.join(root, zh ? 'zh' : '', 'guides/vehicles-transport.html');
   const before = fs.readFileSync(file, 'utf8');
   const markerPattern = /<!-- BEGIN VEHICLE OPERATION TUTORIAL REFERENCE -->[\s\S]*?<!-- END VEHICLE OPERATION TUTORIAL REFERENCE -->/;
-  if (!markerPattern.test(before)) throw new Error(`Missing vehicle operation tutorial block: ${file}`);
-  const after = before.replace(markerPattern, renderVehicleOperation(zh));
+  const withReference = upsertReference(before, markerPattern, renderVehicleOperation(zh));
+  const after = ensureTocLink(withReference, 'vehicle-operation-current-build', zh ? '当前版本车辆操作' : 'Current-build vehicle operation');
   if (before === after) continue;
   if (process.argv.includes('--check')) {
     stale = true;

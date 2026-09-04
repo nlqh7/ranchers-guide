@@ -10,7 +10,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260902-ui2"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
-  <header class="site-header"><nav class="nav-inner" aria-label="主导航"><a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide<small>非官方中文玩家指南</small></span></a><button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button><ul class="nav-links"><li><a class="active" href="/zh/guides/beginners-guide">新手</a></li><li><a href="/zh/database">知识库</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li><li><a href="/zh/search">搜索</a></li><li><a class="nav-cta" href="/contribute">投稿</a></li></ul></nav></header>
+  <header class="site-header"><nav class="nav-inner" aria-label="主导航"><a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide</span></a><button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button><ul class="nav-links"><li><a class="active" href="/zh/guides/beginners-guide">新手</a></li><li><a href="/zh/database">知识库</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li><li><a href="/zh/search">搜索</a></li><li><a class="nav-cta" href="/contribute">投稿</a></li></ul></nav></header>
   <main><article class="article">
     <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / 攻略 / 赚钱指南</nav><h1>The Ranchers 赚钱指南</h1><p class="meta">2026-08-22 复核 · 当前版本 0.8.10.842 · 经济数值按观测版本标注 · 阅读约 15 分钟</p>
     <div class="evidence-status"><strong>证据状态：</strong>9 项官方系统事实 · 8 个视频观测经济锚点 · 3 条社区线索 · 2026-08-22 复核 — <a href="/zh/methodology">我们如何验证 →</a></div>
@@ -146,17 +146,21 @@
       </ul>
     </section>
 
-    <section id="cashin" data-search-entry data-search-title="怎么卖作物：CashIn 箱子" data-search-tags="cashin 卖作物 出售 箱子 结算 farming 停机坪 cargo"><h2>怎么卖作物：CashIn 箱子</h2>
-      <p><strong>快速回答：</strong>收获通过牧场 Cargo/停机坪水泥区旁边的 <strong>CashIn Export Storage Chest</strong> 出售。<strong>存进去当下不给钱</strong>——钱在当天结算时到账，记在 <strong>Farming</strong> 行。<small>EA 0.8.10.455 观测。</small></p>
-      <ol>
-        <li><strong>收获并搬运</strong>作物到 Cargo/停机坪区域的 CashIn 箱子。</li>
-        <li><strong>转移进箱子</strong>——这时钱包不会变，这是正常的，不是 bug。</li>
-        <li><strong>睡觉，看结算画面。</strong>作物收入显示为一个合并的 Farming 总额（观测实例：第 8 天，Farming +1,534）。</li>
-      </ol>
-      <p>去到处比价之前，有两个后果要知道。第一，结算<strong>不会把 Farming 行拆到每种作物</strong>，所以从结算画面读不出单作物售价——这就是本站至今不发布单作物售价的原因。第二，如果你存了作物"没收到钱"，先看第二天早晨的结算，再怀疑 bug。</p>
-      <p>还有一个可能的渠道：市政厅建筑师 Meriam 有 <strong>"Sell items"</strong> 对话选项。观测的实况里没用过它，当作未验证线索，不是已确认商店。<small>EA 0.8.10.455 观测。</small></p>
-      <p class="source-note">地图条目：<a href="/map#cash-in-box">Sunvale 地图上的 Cash-In 箱子 (EN)</a>。</p>
-    </section>
+    <!-- BEGIN CASHIN TUTORIAL REFERENCE -->
+<section class="answer-box tutorial-reference" id="cashin" aria-labelledby="cashin-title" data-search-entry data-search-title="CashIn 出售：怎么放入物品和第二天打款" data-search-tags="CashIn 现金兑换箱 怎么卖作物 出售物品 拖动 移动 拿1个 单个 整堆 第二天打款 品质 价格" data-search-status="游戏构建提示">
+  <h2 id="cashin-title">CashIn 出售：怎么放入物品和第二天打款</h2>
+  <p><strong>直接答案：</strong>把要卖的物品放进 CashIn 箱子；存入后第二天才付款，品质更好的物品收入更高。</p>
+  <ol>
+    <li><strong>选择数量：</strong> 可以转移整堆物品；只想放一个时，使用“拿 1 个”。</li>
+    <li><strong>放进 CashIn：</strong> 鼠标操作可拖入箱子，手柄操作则选择物品后使用“移动”。</li>
+    <li><strong>等待打款：</strong> 存入时不会立即到账；CashIn 公司会在第二天付款。</li>
+    <li><strong>同品质再比较：</strong> 品质会影响收入：品质越高，获得的钱越多。</li>
+  </ol>
+  <p>旧版结算画面只把最终作物收入显示为合并的 Farming 总额，不能据此反推单种作物售价。</p>
+  <p class="source-note">位置：<a href="/zh/map#cash-in-box">在地图中查看 Cash-In 箱子</a>。</p>
+  <p class="recipe-boundary"><span class="evidence-badge evidence-build">游戏文件</span> 来源没有给出可接收物品清单、单件价格、第二天的具体到账时点、手续费或品质倍率。 核对版本 0.8.10.842。</p>
+</section>
+<!-- END CASHIN TUTORIAL REFERENCE -->
 
     <section id="energy" data-search-entry data-search-title="卖电收入：多余电力" data-search-tags="电 卖电 太阳能 风力 水井 公用事业"><h2>卖电收入：多余电力</h2>
       <p>官方 Steam 描述说玩家可以用水井、风力发电机和太阳能板，并能出售多余电力 <span class="evidence-badge evidence-official">官方</span>。评估这个系统要记录：设备成本、分时间和天气的产出、牧场自用、出售费率、维护和电网限制。</p>
@@ -295,12 +299,13 @@
         <li><a href="/zh/updates">更新影响解读</a>——改变价格、成本或机制的补丁说明。</li>
       </ul>
 
-      
+
 
     <aside class="author-card" aria-label="关于作者">
       <div class="author-card-id"><strong>Niki</strong><span>本站编辑，The Ranchers Guide</span></div>
       <p>由本站编辑 Niki 调研和编辑。玩法证据来自公开视频、官方更新和社区报告。最近复核：2026 年 8 月。覆盖版本：0.8.10.x。<a href="/zh/methodology">我们如何验证 →</a></p>
     </aside>
-  </article></main>
+
+</article></main>
   <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>购买价、零售价、出售收入严格分开</span></div></div></footer><script src="/assets/js/main.js?v=20260810-nav1" defer></script>
 </body></html>

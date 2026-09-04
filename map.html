@@ -12,34 +12,30 @@
   <meta property="og:type" content="article"><meta property="og:site_name" content="The Ranchers Guide"><meta property="og:title" content="The Ranchers Map & Sunvale Location Finder"><meta property="og:description" content="A searchable, source-graded directory for shops, transport and landmarks in Sunvale."><meta property="og:url" content="https://theranchersguide.com/map"><meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
 
 
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260902-ui2">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260827-map44">
+
 </head>
 <body>
-  <header class="site-header"><nav class="nav-inner" aria-label="Main navigation"><a class="logo" href="/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide<small>Unofficial fan resource</small></span></a><button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button><ul class="nav-links">
+  <header class="site-header"><nav class="nav-inner" aria-label="Main navigation"><a class="logo" href="/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide</span></a><button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button><ul class="nav-links">
     <li><a href="/guides/beginners-guide">Guides</a></li><li><a href="/database">Database</a></li><li><a class="active" href="/map">Map</a></li><li><a href="/problems">Problems</a></li><li><a href="/research">Research</a></li><li><a href="/search">Search</a></li><li><a class="nav-cta" href="/contribute">Contribute</a></li>
   </ul></nav></header>
   <main>
-    <section class="knowledge-hero"><div class="container knowledge-hero-inner"><div><nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Map</nav><h1>The Ranchers Map & Location Finder</h1><p class="lead">Open the in-game <strong>Map</strong> app, then search for a place below or click a map marker to see its details.</p></div></div></section>
+    <section class="knowledge-hero map-page-hero"><div class="container knowledge-hero-inner"><div><nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Map</nav><h1>The Ranchers Map & Location Finder</h1><p class="lead">Open the in-game <strong>Map</strong> app, then search for a place below or click a map marker to see its details.</p></div></div></section>
 
     <section class="section map-directory"><div class="container">
-      <div class="location-toolbar" aria-label="Filter map locations">
+      <form class="location-toolbar" data-location-finder aria-label="Filter map locations">
         <label for="location-search">Find a place or purpose<input id="location-search" data-location-search type="search" placeholder="Try seeds, blueprints, car repair, airport..." autocomplete="off" aria-controls="location-directory" aria-describedby="location-count"></label>
         <label for="location-category">Category<select id="location-category" data-location-category><option value="all">All categories</option><option value="shopping">Shopping</option><option value="services">Services</option><option value="transport">Transport</option><option value="landmarks">Landmarks</option></select></label>
-      </div>
+        <details class="map-type-filters"><summary>Original map icons</summary><div class="map-marker-type-list" data-map-marker-type-list aria-label="Original map icon types"></div></details>
+      </form>
       <div class="location-results-head"><p id="location-count" data-location-count aria-live="polite">29 locations</p></div>
 
       <section class="current-map" data-current-map aria-labelledby="current-map-title">
-        <div class="visual-atlas-head"><div><h2 id="current-map-title">Explore Sunvale</h2><p>All fixed anchors start visible. Search a place or click a marker for details.</p></div></div>
+        <h2 class="visually-hidden" id="current-map-title">Explore Sunvale</h2>
         <div class="map-viewer-layout">
           <div class="map-viewer-panel">
             <div class="map-viewer-toolbar" aria-label="Map view controls">
-              <div class="map-region-tabs" aria-label="Map regions">
-                <button class="active" type="button" data-map-region="overview" data-map-title="Sunvale overview" data-map-status="Complete map" data-map-copy="The complete map opens first. Zoom or choose a region when you want a closer look." aria-pressed="true">Overview</button>
-                <button type="button" data-map-region="rural" data-map-title="Western ranch district" data-map-status="Current-build map region" data-map-copy="The southwest island contains ranch parcels, country roads and the farm-side Cash-In route." aria-pressed="false">Rural west</button>
-                <button type="button" data-map-region="city" data-map-title="Southern city district" data-map-status="Current-build map region" data-map-copy="The southeast grid contains the verified City Hall and seven Leafy Market POIs alongside dense services and transport." aria-pressed="false">City south</button>
-              </div>
-              <div class="map-view-actions"><button class="map-expand-toggle" type="button" data-map-expand aria-expanded="false">Expand map</button><button class="map-fullscreen-close" type="button" data-map-fullscreen-close aria-label="Close expanded map" hidden>×</button><div class="map-pan-controls" aria-label="Pan controls"><button type="button" data-map-pan="left" aria-label="Pan left" title="Pan left">←</button><button type="button" data-map-pan="up" aria-label="Pan up" title="Pan up">↑</button><button type="button" data-map-pan="down" aria-label="Pan down" title="Pan down">↓</button><button type="button" data-map-pan="right" aria-label="Pan right" title="Pan right">→</button></div><div class="map-zoom-controls" aria-label="Zoom controls"><button type="button" data-map-zoom="out" aria-label="Zoom out" title="Zoom out">−</button><button type="button" data-map-zoom="reset" aria-label="Fit full map" title="Fit full map">Fit</button><button type="button" data-map-zoom="in" aria-label="Zoom in" title="Zoom in">+</button></div><button class="map-label-toggle" type="button" data-map-label-toggle aria-pressed="false" aria-controls="map-stage">Show labels</button></div>
+              <div class="map-view-actions"><button class="map-expand-toggle" type="button" data-map-expand aria-expanded="false">Expand map</button><button class="map-fullscreen-close" type="button" data-map-fullscreen-close aria-label="Close expanded map" hidden>×</button><div class="map-pan-controls" aria-label="Pan controls"><button type="button" data-map-pan="left" aria-label="Pan left" title="Pan left">←</button><button type="button" data-map-pan="up" aria-label="Pan up" title="Pan up">↑</button><button type="button" data-map-pan="down" aria-label="Pan down" title="Pan down">↓</button><button type="button" data-map-pan="right" aria-label="Pan right" title="Pan right">→</button></div><div class="map-zoom-controls" aria-label="Zoom controls"><button type="button" data-map-zoom="out" aria-label="Zoom out" title="Zoom out">−</button><button type="button" data-map-zoom="reset" aria-label="Fit full map" title="Fit full map">Fit</button><button type="button" data-map-zoom="in" aria-label="Zoom in" title="Zoom in">+</button></div></div>
             </div>
             <figure class="map-stage" id="map-stage" data-map-stage tabindex="0" aria-label="Interactive current-build Sunvale map">
               <div class="map-stage-selection" data-map-stage-selection hidden><div><span data-map-stage-selection-status>Exact anchor</span><strong data-map-stage-selection-title></strong></div><button type="button" data-map-stage-selection-details>View details</button></div>
@@ -112,33 +108,11 @@
               <div class="map-pin-layer" data-map-pin-layer aria-hidden="false"></div>
               </div>
             </figure>
-            <details class="map-secondary-actions"><summary>Contribute a map location</summary><p>Drop a temporary pin and open an email draft for manual review.</p><button class="map-add-toggle" type="button" data-map-add-toggle aria-pressed="false" title="Click the map to drop a pin for a location you can confirm">Add a location</button></details>
-            <form class="map-pin-submit" data-map-pin-form hidden aria-labelledby="map-pin-form-title">
-              <button type="button" class="map-pin-close" data-map-pin-close aria-label="Cancel and close">×</button>
-              <div class="section-head"><span class="kicker">Pin a location</span><h3 id="map-pin-form-title">Submit a map location</h3><p>Click the map to place the pin, drag it to fine-tune, then describe what is here. Submitted pins are reviewed manually before they become guide data.</p></div>
-              <label>Location name<input data-map-pin-name required maxlength="60" placeholder="e.g. Leafy Market — North branch"></label>
-              <label>Category<select data-map-pin-category><option value="">Choose a category</option><option>Shop or service</option><option>Transport</option><option>Landmark</option><option>Other</option></select></label>
-              <label>Notes <span class="optional">optional</span><textarea data-map-pin-notes rows="3" placeholder="What is here, and what should players look for?"></textarea></label>
-              <p class="map-pin-coords" data-map-pin-coords>Map position: —</p>
-              <button class="btn" type="submit">Open email draft</button>
-            </form>
-            <div class="map-place-shortcuts" aria-label="Detailed map areas"><span>Focus:</span><button type="button" data-location-map data-map-region="city-north" data-map-title="Northern city shops" data-map-status="Current-build map area" data-map-copy="Focus the northern city grid and use the native category layers to identify shops, services and landmarks.">North shops</button><button type="button" data-location-map data-map-region="city-center" data-map-title="Central city services" data-map-status="Current-build map area" data-map-copy="Focus the City Hall and dense central-service area while keeping every exact anchor fixed.">City services</button><button type="button" data-location-map data-map-region="city-south" data-map-title="Southern commercial grid" data-map-status="Current-build map area" data-map-copy="Focus the southern commercial grid, including Leafy Market, fuel and landmark POIs.">South shops</button><button type="button" data-location-map data-map-region="east-coast" data-map-title="Airport island" data-map-status="Exact current-build area" data-map-copy="Focus the northern airport island with the exact Airport and fuel-station POIs.">Airport island</button></div>
-            <p class="map-source-note">Native map and POI artwork are used with developer permission on this independent fan guide. The Ranchers names and artwork remain the developer's property. Normal drag, long-press and context-menu image actions are disabled as a misuse deterrent, not DRM.</p>
-             <fieldset class="map-layer-panel" data-map-layer-panel>
-               <legend><span>Map layers</span><span data-map-layer-summary aria-live="polite">58 visible · all evidence</span></legend>
-              <p>All fixed anchors are visible by default. Toggle marker types only when you want a simpler view. Nearby locations stay at their source coordinates and appear together in the details panel when selected.</p>
-              <div class="map-layer-actions"><button class="active" type="button" data-map-pin-filter="all" data-map-layer-action="all" aria-pressed="true">Show all layers</button><button type="button" data-map-pin-filter="none" data-map-layer-action="none" aria-pressed="false">Hide all</button></div>
-              <div class="map-layer-grid">
-                 <button class="active" type="button" data-map-pin-filter="shopping" data-map-layer-toggle="shopping" aria-pressed="true"><span><i class="map-layer-swatch map-layer-shopping" aria-hidden="true"></i>Shopping</span><small data-map-layer-count="shopping">11 / 11 visible</small></button>
-                 <button class="active" type="button" data-map-pin-filter="services" data-map-layer-toggle="services" aria-pressed="true"><span><i class="map-layer-swatch map-layer-services" aria-hidden="true"></i>Services</span><small data-map-layer-count="services">11 / 11 visible</small></button>
-                 <button class="active" type="button" data-map-pin-filter="transport" data-map-layer-toggle="transport" aria-pressed="true"><span><i class="map-layer-swatch map-layer-transport" aria-hidden="true"></i>Transport</span><small data-map-layer-count="transport">29 / 29 visible</small></button>
-                 <button class="active" type="button" data-map-pin-filter="landmarks" data-map-layer-toggle="landmarks" aria-pressed="true"><span><i class="map-layer-swatch map-layer-landmarks" aria-hidden="true"></i>Landmarks</span><small data-map-layer-count="landmarks">7 / 7 visible</small></button>
-              </div>
-            </fieldset>
-            <details class="map-type-filters">
-              <summary>Filter by original map icon</summary>
-              <p>All icons stay fixed to their source coordinates. Use these smaller types to isolate one kind of place without moving nearby labels.</p>
-              <div class="map-marker-type-list" data-map-marker-type-list aria-label="Original map icon types"></div>
+            <details class="map-more-tools"><summary>More map tools</summary><div class="map-more-tools-content">
+            <details class="map-view-options"><summary>Map view options</summary>
+              <div class="map-region-tabs" aria-label="Map regions"><button class="active" type="button" data-map-region="overview" data-map-title="Sunvale overview" data-map-status="Complete map" data-map-copy="The complete map opens first. Zoom or choose a region when you want a closer look." aria-pressed="true">Overview</button><button type="button" data-map-region="rural" data-map-title="Western ranch district" data-map-status="Current-build map region" data-map-copy="The southwest island contains ranch parcels, country roads and the farm-side Cash-In route." aria-pressed="false">Rural west</button><button type="button" data-map-region="city" data-map-title="Southern city district" data-map-status="Current-build map region" data-map-copy="The southeast grid contains the verified City Hall and seven Leafy Market POIs alongside dense services and transport." aria-pressed="false">City south</button></div>
+              <button class="map-label-toggle" type="button" data-map-label-toggle aria-pressed="false" aria-controls="map-stage">Show labels</button>
+              <div class="map-place-shortcuts" aria-label="Detailed map areas"><span>Focus:</span><button type="button" data-location-map data-map-region="city-north" data-map-title="Northern city shops" data-map-status="Current-build map area" data-map-copy="Focus the northern city grid and use the native category layers to identify shops, services and landmarks.">North shops</button><button type="button" data-location-map data-map-region="city-center" data-map-title="Central city services" data-map-status="Current-build map area" data-map-copy="Focus the City Hall and dense central-service area while keeping every exact anchor fixed.">City services</button><button type="button" data-location-map data-map-region="city-south" data-map-title="Southern commercial grid" data-map-status="Current-build map area" data-map-copy="Focus the southern commercial grid, including Leafy Market, fuel and landmark POIs.">South shops</button><button type="button" data-location-map data-map-region="east-coast" data-map-title="Airport island" data-map-status="Exact current-build area" data-map-copy="Focus the northern airport island with the exact Airport and fuel-station POIs.">Airport island</button></div>
             </details>
             <details class="map-advanced-filters">
               <summary>More map filters</summary>
@@ -175,8 +149,8 @@
 <article class="map-task-relation-card" data-map-task-relation-card data-native-task data-map-task-id="farm-products-dialogue" data-map-task-status="unresolved"><div class="map-task-relation-copy"><span class="map-task-status is-unresolved">No task coordinate</span><h3>Farm product order (dialogue-defined)</h3><p>Read the steps and preparation; no reliable objective coordinate is recorded.</p></div><div class="map-task-relation-actions"><a href="/database/quests#farm-products-dialogue">Task details&nbsp;→</a></div></article>
 </div>
             </details>
-            <div class="map-progress-summary" id="map-progress" data-map-progress><span data-map-progress-count>0 / 16 places discovered</span><button type="button" class="map-progress-action" data-map-discovery-toggle disabled>Mark selected as discovered</button><button type="button" class="map-progress-reset" data-map-progress-reset>Reset progress</button></div>
-            <div class="map-confidence" aria-label="Location confidence levels">
+            <details class="map-progress-panel" id="map-progress" data-map-progress><summary>Exploration progress</summary><div class="map-progress-summary"><span data-map-progress-count>0 / 16 places discovered</span><button type="button" class="map-progress-action" data-map-discovery-toggle disabled>Mark selected as discovered</button><button type="button" class="map-progress-reset" data-map-progress-reset>Reset progress</button></div></details>
+            <details class="map-confidence" aria-label="Location confidence levels"><summary>Map accuracy notes</summary>
               <p><strong>Coordinate evidence and gameplay evidence are separate</strong><span>A named POI transform proves an anchor, but not an open interior, current stock, price or quest use.</span></p>
               <dl>
                 <div><dt>Fixed anchors</dt><dd>16 place groups and 58 exact anchors shown by default</dd></div>
@@ -184,9 +158,20 @@
                 <div><dt>No verified coordinate</dt><dd>Kept in the directory without a misleading pin</dd></div>
                 <div><dt>Reported gameplay use</dt><dd>Source grade does not change the exact anchor</dd></div>
               </dl>
-            </div>
+            </details>
+            <details class="map-secondary-actions"><summary>Contribute a map location</summary><p>Drop a temporary pin and open an email draft for manual review.</p><button class="map-add-toggle" type="button" data-map-add-toggle aria-pressed="false" title="Click the map to drop a pin for a location you can confirm">Add a location</button></details>
+            </div></details>
+            <form class="map-pin-submit" data-map-pin-form hidden aria-labelledby="map-pin-form-title">
+              <button type="button" class="map-pin-close" data-map-pin-close aria-label="Cancel and close">×</button>
+              <div class="section-head"><span class="kicker">Pin a location</span><h3 id="map-pin-form-title">Submit a map location</h3><p>Click the map to place the pin, drag it to fine-tune, then describe what is here. Submitted pins are reviewed manually before they become guide data.</p></div>
+              <label>Location name<input data-map-pin-name required maxlength="60" placeholder="e.g. Leafy Market — North branch"></label>
+              <label>Category<select data-map-pin-category><option value="">Choose a category</option><option>Shop or service</option><option>Transport</option><option>Landmark</option><option>Other</option></select></label>
+              <label>Notes <span class="optional">optional</span><textarea data-map-pin-notes rows="3" placeholder="What is here, and what should players look for?"></textarea></label>
+              <p class="map-pin-coords" data-map-pin-coords>Map position: —</p>
+              <button class="btn" type="submit">Open email draft</button>
+            </form>
           </div>
-          <aside class="map-inspector" data-map-inspector aria-live="polite"><span data-map-inspector-status>Map overview</span><h3 data-map-inspector-title>Explore all map markers</h3><p data-map-inspector-copy>All fixed anchors are visible. Click any marker to see its name, coordinate confidence and related guide links.</p><div class="map-inspector-stack" data-map-inspector-stack hidden><strong>Nearby locations</strong><div data-map-inspector-stack-list></div></div><div class="map-inspector-connections" data-map-inspector-connections hidden><strong>Connected answers</strong><div data-map-inspector-connection-list></div></div><a class="btn" data-map-inspector-link href="/map" hidden>View directory entry</a></aside>
+          <aside class="map-inspector" data-map-inspector aria-live="polite" hidden><span data-map-inspector-status>Exact anchor</span><h3 data-map-inspector-title></h3><p data-map-inspector-copy></p><div class="map-inspector-stack" data-map-inspector-stack hidden><strong>Nearby locations</strong><div data-map-inspector-stack-list></div></div><details class="map-inspector-related" data-map-inspector-related hidden><summary>Related guides</summary><div class="map-inspector-related-content"><div class="map-inspector-journey" data-map-inspector-journey hidden><strong>Continue solving this</strong><div data-map-inspector-journey-list></div></div><div class="map-inspector-connections" data-map-inspector-connections hidden><strong>Connected answers</strong><div data-map-inspector-connection-list></div></div></div></details><a class="btn" data-map-inspector-link href="/map" hidden>View directory entry</a></aside>
         </div>
       </section>
 
@@ -255,7 +240,8 @@
         <p>Research and editing by Niki, site editor. Gameplay evidence collected from public videos, official updates and community reports. Last reviewed: August 2026. Game version coverage: 0.8.10.x. <a href="/methodology">How we verify →</a></p>
       </aside></div></section>
   </main>
-  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>The Ranchers Guide</h4><p>Independent, fan-made Early Access help with versioned evidence.</p><p class="disclaimer">Not affiliated with RedPilz Studio or Trophy Games.</p></div><nav aria-label="Footer guides"><h4>Help</h4><ul><li><a href="/guides/beginners-guide">Guides</a></li><li><a href="/map">Map</a></li><li><a href="/problems">Problems</a></li><li><a href="/research">Research</a></li></ul></nav><nav aria-label="Footer data"><h4>Data</h4><ul><li><a href="/database/crops">Crops</a></li><li><a href="/database/animals">Animals</a></li><li><a href="/tools/field-notes">Field Notes</a></li></ul></nav><nav aria-label="Footer site"><h4>Site</h4><ul><li><a href="/search">Search</a></li><li><a href="/contribute">Contribute</a></li><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/methodology">Methodology</a></li></ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>Unknown pin details stay unknown.</span></div></div></footer>
-<script src="/assets/js/main.js?v=20260810-nav1" defer></script><script src="/assets/js/map-core.js?v=20260807-2" defer></script><script src="/assets/js/map-state-core.js?v=20260824-4" defer></script><script src="/assets/js/map-viewer-core.js?v=20260825-full2" defer></script><script src="/assets/js/map.js?v=20260825-map33" defer></script>
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>The Ranchers Guide</h4><p>Independent, fan-made Early Access help with versioned evidence.</p><p class="disclaimer">Not affiliated with RedPilz Studio or Trophy Games.</p></div><nav aria-label="Footer guides"><h4>Help</h4><ul><li><a href="/guides/beginners-guide">Guides</a></li><li><a href="/map">Map</a></li><li><a href="/problems">Problems</a></li><li><a href="/research">Research</a></li></ul></nav><nav aria-label="Footer data"><h4>Data</h4><ul><li><a href="/database/crops">Crops</a></li><li><a href="/database/animals">Animals</a></li><li><a href="/tools/field-notes">Field Notes</a></li></ul></nav><nav aria-label="Footer site"><h4>Site</h4><ul><li><a href="/search">Search</a></li><li><a href="/contribute">Contribute</a></li><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li><li><a href="/privacy">Privacy</a></li>
+            <li><a href="/terms">Terms of Service</a></li><li><a href="/methodology">Methodology</a></li></ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>Unknown pin details stay unknown.</span></div></div></footer>
+<script src="/assets/js/main.js?v=20260810-nav1" defer></script><script src="/assets/js/map-core.js?v=20260807-2" defer></script><script src="/assets/js/map-state-core.js?v=20260824-4" defer></script><script src="/assets/js/map-viewer-core.js?v=20260827-full4" defer></script><script src="/assets/js/map.js?v=20260827-map39" defer></script>
 </body>
 </html>

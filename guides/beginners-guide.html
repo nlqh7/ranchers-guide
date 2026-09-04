@@ -27,7 +27,7 @@
     <nav class="nav-inner" aria-label="Main navigation">
       <a class="logo" href="/">
         <span class="logo-mark"><img src="../assets/img/logo.png" alt="" width="34" height="34"></span>
-        <span>The Ranchers Guide<small>Unofficial fan resource</small></span>
+        <span>The Ranchers Guide</span>
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
       <ul class="nav-links">
@@ -51,10 +51,10 @@
       <section class="answer-box" id="first-30-minutes" aria-labelledby="first-30-minutes-title" data-search-entry data-search-title="What to do in the first 30 minutes" data-search-tags="first 30 minutes start beginner opening quest seeds leafy market cashin parking">
         <h2 id="first-30-minutes-title">Your first 30 minutes</h2>
         <ol>
-          <li><strong>Follow the opening quest and answer tutorial phone calls.</strong> They introduce the ranch, driving, shops, crafting and fields; skipping them makes later objectives harder to read.</li>
+          <li><strong>Follow the opening quest and answer tutorial phone calls.</strong> They introduce the ranch, driving, shops, crafting and fields; use the <a href="#smartphone-apps">smartphone guide below</a> when the phone opens.</li>
           <li><strong>Mark three places:</strong> <a href="/map#leafy-market">Leafy Market</a> for seeds, <a href="/map#cash-in-box">CashIn</a> for crop settlement, and the nearest legal overnight parking spot for your vehicle.</li>
           <li><strong>Plant a small test plot.</strong> Record seed cost and planting day instead of spending all your cash on an unmeasured crop.</li>
-          <li><strong>Use the CashIn chest, then check the next settlement.</strong> Deposits do not pay immediately; crop income appears on the end-of-day Farming line.</li>
+          <li><strong>Use the CashIn chest, then collect the payment next day.</strong> Deposits do not pay immediately; the current-build tutorial explicitly says payment arrives the next day.</li>
           <li><strong>Stop and use a focused fix when blocked:</strong> <a href="/guides/roof-quest-stuck">roof quest</a>, <a href="/problems/vehicle-recovery">missing vehicle</a>, <a href="/guides/animal-guide">chicken care</a>, or <a href="/guides/gigi-large-egg-quest">Gigi's large egg</a>.</li>
         </ol>
       </section>
@@ -69,6 +69,7 @@
         <strong>In this guide</strong>
         <ul>
           <li><a href="#first-30-minutes">Your first 30 minutes</a></li>
+          <li><a href="#smartphone-apps">Smartphone apps and navigation</a></li>
           <li><a href="#setup">Before starting: mode and transport</a></li>
           <li><a href="#roadmap">Your first 7 days: a day-by-day roadmap</a></li>
           <li><a href="#quest-chains">Quest milestones and the Scarecrow fix</a></li>
@@ -297,7 +298,7 @@
         <li><a href="/guides/police-wanted-levels">Police Wanted Levels</a> — what 1–5 stars mean before you get creative with the law.</li>
       </ul>
 
-      
+
 
       <h2>Sources</h2>
       <ul>
@@ -317,7 +318,51 @@
       <!-- Ad slot placeholder
       <div class="ad-slot">Advertisement</div>
       -->
-    </article>
+    <!-- BEGIN SLEEP TUTORIAL REFERENCE -->
+<section class="answer-box tutorial-reference" id="saving-sleep-fainting" aria-labelledby="saving-sleep-fainting-title" data-search-entry data-search-title="How saving, sleep and fainting work" data-search-tags="how to save game sleep save point tent bed motel motorhome 3am faint death hospital respawn energy health" data-search-status="Game-build guidance">
+  <h2 id="saving-sleep-fainting-title">How saving, sleep and fainting work</h2>
+  <p><strong>Short answer: </strong>Sleep in a tent, bed, motel or motorhome before 3 a.m. Sleeping saves progress and restores health and energy; the amount depends on sleep quality.</p>
+  <ol>
+    <li><strong>Choose a sleep point:</strong> Use a tent, bed, motel or an eligible vehicle such as a motorhome.</li>
+    <li><strong>Save before the cutoff:</strong> Sleeping saves progress. Staying awake past 3 a.m. makes the player faint.</li>
+    <li><strong>Watch both status bars:</strong> Reaching 0 energy or 0 health can cause fainting or death.</li>
+    <li><strong>Recover after a collapse:</strong> After fainting or death, the player respawns at the nearest hospital and pays a fee.</li>
+  </ol>
+  <p class="recipe-boundary"><span class="evidence-badge evidence-build">Game files</span> The source does not state the hospital fee, exact restoration values, or which individual beds and vehicles are currently usable. Checked against 0.8.10.842.</p>
+</section>
+<!-- END SLEEP TUTORIAL REFERENCE -->
+<!-- BEGIN SMARTPHONE TUTORIAL REFERENCE -->
+<section class="answer-box tutorial-reference" id="smartphone-apps" aria-labelledby="smartphone-apps-title" data-search-entry data-search-title="Smartphone: open it and use the core apps" data-search-tags="how to open smartphone bottom left icon phone apps messages locals map navigation pause exit unlock new apps explore BlaBlaApp Maps Weather Quests Challenges Skills Craft Delivery My Market Zesty Metrix My Garage Settings Pause the game Rate your experience" data-search-status="Game-build guidance">
+  <h2 id="smartphone-apps-title">Smartphone: open it and use the core apps</h2>
+  <p><strong>Short answer: </strong>Click the icon at the bottom left to open the smartphone at any time. Its apps cover local messages, map navigation, pausing and exiting; more apps unlock as you settle in and explore.</p>
+  <ol>
+    <li><strong>Open the phone:</strong> Click the smartphone icon at the bottom left. The tutorial says this opens the phone at any time.</li>
+    <li><strong>Read messages and navigate:</strong> Use the phone apps to read messages from locals, or open the Map app to navigate Ranchers Country.</li>
+    <li><strong>Pause or exit:</strong> The phone also has the appropriate apps for pausing or exiting the game.</li>
+    <li><strong>Unlock more apps:</strong> New apps unlock as you settle into Ranchers Country and explore more of its world.</li>
+  </ol>
+  <h3 class="smartphone-app-list-title">Apps matched to active icons in this build</h3>
+  <div class="smartphone-app-groups"><section class="smartphone-app-group" aria-labelledby="smartphone-app-communication">
+      <h3 id="smartphone-app-communication">Messages</h3>
+      <div class="smartphone-app-names"><span class="smartphone-app-name">BlaBlaApp</span></div>
+    </section>
+    <section class="smartphone-app-group" aria-labelledby="smartphone-app-navigation-planning">
+      <h3 id="smartphone-app-navigation-planning">Navigation &amp; planning</h3>
+      <div class="smartphone-app-names"><span class="smartphone-app-name">Maps</span><span class="smartphone-app-name">Weather</span><span class="smartphone-app-name">Quests</span><span class="smartphone-app-name">Challenges</span><span class="smartphone-app-name">Skills</span></div>
+    </section>
+    <section class="smartphone-app-group" aria-labelledby="smartphone-app-ranch-tools">
+      <h3 id="smartphone-app-ranch-tools">Ranch tools</h3>
+      <div class="smartphone-app-names"><span class="smartphone-app-name">Craft</span><span class="smartphone-app-name">Delivery</span><span class="smartphone-app-name">My Market</span><span class="smartphone-app-name">Zesty Metrix</span><span class="smartphone-app-name">My Garage</span></div>
+    </section>
+    <section class="smartphone-app-group" aria-labelledby="smartphone-app-system-controls">
+      <h3 id="smartphone-app-system-controls">System controls</h3>
+      <div class="smartphone-app-names"><span class="smartphone-app-name">Settings</span><span class="smartphone-app-name">Pause the game</span><span class="smartphone-app-name">Rate your experience</span></div>
+    </section></div>
+  <p class="smartphone-map-controls"><strong>Map controls: </strong>Center the map · Place a landmark · Remove marker. Mapping is unavailable due to a weak GPS signal.</p>
+  <p class="recipe-boundary"><span class="evidence-badge evidence-build">Game files</span> The source does not provide a complete app list, exact unlock order or timing, alternative button bindings, or independent runtime availability for every app. An active serialized app icon and a matching localized label prove current-build UI configuration, not unlock timing or independent runtime availability. Book and Store remain unmatched label candidates. Checked against 0.8.10.842.</p>
+</section>
+<!-- END SMARTPHONE TUTORIAL REFERENCE -->
+</article>
   </main>
 
   <footer class="site-footer">
@@ -354,6 +399,7 @@
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>
             <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
             <li><a href="/methodology">Methodology</a></li>
           </ul>
         </nav>

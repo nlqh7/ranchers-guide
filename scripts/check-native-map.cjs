@@ -34,7 +34,8 @@ for (const relativePath of ["map.html", "zh/map.html"]) {
   assert.match(html, /\/assets\/img\/map\/icons\/airport-b24847725\.png/);
   assert.match(html, /\/assets\/img\/map\/icons\/museum-b24847725\.png/);
   assert.equal((html.match(/\/assets\/img\/map\/icons\/dealer-[a-z]+-b24847725\.png/g) || []).length, 4, `${relativePath} must use each native dealership glyph once`);
-  assert.match(html, /used with developer permission|经开发商许可/i, `${relativePath} must retain the permitted fan-site asset notice`);
+  assert.doesNotMatch(html, /used with developer permission|经开发商许可/i, `${relativePath} must keep legal/process copy out of the map workspace`);
+  assert.match(html, /class="site-footer"/, `${relativePath} must retain the shared site footer`);
 }
 
 const mapScript = read("assets/js/map.js");
