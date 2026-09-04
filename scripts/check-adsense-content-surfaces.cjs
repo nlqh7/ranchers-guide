@@ -57,8 +57,13 @@ for (const [relativePath, routes] of Object.entries(taskRoutes)) {
   const html = read(relativePath);
   const section = html.match(/<section[^>]+id="player-routes"[\s\S]*?<\/section>/)?.[0];
   assert.ok(section, `${relativePath}: homepage needs a player-first route section`);
+  assert.match(section, /<h2[\s>]/, `${relativePath}: the primary route section needs a visible task heading`);
   for (const route of routes) assert.ok(section.includes(`href="${route}"`), `${relativePath}: missing primary player route ${route}`);
   assert.doesNotMatch(section, /unverified|unknown|evidence tracker|still need testing|待验证|未知|证据状态|仍需测试/i, `${relativePath}: primary routes must describe outcomes, not editorial process`);
 }
+
+assert.doesNotMatch(read("index.html"), /hero-eyebrow|hero-promise/, "index.html: do not stack generic promotional lines above the task routes");
+assert.match(read("index.html"), /<h2>What do you need to do\?<\/h2>/, "index.html: first-time visitors need a direct task heading");
+assert.match(read("zh/index.html"), /<h2 id="zh-start-title">你现在想找什么？<\/h2>/, "zh/index.html: first-time visitors need a direct task heading");
 
 console.log("PASS: ads stay on substantial content and both homepages lead with six player tasks.");
