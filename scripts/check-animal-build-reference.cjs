@@ -4,6 +4,16 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const data = require('../data/animals.json');
 const cow = data.species.find(a => a.id === 'cow');
+const goat = data.species.find(a => a.id === 'goat');
+for (const [locale, expected] of [
+  ['en', 'Current-build records cover five ranch-animal groups'],
+  ['zh', '当前构建资料覆盖 5 类牧场动物'],
+]) {
+  const html = fs.readFileSync(path.join(root, locale === 'zh' ? 'zh/database/animals.html' : 'database/animals.html'), 'utf8');
+  const answer = html.indexOf(expected);
+  const chooser = html.indexOf('id="browse-entries"');
+  assert.ok(answer > 0 && answer < chooser, `${locale}: the animal roster answer must appear before the entry chooser`);
+}
 assert.ok(cow.buildReference, 'cow profile must expose source-backed breeds and shop requirements');
 const ref = cow.buildReference;
 assert.equal(ref.evidenceLevel, 'build-observed');
@@ -66,3 +76,29 @@ for (const locale of ['en', 'zh']) {
   assert.ok(entity.facts.some(f => f.evidenceLevel === 'build-observed'), 'goat lookup must label build evidence');
 }
 console.log('PASS: bilingual goat names and product names resolve to the animal reference.');
+
+for (const animal of [cow, goat]) {
+  const breeding = animal.buildReference.breedingReference;
+  assert.ok(breeding, `${animal.id}: profile must expose decoded breeding outcome references`);
+  assert.equal(breeding.evidenceLevel, 'build-observed');
+  assert.equal(breeding.validity, 'unknown');
+  assert.ok(breeding.outcomeIds.length >= 2);
+  for (const outcomeId of breeding.outcomeIds) {
+    assert.ok(data.nativeAnimalReference.entries.some(entry => entry.id === outcomeId), `${animal.id}: ${outcomeId} must resolve to a named animal entry`);
+  }
+}
+
+for (const locale of ['en', 'zh']) {
+  const html = fs.readFileSync(path.join(root, locale === 'zh' ? 'zh/database/animals.html' : 'database/animals.html'), 'utf8');
+  for (const animal of [cow, goat]) {
+    const profile = profileContaining(html, animal.id);
+    const breeding = animal.buildReference.breedingReference;
+    assert.ok(profile.includes(locale === 'zh' ? '构建中的繁殖结果引用' : 'Breeding outcome references'));
+    for (const outcomeId of breeding.outcomeIds) {
+      const entry = data.nativeAnimalReference.entries.find(item => item.id === outcomeId);
+      assert.ok(profile.includes(locale === 'zh' ? entry.zhName : entry.name));
+    }
+    assert.doesNotMatch(profile, /(?:概率|chance|probability)[^<]{0,40}(?:50|100)/i, `${locale}: unnamed source values must not be presented as breeding probabilities`);
+  }
+}
+console.log('PASS: breeding definitions expose named outcomes without inventing probabilities.');

@@ -83,7 +83,7 @@ function renderPage(zh) {
   </main>
   <footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>The Ranchers Guide</h4><p>${zh ? "按版本和证据整理的非官方玩家资料。" : "Independent, fan-made Early Access help with versioned evidence."}</p><p class="disclaimer">${zh ? "不隶属于 RedPilz Studio 或 Trophy Games。" : "Not affiliated with RedPilz Studio or Trophy Games."}</p></div><nav aria-label="Footer site"><h4>${zh ? "站点" : "Site"}</h4><ul><li><a href="${zh ? "/zh/community" : "/community"}">${zh ? "社区雷达" : "Community Radar"}</a></li><li><a href="/contribute">${zh ? "投稿" : "Contribute"}</a></li><li><a href="/research">${zh ? "研究队列" : "Research"}</a></li><li><a href="/about">${zh ? "关于" : "About"}</a></li><li><a href="/privacy">${zh ? "隐私" : "Privacy"}</a></li>${zh ? "" : '<li><a href="/terms">Terms</a></li>'}</ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>${zh ? "先记录，再判断；原帖真实，结论有证据。" : "Record first, conclude later; original threads, evidence-gated answers."}</span></div></div></footer>
   <script type="application/json" id="player-report-config">${jsonScript(topics)}</script>
-  <script src="/assets/js/main.js?v=20260821-report1" defer></script><script src="/assets/js/player-report.js?v=20260821-report1" defer></script>
+  <script src="/assets/js/main.js?v=20260906-nav2" defer></script><script src="/assets/js/player-report.js?v=20260821-report1" defer></script>
 </body></html>`;
 }
 

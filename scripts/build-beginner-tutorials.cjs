@@ -234,8 +234,11 @@ for (const zh of [false, true]) {
 for (const zh of [false, true]) {
   const file = path.join(root, zh ? 'zh' : '', 'guides/building-construction.html');
   const before = fs.readFileSync(file, 'utf8');
-  const markerPattern = /<!-- BEGIN BLUEPRINT TUTORIAL REFERENCE -->[\s\S]*?<!-- END BLUEPRINT TUTORIAL REFERENCE -->/;
-  const withReference = upsertReference(before, markerPattern, renderBlueprint(zh));
+  const markerPattern = /(?:\r?\n)?<!-- BEGIN BLUEPRINT TUTORIAL REFERENCE -->[\s\S]*?<!-- END BLUEPRINT TUTORIAL REFERENCE -->/;
+  const withoutReference = before.replace(markerPattern, '');
+  const leadPattern = /<p class="building-lead">[\s\S]*?<\/p>/;
+  if (!leadPattern.test(withoutReference)) throw new Error(`Missing building introduction: ${file}`);
+  const withReference = withoutReference.replace(leadPattern, match => `${match}\n${renderBlueprint(zh)}`);
   const after = ensureTocLink(withReference, 'blueprint-building', zh ? '蓝图建造步骤' : 'Blueprint building steps');
   if (before === after) continue;
   if (process.argv.includes('--check')) {

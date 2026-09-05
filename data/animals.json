@@ -1,7 +1,7 @@
 {
   "meta": {
     "page": "database/animals.html",
-    "lastUpdated": "2026-09-01",
+    "lastUpdated": "2026-09-04",
     "build": "0.8.10.842",
     "videoBuild": "0.8.10.455",
     "evidenceLevels": [
@@ -377,6 +377,29 @@
       "asset": "resources.assets",
       "pathId": 392824,
       "rawSha256": "cc00971e064b9ec61c12322b58df1cd14ee0e119863c254513f86b7fc67cb0e6"
+    },
+    "owned-build-animal-breeding": {
+      "kind": "first-hand-build-resource",
+      "title": "Owned game files: cattle and goat breeding definitions",
+      "url": null,
+      "date": "2026-09-04",
+      "build": "0.8.10.842",
+      "steamBuild": "24847725",
+      "asset": "resources.assets",
+      "objects": [
+        {
+          "name": "Animals_Breeding_DEF_COWS",
+          "pathId": 392357,
+          "bytes": 1320,
+          "rawSha256": "f82afaf177038a96d80c1c31c715aca40a73141187e5934539f7d4525c54bf36"
+        },
+        {
+          "name": "Animals_Breeding_DEF_GOAT",
+          "pathId": 392372,
+          "bytes": 156,
+          "rawSha256": "58f2d3b623b076e925bd038e926b62aaf3fd4c4dda906770a74048925f48bbb4"
+        }
+      ]
     }
   },
   "nativeAnimalReference": {
@@ -1555,7 +1578,36 @@
             "zhName": "大块牛排",
             "group": "meat"
           }
-        ]
+        ],
+        "breedingReference": {
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-animal-breeding"
+          ],
+          "outcomeIds": [
+            "animal_cow_brown_baby_female",
+            "animal_cow_brown_baby_male",
+            "animal_cow_black_baby_female",
+            "animal_cow_black_baby_male",
+            "animal_cow_brown_super_female_brown",
+            "animal_cow_brown_super_female_tache",
+            "animal_cow_brown_super_female_white"
+          ],
+          "youngOutcomeIds": [
+            "animal_cow_brown_baby_female",
+            "animal_cow_brown_baby_male",
+            "animal_cow_black_baby_female",
+            "animal_cow_black_baby_male"
+          ],
+          "adultOutcomeIds": [
+            "animal_cow_brown_super_female_brown",
+            "animal_cow_brown_super_female_tache",
+            "animal_cow_brown_super_female_white"
+          ],
+          "boundary": "The retained definition establishes references to named outcome entities only. Numeric group keys, case keys and values remain uninterpreted and do not establish pairing requirements, weights, probability, timing or runtime availability."
+        }
       },
       "fields": [
         {
@@ -1898,7 +1950,25 @@
             "zhName": "大块山羊肉",
             "group": "meat"
           }
-        ]
+        ],
+        "breedingReference": {
+          "evidenceLevel": "build-observed",
+          "build": "0.8.10.842",
+          "validity": "unknown",
+          "sourceIds": [
+            "owned-build-animal-breeding"
+          ],
+          "outcomeIds": [
+            "animal_goat_white_baby_female",
+            "animal_goat_white_baby_male"
+          ],
+          "youngOutcomeIds": [
+            "animal_goat_white_baby_female",
+            "animal_goat_white_baby_male"
+          ],
+          "adultOutcomeIds": [],
+          "boundary": "The retained definition establishes references to named outcome entities only. Numeric group keys, case keys and values remain uninterpreted and do not establish pairing requirements, weights, probability, timing or runtime availability."
+        }
       },
       "fields": [
         {

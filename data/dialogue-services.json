@@ -10,7 +10,7 @@
       "summary": "Victor's dialogue lists a 1,000 C electricity-and-gas commissioning fee, end-of-day consumption billing and city purchase of surplus energy; the matching action deducts 1,000 C and supports later termination.",
       "zhSummary": "Victor 的对话列出 1,000 C 电力与燃气合同启用费、按日末用量结算及城市收购富余能源；相符动作会扣除 1,000 C，并支持之后解约。",
       "configuredMoneyAction": 1000,
-      "sourceNodes": ["8/2", "8/5", "8/6", "8/23", "8/24"],
+      "sourceNodes": ["8/2", "8/5", "8/6", "8/23", "8/24", "37/8"],
       "relatedRoute": "/guides/electricity-power#two-paths",
       "evidenceLevel": "build-observed",
       "validity": "unknown"
@@ -22,7 +22,7 @@
       "summary": "Victor's dialogue lists a 500 C water commissioning fee, end-of-day consumption billing and city purchase of excess clean water; the matching action deducts 500 C and supports later termination.",
       "zhSummary": "Victor 的对话列出 500 C 供水合同启用费、按日末用量结算及城市收购富余净水；相符动作会扣除 500 C，并支持之后解约。",
       "configuredMoneyAction": 500,
-      "sourceNodes": ["8/3", "8/8", "8/9", "8/21", "8/22"],
+      "sourceNodes": ["8/3", "8/8", "8/9", "8/21", "8/22", "37/8"],
       "relatedRoute": "/guides/electricity-power#two-paths",
       "evidenceLevel": "build-observed",
       "validity": "unknown"
@@ -34,7 +34,7 @@
       "summary": "The seed-vendor dialogue exposes separate actions for opening the goods catalogue and selling items from the player's inventory.",
       "zhSummary": "种子商人对话分别提供打开商品目录和从玩家背包出售物品的操作。",
       "configuredMoneyAction": null,
-      "sourceNodes": ["10/2", "10/9"],
+      "sourceNodes": ["10/2", "10/9", "11/1"],
       "relatedRoute": "/database/crops",
       "evidenceLevel": "build-observed",
       "validity": "unknown"
@@ -121,7 +121,7 @@
       "summary": "The clothing-shop dialogue opens separate clothing and accessories catalogues and also exposes an inventory selling action.",
       "zhSummary": "服装店对话会分别打开服装目录与配饰目录，并提供从背包出售物品的操作。",
       "configuredMoneyAction": null,
-      "sourceNodes": ["34/31", "34/43", "34/44"],
+      "sourceNodes": ["34/17", "34/31", "34/43", "34/44"],
       "relatedRoute": "/database/customization",
       "evidenceLevel": "build-observed",
       "validity": "unknown"
@@ -134,7 +134,7 @@
       "zhSummary": "Victor 的双语对话列出每块额外土地 300,000 C，并提示直接到目标地块与“待售”标识互动，无需再回市政厅。",
       "configuredMoneyAction": null,
       "dialogueListedCosts": [{"kind": "additional-plot", "currency": 300000}],
-      "sourceNodes": ["8/4", "8/11"],
+      "sourceNodes": ["8/4", "8/11", "37/8"],
       "relatedRoute": "/guides/electricity-power#two-paths",
       "evidenceLevel": "build-observed",
       "validity": "unknown"
@@ -182,7 +182,7 @@
       "summary": "An Angela-named conversation exposes a View shop items action; the retained node does not list inventory, prices or hours.",
       "zhSummary": "一组以 Angela 命名的对话提供“查看商店商品”操作；保留节点不含库存、价格或营业时间。",
       "configuredMoneyAction": null,
-      "sourceNodes": ["46/5"],
+      "sourceNodes": ["45/3", "46/5"],
       "relatedRoute": "/database/npcs#angela",
       "evidenceLevel": "build-observed",
       "validity": "unknown"

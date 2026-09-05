@@ -98,4 +98,12 @@ for (const page of pages) {
   checkPage(page.zh, page.requiredZh);
 }
 
+const roadmap = read("guides/release-time-checklist.html");
+assert.match(roadmap, /<title>The Ranchers Roadmap &amp; Early Access Status — Current Build 0\.8\.10\.842<\/title>/, "roadmap page title must lead with the demonstrated search intent");
+assert.match(roadmap, /<h1>The Ranchers Roadmap &amp; Early Access Status<\/h1>/, "roadmap page h1 must confirm the promised result");
+
+const review = read("guides/review.html");
+assert.match(review, /<title>The Ranchers Review \(0\.8\.10\.842\) — Is Early Access Worth It\?<\/title>/, "review page title must lead with the demonstrated search intent");
+assert.match(review, /<h1>The Ranchers Review: Is Early Access Worth Playing Now\?<\/h1>/, "review page h1 must confirm the promised result");
+
 console.log("PASS: core content pages expose direct answers, evidence boundaries and next steps.");

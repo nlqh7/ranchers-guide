@@ -30,9 +30,28 @@
   var toggle = document.querySelector(".nav-toggle");
   var links = document.querySelector(".nav-links");
   if (toggle && links) {
-    toggle.addEventListener("click", function () {
-      var open = links.classList.toggle("open");
+    var navChinese = document.documentElement.lang.toLowerCase().indexOf("zh") === 0;
+    function setNavOpen(open, restoreFocus) {
+      links.classList.toggle("open", open);
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.setAttribute("aria-label", navChinese ? (open ? "关闭导航" : "展开导航") : (open ? "Close navigation" : "Open navigation"));
+      if (restoreFocus) toggle.focus();
+    }
+    toggle.addEventListener("click", function () {
+      setNavOpen(!links.classList.contains("open"), false);
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && links.classList.contains("open")) {
+        setNavOpen(false, true);
+      }
+    });
+    document.addEventListener("click", function (event) {
+      if (links.classList.contains("open") && !links.contains(event.target) && !toggle.contains(event.target)) {
+        setNavOpen(false, false);
+      }
+    });
+    links.addEventListener("click", function (event) {
+      if (event.target.closest("a")) setNavOpen(false, false);
     });
   }
 
@@ -138,7 +157,8 @@
       id = window.location.hash.slice(1);
     }
     var target = document.getElementById(id);
-    if (target) target.scrollIntoView({ block: "start" });
+    // Deep links are restoration, not a tour through every preceding entry.
+    if (target) target.scrollIntoView({ behavior: "instant", block: "start" });
   }
 
   window.setTimeout(jumpToHashTarget, 0);

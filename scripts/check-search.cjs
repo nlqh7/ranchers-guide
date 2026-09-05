@@ -167,7 +167,7 @@ assert.match(sharedScript, /form\.action = searchRoute/);
 assert.match(sharedScript, /input\.name = "q"/);
 assert.match(sharedScript, /pageHasMainSearch/, "pages with a primary search need an explicit de-duplication rule");
 assert.match(sharedScript, /if \(pageHasMainSearch\)\s*\{\s*searchLink\.parentElement\.remove\(\)/s, "primary-search pages must remove the nav item instead of leaving a text link");
-assert.match(sharedScript, /target\.scrollIntoView\(\{ block: "start" \}\)/);
+assert.match(sharedScript, /target\.scrollIntoView\(\{ behavior: "instant", block: "start" \}\)/);
 assert.match(homePage, /class="hero-search"[^>]+action="\/search"/);
 assert.match(knowledgeBasePage, /<h1>Game database<\/h1>/);
 assert.match(knowledgeBasePage, /href="\/guides\/animal-guide#feeding"/);
@@ -209,6 +209,8 @@ assert.match(fs.readFileSync(path.join(root, "database", "crops.html"), "utf8"),
 assert.match(fs.readFileSync(path.join(root, "database", "animals.html"), "utf8"), /id="black-chicken"[^>]+data-search-entry/);
 assert.equal(searchDocuments(prebuiltIndex, "Power to the Bench")[0].url, "/database/quests#power-to-the-bench");
 assert.equal(searchDocuments(prebuiltIndex, "Angela chicken seller")[0].url, "/database/npcs#angela");
+assert.equal(searchDocuments(prebuiltIndex, "Susan animal infection treatment")[0].url, "/database/npcs#susan");
+assert.equal(searchDocuments(prebuiltIndex, "Meriam blueprint catalogue")[0].url, "/database/npcs#meriam");
 
 const knowledgeIndex = JSON.parse(fs.readFileSync(path.join(root, "knowledge-index.json"), "utf8"));
 const chineseKnowledgeIndex = JSON.parse(fs.readFileSync(path.join(root, "zh", "knowledge-index.json"), "utf8"));
@@ -241,6 +243,8 @@ assert.equal(searchDocuments(chineseIndex, "种子商店在哪里")[0].url, "/zh
 assert.equal(searchDocuments(chineseIndex, "锆矿在哪里买")[0].url, "/zh/database/materials#zirconite");
 assert.equal(searchDocuments(chineseIndex, "工作台通电任务")[0].url, "/zh/database/quests#power-to-the-bench");
 assert.ok(searchDocuments(chineseIndex, "Angela 买鸡").some((result) => result.url === "/zh/database/npcs#angela"));
+assert.equal(searchDocuments(chineseIndex, "Susan 动物感染治疗")[0].url, "/zh/database/npcs#susan");
+assert.equal(searchDocuments(chineseIndex, "Meriam 蓝图目录")[0].url, "/zh/database/npcs#meriam");
 
 /* The five translated core guides must rank for the community phrases they answer. */
 assert.equal(searchDocuments(chineseIndex, "鸡不下蛋")[0].url, "/zh/guides/animal-guide#eggs");

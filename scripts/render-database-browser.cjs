@@ -58,6 +58,17 @@ function renderEntries(data, kind, locale, base = '') {
     const enemies = data.enemyReference?.entries || [];
     return `<div class="database-seasons"><div><h3>${zh ? '牧场动物' : 'Ranch animals'}</h3><div class="database-entry-links">${data.species.map(a => link(a.id, zh ? a.zh.tocLabel : a.name)).join('')}</div></div>${wildlife.length ? `<div><h3>${zh ? '构建内野生生物' : 'Build-defined wildlife'}</h3><div class="database-entry-links">${wildlife.map(a => link(`wildlife-${a.id}`, zh ? a.zhName : a.name)).join('')}</div></div>` : ''}${enemies.length ? `<div><h3>${zh ? '原生 Enemies 表名称' : 'Enemies-table names'}</h3><div class="database-entry-links">${enemies.map(a => link(`enemy-${a.id}`, zh ? a.zhName : a.name)).join('')}</div></div>` : ''}</div>`;
   }
+  if (kind === 'quests') {
+    const groups = [
+      [false, zh ? '任务步骤' : 'Quest walkthroughs'],
+      [true, zh ? '对话订单线索' : 'Dialogue order leads'],
+    ];
+    return groups.map(([dialogue, title]) => {
+      const entries = data.quests.filter(item => (item.buildGuide?.sourceKind === 'dialogue-defined') === dialogue);
+      if (!entries.length) return '';
+      return `<h3>${title}</h3><div class="database-entry-links">${entries.map(item => link(item.id, zh ? (item.buildGuide?.zhName || item.zhName) : (item.buildGuide?.name || item.name))).join('')}</div>`;
+    }).join('');
+  }
   if (kind !== 'crops') {
     return `<div class="database-entry-links">${data[kind].map(item => {
       let name = kind === 'quests' && item.buildGuide ? (zh ? item.buildGuide.zhName : item.buildGuide.name) : (zh ? item.zhName : item.name);
@@ -81,6 +92,15 @@ function renderLookup(data, kind, locale) {
   const zh = locale === 'zh';
   const titles = { animals: ['Choose an animal', '选择动物'], crops: ['Browse crops by season', '按季节查作物'], materials: ['Choose a material', '选择材料'], quests: ['Choose a quest', '选择任务'], npcs: ['Choose a person', '选择人物'] };
   const title = titles[kind][zh ? 1 : 0];
+  const directAnswer = kind === 'animals'
+    ? `<p class="lead database-direct-answer">${zh
+      ? '当前构建资料覆盖 5 类牧场动物：鸡、牛、山羊、绵羊和兔。下面可直接查名称、食物与饮水、运送回家、产物、繁殖结果引用和当前排障资料。'
+      : 'Current-build records cover five ranch-animal groups: Chicken, Cow, Goat, Sheep and Rabbit. Use the entries below for names, food and water, bringing animals home, products, breeding outcome references and current troubleshooting.'}</p>`
+    : kind === 'quests'
+      ? `<p class="lead database-direct-answer">${zh
+        ? '按任务名查看完成步骤、所需物品与容易漏掉的判定。先选任务，再对照游戏追踪器当前目标；对话订单线索单独列在下方。'
+        : 'Find your quest, check the required items and follow the objectives. Match the steps to your current tracker goal; dialogue-only order leads are listed separately.'}</p>`
+      : '';
   const notes = {
     animals: ['Look up ranch-animal care and build-defined wildlife names. Wildlife entries do not establish behavior or spawn locations.', '查看牧场动物照料与构建内野生生物名称；野生生物条目不证明行为或生成地点。'],
     crops: ['Seasons come from game-build configuration. Select a crop for details; Marrow and Leek availability is unconfirmed.', '季节来自游戏构建配置；点击查看种植资料。西葫芦、韭葱的购买途径尚未确认。'],
@@ -88,7 +108,7 @@ function renderLookup(data, kind, locale) {
     quests: ['Check the steps, preparation and stuck-point guides.', '查任务步骤、准备事项与卡关处理。'],
     npcs: ['Find services, related quests and locations.', '查人物服务、相关任务与地点。'],
   };
-  return `${renderTabs(locale, kind)}
+  return `${directAnswer}${renderTabs(locale, kind)}
     <section class="database-browser" id="browse-entries" aria-labelledby="browse-entries-title">
       <h2 id="browse-entries-title">${title}</h2>
       ${renderEntries(data, kind, locale)}${['materials','animals'].includes(kind)?`<div class="database-guide-links"><a href="${zh?'/zh':''}/guides/resources-and-materials#consumables">${zh?'食物与消耗品配置':'Food & consumable settings'}</a></div>`:''}

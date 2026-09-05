@@ -45,7 +45,12 @@ function validateDataset(relative, recordsKey, minimumRecords) {
   return data;
 }
 
-const npcs = validateDataset("data/npcs.json", "npcs", 3);
+const npcs = validateDataset("data/npcs.json", "npcs", 7);
+assert.deepEqual(
+  npcs.npcs.map((npc) => npc.id),
+  ["victor", "angela", "gigi", "malcolm", "meriam", "country-mechanic", "susan"],
+  "The NPC directory must expose the four build-defined service contacts after the reviewed profiles",
+);
 const quests = validateDataset("data/quests.json", "quests", 6);
 const dialogueServices = readJson('data/dialogue-services.json');
 assert.equal(dialogueServices.services.length, 15);
@@ -63,6 +68,10 @@ assert.deepEqual(dialogueServices.services.find(service => service.id === 'subwa
 assert.deepEqual(dialogueServices.services.find(service => service.id === 'additional-land-purchase').dialogueListedCosts, [{kind:'additional-plot',currency:300000}]);
 assert.deepEqual(dialogueServices.services.find(service => service.id === 'vehicle-repair-actions').sourceNodes, ['31/12', '33/15', '33/16']);
 assert.deepEqual(dialogueServices.services.find(service => service.id === 'animal-treatment-actions').sourceNodes, ['47/15', '47/16', '48/3']);
+assert.ok(dialogueServices.services.find(service => service.id === 'seed-vendor-actions').sourceNodes.includes('11/1'), 'seed vendor service must retain its merchant availability gate');
+assert.ok(dialogueServices.services.find(service => service.id === 'clothing-catalogue-actions').sourceNodes.includes('34/17'), 'clothing service must retain its merchant availability gate');
+assert.ok(dialogueServices.services.find(service => service.id === 'additional-land-purchase').sourceNodes.includes('37/8'), 'Victor services must retain their merchant availability gate');
+assert.ok(dialogueServices.services.find(service => service.id === 'angela-shop-catalogue').sourceNodes.includes('45/3'), 'Angela service must retain its merchant availability gate');
 assert.equal(quests.quests.length, 18, 'Sixteen static quests and two dialogue-defined quest leads must reach the website');
 const staticQuests = quests.quests.filter(q => q.buildGuide.sourceKind !== 'dialogue-defined');
 assert.equal(staticQuests.length, 16);
@@ -166,9 +175,11 @@ const zhQuestHtml = read("zh/database/quests.html");
 const zhNpcHtml = read("zh/database/npcs.html");
 for (const html of [npcHtml, zhNpcHtml]) {
   assert.equal((html.match(/data-dialogue-service=/g) || []).length, 15);
-  assert.equal((html.match(/id="dialogue-service-[^"]+" data-dialogue-service=[^>]+data-search-entry/g) || []).length, 15);
+  assert.equal((html.match(/id="dialogue-service-[^"]+" data-dialogue-service=[^>]+data-search-entry/g) || []).length, 9, "services covered by full NPC profiles must not create duplicate search answers");
   assert.doesNotMatch(html, /Marchant_|RepairMarchant_|SubWay_|State_SetMoney/);
 }
+assert.match(npcHtml, /id="dialogue-service-animal-treatment-actions"[^>]*>[\s\S]*?href="\/database\/npcs#susan"/);
+assert.match(zhNpcHtml, /id="dialogue-service-country-mechanic-catalogue"[^>]*>[\s\S]*?href="\/zh\/database\/npcs#country-mechanic"/);
 assert.match(npcHtml, /Electricity contract actions/);
 assert.match(npcHtml, /Bicycle rental terminal/);
 assert.match(npcHtml, /Clothing and accessories catalogues/);
@@ -183,6 +194,7 @@ assert.match(zhNpcHtml, /Meriam 蓝图目录与出售/);
 assert.match(zhNpcHtml, /动物感染治疗/);
 for (const html of [questHtml, zhQuestHtml]) {
   assert.equal((html.match(/data-quest-build-guide=/g) || []).length, 18, "static and dialogue-defined guides must reach the actual page");
+  assert.equal((html.match(/<div class="quest-build-guide" data-quest-build-guide=/g) || []).length, 18, "quest answers must remain visible without opening a details control");
   assert.equal((html.match(/data-quest-flow/g) || []).length, 18, "all published guides must render failure and continuation data");
   assert.equal((html.match(/data-dialogue-defined-quest/g) || []).length, 2, "dialogue-defined leads need a distinct visible boundary");
   assert.equal((html.match(/data-configured-reward-action=/g) || []).length, 5, "five source-matched static quest reward actions must render");

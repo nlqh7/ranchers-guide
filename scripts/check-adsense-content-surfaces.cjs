@@ -26,8 +26,24 @@ const noAdSurfaces = [
   "zh/tools/chicken-troubleshooter.html",
 ];
 
+const belowPrimaryContentBar = [
+  "problems/failed-quest-replay.html",
+  "problems/fast-travel-subway.html",
+  "problems/friend-session-join.html",
+  "problems/offline-mode-loading.html",
+  "updates/launch-hotfix-0-8-10-455.html",
+  "updates/transport-update.html",
+  "zh/problems/fast-travel-subway.html",
+  "zh/updates/launch-hotfix-0-8-10-455.html",
+  "zh/updates/transport-update.html",
+];
+
 for (const relativePath of noAdSurfaces) {
   assert.doesNotMatch(read(relativePath), adPattern, `${relativePath}: navigation, methodology and interactive surfaces must not request ads`);
+}
+
+for (const relativePath of belowPrimaryContentBar) {
+  assert.doesNotMatch(read(relativePath), adPattern, `${relativePath}: B-grade short answers stay outside AdSense inventory until they reach the primary content bar`);
 }
 
 for (const relativePath of ["index.html", "zh/index.html", "guides/beginners-guide.html", "database/crops.html"]) {

@@ -156,16 +156,23 @@ function renderBuildReference(animal, locale) {
   const entries = ref.entries
     ? `<h3>${zh ? '成年羊与幼羊' : 'Adult and young goats'}</h3><div class="data-table-wrap" tabindex="0" role="region" aria-label="${zh ? '山羊名称与商店引用' : 'Goat names and shop references'}"><table class="data-table"><thead><tr><th scope="col">${zh ? '游戏内名称' : 'Game name'}</th><th scope="col">${zh ? '商店表引用' : 'Shop-table reference'}</th></tr></thead><tbody>${ref.entries.map(row => `<tr><th scope="row">${label(row)}<br><small>${zh ? (row.stage === 'adult' ? '成年' : '幼年') : (row.stage === 'adult' ? 'Adult' : 'Young')} · ${zh ? (row.sex === 'female' ? '雌性' : '雄性') : (row.sex === 'female' ? 'Female' : 'Male')}</small></th><td>${row.shopListed ? (zh ? '有引用' : 'Referenced') : (zh ? '未引用' : 'Not referenced')}</td></tr>`).join('')}</tbody></table></div>`
     : `<h3>${zh ? '可查品种' : 'Cattle breeds'}</h3><div class="data-table-wrap" tabindex="0" role="region" aria-label="${zh ? '牛品种与性别' : 'Cattle breeds and sexes'}"><table class="data-table"><thead><tr><th scope="col">${zh ? '品种' : 'Breed'}</th><th scope="col">${zh ? '商店配置条目' : 'Shop entries'}</th></tr></thead><tbody>${ref.breeds.map(b => `<tr><th scope="row">${label(b)}</th><td>${b.sexes.map(sex).join(zh ? '、' : ' / ')}</td></tr>`).join('')}</tbody></table></div>`;
+  const nativeEntries = new Map(data.nativeAnimalReference.entries.map(entry => [entry.id, entry]));
+  const breeding = ref.breedingReference;
+  const breedingNames = ids => ids.map(id => label(nativeEntries.get(id))).join(zh ? '、' : ', ');
+  const breedingBlock = breeding ? `<h3>${zh ? '构建中的繁殖结果引用' : 'Breeding outcome references'}</h3>
+        <ul>${breeding.youngOutcomeIds.length ? `<li><strong>${zh ? '幼体：' : 'Young: '}</strong>${breedingNames(breeding.youngOutcomeIds)}</li>` : ''}${breeding.adultOutcomeIds.length ? `<li><strong>${zh ? '特殊成年体：' : 'Special adults: '}</strong>${breedingNames(breeding.adultOutcomeIds)}</li>` : ''}</ul>
+        <p class="database-browse-note">${zh ? '原始繁殖定义确实引用这些结果实体，但未命名数字的含义尚未解码；本站不据此推断配对要求、权重、概率、耗时或当前运行时可用性。' : 'The retained breeding definition references these outcome entities, but its unnamed numbers remain undecoded. This does not establish pairing requirements, weights, probability, timing or current runtime availability.'}</p>` : '';
   return `<div class="animal-build-reference">
         <p class="database-browse-note">${zh ? '站长整理 · 游戏构建资料' : 'Editor-collected · game-build reference'} · ${escapeHtml(ref.build)}${zh ? '。未逐项实测，配置不保证当前可购买。' : '. Not gameplay-tested; configuration does not guarantee availability.'}</p>
         ${entries}
+        ${breedingBlock}
         <p><strong>${zh ? '关联任务：' : 'Related quest: '}</strong><a href="${questRoute}">${label(ref.quest)}</a> — ${text(ref.quest)}</p>
         ${ref.care.length ? `<h3>${zh ? '照料清单' : 'Care checklist'}</h3><ol>${ref.care.map(step => `<li>${text(step)}</li>`).join('')}</ol>` : ''}
         ${ref.equipment.length ? `<p><strong>${zh ? '同店用品目录：' : 'Equipment in the same shop directory: '}</strong>${ref.equipment.map(label).join(zh ? '、' : ', ')}${zh ? '。这是目录信息，不代表全部必买，也不能由此推定具体食谱。' : '. A directory listing, not a required shopping list or proof of a species-specific diet.'}</p>` : ''}
         <h3>${zh ? '产物名称对照' : 'Product name lookup'}</h3>
         <ul>${['milk', 'meat'].map(group => `<li><strong>${group === 'milk' ? (zh ? '奶类：' : 'Milk: ') : (zh ? '肉类：' : 'Meat: ')}</strong>${ref.products.filter(p => p.group === group).map(label).join(zh ? '、' : ', ')}</li>`).join('')}</ul>
         <p class="database-browse-note">${zh ? '这些是物品定义，不代表每只动物都能产出全部规格；产量、周期和规格出现概率尚未验证。' : 'These are item definitions, not guaranteed outputs for every animal. Yield, production interval and size chances remain unverified.'}</p>
-        <details class="database-outline"><summary>${zh ? '查看资料来源' : 'Reference sources'}</summary><p>${zh ? '站长从自购游戏的动物表、商店表、物品表及双语名称与提示中整理；原始游戏文件不提供下载。' : 'Interpreted from an owned copy’s animal, shop and item tables and bilingual names and guidance. Raw game files are not distributed.'}</p>${renderSources(ref.sourceIds)}</details>
+        <details class="database-outline"><summary>${zh ? '查看资料来源' : 'Reference sources'}</summary><p>${zh ? '站长从自购游戏的动物表、商店表、物品表及双语名称与提示中整理；原始游戏文件不提供下载。' : 'Interpreted from an owned copy’s animal, shop and item tables and bilingual names and guidance. Raw game files are not distributed.'}</p>${renderSources([...ref.sourceIds, ...(breeding?.sourceIds || [])])}</details>
       </div><!-- animal-build-reference-end -->`;
 }
 
@@ -239,16 +246,16 @@ let html = `<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Ranchers Animal Database — Confirmed Roster & Data Tracker</title>
-  <meta name="description" content="Search The Ranchers animal records, variants and reported prices with source links, build context and clear evidence labels separating current facts from historical player data.">
+  <title>The Ranchers Animals Database — Care, Food, Breeding & Roster</title>
+  <meta name="description" content="Browse The Ranchers chickens, cows, goats, sheep and rabbits with current-build names, food and water, transport, products, breeding references and troubleshooting.">
   <link rel="canonical" href="https://theranchersguide.com/database/animals">
   <link rel="alternate" hreflang="en" href="https://theranchersguide.com/database/animals">
   <link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/database/animals">
   <link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/database/animals">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="The Ranchers Guide">
-  <meta property="og:title" content="The Ranchers Animal Database — Confirmed Roster & Data Tracker">
-  <meta property="og:description" content="Officially named animals, confirmed live-build systems, and a transparent queue for costs and production data that still need evidence.">
+  <meta property="og:title" content="The Ranchers Animals Database — Care, Food, Breeding & Roster">
+  <meta property="og:description" content="Current-build animal names, care routes, products, breeding references and troubleshooting in one searchable database.">
   <meta property="og:url" content="https://theranchersguide.com/database/animals">
   <meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
 
@@ -519,7 +526,7 @@ ${renderRoster(data.confirmedRoster)}
     </div>
   </footer>
 
-  <script src="../assets/js/main.js?v=20260810-nav1" defer></script>
+  <script src="../assets/js/main.js?v=20260906-nav2" defer></script>
   <script src="../assets/js/database.js?v=20260807-2" defer></script>
 </body>
 </html>
@@ -595,8 +602,8 @@ let zhHtml = `<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Ranchers 中文动物数据库 | 鸡、牛、山羊与兔</title>
-  <meta name="description" content="The Ranchers 中文动物数据库：鸡舍、喂食、饮水、温控、产蛋、疾病和动物消失排查，逐条标注证据状态。">
+  <title>The Ranchers 中文动物数据库 | 鸡、牛、山羊、绵羊与兔</title>
+  <meta name="description" content="The Ranchers 中文动物数据库：查鸡、牛、山羊、绵羊与兔的名称、食物饮水、运送、产物、繁殖结果引用和当前排障资料。">
   <link rel="canonical" href="https://theranchersguide.com/zh/database/animals">
   <link rel="alternate" hreflang="en" href="https://theranchersguide.com/database/animals"><link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/database/animals"><link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/database/animals">
   <meta property="og:type" content="website"><meta property="og:title" content="The Ranchers 中文动物数据库"><meta property="og:description" content="按版本和证据整理动物照料资料。"><meta property="og:url" content="https://theranchersguide.com/zh/database/animals"><meta property="og:image" content="https://theranchersguide.com/assets/img/db-animals.jpg">
@@ -627,7 +634,7 @@ ${renderWildlifeReference('zh')}
 ${renderEnemyReference('zh')}
 ${renderZhExtra(data.zhExtra)}
   </article></main>
-  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>证据等级与版本标注与英文页一致</span></div></div></footer><script src="/assets/js/main.js?v=20260810-nav1" defer></script>
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>证据等级与版本标注与英文页一致</span></div></div></footer><script src="/assets/js/main.js?v=20260906-nav2" defer></script>
 </body></html>
 `;
 

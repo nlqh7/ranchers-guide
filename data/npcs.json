@@ -1,12 +1,13 @@
 {
-  "meta": { "build": "0.8.10.842", "lastUpdated": "2026-08-22" },
+  "meta": { "build": "0.8.10.842", "lastUpdated": "2026-09-04" },
   "sources": {
     "launch-video": { "kind": "local-video", "title": "Games Station current-build gameplay archive", "url": null, "author": "Games Station", "date": "2026-08-07", "build": "0.8.10.455" },
     "chicken-coop-thread": { "kind": "steam-thread", "title": "Steam thread: Chicken coop mission", "url": "https://steamcommunity.com/app/1501310/discussions/0/587307906418973975/", "author": "DJM / Yakiwi", "date": "2026-08-02", "build": "0.8.10.x" },
     "animal-support-scan": { "kind": "local-archive", "title": "August 2026 animal support answers and community scan", "url": null, "author": "Jennoula / players", "date": "2026-08-08", "build": "0.8.10.x" },
     "gigi-quest-thread": { "kind": "steam-thread", "title": "Steam thread: Real Eggs, Real Evidence quest route", "url": "https://steamcommunity.com/app/1501310/discussions/0/587308167364362187/", "author": "DJM / players", "date": "2026-08-04", "build": "0.8.10.x" },
     "gigi-end-thread": { "kind": "steam-thread", "title": "Steam threads: current quest line after Gigi", "url": "https://steamcommunity.com/app/1501310/discussions/0/587307627624791770/", "author": "Multiple players", "date": "2026-08-01", "build": "0.8.10.x" },
-    "gigi-official-end-thread": { "kind": "steam-thread", "title": "Steam thread: official reply on the current main quest endpoint", "url": "https://steamcommunity.com/app/1501310/discussions/0/590686908802417907/", "author": "Official moderator reply", "date": "2026-08-17", "build": null }
+    "gigi-official-end-thread": { "kind": "steam-thread", "title": "Steam thread: official reply on the current main quest endpoint", "url": "https://steamcommunity.com/app/1501310/discussions/0/590686908802417907/", "author": "Official moderator reply", "date": "2026-08-17", "build": null },
+    "owned-build-dialogue": { "kind": "local-game-build", "title": "Owned build dialogue database", "url": null, "author": "The Ranchers build 24847725", "date": "2026-08-31", "build": "0.8.10.842" }
   },
   "npcs": [
     {
@@ -42,6 +43,50 @@
         { "text": "Multiple current players report no implemented follow-up quest after this route; treat it as the present story endpoint, not a hidden trigger with a known solution.", "zhText": "多名当前玩家报告此流程后没有已实装的后续任务；现阶段应视为剧情终点，而不是存在已知隐藏触发条件。", "evidenceLevel": "community-confirmed", "build": "0.8.10.x", "validity": "current", "sourceIds": ["gigi-end-thread"] }
       ],
       "relatedRoutes": ["/guides/gigi-large-egg-quest", "/guides/police-wanted-levels"]
+    },
+    {
+      "id": "malcolm", "name": "Malcolm", "zhName": "Malcolm 马尔科姆", "searchTags": "malcolm shop catalogue merchant vendor items", "zhSearchTags": "Malcolm 马尔科姆 商店 商品 目录 商人",
+      "summary": "A build-defined merchant contact whose dialogue can open a shop catalogue after an availability check.", "zhSummary": "构建内记录的商人联系人；其对话会先检查商人可用性，再提供打开商店目录的路线。",
+      "whenNeeded": "Check Malcolm when a quest or conversation sends you to his shop; the retained build does not identify the catalogue contents or opening hours.", "zhWhenNeeded": "任务或对话要求前往 Malcolm 的商店时查找此条目；保留构建没有列出目录内容或营业时间。",
+      "facts": [
+        { "text": "A Malcolm-named conversation exposes a View shop items action.", "zhText": "以 Malcolm 命名的对话提供“查看商店商品”操作。", "evidenceLevel": "build-observed", "build": "0.8.10.842", "validity": "unknown", "sourceIds": ["owned-build-dialogue"] },
+        { "text": "The shop branch is preceded by a merchant-availability condition rather than an unconditional catalogue action.", "zhText": "商店分支前存在商人可用性条件，并不是无条件打开目录。", "evidenceLevel": "build-observed", "build": "0.8.10.842", "validity": "unknown", "sourceIds": ["owned-build-dialogue"] },
+        { "text": "The retained nodes do not identify inventory, prices, hours or a guaranteed current runtime location.", "zhText": "保留节点没有确认库存、价格、营业时间或当前运行时必定出现的位置。", "evidenceLevel": "build-observed", "build": "0.8.10.842", "validity": "unknown", "sourceIds": ["owned-build-dialogue"] }
+      ],
+      "relatedRoutes": ["/guides/resources-and-materials"]
+    },
+    {
+      "id": "meriam", "name": "Meriam", "zhName": "Meriam 米里亚姆", "searchTags": "meriam blueprint catalogue sell inventory merchant shop", "zhSearchTags": "Meriam 米里亚姆 蓝图 目录 出售 背包 商店",
+      "summary": "A build-defined merchant contact connected to a blueprint catalogue and selling items from the player's inventory.", "zhSummary": "构建内记录的商人联系人，关联蓝图目录以及从玩家背包出售物品的操作。",
+      "whenNeeded": "Check Meriam when you need the dialogue path for blueprints or selling carried items; contents and prices remain unverified.", "zhWhenNeeded": "需要通过对话寻找蓝图或出售随身物品时查找 Meriam；目录内容和价格仍未验证。",
+      "facts": [
+        { "text": "Meriam-named dialogue exposes an action that opens a blueprint catalogue.", "zhText": "以 Meriam 命名的对话提供打开蓝图目录的操作。", "evidenceLevel": "build-observed", "build": "0.8.10.842", "validity": "unknown", "sourceIds": ["owned-build-dialogue"] },
+        { "text": "A separate branch exposes selling items from the player's inventory.", "zhText": "另一条分支提供从玩家背包出售物品的操作。", "evidenceLevel": "build-observed", "build": "0.8.10.842", "validity": "unknown", "sourceIds": ["owned-build-dialogue"] },
+        { "text": "The retained dialogue does not enumerate blueprint contents, prices, opening hours or current runtime availability.", "zhText": "保留对话没有列出蓝图内容、价格、营业时间或当前运行时可用性。", "evidenceLevel": "build-observed", "build": "0.8.10.842", "validity": "unknown", "sourceIds": ["owned-build-dialogue"] }
+      ],
+      "relatedRoutes": ["/guides/resources-and-materials", "/guides/building-construction"]
+    },
+    {
+      "id": "country-mechanic", "name": "Country mechanic", "zhName": "乡村维修商", "searchTags": "country mechanic repair vehicle catalogue funds price quickfix", "zhSearchTags": "乡村维修商 车辆 修理 目录 资金 价格 QuickFix",
+      "summary": "The build-defined service contact for a vehicle catalogue branch and the repair-all dialogue path.", "zhSummary": "构建内记录的车辆服务联系人，关联商品目录分支和全部修理对话路线。",
+      "whenNeeded": "Use this contact when a vehicle needs repair or the country-mechanic catalogue; the total repair cost is filled at runtime.", "zhWhenNeeded": "车辆需要修理或要查乡村维修商目录时使用此条目；修理总价由运行时填入。",
+      "facts": [
+        { "text": "Country-mechanic dialogue exposes a catalogue action behind a merchant-availability condition.", "zhText": "乡村维修商对话在商人可用性条件后提供商品目录操作。", "evidenceLevel": "build-observed", "build": "0.8.10.842", "validity": "unknown", "sourceIds": ["owned-build-dialogue"] },
+        { "text": "The repair path checks for repairable vehicle content and sufficient player funds before invoking a repair-all action.", "zhText": "修理路线会先检查可修理车辆内容和玩家资金是否足够，再调用全部修理操作。", "evidenceLevel": "build-observed", "build": "0.8.10.842", "validity": "unknown", "sourceIds": ["owned-build-dialogue"] },
+        { "text": "The displayed repair total is runtime-filled; the retained nodes do not establish one fixed repair price or current stock.", "zhText": "显示的修理总价由运行时填入；保留节点不能证明统一固定价格或当前库存。", "evidenceLevel": "build-observed", "build": "0.8.10.842", "validity": "unknown", "sourceIds": ["owned-build-dialogue"] }
+      ],
+      "relatedRoutes": ["/guides/vehicles-transport", "/problems/vehicle-recovery"]
+    },
+    {
+      "id": "susan", "name": "Susan", "zhName": "Susan 苏珊", "searchTags": "susan animal infection treatment antibiotics rest veterinarian funds", "zhSearchTags": "Susan 苏珊 动物 感染 治疗 抗生素 休息 资金",
+      "summary": "A build-defined animal-treatment contact whose dialogue describes infection care and a runtime-priced treatment path.", "zhSummary": "构建内记录的动物治疗联系人；其对话描述感染护理和运行时计价的治疗路线。",
+      "whenNeeded": "Check Susan when an animal is infected and the treatment dialogue asks for antibiotics, rest or payment.", "zhWhenNeeded": "动物感染、治疗对话提到抗生素、休息或付款时查找 Susan。",
+      "facts": [
+        { "text": "Susan's treatment path describes an animal infection that needs antibiotics and rest.", "zhText": "Susan 的治疗路线描述动物感染后需要抗生素和休息。", "evidenceLevel": "build-observed", "build": "0.8.10.842", "validity": "unknown", "sourceIds": ["owned-build-dialogue"] },
+        { "text": "The dialogue checks a runtime-filled treatment total and whether the player has enough funds.", "zhText": "对话会检查运行时填入的治疗总价以及玩家资金是否足够。", "evidenceLevel": "build-observed", "build": "0.8.10.842", "validity": "unknown", "sourceIds": ["owned-build-dialogue"] },
+        { "text": "The path invokes a shared repair-all action; the retained build does not provide one fixed treatment price or prove the outcome was runtime-tested.", "zhText": "该路线会调用共用的全部修复操作；保留构建没有提供统一固定治疗价格，也不能证明结果已经运行时实测。", "evidenceLevel": "build-observed", "build": "0.8.10.842", "validity": "unknown", "sourceIds": ["owned-build-dialogue"] }
+      ],
+      "relatedRoutes": ["/database/animals#chicken", "/guides/animal-guide"]
     }
   ]
 }

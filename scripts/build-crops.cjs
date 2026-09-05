@@ -492,7 +492,7 @@ ${renderRoster(data.confirmedSystems)}
     </div>
   </footer>
 
-  <script src="../assets/js/main.js?v=20260810-nav1" defer></script>
+  <script src="../assets/js/main.js?v=20260906-nav2" defer></script>
   <script src="../assets/js/database.js?v=20260807-2" defer></script>
 </body>
 </html>
@@ -586,7 +586,7 @@ ${renderBuildRoster("zh")}
 ${zhBodyParts.join("\n")}
     ${zhRelated}
   </article></main>
-  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>购买价、零售价、出售收入严格分开</span></div></div></footer><script src="/assets/js/main.js?v=20260810-nav1" defer></script>
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>购买价、零售价、出售收入严格分开</span></div></div></footer><script src="/assets/js/main.js?v=20260906-nav2" defer></script>
 </body></html>
 `;
 

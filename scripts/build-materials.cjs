@@ -151,7 +151,7 @@ function render(locale) {
     <nav class="toc" aria-label="${l.contents}"><strong>${l.contents}</strong><ul>${toc}</ul></nav>
 ${sections}
     <p class="database-browse-note">${l.unknownCopy}</p>
-  </article></main><footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>${l.footer}</span></div></div></footer><script src="/assets/js/main.js?v=20260810-nav1" defer></script>
+  </article></main><footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>${l.footer}</span></div></div></footer><script src="/assets/js/main.js?v=20260906-nav2" defer></script>
 </body></html>`;
 }
 

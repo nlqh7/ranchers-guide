@@ -41,7 +41,18 @@ for(const zh of [false,true]) {
   const file=path.join(root,zh?'zh':'','guides/electricity-power.html');
   const before=fs.readFileSync(file,'utf8');
   if(!before.includes('<!-- BEGIN EQUIPMENT REFERENCE -->'))throw new Error(`Missing equipment block: ${file}`);
-  const after=before.replace(/<!-- BEGIN EQUIPMENT REFERENCE -->[\s\S]*?<!-- END EQUIPMENT REFERENCE -->/,render(zh));
+  const block = /[ \t]*<!-- BEGIN EQUIPMENT REFERENCE -->[\s\S]*?<!-- END EQUIPMENT REFERENCE -->\r?\n?/;
+  let after=before.replace(block,'');
+  const reportAnchor = /[ \t]*<h2 id="known-reports"/;
+  if(!reportAnchor.test(after))throw new Error(`Missing equipment destination: ${file}`);
+  after=after.replace(reportAnchor,`${render(zh)}\n      <h2 id="known-reports"`);
+  const solarSection = /[ \t]*<h2 id="solar-quest"[\s\S]*?(?=<!-- BEGIN EQUIPMENT REFERENCE -->)/;
+  // Keep the troubleshooting answer ahead of contract background and the long catalogue.
+  if(after.indexOf('id="solar-quest"') > after.indexOf('id="two-paths"')) {
+    const solar=after.match(solarSection)?.[0];
+    if(!solar)throw new Error(`Missing solar troubleshooting section: ${file}`);
+    after=after.replace(solarSection,'').replace(/[ \t]*<h2 id="official-scope"/,`${solar}\n      <h2 id="official-scope"`);
+  }
   if(before!==after) {
     if(process.argv.includes('--check')){stale=true;console.error(`STALE: ${file}`);}
     else fs.writeFileSync(file,after);
