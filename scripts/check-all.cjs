@@ -3,6 +3,7 @@ const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
 const nodeChecks = [
+  ["check-table-sorting.cjs"],
   ["build-animals.cjs", "--check"],
   ["check-wildlife-reference.cjs"],
   ["check-enemy-reference.cjs"],

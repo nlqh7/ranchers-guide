@@ -72,16 +72,25 @@
         return String(va).localeCompare(String(vb)) * sortState.dir;
       });
       rows.forEach(function (r) { tbody.appendChild(r); });
-      table.querySelectorAll("th").forEach(function (th, i) {
-        th.classList.toggle("sorted-asc", i === colIdx && sortState.dir === 1);
-        th.classList.toggle("sorted-desc", i === colIdx && sortState.dir === -1);
+      table.querySelectorAll("th").forEach(function (th) {
+        var active = th.cellIndex === colIdx;
+        th.classList.toggle("sorted-asc", active && sortState.dir === 1);
+        th.classList.toggle("sorted-desc", active && sortState.dir === -1);
+        th.setAttribute("aria-sort", active ? (sortState.dir === 1 ? "ascending" : "descending") : "none");
       });
       applyView();
     }
 
-    table.querySelectorAll("th[data-sortable]").forEach(function (th, i) {
-      th.addEventListener("click", function () { sortBy(i); });
-      th.setAttribute("title", "Click to sort");
+    table.querySelectorAll("th[data-sortable]").forEach(function (th) {
+      th.tabIndex = 0;
+      th.setAttribute("aria-sort", "none");
+      th.addEventListener("click", function () { sortBy(th.cellIndex); });
+      th.addEventListener("keydown", function (event) {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        sortBy(th.cellIndex);
+      });
+      th.setAttribute("title", chinese ? "点击或按 Enter / 空格排序" : "Click or press Enter / Space to sort");
     });
 
     if (search) search.addEventListener("input", applyView);
@@ -92,5 +101,6 @@
   initDataTable("crops-table");
   initDataTable("animals-table");
   initDataTable("crop-records-table");
+  initDataTable("crop-video-table");
   initDataTable("animal-records-table");
 })();

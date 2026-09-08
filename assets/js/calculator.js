@@ -9,6 +9,55 @@
 
   var STORAGE_KEY = "ranchers-calc-entries-v1";
   var entries = [];
+  var editingIndex = -1;
+  var removedEntries = null;
+  var undoBox = document.createElement("div");
+  var undoStatus = document.createElement("p");
+  undoStatus.setAttribute("role", "status");
+  var undoButton = document.createElement("button");
+  undoButton.type = "button";
+  undoButton.className = "btn btn-outline";
+  undoButton.textContent = "Undo removal";
+  undoButton.hidden = true;
+  undoBox.appendChild(undoStatus);
+  undoBox.appendChild(undoButton);
+  resultsEl.insertAdjacentElement("beforebegin", undoBox);
+  function rememberRemoval() {
+    removedEntries = entries.slice();
+    undoStatus.textContent = "Entries removed. You can undo this until your next change or page reload.";
+    undoButton.hidden = false;
+  }
+  undoButton.addEventListener("click", function () {
+    if (!removedEntries) return;
+    entries = removedEntries;
+    removedEntries = null;
+    resetEditor();
+    save(); render();
+    undoButton.hidden = true;
+    undoStatus.textContent = "Entries restored.";
+    form.name.focus();
+  });
+  var submitButton = form.querySelector('[type="submit"]');
+  var cancelEdit = document.createElement("button");
+  cancelEdit.type = "button";
+  cancelEdit.className = "btn btn-outline";
+  cancelEdit.style.marginTop = "8px";
+  cancelEdit.textContent = "Cancel editing";
+  cancelEdit.hidden = true;
+  submitButton.insertAdjacentElement("afterend", cancelEdit);
+
+  function resetEditor() {
+    editingIndex = -1;
+    form.reset();
+    form.units.value = 1;
+    submitButton.textContent = "Add & Rank";
+    cancelEdit.hidden = true;
+    typeFields();
+  }
+  cancelEdit.addEventListener("click", function () {
+    resetEditor();
+    form.name.focus();
+  });
 
   function load() {
     try {
@@ -45,7 +94,9 @@
   function typeFields() {
     var isCrop = form.type.value === "crop";
     document.querySelectorAll("[data-when]").forEach(function (el) {
-      el.style.display = el.getAttribute("data-when") === form.type.value ? "" : "none";
+      var active = el.getAttribute("data-when") === form.type.value;
+      el.style.display = active ? "" : "none";
+      el.querySelectorAll("input, select, textarea").forEach(function (field) { field.disabled = !active; });
     });
     document.getElementById("seed-label").textContent = isCrop
       ? "Seed cost (per plot)"
@@ -101,6 +152,7 @@
           "</div>" +
           '<div class="result-bar"><div style="width:' + width + '%"></div></div>' +
           '<div class="result-actions">' +
+            '<button type="button" class="icon-btn" data-edit="' + x.i + '" aria-label="Edit ' + esc(e.name) + '">Edit</button>' +
             '<button class="icon-btn" data-del="' + x.i + '" title="Remove">✕ remove</button>' +
           "</div>" +
         "</div>"
@@ -108,9 +160,25 @@
     }).join("");
 
     resultsEl.innerHTML = html;
+    resultsEl.querySelectorAll("[data-edit]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        editingIndex = parseInt(btn.getAttribute("data-edit"), 10);
+        var entry = entries[editingIndex];
+        Object.keys(entry).forEach(function (key) {
+          var field = form.elements.namedItem(key);
+          if (field) field.value = entry[key];
+        });
+        typeFields();
+        submitButton.textContent = "Save changes & Rank";
+        cancelEdit.hidden = false;
+        form.name.focus();
+      });
+    });
     resultsEl.querySelectorAll("[data-del]").forEach(function (btn) {
       btn.addEventListener("click", function () {
+        rememberRemoval();
         entries.splice(parseInt(btn.getAttribute("data-del"), 10), 1);
+        if (editingIndex !== -1) resetEditor();
         save(); render();
       });
     });
@@ -129,18 +197,22 @@
       growthDays: isCrop ? Math.max(1, parseInt(form.growthDays.value, 10) || 1) : 0,
       cycleDays: isCrop ? 0 : Math.max(1, parseInt(form.cycleDays.value, 10) || 1)
     };
-    entries.push(entry);
+    removedEntries = null;
+    undoButton.hidden = true;
+    undoStatus.textContent = "";
+    if (editingIndex === -1) entries.push(entry);
+    else entries[editingIndex] = entry;
     save(); render();
-    form.reset();
-    form.units.value = 1;
-    typeFields();
+    resetEditor();
   });
 
   form.type.addEventListener("change", typeFields);
 
   var clearBtn = document.getElementById("calc-clear");
   if (clearBtn) clearBtn.addEventListener("click", function () {
-    entries = []; save(); render();
+    if (!entries.length) return;
+    rememberRemoval();
+    entries = []; resetEditor(); save(); render();
   });
 
   load(); typeFields(); render();

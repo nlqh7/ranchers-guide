@@ -527,7 +527,7 @@ ${renderRoster(data.confirmedRoster)}
   </footer>
 
   <script src="../assets/js/main.js?v=20260906-nav2" defer></script>
-  <script src="../assets/js/database.js?v=20260908-reset1" defer></script>
+  <script src="../assets/js/database.js?v=20260908-sort1" defer></script>
 </body>
 </html>
 `;
