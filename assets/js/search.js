@@ -348,16 +348,19 @@
         var build = fact.build ? ' <span class="knowledge-dossier-build">' + escapeHtml(fact.build) + '</span>' : "";
         return '<li><span>' + escapeHtml(fact.text) + '</span> ' + status + build + '</li>';
       }).join("");
-      var related = dossierRelated(entity, matches).map(function (link) {
+      var relatedLinks = dossierRelated(entity, matches).map(function (link) {
         return '<a class="knowledge-dossier-link" href="' + escapeHtml(link.href) + '"><span>' + escapeHtml(link.kind || (IS_ZH ? "关联答案" : "Related answer")) + '</span><strong>' + escapeHtml(link.label) + '</strong></a>';
-      }).join("");
+      });
+      var related = relatedLinks.slice(0, 3).join("");
+      var moreRelated = relatedLinks.slice(3).join("");
       var journey = dossierJourney(entity);
       var sources = (entity.sources || []).slice(0, 4).map(function (source) {
         return source.url
           ? '<a href="' + escapeHtml(source.url) + '" rel="noopener noreferrer">' + escapeHtml(source.title) + '</a>'
           : '<span>' + escapeHtml(source.title) + '</span>';
       }).join(" · ");
-      return '<article class="knowledge-dossier-card"><div class="knowledge-dossier-heading"><div><span class="kicker">' + escapeHtml(entity.typeLabel) + '</span><h2>' + escapeHtml(entity.label) + '</h2></div><a class="btn btn-outline btn-compact" href="' + escapeHtml(entity.route) + '">' + (IS_ZH ? "打开完整条目" : "Open full entry") + '</a></div><p class="knowledge-dossier-summary">' + escapeHtml(entity.summary) + '</p>' + (facts ? '<div class="knowledge-dossier-facts"><strong>' + (IS_ZH ? "先看这些" : "Start with these facts") + '</strong><ul>' + facts + '</ul></div>' : "") + (journey ? '<div class="knowledge-dossier-journey"><strong>' + (IS_ZH ? "继续解决这个问题" : "Continue solving this") + '</strong><div>' + journey + '</div></div>' : "") + (related ? '<div class="knowledge-dossier-related"><strong>' + (IS_ZH ? "相关信息" : "Related information") + '</strong><div>' + related + '</div></div>' : "") + (sources ? '<p class="knowledge-dossier-sources"><strong>' + (IS_ZH ? "证据来源" : "Sources") + ':</strong> ' + sources + '</p>' : "") + '</article>';
+      var supplemental = (facts ? '<div class="knowledge-dossier-facts"><strong>' + (IS_ZH ? "参考资料" : "Reference facts") + '</strong><ul>' + facts + '</ul></div>' : "") + (journey ? '<div class="knowledge-dossier-journey"><strong>' + (IS_ZH ? "完整操作路线" : "Full walkthrough") + '</strong><div>' + journey + '</div></div>' : "") + (moreRelated ? '<div class="knowledge-dossier-related"><div>' + moreRelated + '</div></div>' : "") + (sources ? '<p class="knowledge-dossier-sources"><strong>' + (IS_ZH ? "证据来源" : "Sources") + ':</strong> ' + sources + '</p>' : "");
+      return '<article class="knowledge-dossier-card"><div class="knowledge-dossier-heading"><div><span class="kicker">' + escapeHtml(entity.typeLabel) + '</span><h2>' + escapeHtml(entity.label) + '</h2></div><a class="btn btn-outline btn-compact" href="' + escapeHtml(entity.route) + '">' + (IS_ZH ? "打开完整条目" : "Open full entry") + '</a></div><p class="knowledge-dossier-summary">' + escapeHtml(entity.summary) + '</p>' + (related ? '<div class="knowledge-dossier-related"><strong>' + (IS_ZH ? "直接查看" : "Jump to an answer") + '</strong><div>' + related + '</div></div>' : "") + (supplemental ? '<details class="knowledge-dossier-more"><summary>' + (IS_ZH ? "更多资料与相关攻略" : "More facts and related guides") + '</summary>' + supplemental + '</details>' : "") + '</article>';
     }).join("");
   }
 

@@ -13,6 +13,24 @@
     var sortState = { col: -1, dir: 1 };
     var params = new URLSearchParams(window.location.search);
     var initialQuery = params.get("q");
+    var chinese = document.documentElement.lang.toLowerCase().indexOf("zh") === 0;
+    var reset = null;
+    if (search || filter) {
+      reset = document.createElement("button");
+      reset.type = "button";
+      reset.className = "btn btn-outline";
+      reset.textContent = chinese ? "清除筛选" : "Clear filters";
+      (filter || search).insertAdjacentElement("afterend", reset);
+      reset.addEventListener("click", function () {
+        if (search) search.value = "";
+        if (filter) filter.value = "";
+        var url = new URL(window.location.href);
+        url.searchParams.delete("q");
+        window.history.replaceState(null, "", url.pathname + url.search + url.hash);
+        applyView();
+        (search || filter).focus();
+      });
+    }
 
     if (search && initialQuery) search.value = initialQuery;
 
@@ -29,7 +47,11 @@
         row.style.display = show ? "" : "none";
         if (show) visible++;
       });
-      if (countEl) countEl.textContent = visible + " entries";
+      if (countEl) {
+        countEl.setAttribute("role", "status");
+        countEl.textContent = visible ? visible + (chinese ? " 条记录" : " entries") : (chinese ? "没有匹配记录，请修改关键词或清除筛选。" : "No matching entries. Change your search or clear filters.");
+      }
+      if (reset) reset.hidden = !q && !f;
     }
 
     function cellVal(row, i) {

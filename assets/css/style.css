@@ -3226,6 +3226,8 @@ body.has-modal-open { overflow: hidden; }
 .knowledge-dossier-journey-link small { color: var(--color-text-muted); line-height: 1.45; }
 .knowledge-dossier-sources { margin: 20px 0 0; color: var(--color-text-muted); font-size: 0.82rem; }
 .knowledge-dossier-sources a { color: var(--color-action); }
+.knowledge-dossier-more { margin-top: 16px; border-top: 1px solid var(--color-border); }
+.knowledge-dossier-more > summary { min-height: 44px; padding: 10px 0; cursor: pointer; color: var(--color-action); font-weight: 700; }
 .creator-notes-list { display: grid; gap: 22px; margin-top: 28px; }
 .creator-note-card { padding: 24px; border: 1px solid var(--cream-300); border-top: 4px solid var(--green-500); background: var(--surface); box-shadow: var(--shadow-sm); }
 .creator-note-card-head { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; justify-content: space-between; }

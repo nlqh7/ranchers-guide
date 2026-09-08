@@ -107,6 +107,8 @@ for (const relative of ["knowledge-index.json", "zh/knowledge-index.json"]) {
 
 const search = fs.readFileSync(path.join(root, "assets/js/search.js"), "utf8");
 assert.match(search, /knowledge-dossier-journey/);
-assert.match(search, /Continue solving this/);
-assert.match(search, /继续解决这个问题/);
+assert.match(search, /Full walkthrough/);
+assert.match(search, /完整操作路线/);
+assert.match(search, /More facts and related guides/);
+assert.match(search, /更多资料与相关攻略/);
 console.log("PASS: audited animal, location, material, NPC and quest entities expose bilingual, route-checked journeys in search dossiers.");
