@@ -23,6 +23,8 @@
       <section class="quest-tracker-controls" aria-labelledby="quest-filter-title">
         <h2 id="quest-filter-title">查找任务</h2>
         <div class="quest-tracker-filters">
+          <div class="calc-field"><label for="quest-keyword">搜索这份任务清单</label><input id="quest-keyword" type="search" data-quest-keyword placeholder="任务名称、目标或 NPC"><button class="btn btn-outline" type="button" data-quest-search-clear hidden>清空关键词</button></div>
+          <div class="calc-field"><label for="quest-progress-filter">核对进度</label><select id="quest-progress-filter" data-quest-filter="progress"><option value="all">全部进度</option><option value="open">尚未核对完</option><option value="checked">全部目标已核对</option></select></div>
           <div class="calc-field"><label for="quest-category-filter">分类</label><select id="quest-category-filter" data-quest-filter="category"><option value="all">全部分类</option></select></div>
           <div class="calc-field"><label for="quest-npc-filter">NPC</label><select id="quest-npc-filter" data-quest-filter="npc"><option value="all">全部 NPC</option></select></div>
           <div class="calc-field"><label for="quest-location-filter">地点</label><select id="quest-location-filter" data-quest-filter="location"><option value="all">全部地点</option></select></div>
@@ -34,6 +36,6 @@
     </div>
   </main>
   <footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>The Ranchers Guide</h4><p>按版本和证据整理的非官方中文玩家资料。</p><p class="disclaimer">与 RedPilz Studio 或 Trophy Games 无关联。</p></div><nav aria-label="页脚帮助"><h4>帮助</h4><ul><li><a href="/zh/guides/beginners-guide">新手</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li></ul></nav><nav aria-label="页脚数据"><h4>数据</h4><ul><li><a href="/zh/database">知识库</a></li><li><a href="/zh/database/quests">任务</a></li><li><a href="/zh/database/animals">动物</a></li></ul></nav><nav aria-label="页脚站点"><h4>站点</h4><ul><li><a href="/zh/search">搜索</a></li><li><a href="/contribute">投稿</a></li><li><a href="/about">关于</a></li><li><a href="/privacy">隐私</a></li></ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>本地记录只保存在当前设备。</span></div></div></footer>
-  <script src="/assets/js/main.js?v=20260906-nav2" defer></script><script src="/assets/js/quest-tracker.js?v=20260828-1" defer></script>
+  <script src="/assets/js/main.js?v=20260906-nav2" defer></script><script src="/assets/js/quest-tracker.js?v=20260908-filter2" defer></script>
 </body>
 </html>

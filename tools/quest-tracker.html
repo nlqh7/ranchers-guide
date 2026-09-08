@@ -23,6 +23,8 @@
       <section class="quest-tracker-controls" aria-labelledby="quest-filter-title">
         <h2 id="quest-filter-title">Find a quest</h2>
         <div class="quest-tracker-filters">
+          <div class="calc-field"><label for="quest-keyword">Search this checklist</label><input id="quest-keyword" type="search" data-quest-keyword placeholder="Quest name, objective or NPC"><button class="btn btn-outline" type="button" data-quest-search-clear hidden>Clear search</button></div>
+          <div class="calc-field"><label for="quest-progress-filter">Checklist progress</label><select id="quest-progress-filter" data-quest-filter="progress"><option value="all">All progress</option><option value="open">Still to check</option><option value="checked">All objectives checked</option></select></div>
           <div class="calc-field"><label for="quest-category-filter">Category</label><select id="quest-category-filter" data-quest-filter="category"><option value="all">All categories</option></select></div>
           <div class="calc-field"><label for="quest-npc-filter">NPC</label><select id="quest-npc-filter" data-quest-filter="npc"><option value="all">All NPCs</option></select></div>
           <div class="calc-field"><label for="quest-location-filter">Location</label><select id="quest-location-filter" data-quest-filter="location"><option value="all">All locations</option></select></div>
@@ -35,6 +37,6 @@
   </main>
   <footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>The Ranchers Guide</h4><p>Independent, fan-made Early Access help with versioned evidence.</p><p class="disclaimer">Not affiliated with RedPilz Studio or Trophy Games.</p></div><nav aria-label="Footer guides"><h4>Help</h4><ul><li><a href="/guides/beginners-guide">Guides</a></li><li><a href="/map">Map</a></li><li><a href="/problems">Problems</a></li></ul></nav><nav aria-label="Footer data"><h4>Data</h4><ul><li><a href="/database">Knowledge Base</a></li><li><a href="/database/quests">Quests</a></li><li><a href="/database/animals">Animals</a></li></ul></nav><nav aria-label="Footer site"><h4>Site</h4><ul><li><a href="/search">Search</a></li><li><a href="/contribute">Contribute</a></li><li><a href="/about">About</a></li><li><a href="/privacy">Privacy</a></li>
             <li><a href="/terms">Terms of Service</a></li></ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>Local notes stay local.</span></div></div></footer>
-  <script src="/assets/js/main.js?v=20260906-nav2" defer></script><script src="/assets/js/quest-tracker.js?v=20260828-1" defer></script>
+  <script src="/assets/js/main.js?v=20260906-nav2" defer></script><script src="/assets/js/quest-tracker.js?v=20260908-filter2" defer></script>
 </body>
 </html>

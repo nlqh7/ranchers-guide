@@ -11,7 +11,10 @@
   var storageKey = "ranchers-guide-quest-tracker-v1";
   var state = {};
   var records = [];
+  var keyword = root.querySelector("[data-quest-keyword]");
+  var clearKeyword = root.querySelector("[data-quest-search-clear]");
   var filters = {
+    progress: root.querySelector('[data-quest-filter="progress"]'),
     category: root.querySelector('[data-quest-filter="category"]'),
     npc: root.querySelector('[data-quest-filter="npc"]'),
     location: root.querySelector('[data-quest-filter="location"]')
@@ -134,10 +137,22 @@
   }
 
   function recordMatches(record) {
+    var query = keyword ? keyword.value.trim().toLowerCase() : "";
+    if (query) {
+      var haystack = [record.name, record.zhName, record.summary, record.zhSummary].concat(
+        objectiveFacts(record).map(function (fact) { return [fact.text, fact.zhText].join(" "); }),
+        relationIds(record, "npc").map(relationLabel)
+      ).join(" ").toLowerCase();
+      if (!query.split(/\s+/).every(function (word) { return haystack.indexOf(word) !== -1; })) return false;
+    }
+    var progressFilter = filters.progress ? filters.progress.value : "all";
+    var progress = progressFor(record);
+    var fullyChecked = progress.total > 0 && progress.done === progress.total;
     var category = filters.category ? filters.category.value : "all";
     var npc = filters.npc ? filters.npc.value : "all";
     var location = filters.location ? filters.location.value : "all";
-    return (category === "all" || record.category === category) &&
+    return (progressFilter === "all" || (progressFilter === "checked" ? fullyChecked : !fullyChecked)) &&
+      (category === "all" || record.category === category) &&
       (npc === "all" || relationIds(record, "npc").indexOf(npc) !== -1) &&
       (location === "all" || relationIds(record, "location").indexOf(location) !== -1);
   }
@@ -211,7 +226,33 @@
     return '<article class="quest-tracker-card" data-quest-card="' + titleKey + '"><div class="quest-tracker-card-head"><div><span class="kicker">' + (isChinese ? "任务记录" : "Quest record") + '</span><h2>' + escapeHtml(name) + '</h2>' + (category ? '<span class="tag">' + escapeHtml(category) + '</span>' : '') + '</div><div class="quest-tracker-progress" data-quest-progress>0 / ' + facts.length + (isChinese ? " 已核对" : " checked") + '</div></div><p class="quest-tracker-summary">' + escapeHtml(summary) + '</p>' + nextObjectiveHtml(record) + relationLinks(record) + '<ul class="quest-tracker-items">' + factHtml + '</ul><div class="quest-tracker-card-foot"><div class="quest-tracker-related"><strong>' + (isChinese ? "继续查找" : "Continue with") + '</strong><div>' + related + '</div></div><button class="btn btn-outline btn-compact" type="button" data-quest-reset="' + titleKey + '">' + (isChinese ? "重置任务" : "Reset quest") + '</button></div></article>';
   }
 
+  function restoreFilters() {
+    var params = new URLSearchParams(window.location.search);
+    if (keyword) keyword.value = params.get("q") || "";
+    Object.keys(filters).forEach(function (key) {
+      var select = filters[key];
+      if (!select) return;
+      var value = params.get(key) || "all";
+      select.value = Array.from(select.options).some(function (option) { return option.value === value; }) ? value : "all";
+    });
+  }
+
+  function saveFiltersToUrl() {
+    var url = new URL(window.location.href);
+    var query = keyword ? keyword.value.trim() : "";
+    if (query) url.searchParams.set("q", query);
+    else url.searchParams.delete("q");
+    Object.keys(filters).forEach(function (key) {
+      var select = filters[key];
+      if (select && select.value !== "all") url.searchParams.set(key, select.value);
+      else url.searchParams.delete(key);
+    });
+    window.history.replaceState(window.history.state, "", url.pathname + url.search + url.hash);
+  }
+
   function renderRecords() {
+    saveFiltersToUrl();
+    if (clearKeyword) clearKeyword.hidden = !keyword || !keyword.value;
     var filtered = records.filter(recordMatches);
     updateOverview(filtered);
     list.innerHTML = filtered.length
@@ -230,12 +271,21 @@
     if (record && next) next.outerHTML = nextObjectiveHtml(record);
   }
 
+  function refreshProgressFilter(card) {
+    var record = records.find(function (item) { return item.id === card.dataset.questCard; });
+    if (record && !recordMatches(record)) {
+      renderRecords();
+      if (filters.progress) filters.progress.focus();
+    } else updateOverview(records.filter(recordMatches));
+  }
+
   function wireCards() {
     root.querySelectorAll("[data-quest-fact]").forEach(function (check) {
       check.addEventListener("change", function () {
         state[check.dataset.questFact] = check.checked;
         save();
         updateProgress(check.closest("[data-quest-card]"));
+        refreshProgressFilter(check.closest("[data-quest-card]"));
       });
     });
     root.querySelectorAll("[data-quest-reset]").forEach(function (button) {
@@ -248,10 +298,18 @@
         });
         save();
         updateProgress(card);
+        refreshProgressFilter(card);
       });
     });
     root.querySelectorAll("[data-quest-card]").forEach(updateProgress);
   }
+
+  if (keyword) keyword.addEventListener("input", renderRecords);
+  if (clearKeyword) clearKeyword.addEventListener("click", function () {
+    keyword.value = "";
+    renderRecords();
+    keyword.focus();
+  });
 
   fetch("/data/quests.json", { headers: { Accept: "application/json" } })
     .then(function (response) { if (!response.ok) throw new Error("quest-data"); return response.json(); })
@@ -260,6 +318,8 @@
       if (!Array.isArray(loadedRecords) || !loadedRecords.length) throw new Error("empty-quest-data");
       records = loadedRecords;
       populateFilters();
+      restoreFilters();
+      window.addEventListener("popstate", function () { restoreFilters(); renderRecords(); });
       Object.keys(filters).forEach(function (key) {
         if (filters[key]) filters[key].addEventListener("change", renderRecords);
       });
