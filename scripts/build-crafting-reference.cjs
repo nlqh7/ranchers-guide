@@ -58,7 +58,22 @@ function render(locale, compact = false) {
     return `<tr id="${rowId(row)}" data-recipe-row data-query="${esc(`${row.name} ${row.zhName} ${(recipe?.materials || []).map(m => { const i = data.ingredients.find(i => i.id === m.id); return `${i.name} ${i.zhName}`; }).join(' ')}`)}"${compact || (isTool && recipe) || farmItem ? '' : ` data-search-entry data-search-title="${esc(name(row))}" data-search-tags="${esc(`${row.name} ${row.zhName} crafting recipe tools 制作 配方 工具`)}" data-search-status="${zh ? '游戏构建配置' : 'Game-build configuration'}"`}><th scope="row"><a href="${compact ? `${prefix}/guides/crafting-guide` : ''}#${rowId(row)}">${esc(name(row))}</a>${workbench ? `<small>${workbench}</small>` : ''}${quest}</th><td>${requirement}</td></tr>`;
   };
   const selectedGroups = Object.entries(groups).filter(([id]) => !compact || ['essentials', 'farming', 'building'].includes(id));
+  const wallPlan = [['house_wall_exterior_01', 4], ['house_wall_exterior_Door_01', 1], ['house_wall_exterior_window_01', 1]].map(([id, count]) => ({ recipe: data.recipes.find(r => r.id === id), count }));
+  const planTotals = new Map();
+  wallPlan.forEach(({ recipe, count }) => recipe.materials.forEach(m => planTotals.set(m.id, (planTotals.get(m.id) || 0) + m.quantity * count)));
+  const planExample = compact ? `<section class="answer-box" id="wall-material-plan" data-wall-plan><h2>${zh ? '墙体备料表' : 'Wall material planner'}</h2>
+  <p>${zh ? '先选部件，再把各配方的材料乘以份数并相加。下面按已收录的游戏文件配方计算，示范怎样避免漏算和重复采购。' : 'Choose the parts first, multiply each recipe by its batch count, then add the materials together. This worked example uses the recorded game-file recipes.'}</p>
+  <p>${zh ? '修改各部件数量，合计自动更新；不需要的部件填 0。下方单配方份数不会改变这份备料表。' : 'Change each part count to update the total; enter 0 for parts you do not need. The recipe batch field below does not change this plan.'}</p>
+  <ul class="wall-plan-rows">${wallPlan.map(({ recipe, count }) => `<li data-plan-row><label class="wall-plan-field">${esc(name(recipe))}<input type="number" data-plan-count min="0" max="999" step="1" value="${count}" required></label><span>${recipe.materials.map(m => { const item = data.ingredients.find(i => i.id === m.id); return `${esc(name(item))} × <span data-plan-ingredient="${m.id}" data-plan-base="${m.quantity}">${m.quantity * count}</span>`; }).join(' + ')}</span> <a href="${prefix}/guides/crafting-guide#recipe-${recipe.id}">${zh ? '配方' : 'Recipe'}</a></li>`).join('')}</ul>
+  <p data-plan-error role="status" hidden>${zh ? '每项请输入 0–999 的整数。修正后再读取合计。' : 'Enter a whole number from 0 to 999 for each part to calculate the total.'}</p>
+  <p><strong>${zh ? '合计：' : 'Total: '}${Array.from(planTotals, ([id, quantity]) => { const item = data.ingredients.find(i => i.id === id); return `<span data-plan-total="${id}:${quantity}">${esc(name(item))} × <span data-plan-total-value="${id}">${quantity}</span></span>`; }).join(' + ')}</strong></p>
+  <div class="wall-plan-stock">${Array.from(planTotals, ([id, quantity]) => { const item = data.ingredients.find(i => i.id === id); return `<label class="wall-plan-field">${esc(name(item))}${zh ? '已有' : ' on hand'}<input type="number" data-plan-owned="${id}" min="0" max="999999" step="1" value="0" required></label>`; }).join('')}</div>
+  <p data-plan-stock-error role="status" hidden>${zh ? '已有材料请填写 0–999999 的整数。' : 'Enter a whole number from 0 to 999999 for materials on hand.'}</p>
+  <p><strong>${zh ? '还需收集：' : 'Still to collect: '}${Array.from(planTotals, ([id, quantity]) => { const item = data.ingredients.find(i => i.id === id); return `${esc(name(item))} × <span data-plan-missing="${id}">${quantity}</span>`; }).join(' + ')}</strong></p>
+  <p>${zh ? '这只是上述墙体的用料，不是完整房屋清单；不含地基、屋顶或独立门窗，也不证明能完成房屋任务。三种配方均要求工作台，并带有尚未确认解锁时机的任务条件。' : 'This covers only the listed walls, not a complete house: no foundation, roof or separate doors/windows. All three recipes require a workbench and include quest conditions with unverified unlock timing.'}</p>
+  <ol><li>${zh ? '先确认存档中这三种蓝图可用，并核对当前画面的材料数量。' : 'Check that these three plans are available in your save and compare their displayed ingredient quantities.'}</li><li>${zh ? '从合计中减去背包已有材料，再查' : 'Subtract what you already have, then check the '}<a href="${prefix}/database/materials#stone">${zh ? '石头' : 'Stone'}</a>${zh ? '和' : ' and '}<a href="${prefix}/database/materials#wood-log">${zh ? '原木获取途径' : 'Wood Log supply routes'}</a>。</li><li>${zh ? '按上方蓝图步骤放置、使用锤子完成施工，再核对任务目标；不要用材料齐全代替任务已完成的判断。' : 'Place the blueprints and finish their hammer build steps, then check the quest objectives separately. Having the materials is not the same as completing the quest.'}</li></ol></section>` : '';
   return `<!-- BEGIN CRAFTING REFERENCE -->
+${planExample}
 <section class="crafting-reference" data-crafting-reference data-result-label="${zh ? '{count} 个条目' : 'Results: {count}'}" aria-label="${title}">
   <label class="calc-field recipe-batch-control">${zh ? '配方份数（每份按单次材料计算）' : 'Recipe batches (repeat the listed ingredients)'}<input type="number" data-recipe-batches min="1" max="999" step="1" value="1" required></label>
   <p data-recipe-batch-error role="status" hidden>${zh ? '请输入 1–999 的整数份数。' : 'Enter a whole number from 1 to 999.'}</p>
@@ -80,7 +95,7 @@ for (const locale of ['en', 'zh']) {
     const before = fs.readFileSync(file, 'utf8');
     if (!before.includes('<!-- BEGIN CRAFTING REFERENCE -->')) throw new Error(`Missing crafting block: ${file}`);
     const after = before.replace(/<!-- BEGIN CRAFTING REFERENCE -->[\s\S]*?<!-- END CRAFTING REFERENCE -->/, render(locale, !route.includes('crafting-guide')))
-      .replace(/crafting-reference\.(css|js)\?v=[^"']+/g, 'crafting-reference.$1?v=20260909-prep1');
+      .replace(/crafting-reference\.(css|js)\?v=[^"']+/g, 'crafting-reference.$1?v=20260909-wall1');
     if (before !== after) {
       if (process.argv.includes('--check')) { console.error(`STALE: ${file}`); stale = true; }
       else fs.writeFileSync(file, after);

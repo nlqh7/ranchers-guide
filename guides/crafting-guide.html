@@ -18,7 +18,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
   <link rel="stylesheet" href="../assets/css/style.css?v=20260902-ui2">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/assets/css/crafting-reference.css?v=20260909-prep1">
+<link rel="stylesheet" href="/assets/css/crafting-reference.css?v=20260909-wall1">
 </head>
 <body>
   <header class="site-header"><nav class="nav-inner" aria-label="Main navigation">
@@ -30,7 +30,9 @@
     <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides/beginners-guide">Guides</a> / Crafting</nav>
     <h1>Crafting recipes & tools</h1>
 <p class="recipe-lead">Find the item, gather its ingredients, then craft.</p>
+<nav class="toc" aria-label="Guide navigation"><ul><li><a href="#recipes-essentials">Recipe list</a></li><li><a href="#flow">How to prepare</a></li><li><a href="#materials">Finding materials</a></li><li><a href="#troubleshooting">Cannot craft?</a></li></ul></nav>
 <!-- BEGIN CRAFTING REFERENCE -->
+
 <section class="crafting-reference" data-crafting-reference data-result-label="Results: {count}" aria-label="Recipes & tools">
   <label class="calc-field recipe-batch-control">Recipe batches (repeat the listed ingredients)<input type="number" data-recipe-batches min="1" max="999" step="1" value="1" required></label>
   <p data-recipe-batch-error role="status" hidden>Enter a whole number from 1 to 999.</p>
@@ -242,9 +244,9 @@
   <details class="recipe-sources"><summary>Sources & availability</summary><p>Unofficial reference. Names are matched to the game’s English and Chinese text; ingredients are linked by their original item IDs. 0.8.10.842 · Steam 24847725.</p><p>Demo flags do not establish current availability. Quest-state values are not decoded, so no unlock order is inferred. An absent recipe does not mean an item is unavailable.</p><p>Sources: Owned-build item localization, Plantations_Recipes, Meubles_Recipes, Shelter_Recipes, ToolsWeapons, Deco_Recipes, Ressources, Autres_Recipes. <a href="/methodology">Verification method</a></p></details>
 </section>
 <!-- END CRAFTING REFERENCE -->
-<nav class="toc" aria-label="Guide navigation"><ul><li><a href="#flow">Crafting workflow</a></li><li><a href="#materials">Finding materials</a></li><li><a href="#recipe-evidence">Historical footage</a></li><li><a href="#troubleshooting">Troubleshooting</a></li></ul></nav>
     <h2 id="flow">The crafting flow: plan first, materials second</h2>
-    <p>Crafting questions are easiest to solve when the plan and the output are recorded together. Follow this order instead of farming every material before checking the recipe:</p>
+    <p>Search for the item or a material above. Set Recipe batches to the number of times you want to repeat that recipe; the table calculates the ingredients, not a guaranteed output quantity.</p>
+    <p>Click a material to check its gathering information. Returning to this page restores your search and batch count. Compare the plan with your in-game screen, then gather only what you are missing.</p>
     <ol class="plain-steps"><li><strong>Open the plan list.</strong> Check the phone crafting app or workbench in your current save and note the exact plan name.</li><li><strong>Read the requirement screen.</strong> Record each material and quantity shown. Do not substitute an Alpha-era table for the screen in front of you.</li><li><strong>Gather only the bottleneck.</strong> Start with the material the plan actually asks for; the <a href="/guides/resources-and-materials">resource guide</a> explains which routes are current, reported or unknown.</li><li><strong>Craft the item.</strong> If the plan is not visible, record the locked label or the quest step instead of assuming the recipe was removed.</li><li><strong>Place and test it.</strong> A successful craft does not prove that a building part satisfies a quest objective. For that separate question, use the <a href="/guides/building-construction">building and placement guide</a>.</li></ol>
 
     <h2 id="menu">Where crafting plans appear</h2>
@@ -256,8 +258,8 @@
     <h2 id="materials">Choosing what to gather</h2>
     <div class="knowledge-directory"><article class="knowledge-category"><h3>Stone and Wood Logs</h3><p>These are the only materials needed for the retained Red Tent observation. Gather the loose Stone on owned land and use the current Wood Log route, but do not assume respawn timers or ownership rules that are not retained.</p><a href="/database/materials#stone">Stone record</a> · <a href="/database/materials#wood-log">Wood Log record</a></article><article class="knowledge-category"><h3>Hay for crafting</h3><p>Hay is confirmed as animal feed. It becomes a crafting concern when an automation or animal plan asks for it, but the public gathering route remains a single current-build lead.</p><a href="/database/materials#hay">Hay record</a> · <a href="/guides/animal-guide">Animal care</a></article><article class="knowledge-category"><h3>Charcoal and Zirconite</h3><p>Charcoal remains an open current-build method, while the reviewed official answer identifies buying Zirconite as the current route until mines are implemented. Do not treat either item like a mined recipe ingredient without checking the current screen.</p><a href="/database/materials#charcoal">Charcoal record</a> · <a href="/database/materials#zirconite">Zirconite record</a></article></div>
 
-    <h2 id="troubleshooting">When crafting or placement fails</h2>
-    <h2 id="faq">Crafting FAQ</h2><details class="faq-item" open><summary>The plan is listed but I cannot craft it</summary><div class="faq-body"><p>Record the exact plan name, missing material label, app or workbench used, build number and whether the item is locked or simply unaffordable. Then compare the current screen with the evidence in the <a href="/research">research queue</a>. Do not call it a bug from one missing recipe.</p></div></details>
+    <h2 id="troubleshooting"><span id="faq">When crafting or placement fails</span></h2>
+    <details class="faq-item" open><summary>The plan is listed but I cannot craft it</summary><div class="faq-body"><ol class="plain-steps"><li><strong>Check the selected plan and quantity.</strong> Similar names can have different requirements. Compare each ingredient with the current game screen, including the batch size.</li><li><strong>Check the crafting station.</strong> The recipe row shows whether its file configuration requires a workbench. Compare that with the menu you are using.</li><li><strong>Read the lock or shortage message.</strong> Missing materials and a locked plan are different problems. Gathering more materials does not establish that a quest condition is satisfied.</li></ol><p>If the requirements appear met, keep a screenshot of the plan and the failure message for a <a href="/contribute">crafting report</a>. Include the game version and crafting station so another player can compare the same conditions.</p></div></details>
     <details class="faq-item"><summary>The item crafted but the quest did not advance</summary><div class="faq-body"><p>That is a placement/objective problem, not necessarily a crafting problem. Keep the quest text and blueprint name, then use the <a href="/guides/roof-quest-stuck">roof objective decision guide</a> or <a href="/guides/building-construction#placement-reports">placement reports</a>.</p></div></details>
     <details class="faq-item"><summary>Can I trust an old crafting table from the Alpha?</summary><div class="faq-body"><p>No. Older official and community material is useful for taxonomy and historical context, but recipe quantities and unlock timing need a current-build screen. The site keeps historical values labeled instead of silently promoting them.</p></div></details>
 
@@ -278,6 +280,6 @@
   </article></main>
   <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>Unofficial fan-made guide</span></div></div></footer>
   <script src="/assets/js/main.js?v=20260906-nav2" defer></script>
-<script src="/assets/js/crafting-reference.js?v=20260909-prep1" defer></script>
+<script src="/assets/js/crafting-reference.js?v=20260909-wall1" defer></script>
 </body>
 </html>

@@ -1,5 +1,46 @@
 (function () {
   'use strict';
+  document.querySelectorAll('[data-wall-plan]').forEach(root => {
+    const rows = Array.from(root.querySelectorAll('[data-plan-row]'));
+    const stocks = Array.from(root.querySelectorAll('[data-plan-owned]'));
+    function updatePlan() {
+      const totals = new Map();
+      let valid = true;
+      rows.forEach(row => {
+        const input = row.querySelector('[data-plan-count]');
+        const count = Number(input.value);
+        const allowed = input.value.trim() !== '' && Number.isInteger(count) && count >= 0 && count <= 999;
+        input.setAttribute('aria-invalid', String(!allowed));
+        valid = valid && allowed;
+        row.querySelectorAll('[data-plan-ingredient]').forEach(amount => {
+          const quantity = Number(amount.dataset.planBase) * count;
+          amount.textContent = allowed ? String(quantity) : '—';
+          totals.set(amount.dataset.planIngredient, (totals.get(amount.dataset.planIngredient) || 0) + quantity);
+        });
+      });
+      root.querySelectorAll('[data-plan-total-value]').forEach(amount => {
+        amount.textContent = valid ? String(totals.get(amount.dataset.planTotalValue) || 0) : '—';
+      });
+      root.querySelector('[data-plan-error]').hidden = valid;
+      const owned = new Map();
+      let stockValid = true;
+      stocks.forEach(input => {
+        const count = Number(input.value);
+        const allowed = input.value.trim() !== '' && Number.isInteger(count) && count >= 0 && count <= 999999;
+        input.setAttribute('aria-invalid', String(!allowed));
+        stockValid = stockValid && allowed;
+        owned.set(input.dataset.planOwned, count);
+      });
+      root.querySelectorAll('[data-plan-missing]').forEach(amount => {
+        const id = amount.dataset.planMissing;
+        amount.textContent = valid && stockValid ? String(Math.max(0, (totals.get(id) || 0) - (owned.get(id) || 0))) : '—';
+      });
+      root.querySelector('[data-plan-stock-error]').hidden = stockValid;
+    }
+    rows.forEach(row => row.querySelector('[data-plan-count]').addEventListener('input', updatePlan));
+    stocks.forEach(input => input.addEventListener('input', updatePlan));
+    updatePlan();
+  });
   document.querySelectorAll('[data-crafting-reference]').forEach(root => {
     const query = root.querySelector('[data-recipe-query]');
     const category = root.querySelector('[data-recipe-category]');

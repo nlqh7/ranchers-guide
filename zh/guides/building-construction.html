@@ -9,7 +9,7 @@
   <meta property="og:type" content="article"><meta property="og:site_name" content="The Ranchers Guide"><meta property="og:title" content="The Ranchers 中文建造与放置指南"><meta property="og:description" content="从材料准备到蓝图放置，区分官方确认内容和仍需当前版本复核的任务卡点。"><meta property="og:url" content="https://theranchersguide.com/zh/guides/building-construction"><meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260902-ui2"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/assets/css/building-requirements.css?v=20260828-1">
-<link rel="stylesheet" href="/assets/css/crafting-reference.css?v=20260909-prep1">
+<link rel="stylesheet" href="/assets/css/crafting-reference.css?v=20260909-wall1">
 </head>
 <body>
   <header class="site-header"><nav class="nav-inner" aria-label="主导航"><a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide</span></a><button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button><ul class="nav-links"><li><a class="active" href="/zh/guides/beginners-guide">新手</a></li><li><a href="/zh/database">知识库</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li><li><a href="/zh/updates">更新</a></li><li><a href="/zh/search">搜索</a></li><li><a class="nav-cta" href="/contribute">投稿</a></li></ul></nav></header>
@@ -50,6 +50,17 @@
 </section>
 <!-- END SHOP REFERENCE -->
 <!-- BEGIN CRAFTING REFERENCE -->
+<section class="answer-box" id="wall-material-plan" data-wall-plan><h2>墙体备料表</h2>
+  <p>先选部件，再把各配方的材料乘以份数并相加。下面按已收录的游戏文件配方计算，示范怎样避免漏算和重复采购。</p>
+  <p>修改各部件数量，合计自动更新；不需要的部件填 0。下方单配方份数不会改变这份备料表。</p>
+  <ul class="wall-plan-rows"><li data-plan-row><label class="wall-plan-field">室外墙<input type="number" data-plan-count min="0" max="999" step="1" value="4" required></label><span>石头 × <span data-plan-ingredient="ressource_rock_simple" data-plan-base="2">8</span> + 木材原木 × <span data-plan-ingredient="ressource_wood" data-plan-base="3">12</span></span> <a href="/zh/guides/crafting-guide#recipe-house_wall_exterior_01">配方</a></li><li data-plan-row><label class="wall-plan-field">带门室外墙<input type="number" data-plan-count min="0" max="999" step="1" value="1" required></label><span>石头 × <span data-plan-ingredient="ressource_rock_simple" data-plan-base="2">2</span> + 木材原木 × <span data-plan-ingredient="ressource_wood" data-plan-base="2">2</span></span> <a href="/zh/guides/crafting-guide#recipe-house_wall_exterior_Door_01">配方</a></li><li data-plan-row><label class="wall-plan-field">带窗户室外墙<input type="number" data-plan-count min="0" max="999" step="1" value="1" required></label><span>石头 × <span data-plan-ingredient="ressource_rock_simple" data-plan-base="2">2</span> + 木材原木 × <span data-plan-ingredient="ressource_wood" data-plan-base="3">3</span></span> <a href="/zh/guides/crafting-guide#recipe-house_wall_exterior_window_01">配方</a></li></ul>
+  <p data-plan-error role="status" hidden>每项请输入 0–999 的整数。修正后再读取合计。</p>
+  <p><strong>合计：<span data-plan-total="ressource_rock_simple:12">石头 × <span data-plan-total-value="ressource_rock_simple">12</span></span> + <span data-plan-total="ressource_wood:17">木材原木 × <span data-plan-total-value="ressource_wood">17</span></span></strong></p>
+  <div class="wall-plan-stock"><label class="wall-plan-field">石头已有<input type="number" data-plan-owned="ressource_rock_simple" min="0" max="999999" step="1" value="0" required></label><label class="wall-plan-field">木材原木已有<input type="number" data-plan-owned="ressource_wood" min="0" max="999999" step="1" value="0" required></label></div>
+  <p data-plan-stock-error role="status" hidden>已有材料请填写 0–999999 的整数。</p>
+  <p><strong>还需收集：石头 × <span data-plan-missing="ressource_rock_simple">12</span> + 木材原木 × <span data-plan-missing="ressource_wood">17</span></strong></p>
+  <p>这只是上述墙体的用料，不是完整房屋清单；不含地基、屋顶或独立门窗，也不证明能完成房屋任务。三种配方均要求工作台，并带有尚未确认解锁时机的任务条件。</p>
+  <ol><li>先确认存档中这三种蓝图可用，并核对当前画面的材料数量。</li><li>从合计中减去背包已有材料，再查<a href="/zh/database/materials#stone">石头</a>和<a href="/zh/database/materials#wood-log">原木获取途径</a>。</li><li>按上方蓝图步骤放置、使用锤子完成施工，再核对任务目标；不要用材料齐全代替任务已完成的判断。</li></ol></section>
 <section class="crafting-reference" data-crafting-reference data-result-label="{count} 个条目" aria-label="制作配方与工具">
   <label class="calc-field recipe-batch-control">配方份数（每份按单次材料计算）<input type="number" data-recipe-batches min="1" max="999" step="1" value="1" required></label>
   <p data-recipe-batch-error role="status" hidden>请输入 1–999 的整数份数。</p>
@@ -184,5 +195,5 @@
 
 </article></main>
   <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>非官方玩家资源 · 证据状态见各节</span></div></div></footer><script src="/assets/js/main.js?v=20260906-nav2" defer></script>
-<script src="/assets/js/crafting-reference.js?v=20260909-prep1" defer></script>
+<script src="/assets/js/crafting-reference.js?v=20260909-wall1" defer></script>
 </body></html>

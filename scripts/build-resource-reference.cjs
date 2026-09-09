@@ -22,11 +22,11 @@ function materialReference(materialId,zh) {
  const uses=recipes.filter(r=>r.materials.some(m=>m.id===item.id));
  const listings=shops.offers.filter(o=>o.itemId===item.id);
  const shopLinks=listings.length?`<div class="resource-links"><span class="resource-note">${zh?'商店记录（库存未核实）：':'Shop records (stock unverified):'}</span>${listings.map(o=>{const seller=shops.shops.find(s=>s.id===o.shopId);return `<a href="${prefix}/guides/resources-and-materials#offer-${o.id}">${esc(zh?seller.zhName:seller.name)}</a>`;}).join('')}</div>`:'';
- return `${settings(item,zh)}${shopLinks}<div class="resource-uses"><h3>${zh?'制作用途':'Crafting uses'}</h3><p class="resource-note">${zh?'每项列出这种材料所需数量；点物品查看完整配方。工作台与解锁条件见配方页。':'Quantity of this material per recipe. Open an item for its full ingredients, workbench and unlock conditions.'}</p>${Object.entries(groups).map(([group,labels])=>{
+ return `${shopLinks}<div class="resource-uses"><h3>${zh?'制作用途':'Crafting uses'}</h3><p class="resource-note">${zh?'每项列出这种材料所需数量；点物品查看完整配方。工作台与解锁条件见配方页。':'Quantity of this material per recipe. Open an item for its full ingredients, workbench and unlock conditions.'}</p>${Object.entries(groups).map(([group,labels])=>{
  const rows=uses.filter(r=>r.category===group);
  if(!rows.length)return '';
  return `<details class="resource-details"${group==='essentials'||group==='farming'?' open':''}><summary>${labels[zh?1:0]}</summary><div class="resource-table-wrap" tabindex="0" role="region" aria-label="${esc(zh?item.zhName:item.name)} — ${labels[zh?1:0]}"><table class="resource-use-table"><thead><tr><th scope="col">${zh?'物品':'Item'}</th><th scope="col">${zh?'数量':'Quantity'}</th></tr></thead><tbody>${rows.map(r=>`<tr data-resource-use="${item.id}:${r.id}" data-quantity="${r.materials.find(m=>m.id===item.id).quantity}"><th scope="row"><a href="${prefix}/guides/crafting-guide#recipe-${r.id}">${esc(zh?r.zhName:r.name)}</a></th><td>× ${r.materials.find(m=>m.id===item.id).quantity}</td></tr>`).join('')}</tbody></table></div></details>`;
- }).join('')}</div>`;
+ }).join('')}</div><details class="resource-details"><summary>${zh?'物品属性与配置来源':'Item properties & configuration sources'}</summary>${settings(item,zh)}</details>`;
 }
 module.exports={settings,materialReference};
 function renderUtilities(zh) {

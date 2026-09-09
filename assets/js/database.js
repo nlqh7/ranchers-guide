@@ -57,8 +57,9 @@
     function cellVal(row, i) {
       var cell = row.children[i];
       var v = cell.getAttribute("data-sort");
-      if (v !== null) return parseFloat(v);
+      if (v !== null) return Number.isFinite(parseFloat(v)) ? parseFloat(v) : null;
       var t = cell.textContent.trim();
+      if (!t || /^[—–-]+$/.test(t)) return null;
       var n = parseFloat(t.replace(/[^0-9.\-]/g, ""));
       return isNaN(n) ? t.toLowerCase() : n;
     }
@@ -68,6 +69,7 @@
       else { sortState.col = colIdx; sortState.dir = 1; }
       rows.sort(function (a, b) {
         var va = cellVal(a, colIdx), vb = cellVal(b, colIdx);
+        if (va === null || vb === null) return va === vb ? 0 : va === null ? 1 : -1;
         if (typeof va === "number" && typeof vb === "number") return (va - vb) * sortState.dir;
         return String(va).localeCompare(String(vb)) * sortState.dir;
       });

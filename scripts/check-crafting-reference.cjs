@@ -2,6 +2,39 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
 
+// Adjustable wall plans sum different recipe quantities, including zero and invalid inputs.
+{
+  const rows = [[4, 2, 3], [1, 2, 2], [1, 2, 3]].map(([count, stone, wood]) => {
+    const input = { value: String(count), setAttribute() {}, addEventListener(_, handler) { this.update = handler; } };
+    const ingredients = [stone, wood].map((base, i) => ({ dataset: { planIngredient: i ? 'wood' : 'stone', planBase: String(base) } }));
+    return { input, querySelector() { return input; }, querySelectorAll() { return ingredients; } };
+  });
+  const totals = ['stone', 'wood'].map(id => ({ dataset: { planTotalValue: id }, textContent: '' }));
+  const error = { hidden: true };
+  const stockError = { hidden: true };
+  const stocks = ['stone', 'wood'].map(id => ({ dataset: { planOwned: id }, value: '0', setAttribute() {}, addEventListener(_, handler) { this.update = handler; } }));
+  const shortages = ['stone', 'wood'].map(id => ({ dataset: { planMissing: id }, textContent: '' }));
+  const surface = { querySelector(selector) { return selector === '[data-plan-stock-error]' ? stockError : error; }, querySelectorAll(selector) { return ({ '[data-plan-row]': rows, '[data-plan-total-value]': totals, '[data-plan-owned]': stocks, '[data-plan-missing]': shortages })[selector] || []; } };
+  vm.runInNewContext(fs.readFileSync(require('node:path').join(__dirname, '../assets/js/crafting-reference.js'), 'utf8'), {
+    document: { querySelectorAll(selector) { return selector === '[data-wall-plan]' ? [surface] : []; } }
+  });
+  assert.deepEqual(totals.map(t => t.textContent), ['12', '17']);
+  assert.deepEqual(shortages.map(t => t.textContent), ['12', '17']);
+  stocks[0].value = '5'; stocks[1].value = '30'; stocks[0].update();
+  assert.deepEqual(shortages.map(t => t.textContent), ['7', '0']);
+  stocks[0].value = '-1'; stocks[0].update();
+  assert.equal(stockError.hidden, false);
+  assert.deepEqual(shortages.map(t => t.textContent), ['—', '—']);
+  stocks[0].value = '0'; stocks[0].update();
+  rows[0].input.value = '2'; rows[0].input.update();
+  assert.deepEqual(totals.map(t => t.textContent), ['8', '11']);
+  rows.forEach(row => { row.input.value = '0'; }); rows[0].input.update();
+  assert.deepEqual(totals.map(t => t.textContent), ['0', '0']);
+  rows[0].input.value = '1.5'; rows[0].input.update();
+  assert.equal(error.hidden, false);
+  assert.deepEqual(totals.map(t => t.textContent), ['—', '—']);
+}
+
 // A copied URL or a browser return restores the player's recipe preparation context.
 {
   const location = new URL('https://example.test/guides/crafting-guide?q=Well&category=farming&batches=3&from=guide');
@@ -18,7 +51,7 @@ const vm = require('node:vm');
   };
   let writes = 0;
   vm.runInNewContext(fs.readFileSync(require('node:path').join(__dirname, '../assets/js/crafting-reference.js'), 'utf8'), {
-    document: { querySelectorAll() { return [surface]; }, getElementById() { return null; } },
+    document: { querySelectorAll(selector) { return selector === '[data-crafting-reference]' ? [surface] : []; }, getElementById() { return null; } },
     location, URL, window: { addEventListener(name, handler) { events[name] = handler; } },
     history: { state: { retained: true }, replaceState(state, _, href) { assert.equal(state.retained, true); location.href = href; writes++; } }
   });
@@ -52,7 +85,7 @@ const vm = require('node:vm');
     querySelectorAll(selector) { return selector === '[data-recipe-group]' ? [group] : []; }
   };
   vm.runInNewContext(fs.readFileSync(require('node:path').join(__dirname, '../assets/js/crafting-reference.js'), 'utf8'), {
-    document: { querySelectorAll() { return [surface]; }, getElementById() { return null; } },
+    document: { querySelectorAll(selector) { return selector === '[data-crafting-reference]' ? [surface] : []; }, getElementById() { return null; } },
     location: new URL('https://example.test/'), URL, history: { replaceState() {} }, window: { addEventListener() {} }
   });
   query.value = '水井 石头'; query.update();
@@ -82,7 +115,7 @@ const vm = require('node:vm');
     querySelectorAll(selector) { return selector === '[data-recipe-base-quantity]' ? amounts : []; }
   };
   vm.runInNewContext(fs.readFileSync(require('node:path').join(__dirname, '../assets/js/crafting-reference.js'), 'utf8'), {
-    document: { querySelectorAll() { return [surface]; }, getElementById() { return null; } },
+    document: { querySelectorAll(selector) { return selector === '[data-crafting-reference]' ? [surface] : []; }, getElementById() { return null; } },
     location: new URL('https://example.test/'), URL, history: { replaceState() {} }, window: { addEventListener() {} }
   });
   batches.value = '3'; batches.update();
@@ -102,6 +135,14 @@ const file = path.join(root, 'data/build-recipes.json');
 assert.ok(fs.existsSync(file), 'Native recipes must reach website generators, not remain in the private archive');
 const data = JSON.parse(fs.readFileSync(file));
 assert.equal(data.recipes.length, 162);
+for (const prefix of ['', 'zh/']) {
+  for (const route of ['guides/building-construction.html', 'tools/ranch-checklist.html']) {
+    const page = fs.readFileSync(path.join(root, prefix, route), 'utf8');
+    assert.ok(page.includes('data-plan-total="ressource_rock_simple:12"'), 'Wall plan requires 12 Stone');
+    assert.ok(page.includes('data-plan-total="ressource_wood:17"'), 'Wall plan requires 17 Wood Logs');
+    assert.ok(page.includes(prefix ? '不是完整房屋清单' : 'not a complete house'), 'A partial wall example must not promise a complete house');
+  }
+}
 assert.equal(new Set(data.recipes.map(row => row.id)).size, 162);
 const tent = data.recipes.find(row => row.id === 'red_tent');
 assert.deepEqual(tent.materials, [{id:'ressource_rock_simple', quantity:4}, {id:'ressource_wood', quantity:5}]);

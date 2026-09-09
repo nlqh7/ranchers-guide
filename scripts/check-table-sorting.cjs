@@ -12,7 +12,8 @@ const headers = [header(0), header(1)];
 const cell = textContent => ({ textContent, getAttribute() { return null; } });
 const rows = [
   { children: [cell('A'), cell('20')], textContent: 'A 20', style: {}, getAttribute() { return null; } },
-  { children: [cell('B'), cell('3')], textContent: 'B 3', style: {}, getAttribute() { return null; } }
+  { children: [cell('B'), cell('3')], textContent: 'B 3', style: {}, getAttribute() { return null; } },
+  { children: [cell('Garlic Seed'), cell('—')], textContent: 'Garlic Seed —', style: {}, getAttribute() { return null; } }
 ];
 const body = { querySelectorAll() { return rows.slice(); }, appendChild(row) { rows.splice(rows.indexOf(row), 1); rows.push(row); } };
 const table = { querySelector() { return body; }, querySelectorAll(selector) { return selector === 'th' ? headers : [headers[1]]; } };
@@ -25,11 +26,15 @@ assert.equal(headers[1].tabIndex, 0, 'sortable headers must be keyboard reachabl
 let prevented = false;
 headers[1].events.keydown({ key: 'Enter', preventDefault() { prevented = true; } });
 assert.ok(prevented);
-assert.deepEqual(rows.map(row => row.children[1].textContent), ['3', '20'], 'use the actual column, not the sortable-header subset index');
+assert.deepEqual(rows.map(row => row.children[1].textContent), ['3', '20', '—'], 'use the actual column and put missing prices last');
 assert.equal(headers[1].attrs['aria-sort'], 'ascending');
 headers[1].events.keydown({ key: ' ', preventDefault() {} });
-assert.deepEqual(rows.map(row => row.children[1].textContent), ['20', '3']);
+assert.deepEqual(rows.map(row => row.children[1].textContent), ['20', '3', '—']);
 assert.equal(headers[1].attrs['aria-sort'], 'descending');
 headers[1].events.click();
-assert.deepEqual(rows.map(row => row.children[1].textContent), ['3', '20']);
+assert.deepEqual(rows.map(row => row.children[1].textContent), ['3', '20', '—']);
+headers[1].events.click();
+assert.deepEqual(rows.map(row => row.children[1].textContent), ['20', '3', '—'], 'unknown prices must stay last when sorting descending');
+headers[1].events.click();
+assert.deepEqual(rows.map(row => row.children[1].textContent), ['3', '20', '—'], 'unknown prices must stay last when sorting ascending');
 console.log('PASS: keyboard and pointer sorting use the correct column and expose direction.');

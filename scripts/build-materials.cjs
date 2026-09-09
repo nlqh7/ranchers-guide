@@ -124,8 +124,8 @@ function render(locale) {
     return `      <section class="evidence-ledger material-profile" id="${material.id}" data-search-entry data-search-title="${esc(native ? (zh ? native.zhName : native.name) : (zh ? material.zhSearchTitle : material.searchTitle))}" data-search-aliases="${esc(`${material.name}|${material.zhName.replace(' '+material.name,'')}`)}" data-search-status="${zh?'游戏配置与观测':'Game configuration & observations'}" data-search-tags="${esc(`${material.searchTitle} ${material.zhSearchTitle} ${material.name} ${material.zhName} ${native?.name || ''} ${native?.zhName || ''} ${zh ? material.zhSearchTags : material.searchTags}`)}">
         <h2>${esc(native ? (zh ? `${native.zhName} ${native.name}` : native.name) : (zh ? material.zhName : material.name))}</h2>
         <p class="lead">${esc(zh ? material.zhSummary : material.summary)}</p>
-        ${materialReference(material.id, zh)}
         <h3>${zh ? '获取途径与观测' : 'Sources & observations'}</h3><ul class="evidence-list">${facts}</ul>
+        ${materialReference(material.id, zh)}
         ${buildUse ? `<details class="resource-details"><summary>${zh?'历史建筑配方':'Historical building recipes'}</summary>${buildUse}</details>` : ''}
         ${relatedLinks}
       </section>`;

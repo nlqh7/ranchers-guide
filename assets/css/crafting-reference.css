@@ -1,7 +1,18 @@
 .crafting-guide.article { max-width: 1080px; padding-top: 28px; }
 .crafting-guide > h1 { margin-bottom: 12px; }
 .crafting-guide > .recipe-lead { margin: 0 0 16px; }
+.crafting-guide > .toc { display: block; min-width: 0; padding: 0; margin: 12px 0 20px; border: 0; background: transparent; }
+.crafting-guide > .toc ul { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.crafting-guide > .toc li { margin: 0; }
+.crafting-guide > .toc a { display: inline-flex; align-items: center; min-height: 44px; }
 .crafting-reference { margin-bottom: 24px; }
+.wall-plan-rows { list-style: none; padding: 0; }
+.wall-plan-rows li { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding-block: 8px; border-bottom: 1px solid var(--cream-300); }
+.wall-plan-field { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-weight: 600; }
+.wall-plan-stock { display: flex; flex-wrap: wrap; gap: 12px 24px; }
+.wall-plan-field input { width: 5rem; min-height: 44px; border: 1px solid var(--cream-300); border-radius: 6px; padding: 8px; background: var(--cream-100); color: var(--brown-900); font: inherit; }
+.wall-plan-stock input { width: 7rem; }
+.wall-plan-rows a { display: inline-flex; align-items: center; min-height: 44px; }
 .crafting-reference .recipe-batch-control { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-bottom: 12px; font-size: .88rem; }
 .crafting-reference .recipe-batch-control input { width: 6rem; min-height: 44px; font-size: 1rem; margin: 0; }
 .recipe-boundary { color: var(--brown-700); font-size: .88rem; line-height: 1.6; margin: 0 0 16px; }
