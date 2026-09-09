@@ -22,7 +22,7 @@ function render(locale, compact = false) {
   const materials = recipe => `<ul class="recipe-ingredients">${recipe.materials.map(m => {
     const entry = data.ingredients.find(i => i.id === m.id);
     const icon = icons.find(i => i.sourceItemId === m.id);
-    return `<li><a href="${prefix}/database/materials#${materialRoutes[m.id]}">${icon ? `<img src="${icon.src}" width="28" height="28" alt="" loading="lazy" decoding="async">` : ''}<span>${esc(name(entry))}</span><strong>× ${m.quantity}</strong></a></li>`;
+    return `<li><a href="${prefix}/database/materials#${materialRoutes[m.id]}">${icon ? `<img src="${icon.src}" width="28" height="28" alt="" loading="lazy" decoding="async">` : ''}<span>${esc(name(entry))}</span><strong data-recipe-base-quantity="${m.quantity}">× ${m.quantity}</strong></a></li>`;
   }).join('')}</ul>`;
   const placeableSettings = item => {
     if (!item) return '';
@@ -59,10 +59,13 @@ function render(locale, compact = false) {
   };
   const selectedGroups = Object.entries(groups).filter(([id]) => !compact || ['essentials', 'farming', 'building'].includes(id));
   return `<!-- BEGIN CRAFTING REFERENCE -->
-<section class="crafting-reference" data-crafting-reference aria-label="${title}">
+<section class="crafting-reference" data-crafting-reference data-result-label="${zh ? '{count} 个条目' : 'Results: {count}'}" aria-label="${title}">
+  <label class="calc-field recipe-batch-control">${zh ? '配方份数（每份按单次材料计算）' : 'Recipe batches (repeat the listed ingredients)'}<input type="number" data-recipe-batches min="1" max="999" step="1" value="1" required></label>
+  <p data-recipe-batch-error role="status" hidden>${zh ? '请输入 1–999 的整数份数。' : 'Enter a whole number from 1 to 999.'}</p>
   <p class="recipe-boundary">${zh ? '站长整理 · 游戏文件配置。材料数量与工作台要求来自原生记录；是否已解锁、可获得仍以当前存档为准。' : 'Editor-collected game configuration. Ingredients and workbench requirements come from native records; availability and unlocks depend on your save.'}</p>
   <div class="recipe-controls"><label>${zh ? '查找物品或材料' : 'Find an item or material'}<input type="search" data-recipe-query placeholder="${zh ? '例如：水井、干草、木栅栏' : 'e.g. Well, Hay, Wood Fence'}"></label><label>${zh ? '分类' : 'Category'}<select data-recipe-category><option value="all">${zh ? '全部' : 'All'}</option>${selectedGroups.map(([id, labels]) => `<option value="${id}">${labels[zh ? 1 : 0]}</option>`).join('')}</select></label></div>
-  <p data-recipe-empty hidden role="status">${zh ? '没有匹配的条目，试试其他名称或分类。' : 'No matching entries. Try another name or category.'}</p>
+  <div class="recipe-filter-feedback"><span data-recipe-count role="status" aria-live="polite"></span><button type="button" data-recipe-reset hidden>${zh ? '清除筛选' : 'Clear filters'}</button></div>
+  <p data-recipe-empty hidden>${zh ? '没有匹配的条目，试试其他名称或分类。' : 'No matching entries. Try another name or category.'}</p>
   ${selectedGroups.map(([id, labels]) => `<section data-recipe-group="${id}"><h2 id="recipes-${id}">${labels[zh ? 1 : 0]}</h2>${id==='tools'?`<p class="recipe-boundary">${zh?'工具属性为游戏文件配置。耗能值不是已实测的每次操作消耗，也不是牧场用电；未收录不等于零消耗。堆叠上限未验证。':'Tool attributes are game-file settings. Energy values are not measured per-action costs or ranch electricity use; an absent field is not zero consumption. Stack limits are unverified.'}</p>`:''}${id==='native'?`<p class="recipe-boundary">${zh?'这些条目存在于原生可放置物表，但未匹配到已提取的制作配方。这里仅提供名称与配置检索，不据此断言当前可建造或可购买。':'These entries exist in native placeable tables but have no match in the extracted recipes. This is a name and configuration lookup, not proof that they are currently buildable or purchasable.'}</p>`:''}<div class="recipe-table-wrap" role="region" aria-label="${labels[zh ? 1 : 0]}" tabindex="0"><table class="recipe-table"><thead><tr><th scope="col">${zh ? '物品' : 'Item'}</th><th scope="col">${id==='tools'?(zh?'材料、商店与属性':'Materials, shop & settings'):(id==='native'?(zh?'原生配置':'Native settings'):(zh ? '所需材料与配置' : 'Materials & settings'))}</th></tr></thead><tbody>${(id === 'tools' ? [...data.tools, ...miscItems.items] : id === 'native' ? placeables.items.filter(item => !item.recipeId) : data.recipes.filter(r => r.category === id)).map(r => id === 'native' ? renderUnmatchedPlaceable(r) : renderRow(r, id === 'tools')).join('\n')}</tbody></table></div>${id === 'tools' && !compact ? projectileReference : ''}</section>`).join('\n')}
   ${compact ? `<p><a class="recipe-more" href="${prefix}/guides/crafting-guide">${zh ? '查看全部配方、家具、装饰与工具 →' : 'All recipes, furniture, decoration & tools →'}</a></p>` : ''}
   <details class="recipe-sources"><summary>${zh ? '资料来源与可用性' : 'Sources & availability'}</summary><p>${zh ? '非官方资料。名称逐项匹配游戏的中英文文本，配方按原始物品 ID 对应材料。' : 'Unofficial reference. Names are matched to the game’s English and Chinese text; ingredients are linked by their original item IDs.'} ${esc(data.build)} · Steam ${esc(data.steamBuild)}.</p><p>${zh ? 'Demo 标记不代表现版本可获得；任务条件的状态值尚未解码，因此不推导解锁时机。配方表未收录不代表物品不存在或无法获得。' : 'Demo flags do not establish current availability. Quest-state values are not decoded, so no unlock order is inferred. An absent recipe does not mean an item is unavailable.'}</p><p>${zh ? '来源：' : 'Sources: '}${Object.values(data.sources).map(s => esc(s.title)).join(', ')}. <a href="${prefix}/methodology">${zh ? '验证方法' : 'Verification method'}</a></p></details>
@@ -76,7 +79,8 @@ for (const locale of ['en', 'zh']) {
     const file = path.join(root, locale === 'zh' ? 'zh' : '', route);
     const before = fs.readFileSync(file, 'utf8');
     if (!before.includes('<!-- BEGIN CRAFTING REFERENCE -->')) throw new Error(`Missing crafting block: ${file}`);
-    const after = before.replace(/<!-- BEGIN CRAFTING REFERENCE -->[\s\S]*?<!-- END CRAFTING REFERENCE -->/, render(locale, !route.includes('crafting-guide')));
+    const after = before.replace(/<!-- BEGIN CRAFTING REFERENCE -->[\s\S]*?<!-- END CRAFTING REFERENCE -->/, render(locale, !route.includes('crafting-guide')))
+      .replace(/crafting-reference\.(css|js)\?v=[^"']+/g, 'crafting-reference.$1?v=20260909-prep1');
     if (before !== after) {
       if (process.argv.includes('--check')) { console.error(`STALE: ${file}`); stale = true; }
       else fs.writeFileSync(file, after);

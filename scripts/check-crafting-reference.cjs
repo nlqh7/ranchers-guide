@@ -1,5 +1,101 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
+const vm = require('node:vm');
+
+// A copied URL or a browser return restores the player's recipe preparation context.
+{
+  const location = new URL('https://example.test/guides/crafting-guide?q=Well&category=farming&batches=3&from=guide');
+  const events = {};
+  const field = value => ({ value, addEventListener(name, handler) { this[name] = handler; }, setAttribute() {} });
+  const query = field('');
+  const category = Object.assign(field('all'), { options: [{ value: 'all' }, { value: 'farming' }] });
+  const batches = field('1');
+  const amount = { dataset: { recipeBaseQuantity: '4' } };
+  const empty = {};
+  const surface = {
+    querySelector(selector) { return ({ '[data-recipe-query]': query, '[data-recipe-category]': category, '[data-recipe-batches]': batches, '[data-recipe-empty]': empty, '[data-recipe-batch-error]': empty })[selector] || null; },
+    querySelectorAll(selector) { return selector === '[data-recipe-base-quantity]' ? [amount] : []; }
+  };
+  let writes = 0;
+  vm.runInNewContext(fs.readFileSync(require('node:path').join(__dirname, '../assets/js/crafting-reference.js'), 'utf8'), {
+    document: { querySelectorAll() { return [surface]; }, getElementById() { return null; } },
+    location, URL, window: { addEventListener(name, handler) { events[name] = handler; } },
+    history: { state: { retained: true }, replaceState(state, _, href) { assert.equal(state.retained, true); location.href = href; writes++; } }
+  });
+  assert.equal(query.value, 'Well');
+  assert.equal(category.value, 'farming');
+  assert.equal(batches.value, '3');
+  assert.equal(amount.textContent, '× 12');
+  query.value = 'Tent'; query.input();
+  assert.equal(location.searchParams.get('q'), 'Tent');
+  assert.equal(location.searchParams.get('from'), 'guide');
+  assert.equal(writes, 1, 'Typing should replace the current entry, not push history');
+  location.search = '?category=bad&batches=1.5'; events.popstate();
+  assert.equal(query.value, '');
+  assert.equal(category.value, 'all');
+  assert.equal(batches.value, '1');
+  assert.equal(amount.textContent, '× 4');
+}
+
+// Players can combine item/material terms and recover from an empty search.
+{
+  const query = { value: '', addEventListener(_, handler) { this.update = handler; }, focus() { this.focused = true; } };
+  const category = { value: 'all', options: [{ value: 'all' }], addEventListener(_, handler) { this.update = handler; } };
+  const reset = { hidden: true, addEventListener(_, handler) { this.click = handler; } };
+  const count = { textContent: '' };
+  const empty = { hidden: true };
+  const rows = ['Well 水井 Stone 石头 Wood', 'Tent 帐篷 Stone 石头'].map(query => ({ dataset: { query }, hidden: false }));
+  const group = { dataset: { recipeGroup: 'farming' }, querySelectorAll() { return rows; } };
+  const surface = {
+    dataset: { resultLabel: '{count} results' },
+    querySelector(selector) { return ({ '[data-recipe-query]': query, '[data-recipe-category]': category, '[data-recipe-reset]': reset, '[data-recipe-count]': count, '[data-recipe-empty]': empty })[selector] || null; },
+    querySelectorAll(selector) { return selector === '[data-recipe-group]' ? [group] : []; }
+  };
+  vm.runInNewContext(fs.readFileSync(require('node:path').join(__dirname, '../assets/js/crafting-reference.js'), 'utf8'), {
+    document: { querySelectorAll() { return [surface]; }, getElementById() { return null; } },
+    location: new URL('https://example.test/'), URL, history: { replaceState() {} }, window: { addEventListener() {} }
+  });
+  query.value = '水井 石头'; query.update();
+  assert.equal(rows[0].hidden, false, 'Separate item/material keywords should match together');
+  assert.equal(rows[1].hidden, true);
+  assert.equal(count.textContent, '1 results');
+  query.value = 'nothing'; query.update();
+  assert.equal(empty.hidden, false);
+  category.value = 'tools'; category.update();
+  reset.click();
+  assert.equal(query.value, '');
+  assert.equal(category.value, 'all');
+  assert.equal(query.focused, true);
+  assert.equal(empty.hidden, true);
+  assert.equal(count.textContent, '2 results');
+  assert.equal(reset.hidden, true);
+}
+
+// Run the browser multiplier against a small DOM surface, without altering recipe data.
+{
+  const batches = { value: '1', setAttribute() {}, addEventListener(_, handler) { this.update = handler; } };
+  const amounts = [2, 7].map(value => ({ dataset: { recipeBaseQuantity: String(value) }, textContent: '' }));
+  const error = { hidden: true };
+  const field = { value: '', options: [{ value: 'all' }], addEventListener() {} };
+  const surface = {
+    querySelector(selector) { return selector === '[data-recipe-batches]' ? batches : selector === '[data-recipe-batch-error]' ? error : ['[data-recipe-reset]', '[data-recipe-count]'].includes(selector) ? null : field; },
+    querySelectorAll(selector) { return selector === '[data-recipe-base-quantity]' ? amounts : []; }
+  };
+  vm.runInNewContext(fs.readFileSync(require('node:path').join(__dirname, '../assets/js/crafting-reference.js'), 'utf8'), {
+    document: { querySelectorAll() { return [surface]; }, getElementById() { return null; } },
+    location: new URL('https://example.test/'), URL, history: { replaceState() {} }, window: { addEventListener() {} }
+  });
+  batches.value = '3'; batches.update();
+  require('node:assert/strict').deepEqual(amounts.map(item => item.textContent), ['× 6', '× 21']);
+  for (const invalid of ['', '-1', '1.5', '1000']) {
+    batches.value = invalid; batches.update();
+    require('node:assert/strict').equal(error.hidden, false);
+    require('node:assert/strict').equal(amounts[0].textContent, '—');
+  }
+  batches.value = '1'; batches.update();
+  require('node:assert/strict').equal(error.hidden, true);
+  require('node:assert/strict').equal(amounts[0].textContent, '× 2');
+}
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const file = path.join(root, 'data/build-recipes.json');
