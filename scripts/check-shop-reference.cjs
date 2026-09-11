@@ -2,6 +2,50 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
+// Search survives copied links and browser return without adding history per keystroke.
+{
+  const location = new URL('https://example.test/guides/resources-and-materials?q=Coop&shop=building&keep=1');
+  const field = value => ({ value, addEventListener(event, handler) { this[event] = handler; } });
+  const query = field('');
+  const category = Object.assign(field('all'), { options: [{ value: 'all' }, { value: 'building' }] });
+  const season = Object.assign(field('all'), { options: ['all', 'Spring', 'Summer', 'Autumn', 'Winter'].map(value => ({ value })) });
+  const empty = {};
+  const rows = ['Coop 鸡舍 Stone 石头 Wood Log 原木 Hay 干草', 'Well 水井 Stone 石头'].map(query => ({ dataset: { query, shopListingSeason: 'AllTheTime' } }));
+  const group = { dataset: { shopGroup: 'building' }, querySelectorAll() { return rows; }, querySelector() { return null; } };
+  const surface = { querySelector(s) { return ({ '[data-shop-query]': query, '[data-shop-category]': category, '[data-shop-season]': season, '[data-shop-empty]': empty })[s]; }, querySelectorAll() { return [group]; }, contains() { return false; } };
+  const events = {};
+  require('node:vm').runInNewContext(fs.readFileSync(path.join(root, 'assets/js/shop-reference.js'), 'utf8'), {
+    document: { querySelectorAll() { return [surface]; }, getElementById() { return null; } },
+    location, URL, window: { addEventListener(e, fn) { events[e] = fn; } },
+    history: { state: null, replaceState(_, title, href) { location.href = href; } }
+  });
+  assert.equal(query.value, 'Coop');
+  assert.equal(category.value, 'building');
+  query.value = 'Well'; query.input();
+  assert.equal(location.searchParams.get('q'), 'Well');
+  assert.equal(location.searchParams.get('keep'), '1');
+  location.search = '?q=Seed&shop=invalid'; events.popstate();
+  assert.equal(query.value, 'Seed');
+  assert.equal(category.value, 'all');
+  query.value = '  原木   STONE '; query.input();
+  assert.deepEqual(rows.map(row => row.hidden), [false, true]);
+  assert.equal(group.open, true);
+  query.value = 'Stone missing'; query.input();
+  assert.equal(empty.hidden, false);
+  query.value = ''; query.input();
+  assert.deepEqual(rows.map(row => row.hidden), [false, false]);
+  rows.push({ dataset: { query: 'Carrot 胡萝卜', shopListingSeason: 'Spring' } });
+  rows.push({ dataset: { query: 'Pumpkin 南瓜', shopListingSeason: 'Winter' } });
+  location.search = '?season=Winter'; events.popstate();
+  assert.equal(season.value, 'Winter');
+  assert.deepEqual(rows.map(row => row.hidden), [false, false, true, false], 'Winter includes all-season stock but excludes spring-only listings');
+  season.value = 'Spring'; season.change();
+  assert.equal(location.searchParams.get('season'), 'Spring');
+  assert.deepEqual(rows.map(row => row.hidden), [false, false, false, true]);
+  location.search = '?season=bad'; events.popstate();
+  assert.equal(season.value, 'all');
+  assert.deepEqual(rows.map(row => row.hidden), [false, false, false, false]);
+}
 const file = path.join(root, 'data/build-shops.json');
 assert.ok(fs.existsSync(file), 'Shop configuration must be applied to public lookup data');
 const data = JSON.parse(fs.readFileSync(file));
@@ -89,6 +133,10 @@ for (const prefix of ['', 'zh/']) {
   }
   assert.match(html, /data-shop-query/);
   assert.match(html, /data-shop-category/);
+  assert.match(html, /data-shop-season/);
+  for (const offer of data.offers.filter(o => data.items.find(i => i.id === o.itemId).name)) {
+    assert.ok(html.split(`id="offer-${offer.id}"`)[1]?.split('</tr>')[0].includes(`data-shop-listing-season="${offer.season}"`), 'Season filters must use the source field: ' + offer.id);
+  }
   const tools = fs.readFileSync(path.join(root,prefix,'guides/crafting-guide.html'),'utf8');
   const axe = tools.split('id="tool-tools_axe_metal"')[1]?.split('</tr>')[0];
   assert.ok(axe?.includes('resources-and-materials#offer-building-store-allthetime-tools_axe_metal'), 'Axe lookup needs its configured shop destination');
