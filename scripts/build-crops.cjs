@@ -374,11 +374,12 @@ ${renderVideoTable(data.crops, data.inputs)}
         </div>
       </section>
 
-      <span id="cashin" class="anchor-alias" aria-hidden="true"></span><h2 id="how-to-sell">How crop selling works</h2>
+      <span id="cashin" class="anchor-alias" aria-hidden="true"></span><h2 id="how-to-sell">How to sell crops</h2>
       <ul class="evidence-list">
 ${data.cashin.map(renderFact).join("\n")}
       </ul>
-      <p>Steps and the observed Day-8 example: <a href="/guides/money-making#cashin">How to sell crops: the CashIn chest</a>. <small>Observed in EA 0.8.10.455.</small></p>
+      <p>${escapeHtml(data.sources['cashin-tutorial'].build)} in-game tutorial: ${escapeHtml(require('../data/build-tutorials.json').families.find(entry => entry.id === 'cashin-selling').content.en.summary)} Use <a href="/guides/money-making#cashin">the deposit steps</a> or <a href="/guides/money-making#payment-checks">check a missing payment</a>.</p>
+      <p>Need money sooner? See <a href="/guides/money-making#sell-choice">CashIn versus Leafy Market</a>. The <a href="/guides/money-making#video-anchors">recorded Day 8 statement</a> explains how to read Farming income.</p>
 
       <h2>Confirmed farming systems</h2>
 
@@ -555,7 +556,7 @@ const zhBodyParts = [
   renderExcludedSeeds('zh'),
   renderZhExtraSection(zhExtraById["historical"]),
   ...data.inputs.filter((e) => e.zh).map(renderZhEntry),
-  renderZhExtraSection(zhExtraById["cashin"]),
+  renderZhExtraSection(zhExtraById["cashin"]).replace('</section>', '<p>急用钱时，先看<a href="/zh/guides/money-making#sell-choice">CashIn 与 Leafy Market 怎么选</a>；存入后有疑问，查看<a href="/zh/guides/money-making#payment-checks">到账检查</a>与<a href="/zh/guides/money-making#video-anchors">收款实例</a>。</p></section>'),
 ];
 const zhTocItems = data.crops.filter((e) => e.zh).map((e) => `<li><a href="#${e.id}">${escapeHtml(e.zh.tocLabel)}</a></li>`).join("")
   + `<li><a href="#historical">${escapeHtml(zhExtraById["historical"].tocLabel)}</a></li>`

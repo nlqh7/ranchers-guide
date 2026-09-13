@@ -33,6 +33,7 @@ const nodeChecks = [
   ["build-crafting-reference.cjs", "--check"],
   ["build-backpack-reference.cjs", "--check"],
   ["check-crafting-reference.cjs"],
+  ["check-recipe-plan.cjs"],
   ["build-shop-reference.cjs", "--check"],
   ["check-shop-reference.cjs"],
   ["build-equipment-reference.cjs", "--check"],

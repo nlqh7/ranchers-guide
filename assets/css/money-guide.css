@@ -1,0 +1,72 @@
+/* Scoped article navigation; shared site colors and typography remain authoritative. */
+.money-guide h1,
+.money-guide h2 {
+  text-wrap: balance;
+}
+
+.money-guide h1 span {
+  display: inline-block;
+  max-width: 100%;
+}
+
+.money-guide #compare p {
+  margin: 8px 0 0;
+}
+
+.money-guide .money-jumps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0 28px;
+  padding: 12px 0;
+  border-block: 1px solid var(--cream-300);
+}
+
+.money-guide .money-jumps a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  background: var(--cream-100);
+  border: 1px solid var(--cream-300);
+  border-radius: var(--radius-sm);
+  font-size: 0.94rem;
+  line-height: 1.4;
+}
+
+.money-guide .money-jumps a:hover {
+  background: var(--cream-200);
+}
+
+.money-guide .answer-box p + p {
+  margin-top: 10px;
+}
+
+.money-guide .money-example li + li {
+  margin-top: 12px;
+}
+
+.money-guide .data-table-wrap table {
+  min-width: 0;
+  width: 100%;
+}
+
+.money-guide .data-table-wrap th:first-child,
+.money-guide .data-table-wrap td:first-child {
+  width: 27%;
+}
+
+@media (max-width: 600px) {
+  .money-guide .money-jumps {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .money-guide .data-table-wrap th,
+  .money-guide .data-table-wrap td {
+    padding: 10px 8px;
+    overflow-wrap: anywhere;
+  }
+}

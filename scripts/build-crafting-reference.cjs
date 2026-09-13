@@ -13,7 +13,72 @@ const groups = {essentials:['Essentials', '基础制作'], farming:['Farming', '
 const materialRoutes = {ressource_wood:'wood-log', ressource_rock_simple:'stone', ressource_straw:'hay', ressource_coal:'charcoal', ressource_zerkonite:'zirconite'};
 const heldSlots = {Left_Hand_Weapon:['Left hand','左手'],Right_Hand_Weapon:['Right hand','右手'],TwoHandHolder:['Two-hand holder','双手持物']};
 
-function render(locale, compact = false) {
+function renderRecipePlan(locale) {
+  const zh = locale === 'zh';
+  const prefix = zh ? '/zh' : '';
+  const payload = {
+    buildings: shops.offers.filter(offer => offer.materials.length).map(offer => {
+      const item = shops.items.find(item => item.id === offer.itemId);
+      return { id: offer.id, name: item.name, zhName: item.zhName, materials: offer.materials, quest: offer.questRequirements.length > 0 };
+    }),
+    shops: shops.shops.map(({id, name, zhName}) => ({id, name, zhName})),
+    offers: shops.offers.filter(offer => materialRoutes[offer.itemId]).map(({id, itemId, shopId, season, questRequirements}) =>
+      ({id, itemId, shopId, season, quest: questRequirements.length > 0})),
+    recipes: data.recipes.map(({ id, name, zhName, materials, category, workbench, questRequirements }) =>
+      ({ id, name, zhName, materials, category, workbench, quest: questRequirements.length > 0 })),
+    ingredients: data.ingredients.filter(item => materialRoutes[item.id]).map(item => ({
+      ...item, href: prefix + '/database/materials#' + materialRoutes[item.id],
+      icon: icons.find(icon => icon.sourceItemId === item.id)?.src || ''
+    })),
+    groups: Object.fromEntries(Object.entries(groups).map(([id, names]) => [id, names[zh ? 1 : 0]]))
+  };
+  return `<!-- BEGIN RECIPE PLAN -->
+<section class="recipe-plan" id="recipe-material-plan" data-recipe-plan aria-labelledby="recipe-plan-title">
+  <h2 id="recipe-plan-title">${zh ? '材料准备清单' : 'Material preparation planner'}</h2>
+  <div data-recipe-plan-ui hidden>
+    <div class="recipe-plan-modes" role="group" aria-label="${zh ? '备料方式' : 'Preparation type'}">
+      <button type="button" data-plan-mode="recipes" aria-pressed="true">${zh ? '制作配方' : 'Crafting recipes'}</button>
+      <button type="button" data-plan-mode="building" aria-pressed="false">${zh ? '建筑备料' : 'Building preparation'}</button>
+    </div>
+    <div data-plan-recipes>
+    <p>${zh ? '选好要制作的物品，分别填写份数，再扣除已有材料。相同材料只合计一次。' : 'Choose what to craft, set each batch count, then deduct what you already have. Shared materials are combined into one list.'}</p>
+    <form class="recipe-plan-picker" data-plan-picker>
+      <label>${zh ? '查找配方' : 'Find a recipe'}<input type="search" data-plan-search placeholder="${zh ? '例如：水井、栅栏、干草' : 'e.g. Well, Fence, Hay'}"></label>
+      <label>${zh ? '选择配方' : 'Choose a recipe'}<select data-plan-select aria-label="${zh ? '选择配方' : 'Choose a recipe'}"></select></label>
+      <button type="submit" data-plan-add>${zh ? '加入计划' : 'Add to plan'}</button>
+    </form>
+    <p class="recipe-plan-note" data-plan-no-match hidden>${zh ? '没有匹配的配方。试试其他物品名或材料名；已选物品仍保留。' : 'No matching recipes. Try another item or material name; your selected items are kept.'}</p>
+    <ul class="recipe-plan-selection" data-plan-selections></ul>
+    <p class="recipe-plan-note" data-plan-empty>${zh ? '先添加一项配方，合计会显示在这里。' : 'Add a recipe to start your material list.'}</p>
+    </div>
+    <div class="recipe-plan-building" data-plan-building hidden>
+      <label>${zh ? '选择建筑' : 'Choose a building'}<select data-building-select aria-label="${zh ? '选择建筑' : 'Choose a building'}">
+        <option value="">${zh ? '选择鸡舍、温室或其他建筑' : 'Choose a coop, greenhouse or another building'}</option>
+        ${payload.buildings.map(item => `<option value="${esc(item.id)}">${esc(zh ? item.zhName : item.name)}</option>`).join('')}
+      </select></label>
+      <p class="recipe-plan-note">${zh ? '按单栋商店材料条件核对，不与配方合计。材料是否扣除及购买条件以游戏为准。' : 'Check one building’s shop material conditions separately from recipes. Confirm material consumption and purchase conditions in-game.'}</p>
+      <div class="recipe-plan-building-info" data-building-info></div>
+    </div>
+    <p class="recipe-plan-error" id="recipe-plan-error" data-plan-error role="status" hidden>${zh ? '份数请填 0–999 的整数，已有材料请填 0–999999 的整数。修正后合计会恢复。' : 'Use whole numbers: 0–999 batches and 0–999999 on hand. Correct the marked fields to restore totals.'}</p>
+    <div class="recipe-plan-totals" data-plan-totals hidden><h3 data-plan-total-title>${zh ? '合并材料清单' : 'Combined material list'}</h3><ul class="recipe-plan-supplies" data-plan-supplies></ul></div>
+    <details class="recipe-plan-shopping" data-purchase-plan hidden>
+      <summary>${zh ? '按商店整理缺料' : 'Group missing materials by shop'}</summary>
+      <p class="recipe-plan-note">${zh ? '只列还缺的数量。同一材料有多家商店时选一家；商店名称按文件分类，不代表已核实的库存、报价或地图位置。' : 'Only missing quantities are listed. Choose one seller for materials with alternatives. Shop names describe file categories, not verified stock, prices or map locations.'}</p>
+      <div class="recipe-plan-shop-choices" data-purchase-choices></div>
+      <div data-purchase-groups></div>
+      <p class="recipe-plan-unlisted" data-purchase-unlisted hidden></p>
+    </details>
+    <p class="recipe-plan-note" data-plan-status role="status"></p>
+    <p class="recipe-plan-note" data-plan-save-note>${zh ? '计划保存在此浏览器；打开材料来源后返回，仍可继续。' : 'Your plan stays in this browser, including when you return from a material guide.'}</p>
+  </div>
+  <noscript><p>${zh ? '启用 JavaScript 可计算合并用料；下方配方与材料表仍可直接查看。' : 'Enable JavaScript to combine materials. The recipe and material tables below remain available.'}</p></noscript>
+  <p class="recipe-plan-note" data-plan-recipe-note>${zh ? '制作模式只计算选中的配方，不包含历史建筑目标；工作台与解锁条件请按当前存档核对。' : 'Crafting mode counts only selected recipes, not historical building targets. Check workbench and unlock requirements in your save.'} <a href="${prefix}/guides/crafting-guide">${zh ? '查看配方与来源' : 'Recipes & sources'}</a></p>
+  <script type="application/json" data-plan-data>${JSON.stringify(payload).replace(/</g, '\\u003c')}</script>
+</section>
+<!-- END RECIPE PLAN -->`;
+}
+
+function render(locale, compact = false, checklist = false) {
   const zh = locale === 'zh';
   const prefix = zh ? '/zh' : '';
   const name = row => zh ? row.zhName : row.name;
@@ -73,7 +138,7 @@ function render(locale, compact = false) {
   <p>${zh ? '这只是上述墙体的用料，不是完整房屋清单；不含地基、屋顶或独立门窗，也不证明能完成房屋任务。三种配方均要求工作台，并带有尚未确认解锁时机的任务条件。' : 'This covers only the listed walls, not a complete house: no foundation, roof or separate doors/windows. All three recipes require a workbench and include quest conditions with unverified unlock timing.'}</p>
   <ol><li>${zh ? '先确认存档中这三种蓝图可用，并核对当前画面的材料数量。' : 'Check that these three plans are available in your save and compare their displayed ingredient quantities.'}</li><li>${zh ? '从合计中减去背包已有材料，再查' : 'Subtract what you already have, then check the '}<a href="${prefix}/database/materials#stone">${zh ? '石头' : 'Stone'}</a>${zh ? '和' : ' and '}<a href="${prefix}/database/materials#wood-log">${zh ? '原木获取途径' : 'Wood Log supply routes'}</a>。</li><li>${zh ? '按上方蓝图步骤放置、使用锤子完成施工，再核对任务目标；不要用材料齐全代替任务已完成的判断。' : 'Place the blueprints and finish their hammer build steps, then check the quest objectives separately. Having the materials is not the same as completing the quest.'}</li></ol></section>` : '';
   return `<!-- BEGIN CRAFTING REFERENCE -->
-${planExample}
+${checklist ? `<p id="wall-material-plan"><a class="recipe-more" href="${prefix}/guides/building-construction#wall-material-plan">${zh ? '查看三种墙体的备料示例（不是完整房屋清单）' : 'See the three-part wall example (not a complete house)'}</a></p>` : planExample}
 <section class="crafting-reference" data-crafting-reference data-result-label="${zh ? '{count} 个条目' : 'Results: {count}'}" aria-label="${title}">
   <label class="calc-field recipe-batch-control">${zh ? '配方份数（每份按单次材料计算）' : 'Recipe batches (repeat the listed ingredients)'}<input type="number" data-recipe-batches min="1" max="999" step="1" value="1" required></label>
   <p data-recipe-batch-error role="status" hidden>${zh ? '请输入 1–999 的整数份数。' : 'Enter a whole number from 1 to 999.'}</p>
@@ -94,8 +159,14 @@ for (const locale of ['en', 'zh']) {
     const file = path.join(root, locale === 'zh' ? 'zh' : '', route);
     const before = fs.readFileSync(file, 'utf8');
     if (!before.includes('<!-- BEGIN CRAFTING REFERENCE -->')) throw new Error(`Missing crafting block: ${file}`);
-    const after = before.replace(/<!-- BEGIN CRAFTING REFERENCE -->[\s\S]*?<!-- END CRAFTING REFERENCE -->/, render(locale, !route.includes('crafting-guide')))
+    const checklist = route.includes('ranch-checklist');
+    let after = before.replace(/<!-- BEGIN CRAFTING REFERENCE -->[\s\S]*?<!-- END CRAFTING REFERENCE -->/, render(locale, !route.includes('crafting-guide'), checklist))
       .replace(/crafting-reference\.(css|js)\?v=[^"']+/g, 'crafting-reference.$1?v=20260909-wall1');
+    if (checklist) {
+      if (!after.includes('<!-- BEGIN RECIPE PLAN -->')) throw new Error('Missing recipe plan marker: ' + file);
+      after = after.replace(/<!-- BEGIN RECIPE PLAN -->[\s\S]*?<!-- END RECIPE PLAN -->/, renderRecipePlan(locale));
+      after = after.replace(/recipe-plan\.(css|js)\?v=[^"']+/g, 'recipe-plan.$1?v=20260913-plan3');
+    }
     if (before !== after) {
       if (process.argv.includes('--check')) { console.error(`STALE: ${file}`); stale = true; }
       else fs.writeFileSync(file, after);

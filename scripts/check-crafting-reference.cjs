@@ -136,12 +136,16 @@ assert.ok(fs.existsSync(file), 'Native recipes must reach website generators, no
 const data = JSON.parse(fs.readFileSync(file));
 assert.equal(data.recipes.length, 162);
 for (const prefix of ['', 'zh/']) {
-  for (const route of ['guides/building-construction.html', 'tools/ranch-checklist.html']) {
+  for (const route of ['guides/building-construction.html']) {
     const page = fs.readFileSync(path.join(root, prefix, route), 'utf8');
     assert.ok(page.includes('data-plan-total="ressource_rock_simple:12"'), 'Wall plan requires 12 Stone');
     assert.ok(page.includes('data-plan-total="ressource_wood:17"'), 'Wall plan requires 17 Wood Logs');
     assert.ok(page.includes(prefix ? '不是完整房屋清单' : 'not a complete house'), 'A partial wall example must not promise a complete house');
   }
+  const checklist = fs.readFileSync(path.join(root, prefix, 'tools/ranch-checklist.html'), 'utf8');
+  assert.ok(checklist.includes('data-recipe-plan'), 'The checklist offers a general multi-recipe planner');
+  assert.ok(checklist.includes('guides/building-construction#wall-material-plan'), 'The original wall example remains reachable');
+  assert.ok(!checklist.includes('data-wall-plan'), 'Do not duplicate wall-only controls alongside the general planner');
 }
 assert.equal(new Set(data.recipes.map(row => row.id)).size, 162);
 const tent = data.recipes.find(row => row.id === 'red_tent');

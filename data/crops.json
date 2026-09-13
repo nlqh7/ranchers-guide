@@ -20,6 +20,14 @@
     ]
   },
   "sources": {
+    "cashin-tutorial": {
+      "kind": "first-hand-build-resource",
+      "title": "CashIn in-game tutorial: deposit controls, next-day payout and quality (data/build-tutorials.json)",
+      "url": null,
+      "author": "Site editor",
+      "date": "2026-09-12",
+      "build": "0.8.10.842"
+    },
     "local-build-24847725": {
       "kind": "first-hand-build-resource",
       "title": "Site-owner local build collection: byte-faithful crop TextAssets and cross-table ID audit",
@@ -1260,7 +1268,7 @@
       ]
     },
     {
-      "text": "Depositing pays nothing immediately — the income lands as one combined Farming total in that day's settlement, so per-crop sell prices cannot be read off the settlement screen and none are published here yet.",
+      "text": "The recorded settlement screen groups crop income into one Farming total. It does not provide the quantity and sale value of each crop.",
       "evidenceLevel": "video-observed",
       "build": "0.8.10.455",
       "validity": "current",
@@ -1386,9 +1394,9 @@
         "badge": null,
         "steps": [
           "前往牧场 Cargo/停机坪附近的 CashIn Export Storage Chest。",
-          "确认箱子已经按任务或系统要求连接。",
-          "把收获物放入箱子。存入时不会立即收到钱。",
-          "收入会进入当日结算的 Farming 总额。"
+          "选择整堆物品，或用“拿 1 个”选择单件。",
+          "鼠标拖入箱子，手柄使用“移动”；存入时不会立即收到钱。",
+          "0.8.10.842 游戏教程说明第二天付款，品质更好的物品收入更高。"
         ],
         "notice": "由于结算把多种收入合并，本站目前不会发布未经单独测量的作物出售单价。"
       },

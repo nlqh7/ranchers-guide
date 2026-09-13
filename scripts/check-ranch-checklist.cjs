@@ -23,7 +23,8 @@ for (const file of ['guides/building-construction.html', 'zh/guides/building-con
   assert.match(table, /historical|历史/i);
   assert.match(html, /building-requirements\.css\?v=20260828-1/);
   const nativeTable = html.match(/<table class="recipe-table">[\s\S]*?<\/table>/)?.[0];
-  assert.ok(nativeTable && html.indexOf(nativeTable) < html.indexOf('<details'), `${file}: native requirements precede optional historical records`);
+  const historySection = html.match(/<details\b[^>]*class="[^"]*\brecipe-history\b[^"]*"[^>]*>/);
+  assert.ok(historySection && nativeTable && html.indexOf(nativeTable) < historySection.index, `${file}: native requirements precede optional historical records`);
   assert.match(html, /Wood \/ Rock/, `${file}: preserve the Alpha material naming boundary`);
 }
 

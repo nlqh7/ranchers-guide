@@ -26,7 +26,7 @@ function render(locale, buildingOnly=false) {
     const icon = icons.find(i => i.sourceItemId === id);
     return icon ? `<img src="${icon.src}" width="28" height="28" alt="" loading="lazy" decoding="async">` : '';
   };
-  const materials = offer => `<ul class="recipe-ingredients">${offer.materials.map(m => `<li><a href="${prefix}/database/materials#${materialRoutes[m.id]}">${image(m.id)}<span>${esc(name(item(m.id)))}</span><strong>× ${m.quantity}</strong></a></li>`).join('')}</ul>`;
+  const materials = offer => `<ul class="recipe-ingredients">${offer.materials.map(m => `<li><a href="${prefix}/database/materials#${materialRoutes[m.id]}">${image(m.id)}<span>${esc(name(item(m.id)))}</span><strong>× ${m.quantity}</strong></a></li>`).join('')}</ul><a class="shop-recipe-link" href="${prefix}/tools/ranch-checklist?building=${encodeURIComponent(offer.id)}#recipe-material-plan">${zh ? '核对缺料' : 'Check missing materials'}</a>`;
   const row = offer => {
     const entry = item(offer.itemId);
     const id = buildingOnly ? `shop-plan-${entry.id}` : `offer-${offer.id}`;
