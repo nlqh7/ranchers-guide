@@ -76,7 +76,13 @@ for (const [relativePath, routes] of Object.entries(taskRoutes)) {
   assert.match(section, /<h2[\s>]/, `${relativePath}: the primary route section needs a visible task heading`);
   for (const route of routes) assert.ok(section.includes(`href="${route}"`), `${relativePath}: missing primary player route ${route}`);
   assert.doesNotMatch(section, /unverified|unknown|evidence tracker|still need testing|待验证|未知|证据状态|仍需测试/i, `${relativePath}: primary routes must describe outcomes, not editorial process`);
+  assert.doesNotMatch(section, /database\/buildings\/coop#first-coop-route/, `${relativePath}: keep the specific Coop answer in direct answers, not duplicated in the broad task directory`);
 }
+
+assert.match(read("index.html"), /<a href="\/database\/buildings\/coop#first-coop-route">/, "index.html: the first-Coop answer must remain directly discoverable");
+assert.match(read("zh/index.html"), /<a href="\/zh\/database\/buildings\/coop#first-coop-route">/, "zh/index.html: the first-Coop answer must remain directly discoverable");
+assert.doesNotMatch(read("index.html"), /Help Build the Live Database|Record the game version, conditions and exact result/, "index.html: keep research contribution onboarding off the player-first homepage");
+assert.doesNotMatch(read("zh/index.html"), /证据优先|没有证据的数值不会装成答案/, "zh/index.html: keep editorial-method messaging off the player-first homepage");
 
 assert.doesNotMatch(read("index.html"), /hero-eyebrow|hero-promise/, "index.html: do not stack generic promotional lines above the task routes");
 assert.match(read("index.html"), /<h2>What do you need to do\?<\/h2>/, "index.html: first-time visitors need a direct task heading");

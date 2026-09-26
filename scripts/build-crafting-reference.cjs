@@ -47,6 +47,7 @@ function renderRecipePlan(locale) {
       <label>${zh ? '选择配方' : 'Choose a recipe'}<select data-plan-select aria-label="${zh ? '选择配方' : 'Choose a recipe'}"></select></label>
       <button type="submit" data-plan-add>${zh ? '加入计划' : 'Add to plan'}</button>
     </form>
+    <p class="recipe-plan-note" data-plan-entry role="status"></p>
     <p class="recipe-plan-note" data-plan-no-match hidden>${zh ? '没有匹配的配方。试试其他物品名或材料名；已选物品仍保留。' : 'No matching recipes. Try another item or material name; your selected items are kept.'}</p>
     <ul class="recipe-plan-selection" data-plan-selections></ul>
     <p class="recipe-plan-note" data-plan-empty>${zh ? '先添加一项配方，合计会显示在这里。' : 'Add a recipe to start your material list.'}</p>
@@ -60,7 +61,12 @@ function renderRecipePlan(locale) {
       <div class="recipe-plan-building-info" data-building-info></div>
     </div>
     <p class="recipe-plan-error" id="recipe-plan-error" data-plan-error role="status" hidden>${zh ? '份数请填 0–999 的整数，已有材料请填 0–999999 的整数。修正后合计会恢复。' : 'Use whole numbers: 0–999 batches and 0–999999 on hand. Correct the marked fields to restore totals.'}</p>
-    <div class="recipe-plan-totals" data-plan-totals hidden><h3 data-plan-total-title>${zh ? '合并材料清单' : 'Combined material list'}</h3><ul class="recipe-plan-supplies" data-plan-supplies></ul></div>
+    <div class="recipe-plan-totals" data-plan-totals hidden>
+      <div class="recipe-plan-heading"><h3 data-plan-total-title>${zh ? '合并材料清单' : 'Combined material list'}</h3><button type="button" data-plan-copy>${zh ? '复制缺料清单' : 'Copy missing-material list'}</button></div>
+      <p class="recipe-plan-note" data-plan-copy-status role="status"></p>
+      <div class="recipe-plan-copy-fallback" data-plan-copy-fallback hidden><label>${zh ? '手动复制清单' : 'Copy this list manually'}<textarea data-plan-copy-text readonly rows="7"></textarea></label></div>
+      <ul class="recipe-plan-supplies" data-plan-supplies></ul>
+    </div>
     <details class="recipe-plan-shopping" data-purchase-plan hidden>
       <summary>${zh ? '按商店整理缺料' : 'Group missing materials by shop'}</summary>
       <p class="recipe-plan-note">${zh ? '只列还缺的数量。同一材料有多家商店时选一家；商店名称按文件分类，不代表已核实的库存、报价或地图位置。' : 'Only missing quantities are listed. Choose one seller for materials with alternatives. Shop names describe file categories, not verified stock, prices or map locations.'}</p>
@@ -69,10 +75,12 @@ function renderRecipePlan(locale) {
       <p class="recipe-plan-unlisted" data-purchase-unlisted hidden></p>
     </details>
     <p class="recipe-plan-note" data-plan-status role="status"></p>
+    <p class="recipe-plan-note recipe-plan-return" data-plan-return hidden><a href="#recipe-material-plan" data-plan-return-link></a></p>
     <p class="recipe-plan-note" data-plan-save-note>${zh ? '计划保存在此浏览器；打开材料来源后返回，仍可继续。' : 'Your plan stays in this browser, including when you return from a material guide.'}</p>
   </div>
   <noscript><p>${zh ? '启用 JavaScript 可计算合并用料；下方配方与材料表仍可直接查看。' : 'Enable JavaScript to combine materials. The recipe and material tables below remain available.'}</p></noscript>
   <p class="recipe-plan-note" data-plan-recipe-note>${zh ? '制作模式只计算选中的配方，不包含历史建筑目标；工作台与解锁条件请按当前存档核对。' : 'Crafting mode counts only selected recipes, not historical building targets. Check workbench and unlock requirements in your save.'} <a href="${prefix}/guides/crafting-guide">${zh ? '查看配方与来源' : 'Recipes & sources'}</a></p>
+  <script src="/assets/js/recipe-plan-text.js?v=20260914-copy1" defer></script>
   <script type="application/json" data-plan-data>${JSON.stringify(payload).replace(/</g, '\\u003c')}</script>
 </section>
 <!-- END RECIPE PLAN -->`;
@@ -117,7 +125,9 @@ function render(locale, compact = false, checklist = false) {
     const intent = sourceConfig?.sourceIntents[row.id];
     const nativeToolSettings = isTool && !miscItem ? `<details class="recipe-item-settings tool-settings"><summary>${zh?'原生物品配置':'Native item settings'}</summary><p class="recipe-muted">${row.energy ? `<span data-energy-consumption="${row.energy.consumption}">${zh?'耗能配置':'Energy use setting'}: ${row.energy.consumption}</span>${row.energy.supply ? ` · ${zh?'恢复配置':'Restore setting'}: ${row.energy.supply}` : ''}` : `<span data-energy-missing>${zh?'耗能字段未收录':'Energy field not listed'}</span>`}<br>${zh?'来源类型':'Source type'}: ${sourceType} · ${zh?'来源分类':'Source classification'}: ${sourceConfig.shared.classification} · ${zh?'来源稀有度':'Source rarity'}: ${sourceConfig.shared.rarity}<br>${zh?'可装备':'Equippable'}: ${equippable?(zh?'是':'Yes'):(zh?'否':'No')} · ${zh?'可堆叠':'Stackable'}: ${row.stackable?(zh?'是':'Yes'):(zh?'否':'No')} · ${zh?'可出售标志':'Sellable flag'}: ${sellable?(zh?'是':'Yes'):(zh?'否':'No')} · ${zh?'可丢弃字段：未收录':'Droppable field: not listed'}<br>${heldSlots[row.bodySlot][zh?1:0]}</p>${intent?`<p class="recipe-muted">${esc(zh?intent.zh:intent.en)} <strong>${zh?'来源用途线索，不是运行时验证':'Source-use clue, not runtime verification'}</strong></p>`:''}<p class="recipe-muted">${zh?'耗能、类型、稀有度与物品标志不证明每次动作消耗、伤害、可购买性、堆叠上限、实际售价或当前实现。':'Energy, type, rarity and item flags do not establish per-action cost, damage, acquisition, stack limit, actual price or current implementation.'}</p></details>` : '';
     const settings = isTool ? (miscItem ? `<details class="recipe-item-settings" data-misc-item-id="${row.id}"><summary>${zh?'原生物品配置':'Native item settings'}</summary><p class="recipe-muted">${zh?'体力配置':'Energy settings'}: ${row.energy.consumption}/${row.energy.supply} · ${zh?'生命配置':'Health settings'}: ${row.health.consumption}/${row.health.supply}<br>${zh?'可装备':'Equippable'}: ${row.equippable?(zh?'是':'Yes'):(zh?'否':'No')} · ${zh?'可堆叠':'Stackable'}: ${row.stackable?(zh?'是':'Yes'):(zh?'否':'No')} · ${zh?'可丢弃':'Droppable'}: ${row.droppable?(zh?'是':'Yes'):(zh?'否':'No')} · ${zh?'可出售标志':'Sellable flag'}: ${row.sellable?(zh?'是':'Yes'):(zh?'否':'No')}<br>${heldSlots[row.bodySlot][zh?1:0]}${row.disableHoldingAnimation?` · ${zh?'双手持握动画禁用标志开启':'two-hand holding-animation disable flag enabled'}`:''}</p><p class="recipe-muted">${zh?'零值与标志不证明运行时行为、弹药数量、购买途径或真实售价。':'Zero values and flags do not establish runtime behavior, ammunition count, acquisition or price.'}</p></details>` : nativeToolSettings) : '';
-    const requirement = (recipe ? materials(recipe) : `<span class="recipe-muted">${zh ? '配方表未收录' : 'No recipe in the extracted tables'}</span>`) + shopLink + settings + toolLink + farmLink + placeableSettings(placeable);
+    const planLink = recipe ? `<a class="shop-recipe-link" href="${prefix}/tools/ranch-checklist?recipe=${encodeURIComponent(recipe.id)}#recipe-material-plan">${zh ? '准备材料' : 'Plan materials'}</a>` : '';
+    const actions = planLink + shopLink + toolLink + farmLink;
+    const requirement = (recipe ? materials(recipe) : `<span class="recipe-muted">${zh ? '配方表未收录' : 'No recipe in the extracted tables'}</span>`) + (actions ? `<div class="recipe-actions">${actions}</div>` : '') + settings + placeableSettings(placeable);
     const workbench = recipe ? (recipe.workbench ? (zh ? '需要工作台' : 'Workbench required') : (zh ? '不要求工作台' : 'No workbench required')) : '';
     const quest = recipe?.questRequirements.length ? `<small>${zh ? '有任务条件，解锁时机未确认' : 'Quest condition; unlock timing unverified'}</small>` : '';
     return `<tr id="${rowId(row)}" data-recipe-row data-query="${esc(`${row.name} ${row.zhName} ${(recipe?.materials || []).map(m => { const i = data.ingredients.find(i => i.id === m.id); return `${i.name} ${i.zhName}`; }).join(' ')}`)}"${compact || (isTool && recipe) || farmItem ? '' : ` data-search-entry data-search-title="${esc(name(row))}" data-search-tags="${esc(`${row.name} ${row.zhName} crafting recipe tools 制作 配方 工具`)}" data-search-status="${zh ? '游戏构建配置' : 'Game-build configuration'}"`}><th scope="row"><a href="${compact ? `${prefix}/guides/crafting-guide` : ''}#${rowId(row)}">${esc(name(row))}</a>${workbench ? `<small>${workbench}</small>` : ''}${quest}</th><td>${requirement}</td></tr>`;
@@ -161,11 +171,11 @@ for (const locale of ['en', 'zh']) {
     if (!before.includes('<!-- BEGIN CRAFTING REFERENCE -->')) throw new Error(`Missing crafting block: ${file}`);
     const checklist = route.includes('ranch-checklist');
     let after = before.replace(/<!-- BEGIN CRAFTING REFERENCE -->[\s\S]*?<!-- END CRAFTING REFERENCE -->/, render(locale, !route.includes('crafting-guide'), checklist))
-      .replace(/crafting-reference\.(css|js)\?v=[^"']+/g, 'crafting-reference.$1?v=20260909-wall1');
+      .replace(/crafting-reference\.(css|js)\?v=[^"']+/g, 'crafting-reference.$1?v=20260914-entry1');
     if (checklist) {
       if (!after.includes('<!-- BEGIN RECIPE PLAN -->')) throw new Error('Missing recipe plan marker: ' + file);
       after = after.replace(/<!-- BEGIN RECIPE PLAN -->[\s\S]*?<!-- END RECIPE PLAN -->/, renderRecipePlan(locale));
-      after = after.replace(/recipe-plan\.(css|js)\?v=[^"']+/g, 'recipe-plan.$1?v=20260913-plan3');
+      after = after.replace(/recipe-plan\.(css|js)\?v=[^"']+/g, 'recipe-plan.$1?v=20260914-plan5');
     }
     if (before !== after) {
       if (process.argv.includes('--check')) { console.error(`STALE: ${file}`); stale = true; }

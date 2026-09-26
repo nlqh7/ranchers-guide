@@ -35,8 +35,9 @@ for (const [label, relative, textPattern, recipeRoute] of [
   ["Chinese", "zh/database/quests.html", /普通稻草人，不要制作稻草人鲍勃/, "/zh/guides/crafting-guide#recipe-prop_Scarecrow_00"],
 ]) {
   const html = read(relative);
+  const detailHtml = read(`${relative.startsWith('zh/') ? 'zh/' : ''}database/quests/feathered-foes.html`);
   assert.match(html, textPattern, `${label} quest page is missing the workbench answer`);
-  assert.ok(html.includes(threadUrl), `${label} quest page must expose the exact official source`);
+  assert.ok(html.includes(threadUrl) || detailHtml.includes(threadUrl), `${label} quest directory or standalone entry must expose the exact official source`);
   assert.ok(html.includes(`href="${recipeRoute}"`), `${label} quest page must link the ordinary Scarecrow recipe`);
 }
 

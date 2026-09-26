@@ -193,12 +193,14 @@ assert.match(zhNpcHtml, /购买额外土地/);
 assert.match(zhNpcHtml, /Meriam 蓝图目录与出售/);
 assert.match(zhNpcHtml, /动物感染治疗/);
 for (const html of [questHtml, zhQuestHtml]) {
-  assert.equal((html.match(/data-quest-build-guide=/g) || []).length, 18, "static and dialogue-defined guides must reach the actual page");
-  assert.equal((html.match(/<div class="quest-build-guide" data-quest-build-guide=/g) || []).length, 18, "quest answers must remain visible without opening a details control");
-  assert.equal((html.match(/data-quest-flow/g) || []).length, 18, "all published guides must render failure and continuation data");
+  assert.equal((html.match(/data-quest-build-guide=/g) || []).length, 18, "all task records must remain reachable from the directory");
+  assert.equal((html.match(/<div class="quest-build-guide" data-quest-build-guide=/g) || []).length, 16, "only non-migrated quest entries keep full inline steps");
+  assert.equal((html.match(/data-quest-directory-summary=/g) || []).length, 2, "migrated quest entries must keep compact directory summaries");
+  assert.equal((html.match(/data-quest-flow/g) || []).length, 16, "full inline quest guides must render failure and continuation data");
   assert.equal((html.match(/data-dialogue-defined-quest/g) || []).length, 2, "dialogue-defined leads need a distinct visible boundary");
   assert.equal((html.match(/data-configured-reward-action=/g) || []).length, 5, "five source-matched static quest reward actions must render");
-  assert.equal((html.match(/data-quest-objective=/g) || []).length, 74, "all 71 static and 3 dialogue-defined objectives must be rendered");
+  assert.equal((html.match(/data-quest-objective=/g) || []).length, 66, "full inline guides must retain their configured objectives");
+  assert.match(html, /database\/quests\/(?:seeds-of-success|feathered-foes)/, "migrated quests must link to standalone detail entries");
   assert.match(html, /quest-guide\.css\?v=20260830-1/);
   assert.doesNotMatch(html, /State_HasMoney|InventoryGetItemCount|Quest_Concrd|F_Quest_/);
 }

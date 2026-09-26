@@ -22,6 +22,7 @@ assert.equal(data.items.find(i=>i.id==='ressource_straw').health.consumption,10)
 assert.equal(data.items.find(i=>i.id==='ressource_Fuel').bodySlot,'Right_Hand_Weapon');
 const recipes=require('../data/build-recipes.json').recipes;
 const search=require('../assets/js/search-core.js');
+const standaloneMaterials=new Set(['stone','wood-log','hay']);
 for(const prefix of ['','zh/']) {
  const html=fs.readFileSync(path.join(root,prefix+'database/materials.html'),'utf8');
  for(const item of data.items.filter(i=>i.materialId)) {
@@ -42,12 +43,13 @@ for(const prefix of ['','zh/']) {
  const knowledge=JSON.parse(fs.readFileSync(path.join(root,prefix+'knowledge-index.json'),'utf8'));
  const index=JSON.parse(fs.readFileSync(path.join(root,prefix+'search-index.json'),'utf8'));
  for(const item of data.items) {
-  const expected=`/${prefix}${item.materialId?'database/materials#'+item.materialId:'guides/resources-and-materials#resource-'+item.id}`;
+  const expected=`/${prefix}${item.materialId?(standaloneMaterials.has(item.materialId)?'database/materials/'+item.materialId+'#'+item.materialId:'database/materials#'+item.materialId):'guides/resources-and-materials#resource-'+item.id}`;
   assert.equal(search.searchDocuments(index,prefix?item.zhName:item.name,12)[0]?.url,expected,'Exact resource names must open their full profiles');
  }
  for(const alias of prefix?['锆矿','原木']:['Zirconite','Wood Log']) {
   const material=alias==='原木'||alias==='Wood Log'?'wood-log':'zirconite';
-  assert.equal(search.searchDocuments(index,alias,12)[0]?.url,`/${prefix}database/materials#${material}`,'Existing resource aliases must lead to the same complete profile');
+  const expectedAlias=standaloneMaterials.has(material)?`/${prefix}database/materials/${material}#${material}`:`/${prefix}database/materials#${material}`;
+  assert.equal(search.searchDocuments(index,alias,12)[0]?.url,expectedAlias,'Existing resource aliases must lead to the same complete profile');
  }
  for(const item of data.items.filter(i=>i.materialId)) {
   const entity=knowledge.entities.find(e=>e.id===`material:${item.materialId}`);

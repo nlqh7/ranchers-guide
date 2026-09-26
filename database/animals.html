@@ -55,7 +55,7 @@
       <div class="database-seasons"><div><h3>Ranch animals</h3><div class="database-entry-links"><a href="#chicken"><img class="database-item-icon" src="/assets/img/items/animal_chicken_brown_female-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Chicken</span></a><a href="#cow"><img class="database-item-icon" src="/assets/img/items/animal_cow_brown_female-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Cow</span></a><a href="#goat"><img class="database-item-icon" src="/assets/img/items/animal_goat_white_female-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Goat</span></a><a href="#sheep"><span>Sheep</span></a><a href="#rabbit"><img class="database-item-icon" src="/assets/img/items/animal_rabit_female-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Rabbit</span></a></div></div><div><h3>Build-defined wildlife</h3><div class="database-entry-links"><a href="#wildlife-Flocking_Bird_Butterfly_Easter_Tailed_Blue"><span>Eastern Tailed Blue</span></a><a href="#wildlife-Flocking_Bird_Crow"><span>Crow</span></a><a href="#wildlife-Flocking_Bird_Parrot_Macaw_RED"><span>Macaw Red</span></a><a href="#wildlife-Flocking_Bird_Pigeon"><span>Pigeon</span></a><a href="#wildlife-Flocking_Bird_Seagull"><span>Seagull</span></a><a href="#wildlife-Flocking_Bird_Toucan"><span>Toucan</span></a><a href="#wildlife-Flocking_Bird_Vulture"><span>Vulture</span></a><a href="#wildlife-Flocking_ButterflyAfricanMonarch"><span>African Monarch</span></a><a href="#wildlife-Flocking_Bird_Pigeon_Dove"><span>Dove</span></a><a href="#wildlife-Flocking_Bird_Parrot_Cockatiel"><span>Cockatiel</span></a><a href="#wildlife-Flocking_Bird_Parrot_Galah"><span>Galah</span></a><a href="#wildlife-Flocking_Bird_Parrot_Grey"><span>Grey</span></a><a href="#wildlife-Flocking_Bird_Parrot_Cockatoo"><span>Cockatoo</span></a></div></div><div><h3>Enemies-table names</h3><div class="database-entry-links"><a href="#enemy-Skeleton_A"><span>Skeleton</span></a><a href="#enemy-Spider_Black_Widow"><span>Spider_Black_Widow</span></a><a href="#enemy-Spider_Tarantula"><span>Spider_Tarantula</span></a></div></div></div><div class="database-guide-links"><a href="/guides/resources-and-materials#consumables">Food & consumable settings</a></div>
       <p class="database-browse-note">Look up ranch-animal care and build-defined wildlife names. Wildlife entries do not establish behavior or spawn locations.</p>
     </section><details class="database-reference-notes"><summary>Getting started & reference notes</summary>
-      <details class="database-reference-notes"><summary>Version & reference notes</summary><p class="meta">Current page baseline 0.8.10.842 · Video evidence recorded on 0.8.10.455 · Data last updated 2026-09-04 · Historical values are labeled</p></details>
+      <details class="database-reference-notes"><summary>Version & reference notes</summary><p class="meta">Retained game-file baseline 0.8.10.842 · Video evidence recorded on 0.8.10.455 · Data last updated 2026-09-19 · Historical values are labeled</p></details>
       <details class="database-outline"><summary>Full contents</summary><nav class="toc" aria-label="Contents">
         <div class="toctitle">Contents</div>
         <ul>
@@ -91,6 +91,7 @@
               <li><a href="#goat-acquisition">Buying</a></li>
               <li><a href="#goat-feed">Feeding</a></li>
               <li><a href="#goat-breeding">Breeding</a></li>
+              <li><a href="#goat-sickness">Sickness</a></li>
             </ul>
           </li>
           <li class="toc-cat"><a href="#sheep">Sheep</a>
@@ -102,6 +103,7 @@
             <ul class="toc-fields">
               <li><a href="#rabbit-acquisition">Buying</a></li>
               <li><a href="#rabbit-feed">Feeding</a></li>
+              <li><a href="#rabbit-sickness">Sickness</a></li>
             </ul>
           </li>
         </ul>
@@ -128,7 +130,7 @@
           <li>Link the coop and fill the indoor trough with hay and water. The outdoor trough is not required for ordinary daily feeding.</li>
           <li>Install the coop-specific heater from Angela on the coop exterior wall; a household decoration heater is not a substitute.</li>
           <li>For large eggs, keep needs and satisfaction high, pet the chickens, and provide an enclosed outdoor roaming area. This improves the chance; it does not guarantee the next egg is large.</li>
-          <li>If an animal disappears, update to 0.8.10.842 or later first, then use the <a href="/guides/animal-guide">current troubleshooting checklist</a> rather than an older workaround.</li>
+          <li>If an animal disappears, update to 0.8.10.871 or later first, then use the <a href="/guides/animal-guide">current troubleshooting checklist</a> rather than an older workaround.</li>
         </ol>
         <div class="notice info"><strong>Decision boundary:</strong> prices, production cycles and profit rankings for cow, goat and rabbit remain unverified in the current build. Use the profiles below as evidence-tracked records, not as a complete economy table.</div>
       </section>
@@ -147,7 +149,7 @@
             <span class="kicker">poultry · Coop</span>
             <h2 id="chicken-heading"><span class="database-entry-title"><img class="database-item-icon" src="/assets/img/items/animal_chicken_brown_female-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Chicken</span></span></h2>
           </div>
-          <span class="tag">Updated 2026-08-31</span>
+          <span class="tag">Updated 2026-09-19</span>
         </div>
         <p class="lead">The best-documented animal in the current build. Buy from Angela, keep hay and water in the coop trough, mount the coop heater on the outside wall, and pet daily for a shot at large eggs.</p>
 
@@ -198,10 +200,10 @@
         </ul>
         <h3 id="chicken-sickness">Sickness &amp; the vet</h3>
         <ul class="evidence-list">
+          <li>The End of Day report now alerts you to sickness. Chicken illness lasts 4 days before death; arrange treatment promptly. This is not a feeding interval. <span class="tag evidence-official">Official</span> <span class="fact-source"><a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1842846814456746" rel="noopener noreferrer">Ranching, Multiplayer &amp; Building Update 0.8.10.858</a></span></li>
           <li>An animal sickness mechanic exists; the heater prevents temperature sickness but cannot cure an already sick animal. <span class="tag evidence-official">Official</span> <span class="fact-source"><a href="https://steamcommunity.com/app/1501310/discussions/0/587307627624740721/" rel="noopener noreferrer">Steam thread &quot;Big Chicken Eggs&quot; (Jennoula, official)</a> · <a href="https://steamcommunity.com/games/1501310/announcements/detail/6839319551984984308" rel="noopener noreferrer">The Ranchers, Ranching v2 update! (official Steam announcement)</a></span></li>
           <li>Take sick chickens to the veterinarian. The vet only treats animals that are actually sick — a famished (starving) animal is turned away. <span class="tag evidence-lead">Single-source</span> <span class="fact-source">Steam thread &quot;how to cure at the vet?&quot; (Seansniper27, maxitubby)</span></li>
           <li>A famished chicken recovers by the next morning if you bring it back to the coop and feed it manually. <span class="tag evidence-lead">Single-source</span> <span class="fact-source">Steam thread &quot;how to cure at the vet?&quot; (Seansniper27, maxitubby)</span></li>
-          <li>There is no sickness notification system; check animals manually each day. <span class="tag evidence-lead">Single-source</span> <span class="fact-source">Community discussion scan archive (local file: community-scan-2026-08-08.md, 90 topics scanned, 44 read)</span></li>
         </ul>
         <details class="pending-facts">
           <summary>1 item not yet verified — show</summary>
@@ -224,7 +226,7 @@
         </ul>
         <h3 id="chicken-bugs">Disappearing-chicken checklist</h3>
         <ul class="evidence-list">
-          <li class="fact-historical">Hotfix 0.8.10.562 officially fixed several animal disappearance paths: entering a barn or coop at night, chicks growing up, newborn mammals spawning, animals appearing after a load, and animals becoming stuck between a barn or coop and its doors. This remains the historical fix boundary; current residual reports should be tested on 0.8.10.842 or later. <span class="tag evidence-official">Official · pre-EA documented</span> <span class="fact-source"><a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1840310314352719" rel="noopener noreferrer">Hotfix 0.8.10.562 — official Steam announcement</a></span></li>
+          <li class="fact-historical">Hotfix 0.8.10.562 officially fixed several animal disappearance paths: entering a barn or coop at night, chicks growing up, newborn mammals spawning, animals appearing after a load, and animals becoming stuck between a barn or coop and its doors. This remains the historical fix boundary; test new reports on the latest available build and record the exact version. <span class="tag evidence-official">Official · pre-EA documented</span> <span class="fact-source"><a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1840310314352719" rel="noopener noreferrer">Hotfix 0.8.10.562 — official Steam announcement</a></span></li>
           <li>The 0.8.10.842 update adds animal edge-case fixes for barn/coop association, growth-stage state, hunger display, linked counts, repeated turning at doors and a same-frame disappearance case. <span class="tag evidence-official">Official</span> <span class="fact-source"><a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1841579228669835" rel="noopener noreferrer">0.8.10.842 update — official Steam announcement</a></span></li>
           <li class="fact-historical">Before 0.8.10.562, chickens submitted at the coop door could enter the stock count but vanish or get stuck inside the coop's exterior wall. The historical workaround was to walk inside before dropping them; stuck birds could sometimes be recovered by removing the others and demolishing the coop. <span class="tag historical">Historical</span> <span class="fact-source"><a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364381340/" rel="noopener noreferrer">Steam thread on the coop-door chicken delivery bug (Big Grizzly)</a> · Steam thread &quot;Hühnerstall Bug&quot; (Kartesk, Jennoula) · <a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1840310314352719" rel="noopener noreferrer">Hotfix 0.8.10.562 — official Steam announcement</a></span></li>
           <li>Check linking first: walking near the door should show a stock counter like 0/6 over the dark floor area — no counter means the coop is not linked. <span class="tag evidence-official">Official</span> <span class="fact-source">Steam thread &quot;Hühnerstall Bug&quot; (Kartesk, Jennoula)</span></li>
@@ -247,7 +249,7 @@
             <span class="kicker">mammal · Barn</span>
             <h2 id="cow-heading"><span class="database-entry-title"><img class="database-item-icon" src="/assets/img/items/animal_cow_brown_female-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Cow</span></span></h2>
           </div>
-          <span class="tag">Updated 2026-08-28</span>
+          <span class="tag">Updated 2026-09-19</span>
         </div>
         <p class="lead">Five breeds in the cattle-shop directory, with related quest, care instructions and product names.</p>
 
@@ -305,6 +307,7 @@
         </ul>
         <h3 id="cow-sickness">Sickness</h3>
         <ul class="evidence-list">
+          <li>The End of Day report now alerts you to sickness. Cow illness lasts 7 days before death; arrange treatment promptly. This is not a feeding interval. <span class="tag evidence-official">Official</span> <span class="fact-source"><a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1842846814456746" rel="noopener noreferrer">Ranching, Multiplayer &amp; Building Update 0.8.10.858</a></span></li>
           <li class="fact-historical">The animal sickness mechanic applies to livestock generally; cow-specific treatment flow is unverified in the current build. <span class="tag evidence-official">Official · pre-EA documented</span> <span class="fact-source"><a href="https://steamcommunity.com/games/1501310/announcements/detail/6839319551984984308" rel="noopener noreferrer">The Ranchers, Ranching v2 update! (official Steam announcement)</a></span></li>
         </ul>
         <h3 id="cow-automation">Automation</h3>
@@ -324,7 +327,7 @@
             <span class="kicker">mammal · Barn</span>
             <h2 id="goat-heading"><span class="database-entry-title"><img class="database-item-icon" src="/assets/img/items/animal_goat_white_female-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Goat</span></span></h2>
           </div>
-          <span class="tag">Updated 2026-08-28</span>
+          <span class="tag">Updated 2026-09-19</span>
         </div>
         <p class="lead">Identify adult and young goats, check the adult shop references and look up goat milk and meat names. Purchase prices and production rates remain unverified.</p>
 
@@ -363,6 +366,10 @@
         <h3 id="goat-breeding">Breeding</h3>
         <ul class="evidence-list">
           <li class="fact-historical">As a mammal, goats fall under the documented pregnancy mechanic; current-build behavior unverified. <span class="tag evidence-official">Official · pre-EA documented</span> <span class="fact-source"><a href="https://steamcommunity.com/games/1501310/announcements/detail/6839319551984984308" rel="noopener noreferrer">The Ranchers, Ranching v2 update! (official Steam announcement)</a></span></li>
+        </ul>
+        <h3 id="goat-sickness">Sickness</h3>
+        <ul class="evidence-list">
+          <li>The End of Day report now alerts you to sickness. Goat illness lasts 8 days before death; arrange treatment promptly. This is not a feeding interval. <span class="tag evidence-official">Official</span> <span class="fact-source"><a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1842846814456746" rel="noopener noreferrer">Ranching, Multiplayer &amp; Building Update 0.8.10.858</a></span></li>
         </ul></details>
       </section>
 
@@ -401,7 +408,7 @@
             <span class="kicker">mammal · Hutch / outdoor</span>
             <h2 id="rabbit-heading"><span class="database-entry-title"><img class="database-item-icon" src="/assets/img/items/animal_rabit_female-b24847725.png" alt="" width="32" height="32" decoding="async"><span>Rabbit</span></span></h2>
           </div>
-          <span class="tag">Updated 2026-08-08</span>
+          <span class="tag">Updated 2026-09-19</span>
         </div>
         <p class="lead">Named in official store copy as bunnies and added in the Ranching v2 notes. Diet is the only community-discussed detail, and even that is unconfirmed.</p>
 
@@ -423,6 +430,10 @@
         <h3 id="rabbit-feed">Feeding</h3>
         <ul class="evidence-list">
           <li>One player guessed rabbits eat lettuce/salad greens and that hay does not work — the official reply in that thread was cut off, so the rabbit diet stays unconfirmed. <span class="tag evidence-lead">Single-source</span> <span class="fact-source">Steam thread &quot;beginner_questions&quot; (Kapone; official reply cut off) · Community discussion scan archive (local file: community-scan-2026-08-08.md, 90 topics scanned, 44 read)</span></li>
+        </ul>
+        <h3 id="rabbit-sickness">Sickness</h3>
+        <ul class="evidence-list">
+          <li>The End of Day report now alerts you to sickness. Rabbit illness lasts 5 days before death; arrange treatment promptly. This is not a feeding interval. <span class="tag evidence-official">Official</span> <span class="fact-source"><a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1842846814456746" rel="noopener noreferrer">Ranching, Multiplayer &amp; Building Update 0.8.10.858</a></span></li>
         </ul>
       </section>
 

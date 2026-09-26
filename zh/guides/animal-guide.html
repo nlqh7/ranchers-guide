@@ -7,17 +7,17 @@
   <link rel="canonical" href="https://theranchersguide.com/zh/guides/animal-guide">
   <link rel="alternate" hreflang="en" href="https://theranchersguide.com/guides/animal-guide"><link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/guides/animal-guide"><link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/guides/animal-guide">
   <meta property="og:type" content="article"><meta property="og:title" content="The Ranchers 中文养鸡指南"><meta property="og:description" content="从 Angela 家后院抓鸡到自动喂食、大鸡蛋和卖肉，逐步标注证据强度。"><meta property="og:url" content="https://theranchersguide.com/zh/guides/animal-guide"><meta property="og:image" content="https://theranchersguide.com/assets/img/db-animals.jpg">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260902-ui2"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260919-care1"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
   <header class="site-header"><nav class="nav-inner" aria-label="主导航"><a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide</span></a><button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button><ul class="nav-links"><li><a class="active" href="/zh/guides/beginners-guide">新手</a></li><li><a href="/zh/database">知识库</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li><li><a href="/zh/search">搜索</a></li><li><a class="nav-cta" href="/contribute">投稿</a></li></ul></nav></header>
   <main><article class="article">
-    <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / 攻略 / 养鸡指南</nav><h1>The Ranchers 养鸡指南：从买鸡到收益，一步一步来</h1><p class="meta">2026-08-11 复核 · 当前版本 0.8.10.842 · 阅读约 12 分钟</p>
-    <div class="evidence-status"><strong>证据状态：</strong>官方客服回复（Steam 管理员 Jennoula）· 多名玩家印证 · 单人报告逐条标注 · 2026-08-11 复核 — <a href="/zh/methodology">我们如何验证 →</a></div>
+    <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / 攻略 / 养鸡指南</nav><h1>The Ranchers 养鸡指南：从买鸡到收益，一步一步来</h1><p class="meta">照料更新复核：2026-09-19 · 官方补丁至 0.8.10.871</p>
+    <div class="evidence-status"><strong>证据状态：</strong>官方客服回复（Steam 管理员 Jennoula）· 多名玩家印证 · 单人报告逐条标注 · 2026-09-19 更新复核 — <a href="/zh/methodology">我们如何验证 →</a></div>
 
     <figure class="page-banner"><img src="/assets/img/db-animals.webp" width="800" height="450" alt="The Ranchers 红色谷仓外吃草的牛"></figure>
 
-    <div class="notice"><strong>修复历史：</strong>0.8.10.562 已由官方修复多条动物消失路径，包括夜间进鸡舍/畜棚、雏鸡长大、新生动物生成、读档和门缝卡住；当前 0.8.10.842 又补充了畜棚/鸡舍关联和动物消失边界修复。下面的照料链仍有效；旧恢复办法明确标成历史。</div>
+    <div class="notice">先看<a href="#sickness-alerts">生病提醒与病程</a>；找不到动物时按<a href="#troubleshooting">排查清单</a>确认。9 月更新处理了当时已知的消失问题，但不代表之后所有异常都已排除。</div>
 
     <section class="answer-box">
       <h2>先说结论</h2>
@@ -58,9 +58,10 @@
         <li><strong>安装位置：</strong>鸡舍/畜棚设备装在建筑的<strong>外墙</strong>上。<small>多人印证。</small></li>
         <li><strong>兽医只治真正的病。</strong>只是<em>饿极了</em>的动物会被拒收——在鸡舍喂饱，第二天早晨就恢复。<small>单一线索。</small></li>
         <li><strong>兽医费用：未知。</strong>还没有玩家贴出数字；预计要收费，留一笔小钱备用。</li>
-        <li>当前版本<strong>没有生病通知</strong>——每天自己看一眼动物状态。</li>
+        <li><strong>每天看日终报告：</strong>0.8.10.858 起会提示动物生病；发现后尽快送医，不要等到最后一天。</li>
       </ul>
-    </section>
+</section>
+    <section id="sickness-alerts" data-search-entry data-search-status="官方更新 · 0.8.10.858" data-search-title="动物生病能撑几天：日终提醒与送医" data-search-tags="病鸡 病牛 病羊 病兔 死亡 生病通知 兽医"><h2>收到生病提醒后，还有多久？</h2><p>以下是未治愈疾病导致死亡前的病程，不是喂食间隔或可以放心等待的天数。先区分生病与饥饿，再处理对应需求。</p><div class="data-table-wrap" tabindex="0" role="region" aria-label="动物病程"><table class="guide-answer-table"><thead><tr><th scope="col">动物</th><th scope="col">病程</th></tr></thead><tbody><tr><th scope="row">鸡</th><td>4 天</td></tr><tr><th scope="row">牛</th><td>7 天</td></tr><tr><th scope="row">山羊</th><td>8 天</td></tr><tr><th scope="row">兔子</th><td>5 天</td></tr></tbody></table></div><p class="source-note"><a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1842846814456746" rel="noopener noreferrer">9 月 8 日官方更新</a>；该表未列出绵羊，不套用山羊的数值。</p></section>
 
     <section id="eggs" data-search-entry data-search-title="鸡蛋与大鸡蛋怎么出" data-search-tags="鸡蛋 大鸡蛋 不下蛋 鸡不下蛋 受精 抚摸 评分 围栏"><h2>鸡蛋与大鸡蛋</h2>
       <p><strong>快速回答：</strong>鸡成年且<strong>所有需求和满意度条都满</strong>后开始下蛋。蛋的尺寸（S/M/L）和是否受精是<strong>随机判定</strong>；<strong>大鸡蛋最稀有</strong>，还需要鸡群能在<strong>封闭的室外活动区</strong>活动。<small>官方回复。</small></p>
@@ -85,7 +86,7 @@
     </section>
 
     <section id="troubleshooting" data-search-entry data-search-title="鸡消失或不吃东西排查清单" data-search-tags="鸡消失 鸡不见 鸡没了 不吃东西 排查 鸡舍关联 围栏"><h2>鸡消失或不吃东西：排查清单</h2>
-      <div class="notice hotfix-notice" data-hotfix="0.8.10.562"><strong>先更新——官方热修 0.8.10.562（2026-08-11）。</strong>该热修修复了大多数已知的动物消失成因。排查前先把游戏更新到 0.8.10.842 或更高版本，确认问题仍然复现再继续。下面的清单重新定位为"更新后仍消失"的排查；此前"不排除其他 bug"的口径保留。</div>
+      <div class="notice hotfix-notice" data-hotfix="0.8.10.858"><strong>先更新，再排查。</strong><a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1842846814456746" rel="noopener noreferrer">9 月 8 日更新</a>处理了当时已知的动物消失问题。下面保留较早修复的具体触发点，方便记录仍能复现的情况。</div>
       <ul class="hotfix-fixed-list">
         <li><span class="evidence-badge evidence-official">0.8.10.562 已修复 · 官方</span> 夜间进入鸡舍/畜棚时动物消失。</li>
         <li><span class="evidence-badge evidence-official">0.8.10.562 已修复 · 官方</span> 雏鸡长到下一阶段时消失。</li>
@@ -95,16 +96,16 @@
         <li><span class="evidence-badge evidence-official">0.8.10.562 已修复 · 官方</span> 动物卡在建筑和门之间，看起来丢失。</li>
         <li><span class="evidence-badge evidence-official">0.8.10.562 已修复 · 官方</span> 拴绳动物乘地铁后冻结，或卡在兽医诊所门外。</li>
       </ul>
-      <p><strong>更新到 0.8.10.842 或更高版本后仍会消失？再按下面排查。</strong>Steam 通常会自动更新；只有问题仍存在时才确认标题画面的版本。</p>
+      <p><strong>更新到 0.8.10.871 或更高版本后仍会消失？再按下面排查。</strong>Steam 通常会自动更新；只有问题仍存在时才确认标题画面的版本。</p>
       <ol>
-        <li><strong>确认准确版本。</strong>0.8.10.455 或更早版本的复现属于历史；0.8.10.562 及更高版本的复现才是当前有效线索。</li>
+        <li><strong>确认准确版本。</strong>先更新到最新可用版本，再记录标题画面的准确版本号；旧版本报告用于对照当时的修复范围。</li>
         <li><strong>鸡舍真的关联上了吗？</strong>走到门口：深色面板上应该显示 <strong>0/6 或 3/6</strong> 这样的计数。没有计数说明动物没关联到这个鸡舍。<small>官方回复。</small></li>
         <li><strong>院子围好了吗？</strong>门开着加上入口区域没围栏，鸡会直接溜达走。<small>多人印证。</small></li>
         <li><strong>温控装对了吗？</strong>没装（或装了装饰版）温控会让鸡死于温度胁迫。<small>多人印证 + 官方回复。</small></li>
         <li><strong>记录发生节点。</strong>记清是夜间进建筑、长大、出生、读档、地铁运输还是门口；这些正是官方补丁列出的修复路径。</li>
       </ol>
       <p><strong>历史规避法，不是当前建议：</strong>0.8.10.562 以前，有玩家会先移出其他鸡、拆掉鸡舍来找回卡在门口的鸡，也有单人报告说重载能找回。确认新版本仍能复现之前，不要先拆当前鸡舍。</p>
-      <p>如果 0.8.10.842 或更高版本仍会消失，记下鸡舍计数（x/6）、门/围栏、照料状态和准确发生节点，再带版本号与截图<a href="/contribute">提交案例</a>。</p>
+      <p>如果 0.8.10.871 或更高版本仍会消失，记下鸡舍计数（x/6）、门/围栏、照料状态和准确发生节点，再带版本号与截图<a href="/contribute">提交案例</a>。</p>
     </section>
 
     <section id="profit" data-search-entry data-search-title="卖动物与赚钱" data-search-tags="卖鸡 卖动物 公鸡 卖肉 肉价 收益"><h2>卖动物与赚钱</h2>

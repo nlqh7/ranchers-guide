@@ -1,15 +1,157 @@
 {
   "meta": {
-    "currentBuild": "0.8.10.842",
-    "reviewed": "2026-08-22",
+    "currentBuild": "0.8.10.871",
+    "reviewed": "2026-09-19",
     "note": "This dataset summarizes existing update pages. It does not reproduce official announcements."
   },
   "updates": [
     {
+      "id": "update-0-8-10-871",
+      "version": "0.8.10.871",
+      "dateLabel": "September 16, 2026",
+      "status": "current",
+      "title": {
+        "en": "Camera controls",
+        "zh": "镜头操作"
+      },
+      "summary": {
+        "en": "Choose walking and driving follow separately, or reset a misplaced view.",
+        "zh": "分别调整步行与开车跟随，或一键恢复偏离的视角。"
+      },
+      "affectedRoutes": [
+        {
+          "en": "Camera controls",
+          "zh": "镜头操作",
+          "route": "/guides/controls-camera-settings#camera",
+          "routeZh": "/zh/guides/vehicles-transport#camera"
+        }
+      ],
+      "changes": [
+        {
+          "en": "Choose walking and driving follow separately, or reset a misplaced view.",
+          "zh": "分别调整步行与开车跟随，或一键恢复偏离的视角。"
+        }
+      ],
+      "actions": [
+        {
+          "en": "Find the camera setting for your problem",
+          "zh": "按问题选择镜头设置",
+          "route": "/guides/controls-camera-settings#camera",
+          "routeZh": "/zh/guides/vehicles-transport#camera"
+        }
+      ],
+      "source": {
+        "kind": "official",
+        "label": "0.8.10.871 official update",
+        "labelZh": "0.8.10.871 官方更新",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1844115010489002"
+      }
+    },
+    {
+      "id": "update-0-8-10-868",
+      "version": "0.8.10.868",
+      "dateLabel": "September 14, 2026",
+      "status": "historical",
+      "title": {
+        "en": "Plantation diagnosis and removal",
+        "zh": "种植问题与田块移除"
+      },
+      "summary": {
+        "en": "Read the plantation warning to identify crop loss; use the hoe when you want to remove a plot.",
+        "zh": "按田块提示查作物损失原因，需要删田时使用锄头。"
+      },
+      "affectedRoutes": [
+        {
+          "en": "Plantation diagnosis and removal",
+          "zh": "种植问题与田块移除",
+          "route": "/guides/farming-fields#crop-loss",
+          "routeZh": "/zh/guides/farming-fields#crop-loss"
+        }
+      ],
+      "changes": [
+        {
+          "en": "Read the plantation warning to identify crop loss; use the hoe when you want to remove a plot.",
+          "zh": "按田块提示查作物损失原因，需要删田时使用锄头。"
+        }
+      ],
+      "actions": [
+        {
+          "en": "Match a crop warning to the next step",
+          "zh": "对照作物提示查处理方法",
+          "route": "/guides/farming-fields#crop-loss",
+          "routeZh": "/zh/guides/farming-fields#crop-loss"
+        }
+      ],
+      "source": {
+        "kind": "official",
+        "label": "0.8.10.868 official update",
+        "labelZh": "0.8.10.868 官方更新",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1843481262701719"
+      }
+    },
+    {
+      "id": "update-0-8-10-858",
+      "version": "0.8.10.858",
+      "dateLabel": "September 8, 2026",
+      "status": "historical",
+      "title": {
+        "en": "Animal care and session modes",
+        "zh": "动物照料与游玩模式"
+      },
+      "summary": {
+        "en": "Check sickness alerts, then choose solo play, hosting or a subway visit for your next session.",
+        "zh": "查看动物生病提醒，并按独自游玩、当房主或拜访好友选择模式。"
+      },
+      "affectedRoutes": [
+        {
+          "en": "Animal sickness alerts",
+          "zh": "动物生病提醒",
+          "route": "/guides/animal-guide#sickness-alerts",
+          "routeZh": "/zh/guides/animal-guide#sickness-alerts"
+        },
+        {
+          "en": "Solo and friend session choices",
+          "zh": "单人及好友模式",
+          "route": "/guides/multiplayer-coop#session-mode",
+          "routeZh": "/zh/guides/multiplayer-coop#session-mode"
+        }
+      ],
+      "changes": [
+        {
+          "en": "Daily sickness alerts and revised illness durations give you a clearer prompt to arrange treatment.",
+          "zh": "日终新增生病提醒，并调整病程，及时检查动物状态并安排治疗。"
+        },
+        {
+          "en": "Starting or loading a ranch offers PLAY SOLO or OPEN TO FRIENDS. Hosts must open their ranch for visitors.",
+          "zh": "新建或读取牧场时可选 PLAY SOLO 或 OPEN TO FRIENDS；房主需向好友开放，访客才能加入。"
+        }
+      ],
+      "actions": [
+        {
+          "en": "Check animal care and illness durations",
+          "zh": "查看照料步骤与病程",
+          "route": "/guides/animal-guide#sickness-alerts",
+          "routeZh": "/zh/guides/animal-guide#sickness-alerts"
+        },
+        {
+          "en": "Choose solo, hosting or visiting",
+          "zh": "选择单人、建房或拜访",
+          "route": "/guides/multiplayer-coop#session-mode",
+          "routeZh": "/zh/guides/multiplayer-coop#session-mode"
+        }
+      ],
+      "source": {
+        "kind": "official",
+        "label": "0.8.10.858 official update",
+        "labelZh": "0.8.10.858 官方更新",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1842846814456746"
+      }
+    },
+    {
       "id": "hotfix-0-8-10-842",
       "version": "0.8.10.842",
       "dateLabel": "August 21, 2026",
-      "status": "current",
+      "status": "historical",
       "title": {
         "en": "0.8.10.842 update",
         "zh": "0.8.10.842 更新"
@@ -19,10 +161,30 @@
         "zh": "如果任务或动物状态异常，先更新游戏；本版重点处理任务校验、牧场关联和批量上限。"
       },
       "affectedRoutes": [
-        { "en": "Quest tracker", "zh": "任务追踪器", "route": "/tools/quest-tracker", "routeZh": "/zh/tools/quest-tracker" },
-        { "en": "Animal guide", "zh": "动物指南", "route": "/guides/animal-guide#troubleshooting", "routeZh": "/zh/guides/animal-guide#troubleshooting" },
-        { "en": "Animal database", "zh": "动物数据库", "route": "/database/animals", "routeZh": "/zh/database/animals" },
-        { "en": "Crafting guide", "zh": "制作指南", "route": "/guides/crafting-guide", "routeZh": "/zh/guides/crafting-guide" }
+        {
+          "en": "Quest tracker",
+          "zh": "任务追踪器",
+          "route": "/tools/quest-tracker",
+          "routeZh": "/zh/tools/quest-tracker"
+        },
+        {
+          "en": "Animal guide",
+          "zh": "动物指南",
+          "route": "/guides/animal-guide#troubleshooting",
+          "routeZh": "/zh/guides/animal-guide#troubleshooting"
+        },
+        {
+          "en": "Animal database",
+          "zh": "动物数据库",
+          "route": "/database/animals",
+          "routeZh": "/zh/database/animals"
+        },
+        {
+          "en": "Crafting guide",
+          "zh": "制作指南",
+          "route": "/guides/crafting-guide",
+          "routeZh": "/zh/guides/crafting-guide"
+        }
       ],
       "changes": [
         {
@@ -79,10 +241,30 @@
         "zh": "先更新游戏，再重新检查公告点名的动物、地铁和车辆症状。"
       },
       "affectedRoutes": [
-        { "en": "Animal guide", "zh": "动物指南", "route": "/guides/animal-guide#troubleshooting", "routeZh": "/zh/guides/animal-guide#troubleshooting" },
-        { "en": "Fast-travel troubleshooting", "zh": "快速旅行排查", "route": "/problems/fast-travel-subway", "routeZh": "/zh/problems/fast-travel-subway" },
-        { "en": "Gigi large-egg guide", "zh": "Gigi 大鸡蛋指南", "route": "/guides/gigi-large-egg-quest#eggs", "routeZh": "/zh/guides/gigi-large-egg-quest#eggs" },
-        { "en": "Vehicle guide", "zh": "车辆指南", "route": "/guides/vehicles-transport", "routeZh": "/zh/guides/vehicles-transport" }
+        {
+          "en": "Animal guide",
+          "zh": "动物指南",
+          "route": "/guides/animal-guide#troubleshooting",
+          "routeZh": "/zh/guides/animal-guide#troubleshooting"
+        },
+        {
+          "en": "Fast-travel troubleshooting",
+          "zh": "快速旅行排查",
+          "route": "/problems/fast-travel-subway",
+          "routeZh": "/zh/problems/fast-travel-subway"
+        },
+        {
+          "en": "Gigi large-egg guide",
+          "zh": "Gigi 大鸡蛋指南",
+          "route": "/guides/gigi-large-egg-quest#eggs",
+          "routeZh": "/zh/guides/gigi-large-egg-quest#eggs"
+        },
+        {
+          "en": "Vehicle guide",
+          "zh": "车辆指南",
+          "route": "/guides/vehicles-transport",
+          "routeZh": "/zh/guides/vehicles-transport"
+        }
       ],
       "changes": [
         {
@@ -139,9 +321,24 @@
         "zh": "保留发售热修作为历史背景；复用旧排查步骤前先比较标题画面的版本。"
       },
       "affectedRoutes": [
-        { "en": "Offline loading", "zh": "离线加载排查（英文页）", "route": "/problems/offline-mode-loading", "routeZh": "/problems/offline-mode-loading" },
-        { "en": "Friend-session join", "zh": "好友联机排查（英文页）", "route": "/problems/friend-session-join", "routeZh": "/problems/friend-session-join" },
-        { "en": "Multiplayer guide", "zh": "联机指南", "route": "/guides/multiplayer-coop", "routeZh": "/zh/guides/multiplayer-coop" }
+        {
+          "en": "Offline loading",
+          "zh": "离线加载排查（英文页）",
+          "route": "/problems/offline-mode-loading",
+          "routeZh": "/problems/offline-mode-loading"
+        },
+        {
+          "en": "Friend-session join",
+          "zh": "好友联机排查（英文页）",
+          "route": "/problems/friend-session-join",
+          "routeZh": "/problems/friend-session-join"
+        },
+        {
+          "en": "Multiplayer guide",
+          "zh": "联机指南",
+          "route": "/guides/multiplayer-coop",
+          "routeZh": "/zh/guides/multiplayer-coop"
+        }
       ],
       "changes": [
         {
@@ -194,9 +391,24 @@
         "zh": "按当前交通流程区分合规停车、地铁出行和车辆消失症状。"
       },
       "affectedRoutes": [
-        { "en": "Vehicles guide", "zh": "车辆指南", "route": "/guides/vehicles-transport", "routeZh": "/zh/guides/vehicles-transport" },
-        { "en": "Vehicle recovery", "zh": "车辆找回", "route": "/problems/vehicle-recovery", "routeZh": "/zh/problems/vehicle-recovery" },
-        { "en": "Interactive map", "zh": "互动地图", "route": "/map", "routeZh": "/zh/map" }
+        {
+          "en": "Vehicles guide",
+          "zh": "车辆指南",
+          "route": "/guides/vehicles-transport",
+          "routeZh": "/zh/guides/vehicles-transport"
+        },
+        {
+          "en": "Vehicle recovery",
+          "zh": "车辆找回",
+          "route": "/problems/vehicle-recovery",
+          "routeZh": "/zh/problems/vehicle-recovery"
+        },
+        {
+          "en": "Interactive map",
+          "zh": "互动地图",
+          "route": "/map",
+          "routeZh": "/zh/map"
+        }
       ],
       "changes": [
         {

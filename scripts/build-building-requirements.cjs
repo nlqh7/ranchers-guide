@@ -22,8 +22,8 @@ function render(locale) {
   });
   const sources = Object.values(data.sources).map(source => `<li>${source.url ? `<a href="${esc(source.url)}" rel="noopener noreferrer">${esc(source.title)}</a>` : esc(source.title)} · ${esc(source.build)}</li>`).join('');
   const timeline = zh
-    ? `当前资料基线：${esc(data.meta.currentBuild)}；首发视频来自 0.8.10.455，不代表现版本配方。`
-    : `Current official version: ${esc(data.meta.currentBuild)}. Footage: July 30, 2026 Early Access build (launch/video baseline <strong>0.8.10.455</strong>); it does not establish current recipes.`;
+    ? `当前官方补丁：${esc(data.meta.liveBuild)}；本表本地记录基线为 ${esc(data.meta.currentBuild)}，首发视频来自 0.8.10.455，不代表现版本配方。`
+    : `Current official version: ${esc(data.meta.liveBuild)}. Local requirements record: ${esc(data.meta.currentBuild)}. Footage: July 30, 2026 Early Access build (launch/video baseline <strong>0.8.10.455</strong>); it does not establish current recipes.`;
   return `${start}
 <div class="building-requirements" data-building-requirements>
   <div class="building-table-wrap" role="region" aria-label="${zh ? '建筑材料需求表' : 'Building material requirements'}" tabindex="0">

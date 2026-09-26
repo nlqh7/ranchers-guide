@@ -94,6 +94,27 @@ for (const prefix of ['', 'zh/']) {
   assert.equal(data.offers.filter(offer => offer.itemId === 'ressource_straw').length, 2);
   assert.equal(data.offers.filter(offer => offer.itemId === 'ressource_coal').length, 0);
   assert.deepEqual(data.recipes.map(recipe => recipe.id), recipes.map(recipe => recipe.id));
+  // Every full recipe opens that exact recipe in the same-language planner.
+  const craftingPage = fs.readFileSync(path.join(__dirname, '..', prefix, 'guides/crafting-guide.html'), 'utf8');
+  const craftingRows = Array.from(craftingPage.matchAll(/<tr\b[^>]*\bid="([^"]+)"[^>]*>[\s\S]*?<\/tr>/g),
+    match => ({ id: match[1], html: match[0] }));
+  const recipeRows = craftingRows.filter(row => row.id.startsWith('recipe-'));
+  assert.deepEqual(recipeRows.map(row => row.id).sort(), recipes.map(recipe => 'recipe-' + recipe.id).sort(),
+    `${prefix || 'en/'} full crafting guide must contain every recipe row exactly once`);
+  for (const recipe of recipes) {
+    const row = recipeRows.find(row => row.id === 'recipe-' + recipe.id);
+    const plannerLinks = Array.from(row.html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/g), match => match[1])
+      .filter(href => /[?&]recipe=/.test(href));
+    assert.deepEqual(plannerLinks, [`/${prefix}tools/ranch-checklist?recipe=${encodeURIComponent(recipe.id)}#recipe-material-plan`],
+      `${prefix || 'en/'} ${recipe.id} must link to its own recipe, not a different ID or language`);
+  }
+  const recipeIds = new Set(recipes.map(recipe => recipe.id));
+  const nonRecipeTools = craftingRows.filter(row => row.id.startsWith('tool-') && !recipeIds.has(row.id.slice(5)));
+  assert.ok(nonRecipeTools.length, 'The full guide must retain non-recipe tool rows for this regression');
+  for (const row of nonRecipeTools) {
+    assert.doesNotMatch(row.html, /href="[^"]*[?&]recipe=/,
+      `${prefix || 'en/'} ${row.id} must not invent a recipe-planner entry`);
+  }
   for (const recipe of data.recipes) {
     const source = recipes.find(item => item.id === recipe.id);
     assert.deepEqual(recipe.materials, source.materials);

@@ -23,6 +23,17 @@ for (const locale of ['en', 'zh']) {
 console.log('PASS: all 11 crop configuration profiles have source-labeled bilingual knowledge cards.');
 
 const search = require('../assets/js/search-core.js');
+const englishKnowledge = require('../knowledge-index.json');
+const soloDossiers = englishKnowledge.entities.filter(entity => search.entityScore(entity, 'PLAY SOLO') >= 52);
+assert.deepEqual(soloDossiers.map(entity => entity.id), [], 'PLAY SOLO must not promote unrelated quests or possessive shop names through a single letter');
+assert.equal(search.searchDocuments(require('../search-index.json'), 'PLAY SOLO')[0].url, '/guides/multiplayer-coop#session-mode');
+assert.equal(search.entityScore({label: 'Cow'}, 'coward'), 0, 'Latin names must not match inside another word');
+assert.equal(search.entityScore({label: 'Vehicle', aliases: ['car']}, 'carpet'), 0, 'Aliases need the same word boundaries as labels');
+assert.ok(search.entityScore({label: 'Cow'}, 'how to feed a cow') >= 52);
+assert.ok(search.entityScore({label: "Lina's Tools"}, 'Lina') >= 52);
+assert.ok(search.entityScore({label: '鸡'}, '鸡生病了') >= 52, 'Single-character Chinese animal names remain searchable');
+assert.ok(search.entityScore({label: 'Hay', aliases: ['干草']}, '干草在哪里买') >= 52);
+assert.ok(search.entityScore({label: 'CashIn'}, 'CashIn怎么卖东西') >= 52, 'Chinese text does not need spaces around an English name');
 const buildFact = {text:'Configured item name', evidenceLevel:'build-observed', validity:'unknown', sourceIds:['owned-build-animals']};
 const rumor = {text:'Unverified price', evidenceLevel:'unverified-lead', validity:'unknown', sourceIds:['report']};
 const officialFact = {text:'Official roster', evidenceLevel:'official', validity:'current'};

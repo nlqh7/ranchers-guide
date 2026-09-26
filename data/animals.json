@@ -1,7 +1,7 @@
 {
   "meta": {
     "page": "database/animals.html",
-    "lastUpdated": "2026-09-04",
+    "lastUpdated": "2026-09-19",
     "build": "0.8.10.842",
     "videoBuild": "0.8.10.455",
     "evidenceLevels": [
@@ -400,6 +400,14 @@
           "rawSha256": "58f2d3b623b076e925bd038e926b62aaf3fd4c4dda906770a74048925f48bbb4"
         }
       ]
+    },
+    "update-0-8-10-858": {
+      "kind": "official-news",
+      "title": "Ranching, Multiplayer & Building Update 0.8.10.858",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1842846814456746",
+      "author": "RedPilz Studio",
+      "date": "2026-09-08",
+      "build": "0.8.10.858"
     }
   },
   "nativeAnimalReference": {
@@ -993,6 +1001,15 @@
           "label": "Sickness & the vet",
           "facts": [
             {
+              "text": "The End of Day report now alerts you to sickness. Chicken illness lasts 4 days before death; arrange treatment promptly. This is not a feeding interval.",
+              "evidenceLevel": "official",
+              "build": "0.8.10.858",
+              "validity": "current",
+              "sourceIds": [
+                "update-0-8-10-858"
+              ]
+            },
+            {
               "text": "An animal sickness mechanic exists; the heater prevents temperature sickness but cannot cure an already sick animal.",
               "evidenceLevel": "official",
               "build": "0.8.10.x",
@@ -1025,15 +1042,6 @@
               "evidenceLevel": "unverified-lead",
               "build": null,
               "validity": "unknown",
-              "sourceIds": [
-                "community-scan-archive"
-              ]
-            },
-            {
-              "text": "There is no sickness notification system; check animals manually each day.",
-              "evidenceLevel": "unverified-lead",
-              "build": "0.8.10.x",
-              "validity": "current",
               "sourceIds": [
                 "community-scan-archive"
               ]
@@ -1123,7 +1131,7 @@
           "label": "Disappearing-chicken checklist",
           "facts": [
             {
-              "text": "Hotfix 0.8.10.562 officially fixed several animal disappearance paths: entering a barn or coop at night, chicks growing up, newborn mammals spawning, animals appearing after a load, and animals becoming stuck between a barn or coop and its doors. This remains the historical fix boundary; current residual reports should be tested on 0.8.10.842 or later.",
+              "text": "Hotfix 0.8.10.562 officially fixed several animal disappearance paths: entering a barn or coop at night, chicks growing up, newborn mammals spawning, animals appearing after a load, and animals becoming stuck between a barn or coop and its doors. This remains the historical fix boundary; test new reports on the latest available build and record the exact version.",
               "evidenceLevel": "official",
               "build": "0.8.10.562",
               "validity": "historical",
@@ -1265,7 +1273,7 @@
           "tags": "brown chicken hen poultry coop egg price"
         }
       ],
-      "lastUpdated": "2026-08-31",
+      "lastUpdated": "2026-09-19",
       "zh": {
         "tocLabel": "鸡",
         "kicker": "当前资料最完整",
@@ -1352,11 +1360,15 @@
             "id": null,
             "facts": [
               {
-                "text": "真正生病的鸡可送往兽医；仅处于饥饿状态的动物会被拒绝治疗，应先恢复食物和水。",
-                "badge": "lead"
+                "text": "日终报告会提醒动物生病；鸡病程为 4 天，未治愈会死亡。应尽快处理，不能当作喂食间隔。",
+                "badge": "official",
+                "build": "0.8.10.858",
+                "sourceIds": [
+                  "update-0-8-10-858"
+                ]
               },
               {
-                "text": "目前没有可靠的生病通知，建议每天查看动物状态。",
+                "text": "真正生病的鸡可送往兽医；仅处于饥饿状态的动物会被拒绝治疗，应先恢复食物和水。",
                 "badge": "lead"
               }
             ]
@@ -1719,6 +1731,15 @@
           "label": "Sickness",
           "facts": [
             {
+              "text": "The End of Day report now alerts you to sickness. Cow illness lasts 7 days before death; arrange treatment promptly. This is not a feeding interval.",
+              "evidenceLevel": "official",
+              "build": "0.8.10.858",
+              "validity": "current",
+              "sourceIds": [
+                "update-0-8-10-858"
+              ]
+            },
+            {
               "text": "The animal sickness mechanic applies to livestock generally; cow-specific treatment flow is unverified in the current build.",
               "evidenceLevel": "official",
               "build": "alpha-2023",
@@ -1802,7 +1823,7 @@
           "tags": "black spotted bull cattle barn male breeding price"
         }
       ],
-      "lastUpdated": "2026-08-28",
+      "lastUpdated": "2026-09-19",
       "zh": {
         "tocLabel": "牛",
         "kicker": null,
@@ -1824,6 +1845,20 @@
               {
                 "text": "旧版 Ranching v2 公告描述了哺乳动物怀孕、幼崽和玩家幸运值影响品质概率。这些只能作为历史机制线索，不能直接当作 0.8.10.562 事实。",
                 "badge": "historical"
+              }
+            ]
+          },
+          {
+            "heading": "生病提醒与病程",
+            "id": null,
+            "facts": [
+              {
+                "text": "日终报告会提醒动物生病；牛病程为 7 天，未治愈会死亡。应尽快处理，不能当作喂食间隔。",
+                "badge": "official",
+                "build": "0.8.10.858",
+                "sourceIds": [
+                  "update-0-8-10-858"
+                ]
               }
             ]
           }
@@ -2015,10 +2050,25 @@
               ]
             }
           ]
+        },
+        {
+          "key": "sickness",
+          "label": "Sickness",
+          "facts": [
+            {
+              "text": "The End of Day report now alerts you to sickness. Goat illness lasts 8 days before death; arrange treatment promptly. This is not a feeding interval.",
+              "evidenceLevel": "official",
+              "build": "0.8.10.858",
+              "validity": "current",
+              "sourceIds": [
+                "update-0-8-10-858"
+              ]
+            }
+          ]
         }
       ],
       "variants": [],
-      "lastUpdated": "2026-08-28",
+      "lastUpdated": "2026-09-19",
       "zh": {
         "tocLabel": "山羊",
         "kicker": null,
@@ -2040,6 +2090,20 @@
               {
                 "text": "旧版 Ranching v2 记录提到哺乳动物繁殖机制；这只是历史资料，不能直接当作 0.8.10.562 的山羊行为。",
                 "badge": "historical"
+              }
+            ]
+          },
+          {
+            "heading": "生病提醒与病程",
+            "id": null,
+            "facts": [
+              {
+                "text": "日终报告会提醒动物生病；山羊病程为 8 天，未治愈会死亡。应尽快处理，不能当作喂食间隔。",
+                "badge": "official",
+                "build": "0.8.10.858",
+                "sourceIds": [
+                  "update-0-8-10-858"
+                ]
               }
             ]
           }
@@ -2192,10 +2256,25 @@
               ]
             }
           ]
+        },
+        {
+          "key": "sickness",
+          "label": "Sickness",
+          "facts": [
+            {
+              "text": "The End of Day report now alerts you to sickness. Rabbit illness lasts 5 days before death; arrange treatment promptly. This is not a feeding interval.",
+              "evidenceLevel": "official",
+              "build": "0.8.10.858",
+              "validity": "current",
+              "sourceIds": [
+                "update-0-8-10-858"
+              ]
+            }
+          ]
         }
       ],
       "variants": [],
-      "lastUpdated": "2026-08-08",
+      "lastUpdated": "2026-09-19",
       "zh": {
         "tocLabel": "兔",
         "kicker": null,
@@ -2217,6 +2296,20 @@
               {
                 "text": "社区曾讨论兔子是否吃生菜类食物，但原帖没有提供足够的官方确认；不要把这个猜测当作饲料答案。",
                 "badge": "lead"
+              }
+            ]
+          },
+          {
+            "heading": "生病提醒与病程",
+            "id": null,
+            "facts": [
+              {
+                "text": "日终报告会提醒动物生病；兔病程为 5 天，未治愈会死亡。应尽快处理，不能当作喂食间隔。",
+                "badge": "official",
+                "build": "0.8.10.858",
+                "sourceIds": [
+                  "update-0-8-10-858"
+                ]
               }
             ]
           }
@@ -2437,12 +2530,12 @@
         ],
         "badge": null,
         "steps": [
-          "Steam 通常会自动更新；只有仍在复现问题时才确认标题画面为 0.8.10.842 或更高版本。",
+          "Steam 通常会自动更新；仍有问题时，确认已安装最新可用版本，并记录标题画面的准确版本号。",
           "确认购买后是否完成任务提示要求的交付或关联步骤。",
           "检查动物是否仍关联正确鸡舍/谷仓，门和围栏是否完整。",
           "检查室内食槽、饮水和专用温控设备。",
           "记录日切前后、退出重进前后以及地图图标是否变化。",
-          "如果 0.8.10.842 或更高版本仍会消失，保留版本号、存档模式、日切前后状态和截图；这才是当前残留问题的有效线索。"
+          "更新后仍会消失，保留准确版本号、存档模式、日切前后状态和截图，用于区分新问题与历史修复。"
         ],
         "notice": "不要继续把 0.8.10.455 及更早版本的临时规避法当成当前修复；先确认新版本是否仍能复现。"
       }

@@ -46,7 +46,7 @@ foreach ($relativePath in @('database/crops.html', 'database/animals.html')) {
     }
 }
 
-$currentVersion = '0\.8\.10\.842'
+$currentVersion = '0\.8\.10\.(?:842|871)'
 
 foreach ($relativePath in @(
     'index.html',
@@ -62,7 +62,7 @@ foreach ($relativePath in @(
     $content = Get-Content -Raw -LiteralPath $fullPath
 
     if ($content -notmatch $currentVersion) {
-        $failures.Add("${relativePath}: missing the current official build version 0.8.10.842.")
+        $failures.Add("${relativePath}: missing a recorded/current official build version (0.8.10.842 or 0.8.10.871).")
     }
 }
 

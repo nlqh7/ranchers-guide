@@ -51,6 +51,7 @@ for (const prefix of ['', 'zh/']) {
   for (const item of representatives) {
     const query = prefix ? item.zhName : item.name;
     const expectedUrls = data.items.filter(candidate => (prefix ? candidate.zhName : candidate.name) === query).map(candidate => `/${prefix}guides/crafting-guide#${candidate.recipeId ? `recipe-${candidate.id}` : `placeable-${candidate.id}`}`);
+    if (item.id === 'Custum_Barn_Weak_Small') expectedUrls.push(`/${prefix}database/buildings/coop#coop`);
     const firstUrl = searchCore.searchDocuments(index, query, 12)[0]?.url;
     assert.ok(expectedUrls.includes(firstUrl), `${prefix}: exact placeable name ${query} opened ${firstUrl}`);
   }

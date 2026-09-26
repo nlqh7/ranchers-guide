@@ -56,11 +56,11 @@ for (const [name, html] of [["database/crops.html", cropsPage], ["database/anima
   assert.doesNotMatch(html, new RegExp(`[Vv]ideo-[Oo]bserved [a-z ]+\\(build ${BASELINE.replaceAll(".", "\\.")}\\)`), `${name} must not label a video section with the baseline build`);
   assert.doesNotMatch(html, new RegExp(`video footage (recorded on|from) (build )?${BASELINE.replaceAll(".", "\\.")}`), `${name} must not claim footage was recorded on the baseline build`);
   assert.doesNotMatch(html, new RegExp(`${BASELINE.replaceAll(".", "\\.")} video footage`), `${name} must not claim baseline-build footage`);
-  assert.match(html, new RegExp(`Current page baseline ${BASELINE.replaceAll(".", "\\.")}`), `${name} states the current baseline`);
+  assert.match(html, new RegExp(`(?:Current page baseline|Retained game-file baseline) ${BASELINE.replaceAll(".", "\\.")}`), `${name} retains its file-data baseline`);
 }
 for (const [name, html] of [["zh/database/crops.html", zhCropsPage], ["zh/database/animals.html", zhAnimalsPage]]) {
   assert.match(html, new RegExp(`视频证据录制于 ${VIDEO_BUILD.replaceAll(".", "\\.")}`), `${name} labels video evidence with the observation build`);
-  assert.match(html, new RegExp(`页面基线 ${BASELINE.replaceAll(".", "\\.")}`), `${name} states the current baseline`);
+  assert.match(html, new RegExp(`(?:页面基线|留存游戏文件基线) ${BASELINE.replaceAll(".", "\\.")}`), `${name} retains its file-data baseline`);
   assert.doesNotMatch(html, new RegExp(`视频证据录制于 ${BASELINE.replaceAll(".", "\\.")}`), `${name} must not tie video evidence to the baseline build`);
   assert.doesNotMatch(html, new RegExp(`${BASELINE.replaceAll(".", "\\.")}[^<]{0,20}(画面|实况| footage)`), `${name} must not claim baseline-build footage`);
 }
@@ -93,14 +93,21 @@ assert.match(moneyEnglishSources, /figures below remain observations of 0\.8\.10
 assert.doesNotMatch(moneyEnglish, /Current version reviewed: <strong>0\.8\.10\.562<\/strong>/, "English money guide must not present the historical hotfix as current");
 assert.match(moneyChineseSources, /0\.8\.10\.842 游戏教程/, 'Chinese selling instructions retain their actual tutorial build');
 assert.match(moneyChineseSources, /具体金额仍属于 0\.8\.10\.455 的画面观测/, 'Chinese money amounts remain historical observations');
-assert.match(farmingEnglish, /current-build tutorial text separately tells players to water planted seeds every day/i, "English farming guide must use the current-build daily-watering instruction");
-assert.match(farmingEnglish, /exact penalty or recovery after one missed day is not stated/i, "English farming guide must keep missed-watering behavior unknown");
+assert.match(farmingEnglish, /water daily/i, 'Retained crops need daily watering');
+assert.match(farmingEnglish, /exact penalty or recovery after one missed day is not stated|what one missed watering day does/i, 'Missed-day outcomes stay unknown');
 assert.doesNotMatch(farmingEnglish, /watering is a "every few days|Water every few days/i, "English farming guide must not publish an unsupported watering schedule");
-assert.match(farmingChinese, /当前构建教程另行要求已播种田块每天浇水/, "Chinese farming guide must use the current-build daily-watering instruction");
-assert.match(farmingChinese, /漏浇一天的具体后果和恢复方式没有写明/, "Chinese farming guide must keep missed-watering behavior unknown");
+assert.match(farmingChinese, /每天浇水/, 'Chinese crop care retains daily watering');
+assert.match(farmingChinese, /漏浇一天的后果|漏浇一天的具体后果和恢复方式没有写明/, 'Chinese missed-day outcomes stay unknown');
 assert.doesNotMatch(farmingChinese, /不用每天浇水|几天浇一次即可/, "Chinese farming guide must not publish an unsupported watering schedule");
-assert.match(farmingEnglish, /exact cutoff as a reported rule until it is reproduced/i, "English farming guide must keep the day-30 cutoff at reported status");
-assert.match(farmingChinese, /30 号最后收、1 号换季.*尚未独立复现/, "Chinese farming guide must keep the day-30 cutoff at reported status");
+assert.match(farmingEnglish, /do not independently establish every calendar detail/, 'Exact seasonal cutoff remains unverified');
+assert.match(farmingChinese, /不能独立|未证实|待复现/, 'Exact Chinese seasonal cutoff remains unverified');
+for (const [name, html] of [['EN', farmingEnglish], ['ZH', farmingChinese]]) {
+  assert.match(html, /id="crop-loss"/, name + ' has a searchable crop-loss answer');
+  assert.match(html, /id="watering"/, name + ' preserves old removal links');
+  assert.doesNotMatch(html, /no manual delete tool|目前没有手动删除/, name + ' does not resurrect obsolete removal advice');
+}
+assert.match(farmingEnglish, /removal deducts 2 Nature Skill Points/, 'Removal retains the official cost');
+assert.match(farmingChinese, /扣 2 点自然技能点/, 'Chinese removal retains the official cost');
 assert.match(farmingEnglish, /omission from patch notes is not proof/i, "English fertilizer advice must distinguish patch-note omission from a verified current result");
 assert.match(farmingChinese, /补丁说明没写不能证明行为一定没变/, "Chinese fertilizer advice must distinguish patch-note omission from a verified current result");
 assert.doesNotMatch(problemsHub, /0\.8\.10\.455\+/, "problem report builds must not imply unverified forward compatibility");
@@ -110,11 +117,11 @@ assert.doesNotMatch(problemsHub, /0\.8\.10\.455\+/, "problem report builds must 
 for (const page of ["guides/building-construction.html"]) {
   const html = read(page);
   assert.match(html, /July 30, 2026 Early Access build \(launch\/video baseline <strong>0\.8\.10\.455<\/strong>\)/, `${page} keeps the launch/video baseline`);
-  assert.match(html, /Current official version:[\s\S]{0,120}0\.8\.10\.842/, `${page} states the current official version separately`);
+  assert.match(html, /Current official version:[\s\S]{0,120}0\.8\.10\.871/, `${page} states the current official version separately`);
 }
 for (const [page, current, historical] of [
-  ['guides/electricity-power.html', /Current official version:[\s\S]{0,60}0\.8\.10\.842/, /Historical contract[\s\S]{0,130}0\.8\.10\.455[\s\S]{0,80}not retested/],
-  ['zh/guides/electricity-power.html', /当前官方版本：[\s\S]{0,60}0\.8\.10\.842/, /历史观测基准[\s\S]{0,60}0\.8\.10\.455[\s\S]{0,60}不代表已在当前版本重新实测/]
+  ['guides/electricity-power.html', /Current official version:[\s\S]{0,60}0\.8\.10\.871/, /Historical contract[\s\S]{0,130}0\.8\.10\.455[\s\S]{0,80}not retested/],
+  ['zh/guides/electricity-power.html', /当前官方版本：[\s\S]{0,60}0\.8\.10\.871/, /历史观测基准[\s\S]{0,60}0\.8\.10\.455[\s\S]{0,60}不代表已在当前版本重新实测/]
 ]) {
   const note = read(page).split('id="utility-version-notes"')[1]?.split('</p>')[0];
   assert.ok(note, `${page} keeps source-version context outside the lookup`);

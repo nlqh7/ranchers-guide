@@ -62,6 +62,14 @@
     const selectionList = root.querySelector('[data-plan-selections]');
     const supplyList = root.querySelector('[data-plan-supplies]');
     const status = root.querySelector('[data-plan-status]');
+    const returnNote = root.querySelector('[data-plan-return]');
+    const returnLink = root.querySelector('[data-plan-return-link]');
+    const entryNote = root.querySelector('[data-plan-entry]');
+    const copy = root.querySelector('[data-plan-copy]');
+    const copyStatus = root.querySelector('[data-plan-copy-status]');
+    const copyFallback = root.querySelector('[data-plan-copy-fallback]');
+    const copyText = root.querySelector('[data-plan-copy-text]');
+    let copyRequest = 0;
     const selections = Object.create(null);
     const stock = Object.create(null);
     const preferredShops = Object.create(null);
@@ -95,18 +103,31 @@
     } catch (_) { storageUnavailable(); }
     let savedSelections = { ...selections };
     const savedStock = { ...stock };
-    const linkedBuilding = new URL(location.href).searchParams.get('building');
+    const params = new URL(location.href).searchParams;
+    const linkedBuilding = params.get('building');
+    const linkedRecipe = params.get('recipe');
+    const returnTarget = params.get('return');
+    if (returnNote && returnLink && returnTarget && /^\/(?:zh\/)?database\/buildings\/[a-z0-9-]+$/i.test(returnTarget)) {
+      returnLink.href = returnTarget;
+      returnLink.textContent = zh ? '返回建筑词条' : 'Return to building entry';
+      returnNote.hidden = false;
+    }
     let invalidBuildingLink = false;
-    if (linkedBuilding !== null) {
+    if (linkedBuilding !== null && linkedRecipe === null) {
       invalidBuildingLink = !data.buildings.some(item => item.id === linkedBuilding);
       buildingId = invalidBuildingLink ? '' : linkedBuilding;
       mode = 'building';
     }
     function syncUrl() {
       const url = new URL(location.href);
+      url.searchParams.delete('recipe');
       if (mode === 'building' && buildingId) url.searchParams.set('building', buildingId);
       else url.searchParams.delete('building');
       history.replaceState(history.state, '', url);
+    }
+    function clearEntry() {
+      entryNote.textContent = '';
+      syncUrl();
     }
     function save() {
       if (!currentResult().valid) return;
@@ -122,6 +143,20 @@
     }
     function currentResult() {
       return mode === 'building' ? checkBuilding(data.buildings, buildingId, stock) : calculate(data.recipes, selections, stock);
+    }
+    function summaryText() {
+      const result = currentResult();
+      if (!result.valid || !window.RanchRecipePlanText) return null;
+      const targets = mode === 'building' ? data.buildings.filter(item => item.id === buildingId).map(item => ({ name: name(item), count: 1 })) :
+        Object.entries(selections).filter(([,count]) => Number(count) > 0).map(([id,count]) => ({ name: labels.get(id), count: Number(count) }));
+      if (!targets.length) return null;
+      const ingredientName = id => name(data.ingredients.find(item => item.id === id));
+      const purchase = groupPurchases(result, data.offers, preferredShops);
+      return window.RanchRecipePlanText.formatSummary({ mode, targets,
+        materials: result.materials.map(item => ({ ...item, name: ingredientName(item.id) })),
+        shops: purchase.groups.map(group => ({ name: name(data.shops.find(shop => shop.id === group.shopId)), items: group.items.map(item => ({ name: ingredientName(item.id), missing: item.missing })) })),
+        unlisted: purchase.unresolved.map(item => ({ name: ingredientName(item.id), missing: item.missing }))
+      }, zh);
     }
     function renderMode() {
       root.querySelectorAll('[data-plan-mode]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.planMode === mode)));
@@ -204,6 +239,10 @@
     }
     function update() {
       const result = currentResult();
+      copy.disabled = summaryText() === null;
+      copyStatus.textContent = '';
+      copyFallback.hidden = true;
+      copyText.value = '';
       const hasTarget = mode === 'building' ? Boolean(buildingId) : Object.keys(selections).length > 0;
       root.querySelector('[data-plan-error]').hidden = result.valid;
       root.querySelector('[data-plan-empty]').hidden = Object.keys(selections).length > 0;
@@ -225,6 +264,7 @@
       event.preventDefault();
       const id = picker.value;
       if (!id) return;
+      clearEntry();
       if (Object.hasOwn(selections, id)) {
         root.querySelector(`[data-selected-count="${id}"]`).focus();
         status.textContent = zh ? '已在计划中，可直接修改份数。' : 'Already in your plan. Adjust its batch count.';
@@ -234,6 +274,23 @@
       renderSelections();
       save();
       status.textContent = (zh ? '已加入：' : 'Added: ') + labels.get(id);
+    });
+    copy.addEventListener('click', async () => {
+      const text = summaryText();
+      if (text === null) return;
+      const request = ++copyRequest;
+      copy.disabled = true;
+      let copied = false;
+      try { await navigator.clipboard.writeText(text); copied = true; } catch (_) { /* Manual copy remains available. */ }
+      if (request !== copyRequest) return;
+      copy.disabled = summaryText() === null;
+      if (text !== summaryText()) {
+        copyStatus.textContent = zh ? '计划已更新，请重新复制。' : 'The plan changed. Copy the updated list again.';
+        return;
+      }
+      copyStatus.textContent = copied ? (zh ? '已复制缺料清单。' : 'Missing-material list copied.') : (zh ? '自动复制不可用，已选中下方文本，可手动复制。' : 'Automatic copying is unavailable. The list below is selected for manual copying.');
+      copyFallback.hidden = copied;
+      if (!copied) { copyText.value = text; copyText.focus(); copyText.select(); }
     });
     selectionList.addEventListener('input', event => {
       const id = event.target.dataset.selectedCount;
@@ -257,12 +314,13 @@
       update();
       save();
     });
-    query.addEventListener('input', filter);
+    query.addEventListener('input', () => { filter(); clearEntry(); });
+    picker.addEventListener('change', () => { add.disabled = !picker.value; clearEntry(); });
     root.querySelectorAll('[data-plan-mode]').forEach(button => button.addEventListener('click', () => {
       mode = button.dataset.planMode;
       invalidBuildingLink = false;
       renderMode();
-      syncUrl();
+      clearEntry();
       save();
     }));
     buildingPicker.addEventListener('change', () => {
@@ -282,6 +340,20 @@
     });
     root.querySelector('[data-recipe-plan-ui]').hidden = false;
     filter();
+    if (linkedRecipe !== null) {
+      mode = 'recipes';
+      const conflict = linkedBuilding !== null;
+      const valid = !conflict && data.recipes.some(recipe => recipe.id === linkedRecipe);
+      picker.value = valid ? linkedRecipe : '';
+      add.disabled = !valid;
+      if (conflict) {
+        entryNote.textContent = zh ? '链接同时指定了配方和建筑。请选择一种备料方式重新选择，已有计划未改动。' : 'This link specifies both a recipe and a building. Choose a preparation type and target; your existing plan is unchanged.';
+      } else if (!valid) {
+        entryNote.textContent = zh ? '链接中的配方未收录，请重新选择。已有计划和库存保持不变。' : 'The linked recipe is not listed. Choose another; your existing plan and stock are unchanged.';
+      } else if (Object.hasOwn(selections, linkedRecipe)) {
+        entryNote.textContent = (zh ? '已在计划中：' : 'Already in your plan: ') + labels.get(linkedRecipe) + (zh ? '。下方可修改份数，已有数量未变。' : '. Adjust its batches below; the existing quantity is unchanged.');
+      }
+    }
     renderSelections();
     renderMode();
   });

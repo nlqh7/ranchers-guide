@@ -22,9 +22,16 @@
     "/database",
     "/database/crops",
     "/database/animals",
+    "/database/materials/stone",
+    "/database/materials/wood-log",
+    "/database/materials/hay",
     "/database/materials",
+    "/database/buildings",
+    "/database/buildings/coop",
     "/database/npcs",
     "/database/quests",
+    "/database/quests/seeds-of-success",
+    "/database/quests/feathered-foes",
     "/database/customization",
     "/map",
     "/problems",
@@ -62,9 +69,16 @@
     "/zh/database",
     "/zh/database/crops",
     "/zh/database/animals",
+    "/zh/database/materials/stone",
+    "/zh/database/materials/wood-log",
+    "/zh/database/materials/hay",
     "/zh/database/materials",
+    "/zh/database/buildings",
+    "/zh/database/buildings/coop",
     "/zh/database/npcs",
     "/zh/database/quests",
+    "/zh/database/quests/seeds-of-success",
+    "/zh/database/quests/feathered-foes",
     "/zh/database/customization",
     "/zh/map",
     "/zh/problems",
@@ -279,30 +293,9 @@
     });
   }
 
-  function normalizeQuery(value) {
-    return String(value || "").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
-  }
-
-  function entityScore(entity, query) {
-    var normalized = normalizeQuery(query);
-    var queryTokens = normalized.split(/\s+/).filter(Boolean);
-    var label = normalizeQuery(entity.label);
-    var aliases = (entity.aliases || []).map(normalizeQuery).filter(Boolean);
-    var keywords = (entity.keywords || []).map(normalizeQuery).filter(function (value) { return value.length >= 3; });
-    var labelTokens = label.split(/\s+/).filter(Boolean);
-    if (!normalized || !label) return 0;
-    if (label === normalized || aliases.some(function (alias) { return alias === normalized; })) return 100;
-    if (label && normalized.indexOf(label) !== -1) return 92;
-    if (labelTokens.some(function (token) { return token.length >= 1 && normalized.indexOf(token) !== -1; })) return 88;
-    if (label.split(/\s+/).filter(Boolean).every(function (token) { return queryTokens.indexOf(token) !== -1; })) return 88;
-    if (aliases.some(function (alias) { return alias.length >= 3 && normalized.indexOf(alias) !== -1; })) return 78;
-    var matchedKeyword = keywords.some(function (keyword) { return queryTokens.indexOf(keyword) !== -1; });
-    return matchedKeyword ? 52 : 0;
-  }
-
   function dossierEntity(query) {
     return knowledgeEntities.map(function (entity) {
-      return { entity: entity, score: entityScore(entity, query) };
+      return { entity: entity, score: RanchersSearch.entityScore(entity, query) };
     }).filter(function (item) { return item.score >= 52; }).sort(function (a, b) {
       return b.score - a.score;
     }).filter(function (item) {

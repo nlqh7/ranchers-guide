@@ -36,6 +36,7 @@ function renderTabs(locale, current) {
     ['npcs', 'People', '人物'], ['vehicles', 'Vehicles', '车辆'],
     ['customization', 'Customization', '外观'], ['map', 'Map', '地图'],
   ];
+  if (current === undefined || current === 'buildings') categories.splice(3, 0, ['buildings', 'Buildings', '建筑']);
   return `<nav class="database-tabs" aria-label="${zh ? '资料分类' : 'Database categories'}">${categories.map(([id, en, cn]) =>
     `<a href="${prefix}/${id === 'map' ? 'map' : id === 'vehicles' ? 'guides/vehicles-transport#vehicle-catalog' : `database/${id}`}"${id === current ? ' aria-current="page"' : ''}>${zh ? cn : en}</a>`).join('')}</nav>`;
 }
@@ -101,6 +102,11 @@ function renderLookup(data, kind, locale) {
         ? '按任务名查看完成步骤、所需物品与容易漏掉的判定。先选任务，再对照游戏追踪器当前目标；对话订单线索单独列在下方。'
         : 'Find your quest, check the required items and follow the objectives. Match the steps to your current tracker goal; dialogue-only order leads are listed separately.'}</p>`
       : '';
+  const standalone = kind === 'quests'
+    ? `<p class="database-browse-note"><strong>${zh ? '独立任务词条：' : 'Standalone quest entries:'}</strong> <a href="${zh ? '/zh' : ''}/database/quests/seeds-of-success">${zh ? '成功的种子' : 'Seeds of Success'}</a> · <a href="${zh ? '/zh' : ''}/database/quests/feathered-foes">${zh ? '长着羽毛的敌人' : 'Feathered Foes'}</a></p>`
+    : kind === 'materials'
+      ? `<p class="database-browse-note"><strong>${zh ? '独立材料词条：' : 'Standalone material entries:'}</strong> <a href="${zh ? '/zh' : ''}/database/materials/stone">${zh ? '石头' : 'Stone'}</a> · <a href="${zh ? '/zh' : ''}/database/materials/wood-log">${zh ? '原木' : 'Wood Logs'}</a> · <a href="${zh ? '/zh' : ''}/database/materials/hay">${zh ? '干草' : 'Hay'}</a></p>`
+      : '';
   const notes = {
     animals: ['Look up ranch-animal care and build-defined wildlife names. Wildlife entries do not establish behavior or spawn locations.', '查看牧场动物照料与构建内野生生物名称；野生生物条目不证明行为或生成地点。'],
     crops: ['Seasons come from game-build configuration. Select a crop for details; Marrow and Leek availability is unconfirmed.', '季节来自游戏构建配置；点击查看种植资料。西葫芦、韭葱的购买途径尚未确认。'],
@@ -111,7 +117,7 @@ function renderLookup(data, kind, locale) {
   return `${directAnswer}${renderTabs(locale, kind)}
     <section class="database-browser" id="browse-entries" aria-labelledby="browse-entries-title">
       <h2 id="browse-entries-title">${title}</h2>
-      ${renderEntries(data, kind, locale)}${['materials','animals'].includes(kind)?`<div class="database-guide-links"><a href="${zh?'/zh':''}/guides/resources-and-materials#consumables">${zh?'食物与消耗品配置':'Food & consumable settings'}</a></div>`:''}
+      ${renderEntries(data, kind, locale)}${standalone}${['materials','animals'].includes(kind)?`<div class="database-guide-links"><a href="${zh?'/zh':''}/guides/resources-and-materials#consumables">${zh?'食物与消耗品配置':'Food & consumable settings'}</a></div>`:''}
       ${kind === 'materials' ? `<div class="database-guide-links"><a href="${zh?'/zh':''}/guides/resources-and-materials#resource-definitions">${zh?'水、能源与燃料罐':'Water, energy & fuel'}</a></div>` : ''}<p class="database-browse-note">${notes[kind][zh ? 1 : 0]}</p>
     </section>`;
 }

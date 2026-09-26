@@ -31,10 +31,12 @@ for (const relative of ["404.html", "contribute.html", "search.html", "zh/search
 }
 
 const farming = fs.readFileSync(path.join(root, "guides", "farming-fields.html"), "utf8");
-assert.match(farming, /There is currently no manual delete tool/i, "English farming guide needs the official plot-removal answer");
+assert.match(farming, /removal deducts 2 Nature Skill Points/i, "English farming guide needs the current hoe-removal answer");
+assert.doesNotMatch(farming, /There is currently no manual delete tool/i, "English farming guide must not keep the obsolete removal answer");
 assert.match(farming, /587307627624745847/, "English farming answer needs the official moderator source");
 const farmingZh = fs.readFileSync(path.join(root, "zh", "guides", "farming-fields.html"), "utf8");
-assert.match(farmingZh, /目前没有手动删除农田格的工具/, "Chinese farming guide needs the official plot-removal answer");
+assert.match(farmingZh, /扣 2 点自然技能点/, "Chinese farming guide needs the current hoe-removal answer");
+assert.doesNotMatch(farmingZh, /目前没有手动删除农田格的工具/, "Chinese farming guide must not keep the obsolete removal answer");
 assert.match(farmingZh, /587307627624745847/, "Chinese farming answer needs the official moderator source");
 
 console.log(`PASS: ${audit.totals.html} HTML pages and ${audit.totals.sitemap} sitemap routes satisfy the index audit.`);

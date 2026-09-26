@@ -4,19 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Ranchers Controls & Camera Settings Guide</title>
-  <meta name="description" content="The Ranchers controls and camera settings explained: right-mouse camera rotation, left-mouse tool actions, one-button hammer placement, ESC menu, every camera recenter and zoom option with its default, QWERTZ support, and motion-sickness tips.">
+  <meta name="description" content="Adjust The Ranchers camera sensitivity, walking and driving auto-follow, follow delay and reset shortcuts. Includes current settings and dated general control references.">
   <link rel="canonical" href="https://theranchersguide.com/guides/controls-camera-settings">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="The Ranchers Guide">
   <meta property="og:title" content="The Ranchers Controls & Camera Settings Guide">
-  <meta property="og:description" content="Every officially documented control change and camera setting with its default value, plus editorial recommendations and motion-sickness tips.">
+  <meta property="og:description" content="Find the camera setting for unwanted rotation, slow recentering or awkward zoom, with current shortcuts and clearly dated control references.">
   <meta property="og:url" content="https://theranchersguide.com/guides/controls-camera-settings">
   <meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
 
 
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
-  <link rel="stylesheet" href="../assets/css/style.css?v=20260902-ui2">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260919-care1">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -43,15 +43,10 @@
     <article class="article">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Guides / Controls &amp; Camera Settings</nav>
       <h1>The Ranchers Controls &amp; Camera Settings Guide</h1>
-      <p class="meta">Updated for Early Access 0.8.10.x (August 2026) · August 7, 2026 · Reading time: ~6 min</p>
-      <div class="evidence-status">
-        <strong>Evidence status:</strong> controls and camera defaults from official update notes · recommendations marked editorial · reviewed Aug 7, 2026 — <a href="/methodology">How we verify →</a>
-      </div>
+      <p class="meta">Camera update reviewed September 19, 2026 · 0.8.10.871</p>
+      <div class="evidence-status">Current camera controls come from the September 16 official update. Older general key mappings remain labeled with their original source date.</div>
 
-      <section class="answer-box">
-        <h2>Answer first</h2>
-        <p>The Ranchers controls were simplified in an official update: <strong>Right Mouse Button rotates the camera, Left Mouse Button performs all primary tool actions, and building placement with the Hammer now needs only one button</strong>. Open the menu with <strong>ESC</strong> — Game Settings, including the full Camera Settings section, are accessible directly from it. Every default value and its source update is listed below.</p>
-      </section>
+      <section class="answer-box"><h2>Fix the view first</h2><p>Double-press <strong>C</strong> to reset direction without changing zoom. Use <strong>V</strong> or double-press the <strong>right mouse button</strong> to reset both. For a camera that keeps turning back, adjust the walking and driving follow settings below.</p><a href="#camera">Choose a camera setting →</a></section>
 
       <nav class="toc" aria-label="Table of contents">
         <strong>In this guide</strong>
@@ -82,19 +77,7 @@
       <p><span class="evidence-badge evidence-official">Official</span> <strong>Day rollover is manual.</strong> Per the pre-EA Ranching v2 update notes, a new day starts only when you press the <strong>"Start new day"</strong> button in the end-of-the-day summary — the notes explicitly call this the way to pause the game, and say it works in multiplayer too. Caveat: this is <strong>pre-EA official documentation</strong>, not yet independently rechecked in the current EA build. If you need a break mid-day, use sleep to reach the summary screen and simply do not press the button until you are ready.</p>
       <p>Keyboard layouts: <strong>QWERTZ layout support</strong> (Germany, Austria, etc.) was added in the same update <span class="evidence-badge evidence-official">Official</span> (Feb 2026 update, demo-era); recheck against the current EA build.</p>
 
-      <h2 id="camera">Camera settings, one by one</h2>
-      <p><span class="evidence-badge evidence-official">Official</span> A dedicated Camera Settings section was added in the Feb 2026 update (demo-era); recheck against the current EA build. The same update also reduced camera acceleration and deceleration to remove the "snapping" effect, making movement smoother and more predictable. The settings and their official defaults:</p>
-      <table>
-        <thead><tr><th>Setting</th><th>Official default</th><th>What it does</th><th>Our suggestion <span class="evidence-badge evidence-reported">Editorial</span></th></tr></thead>
-        <tbody>
-          <tr><td><strong>Camera Movement Speed</strong></td><td>Not stated</td><td>How fast the camera turns with your input</td><td>Start at default; raise it only if the camera feels like it lags behind your mouse</td></tr>
-          <tr><td><strong>Camera Zoom Speed</strong></td><td>Not stated</td><td>How fast zoom responds</td><td>Leave at default unless zooming feels jumpy while driving</td></tr>
-          <tr><td><strong>Automatic Camera Recenter – On Foot</strong></td><td><strong>Disabled</strong></td><td>When enabled, the camera automatically rotates to align with the player's direction, without manual input</td><td>Keep it off if you like full manual control; try enabling it if you find yourself constantly dragging the camera while walking</td></tr>
-          <tr><td><strong>Automatic Camera Recenter – In Vehicle</strong></td><td><strong>Enabled</strong></td><td>Same auto-alignment while driving</td><td>The default-on behavior suits most driving; disable it only if you prefer to watch the ranch while cruising</td></tr>
-          <tr><td><strong>Automatic Camera Recentering Latency</strong></td><td><strong>0.5 s</strong></td><td>Controls how quickly the camera realigns — lower value = faster recentering. The official notes say this setting helps with motion sickness</td><td>If the game makes you queasy, this is the first slider to experiment with — see <a href="#motion">motion sickness</a> below</td></tr>
-          <tr><td><strong>Auto Reset Camera Zoom</strong></td><td><strong>Disabled</strong></td><td>When enabled, zoom adjusts automatically depending on context; when disabled, zoom remains stable while driving</td><td>Keep it off (the default) for a stable frame while driving; enable it only if you want automatic zoom changes between contexts</td></tr>
-        </tbody>
-      </table>
+      <section id="camera" data-search-entry data-search-status="Official update · 0.8.10.871" data-search-title="Camera sensitivity, walking and vehicle auto-follow settings" data-search-tags="camera sensitivity automatically follow character vehicle direction delay zoom reset C V"><h2>Choose the setting for your problem</h2><p><strong>Reset direction only:</strong> double-press C. <strong>Reset direction and zoom:</strong> press V or double-press the right mouse button. Both work with auto-follow off.</p><div class="data-table-wrap" tabindex="0" role="region" aria-label="Current camera settings"><table class="guide-answer-table"><thead><tr><th scope="col">Adjust</th><th scope="col">Setting and next step</th></tr></thead><tbody><tr><th scope="row">Mouse speed</th><td><strong>Mouse - Camera Sensitivity</strong>Make a small change and try the same route.</td></tr><tr><th scope="row">Walking follow</th><td><strong>Automatically Follow Character Direction</strong>Try enabling it for automatic alignment. Default: off.</td></tr><tr><th scope="row">Driving follow</th><td><strong>Automatically Follow Vehicle Direction</strong>Disable it for manual control. Default: on.</td></tr><tr><th scope="row">Recenter delay</th><td><strong>On-Foot - Camera Follow Delay / Vehicle - Camera Follow Delay</strong>Adjust the relevant delay when follow is enabled.</td></tr></tbody></table></div><p>Vehicle follow pauses while reversing and resumes when driving forward if enabled. No numeric sensitivity or delay defaults were published; the old demo value of 0.5 seconds is not a current preset.</p><p class="source-note"><a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1844115010489002" rel="noopener noreferrer">September 16 official camera update</a>. The changes suggested in the final column are editorial choices, not measured optimal settings.</p></section>
 
       <h2 id="building">Building controls</h2>
       <p><span class="evidence-badge evidence-official">Official</span> (Feb 2026 update, demo-era); recheck against the current EA build. Two options were added for builders:</p>
@@ -104,14 +87,7 @@
       </ul>
       <p>The same update added clearer error messages when placing blueprints — for unpurchased farm parcels, unauthorized zones or interiors, collisions or failed placement requirements, and exceeding City Hall building height limits. If placement fails, read the message before assuming a bug; see the <a href="/guides/building-construction">Building &amp; Placement Guide</a> and the <a href="/guides/roof-quest-stuck">roof quest troubleshooting page</a> for the most common blockers.</p>
 
-      <h2 id="motion">Motion sickness: settings that help</h2>
-      <p><span class="evidence-badge evidence-reported">Editorial</span> The suggestions in this section are our editorial recommendations, built on the official settings above — they are not official prescriptions.</p>
-      <ul>
-        <li><strong>Adjust Automatic Camera Recentering Latency first.</strong> The official notes explicitly say this setting (default 0.5 s) helps with motion sickness — a lower value recenters the camera faster.</li>
-        <li><strong>Keep Auto Reset Camera Zoom disabled</strong> (the default) so the frame stays stable while driving instead of zooming on context changes.</li>
-        <li><strong>Decide on recentering deliberately.</strong> If automatic camera movement bothers you, disable Automatic Camera Recenter – In Vehicle; if fighting the camera manually is what tires you, enable the on-foot recenter instead.</li>
-        <li><strong>Lower Camera Movement Speed</strong> if fast panning is what triggers discomfort — the post-update camera already has reduced acceleration and deceleration, so small slider changes go a long way.</li>
-      </ul>
+      <section id="motion" data-search-entry data-search-status="Editorial suggestions" data-search-title="Reduce unwanted automatic camera movement"><h2>Make the camera more comfortable</h2><p>Try one change at a time: disable unwanted auto-follow, or adjust its delay if you want following with less frequent realignment. Then tune mouse sensitivity on the same short walking or driving route.</p><p>These are comfort suggestions, not a guaranteed solution. Take a break if movement causes discomfort.</p></section>
 
       <h2 id="faq">Controls FAQ</h2>
       <details class="faq-item">
@@ -132,7 +108,7 @@
       </details>
       <details class="faq-item">
         <summary>The camera keeps swinging back while I drive. Can I stop it?</summary>
-        <div class="faq-body"><p>That is Automatic Camera Recenter – In Vehicle, which is enabled by default. Disable it in Camera Settings, or raise the recentering latency (default 0.5 s) so it kicks in more slowly.</p></div>
+        <div class="faq-body"><p>Check Automatically Follow Vehicle Direction, which defaults to on. Disable it for manual control, or adjust Vehicle - Camera Follow Delay. See the <a href="#camera">current settings table</a>.</p></div>
       </details>
 
       <h2>Related guides</h2>
@@ -147,7 +123,7 @@
           <strong>Niki</strong>
           <span>Site editor, The Ranchers Guide</span>
         </div>
-        <p>Research and editing by Niki, site editor. Gameplay evidence collected from public videos, official updates and community reports. Last reviewed: August 2026. Game version coverage: 0.8.10.x. <a href="/methodology">How we verify →</a></p>
+        <p>Research and editing by Niki, site editor. Gameplay evidence collected from public videos, official updates and community reports. Camera settings reviewed September 19, 2026 against 0.8.10.871; general key mappings retain their source dates. <a href="/methodology">How we verify →</a></p>
       </aside>
 </article>
   </main>

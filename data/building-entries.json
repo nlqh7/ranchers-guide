@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "steamBuild": "24847725",
+  "build": "0.8.10.842",
+  "liveBuild": "0.8.10.871",
+  "entries": [
+    {
+      "id": "coop",
+      "offerId": "building-store-allthetime-Custum_Barn_Weak_Small",
+      "relatedQuestId": "chicken-coop-mission",
+      "sourceId": "Architect-004ad708f5",
+      "status": "recorded-offer-material-reference",
+      "statusZh": "已记录版本建筑商店材料条件参考",
+      "summary": "A recorded-build reference for the Coop offer in the building store. The local record is from 0.8.10.842; the official live patch is 0.8.10.871. The quantities below are the native offer's material conditions, not measured construction consumption, a verified full price, capacity, or unlock order.",
+      "summaryZh": "已记录版本建筑商店鸡舍商品的材料条件参考。本地记录来自 0.8.10.842，官方最新补丁为 0.8.10.871。下列数量来自原生商品记录，不把它们表述为实测建造消耗、已确认的完整价格、容量或解锁顺序。"
+    }
+  ]
+}

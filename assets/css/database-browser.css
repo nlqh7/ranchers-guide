@@ -96,6 +96,11 @@ html:lang(zh) :is(.database-page, .database-hub) :is(h1, h2, h3) { font-family: 
 .wildlife-profile dt { color: var(--db-muted); font-size: .8rem; }
 .wildlife-profile dd { margin: 2px 0 0; font-size: .9rem; overflow-wrap: anywhere; }
 .database-page .data-table-wrap:focus-visible { outline: 2px solid var(--db-link); outline-offset: 2px; }
+.database-page .building-material-conditions .data-table { table-layout: fixed; }
+.database-page .building-material-conditions .data-table :is(th, td) { white-space: normal; overflow-wrap: anywhere; vertical-align: top; }
+.database-page .building-material-conditions .data-table th:first-child { width: 24%; }
+.database-page .building-material-conditions .data-table th:nth-child(2) { width: 15%; }
+.database-page .building-material-conditions .data-table th:nth-child(3) { width: 61%; }
 .database-page :is(.material-profile, .entity-profile) { overflow-wrap: anywhere; }
 .database-page .material-uses :is(th, td) { white-space: normal; vertical-align: top; }
 .database-page .material-uses th:first-child { width: 26%; }

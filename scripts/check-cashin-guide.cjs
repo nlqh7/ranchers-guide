@@ -28,6 +28,7 @@ assert.doesNotMatch(JSON.stringify(cashin), /itemPrice|payoutAmount|fluctuationP
 for (const locale of ['en', 'zh']) {
   const prefix = locale === 'zh' ? 'zh/' : '';
   const money = fs.readFileSync(path.join(root, prefix, 'guides/money-making.html'), 'utf8');
+  const coop = fs.readFileSync(path.join(root, prefix, 'guides/multiplayer-coop.html'), 'utf8');
   const beginner = fs.readFileSync(path.join(root, prefix, 'guides/beginners-guide.html'), 'utf8');
   const searchIndex = JSON.parse(fs.readFileSync(path.join(root, prefix, 'search-index.json'), 'utf8'));
   const block = money.match(/BEGIN CASHIN TUTORIAL REFERENCE -->[\s\S]*?<!-- END CASHIN TUTORIAL REFERENCE/)?.[0] || '';
@@ -42,6 +43,19 @@ for (const locale of ['en', 'zh']) {
   assert.doesNotMatch(block, /24847725/, `${locale}: internal Steam build must not appear in player copy`);
   assert.doesNotMatch(block, locale === 'zh' ? /(?:单价|打款|收入).{0,12}\d+[C币元]/ : /(?:price|payout|income).{0,12}\d+\s*C/i);
   assert.doesNotMatch(money, locale === 'zh' ? /当天结算时到账/ : /that day(?:'s)? end-of-day settlement/i, `${locale}: obsolete same-day wording must be removed`);
+  assert.match(coop, /id="progress-boundary"[^>]*data-search-entry/, `${locale}: co-op progress boundary must be searchable`);
+  assert.match(coop, locale === 'zh'
+    ? /访客保留自己的钱、经验、背包物品和蓝图；房主拥有这个牧场的世界与任务进度/
+    : /visitor keeps their own money, experience, backpack items, and blueprints.*host owns the ranch and its world\/quest progress/s,
+    `${locale}: visitor retention and host progress must agree across guides`);
+  assert.match(coop, locale === 'zh'
+    ? /CashIn 到账仍没有公开分配规则/
+    : /CashIn is the remaining boundary.*does not say whether a visitor's deposit is paid/s,
+    `${locale}: CashIn ownership must remain explicitly unknown`);
+  assert.doesNotMatch(coop, locale === 'zh'
+    ? /当前公开证据不足以把存档归属、访客物品和钱包行为写成通用规则/
+    : /does not define guest inventory or ranch-import behavior/i,
+    `${locale}: old visitor-ownership disclaimer must not contradict the FAQ-backed retention boundary`);
   const beginnerStart = beginner.match(/id="first-30-minutes"[\s\S]*?<\/section>/)?.[0] || '';
   assert.match(beginnerStart, locale === 'zh' ? /第二天/ : /next day/i, `${locale}: beginner route must use current payout timing`);
   const queries = locale === 'zh'
@@ -54,6 +68,12 @@ for (const locale of ['en', 'zh']) {
       `${locale}: ${query} must open the CashIn action path`,
     );
   }
+  const progressQuery = locale === 'zh' ? '访客进度 CashIn' : 'visitor progress CashIn';
+  assert.equal(
+    searchCore.searchDocuments(searchIndex, progressQuery, 5)[0]?.url,
+    `/${prefix}guides/multiplayer-coop#progress-boundary`,
+    `${locale}: visitor/CashIn query must open the cross-page boundary`,
+  );
   if (locale === 'en') {
     assert.equal(searchCore.searchDocuments(searchIndex, 'how to sell crops', 5)[0]?.url, '/database/crops#how-to-sell', 'broad crop-selling query should keep the crop database answer first');
   }

@@ -1,0 +1,5 @@
+{
+  "schemaVersion": 1,
+  "quests": ["seeds-of-success", "feathered-foes"],
+  "materials": ["stone", "wood-log", "hay"]
+}

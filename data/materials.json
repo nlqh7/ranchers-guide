@@ -1,9 +1,17 @@
 {
   "meta": {
     "build": "0.8.10.842",
-    "lastUpdated": "2026-08-28"
+    "lastUpdated": "2026-09-13"
   },
   "sources": {
+    "charcoal-player-route": {
+      "kind": "steam-thread",
+      "title": "Charcoal — Whitebear's August 4 player report",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587308167364380423/",
+      "author": "Whitebear",
+      "date": "2026-08-04",
+      "build": "Not stated in the post"
+    },
     "official-mines-answer": {
       "kind": "steam-thread",
       "title": "Steam thread: Questions about the game (official moderator answer)",
@@ -19,6 +27,22 @@
       "author": "calmc1544 / X-C0brA-X",
       "date": "2026-07-31",
       "build": "0.8.10.x"
+    },
+    "official-stone-wood-gathering-871": {
+      "kind": "official-news",
+      "title": "Official update 0.8.10.871: gathering wood and stone outside the ranch",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1844115010489002",
+      "author": "RedPilz Studio",
+      "date": "2026-09-16",
+      "build": "0.8.10.871"
+    },
+    "official-stone-wood-gathering-868": {
+      "kind": "official-news",
+      "title": "Official update 0.8.10.868: temporary Trees & Rocks change",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1843481262701719",
+      "author": "RedPilz Studio",
+      "date": "2026-09-14",
+      "build": "0.8.10.868"
     },
     "charcoal-moderator-context": {
       "kind": "steam-thread",
@@ -70,10 +94,10 @@
       "zhSearchTitle": "石头在哪里获得",
       "searchTags": "stone rock rocks material building pickaxe mine respawn buy meriam crime",
       "zhSearchTags": "石头 石块 岩石 材料 建造 镐 矿洞 刷新 购买 市政厅 犯罪",
-      "summary": "Collect the loose stone available on land you own first. A reliable repeatable source after that supply is exhausted has not yet been verified.",
-      "zhSummary": "先收集自己土地上的散落石头。初始石头耗尽后，可靠的可重复来源仍待验证。",
-      "whenNeeded": "Use Stone first when an early building or placement step asks for a basic construction material; keep the supply gap visible instead of assuming a mine is available.",
-      "zhWhenNeeded": "当早期建造或放置步骤需要基础建材时先查石头；可靠的可重复来源仍未知，不要默认已经有矿洞。",
+      "summary": "Collect loose stone on your ranch first. Current official notes also say normal rock gathering outside the ranch does not trigger a police chase; a reliable respawning source is still unverified.",
+      "zhSummary": "先收集牧场上的散落石头。官方当前公告也说明，牧场外正常敲石不会触发警察追逐；可靠的可重复刷新来源仍未确认。",
+      "whenNeeded": "For a building requirement, use loose stone on your ranch first. If you need more, the official no-chase rule covers normal rock gathering outside the ranch; exact deposits and respawn behavior are not established.",
+      "zhWhenNeeded": "建造缺石头时先收集牧场上的散落石头。需要更多时，官方说明牧场外正常敲石不会触发警察追逐；具体矿点和刷新规律仍未确认。",
       "relatedRoutes": ["/guides/building-construction#materials", "/guides/resources-and-materials"],
       "facts": [
         {
@@ -85,11 +109,19 @@
           "sourceIds": ["current-stone-thread", "community-material-scan"]
         },
         {
-          "text": "Taking stone from land you do not own can be treated as theft and trigger fines or jail; neighboring plots are not a safe free supply.",
-          "zhText": "从不属于你的土地拿石头可能被判定为偷窃并触发罚款或坐牢；不要把邻近地块当成免费来源。",
-          "evidenceLevel": "unverified-lead",
-          "build": "0.8.10.x",
+          "text": "Official 0.8.10.871 notes say normal wood and stone gathering outside the ranch does not trigger a police chase. The 0.8.10.868 notes describe this as temporary while dedicated gathering areas are developed; this does not establish rules for taking loose items or every ownership interaction.",
+          "zhText": "官方 0.8.10.871 公告说明，牧场外正常采集木材和石头不会触发警察追逐；0.8.10.868 将此说明为等待专门采集区域期间的临时调整。这没有说明拾取散落物或所有权交互的规则。",
+          "evidenceLevel": "official",
+          "build": "0.8.10.871; temporary change introduced in 0.8.10.868",
           "validity": "current",
+          "sourceIds": ["official-stone-wood-gathering-871", "official-stone-wood-gathering-868"]
+        },
+        {
+          "text": "A July 2026 player report warned that taking stone from land you do not own could trigger fines or jail. It predates the 0.8.10.868 change and does not establish the current rule for normal rock gathering; other theft interactions remain unverified.",
+          "zhText": "2026 年 7 月的一则玩家报告曾提醒，从非自有地块取石头可能触发罚款或坐牢。该报告早于 0.8.10.868 更新，不能代表当前普通敲石规则；其他偷窃行为仍未确认。",
+          "evidenceLevel": "unverified-lead",
+          "build": "0.8.10.x, before 0.8.10.868",
+          "validity": "historical",
           "sourceIds": ["current-stone-thread"]
         },
         {
@@ -110,8 +142,8 @@
       "zhSearchTitle": "原木怎么获得",
       "searchTags": "wood log timber tree chop charcoal building red tent recipe",
       "zhSearchTags": "原木 木材 木头 砍树 木炭 建造 红帐篷 配方",
-      "summary": "Wood Logs are the base material for early construction and the input used by the community charcoal method.",
-      "zhSummary": "原木是早期建造材料，也是社区木炭制作方法所使用的原料。",
+      "summary": "Cutting trees yields Wood Logs. Official 0.8.10.871 notes say normal wood gathering outside the ranch does not trigger a police chase; respawn timing is unverified.",
+      "zhSummary": "砍树可获得原木。官方 0.8.10.871 公告说明，牧场外正常采木不会触发警察追逐；树木刷新时间仍未知。",
       "whenNeeded": "Keep Wood Logs for early construction before testing the community charcoal lead; the retained evidence does not establish a universal recipe list.",
       "zhWhenNeeded": "早期建造优先保留原木，再考虑测试社区木炭线索；现有证据不能推出完整配方表。",
       "relatedRoutes": ["/guides/building-construction#materials", "/guides/crafting-guide"],
@@ -123,6 +155,14 @@
           "build": "0.8.10.x",
           "validity": "current",
           "sourceIds": ["community-material-scan"]
+        },
+        {
+          "text": "Official 0.8.10.871 notes say normal wood and stone gathering outside the ranch does not trigger a police chase. The 0.8.10.868 notes describe this as temporary while dedicated gathering areas are developed; this does not establish rules for taking loose items or every ownership interaction.",
+          "zhText": "官方 0.8.10.871 公告说明，牧场外正常采集木材和石头不会触发警察追逐；0.8.10.868 将此说明为等待专门采集区域期间的临时调整。这没有说明拾取散落物或所有权交互的规则。",
+          "evidenceLevel": "official",
+          "build": "0.8.10.871; temporary change introduced in 0.8.10.868",
+          "validity": "current",
+          "sourceIds": ["official-stone-wood-gathering-871", "official-stone-wood-gathering-868"]
         },
         {
           "text": "Launch-build footage shows a Red Tent recipe requiring 10 Wood Logs and 8 Stone; it does not prove other recipe costs.",
@@ -174,19 +214,27 @@
       "zhSearchTitle": "木炭怎么制作",
       "searchTags": "charcoal coal burn logs torch fire extinguisher building material",
       "zhSearchTags": "木炭 煤 原木 燃烧 火把 灭火器 建造 材料",
-      "summary": "A community lead suggests burning Wood Logs and extinguishing the fire before collecting Charcoal. Current-build steps, yield and fire behaviour still need a direct screenshot or video.",
-      "zhSummary": "一条社区线索称可以燃烧原木，再灭火收集木炭。当前版本的具体步骤、产量和火焰行为仍需要直接截图或视频确认。",
-      "whenNeeded": "Treat Charcoal as a research lead rather than a guaranteed route. Use the linked crafting context, then verify the fire and collection steps in the current build before spending resources.",
-      "zhWhenNeeded": "把木炭当作待验证线索，不要当成保证可行的路线。先看制作背景，再在当前版本确认燃烧和收集步骤后投入资源。",
+      "summary": "A player reports burning Wood Logs, extinguishing them, then collecting Charcoal. This remains an unverified route, not a guaranteed recipe.",
+      "zhSummary": "一名玩家报告了燃烧原木、灭火后收集木炭的路线。它仍未经过本站复现，不是保证可行的配方。",
+      "whenNeeded": "Check how much your selected recipes need before trying the reported route. Keep logs needed for construction separate.",
+      "zhWhenNeeded": "尝试报告中的路线前，先查所选配方需要多少木炭，并留好建造所需的原木。",
       "relatedRoutes": ["/guides/crafting-guide", "/community"],
       "facts": [
         {
-          "text": "A community lead suggests placing or cutting Wood Logs, igniting them, waiting for a material change, then using a fire extinguisher before collecting Charcoal. The retained scan has no direct post URL, so this remains a route to test.",
-          "zhText": "一条社区线索称可以放下或砍出原木，点燃并等待材料变化，再用灭火器灭火后收集木炭。现有存档没有直接帖子链接，因此它仍是待复测路线。",
+          "text": "Whitebear's August 4 report describes igniting felled or dropped logs with a torch in dry weather, waiting for a material change, and extinguishing the fire before collecting.",
+          "zhText": "Whitebear 在 8 月 4 日的报告中描述：干燥天气用火把点燃砍下或放下的原木，等待材料变化，灭火后再收集。",
           "evidenceLevel": "unverified-lead",
-          "build": "0.8.10.x",
-          "validity": "current",
-          "sourceIds": ["community-material-scan"]
+          "build": "Not stated / 原帖未注明",
+          "validity": "unknown",
+          "sourceIds": ["charcoal-player-route"]
+        },
+        {
+          "text": "The report warns that the fire can kill the character. Current-build controls, timing and yield remain unverified.",
+          "zhText": "报告提醒火焰可能导致角色死亡。当前版本的操作按键、计时和产量仍未验证。",
+          "evidenceLevel": "unverified-lead",
+          "build": "Not stated / 原帖未注明",
+          "validity": "unknown",
+          "sourceIds": ["charcoal-player-route"]
         },
         {
           "text": "The moderator separately identifies the fire extinguisher as the intended way to put out fires. The retained evidence does not lock down one keyboard control or an exact burn timer.",

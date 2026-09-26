@@ -13,8 +13,11 @@ const privateToolRoutes = new Set([
   "/zh/tools/update-impact-tracker",
 ]);
 
-assert.equal(data.meta.currentBuild, "0.8.10.842");
-assert.equal(data.updates.length, 4);
+const currentUpdates = data.updates.filter(update => update.status === 'current');
+assert.equal(currentUpdates.length, 1, 'Exactly one update is current');
+assert.equal(currentUpdates[0].version, data.meta.currentBuild, 'Current update matches the declared version');
+assert.equal(data.updates[0].version, data.meta.currentBuild, 'Latest update is first');
+assert.equal(new Set(data.updates.map(update => update.id)).size, data.updates.length, 'No duplicate update IDs');
 assert.ok(data.updates.every((update) => update.id && update.version && update.title && update.summary));
 assert.ok(data.updates.every((update) => update.changes.length > 0 && update.actions.length > 0));
 assert.ok(data.updates.every((update) => update.source && update.source.url));

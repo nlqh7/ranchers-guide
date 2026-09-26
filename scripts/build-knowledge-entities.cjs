@@ -6,6 +6,8 @@ const dialogueServices = require('../data/dialogue-services.json');
 
 const root = path.resolve(__dirname, "..");
 const checkOnly = process.argv.includes("--check");
+const b2Entries = require('../data/b2-entry-pages.json');
+const standaloneQuestIds = new Set(b2Entries.quests);
 
 function esc(value) {
   return String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
@@ -133,9 +135,9 @@ function npcLookupGuide(locale) {
 
 function questLookupGuide(locale) {
   if (locale === "zh") {
-    return `<section class="answer-box quest-lookup-guide"><strong>从你正在完成的任务开始：</strong>车辆路线查看<a href="#rust-to-rumbling">Rust to Rumbling!</a>，电力和工作台查看<a href="#power-to-the-bench">Power to the Bench</a>，买鸡后带回家查看<a href="#chicken-coop-mission">养鸡场记录</a>，任务追踪器卡在屋顶时查看<a href="#roof-building">屋顶目标</a>。每张卡都会连接下一步攻略或地图；没有证据的奖励和前置条件继续留空。</section>`;
+    return `<section class="answer-box quest-lookup-guide"><strong>从你正在完成的任务开始：</strong>车辆路线查看<a href="#rust-to-rumbling">Rust to Rumbling!</a>，电力和工作台查看<a href="#power-to-the-bench">Power to the Bench</a>，买鸡后带回家查看<a href="#chicken-coop-mission">养鸡场记录</a>，任务追踪器卡在屋顶时查看<a href="#roof-building">屋顶目标</a>。每张卡都会连接下一步攻略或地图；没有证据的奖励和前置条件继续留空。<br><strong>独立词条：</strong><a href="/zh/database/quests/seeds-of-success">成功的种子</a>、<a href="/zh/database/quests/feathered-foes">长着羽毛的敌人</a>。</section>`;
   }
-  return `<section class="answer-box quest-lookup-guide"><strong>Start from the task you are trying to finish:</strong> use <a href="#rust-to-rumbling">Rust to Rumbling!</a> for the observed vehicle route, <a href="#power-to-the-bench">Power to the Bench</a> for electricity and workbench steps, <a href="#chicken-coop-mission">the chicken-coop record</a> for bringing a purchase home, or <a href="#roof-building">the roof objective</a> when the tracker is stuck. Each card links to the next guide or map route; missing rewards and prerequisites stay unfilled.</section>`;
+  return `<section class="answer-box quest-lookup-guide"><strong>Start from the task you are trying to finish:</strong> use <a href="#rust-to-rumbling">Rust to Rumbling!</a> for the observed vehicle route, <a href="#power-to-the-bench">Power to the Bench</a> for electricity and workbench steps, <a href="#chicken-coop-mission">the chicken-coop record</a> for bringing a purchase home, or <a href="#roof-building">the roof objective</a> when the tracker is stuck. Each card links to the next guide or map route; missing rewards and prerequisites stay unfilled.<br><strong>Standalone entries:</strong> <a href="/database/quests/seeds-of-success">Seeds of Success</a> and <a href="/database/quests/feathered-foes">Feathered Foes</a>.</section>`;
 }
 
 function badge(fact, locale) {
@@ -164,6 +166,19 @@ function questGuideHtml(dataset, record, locale) {
   const zh = locale === "zh";
   const guide = record.buildGuide;
   const title = zh ? guide.zhName : guide.name;
+  if (standaloneQuestIds.has(record.id)) {
+    const detailHref = `${zh ? '/zh' : ''}/database/quests/${record.id}`;
+    const differences = guide.notes.map(note => `<li>${esc(zh ? note.zhText : note.text)}</li>`).join('');
+    const links = record.relatedRoutes.map(route => {
+      const labels = relatedRouteLabels[route];
+      if (!labels) throw new Error(`Missing related route label for ${route}`);
+      return `<a class="btn btn-outline btn-compact" href="${esc(zh ? localizeRoute(route) : route)}">${esc(labels[locale])}</a>`;
+    }).join('');
+    return `<section class="entity-profile quest-directory-summary" id="${record.id}" data-quest-directory-summary="${record.id}" data-search-entry data-search-title="${esc(title)}" data-search-tags="${esc([guide.name, guide.zhName, record.name, record.zhName, zh ? record.zhSearchTags : record.searchTags].join(' '))}" data-search-status="${zh ? '任务目录摘要' : 'Quest directory summary'}">
+<h2>${esc(title)}</h2>
+<div class="quest-directory-answer" data-quest-build-guide="${record.id}"><p class="quest-guide-origin">${zh ? '已迁移独立词条；此处只保留目录摘要。' : 'Migrated standalone entry; this directory keeps a compact answer only.'}</p><p class="lead"><strong>${zh ? '简答：' : 'Quick answer: '}</strong>${esc(zh ? record.zhSummary : record.summary)}</p><h3>${zh ? '关键差异与卡点' : 'Key differences and stop points'}</h3><ul class="evidence-list">${differences}</ul><p class="database-browse-note">${zh ? '配置版本' : 'Recorded build'}: ${esc(guide.build)} · ${zh ? '完整步骤、来源与边界见独立词条。' : 'Open the standalone entry for full steps, sources and boundaries.'}</p><p><a class="btn btn-primary btn-compact" href="${detailHref}">${zh ? '打开独立任务词条' : 'Open standalone quest entry'} →</a></p></div>
+<div class="entity-related"><strong>${zh ? '继续查找' : 'Continue with'}</strong><div>${links}</div></div></section>`;
+  }
   const steps = guide.steps.map(step => `<li data-quest-objective="${step.entry}">${esc(zh ? step.zhText : step.text)}</li>`).join("");
   const notes = guide.notes.map(note => `<li>${esc(zh ? note.zhText : note.text)}</li>`).join("");
   const flow = guide.flow;
@@ -225,11 +240,15 @@ ${questVehicleHtml}${relationsHtml(record, locale)}<div class="entity-related"><
 
 function questPage(html, locale) {
   const zh = locale === "zh";
+  const independent = zh
+    ? '<p class="database-browse-note"><strong>独立任务词条：</strong><a href="/zh/database/quests/seeds-of-success">成功的种子</a> · <a href="/zh/database/quests/feathered-foes">长着羽毛的敌人</a></p>'
+    : '<p class="database-browse-note"><strong>Standalone quest entries:</strong> <a href="/database/quests/seeds-of-success">Seeds of Success</a> · <a href="/database/quests/feathered-foes">Feathered Foes</a></p>';
   return html.replace("</head>", '<link rel="stylesheet" href="/assets/css/quest-guide.css?v=20260830-1"></head>')
     .replace('class="article entity-directory"', 'class="article entity-directory quest-directory"')
     .replace(/<p class="lead">[\s\S]*?<\/p>/, `<p class="lead">${zh ? "按游戏里的任务名查步骤、准备物品和卡关处理。原有的社区称呼仍可搜索。" : "Find your in-game quest, check what to prepare, and follow the steps or stuck-point guide. Earlier community names remain searchable."}</p>`)
     .replace(/<div class="notice info">[\s\S]*?<\/div>/, "")
-    .replace(/<section class="answer-box quest-lookup-guide">[\s\S]*?<\/section>/, "");
+    .replace(/<section class="answer-box quest-lookup-guide">[\s\S]*?<\/section>/, "")
+    .replace(/(<p class="lead">[\s\S]*?<\/p>)/, `$1${independent}`);
 }
 
 const serviceProfileTargets = {

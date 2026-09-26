@@ -8,16 +8,18 @@ const animals = read('animals');
 const crops = read('crops');
 const customization = JSON.parse(fs.readFileSync(path.join(root, 'data/build-customization.json'), 'utf8'));
 const vehicles = JSON.parse(fs.readFileSync(path.join(root, 'data/build-vehicles.json'), 'utf8'));
+const buildings = JSON.parse(fs.readFileSync(path.join(root, 'data/building-entries.json'), 'utf8'));
 const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
 
 function render(locale) {
   const zh = locale === 'zh';
   const prefix = zh ? '/zh' : '';
-  const labels = { animals: ['Animals', '动物'], crops: ['Crops', '作物'], materials: ['Materials', '材料'], quests: ['Quests', '任务'], npcs: ['People & services', '人物与服务'], vehicles: ['Vehicles', '车辆'], customization: ['Character customization', '角色外观'] };
+  const labels = { animals: ['Animals', '动物'], crops: ['Crops', '作物'], materials: ['Materials', '材料'], buildings: ['Buildings', '建筑'], quests: ['Quests', '任务'], npcs: ['People & services', '人物与服务'], vehicles: ['Vehicles', '车辆'], customization: ['Character customization', '角色外观'] };
   const descriptions = {
     animals: ['Breeds, care & products', '品种、照料与产物'],
     crops: ['Seasons & growing times', '种植季节与生长时间'],
     materials: ['Sources & building uses', '获取途径与建造用途'],
+    buildings: ['Material conditions & preparation', '材料条件与备料'],
     quests: ['Objectives & preparation', '任务步骤与准备事项'],
     npcs: ['Shops, services & quests', '商店、服务与相关任务'],
     vehicles: ['Names, dealer links & source settings', '名称、经销商记录与原生配置'],
@@ -28,11 +30,14 @@ function render(locale) {
     animals: [['animal-guide#feeding', 'Feed and water', '喂食与饮水'], ['resources-and-materials#consumables', 'Milk, eggs & meat', '奶、蛋与肉类资料']],
     crops: [['farming-fields', 'Planting guide', '种植指南'], ['farming-fields#farm-equipment', 'Sprinklers & farm equipment', '洒水器与农用设施'], ['money-making', 'Selling crops', '出售与收益']],
     quests: [['gigi-large-egg-quest', 'Gigi’s large eggs', 'Gigi 大鸡蛋攻略']],
+    buildings: [['building-construction#shop-building-materials', 'Building material reference', '建筑材料参考']],
   };
   const cards = Object.keys(labels).map(kind => {
     const route = kind === 'vehicles' ? `${prefix}/guides/vehicles-transport` : `${prefix}/database/${kind}`;
     const entries = kind === 'customization'
       ? `<div class="database-entry-links">${customization.categories.map(category => `<a href="${route}#browse-entries"><span>${escapeHtml(zh ? category.zhName : category.name)}</span></a>`).join('')}</div>`
+      : kind === 'buildings'
+        ? `<div class="database-entry-links">${buildings.entries.map(entry => `<a href="${route}/${entry.id}"><span>${escapeHtml(zh ? '鸡舍 · Coop' : 'Coop · 鸡舍')}</span></a>`).join('')}</div>`
       : renderEntries(kind === 'animals' ? animals : kind === 'crops' ? crops : kind === 'vehicles' ? vehicles : read(kind), kind, locale, route);
     const guides = (guideLinks[kind] || []).map(([id, en, cn]) => `<a href="${prefix}/guides/${id}">${zh ? cn : en}</a>`).join('');
     return `<section class="database-hub-card database-hub-${kind}"><div class="database-hub-heading"><h2><a href="${route}">${labels[kind][zh ? 1 : 0]} <span aria-hidden="true">›</span></a></h2><p>${descriptions[kind][zh ? 1 : 0]}</p></div><div class="database-hub-content">${entries}${guides ? `<div class="database-guide-links">${guides}</div>` : ''}</div></section>`;

@@ -17,6 +17,21 @@ const LEVELS = new Set(data.meta.evidenceLevels);
 const VALIDITY = new Set(data.meta.validityValues);
 const SOURCE_KINDS = new Set(["official-news", "steam-thread", "local-video", "wiki", "local-archive", "community-scan", "store-page", "first-hand-build-resource"]);
 const SOURCE_IDS = new Set(Object.keys(data.sources));
+// Newly sourced care facts must retain the same version in both languages.
+for (const animal of data.species) {
+  for (const fact of animal.zh?.groups.flatMap(group => group.facts) || []) {
+    if (fact.sourceIds?.includes('update-0-8-10-858')) {
+      assert.equal(fact.build, data.sources['update-0-8-10-858'].build, `${animal.id}: Chinese sickness facts must retain the official source build`);
+    }
+  }
+}
+for (const locale of ['', 'zh/']) {
+  const index = JSON.parse(fs.readFileSync(path.join(root, locale, 'search-index.json'), 'utf8'));
+  const route = `/${locale}guides/animal-guide#sickness-alerts`;
+  const answer = index.find(entry => entry.url === route);
+  assert.ok(answer, `${locale || 'en'}: sickness answer must have its own searchable deep link`);
+  assert.match(answer.description, /^(Official|官方)/, `${route}: official care advice must not inherit a community label`);
+}
 assert.ok(LEVELS.size === 6 && LEVELS.has('build-observed') && VALIDITY.size === 4, "meta must enumerate evidence levels, including build observations, and validity values");
 assert.ok(Array.isArray(data.species) && data.species.length >= 4, "expected at least 4 species");
 assert.match(sharedStyles, /\.table-tools\s*\{[^}]*align-items:\s*center/s, "table controls must vertically center count badges");

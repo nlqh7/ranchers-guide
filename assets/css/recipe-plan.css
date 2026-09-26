@@ -9,7 +9,7 @@
 .recipe-plan p { margin: 0 0 12px; }
 .recipe-plan .recipe-plan-note { font-size: .875rem; color: var(--brown-700); line-height: 1.6; }
 .recipe-plan p:last-of-type { margin-bottom: 0; }
-.recipe-plan [hidden], .recipe-plan [data-plan-status]:empty { display: none !important; }
+.recipe-plan [hidden], .recipe-plan [data-plan-status]:empty, .recipe-plan [data-plan-entry]:empty { display: none !important; }
 .recipe-plan a { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; color: var(--green-700); }
 .recipe-plan a:hover { text-decoration: underline; }
 .recipe-plan-picker { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) auto; align-items: end; gap: 12px; margin: 16px 0; }
@@ -143,6 +143,12 @@
 .recipe-plan .recipe-plan-building-info a {
   min-width: 0; min-height: 44px; max-width: 100%; overflow-wrap: anywhere;
 }
+.recipe-plan .recipe-plan-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; margin: 16px 0 8px; }
+.recipe-plan .recipe-plan-heading h3 { margin: 0; }
+.recipe-plan [data-plan-copy-status]:empty { display: none; }
+.recipe-plan .recipe-plan-copy-fallback { margin: 8px 0 16px; }
+.recipe-plan .recipe-plan-copy-fallback textarea { box-sizing: border-box; width: 100%; max-width: 100%; min-height: 120px; padding: 10px; border: 1px solid var(--brown-300); border-radius: 6px; font: inherit; line-height: 1.6; color: var(--brown-900); background: var(--cream-100); resize: vertical; }
+.recipe-plan .recipe-plan-copy-fallback textarea:focus-visible { outline: 2px solid var(--green-700); outline-offset: 3px; }
 @media (max-width: 640px) {
   .recipe-plan .recipe-plan-modes > button { flex: 1 1 0; }
   .recipe-plan .recipe-plan-building > label { max-width: none; }

@@ -3768,3 +3768,19 @@ details.pending-facts .pending-list {
   font-size: 0.85rem;
   line-height: 1.6;
 }
+
+/* Practical guide lookups: readable row labels instead of repeated header styling. */
+.article .guide-answer-table th {
+  color: var(--brown-900);
+  background: var(--cream-200);
+  text-transform: none;
+  letter-spacing: normal;
+  vertical-align: top;
+}
+.article .guide-answer-table tbody th {
+  width: 34%;
+  background: var(--cream-100);
+  font-weight: 600;
+}
+.article .guide-answer-table td { vertical-align: top; }
+.article .guide-answer-table td strong { display: block; margin-bottom: 4px; }

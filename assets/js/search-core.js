@@ -276,6 +276,37 @@
     }).slice(0, typeof limit === "number" ? limit : 12);
   }
 
+  function normalizeEntityQuery(value) {
+    return String(value || "").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+  }
+
+  function containsEntityName(query, name) {
+    // Inputs contain only letters, numbers and spaces. Latin names need word
+    // boundaries; Chinese names (and adjacent Chinese questions) need no spaces.
+    return new RegExp("(?:^|[^a-z0-9])" + name + "(?:$|[^a-z0-9])").test(query);
+  }
+
+  function entityScore(entity, query) {
+    var normalized = normalizeEntityQuery(query);
+    var queryTokens = normalized.split(/\s+/).filter(Boolean);
+    var label = normalizeEntityQuery(entity.label);
+    var aliases = (entity.aliases || []).map(normalizeEntityQuery).filter(Boolean);
+    var keywords = (entity.keywords || []).map(normalizeEntityQuery).filter(function (value) { return value.length >= 3; });
+    var labelTokens = label.split(/\s+/).filter(Boolean);
+    if (!normalized || !label) return 0;
+    if (label === normalized || aliases.some(function (alias) { return alias === normalized; })) return 100;
+    if (containsEntityName(normalized, label)) return 92;
+    if (labelTokens.some(function (token) {
+      return token.length >= 2 && !QUERY_STOP_WORDS.has(token) && queryTokens.indexOf(token) !== -1;
+    })) return 88;
+    if (label.split(/\s+/).filter(Boolean).every(function (token) { return queryTokens.indexOf(token) !== -1; })) return 88;
+    if (aliases.some(function (alias) {
+      return (alias.length >= 3 || /[\u3400-\u9fff]/.test(alias)) && containsEntityName(normalized, alias);
+    })) return 78;
+    var matchedKeyword = keywords.some(function (keyword) { return queryTokens.indexOf(keyword) !== -1; });
+    return matchedKeyword ? 52 : 0;
+  }
+
   function dossierSupportsExactAnswer(entity, query, matches) {
     var exact = matches.filter(function (match) { return normalize(match.title) === normalize(query); });
     return !exact.length || exact.some(function (match) { return match.url === entity.route; });
@@ -298,6 +329,7 @@
   }
 
   return {
+    entityScore: entityScore,
     dossierSupportsExactAnswer: dossierSupportsExactAnswer,
     dossierFacts: dossierFacts,
     evidencePresentation: evidencePresentation,

@@ -1,5 +1,6 @@
 {
   "build": "0.8.10.842",
+  "liveBuild": "0.8.10.871",
   "steamBuild": "24847725",
   "evidenceLevel": "build-observed",
   "validity": "unknown",

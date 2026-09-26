@@ -5,6 +5,7 @@ const root = path.resolve(__dirname, '..');
 const animals = require('../data/animals.json');
 const crops = require('../data/crops.json');
 const vehicles = require('../data/build-vehicles.json');
+const b2Entries = require('../data/b2-entry-pages.json');
 for (const prefix of ['', 'zh/']) {
   for (const suffix of ['.html', '/animals.html', '/crops.html', '/materials.html', '/quests.html', '/npcs.html', '/customization.html']) {
     const html = fs.readFileSync(path.join(root, `${prefix}database${suffix}`), 'utf8');
@@ -25,7 +26,13 @@ for (const prefix of ['', 'zh/']) {
       assert.ok(browser.includes(`href="#${item.id}"`));
       const profile = html.match(new RegExp(`<section[^>]*id="${item.id}"[^>]*>[\\s\\S]*?<\\/section>`))?.[0];
       assert.ok(profile?.includes('href="#browse-entries"'), `${item.id}: return link preserves quick lookup`);
-      for (const fact of item.facts) assert.ok(profile.includes((prefix ? fact.zhText : fact.text).replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]))), `${item.id}: existing evidence is retained`);
+      const migrated = kind === 'quests' && b2Entries.quests.includes(item.id);
+      if (migrated) {
+        assert.match(profile, new RegExp(`database/quests/${item.id}`), `${item.id}: compact directory must link to its standalone entry`);
+        assert.match(profile, /data-quest-directory-summary=/, `${item.id}: compact directory summary must remain visible`);
+      } else {
+        for (const fact of item.facts) assert.ok(profile.includes((prefix ? fact.zhText : fact.text).replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]))), `${item.id}: existing evidence is retained`);
+      }
     }
     assert.doesNotMatch(html, /class="answer-box npc-lookup-guide"|class="entity-decision"/, 'avoid repeated introductory panels');
   }

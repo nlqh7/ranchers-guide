@@ -22,6 +22,19 @@
 .article .resource-use-table tbody tr:hover :is(th,td) { background: var(--cream-200); }
 .article .resource-use-table td { font-variant-numeric: tabular-nums; }
 .resource-use-table a { overflow-wrap: anywhere; }
+.resource-uses[data-material-uses] > .resource-use-controls { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: end; gap: 12px; max-width: 640px; margin: 12px 0 8px; }
+.resource-uses[data-material-uses] .resource-use-controls label { display: grid; gap: 6px; min-width: 0; color: var(--brown-700); font-size: .9rem; font-weight: 600; }
+.resource-uses[data-material-uses] [data-use-search] { width: 100%; min-width: 0; min-height: 44px; padding: 10px 12px; border: 1px solid var(--brown-500); border-radius: 4px; background: var(--cream-100); color: var(--brown-900); font: inherit; font-size: 1rem; line-height: 1.4; }
+.resource-uses[data-material-uses] [data-use-search]::placeholder { color: var(--brown-700); opacity: 1; }
+.resource-uses[data-material-uses] [data-use-clear] { min-width: 44px; min-height: 44px; max-width: 100%; padding: 10px 16px; border: 1px solid var(--green-700); border-radius: 4px; background: var(--cream-200); color: var(--green-700); font: inherit; font-weight: 600; line-height: 1.4; cursor: pointer; }
+.resource-uses[data-material-uses] [data-use-clear]:hover { background: var(--cream-300); }
+.resource-uses[data-material-uses] :is([data-use-search],[data-use-clear]):focus-visible { outline: 3px solid var(--green-700); outline-offset: 2px; }
+.resource-uses[data-material-uses] > [data-use-count] { margin: 8px 0 12px; overflow-wrap: anywhere; }
+.resource-uses[data-material-uses] > .resource-use-controls[hidden],
+.resource-uses[data-material-uses] > [data-use-count][hidden],
+.resource-uses[data-material-uses] > [data-use-count]:empty,
+.resource-uses[data-material-uses] [data-use-group][hidden],
+.resource-uses[data-material-uses] tr[data-use-row][hidden] { display: none !important; }
 .resource-links { display: flex; flex-wrap: wrap; align-items: center; gap: 0 20px; }
 .resource-links .resource-note { margin: 0; }
 .resource-profile { border-top: 1px solid var(--cream-300); margin-top: 24px; padding-top: 16px; scroll-margin-top: 110px; }
