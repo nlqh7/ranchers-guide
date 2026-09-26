@@ -23,6 +23,12 @@ for (const prefix of ['', 'zh/']) {
   assert.match(beginner, prefix ? /11 个季节配置.*9 个.*种子商店/ : /11 seasonal configurations.*9.*Town Seed Vendor/is);
   assert.match(beginner, prefix ? /href="\/zh\/tools\/quest-tracker"/ : /href="\/tools\/quest-tracker"/);
   assert.match(beginner, prefix ? /<details class="faq-item">\s*<summary>展开旧版/ : /<details class="faq-item">\s*<summary>Older 0\.8\.10\.455/);
+  assert.match(beginner, prefix ? /2026-09-26 (?:更新|复核)/ : /September 26, 2026/, `${prefix || 'en/'} review date must reflect the latest patch-guidance review`);
+  assert.match(beginner, /href="\/guides\/controls-camera-settings#camera"/, `${prefix || 'en/'} newcomers must be able to jump from the beginner route to the published camera guide`);
+  assert.match(beginner, prefix ? /href="\/zh\/guides\/farming-fields#crop-loss"/ : /href="\/guides\/farming-fields#crop-loss"/, `${prefix || 'en/'} crop-loss answer must link to the actionable current diagnostic`);
+  assert.match(beginner, prefix ? /日终.*(?:提示|报告).{0,120}(?:田块|信息弹窗)|(?:田块|信息弹窗).{0,120}日终/ : /End.of.Day.{0,180}(?:Plantation Info Popup|popup)|(?:Plantation Info Popup|popup).{0,180}End.of.Day/i, `${prefix || 'en/'} crop-loss answer must direct players to both in-game reason displays`);
+  assert.match(beginner, prefix ? /(?:首次|第一次).{0,120}(?:屋顶|屋顶板).{0,100}(?:教程|支持|放置)/ : /first.*roof.{0,150}(?:tutorial|support|placement)/i, `${prefix || 'en/'} building FAQ must explain the first-roof tutorial`);
+  assert.match(beginner, /1844115010489002/, `${prefix || 'en/'} new roof/camera guidance must link to the official 0.8.10.871 announcement`);
   assert.doesNotMatch(beginner, /profit per day for every known crop|Scarecrow recipes live in the workbench|稻草人配方在工地制作菜单/);
 }
 

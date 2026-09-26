@@ -61,6 +61,8 @@ const nodeChecks = [
   ["check-animal-care-reference.cjs"],
   ["check-sleep-guide.cjs"],
   ["check-cashin-guide.cjs"],
+  ["check-multiplayer-coop-content.cjs"],
+  ["check-victor-hours-guide.cjs"],
   ["check-hoe-guide.cjs"],
   ["check-blueprint-building-guide.cjs"],
   ["check-police-pursuit-guide.cjs"],

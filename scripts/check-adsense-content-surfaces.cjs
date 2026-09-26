@@ -84,6 +84,13 @@ assert.match(read("zh/index.html"), /<a href="\/zh\/database\/buildings\/coop#fi
 assert.doesNotMatch(read("index.html"), /Help Build the Live Database|Record the game version, conditions and exact result/, "index.html: keep research contribution onboarding off the player-first homepage");
 assert.doesNotMatch(read("zh/index.html"), /证据优先|没有证据的数值不会装成答案/, "zh/index.html: keep editorial-method messaging off the player-first homepage");
 
+const guideSection = read("index.html").match(/<section class="section" id="guides">[\s\S]*?<\/section>/)?.[0];
+assert.ok(guideSection, "index.html: practical guides need a discoverable home section");
+assert.doesNotMatch(guideSection, /versioned screenshot|repeatable in-game observation|evidence tracker|limits of current source material|Review the evidence|Profit Formulas & Payback Method/i, "index.html: guide cards should promise player outcomes, not editorial process");
+assert.match(guideSection, /Compare crop seasons, first harvest times and regrowth/i, "index.html: the crop entry should describe a planting decision it helps with");
+assert.match(guideSection, /Compare Costs Before an Upgrade/i, "index.html: the money entry should describe the player's spending decision");
+assert.match(guideSection, /Animal Care & Requirements/i, "index.html: the animal entry should lead with care requirements");
+
 assert.doesNotMatch(read("index.html"), /hero-eyebrow|hero-promise/, "index.html: do not stack generic promotional lines above the task routes");
 assert.match(read("index.html"), /<h2>What do you need to do\?<\/h2>/, "index.html: first-time visitors need a direct task heading");
 assert.match(read("zh/index.html"), /<h2 id="zh-start-title">你现在想找什么？<\/h2>/, "zh/index.html: first-time visitors need a direct task heading");

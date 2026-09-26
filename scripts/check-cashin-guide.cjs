@@ -45,9 +45,13 @@ for (const locale of ['en', 'zh']) {
   assert.doesNotMatch(money, locale === 'zh' ? /当天结算时到账/ : /that day(?:'s)? end-of-day settlement/i, `${locale}: obsolete same-day wording must be removed`);
   assert.match(coop, /id="progress-boundary"[^>]*data-search-entry/, `${locale}: co-op progress boundary must be searchable`);
   assert.match(coop, locale === 'zh'
-    ? /访客保留自己的钱、经验、背包物品和蓝图；房主拥有这个牧场的世界与任务进度/
-    : /visitor keeps their own money, experience, backpack items, and blueprints.*host owns the ranch and its world\/quest progress/s,
-    `${locale}: visitor retention and host progress must agree across guides`);
+    ? /访客保留自己的钱、经验、背包物品和蓝图/
+    : /visitors keep personal money, experience, backpack items, and blueprints/i,
+    `${locale}: co-op guidance must list the FAQ-confirmed visitor property`);
+  assert.match(coop, locale === 'zh'
+    ? /房主拥有这个牧场的世界与任务进度/
+    : /world and quest progress in that session stays with the host's save/i,
+    `${locale}: co-op guidance must assign ranch and quest progress to the host`);
   assert.match(coop, locale === 'zh'
     ? /CashIn 到账仍没有公开分配规则/
     : /CashIn is the remaining boundary.*does not say whether a visitor's deposit is paid/s,

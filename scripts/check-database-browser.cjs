@@ -9,7 +9,8 @@ const b2Entries = require('../data/b2-entry-pages.json');
 for (const prefix of ['', 'zh/']) {
   for (const suffix of ['.html', '/animals.html', '/crops.html', '/materials.html', '/quests.html', '/npcs.html', '/customization.html']) {
     const html = fs.readFileSync(path.join(root, `${prefix}database${suffix}`), 'utf8');
-    assert.equal((html.match(/database-browser\.css\?v=20260831-1/g) || []).length, 1, 'every database loads the current shared theme once');
+    const themeVersion = suffix === '/crops.html' ? '20260927-crop-cards' : '20260831-1';
+    assert.equal((html.match(new RegExp(`database-browser\\.css\\?v=${themeVersion}`, 'g')) || []).length, 1, 'every database loads the current shared theme once');
     assert.doesNotMatch(html, /<article[^>]*style="[^"]*max-width/, `${prefix}${suffix}: page-specific inline width must not override the shared layout`);
     assert.match(html, /favicon-32\.png/, 'theme changes preserve favicon markup');
     assert.match(html, /main\.js\?v=/, 'theme changes preserve shared navigation');
@@ -69,6 +70,11 @@ for (const prefix of ['', 'zh/']) {
       assert.ok(browser.includes(`href="#${target}"`), `${prefix}${kind}: ${item.id} has a direct link`);
       assert.ok(html.includes(`id="${target}"`), `${target}: destination exists`);
       if (kind === 'crops') {
+        const card = browser.match(new RegExp(`<a\\b[^>]*href="#${target}"[^>]*>[\\s\\S]*?<\\/a>`))?.[0] || '';
+        assert.match(card, /database-entry-meta/, `${prefix}${target}: crop choice should show a quick growth summary`);
+        assert.ok(card.includes(String(item.daysToFirstHarvest)), `${prefix}${target}: quick summary must use the configured first-harvest value`);
+        assert.match(card, prefix ? /首收/ : /First harvest/, `${prefix}${target}: summary must label the growth value`);
+        assert.ok(card.includes(item.regrowEveryDays ? String(item.regrowEveryDays) : (prefix ? '不再生' : 'no regrow')), `${prefix}${target}: quick summary must distinguish regrowing from single-harvest crops`);
         const profile = html.match(new RegExp(`<section[^>]*id="${target}"[^>]*>[\\s\\S]*?<\\/section>`))?.[0];
         assert.ok(profile?.includes('class="database-facts"'), `${target}: labeled configuration must appear in its profile`);
         assert.ok(profile.includes(`${item.daysToFirstHarvest} ${prefix ? '天' : 'days'}`), 'first-harvest value must come from the roster');
@@ -77,7 +83,8 @@ for (const prefix of ['', 'zh/']) {
         assert.ok(html.includes(`id="build-${target}"`), 'old table anchors remain valid');
       }
     }
-    assert.match(html, /database-browser\.css\?v=20260831-1/);
+    if (kind === 'crops') assert.ok(browser.includes(prefix ? '来自 0.8.10.842 游戏配置，未实机计时' : 'from 0.8.10.842 game configuration and has not been timed in a live save'), `${prefix}crops: growth-summary build and source boundary must be visible once`);
+    assert.match(html, new RegExp(`database-browser\\.css\\?v=${kind === 'crops' ? '20260927-crop-cards' : '20260831-1'}`));
     assert.doesNotMatch(html, /class="entity-decision"/, 'lookup explanation must not repeat the profile summary');
     assert.match(html, /class="database-reference-notes"/, 'page metadata belongs in one secondary disclosure');
     assert.doesNotMatch(html, />1 days</, 'English one-day values use singular units');

@@ -82,10 +82,16 @@ function renderEntries(data, kind, locale, base = '') {
     }).join('')}</div>`;
   }
   const seasons = [...new Set(data.buildRoster.entries.map(c => c.season))];
+  const cropLink = crop => {
+    const firstHarvest = zh ? `首收 ${crop.daysToFirstHarvest} 天` : `First harvest ${crop.daysToFirstHarvest}d`;
+    const regrowth = crop.regrowEveryDays
+      ? (zh ? `每 ${crop.regrowEveryDays} 天再生` : `repeats every ${crop.regrowEveryDays}d`)
+      : (zh ? '不再生' : 'no regrow');
+    return `<a class="database-crop-entry" href="${base}#${escapeHtml(crop.id)}">${renderIcon('crops', crop.id)}<span class="database-crop-entry-copy"><strong>${escapeHtml(zh ? crop.zhName : crop.name)}</strong><small class="database-entry-meta">${firstHarvest} · ${regrowth}</small></span></a>`;
+  };
   return `<div class="database-seasons">${seasons.map(season => {
     const entries = data.buildRoster.entries.filter(c => c.season === season);
-    return `<div><h3>${escapeHtml(zh ? entries[0].zhSeason : season)}</h3><div class="database-entry-links">${entries.map(c =>
-      link(c.id, zh ? c.zhName : c.name)).join('')}</div></div>`;
+    return `<div><h3>${escapeHtml(zh ? entries[0].zhSeason : season)}</h3><div class="database-entry-links">${entries.map(cropLink).join('')}</div></div>`;
   }).join('')}${data.inputs?.some(i => i.buildInput) ? `<div><h3>${zh ? '肥料' : 'Fertilizers'}</h3><div class="database-entry-links">${data.inputs.filter(i => i.buildInput).map(i => link(i.id, zh ? i.buildInput.zhName : i.buildInput.name)).join('')}</div></div>` : ''}<div><h3>${zh ? '未列入当前作物表' : 'Not in current roster'}</h3><div class="database-entry-links">${seedItems.filter(i => i.rosterStatus === 'not-included').map(i => link(`seed-${i.cropId}`, zh ? i.zhName : i.name)).join('')}</div></div></div>`;
 }
 
@@ -109,7 +115,7 @@ function renderLookup(data, kind, locale) {
       : '';
   const notes = {
     animals: ['Look up ranch-animal care and build-defined wildlife names. Wildlife entries do not establish behavior or spawn locations.', '查看牧场动物照料与构建内野生生物名称；野生生物条目不证明行为或生成地点。'],
-    crops: ['Seasons come from game-build configuration. Select a crop for details; Marrow and Leek availability is unconfirmed.', '季节来自游戏构建配置；点击查看种植资料。西葫芦、韭葱的购买途径尚未确认。'],
+    crops: ['Growth timing comes from 0.8.10.842 game configuration and has not been timed in a live save. Select a crop for details; Marrow and Leek have no seed-shop table match.', '生长时间来自 0.8.10.842 游戏配置，未实机计时。点击查看详情；西葫芦、韭葱未匹配到种子商店记录。'],
     materials: ['Find how to obtain each material and where it is used.', '查获取途径与用途。'],
     quests: ['Check the steps, preparation and stuck-point guides.', '查任务步骤、准备事项与卡关处理。'],
     npcs: ['Find services, related quests and locations.', '查人物服务、相关任务与地点。'],
@@ -141,7 +147,7 @@ function decorateReferencePage(html, data, kind, locale) {
 
 function decoratePage(html, data, kind, locale) {
   const zh = locale === 'zh';
-  const cssVersion = '20260831-1';
+  const cssVersion = kind === 'crops' ? '20260927-crop-cards' : '20260831-1';
   return decorateEntryHeadings(html, kind)
     .replace('</head>', `  <link rel="stylesheet" href="/assets/css/database-browser.css?v=${cssVersion}">\n</head>`)
     .replace('<body>', '<body class="database-surface">')
