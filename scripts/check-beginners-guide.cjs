@@ -28,6 +28,7 @@ for (const prefix of ['', 'zh/']) {
   assert.match(beginner, prefix ? /href="\/zh\/guides\/farming-fields#crop-loss"/ : /href="\/guides\/farming-fields#crop-loss"/, `${prefix || 'en/'} crop-loss answer must link to the actionable current diagnostic`);
   assert.match(beginner, prefix ? /日终.*(?:提示|报告).{0,120}(?:田块|信息弹窗)|(?:田块|信息弹窗).{0,120}日终/ : /End.of.Day.{0,180}(?:Plantation Info Popup|popup)|(?:Plantation Info Popup|popup).{0,180}End.of.Day/i, `${prefix || 'en/'} crop-loss answer must direct players to both in-game reason displays`);
   assert.match(beginner, prefix ? /(?:首次|第一次).{0,120}(?:屋顶|屋顶板).{0,100}(?:教程|支持|放置)/ : /first.*roof.{0,150}(?:tutorial|support|placement)/i, `${prefix || 'en/'} building FAQ must explain the first-roof tutorial`);
+  assert.match(beginner, /href="\/(?:zh\/)?database\/buildings\/coop#first-coop-route"/, `${prefix || 'en/'} quest milestones must link directly to the first-Coop walkthrough`);
   assert.match(beginner, /1844115010489002/, `${prefix || 'en/'} new roof/camera guidance must link to the official 0.8.10.871 announcement`);
   assert.doesNotMatch(beginner, /profit per day for every known crop|Scarecrow recipes live in the workbench|稻草人配方在工地制作菜单/);
 }

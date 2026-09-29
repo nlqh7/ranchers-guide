@@ -26,7 +26,14 @@ for (const icon of manifest.icons) {
   for (const prefix of ['', 'zh/']) {
     const hub = fs.readFileSync(path.join(root, prefix, 'database.html'), 'utf8');
     const page = fs.readFileSync(path.join(root, prefix, 'database', `${icon.kind}.html`), 'utf8');
-    const link = hub.match(new RegExp(`<a\\b[^>]*href="/${prefix}database/${icon.kind}#${icon.id}"[^>]*>([\\s\\S]*?)</a>`))?.[1];
+    const directRoute = icon.kind === 'animals' && icon.id === 'chicken'
+      ? `/${prefix}database/animals/chicken`
+      : icon.kind === 'animals' && ['cow', 'goat'].includes(icon.id)
+        ? `/${prefix}database/animals/livestock#${icon.id}`
+        : icon.kind === 'crops' && ['red-lettuce', 'garlic', 'strawberry'].includes(icon.id)
+          ? `/${prefix}database/crops/${icon.id}`
+          : `/${prefix}database/${icon.kind}#${icon.id}`;
+    const link = hub.match(new RegExp(`<a\\b[^>]*href="${directRoute}"[^>]*>([\\s\\S]*?)</a>`))?.[1];
     assert.ok(link?.includes(icon.src), `${prefix}${icon.id}: native icon accompanies the hub name`);
     assert.match(link, /alt=""/);
     if (prefix && icon.id === 'wood-log') {

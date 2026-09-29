@@ -44,6 +44,14 @@
       "date": "2026-09-14",
       "build": "0.8.10.868"
     },
+    "general-store-charcoal-reply": {
+      "kind": "steam-thread",
+      "title": "General Store — September 23 staff answer on making Charcoal",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/592942202593765840/",
+      "author": "Jennoula",
+      "date": "2026-09-23",
+      "build": "Not stated in the post"
+    },
     "charcoal-moderator-context": {
       "kind": "steam-thread",
       "title": "Steam thread: Fundamental Issues (moderator fire-extinguisher clarification)",
@@ -67,6 +75,14 @@
       "author": "Tila",
       "date": "2026-08-05",
       "build": "0.8.10.x"
+    },
+    "ranching-v2-notes": {
+      "kind": "official-news",
+      "title": "The Ranchers, Ranching v2 update! (official Steam announcement)",
+      "url": "https://steamcommunity.com/games/1501310/announcements/detail/3716073126083415742",
+      "author": "Ethan (official)",
+      "date": "2023-03-31",
+      "build": "alpha-2023"
     },
     "official-chicken-feed": {
       "kind": "steam-thread",
@@ -182,12 +198,20 @@
       "zhSearchTitle": "鸡饲料干草在哪里获得",
       "searchTags": "hay grass bush crates barrels chicken feed trough silo animal food",
       "zhSearchTags": "干草 草 灌木 木箱 桶 鸡饲料 食槽 筒仓 动物食物",
-      "summary": "Hay is chicken feed. The public current-build gathering route is still based on a single traceable player report.",
-      "zhSummary": "干草是鸡饲料。当前公开获取路线仍主要来自一条可追踪的玩家报告。",
-      "whenNeeded": "Check Hay as soon as chickens arrive: the feed use is officially supported, while the outdoor gathering route remains a lead to test.",
-      "zhWhenNeeded": "鸡到家后就要查干草：作为饲料的用途有官方支持，但户外获取路线仍只是待复测线索。",
+      "summary": "Hay is chicken feed. Official pre-EA notes say wild grass yields it at any growth stage; because that predates Early Access, verify a small test in your current save. A current-build bush/container route remains a single-player lead.",
+      "zhSummary": "干草是鸡饲料。EA 前官方说明称任意生长阶段的野草都能产出干草；由于资料早于抢先体验，建议先在当前存档小范围验证。灌木/容器路线仍只有一条当前版本玩家线索。",
+      "whenNeeded": "When chickens arrive, first try cutting a small patch of wild grass; official Alpha notes say growth stage does not matter, but this has not been reverified in the current Early Access build. If that fails, a current-build report suggests bushes and NPC-farm crates/barrels, not a guaranteed drop table.",
+      "zhWhenNeeded": "鸡到家后，可先试割一小片野草；官方 Alpha 说明称生长阶段不限，但该路线尚未按当前抢先体验版本复核。若无效，再参考当前版本玩家提到的灌木和 NPC 农场木箱/桶路线；这不是保证掉落表。",
       "relatedRoutes": ["/guides/animal-guide#feeding", "/database/animals#chicken"],
       "facts": [
+        {
+          "text": "Official 2023 Alpha update notes say wild grass produces Hay regardless of growth stage. This is pre-Early Access documentation and does not by itself confirm current-build behavior.",
+          "zhText": "2023 年官方 Alpha 更新说明称，野草在任何生长阶段都能产出干草。这是抢先体验前的资料，不能单独证明当前版本行为。",
+          "evidenceLevel": "official",
+          "build": "alpha-2023",
+          "validity": "historical",
+          "sourceIds": ["ranching-v2-notes"]
+        },
         {
           "text": "An official moderator answer identifies hay as chicken feed; place it in the interior trough or load a connected silo for automation.",
           "zhText": "官方版主确认干草是鸡饲料；可放进鸡舍内部食槽，或装入已连接的筒仓用于自动喂食。",
@@ -214,12 +238,20 @@
       "zhSearchTitle": "木炭怎么制作",
       "searchTags": "charcoal coal burn logs torch fire extinguisher building material",
       "zhSearchTags": "木炭 煤 原木 燃烧 火把 灭火器 建造 材料",
-      "summary": "A player reports burning Wood Logs, extinguishing them, then collecting Charcoal. This remains an unverified route, not a guaranteed recipe.",
-      "zhSummary": "一名玩家报告了燃烧原木、灭火后收集木炭的路线。它仍未经过本站复现，不是保证可行的配方。",
-      "whenNeeded": "Check how much your selected recipes need before trying the reported route. Keep logs needed for construction separate.",
-      "zhWhenNeeded": "尝试报告中的路线前，先查所选配方需要多少木炭，并留好建造所需的原木。",
+      "summary": "Community staff say Charcoal is made by burning wood, not bought. Exact controls, burn time and yield remain unverified.",
+      "zhSummary": "社区工作人员明确说明木炭由燃烧木材获得，不是去商店购买。具体操作、燃烧时间和产量仍未验证。",
+      "whenNeeded": "Check your recipe's Charcoal requirement, keep construction logs separate and test a small amount before scaling up.",
+      "zhWhenNeeded": "先查配方所需木炭数量，留好建造原木，小量确认结果后再扩大制作。",
       "relatedRoutes": ["/guides/crafting-guide", "/community"],
       "facts": [
+        {
+          "text": "In the September 23 General Store discussion, community staff say Charcoal is made by burning wood rather than bought. The reply does not specify controls, weather, timing or yield.",
+          "zhText": "9 月 23 日 General Store 讨论中，社区工作人员说明木炭由燃烧木材获得，而非购买。该答复没有给出操作按键、天气、计时或产量。",
+          "evidenceLevel": "official",
+          "build": "Not stated / 原帖未注明",
+          "validity": "unknown",
+          "sourceIds": ["general-store-charcoal-reply"]
+        },
         {
           "text": "Whitebear's August 4 report describes igniting felled or dropped logs with a torch in dry weather, waiting for a material change, and extinguishing the fire before collecting.",
           "zhText": "Whitebear 在 8 月 4 日的报告中描述：干燥天气用火把点燃砍下或放下的原木，等待材料变化，灭火后再收集。",

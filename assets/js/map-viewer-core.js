@@ -51,6 +51,26 @@
     return painted || nearest;
   }
 
+  function groupNearbyMarkers(markers, threshold) {
+    var pending = markers.slice();
+    var groups = [];
+    var radius = Math.max(0, Number(threshold) || 0);
+    while (pending.length) {
+      var anchor = pending.shift();
+      var group = [anchor];
+      for (var index = 0; index < pending.length;) {
+        var candidate = pending[index];
+        if (Math.hypot(Number(candidate.x) - Number(anchor.x), Number(candidate.y) - Number(anchor.y)) <= radius) {
+          group.push(pending.splice(index, 1)[0]);
+        } else {
+          index += 1;
+        }
+      }
+      if (group.length > 1) groups.push(group);
+    }
+    return groups;
+  }
+
   function pan(view, direction) {
     var next = { scale: clampZoom(view.scale), x: Number(view.x) || 0, y: Number(view.y) || 0 };
     var step = 7 / next.scale;
@@ -108,5 +128,5 @@
     return clampXY({ scale: s, x: 100 * s * (0.5 - (Number(mx) || 0) / 100), y: 100 * s * (0.5 - (Number(my) || 0) / 100) });
   }
 
-  return { clampZoom: clampZoom, getView: getView, getMarkerMetrics: getMarkerMetrics, pickMarker: pickMarker, viewportToCanvas: viewportToCanvas, pan: pan, stageToImage: stageToImage, clampXY: clampXY, zoomAt: zoomAt, panBy: panBy, focus: focus };
+  return { clampZoom: clampZoom, getView: getView, getMarkerMetrics: getMarkerMetrics, pickMarker: pickMarker, groupNearbyMarkers: groupNearbyMarkers, viewportToCanvas: viewportToCanvas, pan: pan, stageToImage: stageToImage, clampXY: clampXY, zoomAt: zoomAt, panBy: panBy, focus: focus };
 });

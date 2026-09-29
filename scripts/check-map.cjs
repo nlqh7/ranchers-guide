@@ -19,9 +19,9 @@ assert.match(mapPage, /<h2 class="visually-hidden" id="current-map-title">/, "th
 assert.match(chineseMapPage, /<h2 class="visually-hidden" id="current-map-title">/, "Chinese map must use the same compact heading structure");
 const questData = JSON.parse(read("data/quests.json"));
 const taskRelationIds = questData.quests.map((quest) => quest.id);
-const mapStyleAsset = /\/assets\/css\/style\.css\?v=20260827-map44/;
-const mapScriptAsset = /\/assets\/js\/map\.js\?v=20260827-map39/;
-const mapViewerAsset = /\/assets\/js\/map-viewer-core\.js\?v=20260827-full4/;
+const mapStyleAsset = /\/assets\/css\/style\.css\?v=20260928-map45/;
+const mapScriptAsset = /\/assets\/js\/map\.js\?v=20260928-map40/;
+const mapViewerAsset = /\/assets\/js\/map-viewer-core\.js\?v=20260928-neighbor1/;
 assert.match(mapPage, mapStyleAsset, "English map must bust the stylesheet cache after adding marker-type controls");
 assert.match(chineseMapPage, mapStyleAsset, "Chinese map must use the same current stylesheet cache key");
 assert.match(mapPage, mapScriptAsset, "English map must bust the script cache after map interaction changes");

@@ -1,4 +1,4 @@
-/* The Ranchers Guide - shared JS: mobile nav + footer year */
+/* The Ranchers Guide - shared navigation, footer year and hash deep links */
 (function () {
   "use strict";
 
@@ -23,7 +23,20 @@
     return "";
   }
 
-  if (typeof module !== "undefined" && module.exports) module.exports = { activeNavHref: activeNavHref };
+  function openDetailsForHashTarget(target) {
+    var current = target;
+    while (current) {
+      if (String(current.tagName || "").toLowerCase() === "details") current.open = true;
+      current = current.parentElement;
+    }
+  }
+
+  if (typeof module !== "undefined" && module.exports) {
+    module.exports = {
+      activeNavHref: activeNavHref,
+      openDetailsForHashTarget: openDetailsForHashTarget
+    };
+  }
   if (typeof document === "undefined" || typeof window === "undefined") return;
 
   /* Mobile nav toggle */
@@ -158,7 +171,10 @@
     }
     var target = document.getElementById(id);
     // Deep links are restoration, not a tour through every preceding entry.
-    if (target) target.scrollIntoView({ behavior: "instant", block: "start" });
+    if (target) {
+      openDetailsForHashTarget(target);
+      target.scrollIntoView({ behavior: "instant", block: "start" });
+    }
   }
 
   window.setTimeout(jumpToHashTarget, 0);

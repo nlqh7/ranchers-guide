@@ -64,7 +64,11 @@ for (const prefix of ['', 'zh/']) {
     assert.ok(profile?.includes(`data-produce-id="${item.id}"`), `${prefix}: ${item.id} must be visible in its full profile`);
     assert.ok(profile.includes(prefix ? item.zhName : item.name));
     for (const offerId of item.shopOfferIds) assert.ok(profile.includes(`href="/${prefix}guides/resources-and-materials#offer-${offerId}"`));
-    assert.equal(search.searchDocuments(index, prefix ? item.zhName : item.name, 12)[0]?.url, `/${prefix}database/crops#${anchor}`, `${prefix}: exact produce name must open the complete profile`);
+    const standalone = item.cropStatus === 'current-roster' && ['red-lettuce', 'garlic', 'strawberry'].includes(item.cropId);
+    const expectedUrl = standalone
+      ? `/${prefix}database/crops/${item.cropId}#${item.cropId}`
+      : `/${prefix}database/crops#${anchor}`;
+    assert.equal(search.searchDocuments(index, prefix ? item.zhName : item.name, 12)[0]?.url, expectedUrl, `${prefix}: exact produce name must open the complete profile`);
     if (item.cropStatus === 'current-roster') {
       const entity = knowledge.entities.find(entry => entry.id === `crop:${item.cropId}`);
       assert.ok(entity.aliases.includes(item.name) && entity.aliases.includes(item.zhName));

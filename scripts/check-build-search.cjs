@@ -3,13 +3,18 @@ const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const crops = require('../data/crops.json');
+const standaloneCropIds = new Set(['red-lettuce', 'garlic', 'strawberry']);
 for (const locale of ['en', 'zh']) {
   const index = JSON.parse(fs.readFileSync(path.join(root, locale === 'zh' ? 'zh/knowledge-index.json' : 'knowledge-index.json'), 'utf8'));
   for (const crop of crops.buildRoster.entries) {
     const matches = index.entities.filter(e => e.id === `crop:${crop.id}`);
     assert.equal(matches.length, 1, `${locale}: ${crop.id} needs one direct knowledge card`);
     const entity = matches[0];
-    assert.equal(entity.route, `${locale === 'zh' ? '/zh' : ''}/database/crops#${crop.id}`);
+    const prefix = locale === 'zh' ? '/zh' : '';
+    const expectedRoute = standaloneCropIds.has(crop.id)
+      ? `${prefix}/database/crops/${crop.id}`
+      : `${prefix}/database/crops#${crop.id}`;
+    assert.equal(entity.route, expectedRoute);
     assert.ok(entity.aliases.includes(crop.name) && entity.aliases.includes(crop.zhName));
     const facts = entity.facts.filter(f => f.evidenceLevel === 'build-observed');
     const cropFacts = facts.filter(f => f.sourceIds.includes('local-build-24847725'));
@@ -23,6 +28,10 @@ for (const locale of ['en', 'zh']) {
 console.log('PASS: all 11 crop configuration profiles have source-labeled bilingual knowledge cards.');
 
 const search = require('../assets/js/search-core.js');
+const storeAnswer = {title:'Where is the General Store? Look for Leafy Markets', aliases:['General Store'], url:'/guides/resources-and-materials#general-store'};
+assert.equal(search.dossierSupportsExactAnswer({route:'/map#youssefs-stand'},'General Store',[storeAnswer]),false,'An exact answer alias must suppress a keyword-only unrelated location card');
+assert.equal(search.dossierSupportsExactAnswer({route:storeAnswer.url},'General Store',[storeAnswer]),true,'The matching answer route may keep its card');
+assert.equal(search.dossierSupportsExactAnswer({route:'/map#youssefs-stand'},'clothing store',[storeAnswer]),true,'Keep fallback cards when no exact title or alias answers the question');
 const englishKnowledge = require('../knowledge-index.json');
 const soloDossiers = englishKnowledge.entities.filter(entity => search.entityScore(entity, 'PLAY SOLO') >= 52);
 assert.deepEqual(soloDossiers.map(entity => entity.id), [], 'PLAY SOLO must not promote unrelated quests or possessive shop names through a single letter');

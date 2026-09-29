@@ -43,21 +43,28 @@ function renderTabs(locale, current) {
 
 function renderEntries(data, kind, locale, base = '') {
   const zh = locale === 'zh';
-  const link = (id, name) => `<a href="${base}#${escapeHtml(id)}">${renderIcon(kind, id)}<span>${escapeHtml(name)}</span></a>`;
+  const link = (id, name) => {
+    let href = `${base}#${escapeHtml(id)}`;
+    if (kind === 'animals') {
+      const prefix = zh ? '/zh' : '';
+      if (id === 'chicken') href = `${prefix}/database/animals/chicken`;
+      else if (['cow', 'goat'].includes(id)) href = `${prefix}/database/animals/livestock#${escapeHtml(id)}`;
+    }
+    return `<a href="${href}">${renderIcon(kind, id)}<span>${escapeHtml(name)}</span></a>`;
+  };
   if (kind === 'vehicles') {
-    const groups = [
-      [true, zh ? '有经销商记录' : 'Dealer-linked definitions'],
-      [false, zh ? '无匹配经销商记录' : 'No matched dealer record'],
+    const actions = [
+      ['vehicle-operation-current-build', zh ? '加油、损坏与修理' : 'Fuel, damage & repairs'],
+      ['travel', zh ? '地铁、停车与出行' : 'Subway, parking & travel'],
+      ['vehicle-catalog', zh ? '车辆名称目录' : 'Vehicle name catalogue'],
     ];
-    return `<div class="database-seasons">${groups.map(([listed, title]) => {
-      const entries = data.items.filter(item => Boolean(item.shopOfferIds.length) === listed);
-      return `<div><h3>${title}</h3><div class="database-entry-links">${entries.map(item => link(`vehicle-${item.id}`, zh ? item.zhName : item.name)).join('')}</div></div>`;
-    }).join('')}</div>`;
+    return `<div class="database-guide-links">${actions.map(([id, label]) => `<a href="${base}#${id}">${label}</a>`).join('')}</div>`;
   }
   if (kind === 'animals') {
     const wildlife = data.wildlifeReference?.entries || [];
     const enemies = data.enemyReference?.entries || [];
-    return `<div class="database-seasons"><div><h3>${zh ? '牧场动物' : 'Ranch animals'}</h3><div class="database-entry-links">${data.species.map(a => link(a.id, zh ? a.zh.tocLabel : a.name)).join('')}</div></div>${wildlife.length ? `<div><h3>${zh ? '构建内野生生物' : 'Build-defined wildlife'}</h3><div class="database-entry-links">${wildlife.map(a => link(`wildlife-${a.id}`, zh ? a.zhName : a.name)).join('')}</div></div>` : ''}${enemies.length ? `<div><h3>${zh ? '原生 Enemies 表名称' : 'Enemies-table names'}</h3><div class="database-entry-links">${enemies.map(a => link(`enemy-${a.id}`, zh ? a.zhName : a.name)).join('')}</div></div>` : ''}</div>`;
+    const hasBuildReferences = wildlife.length || enemies.length;
+    return `<h3>${zh ? '牧场动物' : 'Ranch animals'}</h3><div class="database-entry-links">${data.species.map(a => link(a.id, zh ? a.zh.tocLabel : a.name)).join('')}</div>${hasBuildReferences ? `<div class="database-guide-links"><a href="${base}#build-data-reference">${zh ? '游戏文件名称参考（未实机确认）' : 'Game-file name references (not gameplay-verified)'}</a></div>` : ''}`;
   }
   if (kind === 'quests') {
     const groups = [
@@ -87,7 +94,8 @@ function renderEntries(data, kind, locale, base = '') {
     const regrowth = crop.regrowEveryDays
       ? (zh ? `每 ${crop.regrowEveryDays} 天再生` : `repeats every ${crop.regrowEveryDays}d`)
       : (zh ? '不再生' : 'no regrow');
-    return `<a class="database-crop-entry" href="${base}#${escapeHtml(crop.id)}">${renderIcon('crops', crop.id)}<span class="database-crop-entry-copy"><strong>${escapeHtml(zh ? crop.zhName : crop.name)}</strong><small class="database-entry-meta">${firstHarvest} · ${regrowth}</small></span></a>`;
+    const detailRoute = ['red-lettuce', 'garlic', 'strawberry'].includes(crop.id) ? `${zh ? '/zh' : ''}/database/crops/${crop.id}` : `${base}#${escapeHtml(crop.id)}`;
+    return `<a class="database-crop-entry" href="${detailRoute}">${renderIcon('crops', crop.id)}<span class="database-crop-entry-copy"><strong>${escapeHtml(zh ? crop.zhName : crop.name)}</strong><small class="database-entry-meta">${firstHarvest} · ${regrowth}</small></span></a>`;
   };
   return `<div class="database-seasons">${seasons.map(season => {
     const entries = data.buildRoster.entries.filter(c => c.season === season);
@@ -166,6 +174,8 @@ function decoratePage(html, data, kind, locale) {
       return `${browser}${delivery ? `\n${delivery}` : ''}<details class="database-reference-notes"><summary>${zh ? '使用指南与资料说明' : 'Getting started & reference notes'}</summary>${referenceIntro}</details>\n`;
     })
     .replace(/(<section class="evidence-ledger animal-profile"[^>]*>)/g, `$1<a class="database-back" href="#browse-entries">${zh ? '返回条目目录' : 'Back to entries'}</a>`)
+    .replace(/(<section class="evidence-ledger wildlife-reference" id="build-wildlife"[\s\S]*?<\/section>\s*<section class="evidence-ledger wildlife-reference" id="build-enemies"[\s\S]*?<\/section>)/,
+      (_, references) => `<details class="database-reference-notes database-wildlife-references" id="build-data-reference"><summary>${zh ? '游戏文件名称参考（未实机确认）' : 'Game-file name references (not gameplay-verified)'}</summary>${references}</details>`)
     .replace(/[\t ]+$/gm, '');
 }
 

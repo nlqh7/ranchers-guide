@@ -17,6 +17,7 @@ const { renderCropFacts, renderBuildOnlyCrops, renderExcludedSeeds } = require('
 const shops = require('../data/build-shops.json');
 const seedItems = require('../data/build-seeds.json').items;
 const produceItems = require('../data/build-produce.json').items;
+const CROP_DETAIL_ROUTES = Object.fromEntries(['red-lettuce', 'garlic', 'strawberry'].map(id => [id, `/database/crops/${id}`]));
 
 function escapeHtml(text) {
   return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -110,7 +111,10 @@ ${parts.join("\n")}`;
   }).join("\n");
 
   if (entry.buildInput) return renderFertilizerProfile(entry, 'en', fields);
-  return `      <section class="evidence-ledger animal-profile" id="${entry.id}" data-search-entry data-search-title="${escapeHtml(entry.id === 'hay' ? 'Hay as animal feed' : entry.name)}"${seedAliases} data-search-tags="${escapeHtml(entry.searchTags)}" data-search-status="Database record" aria-labelledby="${entry.id}-heading">
+  const searchableInDirectory = !CROP_DETAIL_ROUTES[entry.id];
+  const detailLink = CROP_DETAIL_ROUTES[entry.id] ? `<p><a class="btn btn-outline btn-compact" href="${CROP_DETAIL_ROUTES[entry.id]}">Open the ${escapeHtml(entry.name)} crop entry</a></p>` : '';
+  const evidenceFields = CROP_DETAIL_ROUTES[entry.id] ? `<details class="database-outline"><summary>Evidence notes and price boundaries</summary>${fields}</details>` : fields;
+  return `      <section class="evidence-ledger animal-profile" id="${entry.id}"${searchableInDirectory ? ' data-search-entry' : ''} data-search-title="${escapeHtml(entry.id === 'hay' ? 'Hay as animal feed' : entry.name)}"${seedAliases} data-search-tags="${escapeHtml(entry.searchTags)}" data-search-status="Database record" aria-labelledby="${entry.id}-heading">
         <div class="section-heading-row">
           <div>
             <span class="kicker">${escapeHtml(kicker)}</span>
@@ -121,7 +125,7 @@ ${parts.join("\n")}`;
         <p class="lead">${escapeHtml(entry.summary)}</p>
 ${renderCropFacts(data, entry.id, 'en')}
 ${entry.decision ? `        <div class="entity-decision"><strong>When to use this entry</strong><p>${escapeHtml(entry.decision)}</p><div class="button-stack"><a class="btn btn-outline btn-compact" href="/guides/farming-fields">Farming guide</a><a class="btn btn-outline btn-compact" href="/guides/money-making#cashin">CashIn selling</a>${entry.videoRow ? '<a class="btn btn-outline btn-compact" href="/map#leafy-market">Leafy Market</a>' : ""}</div></div>` : ""}
-${fields}
+${detailLink}${evidenceFields}
       </section>`;
 }
 
@@ -141,7 +145,8 @@ function renderVideoTable(crops, inputs) {
     const badgeHtml = row.status === "Video-observed"
       ? '<span class="tag evidence-video">Video-observed</span>'
       : '<span class="tag evidence-lead">Unverified lead</span>';
-    rows.push(`              <tr id="${id}"${profileId ? '' : ' data-search-entry'} data-search-title="${escapeHtml(name)}" data-search-tags="${escapeHtml(row.tags)}" data-search-status="${row.status}" data-category="video">
+    const indexRow = profileId || !['red-lettuce', 'garlic', 'strawberry'].some(cropId => id.startsWith(`${cropId}-`));
+    rows.push(`              <tr id="${id}"${indexRow ? ' data-search-entry' : ''} data-search-title="${escapeHtml(name)}" data-search-tags="${escapeHtml(row.tags)}" data-search-status="${row.status}" data-category="video">
                 <td><a class="entry-anchor" href="#${profileId || id}">${escapeHtml(name)}</a></td>
                 ${price}
                 <td>${escapeHtml(row.details)}</td>
@@ -173,8 +178,9 @@ function renderBuildRoster(locale) {
     const vendor = entry.townSeedVendor === "listed"
       ? (zh ? "有记录" : "Listed")
       : (zh ? "未列入" : "Not listed");
+    const detailRoute = CROP_DETAIL_ROUTES[entry.id] ? `${zh ? '/zh' : ''}${CROP_DETAIL_ROUTES[entry.id]}` : `#${entry.id}`;
     return `              <tr id="build-${entry.id}">
-                <td><a class="entry-anchor" href="#${entry.id}">${escapeHtml(name)}</a></td>
+                <td><a class="entry-anchor" href="${detailRoute}">${escapeHtml(name)}</a></td>
                 <td>${escapeHtml(season)}</td>
                 <td>${entry.daysToFirstHarvest}</td>
                 <td>${escapeHtml(regrow)}</td>
@@ -493,7 +499,7 @@ ${renderRoster(data.confirmedSystems)}
     </div>
   </footer>
 
-  <script src="../assets/js/main.js?v=20260906-nav2" defer></script>
+  <script src="../assets/js/main.js?v=20260927-hash-details1" defer></script>
   <script src="../assets/js/database.js?v=20260909-missing1" defer></script>
 </body>
 </html>
@@ -536,16 +542,19 @@ function renderZhEntry(entry) {
   }).join("");
   const decision = zh.decision ? `<div class="entity-decision"><strong>什么时候查</strong><p>${escapeHtml(zh.decision)}</p><div class="button-stack"><a class="btn btn-outline btn-compact" href="/zh/guides/farming-fields">种地实战攻略</a><a class="btn btn-outline btn-compact" href="/zh/guides/money-making#cashin">CashIn 出售</a>${entry.videoRow ? '<a class="btn btn-outline btn-compact" href="/zh/map#leafy-market">Leafy Market</a>' : ""}</div></div>` : "";
   if (entry.buildInput) return renderFertilizerProfile(entry, 'zh', groups);
+  const searchableInDirectory = !CROP_DETAIL_ROUTES[entry.id];
   const seedAliases = cropSearchAliases(entry.id);
-  return `    <section class="evidence-ledger animal-profile" id="${entry.id}" data-search-entry data-search-title="${escapeHtml(zh.searchTitle)}"${seedAliases} data-search-tags="${escapeHtml(zh.searchTags)}">${head}${summary}${renderCropFacts(data, entry.id, 'zh')}${decision}${groups}</section>`;
+  const detailLink = CROP_DETAIL_ROUTES[entry.id] ? `<p><a class="btn btn-outline btn-compact" href="/zh${CROP_DETAIL_ROUTES[entry.id]}">查看${escapeHtml(zh.name)}词条</a></p>` : '';
+  const evidenceGroups = CROP_DETAIL_ROUTES[entry.id] ? `<details class="database-outline"><summary>证据与价格边界</summary>${groups}</details>` : groups;
+  return `    <section class="evidence-ledger animal-profile" id="${entry.id}"${searchableInDirectory ? ' data-search-entry' : ''} data-search-title="${escapeHtml(zh.searchTitle)}"${seedAliases} data-search-tags="${escapeHtml(zh.searchTags)}">${head}${summary}${renderCropFacts(data, entry.id, 'zh')}${decision}${detailLink}${evidenceGroups}</section>`;
 }
 
-function renderZhExtraSection(s) {
+function renderZhExtraSection(s, extraHtml = '') {
   const paras = (s.paragraphs || []).map((p) => `<p>${escapeHtml(p)}</p>`).join("");
   const badge = s.badge ? zhBadge(s.badge) : "";
   const steps = s.steps ? `<ol>${s.steps.map((t) => `<li>${escapeHtml(t)}</li>`).join("")}</ol>` : "";
   const notice = s.notice ? `<div class="notice">${escapeHtml(s.notice)}</div>` : "";
-  return `    <section class="evidence-ledger animal-profile" id="${s.id}" data-search-entry data-search-title="${escapeHtml(s.searchTitle)}" data-search-tags="${escapeHtml(s.searchTags)}"><h2>${escapeHtml(s.heading)}</h2>${paras}${badge}${steps}${notice}</section>`;
+  return `    <section class="evidence-ledger animal-profile" id="${s.id}" data-search-entry data-search-title="${escapeHtml(s.searchTitle)}" data-search-tags="${escapeHtml(s.searchTags)}"><h2>${escapeHtml(s.heading)}</h2>${paras}${badge}${steps}${notice}${extraHtml}</section>`;
 }
 
 const zhExtraById = Object.fromEntries(data.zhExtra.sections.map((s) => [s.id, s]));
@@ -556,7 +565,7 @@ const zhBodyParts = [
   renderExcludedSeeds('zh'),
   renderZhExtraSection(zhExtraById["historical"]),
   ...data.inputs.filter((e) => e.zh).map(renderZhEntry),
-  renderZhExtraSection(zhExtraById["cashin"]).replace('</section>', '<p>急用钱时，先看<a href="/zh/guides/money-making#sell-choice">CashIn 与 Leafy Market 怎么选</a>；存入后有疑问，查看<a href="/zh/guides/money-making#payment-checks">到账检查</a>与<a href="/zh/guides/money-making#video-anchors">收款实例</a>。</p></section>'),
+  renderZhExtraSection(zhExtraById["cashin"], '<p>急用钱时，先看<a href="/zh/guides/money-making#sell-choice">CashIn 与 Leafy Market 怎么选</a>；存入后有疑问，查看<a href="/zh/guides/money-making#payment-checks">到账检查</a>与<a href="/zh/guides/money-making#video-anchors">收款实例</a>。</p>'),
 ];
 const zhTocItems = data.crops.filter((e) => e.zh).map((e) => `<li><a href="#${e.id}">${escapeHtml(e.zh.tocLabel)}</a></li>`).join("")
   + `<li><a href="#historical">${escapeHtml(zhExtraById["historical"].tocLabel)}</a></li>`
@@ -587,7 +596,7 @@ ${renderBuildRoster("zh")}
 ${zhBodyParts.join("\n")}
     ${zhRelated}
   </article></main>
-  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>购买价、零售价、出售收入严格分开</span></div></div></footer><script src="/assets/js/main.js?v=20260906-nav2" defer></script>
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>购买价、零售价、出售收入严格分开</span></div></div></footer><script src="/assets/js/main.js?v=20260927-hash-details1" defer></script>
 </body></html>
 `;
 

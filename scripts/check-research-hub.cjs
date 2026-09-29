@@ -94,6 +94,12 @@ assert.match(searchScript, /ranchers-search-index-v43/);
 assert.match(searchScript, /ranchers-search-index-zh-v29/);
 
 const chineseProblems = read("zh/problems.html");
+const englishProblemMeta = hub.match(/<p class="knowledge-hero-meta">([\s\S]*?)<\/p>/)?.[1] || "";
+const chineseProblemMeta = chineseProblems.match(/<p class="knowledge-hero-meta">([\s\S]*?)<\/p>/)?.[1] || "";
+assert.match(englishProblemMeta, /Latest official update checked: 0\.8\.10\.871[\s\S]*Entry build labels retain report\/fix scope/);
+assert.match(chineseProblemMeta, /已核对的最新官方更新：0\.8\.10\.871[\s\S]*条目版本表示原始报告或修复版本/);
+assert.doesNotMatch(hub, /Current baseline: 0\.8\.10\.842|Known issues and fixes through build 0\.8\.10\.842|coverage-summary/);
+assert.doesNotMatch(chineseProblems, /当前基线：0\.8\.10\.842|最近复核：2026 年 8 月 22 日|coverage-summary|当前复核 0\.8\.10\.842/);
 assert.match(chineseProblems, /data-problem-search/);
 assert.match(chineseProblems, /data-problem-filter-value="solved"/);
 assert.match(chineseProblems, /data-problem-filter-value="reported"/);

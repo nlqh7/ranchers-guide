@@ -92,7 +92,9 @@ function checkFact(fact, where) {
 const entries = data.crops.concat(data.inputs);
 for (const entry of entries) {
   assert.ok(entry.id && entry.name && entry.lastUpdated, `entry missing id/name/lastUpdated: ${entry.id}`);
-  assert.match(html, new RegExp(`id="${entry.id}" data-search-entry`), `generated page must expose #${entry.id} anchor`);
+  const hasLegacyAnchor = new RegExp(`id="${entry.id}" data-search-entry`).test(html);
+  const hasDetailRoute = html.includes(`href="/database/crops/${entry.id}"`);
+  assert.ok(hasLegacyAnchor || hasDetailRoute, `generated page must expose #${entry.id} or link to its detail route`);
   for (const field of entry.fields) {
     for (const fact of field.facts) checkFact(fact, `${entry.id}/${field.key}`);
   }

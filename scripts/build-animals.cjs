@@ -14,6 +14,7 @@ const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
 const data = JSON.parse(fs.readFileSync(path.join(root, "data", "animals.json"), "utf8"));
+const DETAIL_ROUTES = { chicken: '/database/animals/chicken', cow: '/database/animals/livestock#cow', goat: '/database/animals/livestock#goat' };
 
 function escapeHtml(text) {
   return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -86,10 +87,11 @@ ${parts.join("\n")}`;
         </div>
         <p class="lead">${escapeHtml(animal.summary)}</p>
 ${animal.whenNeeded ? `        <div class="entity-decision"><strong>When to look here</strong><p>${escapeHtml(animal.whenNeeded)}</p></div>` : ""}
+${DETAIL_ROUTES[animal.id] ? `        <p><a class="btn btn-outline btn-compact" href="${DETAIL_ROUTES[animal.id]}">${animal.id === 'chicken' ? 'Open the chicken care profile' : 'Open cow and goat records'}</a></p>` : ''}
         </div>
 ${renderNativeAnimalReference(animal, 'en')}
 ${renderBuildReference(animal, 'en')}
-${animal.buildReference ? `<details class="database-outline"><summary>Further care evidence and open questions</summary>${fields}</details>` : fields}
+${DETAIL_ROUTES[animal.id] ? `<details class="database-outline"><summary>${animal.id === 'chicken' ? 'Legacy chicken evidence and field notes' : 'Legacy evidence and field notes'}</summary>${fields}</details>` : animal.buildReference ? `<details class="database-outline"><summary>Further care evidence and open questions</summary>${fields}</details>` : fields}
       </section>`;
 }
 
@@ -526,7 +528,7 @@ ${renderRoster(data.confirmedRoster)}
     </div>
   </footer>
 
-  <script src="../assets/js/main.js?v=20260906-nav2" defer></script>
+  <script src="../assets/js/main.js?v=20260927-hash-details1" defer></script>
   <script src="../assets/js/database.js?v=20260909-missing1" defer></script>
 </body>
 </html>
@@ -579,7 +581,10 @@ function renderZhEntry(entry) {
     return `${h}${items ? `<ul class="evidence-list">${items}</ul>` : ""}${pendingBlock}`;
   }).join("");
   const decision = zh.whenNeeded ? `<div class="entity-decision"><strong>什么时候查</strong><p>${escapeHtml(zh.whenNeeded)}</p></div>` : "";
-  return `    <section class="evidence-ledger animal-profile"><div id="${entry.id}" data-search-entry data-search-title="${escapeHtml(zh.searchTitle)}" data-search-text="${escapeHtml([zh.summary, zh.whenNeeded].filter(Boolean).join(' '))}" data-search-tags="${escapeHtml(zh.searchTags)}">${head}${summary}${decision}</div>${renderNativeAnimalReference(entry, 'zh')}${renderBuildReference(entry, 'zh')}${entry.buildReference ? `<details class="database-outline"><summary>更多照料证据与待验证项</summary>${groups}</details>` : groups}</section>`;
+  const detailRoute = DETAIL_ROUTES[entry.id]?.replace('/database', '/zh/database');
+  const detailLink = detailRoute ? `<p><a class="btn btn-outline btn-compact" href="${detailRoute}">${entry.id === 'chicken' ? '打开鸡的照料词条' : '查看牛与山羊记录'}</a></p>` : '';
+  const fieldNotes = detailRoute ? `<details class="database-outline"><summary>${entry.id === 'chicken' ? '旧鸡条目与证据记录' : '旧物种记录与资料边界'}</summary>${groups}</details>` : entry.buildReference ? `<details class="database-outline"><summary>更多照料证据与待验证项</summary>${groups}</details>` : groups;
+  return `    <section class="evidence-ledger animal-profile"><div id="${entry.id}" data-search-entry data-search-title="${escapeHtml(zh.searchTitle)}" data-search-text="${escapeHtml([zh.summary, zh.whenNeeded].filter(Boolean).join(' '))}" data-search-tags="${escapeHtml(zh.searchTags)}">${head}${summary}${decision}${detailLink}</div>${renderNativeAnimalReference(entry, 'zh')}${renderBuildReference(entry, 'zh')}${fieldNotes}</section>`;
 }
 
 function renderZhExtra(extra) {
@@ -634,7 +639,7 @@ ${renderWildlifeReference('zh')}
 ${renderEnemyReference('zh')}
 ${renderZhExtra(data.zhExtra)}
   </article></main>
-  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>证据等级与版本标注与英文页一致</span></div></div></footer><script src="/assets/js/main.js?v=20260906-nav2" defer></script>
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>证据等级与版本标注与英文页一致</span></div></div></footer><script src="/assets/js/main.js?v=20260927-hash-details1" defer></script>
 </body></html>
 `;
 

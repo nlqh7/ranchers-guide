@@ -31,7 +31,7 @@ assert.ok(sharedNavPages.length > 80, "shared navigation should cover the site")
 for (const file of sharedNavPages) {
   assert.match(
     fs.readFileSync(file, "utf8"),
-    /assets\/js\/main\.js\?v=20260906-nav2/,
+    /assets\/js\/main\.js\?v=20260927-hash-details1/,
     `${path.relative(root, file)} must invalidate the previous navigation behavior`,
   );
 }

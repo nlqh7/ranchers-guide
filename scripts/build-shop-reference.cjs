@@ -1,6 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const data = require('../data/build-shops.json');
+const animalData = require('../data/animals.json');
 const recipes = require('../data/build-recipes.json');
 const equipment = require('../data/build-equipment.json');
 const consumables = require('../data/build-consumables.json');
@@ -18,7 +19,7 @@ const materialRoutes = {ressource_wood:'wood-log',ressource_rock_simple:'stone',
 const sections = {supplies:['Supplies','物资'],generators:['Power generation','发电设备'],equipment:['Equipment','设备'],buildings:['Buildings','建筑'],animals:['Animals','动物'],'two-wheel':['Two-wheel vehicles','两轮车辆'],'four-wheel':['Four-wheel vehicles','四轮车辆'],vip:['Special vehicles','特殊车辆'],cars:['Cars','汽车'],vehicles:['Vehicles','车辆'],seeds:['Seeds & fertilizer','种子与肥料'],produce:['Produce','农产品'],groceries:['Groceries','杂货']};
 const seasons = {AllTheTime:['All seasons','全年'],Spring:['Spring','春季'],Summer:['Summer','夏季'],Autumn:['Autumn','秋季'],Winter:['Winter','冬季']};
 
-function render(locale, buildingOnly=false) {
+function render(locale, buildingOnly=false, showHomeChoice=false) {
   const zh = locale === 'zh', prefix = zh ? '/zh' : '';
   const name = item => zh ? item.zhName : item.name;
   const item = id => data.items.find(i => i.id === id);
@@ -53,6 +54,12 @@ function render(locale, buildingOnly=false) {
     return `<tr id="${id}" data-shop-row${buildingOnly ? '' : ` data-shop-listing-season="${offer.season}"`} data-query="${esc(query)}"${searchAttrs}><th scope="row"><a href="${link}">${image(entry.id)}<span>${esc(name(entry))}</span></a></th><td>${buildingOnly ? '' : `<span class="recipe-muted">${sections[offer.section][zh?1:0]} · ${seasons[offer.season][zh?1:0]}</span>`}${offer.materials.length ? materials(offer) : ''}${offer.questRequirements.length ? `<small class="shop-condition">${zh ? '含任务条件，解锁时机未确认' : 'Quest condition; unlock timing unverified'}</small>` : ''}${equipmentLink}${consumableLink}${farmInputLink}${resourceLink}${seedLink}${produceLink}${miscLink}${placeableLink}${vehicleLink}${hasRecipe && !buildingOnly ? `<a class="shop-recipe-link" href="${prefix}/guides/crafting-guide#recipe-${entry.id}">${zh ? '查看制作材料' : 'Crafting ingredients'} →</a>` : ''}</td></tr>`;
   };
   const table = (offers,title) => `<div class="recipe-table-wrap" role="region" aria-label="${esc(title)}" tabindex="0"><table class="recipe-table"><thead><tr><th scope="col">${zh?'物品':'Item'}</th><th scope="col">${buildingOnly ? (zh?'所需材料':'Materials needed') : (zh?'分类、季节与条件':'Category, season & conditions')}</th></tr></thead><tbody>${offers.map(row).join('\n')}</tbody></table></div>`;
+  const coopSpecies = animalData.species.filter(species => species.housingType === 'Coop');
+  const barnSpecies = animalData.species.filter(species => species.housingType === 'Barn');
+  if (showHomeChoice && (!coopSpecies.some(species => species.id === 'chicken') || !barnSpecies.some(species => ['cow', 'goat'].includes(species.id)))) {
+    throw new Error('Animal housing data no longer supports the coop/barn choice summary.');
+  }
+  const homeChoice = showHomeChoice ? `<aside class="notice info" id="animal-home-choice"><h3>${zh?'按动物选住所':'Choose a home by animal'}</h3><ul><li><strong>${zh?'鸡舍':'Coop'}</strong> — ${zh?'鸡':'chickens'} · <a href="#shop-plan-Custum_Barn_Weak_Small">${zh?'看鸡舍规格与备料':'Compare coop requirements & prepare'}</a></li><li><strong>${zh?'谷仓':'Barn'}</strong> — ${zh?'牛、山羊':'cattle and goats'} · <a href="#shop-plan-Custum_Barn_Strong_Small">${zh?'看谷仓规格与备料':'Compare barn requirements & prepare'}</a></li></ul><p>${zh?'下表按商店配置列出各规格材料，并可直接把目标带入备料器。当前容量与适合饲养数量尚未核实，因此这里只比较住所类型和已记录的材料条件。':'The table lists each size’s shop-file materials and links each target to the existing planner. Current capacity and animal limits are not verified, so this guide compares housing type and recorded material requirements only.'}</p></aside>` : '';
   const unresolvedReference = offer => {
     const reference = data.unresolvedReferences.find(entry => entry.id === offer.itemId);
     if (!reference) throw new Error(`Missing unresolved-reference disposition: ${offer.itemId}`);
@@ -73,7 +80,7 @@ function render(locale, buildingOnly=false) {
 <section class="crafting-reference shop-reference"${buildingOnly?'':' data-shop-reference'} aria-label="${title}">
 <h2 id="${buildingOnly?'shop-building-materials':'shops'}">${title}</h2>
 <p class="recipe-boundary">${zh?'站长整理 · 游戏文件配置。这里列出商店商品与材料条件，不保证当前库存，也不代表完整售价。':'Editor-collected game configuration: shop listings and resource conditions, not guaranteed stock or the full purchase price.'}</p>
-${body}
+${homeChoice}${body}
 <details class="recipe-sources"><summary>${zh?'资料来源与可用性':'Sources & availability'}</summary><p>${zh?'非官方资料。商品名称逐项核对游戏双语文本；商店标题按源表类型描述，未推测店主、营业时间或精确地点。季节为商店配置分组，不是种植季节。':'Unofficial reference. Item names are matched to bilingual game text. Shop headings describe source categories; no owner, opening time or precise location is inferred. Seasons describe shop sections, not growing seasons.'} ${data.build} · Steam ${data.steamBuild}.</p><p>${zh?'不从 Demo 标记、内部价格或任务状态推断运行时可用性。材料条件来自商店记录，与制作配方分开；空材料条件不代表免费。':'Demo flags, internal prices and quest states do not establish runtime availability. Shop resource conditions are distinct from crafting recipes; an empty condition does not mean an item is free.'}</p><p>${zh?'来源：':'Sources: '}${Object.values(data.sources).filter(s=>!buildingOnly || ['Architect','Owned-build item localization'].includes(s.title)).map(s=>esc(s.title)).join(', ')}. <a href="${prefix}/methodology">${zh?'验证方法':'Methodology'}</a></p></details>
 </section>
 <!-- END SHOP REFERENCE -->`;
@@ -84,7 +91,7 @@ for(const locale of ['en','zh']) for(const route of ['guides/resources-and-mater
   const file = path.join(root,locale==='zh'?'zh':'',route);
   const before = fs.readFileSync(file,'utf8');
   if(!before.includes('<!-- BEGIN SHOP REFERENCE -->')) throw new Error(`Missing shop block: ${file}`);
-  let after = before.replace(/<!-- BEGIN SHOP REFERENCE -->[\s\S]*?<!-- END SHOP REFERENCE -->/,render(locale,!route.includes('resources-and-materials')));
+  let after = before.replace(/<!-- BEGIN SHOP REFERENCE -->[\s\S]*?<!-- END SHOP REFERENCE -->/,render(locale,!route.includes('resources-and-materials'),route.includes('building-construction')));
   if (route.includes('resources-and-materials')) after = after.replace(/shop-reference\.js\?v=[^"']+/g, 'shop-reference.js?v=20260911-shop1').replace(/crafting-reference\.css\?v=[^"']+/g, 'crafting-reference.css?v=20260911-shop1');
   if(before!==after) {
     if(process.argv.includes('--check')) { console.error(`STALE: ${file}`);stale=true; }

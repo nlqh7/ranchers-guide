@@ -260,6 +260,14 @@
     }));
   }
 
+  function canonicalCropRouteScore(url) {
+    var value = String(url || "");
+    if (/^\/(?:zh\/)?database\/buildings\/coop#coop$/.test(value)) return 3;
+    if (/^\/(?:zh\/)?database\/crops\/(?:red-lettuce|garlic|strawberry)(?:#|$)/.test(value)) return 2;
+    if (/^\/(?:zh\/)?database\/crops#(?:red-lettuce|garlic|strawberry)-heading$/.test(value)) return 1;
+    return 0;
+  }
+
   function searchDocuments(documents, query, limit) {
     var queryTerms = queryTokens(query);
     if (!queryTerms.length) return [];
@@ -272,7 +280,9 @@
         snippet: bestSnippet(document, queryTerms),
       });
     }).filter(Boolean).sort(function (a, b) {
-      return b.score - a.score || a.title.localeCompare(b.title);
+      return b.score - a.score
+        || canonicalCropRouteScore(b.url) - canonicalCropRouteScore(a.url)
+        || a.title.localeCompare(b.title);
     }).slice(0, typeof limit === "number" ? limit : 12);
   }
 
@@ -308,7 +318,10 @@
   }
 
   function dossierSupportsExactAnswer(entity, query, matches) {
-    var exact = matches.filter(function (match) { return normalize(match.title) === normalize(query); });
+    var normalized = normalize(query);
+    var exact = matches.filter(function (match) {
+      return [match.title].concat(match.aliases || []).some(function (name) { return normalize(name) === normalized; });
+    });
     return !exact.length || exact.some(function (match) { return match.url === entity.route; });
   }
 

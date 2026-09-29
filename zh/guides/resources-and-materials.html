@@ -28,8 +28,21 @@
     <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / <a href="/zh/database">数据库</a> / 资源</nav>
     <h1>资源与物品查阅</h1>
     <p class="recipe-lead">查找材料、商店商品与消耗品配置。</p>
-    <section class="answer-box"><h2>先看：这些资源现在该怎么找？</h2><p><strong>石头：</strong>先收集自己牧场的散落石头。<strong>原木：</strong>当前报告指向砍树。<strong>干草：</strong>确定是鸡饲料，但获取路线仍是待测试线索。<strong>木炭：</strong>燃烧制作方法尚未通过当前版本验证。<strong>锆矿：</strong>先购买；官方回答说明当前版本不应先去寻找矿洞。</p></section>
+    <section class="answer-box"><h2>先看：这些资源现在该怎么找？</h2><p><strong>石头：</strong>先收集自己牧场的散落石头。<strong>原木：</strong>当前报告指向砍树。<strong>干草：</strong>先小范围试割野草；旧官方 Alpha 资料称任何生长阶段都能产出干草，但早于抢先体验，先查背包再扩大采集。灌木/木箱仍只是当前玩家线索。<strong>木炭：</strong>工作人员说明由燃烧木材获得，不是购买；具体操作、计时和产量仍未验证。<strong>锆矿：</strong>先购买；官方回答说明当前版本不应先去寻找矿洞。</p></section>
     <nav class="resource-nav" aria-label="资源查阅"><a href="#shops">商店商品</a><a href="#consumables">食物与消耗品</a><a href="#resource-definitions">水、能源与燃料</a><a href="#decision">资源采集路线</a></nav>
+    <details id="missing-tools" class="resource-details" data-search-entry data-search-title="锄头或工具不见了？去市政厅补买" data-search-aliases="锄头丢了|锄头不见了|工具丢了|工具不见了" data-search-tags="工具丢了 工具不见 锄头丢失 斧头 锤子 镐头 洒水壶 补买 市政厅">
+      <summary>锄头或其他工具不见了？</summary>
+      <p><strong>去市政厅补买工具。</strong>9 月 15 日，社区工作人员在玩家找不到锄头的求助帖中明确给出了这条路线。</p>
+      <ol><li>先查背包、储物箱和车辆后备箱，避免重复购买。</li><li>前往市政厅，以当前存档显示的工具列表和价格为准。</li><li>买前核对名称。已整理的商店配置列有锄头、斧头、锤子、镐头和洒水壶，但不保证当前库存。</li></ol>
+      <div class="resource-links"><a href="/zh/map#city-hall">查看市政厅位置</a><a href="#offer-building-store-allthetime-tools_hoe_metal">查看锄头商品记录</a></div>
+      <p class="source-note"><a href="https://steamcommunity.com/app/1501310/discussions/0/567045839109751880/" rel="noopener noreferrer">Missing Tools：9 月 15 日工作人员答复</a>。工具丢失原因不明；这是补买路线，不是自动找回原工具。</p>
+    </details>
+    <details id="general-store" class="resource-details" data-search-entry data-search-title="General Store 在哪里？就是绿叶市场" data-search-aliases="General Store|General Stores" data-search-tags="General Store 杂货店 商店在哪 绿叶市场 Leafy Market Leafy Markets 买种子">
+      <summary>General Store（杂货店）在哪里？</summary>
+      <p><strong>General Store 指的就是 Leafy Markets（绿叶市场）。</strong>不必再找一栋挂着 General Store 招牌的独立建筑。社区工作人员在 9 月 23 日明确解释了这个名称。</p>
+      <div class="resource-links"><a href="/zh/map#leafy-market">查看绿叶市场位置</a><a href="#shop-seed-store">查看种子与杂货商品</a><a href="#charcoal">想找木炭？</a></div>
+      <p class="source-note"><a href="https://steamcommunity.com/app/1501310/discussions/0/592942202593765840/" rel="noopener noreferrer">General Store：9 月 23 日工作人员答复</a>。名称对应关系不代表每家分店的库存、营业时间或价格都相同。</p>
+    </details>
     <!-- BEGIN SHOP REFERENCE -->
 <section class="crafting-reference shop-reference" data-shop-reference aria-label="商店商品查阅">
 <h2 id="shops">商店商品查阅</h2>
@@ -215,30 +228,34 @@
     <h2 id="decision">先选正确路线，再决定要不要继续找</h2>
 <div class="recipe-table-wrap" role="region" aria-label="资源获取路线" tabindex="0">
     <table><thead><tr><th>资源</th><th>当前建议</th><th>不要直接假定</th><th>状态</th></tr></thead><tbody>
-      <tr><td><strong>石头 Stone</strong></td><td>先收集自己牧场的散落资源。</td><td>已经有矿洞或稳定刷新路线。</td><td><span class="evidence-badge evidence-corroborated">报告 + 官方边界</span></td></tr>
-      <tr><td><strong>原木 Wood Log</strong></td><td>砍树，并给早期建造留出储备。</td><td>树木刷新时间和所有权规则。</td><td><span class="evidence-badge evidence-reported">社区报告</span></td></tr>
-      <tr><td><strong>干草 Hay</strong></td><td>放在鸡舍室内食槽；可以测试社区获取线索。</td><td>灌木或木箱一定掉落干草。</td><td><span class="evidence-badge evidence-official">饲料已确认</span></td></tr>
-      <tr><td><strong>木炭 Charcoal</strong></td><td>没有测试前不要批量消耗原木。</td><td>精确燃烧时间、产量或按键。</td><td><span class="evidence-badge evidence-lead">待验证线索</span></td></tr>
+      <tr><td><strong>石头 Stone</strong></td><td>先收集自家牧场的散落石头；目前在牧场外正常敲石不会触发警察追逐。</td><td>已经有矿洞或稳定刷新路线。</td><td><span class="evidence-badge evidence-official">官方采集规则</span></td></tr>
+      <tr><td><strong>原木 Wood Log</strong></td><td>砍树；目前在牧场外正常采集不会触发警察追逐，并留出建造储备。</td><td>树木刷新时间或所有权相关交互规则。</td><td><span class="evidence-badge evidence-official">官方采集规则</span></td></tr>
+      <tr><td><strong>干草 Hay</strong></td><td>先小范围试割野草；旧官方方法早于抢先体验，确认当前版本有效后再扩大采集。</td><td>灌木或木箱一定掉落干草。</td><td><span class="evidence-badge evidence-official">饲料已确认</span></td></tr>
+      <tr><td><strong>木炭 Charcoal</strong></td><td>用木材制作；先小量确认，不要消耗整批建造储备。</td><td>精确燃烧时间、产量或按键。</td><td><span class="evidence-badge evidence-official">工作人员答复：燃烧木材</span></td></tr>
       <tr><td><strong>锆矿 Zirconite</strong></td><td>去市政厅找 Meriam 查看购买路线。</td><td>当前版本存在矿洞入口或固定价格。</td><td><span class="evidence-badge evidence-official">购买路线已确认</span></td></tr>
     </tbody></table>
 </div>
-    <h2 id="stone">石头：先收集自己土地上的储量</h2>
-    <p>当前版本报告称，玩家可以收集自己牧场上的散落石头，而且可见储量会被采完。这意味着石头适合用于早期帐篷、工作台等建造决策，但不能据此承诺存在无限来源。</p>
-    <ol><li>先收集自己土地上的散落石头。</li><li>给早期建造留出储备，不要把石头全部花在可选摆件上。</li><li>可见储量耗尽后，不要把矿洞当成当前版本已经开放的必然路线。</li></ol>
-    <p><strong>风险：</strong>当前讨论中有玩家报告，从不属于自己的土地拿资源可能触发犯罪系统。没有自己存档验证前，不要把邻近地块当成免费资源点。可靠的重复来源和矿洞开放情况仍待确认。</p>
-    <p class="fact-source"><strong>来源：</strong><a href="https://steamcommunity.com/app/1501310/discussions/0/587307906418914271/" rel="noopener noreferrer">官方矿洞状态回答</a> · <a href="https://steamcommunity.com/app/1501310/discussions/0/587307627624728860/" rel="noopener noreferrer">当前石头与犯罪系统讨论</a></p>
+    <h2 id="stone">石头：先收集自己牧场的储量</h2>
+    <p>当前版本玩家报告称，牧场上有散落石头，而且可见储量可能采完。早期建造先收集这些石头，并留出一小份储备。</p>
+    <ol><li>先收集自家牧场上的散落石头。</li><li>还需要更多时，当前官方规则说明：在牧场外正常敲石不会触发警察追逐。</li><li>不要把矿洞或保证刷新的路线当成已确认事实。</li></ol>
+    <p><strong>适用范围：</strong>0.8.10.871 涵盖在牧场外正常砍树和敲石；0.8.10.868 说明这是等待开放世界专门采集区期间的临时调整。这不代表拾取散落物、擅闯地块或其他偷窃交互一律安全。7 月关于拿取石头的玩家提醒早于 0.8.10.868，不能继续当作当前正常采集规则。</p>
+    <p class="fact-source"><strong>来源：</strong><a href="https://steamcommunity.com/app/1501310/announcements/detail/1844115010489002" rel="noopener noreferrer">官方 0.8.10.871 采集规则</a> · <a href="https://steamcommunity.com/app/1501310/announcements/detail/1843481262701719" rel="noopener noreferrer">官方 0.8.10.868 临时调整说明</a> · <a href="https://steamcommunity.com/app/1501310/discussions/0/587307627624728860/" rel="noopener noreferrer">较早的石头与犯罪讨论</a></p>
     <h2 id="wood">原木：早期建造有用，但刷新未确认</h2>
-    <p>社区记录把砍树作为当前获得原木的路线。现有资料不能证明树木多久刷新，也不能证明所有土地都遵循相同的采集规则，因此把它前作起点，不要当成完整经济表。</p>
+    <p>现有记录把砍树作为获取原木的路线。官方 0.8.10.871 说明，在牧场外正常砍树不会触发警察追逐；但树木刷新时间和所有权相关交互规则仍未确认，因此把它作为起点，不要当成完整供应表。</p>
     <p>首发版本视频打开过一个红帐篷配方：<strong>8 个石头 + 10 根原木</strong>。这可以帮助你准备第一批建造材料，但不能推导其他建筑和家具的配方。</p>
     <p><a class="btn btn-outline btn-compact" href="/guides/building-construction#workbench-menu">查看工作台观测</a> <a class="btn btn-outline btn-compact" href="/zh/database/materials#wood-log">打开原木条目</a></p>
-    <h2 id="hay">干草：用途已确认，获取路线还没确认</h2>
-    <p>官方版主回答确认干草是鸡饲料。把它放入<strong>鸡舍内部食槽</strong>；测试自动化时，再观察已连接筒仓是否能够供给。这是现在可以直接执行的部分。</p>
-    <p>一条当前版本报告称，可以砍灌木或搜索 NPC 农场的木箱和桶来获得干草。它适合作为测试路线，但不是确定掉落表。要升级它的证据等级，需要记录地点、容器、版本以及获得前后的背包画面。</p>
+    <h2 id="hay">干草：先试割野草，再核对当前版本</h2>
+    <p><strong>快速回答：</strong>先试着割一小片野草，即使还没长成熟也可以。官方 2023 年 Alpha 说明称，任何生长阶段的野草都能产出干草；但这份资料早于抢先体验，我们没有在当前版本独立复核。先看背包是否出现干草，再考虑大面积采集。<a href="https://steamcommunity.com/games/1501310/announcements/detail/3716073126083415742" rel="noopener noreferrer">官方 Ranching v2 更新说明</a>。</p>
+    <p>如果无效，一条当前版本玩家报告还提到砍灌木，或搜索 NPC 农场的木箱和桶。这是后备线索，不是保证掉落表。要升级其证据等级，需要记录地点、容器、版本以及获得前后的背包画面。</p>
+    <p>官方版主回答确认干草是鸡饲料。把它放入<strong>鸡舍内部食槽</strong>；测试自动化时，再观察已连接筒仓是否能够供给。见<a href="/zh/guides/animal-guide#feeding">鸡的喂养步骤</a>。</p>
     <p><a class="btn btn-outline btn-compact" href="/zh/guides/animal-guide#feeding">打开动物喂养指南</a> <a class="btn btn-outline btn-compact" href="/zh/database/animals#chicken">查看鸡的照护条目</a></p>
-    <h2 id="charcoal">木炭：目前是测试线索，不是配方</h2>
-    <p>社区扫描记录了一条可能路线：燃烧原木，等待材料状态变化，再用灭火器灭火后收集木炭。现有存档没有保留直接公开帖子链接，也没有当前版本截图，所以本文不会把它写成已确认配方。</p>
-    <p>如果要测试，先只用一根原木。记录放置物、点火方式、经过时间、火焰状态、灭火动作和最终背包结果。不要根据旧 Alpha 资料批量消耗原木；历史版主回答只能说明灭火器是预期的灭火方式。</p>
+    <section id="charcoal" data-search-entry data-search-title="木炭在哪里买，还是需要自己做？" data-search-tags="木炭 煤 购买 制作 燃烧木材 原木 商店">
+    <h2>木炭：用木材制作，不是去商店购买</h2>
+    <p><strong>9 月 23 日工作人员明确答复：木炭要燃烧木材获得，而不是购买。</strong>这确认了制作方向，但不是包含按键、计时和产量的完整配方。</p>
+    <p><a href="https://steamcommunity.com/app/1501310/discussions/0/592942202593765840/" rel="noopener noreferrer">查看 General Store 原帖答复</a>。原帖未注明版本，本站尚未实机复现；先留好建造用木材，小量确认结果后再扩大制作。</p>
+    <p>8 月的玩家报告还提到火把、干燥天气和灭火后收集。这些额外步骤仍只是未验证线索，不能说都被 9 月答复确认了。<a href="/zh/database/materials#charcoal">木炭条目</a>分别保留两类来源。</p>
     <p><a class="btn btn-outline btn-compact" href="/zh/database/materials#charcoal">打开木炭条目</a> <a class="btn btn-outline btn-compact" href="/contribute">提交可复现结果</a></p>
+    </section>
     <h2 id="zirconite">锆矿：先买，不要先找矿洞</h2>
     <p>官方版主回答说明，在矿洞实装前，购买锆矿是当前唯一途径。多条当前社区回答把<strong>市政厅的 Meriam</strong>指认为卖家，但现有记录不足以发布稳定的当前价格。</p>
     <ol><li>打开<a href="/zh/map#city-hall">市政厅地图位置</a>。</li><li>找到 Meriam，查看当前材料或蓝图相关购买列表。</li><li>以自己存档中看到的价格为准，不要套用 Alpha 时代价格表。</li></ol>
@@ -247,12 +264,12 @@
     <p>一条有价值的资源报告不只是“我找到了”。请记录游戏版本、平台、土地是否属于自己、季节或天数、具体搜索对象、前后数量，以及背包或商店界面截图。只有在相近条件下有第二条可复现记录时，本站才会把线索升级为相互印证的结论。</p>
     <h2 id="faq">资源常见问题</h2>
     <details class="faq-item"><summary>现在能挖到石头或锆矿吗？</summary><div class="faq-body"><p>不要直接这样理解。当前官方回答说明审查版本的矿洞尚未开放；石头先收集自己土地上的散落资源，锆矿先找卖家购买。</p></div></details>
-    <details class="faq-item"><summary>木炭燃烧法已经确认了吗？</summary><div class="faq-body"><p>没有。它是社区线索，并且只有历史灭火器背景。先用一根原木测试，记录结果后再决定是否可信。</p></div></details>
+    <details class="faq-item"><summary>木炭燃烧法已经确认了吗？</summary><div class="faq-body"><p>工作人员确认了燃烧木材这条路线，而不是购买木炭；具体按键、燃烧时间和产量仍未验证。<a href="#charcoal">查看答复及适用范围</a>。</p></div></details>
     <details class="faq-item"><summary>查完资源后应该去哪里？</summary><div class="faq-body"><p>单独查证据可以打开<a href="/zh/database/materials">材料数据库</a>；要看蓝图和要求，打开<a href="/zh/guides/crafting-guide">制作指南</a>；要看摆放问题，打开<a href="/zh/guides/building-construction">建造指南</a>；资源是动物饲料时，继续看<a href="/zh/guides/animal-guide">动物指南</a>。</p></div></details>
     <p class="fact-source"><strong>维护说明：</strong>本站是非官方玩家资源，与 RedPilz Studio 和 Trophy Games 无隶属关系。Early Access 会持续变化，旧证据会保留并标注，不会静默替换。<a href="/zh/methodology">查看证据方法</a>。</p>
   </article></main>
   <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>证据优先，不把猜测写成结论。</span></div></div></footer>
-  <script src="../../assets/js/main.js?v=20260906-nav2" defer></script>
+  <script src="../../assets/js/main.js?v=20260927-hash-details1" defer></script>
 <script src="/assets/js/shop-reference.js?v=20260911-shop1"></script>
 </body>
 </html>

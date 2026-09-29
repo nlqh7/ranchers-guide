@@ -108,12 +108,18 @@ for (const prefix of ['', 'zh/']) {
       assert.ok(html.split(`id="offer-${offer.id}"`)[1]?.split('</tr>')[0].includes(`database/crops#${profile.id}`));
     }
     if (seed) {
-      assert.ok(index.some(i => i.url === `/${prefix}database/crops#${seed.cropId}`));
+      const detailRoute = ['red-lettuce', 'garlic', 'strawberry'].includes(seed.cropId)
+        ? `/${prefix}database/crops/${seed.cropId}`
+        : `/${prefix}database/crops#${seed.cropId}`;
+      assert.ok(index.some(i => i.url === detailRoute));
       assert.ok(html.split(`id="offer-${offer.id}"`)[1]?.split('</tr>')[0].includes(`database/crops#${seed.cropId}`));
     }
     if (produceItem) {
       const target = produceItem.cropStatus === 'current-roster' ? produceItem.cropId : `seed-${produceItem.cropId}`;
-      assert.ok(index.some(i => i.url === `/${prefix}database/crops#${target}`));
+      const detailRoute = ['red-lettuce', 'garlic', 'strawberry'].includes(target)
+        ? `/${prefix}database/crops/${target}`
+        : `/${prefix}database/crops#${target}`;
+      assert.ok(index.some(i => i.url === detailRoute));
       assert.ok(html.split(`id="offer-${offer.id}"`)[1]?.split('</tr>')[0].includes(`database/crops#${target}`));
     }
     if (placeable) {
@@ -146,6 +152,22 @@ for (const prefix of ['', 'zh/']) {
       const row = page.split(`id="shop-plan-${offer.itemId}"`)[1]?.split('</tr>')[0];
       assert.ok(row, `Missing building: ${route} ${offer.itemId}`);
       for (const m of offer.materials) assert.ok(row.includes(`× ${m.quantity}</strong>`));
+    }
+    if (route === 'guides/building-construction.html') {
+      assert.match(page, prefix ? /按动物选住所/ : /Choose a home by animal/);
+      assert.match(page, prefix ? /鸡舍.*鸡/ : /Coop.*chickens/i);
+      assert.match(page, prefix ? /谷仓.*牛.*山羊/ : /Barn.*cattle.*goats/i);
+      assert.match(page, prefix ? /容量.*未核实/ : /capacity.*not verified/i);
+      assert.match(page, /#shop-plan-Custum_Barn_Weak_Small/);
+      assert.match(page, /#shop-plan-Custum_Barn_Strong_Small/);
+    }
+    if (route === 'guides/building-construction.html') {
+      assert.match(page, prefix ? /按动物选住所/ : /Choose a home by animal/);
+      assert.match(page, prefix ? /鸡舍.*鸡/ : /Coop.*chickens/i);
+      assert.match(page, prefix ? /谷仓.*牛.*山羊/ : /Barn.*cattle.*goats/i);
+      assert.match(page, prefix ? /容量.*未核实/ : /capacity.*not verified/i);
+      assert.match(page, /#shop-plan-Custum_Barn_Weak_Small/);
+      assert.match(page, /#shop-plan-Custum_Barn_Strong_Small/);
     }
   }
 }

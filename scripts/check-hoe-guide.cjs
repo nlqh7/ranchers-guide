@@ -45,6 +45,12 @@ for (const locale of ['en', 'zh']) {
     : [/watering interval for a planted crop is still unverified/i, /current-build tilling and greenhouse steps are still open/i, /old greenhouse or hoe tutorial/i, /Not yet verified: tilling & greenhouses/i, /money arrives in the end-of-day Farming line/i];
   for (const pattern of obsolete) assert.doesNotMatch(guide, pattern, `${locale}: obsolete guidance must be removed: ${pattern}`);
 
+  assert.match(guide, /0\.8\.10\.868/, `${locale}: current hoe removal patch must be named`);
+  assert.match(guide, locale === 'zh' ? /2 点自然技能点/ : /2 Nature Skill Points/);
+  assert.match(guide, locale === 'zh' ? /农田信息弹窗|田块信息弹窗/ : /Plantation(?: Info)? Popup|plantation's info popup/i);
+  assert.match(guide, locale === 'zh' ? /不需要供暖/ : /does not need heating/);
+  assert.match(guide, locale === 'zh' ? /没有冬季种子/ : /no winter seeds/);
+
   const queries = locale === 'zh'
     ? ['怎么开第一块种植地', '锄头 红色 白色', '锄头 播种 使用键 洒水壶']
     : ['how to start first plantation', 'hoe red white placement', 'hoe plant seed watering can'];

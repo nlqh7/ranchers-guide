@@ -122,34 +122,32 @@
 
   function buildMarkerStacks() {
     resetMarkerStacks();
-    var assigned = new Set();
-    var canvas = document.querySelector("[data-map-canvas]");
-    var compactStacking = !!(canvas && canvas.getBoundingClientRect().width < 280);
     var threshold = getStackThreshold();
-    markers.forEach(function (seed) {
-      if (assigned.has(seed)) return;
-      var queue = [seed];
-      var stack = [];
-      assigned.add(seed);
-      while (queue.length) {
-        var current = queue.shift();
-        stack.push(current);
-        var cx = parseFloat(current.style.getPropertyValue("--mx"));
-        var cy = parseFloat(current.style.getPropertyValue("--my"));
-        markers.forEach(function (candidate) {
-          if (assigned.has(candidate)) return;
-          if (compactStacking && candidate.dataset.markerId !== current.dataset.markerId) return;
-          var x = parseFloat(candidate.style.getPropertyValue("--mx"));
-          var y = parseFloat(candidate.style.getPropertyValue("--my"));
-          if (Math.hypot(cx - x, cy - y) <= threshold) {
-            assigned.add(candidate);
-            queue.push(candidate);
-          }
-        });
-      }
-      if (stack.length < 2) return;
-      markerStackGroups.push({ members: stack, hitTargets: [], fanned: false, autoFanned: false });
-      stack.forEach(function (marker, index) {
+    var nearbyGroups = window.RanchersMapViewer.groupNearbyMarkers(markers.map(function (marker) {
+      return {
+        marker: marker,
+        markerId: marker.dataset.markerId,
+        x: parseFloat(marker.style.getPropertyValue("--mx")),
+        y: parseFloat(marker.style.getPropertyValue("--my")),
+      };
+    }), threshold);
+    nearbyGroups.forEach(function (group) {
+      var typedGroups = [];
+      group.forEach(function (item) {
+        var bucket = typedGroups.find(function (candidate) { return candidate.marker.dataset.markerId === item.marker.dataset.markerId; });
+        var current = bucket ? bucket.marker : item.marker;
+        if (!bucket) {
+          bucket = { marker: current, items: [] };
+          typedGroups.push(bucket);
+        }
+        if (item.marker.dataset.markerId !== current.dataset.markerId) return;
+        bucket.items.push(item);
+      });
+      typedGroups.forEach(function (typedGroup) {
+        var stack = typedGroup.items.map(function (item) { return item.marker; });
+        if (stack.length < 2) return;
+        markerStackGroups.push({ members: stack, hitTargets: [], fanned: false, autoFanned: false });
+        stack.forEach(function (marker, index) {
         markerStackByElement.set(marker, stack);
         marker.dataset.markerStackSize = String(stack.length);
         marker.dataset.markerStackIndex = String(index);
@@ -180,6 +178,7 @@
           tether.setAttribute("aria-hidden", "true");
           marker.appendChild(tether);
         }
+        });
       });
     });
   }
@@ -320,7 +319,6 @@
     return picked && picked.element;
   }
 
-  buildMarkerStacks();
   window.addEventListener("resize", function () {
     buildMarkerStacks();
     updateMarkerStackBadges();
@@ -677,6 +675,7 @@
       button.type = "button";
       button.className = "map-inspector-stack-item";
       button.classList.toggle("active", candidate === marker);
+      button.setAttribute("aria-pressed", candidate === marker ? "true" : "false");
       var icon = candidate.querySelector(".map-marker-native-icon");
       if (icon) {
         var image = icon.cloneNode(true);
@@ -688,7 +687,11 @@
       var copy = document.createElement("span");
       copy.textContent = candidate.dataset.markerTitle + (candidate.dataset.markerPointLabel ? " · " + candidate.dataset.markerPointLabel : "");
       button.appendChild(copy);
-      button.addEventListener("click", function () { selectMarker(candidate); });
+      button.addEventListener("click", function () {
+        selectMarker(candidate);
+        var selectedButton = inspectorStackList.children[visible.indexOf(candidate)];
+        if (selectedButton) selectedButton.focus({ preventScroll: true });
+      });
       inspectorStackList.appendChild(button);
     });
     inspectorStack.hidden = false;
@@ -1585,6 +1588,9 @@
   }
 
   applyMapView();
+  // Measure nearby pins after the initial zoom is applied, just as on resize.
+  buildMarkerStacks();
+  updateMarkerStackBadges();
   if (hasDirectory) {
     var initialMatches = render();
     if (search.value.trim()) setTimeout(function () { focusBestMatch(initialMatches, true); }, 0);

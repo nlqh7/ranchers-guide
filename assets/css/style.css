@@ -2299,7 +2299,7 @@ body.has-modal-open { overflow: hidden; }
 .map-inspector-stack > div { display: grid; gap: 6px; }
 .map-inspector-stack-item { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 7px 10px; border: 1px solid var(--cream-300); background: var(--color-surface); color: var(--brown-700); text-align: left; cursor: pointer; }
 .map-inspector-stack-item:hover, .map-inspector-stack-item:focus-visible, .map-inspector-stack-item.active { border-color: var(--green-700); color: var(--green-700); }
-.map-inspector-stack-icon { width: 24px; height: 24px; object-fit: contain; flex: 0 0 24px; }
+.map-inspector-stack-icon { width: 24px; height: 24px; object-fit: contain; flex: 0 0 24px; padding: 3px; border-radius: 4px; background: var(--green-700); }
 .map-type-filters { margin-top: 12px; padding: 0 12px; border: 1px solid var(--cream-300); background: var(--color-surface); }
 .location-toolbar .map-type-filters { grid-column: auto; margin-top: 0; border-radius: 6px; }
 .location-toolbar .map-type-filters[open] { grid-column: 1 / -1; }

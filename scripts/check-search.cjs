@@ -238,7 +238,7 @@ const missingChickenResults = searchDocuments(chineseIndex, "鸡消失");
 assert.equal(missingChickenResults[0].url, "/zh/guides/animal-guide#troubleshooting");
 assert.ok(missingChickenResults.some((result) => result.url === "/zh/problems#animals"));
 assert.ok(missingChickenResults.some((result) => result.url === "/zh/database/animals#missing"));
-assert.equal(searchDocuments(chineseIndex, "草莓多久成熟")[0].url, "/zh/database/crops#strawberry");
+assert.equal(searchDocuments(chineseIndex, "草莓多久成熟")[0].url, "/zh/database/crops/strawberry#strawberry");
 assert.equal(searchDocuments(chineseIndex, "种子商店在哪里")[0].url, "/zh/map#leafy-market");
 assert.equal(searchDocuments(chineseIndex, "锆矿在哪里买")[0].url, "/zh/database/materials#zirconite");
 assert.equal(searchDocuments(chineseIndex, "工作台通电任务")[0].url, "/zh/database/quests#power-to-the-bench");

@@ -16,6 +16,12 @@ assert.equal(viewer.pickMarker(hitCandidates, { x: 95, y: 100 }).id, "behind", "
 assert.equal(viewer.pickMarker(hitCandidates, { x: 82, y: 100 }).id, "behind", "empty target padding uses the nearest anchor");
 assert.equal(viewer.pickMarker(hitCandidates, { x: 70, y: 100 }), null, "a marker must not claim clicks beyond its 44px target");
 assert.equal(viewer.pickMarker([], { x: 100, y: 100 }), null);
+const closePins = [
+  { id: "city-hall", x: 10, y: 10 },
+  { id: "subway", x: 10.5, y: 10 },
+  { id: "parking", x: 11, y: 10 },
+];
+assert.deepEqual(viewer.groupNearbyMarkers(closePins, 0.75), [[closePins[0], closePins[1]]], "nearby different POIs should be selectable together without chaining a whole street into one inspector list");
 assert.deepEqual(viewer.viewportToCanvas({ sx: 0.75, sy: 0.5 }, { width: 800, height: 500 }, { width: 500, height: 500 }), { sx: 0.9, sy: 0.5 }, "wheel anchors must use the square canvas, not the wider viewport");
 const zoomedCenter = viewer.zoomAt({ scale: 2, x: -40, y: -30 }, 2, { sx: 0.5, sy: 0.5 });
 assert.deepEqual(zoomedCenter, { scale: 4, x: -80, y: -60 }, "button zoom keeps the same place at the center");

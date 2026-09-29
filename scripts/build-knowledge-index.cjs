@@ -27,10 +27,19 @@ function routeForType(type, id, locale) {
   const prefix = locale === "zh" ? "/zh" : "";
   if (type === "location") return `${prefix}/map#${id}`;
   if (type === "building") return `${prefix}/guides/building-construction#materials`;
+  if (type === "animal" && id === "chicken") return `${prefix}/database/animals/chicken`;
+  if (type === "animal" && (id === "cow" || id === "goat")) return `${prefix}/database/animals/livestock#${id}`;
+  if (type === "crop" && ["red-lettuce", "garlic", "strawberry"].includes(id)) return `${prefix}/database/crops/${id}`;
   return `${prefix}/database/${type === "npc" ? "npcs" : type === "quest" ? "quests" : `${type}s`}#${id}`;
 }
 
 const routeLabels = {
+  "/database/crops/red-lettuce": { en: "Red Lettuce crop entry", zh: "红生菜词条" },
+  "/database/crops/garlic": { en: "Garlic crop entry", zh: "大蒜词条" },
+  "/database/crops/strawberry": { en: "Strawberry crop entry", zh: "草莓词条" },
+  "/database/animals/chicken": { en: "Chicken care profile", zh: "鸡的照料词条" },
+  "/database/animals/livestock#cow": { en: "Cow breeds and records", zh: "牛品种与记录" },
+  "/database/animals/livestock#goat": { en: "Goat records", zh: "山羊资料" },
   "/guides/electricity-power#two-paths": { en: "Electricity contracts & power", zh: "水电合同与供电" },
   "/guides/electricity-power#solar-quest": { en: "Solar objective checklist", zh: "太阳能目标检查清单" },
   "/guides/animal-guide#getting": { en: "Bring chickens home", zh: "把鸡运回家" },
@@ -65,6 +74,7 @@ const journeyPlans = {
     { route: "/tools/player-report", en: { label: "Report a current crop screen", reason: "A current shop or planting capture is the missing evidence for this record." }, zh: { label: "提交当前作物画面", reason: "这条记录缺少当前商店或种植画面，提交截图可以帮助补证。" } },
   ],
   "animal:chicken": [
+    { route: "/database/animals/chicken", en: { label: "Chicken care profile", reason: "Open the player-facing purchase, coop, feed, egg and troubleshooting route." }, zh: { label: "鸡的照料词条", reason: "查看购买、鸡舍、喂养、鸡蛋与排查路线。" } },
     { route: "/guides/animal-guide#getting", en: { label: "Bring chickens home", reason: "Start with the documented purchase and delivery route." }, zh: { label: "把鸡带回家", reason: "先按已有证据确认购买和运回流程。" } },
     { route: "/database/npcs#angela", en: { label: "Find Angela", reason: "Open the seller profile and housing equipment notes." }, zh: { label: "找到 Angela", reason: "查看卖鸡商人和鸡舍设备记录。" } },
     { route: "/database/quests#chicken-coop-mission", en: { label: "Chicken Coop Mission", reason: "Check the task hand-off before treating it as a bug." }, zh: { label: "鸡舍任务", reason: "先看任务交付点，再判断是否是 bug。" } },
@@ -177,16 +187,19 @@ const journeyPlans = {
     { route: "/guides/building-construction#materials", en: { label: "Building material context", reason: "Check how the material fits the documented construction path." }, zh: { label: "建造材料上下文", reason: "查看该材料如何接入已有记录的建造流程。" } },
   ],
   "crop:red-lettuce": [
+    { route: "/database/crops/red-lettuce", en: { label: "Red Lettuce entry", reason: "Read its 48C seed and three-day Spring cycle without mistaking unknown sales income for profit." }, zh: { label: "红生菜词条", reason: "查看 48C 种子与春季 3 天周期，不把未知出售收入当作利润。" } },
     { route: "/guides/farming-fields#start-farming", en: { label: "Start farming", reason: "Use the current planting sequence before committing more cash to a crop." }, zh: { label: "开始种田", reason: "先按当前种植流程操作，再决定是否继续投入现金。" } },
     { route: "/guides/money-making#cashin", en: { label: "CashIn selling", reason: "Follow the documented settlement route without assuming a per-head sell price." }, zh: { label: "CashIn 出售", reason: "按已有结算路线出售，不把单颗售价当成已知。" } },
     { route: "/map#leafy-market", en: { label: "Leafy Market", reason: "Open the approximate shop area tied to the observed seed listing." }, zh: { label: "Leafy Market", reason: "打开与种子画面相关的大致商店区域。" } },
   ],
   "crop:strawberry": [
+    { route: "/database/crops/strawberry", en: { label: "Strawberry entry", reason: "Compare its 144C seed, seven-day first harvest and three-day regrow interval; sell price and yield stay unknown." }, zh: { label: "草莓词条", reason: "查看 144C 种子、7 天首次收获与 3 天再生；售价和产量仍未知。" } },
     { route: "/guides/farming-fields#regrow", en: { label: "Regrow crop rules", reason: "Compare the observed regrow timing with one-time harvest crops." }, zh: { label: "返收作物规则", reason: "把已有返收时间与一次性收获作物对照。" } },
     { route: "/guides/money-making#cashin", en: { label: "CashIn selling", reason: "Use the settlement workflow while keeping berry price and yield open." }, zh: { label: "CashIn 出售", reason: "按结算流程操作，并保留草莓售价和产量未知。" } },
     { route: "/map#leafy-market", en: { label: "Leafy Market", reason: "Open the approximate shop area tied to the observed seed listing." }, zh: { label: "Leafy Market", reason: "打开与种子画面相关的大致商店区域。" } },
   ],
   "crop:garlic": [
+    { route: "/database/crops/garlic", en: { label: "Garlic entry", reason: "Separate the 31C retail product from the unobserved seed price and player sale value." }, zh: { label: "大蒜词条", reason: "区分 31C 成品零售价、未观察到的种子价和玩家出售收入。" } },
     { route: "/guides/farming-fields#selling", en: { label: "Crop selling boundary", reason: "Separate shop retail price from the still-unobserved player sell value." }, zh: { label: "作物出售边界", reason: "区分商店零售价和仍未观测的玩家出售收入。" } },
     { route: "/guides/money-making#cashin", en: { label: "CashIn selling", reason: "Follow the documented settlement route instead of reading 31C as farm income." }, zh: { label: "CashIn 出售", reason: "按已有结算路线操作，不把 31C 误读成种植收入。" } },
     { route: "/map#leafy-market", en: { label: "Leafy Market", reason: "Open the shop area where the retail and seed tabs were observed." }, zh: { label: "Leafy Market", reason: "打开观察到零售价和种子页签的商店区域。" } },
@@ -213,11 +226,13 @@ const journeyPlans = {
     { route: "/database/materials#wood-log", en: { label: "Wood Log record", reason: "Check the second documented material without expanding the recipe." }, zh: { label: "原木条目", reason: "查看第二种已记录材料，不扩写配方。" } },
   ],
   "animal:cow": [
+    { route: "/database/animals/livestock#cow", en: { label: "Cow breeds and records", reason: "Compare the five recorded breed names, listed items and official sickness duration." }, zh: { label: "牛品种与记录", reason: "对照五个品种名、物品和官方病程记录。" } },
     { route: "/guides/animal-guide", en: { label: "Animal care guide", reason: "Keep current-build care answers separate from historical barn mechanics." }, zh: { label: "动物照护指南", reason: "把当前版本照护答案与历史谷仓机制分开。" } },
     { route: "/database/animals#cow", en: { label: "Cow evidence", reason: "Review the roster, product observations and unknown purchase fields together." }, zh: { label: "牛的证据", reason: "集中查看动物名单、产物观测和未知购买字段。" } },
     { route: "/tools/ranch-checklist", en: { label: "Save animal notes", reason: "Track your own care observations without turning them into site facts." }, zh: { label: "保存动物记录", reason: "记录自己的照护观察，不把它直接变成网站事实。" } },
   ],
   "animal:goat": [
+    { route: "/database/animals/livestock#goat", en: { label: "Goat records", reason: "Separate adult shop references, young definitions, unknown diet and official sickness duration." }, zh: { label: "山羊资料", reason: "区分成年商店引用、幼年定义、未知饮食和官方病程。" } },
     { route: "/guides/animal-guide", en: { label: "Animal care guide", reason: "Use the shared care context while goat-specific current data remains open." }, zh: { label: "动物照护指南", reason: "在山羊当前版本数据不足时，先查看通用照护上下文。" } },
     { route: "/database/animals#goat", en: { label: "Goat evidence", reason: "Separate the confirmed roster from unverified seller, price and feed fields." }, zh: { label: "山羊的证据", reason: "区分已确认的动物名单与未验证的卖家、价格和食物字段。" } },
     { route: "/tools/ranch-checklist", en: { label: "Save animal notes", reason: "Keep personal observations local until they have traceable evidence." }, zh: { label: "保存动物记录", reason: "在具备可追踪证据前，把个人观察保存在本机。" } },

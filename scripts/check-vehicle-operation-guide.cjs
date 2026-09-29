@@ -42,6 +42,7 @@ for (const locale of ['en', 'zh']) {
   const guide = fs.readFileSync(path.join(root, prefix, 'guides/vehicles-transport.html'), 'utf8');
   const searchIndex = JSON.parse(fs.readFileSync(path.join(root, prefix, 'search-index.json'), 'utf8'));
   const block = guide.match(/BEGIN VEHICLE OPERATION TUTORIAL REFERENCE -->[\s\S]*?<!-- END VEHICLE OPERATION TUTORIAL REFERENCE/)?.[0] || '';
+  const camera = guide.match(/<section id="camera"[^>]*>[\s\S]*?<\/section>/)?.[0] || '';
 
   assert.ok(block, `${locale}: generated vehicle operation block missing`);
   assert.match(block, /id="vehicle-operation-current-build"[^>]*data-search-entry/, `${locale}: operation path needs a searchable deep link`);
@@ -58,6 +59,16 @@ for (const locale of ['en', 'zh']) {
   assert.match(guide, /<a href="#vehicle-operation-current-build">/, `${locale}: table of contents must link to the current-build path`);
   assert.match(guide, /id="answer"[\s\S]*?<a href="#vehicle-operation-current-build">/, `${locale}: answer-first copy must expose the path`);
 
+  assert.ok(camera, `${locale}: official vehicle-camera settings need a directly linkable guide section`);
+  assert.match(guide, /<a href="#camera">/, `${locale}: table of contents must link to camera guidance`);
+  assert.match(camera, /0\.8\.10\.871/, `${locale}: camera guidance must cite the official build that introduced it`);
+  assert.match(camera, locale === 'zh' ? /Automatically Follow Vehicle Direction[\s\S]*倒车/ : /Automatically Follow Vehicle Direction[\s\S]*revers(?:e|ing)/i);
+  assert.match(camera, locale === 'zh' ? /镜头[\s\S]*不.*转向|只.*镜头[\s\S]*转向/ : /camera[\s\S]*not.*steer|not.*steering/i,
+    `${locale}: camera settings must not be presented as a fix for steering response`);
+  const metadata = guide.match(/<p class="meta">([^<]+)<\/p>/)?.[1] || '';
+  assert.ok(metadata.includes('0.8.10.842') && metadata.includes('0.8.10.871'),
+    `${locale}: metadata must distinguish the vehicle-catalogue baseline from camera-update coverage`);
+
   const queries = locale === 'zh'
     ? ['车辆油表在哪里', 'QuickFix 修理损坏车辆', '开车消耗玩家体力']
     : ['where is the vehicle fuel gauge', 'QuickFix repair damaged vehicle', 'driving uses player energy'];
@@ -66,6 +77,17 @@ for (const locale of ['en', 'zh']) {
       searchCore.searchDocuments(searchIndex, query, 5)[0]?.url,
       `/${prefix}guides/vehicles-transport#vehicle-operation-current-build`,
       `${locale}: ${query} must open the current-build vehicle path`,
+    );
+  }
+
+  const cameraQueries = locale === 'zh'
+    ? ['车辆镜头自动跟随 倒车', '车辆转向迟滞']
+    : ['vehicle camera auto follow reverse', 'stiff steering'];
+  for (const cameraQuery of cameraQueries) {
+    assert.equal(
+      searchCore.searchDocuments(searchIndex, cameraQuery, 5)[0]?.url,
+      `/${prefix}guides/vehicles-transport#camera`,
+      `${locale}: ${cameraQuery} must open the relevant camera guidance and its steering boundary`,
     );
   }
 }

@@ -60,7 +60,10 @@ for (const prefix of ['', 'zh/']) {
   const index = JSON.parse(fs.readFileSync(path.join(root, prefix, 'search-index.json'), 'utf8'));
   const knowledge = JSON.parse(fs.readFileSync(path.join(root, prefix, 'knowledge-index.json'), 'utf8'));
   for (const item of data.items) {
-    const expected = `/${prefix}database/crops#${item.rosterStatus === 'current-roster' ? item.cropId : `seed-${item.cropId}`}`;
+    const standalone = ['red-lettuce', 'garlic', 'strawberry'].includes(item.cropId);
+    const expected = item.rosterStatus === 'current-roster' && standalone
+      ? `/${prefix}database/crops/${item.cropId}#${item.cropId}`
+      : `/${prefix}database/crops#${item.rosterStatus === 'current-roster' ? item.cropId : `seed-${item.cropId}`}`;
     const query = item.id === 'seed_chili' ? item.id : (prefix ? item.zhName : item.name);
     assert.equal(search.searchDocuments(index, query, 12)[0]?.url, expected, `${prefix}: exact seed query must open its complete crop/seed profile`);
     if (item.id === 'seed_chili') assert.ok(search.searchDocuments(index, prefix ? item.zhName : item.name, 3).some(result => result.url === expected), `${prefix}: ambiguous native Chili name must keep the seed profile near the top`);

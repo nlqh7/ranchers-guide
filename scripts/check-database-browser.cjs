@@ -67,10 +67,20 @@ for (const prefix of ['', 'zh/']) {
     const entries = kind === 'animals' ? animals.species : crops.buildRoster.entries;
     for (const item of entries) {
       const target = item.id;
-      assert.ok(browser.includes(`href="#${target}"`), `${prefix}${kind}: ${item.id} has a direct link`);
-      assert.ok(html.includes(`id="${target}"`), `${target}: destination exists`);
+      const cropDetailRoute = kind === 'crops' && ['red-lettuce', 'garlic', 'strawberry'].includes(target);
+      const animalDetailRoute = kind === 'animals' && ['chicken', 'cow', 'goat'].includes(target);
+      const animalHref = target === 'chicken' ? `/${prefix}database/animals/chicken` : `/${prefix}database/animals/livestock#${target}`;
+      const expectedHref = cropDetailRoute
+        ? `href="/${prefix}database/crops/${target}"`
+        : animalDetailRoute ? `href="${animalHref}"` : `href="#${target}"`;
+      assert.ok(browser.includes(expectedHref), `${prefix}${kind}: ${item.id} has a direct link`);
+      assert.ok(cropDetailRoute
+        ? fs.existsSync(path.join(root, prefix, 'database', 'crops', `${target}.html`))
+        : animalDetailRoute
+          ? fs.existsSync(path.join(root, prefix, 'database', 'animals', target === 'chicken' ? 'chicken.html' : 'livestock.html'))
+          : html.includes(`id="${target}"`), `${target}: destination exists`);
       if (kind === 'crops') {
-        const card = browser.match(new RegExp(`<a\\b[^>]*href="#${target}"[^>]*>[\\s\\S]*?<\\/a>`))?.[0] || '';
+        const card = browser.match(new RegExp(`<a\\b[^>]*${expectedHref}[^>]*>[\\s\\S]*?<\\/a>`))?.[0] || '';
         assert.match(card, /database-entry-meta/, `${prefix}${target}: crop choice should show a quick growth summary`);
         assert.ok(card.includes(String(item.daysToFirstHarvest)), `${prefix}${target}: quick summary must use the configured first-harvest value`);
         assert.match(card, prefix ? /首收/ : /First harvest/, `${prefix}${target}: summary must label the growth value`);
@@ -94,12 +104,28 @@ for (const prefix of ['', 'zh/']) {
   const html = fs.readFileSync(path.join(root, prefix, 'database.html'), 'utf8');
   const browse = html.match(/<!-- DATABASE BROWSER START -->[\s\S]*?<!-- DATABASE BROWSER END -->/)?.[0];
   assert.ok(browse, `${prefix}database: generated direct-entry directory required`);
-  for (const animal of animals.species) assert.ok(browse.includes(`/${prefix}database/animals#${animal.id}`));
-  for (const vehicle of vehicles.items) assert.ok(browse.includes(`/${prefix}guides/vehicles-transport#vehicle-${vehicle.id}`), `${prefix}database: ${vehicle.id} has a direct vehicle profile link`);
+  for (const animal of animals.species) {
+    const detail = animal.id === 'chicken' ? `/${prefix}database/animals/chicken`
+      : ['cow', 'goat'].includes(animal.id) ? `/${prefix}database/animals/livestock#${animal.id}`
+        : `/${prefix}database/animals#${animal.id}`;
+    assert.ok(browse.includes(`href="${detail}"`), `${prefix}database: ${animal.id} should link to its most useful available entry`);
+  }
+  for (const cropId of ['red-lettuce', 'garlic', 'strawberry']) {
+    assert.ok(browse.includes(`href="/${prefix}database/crops/${cropId}"`), `${prefix}database: ${cropId} should link directly to its standalone entry`);
+  }
+  const animalPage = fs.readFileSync(path.join(root, prefix, 'database/animals.html'), 'utf8');
+  const vehicleGuide = fs.readFileSync(path.join(root, prefix, 'guides/vehicles-transport.html'), 'utf8');
+  assert.match(animalPage, /<details class="database-reference-notes database-wildlife-references" id="build-data-reference"><summary>[\s\S]*?id="build-wildlife"[\s\S]*?id="build-enemies"[\s\S]*?<\/section><\/details>/, `${prefix}animals: build-only reference sections remain available but do not crowd the main lookup`);
+  for (const vehicle of vehicles.items) assert.ok(vehicleGuide.includes(`id="vehicle-${vehicle.id}"`), `${prefix}vehicle guide: ${vehicle.id} remains available in the detailed catalogue`);
   for (const category of ['animals', 'crops', 'materials', 'quests', 'npcs']) assert.ok(browse.includes(`/${prefix}database/${category}`));
   assert.doesNotMatch(browse, /coverage-summary|knowledge-category-number/);
   assert.match(browse, /class="database-hub-heading"/, 'category labels have a consistent alignment column');
   assert.match(browse, /class="database-hub-content"/, 'names occupy a separate aligned content column');
   assert.doesNotMatch(browse, /查看全部资料|Open full reference/, 'avoid repeating the same category link in each block');
+  assert.ok(browse.includes(`/${prefix}database/animals#build-data-reference`), `${prefix}database: game-file animal records need one clearly separated reference entry`);
+  assert.doesNotMatch(browse, /wildlife-Flocking_Bird_|enemy-Spider_/, `${prefix}database: do not expose raw wildlife or enemy identifiers in the main directory`);
+  assert.ok(browse.includes(`/${prefix}guides/vehicles-transport#vehicle-operation-current-build`), `${prefix}database: vehicle category needs a player-action entry point`);
+  assert.ok(browse.includes(`/${prefix}guides/vehicles-transport#vehicle-catalog`), `${prefix}database: retain access to the detailed vehicle catalogue`);
+  assert.doesNotMatch(browse, /vehicle-VIC_Container_|vehicle-VIC_AirPlane_/, `${prefix}database: do not list internal container or aircraft records in the main directory`);
 }
 console.log('PASS: bilingual database entry browsers preserve direct destinations.');

@@ -18,6 +18,11 @@ assert.deepEqual(audit.issues.orphaned, [], "Every sitemap route needs an intern
 assert.deepEqual(audit.issues.duplicateTitles, [], "Page titles must be unique");
 assert.deepEqual(audit.issues.duplicateDescriptions, [], "Page descriptions must be unique");
 
+const redirects = fs.readFileSync(path.join(root, "_redirects"), "utf8");
+assert.match(redirects, /^\/zh\/problems\/failed-quest-replay\s+\/problems\/failed-quest-replay\s+301\s*$/m, "the retired Chinese failed-quest URL must permanently lead to the existing recovery guide");
+assert.ok(fs.existsSync(path.join(root, "problems", "failed-quest-replay.html")), "the failed-quest redirect destination must exist");
+assert.doesNotMatch(fs.readFileSync(path.join(root, "sitemap.xml"), "utf8"), /\/zh\/problems\/failed-quest-replay/, "the retired URL belongs in redirects, not the sitemap");
+
 for (const route of ["/404", "/contribute", "/search", "/zh/search", "/research", "/tools/field-notes", "/tools/player-report", "/zh/tools/player-report", "/tools/ranch-checklist", "/zh/tools/ranch-checklist", "/tools/update-impact-tracker", "/zh/tools/update-impact-tracker", "/tools/profit-calculator"]) {
   const page = audit.pages.find((candidate) => candidate.route === route);
   assert.ok(page, `${route} must be audited`);

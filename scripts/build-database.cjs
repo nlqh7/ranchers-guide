@@ -22,7 +22,7 @@ function render(locale) {
     buildings: ['Material conditions & preparation', '材料条件与备料'],
     quests: ['Objectives & preparation', '任务步骤与准备事项'],
     npcs: ['Shops, services & quests', '商店、服务与相关任务'],
-    vehicles: ['Names, dealer links & source settings', '名称、经销商记录与原生配置'],
+    vehicles: ['Driving, travel & vehicle recovery', '驾驶、出行与车辆找回'],
     customization: ['Names & source settings', '名称与原生配置'],
   };
   const guideLinks = {

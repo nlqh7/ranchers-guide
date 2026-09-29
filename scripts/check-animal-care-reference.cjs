@@ -46,6 +46,9 @@ assert.deepEqual(diets.rabbit.foodIds, ['vegetable_red_luttuce_normal', 'vegetab
 assert.deepEqual(diets.ram.foodIds, ['ressource_straw']);
 assert.ok(ref.diets.every(diet => diet.waterIds.length === 1 && diet.waterIds[0] === 'farm_water_1L'));
 assert.deepEqual(diets.ram.entryIds, ['animal_ram_male'], 'RAM source must not be expanded to every sheep entry');
+const chicken = data.species.find(entry => entry.id === 'chicken');
+assert.ok(chicken.fields.find(field => field.key === 'feed')?.facts.some(fact => fact.validity === 'historical' && fact.build === 'alpha-2023' && fact.evidenceLevel === 'official' && fact.sourceIds.includes('ranching-v2-notes')), 'chicken entry must label the official wild-grass Hay route as pre-EA historical evidence');
+assert.ok(chicken.zh.groups.find(group => group.id === 'feeding')?.facts.some(fact => fact.badge === 'official' && fact.sourceIds?.includes('ranching-v2-notes') && /Alpha.*(?:任何|无论)生长阶段/.test(fact.text)), 'Chinese chicken entry must retain the dated official wild-grass source');
 
 assert.equal(ref.delivery.titleSourceKey, 'GT/Animals_Pickable_FromDeliveryToBarn_Title');
 assert.deepEqual(ref.delivery.steps.map(step => step.sourceKey), [
@@ -72,6 +75,8 @@ for (const locale of ['en', 'zh']) {
   const knowledgeIndex = JSON.parse(fs.readFileSync(path.join(root, prefix, 'knowledge-index.json'), 'utf8'));
   assert.match(html, /id="bringing-small-animals-home"[^>]*data-search-entry/, `${locale}: delivery route must be directly searchable`);
   assert.match(html, /data-animal-delivery-reference/, `${locale}: delivery route must be visible`);
+  assert.match(html, locale === 'zh' ? /野草(?:无论|在任何)生长阶段都能产出干草[\s\S]*早于抢先体验/ : /wild grass produces Hay at any growth stage[\s\S]*pre-EA documented/, `${locale}: wild-grass Hay route must be displayed with its historical boundary`);
+  assert.match(html, /3716073126083415742/, `${locale}: historical Hay method must link its official source`);
   const deliveryPosition = html.indexOf('data-animal-delivery-reference');
   assert.equal(detailsDepthAt(html, deliveryPosition), 0, `${locale}: delivery route must not be hidden inside a collapsed disclosure`);
   for (const step of ref.delivery.steps) assert.ok(html.includes(locale === 'zh' ? step.zhText : step.text));

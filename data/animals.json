@@ -91,9 +91,9 @@
     "ranching-v2-notes": {
       "kind": "official-news",
       "title": "The Ranchers, Ranching v2 update! (official Steam announcement)",
-      "url": "https://steamcommunity.com/games/1501310/announcements/detail/6839319551984984308",
+      "url": "https://steamcommunity.com/games/1501310/announcements/detail/3716073126083415742",
       "author": "Ethan (official)",
-      "date": "2023-06-27",
+      "date": "2023-03-31",
       "build": "alpha-2023"
     },
     "games-station-video": {
@@ -236,7 +236,7 @@
     "thread-silos": {
       "kind": "steam-thread",
       "title": "Steam thread \"Silos\" (maxitubby, Jennoula)",
-      "url": null,
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587308167364408897/",
       "author": "maxitubby / Jennoula",
       "date": "2026-08",
       "build": "0.8.10.x"
@@ -894,6 +894,15 @@
               ]
             },
             {
+              "text": "Official 2023 Alpha update notes say wild grass produces Hay at any growth stage. This is pre-Early Access documentation and does not by itself confirm current-build behavior.",
+              "evidenceLevel": "official",
+              "build": "alpha-2023",
+              "validity": "historical",
+              "sourceIds": [
+                "ranching-v2-notes"
+              ]
+            },
+            {
               "text": "Hay comes from cutting bushes or looting crates and barrels on NPC farms.",
               "evidenceLevel": "unverified-lead",
               "build": "0.8.10.x",
@@ -952,7 +961,7 @@
               ]
             },
             {
-              "text": "Chicken Breast and Chicken Leg exist as current-build shop items, confirming the meat path for culled chickens.",
+              "text": "Chicken Breast and Chicken Leg exist as current-build shop items. This confirms that these item records exist; the shelf footage alone does not prove how a chicken is processed, dropped or made available in the current runtime.",
               "evidenceLevel": "video-observed",
               "build": "0.8.10.455",
               "validity": "current",
@@ -1301,6 +1310,13 @@
                 "badge": "community"
               },
               {
+                "text": "历史官方资料：2023 年 Alpha 更新说明称野草无论生长阶段都能产出干草；这早于抢先体验，不能单独证明当前版本行为。可先小范围试割并检查背包。",
+                "badge": "official",
+                "sourceIds": [
+                  "ranching-v2-notes"
+                ]
+              },
+              {
                 "text": "干草可通过割灌木，或搜寻 NPC 农场的木箱和桶获得。",
                 "badge": "lead"
               }
@@ -1420,7 +1436,7 @@
       "name": "Cow",
       "category": "mammal",
       "housingType": "Barn",
-      "summary": "Five breeds in the cattle-shop directory, with related quest, care instructions and product names.",
+      "summary": "Five breeds in the cattle-shop directory, with related quest, recorded care configuration and product names. The owned 0.8.10.842 table lists Hay as food and Water as the water choice; current-save care, seller, price and production remain unverified.",
       "whenNeeded": "Use the breed list before buying, and the care checklist when settling cattle into a barn. Do not use item definitions to estimate income.",
       "searchTags": "cow bull calf cattle barn milk meat spotted food diet feed price buy sell Bretonne Pie Noire Maine-Anjou Angeln Deutsche Rotbunte Gascon",
       "buildReference": {
@@ -1667,10 +1683,10 @@
           "label": "Feeding",
           "facts": [
             {
-              "text": "Each species has its own unique diet under the livestock feeding system; the cow diet has not been confirmed in the current build.",
-              "evidenceLevel": "official",
-              "build": "alpha-2023",
-              "validity": "historical",
+              "text": "The owned 0.8.10.842 Cow care configuration lists Hay as food and Water as the water choice. This is serialized configuration, not a current-save feeding test; quantity, frequency and output remain unverified.",
+              "evidenceLevel": "build-observed",
+              "build": "0.8.10.842",
+              "validity": "unknown",
               "sourceIds": [
                 "ranching-v2-notes"
               ]
@@ -1770,10 +1786,10 @@
           "label": "Selling",
           "facts": [
             {
-              "text": "Selling live animals is not implemented; the meat path is the current disposal route.",
+              "text": "The reviewed official selling guidance covers surplus chickens and roosters only; it does not establish a cattle-specific live-sale or dispatch route. Keep these cow product names separate from an untested selling result.",
               "evidenceLevel": "official",
               "build": "0.8.10.x",
-              "validity": "current",
+              "validity": "unknown",
               "sourceIds": [
                 "thread-cant-sell-roosters"
               ]
@@ -1839,8 +1855,12 @@
             "id": null,
             "facts": [
               {
-                "text": "当前不能出售活体动物，处理后出售肉类是已确认路线。",
-                "badge": "official"
+                "text": "已核对的官方出售说明只涉及多余鸡和公鸡，不能据此确认牛的活体出售或处理路线；牛的产物名称不要当成已实测出售结果。",
+                "badge": "unknown",
+                "sourceIds": [
+                  "thread-cant-sell-roosters"
+                ],
+                "build": "0.8.10.x"
               },
               {
                 "text": "旧版 Ranching v2 公告描述了哺乳动物怀孕、幼崽和玩家幸运值影响品质概率。这些只能作为历史机制线索，不能直接当作 0.8.10.562 事实。",
@@ -1896,7 +1916,7 @@
       "name": "Goat",
       "category": "mammal",
       "housingType": "Barn",
-      "summary": "Identify adult and young goats, check the adult shop references and look up goat milk and meat names. Purchase prices and production rates remain unverified.",
+      "summary": "Identify adult and young goats, check the adult shop references and look up the recorded care configuration, milk and meat names. The owned 0.8.10.842 table lists Hay, Green Lettuce, Green Salad and Carotte with Water; purchase prices and production rates remain unverified.",
       "whenNeeded": "Compare the animal name before looking for a purchase route. Young goat definitions are not entries in the reviewed livestock-shop directory.",
       "searchTags": "goat buck doe doeling buckling kid barn mammal milk meat food diet feed price buy sell",
       "buildReference": {
@@ -2026,10 +2046,10 @@
           "label": "Feeding",
           "facts": [
             {
-              "text": "Species-unique diets are documented, but the goat diet is unconfirmed in the current build.",
-              "evidenceLevel": "official",
-              "build": "alpha-2023",
-              "validity": "historical",
+              "text": "The owned 0.8.10.842 Goat care configuration lists Hay, Green Lettuce, Green Salad and Carotte as food, with Water as the water choice. This is serialized configuration, not a current-save feeding test; quantity, frequency and output remain unverified.",
+              "evidenceLevel": "build-observed",
+              "build": "0.8.10.842",
+              "validity": "unknown",
               "sourceIds": [
                 "ranching-v2-notes"
               ]

@@ -55,9 +55,9 @@
     "ranching-v2-notes": {
       "kind": "official-news",
       "title": "The Ranchers, Ranching v2 update! (official Steam announcement)",
-      "url": "https://steamcommunity.com/games/1501310/announcements/detail/6839319551984984308",
+      "url": "https://steamcommunity.com/games/1501310/announcements/detail/3716073126083415742",
       "author": "Ethan (official)",
-      "date": "2023-06-27",
+      "date": "2023-03-31",
       "build": "alpha-2023"
     },
     "games-station-video": {
@@ -362,8 +362,8 @@
       "id": "red-lettuce",
       "name": "Red Lettuce",
       "category": "vegetable",
-      "summary": "The cheapest seed confirmed in launch-build footage: 48C, Spring, 3 days, single harvest. Sell price per head is still unobserved.",
-      "decision": "Check this entry when you want a current-build, one-harvest Spring crop comparison. The seed and timing are observed; player sell value is still unknown, so this is not a profit ranking.",
+      "summary": "The cheapest seed confirmed in launch-build footage: 48C, Spring, 3 days, single harvest.",
+      "decision": "Use this entry to plan a one-harvest Spring crop: confirm the Leafy Market seed listing, plant it, and keep it watered through the 3-day growth window.",
       "searchTags": "red lettuce salad vegetable spring seed price grow harvest food sell buy",
       "fields": [
         {
@@ -457,24 +457,27 @@
         "name": "红生菜 Red Lettuce",
         "searchTitle": "红生菜",
         "searchTags": "红生菜 种子 48C 春季 3天 生长 收获",
-        "summary": "当前画面确认红生菜是春季、3 天成熟、一次收获的作物；种子价格为 48C。玩家出售价格仍未知，因此不能直接当成收益排名。",
-        "decision": "想比较当前版本的一次性春季作物，或准备核对 48C 种子和 3 天成熟记录时查这里；出售收入仍要等实测。",
+        "summary": "当前画面确认红生菜是春季、3 天成熟、一次收获的作物；种子价格为 48C。",
+        "decision": "按一次性春季作物准备：先核对 Leafy Market 种子，再种下并连续浇水，3 天后查看首收。",
         "groups": [
           {
             "heading": null,
             "id": null,
             "facts": [
-              {
-                "text": "Leafy Market 的 Seed & Fertilizer 页签出售基础品质红生菜种子，价格 48C。",
-                "badge": "video"
-              },
-              {
-                "text": "春季作物，生长 3 天，一次种植收获一次，不会自动再生。",
-                "badge": "video"
-              },
-              {
-                "text": "玩家每颗出售价格未知。当日结算只显示合并后的 Farming 总额，无法拆分出红生菜单价。",
-                "badge": "unknown"
+          {
+            "text": "Leafy Market 的 Seed & Fertilizer 页签出售基础品质红生菜种子，价格 48C。",
+            "badge": "video",
+            "fieldKey": "seed"
+          },
+          {
+            "text": "春季作物，生长 3 天，一次种植收获一次，不会自动再生。",
+            "badge": "video",
+            "fieldKey": "growth"
+          },
+          {
+            "text": "玩家每颗出售价格未知。当日结算只显示合并后的 Farming 总额，无法拆分出红生菜单价。",
+            "badge": "unknown",
+            "fieldKey": "sell"
               }
             ]
           }
@@ -485,8 +488,8 @@
       "id": "strawberry",
       "name": "Strawberry",
       "category": "fruit",
-      "summary": "The first video-confirmed regrow crop: 144C seed, Spring, 7 days to first harvest, then fruit every 3 days. Berry sell price is unobserved — the 18C-per-harvest figure is a cost-allocation model, not revenue.",
-      "decision": "Check this entry when you are comparing a regrow crop with a one-time harvest. The observed timing is useful for planning, but the berry sell value and yield are still unknown.",
+      "summary": "The first video-confirmed regrow crop: 144C seed, Spring, 7 days to first harvest, then fruit every 3 days.",
+      "decision": "Use this entry to plan a Spring regrow crop: confirm the 144C seed listing, keep the plant watered for the first 7 days, then return every 3 days after the first harvest.",
       "searchTags": "strawberry berry berries fruit spring regrow recurring seed price grow harvest sell buy",
       "fields": [
         {
@@ -589,28 +592,32 @@
         "name": "草莓 Strawberry",
         "searchTitle": "草莓",
         "searchTags": "草莓 种子 144C 春季 7天 每3天 再生 收获",
-        "summary": "当前画面确认草莓种子 144C，春季 7 天首次成熟，之后每 3 天再生；出售价格和每株产量仍未知。18C 只是种子成本分摊模型，不是售价或利润。",
-        "decision": "想比较可再生作物与一次性收获，或核对 144C、7 天和每 3 天再生记录时查这里；不要用 18C 模型代替实际收益。",
+        "summary": "当前画面确认草莓种子 144C，春季 7 天首次成熟，之后每 3 天再生；可按这个节奏安排浇水和回收。",
+        "decision": "按可再生春季作物准备：先核对 144C 种子，前 7 天保持浇水，首收后每 3 天回来收取一次。",
         "groups": [
           {
             "heading": null,
             "id": null,
             "facts": [
-              {
-                "text": "基础品质草莓种子 144C；购买框另行确认 10 颗种子共 1,440C。",
-                "badge": "video"
-              },
-              {
-                "text": "春季作物，首次成熟需要 7 天，第一次收获后每 3 天再次结果。",
-                "badge": "video"
-              },
-              {
-                "text": "“每次收获分摊 18C”只是按完整 30 天春季、无漏收、无死亡假设计算的种子成本模型，不是草莓售价或利润。",
-                "badge": "model"
-              },
-              {
-                "text": "玩家每颗草莓出售价格与每株产量仍未观察。",
-                "badge": "unknown"
+          {
+            "text": "基础品质草莓种子 144C；购买框另行确认 10 颗种子共 1,440C。",
+            "badge": "video",
+            "fieldKey": "seed"
+          },
+          {
+            "text": "春季作物，首次成熟需要 7 天，第一次收获后每 3 天再次结果。",
+            "badge": "video",
+            "fieldKey": "growth"
+          },
+          {
+            "text": "“每次收获分摊 18C”只是按完整 30 天春季、无漏收、无死亡假设计算的种子成本模型，不是草莓售价或利润。",
+            "badge": "model",
+            "fieldKey": "sell"
+          },
+          {
+            "text": "玩家每颗草莓出售价格与每株产量仍未观察。",
+            "badge": "unknown",
+            "fieldKey": "sell"
               }
             ]
           }
@@ -621,8 +628,8 @@
       "id": "garlic",
       "name": "Garlic",
       "category": "vegetable",
-      "summary": "The 31C figure seen on screen is the retail price of the harvested product, not the seed. The seed listing exists but its price was never captured.",
-      "decision": "Check this entry when you need to separate a shop retail value from a seed price or player sell value. The 31C screen value cannot answer the farm-profit question.",
+      "summary": "Garlic is listed as a Spring crop with a 4-day first harvest and no regrow in the 0.8.10.842 configuration; its seed listing is present, but the captured seed price is unreadable.",
+      "decision": "Use this entry to prepare a Spring garlic planting: confirm the seed listing, keep the plot watered through the 4-day first harvest, and treat the price notes below as a separate reference.",
       "searchTags": "garlic vegetable spring seed price grow harvest sell buy retail",
       "fields": [
         {
@@ -689,20 +696,22 @@
         "name": "大蒜 Garlic",
         "searchTitle": "大蒜",
         "searchTags": "大蒜 garlic 31C 零售价 种子 价格",
-        "summary": "当前画面里的 31C 是 Leafy Market 成品大蒜的零售价，不是种子价，也不是玩家出售所得；种子价格和玩家卖价都没有拍清。",
-        "decision": "看到 31C 大蒜时查这里区分商店零售价、种子价格和玩家出售收入；现有证据只能确认前者。",
+        "summary": "大蒜在 0.8.10.842 配置中属于春季作物，首收 4 天且不再生；种子页签有记录，但现有画面看不清种子价格。",
+        "decision": "按春季大蒜准备：先核对种子页签，连续浇水 4 天等待首收；下方价格说明单独处理零售价与玩家出售收入的区别。",
         "groups": [
           {
             "heading": null,
             "id": null,
             "facts": [
-              {
-                "text": "大蒜种子出现在 Leafy Market 的种子页签，但画面没有清楚拍到种子价格。",
-                "badge": "shot-pending"
-              },
-              {
-                "text": "成品大蒜在蔬菜货架的零售价是 31C，并显示恢复 15 HP / 50 energy。31C 是玩家购买商品的价格，不是玩家卖大蒜所得。",
-                "badge": "video"
+          {
+            "text": "大蒜种子出现在 Leafy Market 的种子页签，但画面没有清楚拍到种子价格。",
+            "badge": "shot-pending",
+            "fieldKey": "seed"
+          },
+          {
+            "text": "成品大蒜在蔬菜货架的零售价是 31C，并显示恢复 15 HP / 50 energy；这是玩家购买商品的价格，不是玩家卖大蒜所得。",
+            "badge": "video",
+            "fieldKey": "sell"
               }
             ]
           }
