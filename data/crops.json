@@ -722,21 +722,30 @@
       "id": "aubergine",
       "name": "Aubergine",
       "category": "vegetable",
-      "summary": "Historical Alpha record only — no current-build evidence yet.",
-      "decision": "Use this entry only as a historical lead. Wait for a current-build shop or planting screen before using aubergine in a crop plan.",
+      "summary": "Current-build data lists Aubergine as a Summer crop with a 7-day first harvest and 7-day regrowth, plus a Summer seed item linked to the Town SeedVendor table. These are serialized 0.8.10.842 settings, not current gameplay observations.",
+      "decision": "Use the recorded .842 settings as a tentative Summer planting reference: look for the Aubergine Seed offer and plan around 7 days to first harvest with a 7-day regrow interval. Confirm availability and timing in your save; the historical 21C is not a current price, and sale income and yield remain unverified.",
       "searchTags": "aubergine eggplant vegetable summer seed price crop grow sell buy",
       "fields": [
         {
           "key": "seed",
-          "label": "Seed source & price",
+          "label": "Seed source, price & build settings",
           "facts": [
             {
-              "text": "The historical Alpha record listed Aubergine Seeds at 21C (Summer). No current-build observation exists.",
+              "text": "The historical Alpha record listed Aubergine Seeds at 21C (Summer); 21C is a historical lead, not a current price.",
               "evidenceLevel": "unverified-lead",
               "build": "alpha",
               "validity": "historical",
               "sourceIds": [
                 "farmers-land-fandom"
+              ]
+            },
+            {
+              "text": "The 0.8.10.842 data links Aubergine Seed to the Summer Seed_fruits table and a Town SeedVendor offer; this serialized configuration does not prove current stock or a current gameplay observation.",
+              "evidenceLevel": "build-observed",
+              "build": "0.8.10.842",
+              "validity": "current",
+              "sourceIds": [
+                "local-build-24847725"
               ]
             }
           ]
@@ -755,16 +764,16 @@
       "lastUpdated": "2026-08-08",
       "zh": {
         "tocLabel": "茄子",
-        "kicker": "历史资料",
-        "headerBadge": "historical",
+        "kicker": "构建配置（未实测）",
+        "headerBadge": "none",
         "name": "茄子 Aubergine",
         "searchTitle": "茄子",
         "searchTags": "茄子 aubergine 夏季 种子价格 历史作物",
-        "summary": "只有 Alpha 资料记录；当前版本还没有种子、种植周期或出售收入的画面证据。",
-        "decision": "只想核对旧资料时查这里；当前版本没有足够证据把茄子放进种植或收益计划。",
+        "summary": "0.8.10.842 配置把茄子列为夏季作物：首收 7 天、每 7 天再生，并有夏季种子及 Town SeedVendor 表引用。这些是序列化配置，不是当前存档的实机观测。",
+        "decision": "可把这组 .842 配置当作暂定的夏季种植参考：先在夏季种子商店记录中查找茄子种子，再按首收 7 天、之后每 7 天再生的配置做准备。实际购买和计时请在自己的存档确认；历史 21C 不是当前价格，出售收入和产量仍未验证。",
         "groups": [
           {
-            "heading": "当前状态",
+            "heading": "当前状态与配置边界",
             "id": null,
             "facts": [
               {
@@ -772,8 +781,8 @@
                 "badge": "historical"
               },
               {
-                "text": "当前版本的购买方式、成长时间、产量和玩家出售收入仍未知。",
-                "badge": "unknown"
+                "text": "0.8.10.842 游戏文件记录了夏季茄子种子、种子商店表引用、首收 7 天和每 7 天再生；这些是序列化配置，不等于当前可购买或已实机计时。",
+                "badge": "none"
               }
             ]
           }
@@ -784,21 +793,30 @@
       "id": "corn",
       "name": "Corn",
       "category": "vegetable",
-      "summary": "Historical Alpha record only — no current-build evidence yet.",
-      "decision": "Use this entry only as a historical lead. Wait for a current-build shop or planting screen before using corn in a crop plan.",
+      "summary": "Current-build data lists Corn as a Summer crop with a 7-day first harvest and no configured regrowth, plus a Summer seed item linked to the Town SeedVendor table. These are serialized 0.8.10.842 settings, not current gameplay observations.",
+      "decision": "Use the recorded .842 settings as a tentative Summer planting reference: look for the Corn Seed offer and plan around 7 days to first harvest with no configured regrow interval. Confirm availability and timing in your save; the historical 54C is not a current price, and sale income and yield remain unverified.",
       "searchTags": "corn maize vegetable summer seed price crop grow sell buy",
       "fields": [
         {
           "key": "seed",
-          "label": "Seed source & price",
+          "label": "Seed source, price & build settings",
           "facts": [
             {
-              "text": "The historical Alpha record listed Corn Seeds at 54C (Summer). No current-build observation exists.",
+              "text": "The historical Alpha record listed Corn Seeds at 54C (Summer); 54C is a historical lead, not a current price.",
               "evidenceLevel": "unverified-lead",
               "build": "alpha",
               "validity": "historical",
               "sourceIds": [
                 "farmers-land-fandom"
+              ]
+            },
+            {
+              "text": "The 0.8.10.842 data links Corn Seed to the Summer Seed_fruits table and a Town SeedVendor offer; this serialized configuration does not prove current stock or a current gameplay observation.",
+              "evidenceLevel": "build-observed",
+              "build": "0.8.10.842",
+              "validity": "current",
+              "sourceIds": [
+                "local-build-24847725"
               ]
             }
           ]
@@ -817,16 +835,16 @@
       "lastUpdated": "2026-08-08",
       "zh": {
         "tocLabel": "玉米",
-        "kicker": "历史资料",
-        "headerBadge": "historical",
+        "kicker": "构建配置（未实测）",
+        "headerBadge": "none",
         "name": "玉米 Corn",
         "searchTitle": "玉米",
         "searchTags": "玉米 corn 夏季 种子价格 历史作物",
-        "summary": "只有 Alpha 资料记录；当前版本还没有种子、种植周期或出售收入的画面证据。",
-        "decision": "只想核对旧资料时查这里；当前版本没有足够证据把玉米放进种植或收益计划。",
+        "summary": "0.8.10.842 配置把玉米列为夏季作物：首收 7 天、不再生，并有夏季种子及 Town SeedVendor 表引用。这些是序列化配置，不是当前存档的实机观测。",
+        "decision": "可把这组 .842 配置当作暂定的夏季种植参考：先在夏季种子商店记录中查找玉米种子，再按首收 7 天、没有配置再生的节奏做准备。实际购买和计时请在自己的存档确认；历史 54C 不是当前价格，出售收入和产量仍未验证。",
         "groups": [
           {
-            "heading": "当前状态",
+            "heading": "当前状态与配置边界",
             "id": null,
             "facts": [
               {
@@ -834,8 +852,8 @@
                 "badge": "historical"
               },
               {
-                "text": "当前版本的购买方式、成长时间、产量和玩家出售收入仍未知。",
-                "badge": "unknown"
+                "text": "0.8.10.842 游戏文件记录了夏季玉米种子、种子商店表引用、首收 7 天且不再生；这些是序列化配置，不等于当前可购买或已实机计时。",
+                "badge": "none"
               }
             ]
           }
