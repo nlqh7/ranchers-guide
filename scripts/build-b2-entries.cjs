@@ -1,6 +1,7 @@
 /* Build the first B2 bilingual task/material entries from the existing source records. */
 const fs = require('node:fs');
 const path = require('node:path');
+const { renderSiteFooter } = require('./render-site-footer.cjs');
 
 const root = path.resolve(__dirname, '..');
 const config = require('../data/b2-entry-pages.json');
@@ -73,7 +74,7 @@ function shell(locale, route, title, description, body) {
 <html lang="${zh ? 'zh-CN' : 'en'}"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${esc(title)}</title><meta name="description" content="${esc(description)}"><link rel="canonical" href="${canonical}"><link rel="alternate" hreflang="en" href="https://theranchersguide.com${zh ? alternate : route}"><link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com${zh ? route : alternate}"><link rel="alternate" hreflang="x-default" href="https://theranchersguide.com${zh ? alternate : route}"><meta property="og:type" content="website"><meta property="og:site_name" content="The Ranchers Guide"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260902-ui2"><link rel="stylesheet" href="/assets/css/database-browser.css?v=20260831-1"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script></head><body class="database-surface">
 <header class="site-header"><nav class="nav-inner" aria-label="${zh ? '主导航' : 'Main navigation'}"><a class="logo" href="${zh ? '/zh/' : '/'}"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide</span></a><button class="nav-toggle" aria-expanded="false" aria-label="${zh ? '打开导航' : 'Toggle navigation'}">☰</button><ul class="nav-links">${nav(locale)}</ul></nav></header>
-<main><article class="article database-page b2-entry-page" style="max-width: 980px">${normalized}</article></main><footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>${zh ? '缺失证据保持可见' : 'Missing evidence stays visible'}</span></div></div></footer><script src="/assets/js/main.js?v=20260927-hash-details1" defer></script></body></html>`;
+<main><article class="article database-page b2-entry-page" style="max-width: 980px">${normalized}</article></main>${renderSiteFooter(locale, { en: 'Missing evidence stays visible', zh: '缺失证据保持可见' })}<script src="/assets/js/main.js?v=20260927-hash-details1" defer></script></body></html>`;
 }
 
 function relatedLinks(routes, locale) {

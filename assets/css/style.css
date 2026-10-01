@@ -777,11 +777,12 @@ main [data-search-entry][id] {
   color: var(--green-700);
 }
 .card .card-icon svg { width: 27px; height: 27px; }
-.hero-cards .card-icon {
-  font-family: var(--font-display);
-  font-size: 0.9rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+.hero-cards .card h3 .title-icon {
+  width: 19px;
+  height: 19px;
+  margin-right: 8px;
+  vertical-align: -2px;
+  color: var(--green-700);
 }
 
 /* Card top illustration */
@@ -3605,8 +3606,8 @@ body.has-modal-open { overflow: hidden; }
   justify-content: space-between;
   align-items: center;
 }
-.faq-item summary::after { content: "+"; font-size: 1.3rem; color: var(--green-500); }
-.faq-item[open] summary::after { content: "−"; }
+.faq-item summary::after { content: "+"; font-size: 1.3rem; color: var(--green-500); transition: transform var(--duration-base) var(--ease-standard); }
+.faq-item[open] summary::after { transform: rotate(45deg); }
 .faq-item .faq-body { padding: 0 20px 16px; color: var(--brown-700); }
 
 /* ---------- Footer ---------- */
@@ -3784,3 +3785,45 @@ details.pending-facts .pending-list {
 }
 .article .guide-answer-table td { vertical-align: top; }
 .article .guide-answer-table td strong { display: block; margin-bottom: 4px; }
+
+/* ---------- Back to top ---------- */
+.back-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 60;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--green-700);
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--green-700);
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity var(--duration-base) var(--ease-standard), transform var(--duration-base) var(--ease-standard), background var(--duration-base) var(--ease-standard), color var(--duration-base) var(--ease-standard), visibility var(--duration-base) var(--ease-standard);
+}
+.back-to-top.visible { opacity: 1; transform: none; pointer-events: auto; visibility: visible; }
+.back-to-top:hover { background: var(--green-700); color: #fff; }
+.back-to-top:focus-visible {
+  outline: 3px solid rgba(93, 143, 74, 0.45);
+  outline-offset: 3px;
+}
+
+/* ---------- Scroll reveal (JS-gated; content stays visible without JS) ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 480ms ease, transform 480ms ease;
+}
+.reveal.reveal-in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top { transition: none; transform: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}

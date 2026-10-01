@@ -6,40 +6,64 @@ const root = path.resolve(__dirname, "..");
 const english = fs.readFileSync(path.join(root, "guides/multiplayer-coop.html"), "utf8");
 const chinese = fs.readFileSync(path.join(root, "zh/guides/multiplayer-coop.html"), "utf8");
 
-assert.match(english, /Visitors keep money, experience, backpack items, and blueprints/, "English co-op guidance must state confirmed visitor property");
-assert.match(
-  english,
-  /The FAQ does not say whether a visitor's deposit is paid to the visitor, the host, or a shared settlement/i,
-  "English co-op guidance must keep CashIn payout ownership explicitly unresolved",
-);
-assert.match(
-  chinese,
-  /访客保留自己的钱[\s\S]{0,180}CashIn[\s\S]{0,60}(?:仍未说明|没有说明|未说明)/,
-  "Chinese co-op guidance must separate confirmed visitor property from the unresolved CashIn payout owner",
-);
-assert.doesNotMatch(
-  english,
-  /visitor items and shared wallet.*(?:do not|don't) (?:draw|make) conclusions/i,
-  "English introduction must not call FAQ-confirmed visitor property unverified",
-);
-assert.doesNotMatch(
-  chinese,
-  /访客物品和共享钱包等细节不要在没有测试时下结论/,
-  "Chinese introduction must not call FAQ-confirmed visitor property unverified",
-);
-assert.match(english, /Every player has their own ranch and world progression/i, "English guidance must explain separate ranch saves");
-assert.match(chinese, /每位玩家都有自己的牧场和世界进度/, "Chinese guidance must explain separate ranch saves");
-assert.match(english, /same The Ranchers server region/i, "English join troubleshooting must include the matching server region");
-assert.match(chinese, /选择同一 The Ranchers 服务器区域/, "Chinese join troubleshooting must include the matching server region");
-assert.match(english, /finish the introductory progression to unlock multiplayer/i, "English join troubleshooting must include the progression unlock");
-assert.match(chinese, /完成序章并解锁多人模式/, "Chinese join troubleshooting must include the progression unlock");
+function section(html, id) {
+  return html.match(new RegExp(`<section[^>]*\\bid=["']${id}["'][\\s\\S]*?<\\/section>`, "i"))?.[0] || "";
+}
+
+function visibleText(html) {
+  return html.replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<style[\s\S]*?<\/style>/gi, " ").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function assertIncludesAll(value, patterns, label) {
+  for (const pattern of patterns) assert.match(value, pattern, `${label}: missing ${pattern}`);
+}
+
+function hasUnqualifiedEffectPromise(html, locale) {
+  const sentences = visibleText(html).split(/[.!?。！？]/);
+  const effect = locale === "zh"
+    ? /零丢失|丢失|浪费.{0,12}(?:一天|整天)|损失.{0,12}(?:一天|整天)/
+    : /zero lost items?|lost items?|wast(?:e|ing).{0,20}(?:day|energy)|entire day/i;
+  const promise = locale === "zh" ? /保证|确保|防止|避免|不会/ : /prevents?|guarantees?|ensures?|zero lost items?/i;
+  const caveat = locale === "zh" ? /不能|不保证|无法|未证实|未知|建议|只是|不要把/ : /does not|doesn't|cannot|can't|not guaranteed|unknown|unverified|suggest(?:ion|ed)|do not assume/i;
+  return sentences.some(sentence => effect.test(sentence) && promise.test(sentence) && !caveat.test(sentence));
+}
+
+const enText = visibleText(english);
+const zhText = visibleText(chinese);
+const enMode = section(english, "session-mode");
+const zhMode = section(chinese, "session-mode");
+const enProgress = section(english, "progress-boundary");
+const zhProgress = section(chinese, "progress-boundary");
+const enCashin = section(english, "cashin-coop");
+const zhCashin = section(chinese, "cashin-coop");
+
+assert.ok(enMode && zhMode, "both pages must expose the session-mode decision section");
+assert.ok(enProgress && zhProgress, "both pages must expose the progress-boundary section");
+assert.ok(enCashin && zhCashin, "both pages must expose the cashin-coop boundary section");
+
+assertIncludesAll(enMode, [/PLAY SOLO/i, /OPEN TO FRIENDS/i, /visit|visiting/i], "English mode choice");
+assertIncludesAll(zhMode, [/PLAY SOLO/i, /OPEN TO FRIENDS/i, /拜访|朋友家/], "Chinese mode choice");
+assertIncludesAll(enProgress, [/visitor/i, /money/i, /experience/i, /backpack items?/i, /blueprints?/i], "English visitor property");
+assertIncludesAll(zhProgress, [/访客/, /钱|钱款|金钱/, /经验/, /背包物品/, /蓝图/], "Chinese visitor property");
+assertIncludesAll(enProgress, [/host/i, /world|ranch/i, /quest progress|world progression/i, /host(?:'s)? (?:save|world)/i], "English host progress");
+assertIncludesAll(zhProgress, [/房主/, /世界|牧场/, /任务|进度/, /房主(?:拥有|的)?(?:这个牧场的)?(?:世界|任务|进度)/], "Chinese host progress");
+assertIncludesAll(enProgress, [/CashIn/i, /(?:does not|doesn't|not specify|unknown|unresolved)/i, /visitor|host|shared/i, /(?:payout|payment|settlement|paid|receives)/i], "English CashIn boundary");
+assertIncludesAll(zhProgress, [/CashIn/i, /没有说明|未说明|未知|归属仍/, /访客|房主|共享/, /结算|到账|分配规则/], "Chinese CashIn boundary");
+assertIncludesAll(enText, [/introductory|introduction/i, /compatible versions?/i, /same The Ranchers server region/i, /Steam/i, /OPEN TO FRIENDS/i, /stay online|online/i], "English join prerequisites");
+assertIncludesAll(zhText, [/序章/, /兼容版本/, /同一 The Ranchers 服务器区域/, /Steam/, /OPEN TO FRIENDS/, /保持在线|在线/], "Chinese join prerequisites");
+assertIncludesAll(enCashin, [/single|one basic|only that one/i, /stop all other|no other|isolation/i, /next[- ]day/i, /wallet|settlement records?|income lines?/i], "English CashIn isolation plan");
+assertIncludesAll(zhCashin, [/一件|单个|只选/, /停止其他|隔离|不使用混合/, /第二天|次日/, /钱包|结算单|收入行/], "Chinese CashIn isolation plan");
+assert.doesNotMatch(enText, /visitor(?:s)? (?:money|items|property).{0,80}(?:unknown|unverified|not confirmed)/i, "English page must not relabel FAQ-confirmed visitor property as unknown");
+assert.doesNotMatch(zhText, /访客(?:的钱|物品|进度).{0,30}(?:未知|未确认|没有证据)/, "Chinese page must not relabel FAQ-confirmed visitor property as unknown");
+assert.equal(hasUnqualifiedEffectPromise(english, "en"), false, "English page must not promise zero lost items or guaranteed schedule outcomes");
+assert.equal(hasUnqualifiedEffectPromise(chinese, "zh"), false, "Chinese page must not promise zero lost items or guaranteed schedule outcomes");
 assert.match(english, /Last reviewed: September 26, 2026\./, "English review date must match the latest FAQ review");
 assert.match(chinese, /最近复核：2026 年 9 月 26 日。/, "Chinese review date must match the latest FAQ review");
-assert.doesNotMatch(english, /Save ownership and transfer behavior should be tested/i, "English page must not label FAQ-defined save ownership unknown");
-assert.doesNotMatch(chinese, /弄清当前版本如何保留世界和访客进度/, "Chinese page must not label FAQ-defined save ownership unknown");
-assert.match(english, /<h1>The Ranchers Multiplayer Guide: Join, Host, and Visitor Progress<\/h1>/, "English heading must describe the page's player tasks, not imply a permanent shared ranch");
-assert.match(chinese, /<h1>The Ranchers 联机攻略：加入好友、房主设置与访客进度<\/h1>/, "Chinese heading must describe the page's player tasks, not imply a permanent shared ranch");
-assert.match(english, /name="description" content="The Ranchers multiplayer guide: unlock co-op, check server region and compatible versions/i, "English search description must advertise the actionable co-op answers");
-assert.match(chinese, /name="description" content="本攻略整理 The Ranchers 在线合作的加入条件和步骤：先完成序章，再匹配服务器区域与兼容版本/i, "Chinese search description must advertise the actionable co-op answers");
+const enHeading = english.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || "";
+const zhHeading = chinese.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || "";
+assertIncludesAll(visibleText(enHeading), [/Ranchers/i, /multiplayer/i, /join/i, /visitor/i, /progress/i], "English heading");
+assertIncludesAll(visibleText(zhHeading), [/Ranchers/, /联机/, /加入/, /访客/, /进度/], "Chinese heading");
+assertIncludesAll(english, [/unlock co-op|unlock multiplayer/i, /server region/i, /compatible versions?/i, /CashIn/i], "English search description");
+assertIncludesAll(chinese, [/加入条件|解锁多人/, /服务器区域/, /兼容版本/, /CashIn/], "Chinese search description");
 
-console.log("PASS: co-op guidance matches the FAQ on separate ranches, join prerequisites, visitor property, CashIn limits, and review date.");
+console.log("PASS: co-op guidance covers mode choice, host/visitor progress, join prerequisites, CashIn limits and evidence-bounded schedule guidance.");

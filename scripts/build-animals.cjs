@@ -11,6 +11,7 @@
  */
 const fs = require("node:fs");
 const path = require("node:path");
+const { renderSiteFooter } = require('./render-site-footer.cjs');
 
 const root = path.resolve(__dirname, "..");
 const data = JSON.parse(fs.readFileSync(path.join(root, "data", "animals.json"), "utf8"));
@@ -639,7 +640,7 @@ ${renderWildlifeReference('zh')}
 ${renderEnemyReference('zh')}
 ${renderZhExtra(data.zhExtra)}
   </article></main>
-  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>证据等级与版本标注与英文页一致</span></div></div></footer><script src="/assets/js/main.js?v=20260927-hash-details1" defer></script>
+  ${renderSiteFooter('zh', { zh: '证据等级与版本标注与英文页一致' })}<script src="/assets/js/main.js?v=20260927-hash-details1" defer></script>
 </body></html>
 `;
 

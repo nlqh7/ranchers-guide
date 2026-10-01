@@ -2,6 +2,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { decorateReferencePage } = require('./render-database-browser.cjs');
 const { materialReference } = require('./build-resource-reference.cjs');
+const { renderSiteFooter } = require('./render-site-footer.cjs');
 const resourceData = require('../data/build-resources.json');
 
 const root = path.resolve(__dirname, "..");
@@ -160,7 +161,7 @@ function render(locale) {
     <nav class="toc" aria-label="${l.contents}"><strong>${l.contents}</strong><ul>${toc}</ul></nav>
 ${sections}
     <p class="database-browse-note">${l.unknownCopy}</p>
-  </article></main><footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>${l.footer}</span></div></div></footer><script src="/assets/js/main.js?v=20260927-hash-details1" defer></script>
+</article></main>${renderSiteFooter(locale, { en: l.footer, zh: l.footer })}<script src="/assets/js/main.js?v=20260927-hash-details1" defer></script>
 <script src="/assets/js/material-use-search.js?v=20260913-use1" defer></script></body></html>`;
 }
 

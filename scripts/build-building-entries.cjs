@@ -2,6 +2,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { renderTabs } = require('./render-database-browser.cjs');
+const { renderSiteFooter } = require('./render-site-footer.cjs');
 
 const root = path.resolve(__dirname, '..');
 const read = file => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
@@ -57,7 +58,7 @@ function shell(locale, canonical, title, description, body) {
 </head><body class="database-surface">
   <header class="site-header"><nav class="nav-inner" aria-label="${zh ? '主导航' : 'Main navigation'}"><a class="logo" href="${zh ? '/zh/' : '/'}"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide</span></a><button class="nav-toggle" aria-expanded="false" aria-label="${zh ? '打开导航' : 'Toggle navigation'}">☰</button><ul class="nav-links"><li><a href="${prefixFor(locale)}/guides/beginners-guide">${zh ? '攻略' : 'Guides'}</a></li><li><a class="active" href="${prefixFor(locale)}/database">${zh ? '资料库' : 'Database'}</a></li><li><a href="${prefixFor(locale)}/map">${zh ? '地图' : 'Map'}</a></li><li><a href="${prefixFor(locale)}/problems">${zh ? '问题' : 'Problems'}</a></li><li><a href="${prefixFor(locale)}/research">${zh ? '研究' : 'Research'}</a></li><li><a href="${prefixFor(locale)}/search">${zh ? '搜索' : 'Search'}</a></li><li><a href="${prefixFor(locale)}/contribute">${zh ? '投稿' : 'Contribute'}</a></li></ul></nav></header>
   <main><article class="article database-page database-buildings" style="max-width: 980px">${body}</article></main>
-  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>${zh ? '当前路线优先；缺失证据保持可见' : 'Current routes first; missing evidence stays visible'}</span></div></div></footer>
+${renderSiteFooter(locale, { en: 'Current routes first; missing evidence stays visible', zh: '当前路线优先；缺失证据保持可见' })}
   <script src="/assets/js/main.js?v=20260927-hash-details1" defer></script>
 </body></html>`);
 }

@@ -160,6 +160,46 @@
   var y = document.querySelector("[data-year]");
   if (y) y.textContent = new Date().getFullYear();
 
+  /* Back to top */
+  var reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var backToTop = document.createElement("button");
+  backToTop.type = "button";
+  backToTop.className = "back-to-top";
+  backToTop.setAttribute("aria-label", isChinese ? "返回顶部" : "Back to top");
+  backToTop.title = isChinese ? "返回顶部" : "Back to top";
+  backToTop.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  document.body.appendChild(backToTop);
+
+  var backToTopShown = false;
+  function updateBackToTop() {
+    var show = window.scrollY > 600;
+    if (show !== backToTopShown) {
+      backToTopShown = show;
+      backToTop.classList.toggle("visible", show);
+    }
+  }
+  window.addEventListener("scroll", updateBackToTop, { passive: true });
+  updateBackToTop();
+  backToTop.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: reduceMotionQuery.matches ? "instant" : "smooth" });
+  });
+
+  /* Reveal homepage sections as they enter the viewport. The hidden state is
+     only added by this script, so no-JS and reduced-motion stay fully visible. */
+  if (document.querySelector(".hero") && !reduceMotionQuery.matches && "IntersectionObserver" in window) {
+    var revealSections = document.querySelectorAll("main .section");
+    revealSections.forEach(function (section) { section.classList.add("reveal"); });
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("reveal-in");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+    revealSections.forEach(function (section) { revealObserver.observe(section); });
+  }
+
   /* Re-apply answer anchors after deferred scripts and browser scroll restoration. */
   function jumpToHashTarget() {
     if (!window.location.hash) return;

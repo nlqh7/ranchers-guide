@@ -14,6 +14,7 @@ const path = require("node:path");
 const root = path.resolve(__dirname, "..");
 const data = JSON.parse(fs.readFileSync(path.join(root, "data", "crops.json"), "utf8"));
 const { renderCropFacts, renderBuildOnlyCrops, renderExcludedSeeds } = require('./render-database-browser.cjs');
+const { renderSiteFooter } = require('./render-site-footer.cjs');
 const shops = require('../data/build-shops.json');
 const seedItems = require('../data/build-seeds.json').items;
 const produceItems = require('../data/build-produce.json').items;
@@ -596,7 +597,7 @@ ${renderBuildRoster("zh")}
 ${zhBodyParts.join("\n")}
     ${zhRelated}
   </article></main>
-  <footer class="site-footer"><div class="container"><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>购买价、零售价、出售收入严格分开</span></div></div></footer><script src="/assets/js/main.js?v=20260927-hash-details1" defer></script>
+  ${renderSiteFooter('zh', { zh: '购买价、零售价、出售收入严格分开' })}<script src="/assets/js/main.js?v=20260927-hash-details1" defer></script>
 </body></html>
 `;
 
