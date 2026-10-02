@@ -935,27 +935,99 @@ figure img { border-radius: var(--radius); }
 .article tr:nth-child(even) td { background: var(--cream-100); }
 
 .toc {
-  background: #fff;
-  border: 2px solid var(--cream-300);
+  background: linear-gradient(180deg, var(--color-surface) 0%, var(--cream-100) 100%);
+  border: 1px solid var(--cream-300);
+  border-top: 3px solid var(--gold);
   border-radius: var(--radius-sm);
-  padding: 14px 18px;
+  box-shadow: var(--shadow);
+  padding: 16px 20px 14px;
   margin: 16px 0;
   font-size: 0.92rem;
   display: inline-block;
-  min-width: 220px;
+  min-width: 240px;
   max-width: 100%;
   box-sizing: border-box;
 }
-.toc .toctitle {
+.toc .toctitle,
+.toc > strong {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-display);
   color: var(--brown-900);
   font-size: 1.05rem;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
+}
+.toc .toctitle::before,
+.toc > strong::before {
+  content: "";
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  background: var(--cream-200) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235d4427' stroke-width='2' stroke-linecap='round'%3E%3Cline x1='9' y1='6' x2='20' y2='6'/%3E%3Cline x1='9' y1='12' x2='20' y2='12'/%3E%3Cline x1='9' y1='18' x2='20' y2='18'/%3E%3Ccircle cx='4' cy='6' r='1.3' fill='%235d4427' stroke='none'/%3E%3Ccircle cx='4' cy='12' r='1.3' fill='%235d4427' stroke='none'/%3E%3Ccircle cx='4' cy='18' r='1.3' fill='%235d4427' stroke='none'/%3E%3C/svg%3E") center / 15px no-repeat;
 }
 .toc ul {
   margin: 0;
   padding-left: 0;
   list-style: none;
+}
+.toc > ul {
+  counter-reset: toc-item;
+}
+.toc > ul > li > a {
+  counter-increment: toc-item;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard);
+}
+.toc > ul > li > a::before {
+  content: counter(toc-item);
+  flex: none;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--cream-200);
+  color: var(--brown-700);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+  transition: background-color var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard);
+}
+.toc > ul > li > a::after {
+  content: "\2192 ";
+  margin-left: auto;
+  color: var(--green-500);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity var(--duration-fast) var(--ease-standard), transform var(--duration-fast) var(--ease-standard);
+}
+.toc > ul > li > a:hover {
+  background: var(--color-surface);
+  color: var(--green-700);
+}
+.toc > ul > li > a:hover::before {
+  background: var(--green-500);
+  color: #fff;
+}
+.toc > ul > li > a:hover::after,
+.toc > ul > li > a:focus-visible::after {
+  opacity: 1;
+  transform: none;
+}
+.toc > ul > li > a:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+.toc > ul > li.toc-cat > a {
+  padding: 4px 8px;
 }
 .toc .tocnumber {
   color: var(--brown-500);

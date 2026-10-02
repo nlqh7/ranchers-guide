@@ -23,6 +23,41 @@
     return "";
   }
 
+  /* Routes whose bilingual counterparts share the same player context.
+     Only whitelisted query params and anchors cross the language switch;
+     tracking/unknown params never do. */
+  var LANGUAGE_CONTEXT_RULES = [
+    { pathnames: ["/search", "/zh/search"], params: ["q"], keepHash: false },
+    { pathnames: ["/map", "/zh/map"], params: ["q", "category", "location"], keepHash: true },
+    { pathnames: ["/database/crops", "/zh/database/crops"], params: [], keepHash: true },
+    { pathnames: ["/database/animals", "/zh/database/animals"], params: [], keepHash: true },
+    { pathnames: ["/tools/chicken-troubleshooter", "/zh/tools/chicken-troubleshooter"], params: ["build", "symptom"], keepHash: false }
+  ];
+
+  function languageContextRule(pathname) {
+    var clean = String(pathname || "/").replace(/\/index\.html$/, "").replace(/(.)\/$/, "$1") || "/";
+    for (var i = 0; i < LANGUAGE_CONTEXT_RULES.length; i += 1) {
+      if (LANGUAGE_CONTEXT_RULES[i].pathnames.indexOf(clean) !== -1) return LANGUAGE_CONTEXT_RULES[i];
+    }
+    return null;
+  }
+
+  function languageContextHref(alternateHref, pathname, search, hash) {
+    var href = String(alternateHref || "");
+    var rule = languageContextRule(pathname);
+    if (!href || !rule) return href;
+    var kept = [];
+    var params = new URLSearchParams(search || "");
+    rule.params.forEach(function (name) {
+      params.getAll(name).forEach(function (value) {
+        kept.push(encodeURIComponent(name) + "=" + encodeURIComponent(value));
+      });
+    });
+    if (kept.length) href += (href.indexOf("?") === -1 ? "?" : "&") + kept.join("&");
+    if (rule.keepHash && hash && /^#[A-Za-z][\w:.-]*$/.test(hash)) href += hash;
+    return href;
+  }
+
   function openDetailsForHashTarget(target) {
     var current = target;
     while (current) {
@@ -34,7 +69,8 @@
   if (typeof module !== "undefined" && module.exports) {
     module.exports = {
       activeNavHref: activeNavHref,
-      openDetailsForHashTarget: openDetailsForHashTarget
+      openDetailsForHashTarget: openDetailsForHashTarget,
+      languageContextHref: languageContextHref
     };
   }
   if (typeof document === "undefined" || typeof window === "undefined") return;
@@ -77,17 +113,20 @@
 
   /* Show one exact counterpart link only when this page declares a paired
      locale. Utility pages without an alternate stay uncluttered. */
+  var languageLink = null;
+  var languageAlternateHref = "";
   if (links) {
     links.querySelectorAll(".nav-language-item").forEach(function (item) { item.remove(); });
     var targetHreflang = isChinese ? "en" : "zh-CN";
     var alternate = document.querySelector('link[rel="alternate"][hreflang="' + targetHreflang + '"]');
     if (alternate && alternate.getAttribute("href")) {
       var languageItem = document.createElement("li");
-      var languageLink = document.createElement("a");
+      languageLink = document.createElement("a");
+      languageAlternateHref = alternate.getAttribute("href");
       var targetLabel = isChinese ? "English" : "中文";
       languageItem.className = "nav-language-item";
       languageLink.className = "nav-language-link";
-      languageLink.href = alternate.getAttribute("href");
+      languageLink.href = languageAlternateHref;
       languageLink.setAttribute("hreflang", targetHreflang);
       languageLink.setAttribute("lang", isChinese ? "en" : "zh-CN");
       languageLink.setAttribute("aria-label", isChinese ? "切换到英文" : "Switch to Chinese");
@@ -98,6 +137,26 @@
       if (ctaLink && ctaLink.parentElement) links.insertBefore(languageItem, ctaLink.parentElement);
       else links.append(languageItem);
     }
+  }
+
+  /* Keep the counterpart link pointed at the player's current context, even
+     when tools rewrite the URL (replaceState/pushState) after page load. */
+  function syncLanguageLink() {
+    if (!languageLink) return;
+    languageLink.href = languageContextHref(languageAlternateHref, window.location.pathname, window.location.search, window.location.hash);
+  }
+  syncLanguageLink();
+  window.addEventListener("hashchange", syncLanguageLink);
+  window.addEventListener("popstate", syncLanguageLink);
+  if (window.history && window.history.pushState && window.history.replaceState) {
+    ["pushState", "replaceState"].forEach(function (method) {
+      var original = window.history[method];
+      window.history[method] = function () {
+        var result = original.apply(this, arguments);
+        syncLanguageLink();
+        return result;
+      };
+    });
   }
 
   /* Normalize section highlighting so every page gives the same location cue. */
@@ -201,7 +260,7 @@
   }
 
   /* Re-apply answer anchors after deferred scripts and browser scroll restoration. */
-  function jumpToHashTarget() {
+  function jumpToHashTarget(isUserNavigation) {
     if (!window.location.hash) return;
     var id;
     try {
@@ -211,13 +270,19 @@
     }
     var target = document.getElementById(id);
     // Deep links are restoration, not a tour through every preceding entry.
+    // In-page clicks (TOC) get the smooth animation; only initial-load
+    // restoration snaps instantly.
     if (target) {
       openDetailsForHashTarget(target);
-      target.scrollIntoView({ behavior: "instant", block: "start" });
+      if (isUserNavigation && !reduceMotionQuery.matches) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        target.scrollIntoView({ behavior: "instant", block: "start" });
+      }
     }
   }
 
-  window.setTimeout(jumpToHashTarget, 0);
-  window.addEventListener("load", jumpToHashTarget);
-  window.addEventListener("hashchange", jumpToHashTarget);
+  window.setTimeout(function () { jumpToHashTarget(false); }, 0);
+  window.addEventListener("load", function () { jumpToHashTarget(false); });
+  window.addEventListener("hashchange", function () { jumpToHashTarget(true); });
 })();

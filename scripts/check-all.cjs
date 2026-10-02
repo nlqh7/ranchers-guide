@@ -111,6 +111,7 @@ const nodeChecks = [
   ["check-map-viewer.cjs"],
   ["check-materials.cjs"],
   ["check-navigation-state.cjs"],
+  ["check-language-context.cjs"],
   ["check-page-navigation.cjs"],
   ["check-profit-calculator.cjs"],
   ["check-research-hub.cjs"],

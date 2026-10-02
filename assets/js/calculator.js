@@ -3,11 +3,61 @@
 (function () {
   "use strict";
 
+  var STORAGE_KEY = "ranchers-calc-entries-v1";
+
+  /* Keep only rows that match the form's min/step contract and can be
+     computed without overflow; everything else is skipped (and preserved
+     raw by the loader) instead of being silently clamped or rounded.
+     Form contract: sellPrice/yieldAmount/seedCost >= 0 (decimals allowed),
+     units an integer >= 1, the active type's days an integer >= 1, and the
+     inactive type's days = 0 (legitimate legacy record). */
+  function sanitizeEntries(list) {
+    var valid = [];
+    var skipped = 0;
+    (Array.isArray(list) ? list : []).forEach(function (entry) {
+      if (!entry || typeof entry !== "object") { skipped += 1; return; }
+      if (entry.type !== "crop" && entry.type !== "animal") { skipped += 1; return; }
+      var numericKeys = ["sellPrice", "yieldAmount", "seedCost", "units", "growthDays", "cycleDays"];
+      var usable = numericKeys.every(function (key) {
+        return typeof entry[key] === "number" && isFinite(entry[key]);
+      });
+      if (!usable) { skipped += 1; return; }
+      if (entry.sellPrice < 0 || entry.yieldAmount < 0 || entry.seedCost < 0) { skipped += 1; return; }
+      if (entry.units < 1 || entry.units % 1 !== 0) { skipped += 1; return; }
+      var activeDays = entry.type === "crop" ? entry.growthDays : entry.cycleDays;
+      var inactiveDays = entry.type === "crop" ? entry.cycleDays : entry.growthDays;
+      if (activeDays < 1 || activeDays % 1 !== 0) { skipped += 1; return; }
+      if (inactiveDays < 0 || inactiveDays % 1 !== 0) { skipped += 1; return; }
+      /* Finite inputs can still overflow the profit math into Infinity/NaN
+         ranking; verify the computation stays finite (formula unchanged). */
+      var product = entry.sellPrice * entry.yieldAmount;
+      var profit = product - entry.seedCost;
+      var perDay = (profit / activeDays) * entry.units;
+      var cycleProfit = profit * entry.units;
+      if (!isFinite(product) || !isFinite(profit) || !isFinite(perDay) || !isFinite(cycleProfit)) { skipped += 1; return; }
+      valid.push({
+        type: entry.type,
+        name: typeof entry.name === "string" && entry.name.trim() ? entry.name : (entry.type === "crop" ? "Unnamed crop" : "Unnamed animal"),
+        sellPrice: entry.sellPrice,
+        yieldAmount: entry.yieldAmount,
+        seedCost: entry.seedCost,
+        units: entry.units,
+        growthDays: entry.growthDays,
+        cycleDays: entry.cycleDays
+      });
+    });
+    return { valid: valid, skipped: skipped };
+  }
+
+  if (typeof module !== "undefined" && module.exports) {
+    module.exports = { sanitizeEntries: sanitizeEntries };
+  }
+  if (typeof document === "undefined") return;
+
   var form = document.getElementById("calc-form");
   var resultsEl = document.getElementById("calc-results");
   if (!form || !resultsEl) return;
 
-  var STORAGE_KEY = "ranchers-calc-entries-v1";
   var entries = [];
   var editingIndex = -1;
   var removedEntries = null;
@@ -59,14 +109,123 @@
     form.name.focus();
   });
 
-  function load() {
+  /* Storage recovery: unreadable or partially broken data is quarantined —
+     the original blob is never overwritten until the player explicitly
+     discards it, and can be copied out first. */
+  var quarantinedRaw = null;
+  var saveFailed = false;
+
+  var saveStatus = document.createElement("p");
+  saveStatus.className = "calc-save-status";
+  saveStatus.setAttribute("role", "status");
+  undoBox.appendChild(saveStatus);
+
+  var noticeBox = document.createElement("div");
+  noticeBox.className = "calc-storage-notice notice";
+  noticeBox.hidden = true;
+  var noticeText = document.createElement("p");
+  var rawView = document.createElement("textarea");
+  rawView.readOnly = true;
+  rawView.setAttribute("aria-label", "Original saved data");
+  rawView.style.width = "100%";
+  rawView.rows = 3;
+  var copyButton = document.createElement("button");
+  copyButton.type = "button";
+  copyButton.className = "btn btn-outline";
+  copyButton.textContent = "Copy original data";
+  var discardButton = document.createElement("button");
+  discardButton.type = "button";
+  discardButton.className = "btn btn-outline";
+  discardButton.textContent = "Discard damaged data and keep current list";
+  noticeBox.appendChild(noticeText);
+  noticeBox.appendChild(rawView);
+  noticeBox.appendChild(copyButton);
+  noticeBox.appendChild(discardButton);
+  resultsEl.insertAdjacentElement("beforebegin", noticeBox);
+
+  function showRecoveryNotice(skipped) {
+    noticeText.textContent = skipped > 0
+      ? skipped + " saved " + (skipped === 1 ? "entry" : "entries") + " couldn't be read and " + (skipped === 1 ? "was" : "were") + " skipped. The original browser data is kept untouched — copy it below, or discard it to save the current list."
+      : "Your saved entries couldn't be read — the stored data is damaged. It has NOT been overwritten: copy the original below, or discard it to start saving again.";
+    rawView.value = quarantinedRaw || "";
+    noticeBox.hidden = false;
+  }
+  copyButton.addEventListener("click", function () {
+    function manualCopy() {
+      rawView.focus();
+      rawView.select();
+      saveStatus.textContent = "Copy didn't work in this browser — the original data is selected above; copy it manually.";
+    }
+    if (!navigator.clipboard || !navigator.clipboard.writeText) {
+      manualCopy();
+      return;
+    }
+    var write;
     try {
-      var raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) entries = JSON.parse(raw) || [];
-    } catch (e) { entries = []; }
+      write = navigator.clipboard.writeText(quarantinedRaw || "");
+    } catch (e) {
+      manualCopy();
+      return;
+    }
+    if (!write || typeof write.then !== "function") {
+      manualCopy();
+      return;
+    }
+    saveStatus.textContent = "Copying original data…";
+    write.then(function () {
+      saveStatus.textContent = "Original data copied.";
+    }, manualCopy);
+  });
+  discardButton.addEventListener("click", function () {
+    quarantinedRaw = null;
+    noticeBox.hidden = true;
+    if (save()) saveStatus.textContent = "Damaged data discarded. Current list saved in this browser.";
+  });
+
+  function load() {
+    var raw;
+    try {
+      raw = localStorage.getItem(STORAGE_KEY);
+    } catch (e) {
+      saveStatus.textContent = "Browser storage is unavailable. Calculations still work, but your list may be lost when you refresh or leave.";
+      return;
+    }
+    if (!raw) return;
+    var parsed;
+    try {
+      parsed = JSON.parse(raw);
+    } catch (e) {
+      quarantinedRaw = raw;
+      showRecoveryNotice(0);
+      return;
+    }
+    if (!Array.isArray(parsed)) {
+      quarantinedRaw = raw;
+      showRecoveryNotice(0);
+      return;
+    }
+    var result = sanitizeEntries(parsed);
+    entries = result.valid;
+    if (result.skipped > 0) {
+      quarantinedRaw = raw;
+      showRecoveryNotice(result.skipped);
+    }
   }
   function save() {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(entries)); } catch (e) {}
+    if (quarantinedRaw !== null) {
+      saveStatus.textContent = "Changes are not saved yet — copy or discard the damaged data below first.";
+      return false;
+    }
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+      saveStatus.textContent = saveFailed ? "Entries saved in this browser again." : "";
+      saveFailed = false;
+      return true;
+    } catch (e) {
+      saveFailed = true;
+      saveStatus.textContent = "Couldn't save to this browser. Calculations on this page still work, but your list may be lost when you refresh or leave.";
+      return false;
+    }
   }
 
   function fmt(n) {

@@ -12,7 +12,7 @@ assert.match(english, /No current source confirms[^.]*keyboard remapping|keyboar
 assert.ok(english.includes('https://steamcommunity.com/app/1501310/eventcomments/587307627624695975/#c587307627624739829'), 'Link the moderator response about the planned-but-not-yet-available feature');
 assert.ok(english.includes('https://steamcommunity.com/app/1501310/discussions/0/3203744999892138506/'), 'Link the September developer FAQ for the current support boundary');
 assert.ok(english.includes('https://steamcommunity.com/app/1501310/announcements/detail/1844115010489002'), 'Link the latest camera update rather than implying it added key remapping');
-assert.ok(english.includes('main.js?v=20260927-hash-details1'), 'The keyboard-remapping deep link must load the updated shared hash behavior');
+assert.ok(english.includes('main.js?v=20261003-r15'), 'The keyboard-remapping deep link must load the updated shared hash behavior');
 
 assert.ok(chinese.includes('id="keyboard-remapping"'), 'Chinese beginner FAQ needs the same direct keyboard-remapping answer');
 assert.match(chinese, /尚不能确认[^。]*键位重设|当前版本[^。]*键位重设[^。]*尚未确认/, 'Chinese copy must preserve the current availability uncertainty');
@@ -20,7 +20,7 @@ assert.ok(chinese.includes('改键') && chinese.includes('左手'), 'Chinese sea
 assert.ok(chinese.includes('https://steamcommunity.com/app/1501310/eventcomments/587307627624695975/#c587307627624739829'), 'Link the same dated moderator response in Chinese');
 assert.ok(chinese.includes('https://steamcommunity.com/app/1501310/discussions/0/3203744999892138506/'), 'Link the current developer FAQ in Chinese');
 assert.ok(chinese.includes('https://steamcommunity.com/app/1501310/announcements/detail/1844115010489002'), 'Link the latest official update in Chinese');
-assert.ok(chinese.includes('main.js?v=20260927-hash-details1'), 'The Chinese search result must load the updated shared hash behavior');
+assert.ok(chinese.includes('main.js?v=20261003-r15'), 'The Chinese search result must load the updated shared hash behavior');
 
 const englishIndex = JSON.parse(fs.readFileSync(path.join(root, 'search-index.json'), 'utf8'));
 const chineseIndex = JSON.parse(fs.readFileSync(path.join(root, 'zh/search-index.json'), 'utf8'));

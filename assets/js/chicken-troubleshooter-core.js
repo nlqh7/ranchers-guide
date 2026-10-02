@@ -10,6 +10,25 @@
     return String(value || "");
   }
 
+  function readUrlState(search, data) {
+    var params = new URLSearchParams(search || "");
+    var rawBuild = params.get("build");
+    var rawSymptom = params.get("symptom");
+    var builds = ["current", "older", "unknown"];
+    var paths = data && data.paths ? data.paths : {};
+    var build = builds.indexOf(rawBuild) !== -1 ? rawBuild : null;
+    var symptom = rawSymptom && Object.prototype.hasOwnProperty.call(paths, rawSymptom) ? rawSymptom : null;
+    var invalid = [];
+    if (rawBuild !== null && !build) invalid.push("build");
+    if (rawSymptom !== null && !symptom) invalid.push("symptom");
+    return {
+      build: build,
+      symptom: symptom,
+      canRender: Boolean(build && symptom),
+      invalid: invalid,
+    };
+  }
+
   function buildPlan(data, answers, locale) {
     var language = locale === "zh" ? "zh" : "en";
     var path = data.paths[answers.symptom];
@@ -39,5 +58,5 @@
     };
   }
 
-  return { buildPlan: buildPlan };
+  return { buildPlan: buildPlan, readUrlState: readUrlState };
 });

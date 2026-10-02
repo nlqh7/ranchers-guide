@@ -152,7 +152,7 @@ function render(locale) {
   <title>${l.title}</title><meta name="description" content="${l.description}">
   <link rel="canonical" href="${canonical}"><link rel="alternate" hreflang="en" href="${alternateEn}"><link rel="alternate" hreflang="zh-CN" href="${alternateZh}"><link rel="alternate" hreflang="x-default" href="${alternateEn}">
   <meta property="og:type" content="website"><meta property="og:site_name" content="The Ranchers Guide"><meta property="og:title" content="${l.title}"><meta property="og:description" content="${l.description}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="https://theranchersguide.com/assets/img/guide-barn.webp">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260902-ui2"><link rel="stylesheet" href="/assets/css/resource-reference.css?v=20260913-use1"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20261003-r15"><link rel="stylesheet" href="/assets/css/resource-reference.css?v=20260913-use1"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head><body>
   <header class="site-header"><nav class="nav-inner" aria-label="${zh ? "主导航" : "Main navigation"}"><a class="logo" href="${prefix}/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide</span></a><button class="nav-toggle" aria-expanded="false" aria-label="${zh ? "展开导航" : "Toggle navigation"}">☰</button><ul class="nav-links">${nav}</ul></nav></header>
   <main><article class="article" style="max-width:980px"><nav class="breadcrumb" aria-label="${zh ? "面包屑" : "Breadcrumb"}"><a href="${prefix}/">${zh ? "首页" : "Home"}</a> / <a href="${prefix}/database">${zh ? "知识库" : "Database"}</a> / ${l.breadcrumb}</nav>
@@ -161,7 +161,7 @@ function render(locale) {
     <nav class="toc" aria-label="${l.contents}"><strong>${l.contents}</strong><ul>${toc}</ul></nav>
 ${sections}
     <p class="database-browse-note">${l.unknownCopy}</p>
-</article></main>${renderSiteFooter(locale, { en: l.footer, zh: l.footer })}<script src="/assets/js/main.js?v=20260927-hash-details1" defer></script>
+</article></main>${renderSiteFooter(locale, { en: l.footer, zh: l.footer })}<script src="/assets/js/main.js?v=20261003-r15" defer></script>
 <script src="/assets/js/material-use-search.js?v=20260913-use1" defer></script></body></html>`;
 }
 
