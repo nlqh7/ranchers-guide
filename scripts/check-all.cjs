@@ -77,6 +77,7 @@ const nodeChecks = [
   ["check-scarecrow-workbench-answer.cjs"],
   ["check-update-impact-tracker.cjs"],
   ["check-entity-journeys.cjs"],
+  ["check-r9-answers.cjs"],
   ["check-crops.cjs"],
   ["check-field-notes.cjs"],
   ["check-home-card-links.cjs"],

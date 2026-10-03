@@ -45,7 +45,7 @@ check(updateScript, /localStorage/);
 check(updateScript, /actions/);
 check(updateScript, /routeZh/);
 const updates = JSON.parse(read("data/updates.json"));
-assert.equal(updates.meta.currentBuild, "0.8.10.842", "update tracker must use the current content baseline");
+assert.equal(updates.meta.currentBuild, "0.8.10.858", "update tracker must use the current content baseline");
 assert.ok(updates.updates.length >= 1 && updates.updates.every((item) => item.actions.length > 0));
 
 for (const relative of ["tools/quest-tracker.html", "zh/tools/quest-tracker.html"]) {

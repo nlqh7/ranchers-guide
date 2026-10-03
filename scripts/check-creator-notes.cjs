@@ -7,7 +7,10 @@ const data = JSON.parse(fs.readFileSync(path.join(root, "data", "creator-notes.j
 const english = fs.readFileSync(path.join(root, "creator-notes.html"), "utf8");
 const chinese = fs.readFileSync(path.join(root, "zh", "creator-notes.html"), "utf8");
 
-assert.equal(data.notes.length, 12);
+// The source desk grows as new encyclopedias and evidence boundaries are audited.
+// Guard against accidental truncation without forcing this check to be edited for
+// every legitimate source addition.
+assert.ok(data.notes.length >= 21);
 assert.equal(new Set(data.notes.map((note) => note.id)).size, data.notes.length);
 assert.ok(data.notes.every((note) => note.sourceUrl.startsWith("https://")));
 assert.ok(data.notes.every((note) => note.build && note.scope && note.zhScope && note.use && note.zhUse && note.risk && note.zhRisk));

@@ -771,12 +771,12 @@
         "en": {
           "title": "Sunset Casino",
           "keywords": "casino community shared place social players",
-          "entryHtml": "<div><span class=\"location-category\">Landmarks</span><h2>Sunset Casino</h2><p>Introduced in official development material as a Community Shared Place. A named Casino POI still exists in the current build, but accessibility and activities need an in-game check.</p></div><div class=\"location-use\"><strong>Historical purpose</strong><span>Social shared place</span><span class=\"evidence-badge evidence-historical\">Access still unverified</span></div>"
+          "entryHtml": "<div><span class=\"location-category\">Landmarks</span><h2>Sunset Casino</h2><p>Introduced in official development material as a Community Shared Place. The current FAQ says the casino is open to explore, while playable casino games are planned for later; this named POI is therefore a location anchor, not a promise of current games. <a href=\"https://steamcommunity.com/app/1501310/discussions/0/3203744999892138506/\" rel=\"noopener noreferrer\">Read the official FAQ</a>.</p></div><div class=\"location-use\"><strong>Current boundary</strong><span>Explore the place</span><span class=\"evidence-badge evidence-historical\">Games planned later</span></div>"
         },
         "zh": {
           "title": "Sunset Casino",
           "keywords": "Sunset Casino 赌场 社交地点 玩家 Community Shared Place",
-          "summary": "Sunset Casino 曾作为 Community Shared Place 出现；当前正式版仍有命名 Casino POI 和精确标点，但是否可进入及具体活动需要实机复核。",
+          "summary": "Sunset Casino 曾作为 Community Shared Place 出现；当前 FAQ 说明赌场可以探索，但可玩的赌场游戏要到后续内容，因此这里是地点锚点，不代表当前已有可玩的赌场项目。<a href=\"https://steamcommunity.com/app/1501310/discussions/0/3203744999892138506/\" rel=\"noopener noreferrer\">查看官方 FAQ</a>。",
           "entryHtml": null
         }
       },
@@ -790,7 +790,7 @@
           "en": {
             "title": "Sunset Casino",
             "confidence": "Exact current-build POI",
-            "description": "Named Casino POI transform exists in the site owner's current local build; accessibility and activities still need in-game verification.",
+            "description": "A named Casino POI exists in the site owner's current local build. The current FAQ says the place is open to explore while playable games are planned later.",
             "ariaLabel": "Exact current-build POI: Sunset Casino",
             "label": "Casino",
             "target": "#sunset-casino"
@@ -798,7 +798,7 @@
           "zh": {
             "title": "Sunset Casino",
             "confidence": "当前版本精确 POI",
-            "description": "站长当前本地构建中存在命名 Casino POI Transform；是否可进入及具体活动仍需实机验证。",
+            "description": "站长当前本地构建中存在命名 Casino POI Transform；FAQ 说明地点可探索，但可玩的赌场项目计划后续加入。",
             "ariaLabel": "当前版本精确 POI：Sunset Casino",
             "label": "赌场",
             "target": "#sunset-casino"

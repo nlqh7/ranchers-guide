@@ -24,6 +24,9 @@ function render(locale) {
   const timeline = zh
     ? `当前资料基线：${esc(data.meta.currentBuild)}；首发视频来自 0.8.10.455，不代表现版本配方。`
     : `Current official version: ${esc(data.meta.currentBuild)}. Footage: July 30, 2026 Early Access build (launch/video baseline <strong>0.8.10.455</strong>); it does not establish current recipes.`;
+  const wikiAudit = zh
+    ? '2026 年 9 月 12 日复核官方 Wiki：鸡舍、畜棚、筒仓和水塔页面仍提供容量、食槽、建造步骤、能耗或网格覆盖字段，但没有统一的抢先体验版本边界；这些字段只作为待复核的资料线索，不覆盖当前构建数据。'
+    : 'Official Wiki audit on September 12, 2026: the Coop, Barn, Silo and Water Tower pages still expose capacity, trough, build-step, energy or grid-coverage fields, but no single Early Access build boundary; these fields remain recheck leads and do not override current-build data.';
   return `${start}
 <div class="building-requirements" data-building-requirements>
   <div class="building-table-wrap" role="region" aria-label="${zh ? '建筑材料需求表' : 'Building material requirements'}" tabindex="0">
@@ -34,7 +37,7 @@ function render(locale) {
       <tbody><tr class="building-source-group"><th colspan="2" scope="rowgroup">${zh ? '官方 Wiki 历史记录' : 'Historical Official Wiki'} · Alpha</th></tr>${rows.filter((_, i) => data.targets[i].build === 'alpha-2023').join('\n')}</tbody>
     </table>
   </div>
-  <details class="building-sources"><summary>${zh ? '配方来源与旧名称' : 'Recipe sources and older names'}</summary><p>${timeline}</p><p>${zh ? 'Alpha 原文使用 Wood / Rock，表中保留旧名称；材料链接指向现有条目，不证明旧配方仍然适用。' : 'Alpha entries use Wood / Rock. These original names are retained; links to present material entries do not establish current recipe validity.'}</p><ul>${sources}</ul></details>
+  <details class="building-sources"><summary>${zh ? '配方来源与旧名称' : 'Recipe sources and older names'}</summary><p>${timeline}</p><p>${wikiAudit}</p><p>${zh ? 'Alpha 原文使用 Wood / Rock，表中保留旧名称；材料链接指向现有条目，不证明旧配方仍然适用。' : 'Alpha entries use Wood / Rock. These original names are retained; links to present material entries do not establish current recipe validity.'}</p><ul>${sources}</ul></details>
 </div>
 ${end}`;
 }

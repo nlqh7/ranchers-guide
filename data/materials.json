@@ -1,7 +1,7 @@
 {
   "meta": {
     "build": "0.8.10.842",
-    "lastUpdated": "2026-08-28"
+    "lastUpdated": "2026-09-12"
   },
   "sources": {
     "official-mines-answer": {
@@ -11,6 +11,14 @@
       "author": "Jennoula",
       "date": "2026-08-02",
       "build": "0.8.10.x"
+    },
+    "current-zirconite-thread": {
+      "kind": "steam-thread",
+      "title": "Steam thread: where to get zerkonite (City Hall and exploit warning)",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587307627624731278/",
+      "author": "general / Cieramist",
+      "date": "2026-07-31",
+      "build": "Early Access; build not stated"
     },
     "current-stone-thread": {
       "kind": "steam-thread",
@@ -35,6 +43,30 @@
       "author": "Site editor",
       "date": "2026-08-08",
       "build": "0.8.10.x"
+    },
+    "current-charcoal-thread": {
+      "kind": "steam-thread",
+      "title": "Steam thread: charcoal player route",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587308167364380423/",
+      "author": "Whitebear",
+      "date": "2026-08-04",
+      "build": "Build not stated"
+    },
+    "official-silo-automation": {
+      "kind": "steam-thread",
+      "title": "Steam thread: Silos (Jennoula official automation answer)",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587308167364408897/",
+      "author": "Jennoula",
+      "date": "2026-08-04",
+      "build": "Early Access; build not stated"
+    },
+    "official-water-tower": {
+      "kind": "steam-thread",
+      "title": "Steam thread: Watertower problem (Jennoula official answer)",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587307906418969824/",
+      "author": "Jennoula",
+      "date": "2026-08-03",
+      "build": "Early Access; build not stated"
     },
     "current-hay-thread": {
       "kind": "steam-thread",
@@ -122,7 +154,7 @@
           "evidenceLevel": "community-confirmed",
           "build": "0.8.10.x",
           "validity": "current",
-          "sourceIds": ["community-material-scan"]
+          "sourceIds": ["community-material-scan", "current-charcoal-thread"]
         },
         {
           "text": "Launch-build footage shows a Red Tent recipe requiring 10 Wood Logs and 8 Stone; it does not prove other recipe costs.",
@@ -154,7 +186,7 @@
           "evidenceLevel": "official",
           "build": "0.8.10.x",
           "validity": "current",
-          "sourceIds": ["official-chicken-feed"]
+          "sourceIds": ["official-chicken-feed", "official-silo-automation"]
         },
         {
           "text": "One current-build report gets hay by cutting bushes or searching crates and barrels on NPC farms. Treat this as a route to test, not a guaranteed drop table.",
@@ -174,19 +206,19 @@
       "zhSearchTitle": "木炭怎么制作",
       "searchTags": "charcoal coal burn logs torch fire extinguisher building material",
       "zhSearchTags": "木炭 煤 原木 燃烧 火把 灭火器 建造 材料",
-      "summary": "A community lead suggests burning Wood Logs and extinguishing the fire before collecting Charcoal. Current-build steps, yield and fire behaviour still need a direct screenshot or video.",
-      "zhSummary": "一条社区线索称可以燃烧原木，再灭火收集木炭。当前版本的具体步骤、产量和火焰行为仍需要直接截图或视频确认。",
+      "summary": "A directly linked player report describes burning a felled or placed Wood Log, waiting for it to turn into charcoal, then extinguishing the fire before collecting. Current-build steps, yield and fire behaviour still need independent confirmation.",
+      "zhSummary": "一条有直链的玩家报告描述了点燃砍下或放置的原木，等待其变成木炭，再灭火后收集。当前版本的具体步骤、产量和火焰行为仍需要独立确认。",
       "whenNeeded": "Treat Charcoal as a research lead rather than a guaranteed route. Use the linked crafting context, then verify the fire and collection steps in the current build before spending resources.",
       "zhWhenNeeded": "把木炭当作待验证线索，不要当成保证可行的路线。先看制作背景，再在当前版本确认燃烧和收集步骤后投入资源。",
       "relatedRoutes": ["/guides/crafting-guide", "/community"],
       "facts": [
         {
-          "text": "A community lead suggests placing or cutting Wood Logs, igniting them, waiting for a material change, then using a fire extinguisher before collecting Charcoal. The retained scan has no direct post URL, so this remains a route to test.",
-          "zhText": "一条社区线索称可以放下或砍出原木，点燃并等待材料变化，再用灭火器灭火后收集木炭。现有存档没有直接帖子链接，因此它仍是待复测路线。",
+          "text": "A player report describes placing or cutting Wood Logs, lighting them with a torch, waiting roughly 1–2 minutes for a charcoal change, then extinguishing with a fire extinguisher or watering can before collecting. It is still a single-source route to test, not a guaranteed timer or yield.",
+          "zhText": "一名玩家报告称可以放下或砍出原木，用火把点燃，等待约 1–2 分钟出现木炭变化，再用灭火器或浇水壶灭火后收集。它仍是单一来源的待复测路线，不是保证计时或产量。",
           "evidenceLevel": "unverified-lead",
           "build": "0.8.10.x",
           "validity": "current",
-          "sourceIds": ["community-material-scan"]
+          "sourceIds": ["current-charcoal-thread", "community-material-scan"]
         },
         {
           "text": "The moderator separately identifies the fire extinguisher as the intended way to put out fires. The retained evidence does not lock down one keyboard control or an exact burn timer.",
@@ -226,7 +258,15 @@
           "evidenceLevel": "community-confirmed",
           "build": "0.8.10.x",
           "validity": "current",
-          "sourceIds": ["community-material-scan"]
+          "sourceIds": ["community-material-scan", "current-zirconite-thread"]
+        },
+        {
+          "text": "A current thread also mentions repeatedly searching airport or casino bins after buying one piece, but another participant calls that an exploit. Keep it out of the normal route and do not publish it as a guaranteed farming method.",
+          "zhText": "当前讨论还提到先买一块再反复搜索机场或赌场垃圾桶，但另一名参与者称这是利用漏洞。它不应进入正常路线，也不能写成保证有效的刷取方法。",
+          "evidenceLevel": "unverified-lead",
+          "build": "0.8.10.x",
+          "validity": "current",
+          "sourceIds": ["current-zirconite-thread"]
         }
       ]
     }

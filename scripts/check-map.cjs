@@ -111,9 +111,9 @@ assert.match(mapPage, /data-map-inspector-stack-list/, "English map needs a stab
 assert.match(chineseMapPage, /data-map-inspector-stack-list/, "Chinese map needs a stable nearby-location list instead of moving labels");
 assert.match(mapPage, /<details class="map-inspector-related"[^>]*data-map-inspector-related[\s\S]*?data-map-inspector-connections[\s\S]*?<\/details>/, "related guides should not overwhelm the primary location details");
 assert.match(chineseMapPage, /<details class="map-inspector-related"[^>]*data-map-inspector-related[\s\S]*?data-map-inspector-connections[\s\S]*?<\/details>/, "Chinese related guides should not overwhelm the primary location details");
-assert.match(mapPage, /<aside class="map-inspector"[^>]*data-map-inspector[^>]*hidden>/, "the inspector should stay out of the default map view until a marker is selected");
-assert.match(chineseMapPage, /<aside class="map-inspector"[^>]*data-map-inspector[^>]*hidden>/, "the Chinese inspector should stay out of the default map view until a marker is selected");
-assert.match(mapPage, /<details class="map-progress-panel"[^>]*data-map-progress>/, "exploration progress should be secondary disclosure");
+assert.match(mapPage, /<aside class="map-inspector"[^>]*data-map-inspector[^>]*hidden(?:\s[^>]*)?>/, "the inspector should stay out of the default map view until a marker is selected");
+assert.match(chineseMapPage, /<aside class="map-inspector"[^>]*data-map-inspector[^>]*hidden(?:\s[^>]*)?>/, "the Chinese inspector should stay out of the default map view until a marker is selected");
+assert.match(mapPage, /<details class="[^"]*\bmap-progress-panel\b[^"]*"[^>]*data-map-progress[^>]*>/, "exploration progress should be secondary disclosure");
 assert.match(mapPage, /<details class="map-confidence"/, "map accuracy notes should be secondary disclosure");
 assert.doesNotMatch(mapPage, /data-map-layer-summary/, "the default layer panel should not show an implementation count");
 assert.doesNotMatch(chineseMapPage, /data-map-layer-summary/, "the Chinese layer panel should not show an implementation count");

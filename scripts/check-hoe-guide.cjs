@@ -41,9 +41,15 @@ for (const locale of ['en', 'zh']) {
   assert.doesNotMatch(block, /24847725/, `${locale}: internal Steam build must not appear in player copy`);
 
   const obsolete = locale === 'zh'
-    ? [/已种作物多久浇一次仍未验证/, /开田和温室的当前版本步骤仍未闭环/, /不要把旧温室或锄头教程当成确定路线/, /未验证：开田与温室/, /钱会进入当天结算/, /钱在日终结算单/]
-    : [/watering interval for a planted crop is still unverified/i, /current-build tilling and greenhouse steps are still open/i, /old greenhouse or hoe tutorial/i, /Not yet verified: tilling & greenhouses/i, /money arrives in the end-of-day Farming line/i];
+    ? [/已种作物多久浇一次仍未验证/, /开田和温室的当前版本步骤仍未闭环/, /不要把旧温室或锄头教程当成确定路线/, /未验证：开田与温室/, /钱会进入当天结算/, /钱在日终结算单/, /目前没有手动删除农田格的工具/]
+    : [/watering interval for a planted crop is still unverified/i, /current-build tilling and greenhouse steps are still open/i, /old greenhouse or hoe tutorial/i, /Not yet verified: tilling & greenhouses/i, /money arrives in the end-of-day Farming line/i, /There is currently no manual delete tool/i];
   for (const pattern of obsolete) assert.doesNotMatch(guide, pattern, `${locale}: obsolete guidance must be removed: ${pattern}`);
+
+  assert.match(guide, /0\.8\.10\.868/, `${locale}: current hoe removal patch must be named`);
+  assert.match(guide, locale === 'zh' ? /2 点自然技能点/ : /2 Nature Skill Points/);
+  assert.match(guide, locale === 'zh' ? /农田信息弹窗/ : /Plantation Info Popup/);
+  assert.match(guide, locale === 'zh' ? /不需要供暖/ : /does not need heating/);
+  assert.match(guide, locale === 'zh' ? /没有冬季种子/ : /no winter seeds/);
 
   const queries = locale === 'zh'
     ? ['怎么开第一块种植地', '锄头 红色 白色', '锄头 播种 使用键 洒水壶']

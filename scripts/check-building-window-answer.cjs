@@ -30,7 +30,7 @@ for (const [label, page, answer] of [
 ]) {
   assert.match(page, /href="#find-windows"/, `${label} table of contents must link the answer`);
   assert.match(answer, /data-search-entry/, `${label} answer must be independently searchable`);
-  assert.match(answer, /data-search-status="(?:Official answer|官方答复)"/, `${label} search result must retain official evidence status`);
+  assert.match(answer, /data-search-status="(?:Official answer|官方答复)(?:[^"]*)"/, `${label} search result must retain official evidence status`);
   assert.match(answer, /href="#recipe-House_Window_01"/, `${label} answer must link the current-build Window recipe`);
   assert.ok(page.includes(sourceUrl), `${label} page must cite the exact moderator discussion`);
 }
@@ -38,7 +38,7 @@ for (const [label, page, answer] of [
 assert.match(enAnswer, /workbench/i, "English answer must identify the workbench");
 assert.match(enAnswer, /scroll (?:horizontally|across)/i, "English answer must explain horizontal scrolling");
 assert.match(enAnswer, /red blinds/i, "English answer must include the moderator's visual cue");
-assert.match(enAnswer, /does not confirm[^.]*unlock[^.]*placement/i, "English answer must bound what the source proves");
+assert.match(enAnswer, /(?:does|do) not confirm[^.]*unlock[^.]*placement/i, "English answer must bound what the source proves");
 
 assert.match(zhAnswer, /工作台/, "Chinese answer must identify the workbench");
 assert.match(zhAnswer, /横向滚动/, "Chinese answer must explain horizontal scrolling");

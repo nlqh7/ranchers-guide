@@ -25,7 +25,7 @@
     <nav class="nav-inner" aria-label="Main navigation">
       <a class="logo" href="/">
         <span class="logo-mark"><img src="../assets/img/logo.png" alt="" width="34" height="34"></span>
-        <span>The Ranchers Guide<small>Unofficial fan resource</small></span>
+        <span>The Ranchers Guide</span>
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
       <ul class="nav-links">
@@ -44,14 +44,15 @@
     <article class="article">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Guides / Police Wanted Levels</nav>
       <h1>Police Wanted Levels in The Ranchers: Codes, Force and Surrender Rules</h1>
-      <p class="meta">Official pre-EA design reviewed against Early Access 0.8.10.x · August 9, 2026 · Reading time: ~5 min</p>
+      <p class="meta">Official pre-EA design cross-checked against Early Access 0.8.10.858 · September 12, 2026 · Reading time: ~5 min</p>
       <div class="evidence-status">
-        <strong>Evidence status:</strong> entire page sourced from one official announcement (Police District Update, published before Early Access) · individual values and edge cases may have changed in the current build · reviewed Aug 7, 2026 — <a href="/methodology">How we verify →</a>
+        <strong>Evidence status:</strong> pre-EA police design cross-checked against the current 0.8.10.858 announcement · individual values and edge cases may have changed in the current build · reviewed Sep 12, 2026 — <a href="/methodology">How we verify →</a>
       </div>
+      <div class="notice hotfix-notice"><strong>Current 0.8.10.858 boundary:</strong> the early-game tutorial temporarily disables police chases, vehicle damage and criminal activities. If those systems are unavailable before the tutorial unlocks them, that is an announced progression boundary rather than proof that the feature is missing. The same update says NPCs flee when harmed. <a href="https://steamcommunity.com/app/1501310/announcements/detail/1842846814456746" rel="noopener noreferrer">Read the official update</a>.</div>
 
       <section class="answer-box">
         <h2>Answer first</h2>
-        <p><span class="evidence-badge evidence-official">Official pre-EA design</span> The Police District Update describes a <strong>5-level wanted system</strong>, escalating from peaceful fine collection to heavy lethal weapons. It also describes surrender as a way to reduce sentence and bail. <strong>The current 0.8.10.x surrender prompt, key and trigger have not been independently rechecked</strong>, so this page separates documented design from current-build observations.</p>
+        <p><span class="evidence-badge evidence-official">Official pre-EA design</span> The Police District Update describes a <strong>5-level wanted system</strong>, escalating from peaceful fine collection to heavy lethal weapons. It also describes surrender as a way to reduce sentence and bail. <strong>The current 0.8.10.x surrender prompt, key and trigger have not been independently rechecked</strong>, so this page separates documented design from current-build observations. Test only after the opening tutorial boundary is cleared.</p>
       </section>
 
       <nav class="toc" aria-label="Table of contents">
@@ -64,7 +65,8 @@
           <li><a href="#evidence">Evidence and version</a></li>
           <li><a href="#limits">Known limits</a></li>
           <li><a href="#faq">Wanted level FAQ</a></li>
-        </ul>
+
+          <li><a href="#police-pursuit-current-build">Current-build pursuit path</a></li></ul>
       </nav>
 
       <h2 id="levels">The 5 wanted levels, level by level</h2>
@@ -190,7 +192,20 @@
       <!-- Ad slot placeholder
       <div class="ad-slot">Advertisement</div>
       -->
-    </article>
+    <!-- BEGIN POLICE PURSUIT TUTORIAL REFERENCE -->
+<section class="answer-box tutorial-reference" id="police-pursuit-current-build" aria-labelledby="police-pursuit-current-build-title" data-search-entry data-search-title="Police pursuit: trigger, HUD and your three choices" data-search-tags="police pursuit how starts trigger steal vehicle farm animal kill character HUD wanted level one star 1 star pay fine surrender escape custody police car drone" data-search-status="Game-build guidance">
+  <h2 id="police-pursuit-current-build-title">Police pursuit: trigger, HUD and your three choices</h2>
+  <p><strong>Short answer: </strong>A pursuit starts when police spot crimes such as stealing a vehicle, taking a farm animal or killing another character. Check the wanted level in the HUD, then choose whether to pay the fine, surrender or try to escape.</p>
+  <ol>
+    <li><strong>Know what starts a pursuit:</strong> Being spotted stealing a vehicle, taking a farm animal or killing another character can start a police pursuit.</li>
+    <li><strong>Read the HUD:</strong> Your wanted level appears in the HUD. As it rises, police cars and drones become more aggressive.</li>
+    <li><strong>Choose a response:</strong> During the pursuit, choose to pay the fine, surrender or try to escape. Your choice and wanted level affect the judge&#39;s jail-time decision.</li>
+    <li><strong>Check the star outcome:</strong> At 1 star, paying the fine lets you continue your day. With more than 1 star, paying the fine also leads to time in police custody.</li>
+  </ol>
+  <p class="recipe-boundary"><span class="evidence-badge evidence-build">Game files</span> The source does not provide fine amounts, button bindings or prompts, custody duration, the judge formula, exact star increases for each crime, or independent runtime validation. Checked against 0.8.10.842.</p>
+</section>
+<!-- END POLICE PURSUIT TUTORIAL REFERENCE -->
+</article>
   </main>
 
   <footer class="site-footer">
@@ -227,6 +242,7 @@
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>
             <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
             <li><a href="/methodology">Methodology</a></li>
           </ul>
         </nav>

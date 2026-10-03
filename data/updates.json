@@ -1,10 +1,47 @@
 {
   "meta": {
-    "currentBuild": "0.8.10.842",
-    "reviewed": "2026-08-22",
+    "currentBuild": "0.8.10.858",
+    "reviewed": "2026-09-12",
     "note": "This dataset summarizes existing update pages. It does not reproduce official announcements."
   },
   "updates": [
+    {
+      "id": "hotfix-0-8-10-858",
+      "version": "0.8.10.858",
+      "dateLabel": "September 8, 2026",
+      "status": "current",
+      "title": {
+        "en": "0.8.10.858 ranching, co-op and building update",
+        "zh": "0.8.10.858 牧场、联机与建造更新"
+      },
+      "summary": {
+        "en": "Update first when animal disappearance, sickness alerts, solo/co-op mode or building visibility and placement looks wrong.",
+        "zh": "如果动物消失、生病提示、单人/联机模式或建造显示与放置异常，先更新到本版再复测。"
+      },
+      "affectedRoutes": [
+        { "en": "Animal guide", "zh": "动物指南", "route": "/guides/animal-guide#troubleshooting", "routeZh": "/zh/guides/animal-guide#troubleshooting" },
+        { "en": "Animal database", "zh": "动物数据库", "route": "/database/animals", "routeZh": "/zh/database/animals" },
+        { "en": "Co-op guide", "zh": "联机指南", "route": "/guides/multiplayer-coop", "routeZh": "/zh/guides/multiplayer-coop" },
+        { "en": "Building guide", "zh": "建造指南", "route": "/guides/building-construction", "routeZh": "/zh/guides/building-construction" }
+      ],
+      "changes": [
+        { "en": "Known animal-disappearance paths were addressed; end-of-day sickness alerts were added.", "zh": "修复已知动物消失路径，并加入日终生病提醒。" },
+        { "en": "Sickness windows are now 4 days for chickens, 7 for cows, 8 for goats and 5 for rabbits.", "zh": "生病容忍期调整为鸡 4 天、牛 7 天、山羊 8 天、兔 5 天。" },
+        { "en": "New games and loaded saves choose PLAY SOLO or OPEN TO FRIENDS; brief multiplayer drops are handled more reliably.", "zh": "新游戏和读档时可选择 PLAY SOLO 或 OPEN TO FRIENDS，短暂联机波动的处理也更稳定。" },
+        { "en": "Blueprint placement, roof snapping, floor visibility and foundations over rivers were improved; early-game police chases, vehicle damage and criminal activities remain temporarily disabled.", "zh": "改善蓝图放置、屋顶吸附、楼层显示和跨河地基；早期警察追逐、车辆损坏与犯罪活动仍暂时关闭。" }
+      ],
+      "actions": [
+        { "en": "Run the current animal-care checklist", "zh": "运行当前动物照料排查", "route": "/guides/animal-guide#troubleshooting", "routeZh": "/zh/guides/animal-guide#troubleshooting" },
+        { "en": "Choose the intended session mode", "zh": "选择需要的联机模式", "route": "/guides/multiplayer-coop", "routeZh": "/zh/guides/multiplayer-coop" },
+        { "en": "Retest floors, roofs and river foundations", "zh": "复测楼层、屋顶与跨河地基", "route": "/guides/building-construction", "routeZh": "/zh/guides/building-construction" }
+      ],
+      "source": {
+        "kind": "official",
+        "label": "0.8.10.858 update announcement",
+        "labelZh": "0.8.10.858 官方更新公告",
+        "url": "https://steamcommunity.com/app/1501310/announcements/detail/1842846814456746"
+      }
+    },
     {
       "id": "hotfix-0-8-10-842",
       "version": "0.8.10.842",

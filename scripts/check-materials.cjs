@@ -47,7 +47,9 @@ for (const material of data.materials) {
 }
 
 const publicCopy = data.materials.flatMap((material) => material.facts.flatMap((fact) => [fact.text, fact.zhText])).join("\n");
-assert.doesNotMatch(publicCopy, /press Q|按 Q|1[–-]2 minutes|1[–-]2 分钟|watering can.*extinguish|浇水壶.*灭火/i, "charcoal controls, timing and watering-can behavior are not retained current facts");
+assert.doesNotMatch(publicCopy, /press Q|按 Q/i, "an unsupported charcoal keyboard control must not be published");
+const charcoal = data.materials.find((material) => material.id === "charcoal");
+assert.ok(charcoal && charcoal.facts.some((fact) => /1[–-]2 minutes|1[–-]2 分钟|watering can.*extinguish|浇水壶.*灭火/i.test(`${fact.text}\n${fact.zhText}`) && fact.evidenceLevel === "unverified-lead" && /single-source route to test|待复测路线/.test(`${fact.text}\n${fact.zhText}`)), "charcoal timing and watering-can details must remain explicitly bounded as an unverified lead");
 assert.doesNotMatch(publicCopy, /mine is open|mines are open|矿洞已开放|矿场已开放/i, "mines must not be presented as currently available");
 assert.doesNotMatch(publicCopy, /stone (?:costs|is sold for) 29C|石头.*29C/i, "single-source stone price must not be published as confirmed");
 

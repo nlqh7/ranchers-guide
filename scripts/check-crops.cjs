@@ -113,6 +113,22 @@ for (const fact of sellFacts) {
 const garlic = data.crops.find((c) => c.id === "garlic");
 assert.ok(garlic.fields.every((f) => f.key !== "seed" || !/31C/.test(f.facts.map((x) => x.text).join(" "))), "31C must not appear as garlic seed price");
 
+/* The profile answer must lead with planting facts and the next action. Price
+ * limitations belong in the evidence fields, not before the core crop facts. */
+for (const id of ["red-lettuce", "strawberry", "garlic"]) {
+  for (const [locale, page] of [["en", html], ["zh", zhHtml]]) {
+    const start = page.indexOf(`id="${id}" data-search-entry`);
+    assert.ok(start >= 0, `${locale} ${id}: profile must exist`);
+    const end = page.indexOf("</section>", start);
+    const profile = page.slice(start, end);
+    const configAt = profile.indexOf('data-seed-id=');
+    const leadAt = locale === 'en' ? profile.indexOf('<p class="lead">') : profile.indexOf('</div><p>', configAt);
+    assert.ok(configAt >= 0 && leadAt > configAt, `${locale} ${id}: seed/season/growth configuration must precede the lead copy`);
+    assert.match(profile, /farming-fields#start-farming/, `${locale} ${id}: planting action must be directly reachable`);
+    assert.match(profile, /farming-fields#watering/, `${locale} ${id}: watering action must be directly reachable`);
+  }
+}
+
 /* zh (Chinese) block sanity: every zh entry needs the fields the zh renderer consumes. */
 const ZH_BADGE_KINDS = new Set(["official", "official-warn", "community", "video", "lead", "model", "shot-pending", "unknown", "historical", "none"]);
 function checkZh(zh, where) {

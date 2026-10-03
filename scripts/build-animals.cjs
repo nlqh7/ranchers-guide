@@ -88,6 +88,7 @@ ${parts.join("\n")}`;
 ${animal.whenNeeded ? `        <div class="entity-decision"><strong>When to look here</strong><p>${escapeHtml(animal.whenNeeded)}</p></div>` : ""}
         </div>
 ${renderNativeAnimalReference(animal, 'en')}
+${renderNativeAnimalDietReference(animal, 'en')}
 ${renderBuildReference(animal, 'en')}
 ${animal.buildReference ? `<details class="database-outline"><summary>Further care evidence and open questions</summary>${fields}</details>` : fields}
       </section>`;
@@ -120,6 +121,50 @@ function renderNativeAnimalReference(animal, locale) {
         <div class="data-table-wrap" tabindex="0" role="region" aria-label="${zh ? `${escapeHtml(animal.zh?.tocLabel || animal.name)}当前构建名称` : `${escapeHtml(animal.name)} current-build names`}"><table class="data-table"><thead><tr><th scope="col">${zh ? '游戏内名称' : 'Game name'}</th><th scope="col">${zh ? '阶段与性别' : 'Stage and sex'}</th><th scope="col">${zh ? '来源 ID' : 'Source ID'}</th></tr></thead><tbody>${body}</tbody></table></div>
         <details class="database-reference-notes"><summary>${zh ? '共用配置与资料边界' : 'Shared configuration and limits'}</summary><p>${zh ? `源表共同字段：${escapeHtml(settings.classification)} 分类、${escapeHtml(settings.rarity)} 稀有度、不可装备、不可堆叠、不可丢弃，并带有可出售标志。配置不证明当前可购买、可出售活体、可繁殖或会在存档中生成。` : `Shared source fields: ${escapeHtml(settings.classification)} classification, ${escapeHtml(settings.rarity)} rarity, not equippable, not stackable, not droppable, with the sellable flag set. This configuration does not prove current purchase, live-animal sale, breeding or save availability.`}</p>${renderSources(ref.sourceIds)}</details>
       </div>`;
+}
+
+function renderNativeAnimalDietReference(animal, locale) {
+  if (!['cow', 'sheep'].includes(animal.id)) return '';
+  const ref = data.nativeAnimalCareReference;
+  if (!ref) return '';
+  const zh = locale === 'zh';
+  const diet = ref.diets.find(item => item.speciesId === animal.id);
+  if (!diet) return '';
+  const foods = new Map(ref.foods.map(item => [item.id, item]));
+  const foodNames = diet.foodIds.map(id => foods.get(id)).filter(Boolean).map(item => escapeHtml(zh ? item.zhName : item.name));
+  const waterNames = diet.waterIds.map(id => foods.get(id)).filter(Boolean).map(item => escapeHtml(zh ? item.zhName : item.name));
+  const animalName = diet.id === 'ram'
+    ? (zh ? '公绵羊' : 'Ram')
+    : (zh ? (animal.zh?.tocLabel || animal.name) : animal.name);
+  const title = zh ? `${animalName}的构建饲料配置` : `${animalName} build diet configuration`;
+  const boundary = diet.id === 'ram'
+    ? (zh ? '来源只匹配公绵羊（Ram）定义，不能据此推定母绵羊食谱；这不是当前存档实测。食量、频率、库存和产出仍未知。' : 'This source matches the Ram definition only and does not establish the ewe diet; it is not a current-save gameplay test. Quantity, frequency, stock and output remain unknown.')
+    : (zh ? '这是 .842 游戏文件配置，不是当前存档实测。食量、频率、库存、运行时可用性和产出仍未知。' : 'This is a .842 game-file configuration, not a current-save gameplay test. Quantity, frequency, stock, runtime availability and output remain unknown.');
+  const prefix = zh ? '/zh' : '';
+  return `<div class="database-config native-animal-diet-summary" id="${escapeHtml(animal.id)}-diet-config" data-search-entry data-search-title="${escapeHtml(title)}" data-search-tags="${escapeHtml(`${animalName} diet feed water 饲料 食物 水`)}" data-search-status="${zh ? '游戏文件配置 · 未实测' : 'Game-file configuration · not gameplay-tested'}"><p><strong>${escapeHtml(title)}</strong> · ${escapeHtml(ref.build)}</p><dl class="database-facts"><div><dt>${zh ? '配置食物' : 'Configured food'}</dt><dd>${foodNames.join(zh ? '、' : ', ')}</dd></div><div><dt>${zh ? '配置饮水' : 'Configured water'}</dt><dd>${waterNames.join(zh ? '、' : ', ')}</dd></div></dl><p class="database-browse-note">${boundary} ${renderSources(['owned-build-animal-diets'])}</p><div class="database-guide-links"><a href="${prefix}/guides/animal-guide#feeding">${zh ? '喂食与饮水步骤' : 'Feed and water steps'}</a></div></div>`;
+}
+
+function renderNativeAnimalCareReference(locale) {
+  const ref = data.nativeAnimalCareReference;
+  if (!ref) return '';
+  const zh = locale === 'zh';
+  const foods = new Map(ref.foods.map(item => [item.id, item]));
+  const speciesNames = new Map(data.species.map(item => [item.id, zh ? item.zh.tocLabel : item.name]));
+  const diets = ref.diets.map(diet => {
+    const name = diet.id === 'ram'
+      ? (zh ? '公羊' : 'Ram')
+      : (zh && diet.speciesId === 'rabbit' ? '兔子' : speciesNames.get(diet.speciesId));
+    const foodNames = diet.foodIds.map(id => foods.get(id)).filter(Boolean).map(item => escapeHtml(zh ? item.zhName : item.name));
+    const waterNames = diet.waterIds.map(id => foods.get(id)).filter(Boolean).map(item => escapeHtml(zh ? item.zhName : item.name));
+    const title = zh ? `${name}饲料配置` : `${name} diet`;
+    return `<article class="native-animal-care-card" id="${escapeHtml(diet.id)}-diet" data-search-entry data-search-title="${escapeHtml(title)}" data-search-tags="${escapeHtml(`${name} diet feed food water 饲料 食物 水`)}" data-search-status="${zh ? '游戏构建配置' : 'Game-build configuration'}"><h3>${escapeHtml(title)}</h3><p><strong>${zh ? '食物：' : 'Food: '}</strong>${foodNames.join(zh ? '、' : ', ')} · <strong>${zh ? '饮水：' : 'Water: '}</strong>${waterNames.join(zh ? '、' : ', ')}</p>${diet.id === 'ram' ? `<p>${zh ? '此记录只匹配公羊定义，不能据此推定母羊食谱。' : 'This record matches the Ram definition only and does not establish the ewe diet.'}</p>` : ''}</article>`;
+  }).join('');
+  const deliverySteps = ref.delivery.steps.map(step => `<li>${escapeHtml(zh ? step.zhText : step.text)}</li>`).join('');
+  const deliveryTitle = zh ? ref.delivery.zhTitle : ref.delivery.title;
+  const boundary = zh
+    ? '这些序列化配置和教程文字说明了可选食物与预期操作路线，但配置不能证明食量、喂食频率、商店库存或产出，也不能证明售价和当前运行时可用性。'
+    : 'These serialized settings and tutorial lines identify configured food choices and an intended route, but configuration does not establish quantity, feeding frequency, shop stock or output, seller price or current runtime availability.';
+  return `<section class="evidence-ledger native-animal-care-reference" data-animal-delivery-reference aria-labelledby="native-animal-care-title"><div class="section-heading-row"><div><span class="kicker">${zh ? '游戏构建资料' : 'Game-build reference'}</span><h2 id="native-animal-care-title">${zh ? '动物食物与取货路线' : 'Animal diets and delivery route'}</h2></div><span class="tag">${escapeHtml(ref.build)}</span></div><section id="bringing-small-animals-home" data-search-entry data-search-title="${escapeHtml(deliveryTitle)}" data-search-tags="${zh ? '带小动物回家 取货区 后备箱 畜棚 鸡舍' : 'bringing small animals home delivery zone boot barn coop'}" data-search-status="${zh ? '游戏构建提示' : 'Game-build guidance'}"><h3>${escapeHtml(deliveryTitle)}</h3><ol>${deliverySteps}</ol></section><div class="native-animal-care-grid">${diets}</div><p class="database-browse-note">${boundary}</p><details class="database-reference-notes"><summary>${zh ? '资料来源' : 'Reference sources'}</summary>${renderSources(ref.sourceIds)}</details></section>`;
 }
 
 function renderBuildReference(animal, locale) {
@@ -240,7 +285,7 @@ let html = `<!DOCTYPE html>
     <nav class="nav-inner" aria-label="Main navigation">
       <a class="logo" href="/">
         <span class="logo-mark"><img src="../assets/img/logo.png" alt="" width="34" height="34"></span>
-        <span>The Ranchers Guide<small>Unofficial fan resource</small></span>
+        <span>The Ranchers Guide</span>
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
       <ul class="nav-links">
@@ -259,7 +304,7 @@ let html = `<!DOCTYPE html>
     <article class="article" style="max-width: 980px;">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Database / Animals</nav>
       <h1>The Ranchers Animal Database</h1>
-      <p class="meta">Current page baseline ${escapeHtml(data.meta.build)} · Video evidence recorded on ${escapeHtml(data.meta.videoBuild)} · Data last updated ${escapeHtml(data.meta.lastUpdated)} · Historical values are labeled</p>
+      <p class="meta">Steam live patch ${escapeHtml(data.meta.liveBuild || data.meta.build)} · Local file baseline ${escapeHtml(data.meta.build)} · Video evidence recorded on ${escapeHtml(data.meta.videoBuild)} · Data last updated ${escapeHtml(data.meta.lastUpdated)} · Historical values are labeled</p>
       <nav class="toc" aria-label="Contents">
         <div class="toctitle">Contents</div>
         <ul>
@@ -295,7 +340,7 @@ ${a.fields.map((f) => `              <li><a href="#${a.id}-${f.key}">${escapeHtm
           <li>Link the coop and fill the indoor trough with hay and water. The outdoor trough is not required for ordinary daily feeding.</li>
           <li>Install the coop-specific heater from Angela on the coop exterior wall; a household decoration heater is not a substitute.</li>
           <li>For large eggs, keep needs and satisfaction high, pet the chickens, and provide an enclosed outdoor roaming area. This improves the chance; it does not guarantee the next egg is large.</li>
-          <li>If an animal disappears, update to 0.8.10.842 or later first, then use the <a href="/guides/animal-guide">current troubleshooting checklist</a> rather than an older workaround.</li>
+          <li>If an animal disappears, update to ${escapeHtml(data.meta.liveBuild || data.meta.build)} or later first, then use the <a href="/guides/animal-guide">current troubleshooting checklist</a> rather than an older workaround.</li>
         </ol>
         <div class="notice info"><strong>Decision boundary:</strong> prices, production cycles and profit rankings for cow, goat and rabbit remain unverified in the current build. Use the profiles below as evidence-tracked records, not as a complete economy table.</div>
       </section>
@@ -303,6 +348,8 @@ ${a.fields.map((f) => `              <li><a href="#${a.id}-${f.key}">${escapeHtm
       <p>Collect discoveries privately in <a href="/tools/field-notes">Field Notes</a>, then export the versioned record when it is complete enough to verify.</p>
 
       <p class="lead">This living database combines the official roster with clearly labeled player research. Each animal has its own anchored profile below — search an individual animal, inspect its source and version context, and help replace historical values with current-build evidence.</p>
+
+${renderNativeAnimalCareReference('en')}
 
 ${speciesHtml}
 
@@ -482,6 +529,7 @@ ${renderRoster(data.confirmedRoster)}
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>
             <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
             <li><a href="/methodology">Methodology</a></li>
           </ul>
         </nav>
@@ -546,7 +594,7 @@ function renderZhEntry(entry) {
     return `${h}${items ? `<ul class="evidence-list">${items}</ul>` : ""}${pendingBlock}`;
   }).join("");
   const decision = zh.whenNeeded ? `<div class="entity-decision"><strong>什么时候查</strong><p>${escapeHtml(zh.whenNeeded)}</p></div>` : "";
-  return `    <section class="evidence-ledger animal-profile"><div id="${entry.id}" data-search-entry data-search-title="${escapeHtml(zh.searchTitle)}" data-search-text="${escapeHtml([zh.summary, zh.whenNeeded].filter(Boolean).join(' '))}" data-search-tags="${escapeHtml(zh.searchTags)}">${head}${summary}${decision}</div>${renderNativeAnimalReference(entry, 'zh')}${renderBuildReference(entry, 'zh')}${entry.buildReference ? `<details class="database-outline"><summary>更多照料证据与待验证项</summary>${groups}</details>` : groups}</section>`;
+  return `    <section class="evidence-ledger animal-profile"><div id="${entry.id}" data-search-entry data-search-title="${escapeHtml(zh.searchTitle)}" data-search-text="${escapeHtml([zh.summary, zh.whenNeeded].filter(Boolean).join(' '))}" data-search-tags="${escapeHtml(zh.searchTags)}">${head}${summary}${decision}</div>${renderNativeAnimalReference(entry, 'zh')}${renderNativeAnimalDietReference(entry, 'zh')}${renderBuildReference(entry, 'zh')}${entry.buildReference ? `<details class="database-outline"><summary>更多照料证据与待验证项</summary>${groups}</details>` : groups}</section>`;
 }
 
 function renderZhExtra(extra) {
@@ -577,9 +625,9 @@ let zhHtml = `<!DOCTYPE html>
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260902-ui2"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
-  <header class="site-header"><nav class="nav-inner" aria-label="主导航"><a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide<small>非官方中文玩家指南</small></span></a><button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button><ul class="nav-links"><li><a href="/zh/guides/beginners-guide">新手</a></li><li><a class="active" href="/zh/database">知识库</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li><li><a href="/zh/search">搜索</a></li><li><a class="nav-cta" href="/contribute">投稿</a></li></ul></nav></header>
+  <header class="site-header"><nav class="nav-inner" aria-label="主导航"><a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide</span></a><button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button><ul class="nav-links"><li><a href="/zh/guides/beginners-guide">新手</a></li><li><a class="active" href="/zh/database">知识库</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li><li><a href="/zh/search">搜索</a></li><li><a class="nav-cta" href="/contribute">投稿</a></li></ul></nav></header>
   <main><article class="article" style="max-width:980px">
-    <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / <a href="/zh/database">知识库</a> / 动物</nav><h1>The Ranchers 中文动物数据库</h1><p class="meta">页面基线 ${escapeHtml(data.meta.build)} · 视频证据录制于 ${escapeHtml(data.meta.videoBuild)} · ${escapeHtml(data.meta.lastUpdated)} 更新 · 旧版本内容单独标注</p>
+    <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / <a href="/zh/database">知识库</a> / 动物</nav><h1>The Ranchers 中文动物数据库</h1><p class="meta">Steam 当前补丁 ${escapeHtml(data.meta.liveBuild || data.meta.build)} · 本地文件基线 ${escapeHtml(data.meta.build)} · 视频证据录制于 ${escapeHtml(data.meta.videoBuild)} · ${escapeHtml(data.meta.lastUpdated)} 更新 · 旧版本内容单独标注</p>
     <div class="evidence-status"><strong>证据说明：</strong>“官方”来自开发者说明；“视频观测”来自保留版本号的画面；“多人印证”只证明多人遇到同类行为；“单一线索”不能直接当成确定机制。</div>
     <figure class="page-banner"><img src="/assets/img/db-animals.webp" width="800" height="450" alt="The Ranchers 牧场中的牛与红色谷仓"></figure>
     <section class="evidence-ledger" aria-labelledby="animal-quick-start-zh">
@@ -590,10 +638,11 @@ let zhHtml = `<!DOCTYPE html>
         <li>确认鸡舍已关联，补满室内食槽的干草和水；日常喂养不要求额外放置室外食槽。</li>
         <li>使用 Angela 出售的鸡舍专用暖气，并安装在鸡舍外墙；市政厅的住宅装饰暖气不能替代它。</li>
         <li>想提高大鸡蛋出现机会时，保持需求和满意度较高、每天抚摸，并准备封闭的室外活动区；这只是提高机会，不保证下一枚就是大鸡蛋。</li>
-        <li>如果动物消失，先把游戏更新到 0.8.10.842 或更高版本，再按<a href="/zh/guides/animal-guide">当前排障清单</a>记录问题，不要直接套用旧版本规避法。</li>
+        <li>如果动物消失，先把游戏更新到 ${escapeHtml(data.meta.liveBuild || data.meta.build)} 或更高版本，再按<a href="/zh/guides/animal-guide">当前排障清单</a>记录问题，不要直接套用旧版本规避法。</li>
       </ol>
       <div class="notice info"><strong>数据边界：</strong>牛、山羊和兔的当前购买价、生产周期与收益排名仍未验证。下面的条目是带证据状态的记录，不是完整经济表。</div>
     </section>
+${renderNativeAnimalCareReference('zh')}
     <nav class="toc" aria-label="动物目录"><strong>快速跳转：</strong><ul>${zhTocItems}</ul></nav>
 ${data.species.filter((a) => a.zh).map(renderZhEntry).join("\n")}
 ${renderWildlifeReference('zh')}

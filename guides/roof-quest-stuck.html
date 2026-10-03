@@ -25,7 +25,7 @@
     <nav class="nav-inner" aria-label="Main navigation">
       <a class="logo" href="/">
         <span class="logo-mark"><img src="../assets/img/logo.png" alt="" width="34" height="34"></span>
-        <span>The Ranchers Guide<small>Unofficial fan resource</small></span>
+        <span>The Ranchers Guide</span>
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
       <ul class="nav-links">
@@ -44,9 +44,9 @@
     <article class="article">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Guides / Roof Quest Stuck</nav>
       <h1>Roof Quest Stuck in The Ranchers? Building Quest Fixes That Work</h1>
-      <p class="meta">Updated for Early Access 0.8.10.x (August 2026) · August 7, 2026 · Reading time: ~7 min</p>
+      <p class="meta">Updated for Early Access 0.8.10.871 (September 2026) · September 27, 2026 · Reading time: ~8 min</p>
       <div class="evidence-status">
-        <strong>Evidence status:</strong> 1 officially confirmed known issue · 2 multi-player corroborated fixes · 2 single reports (labeled) · reviewed Aug 7, 2026 — <a href="/methodology">How we verify →</a>
+        <strong>Evidence status:</strong> 1 officially confirmed known issue · 2 multi-player corroborated fixes · 3 single/recent reports (labeled) · reviewed September 27, 2026 — <a href="/methodology">How we verify →</a>
       </div>
 
       <p>If your roof quest will not complete after you built the roof, you are not alone — this was one of the most-reported problems on the Steam discussion board in the first week of August 2026, with players posting about it in English, German and Russian, and some getting stuck even earlier at the first step of placing stairs (<a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364412800/" rel="noopener noreferrer">Tutorial build roof</a>, Aug 4; Whitebear, Aug 2; Campingqueen769, Aug 3).</p>
@@ -69,6 +69,7 @@
           <li><a href="#symptom-b">Symptom B: no roof, door or bed blueprint at the workbench</a></li>
           <li><a href="#symptom-c">Symptom C: cannot build a door</a></li>
           <li><a href="#symptom-d">Symptom D: hole in the middle of the roof</a></li>
+          <li><a href="#symptom-e">Symptom E: exterior-wall objective does not update</a></li>
           <li><a href="#flow">Troubleshooting flow</a></li>
           <li><a href="#faq">Roof quest FAQ</a></li>
         </ul>
@@ -99,11 +100,16 @@
       <p><span class="evidence-badge evidence-reported">Single report</span> <em>unverified</em></p>
       <p>Several players use Roof Cap Lvl 2 to fill the hole in the middle and then wonder whether that counts. One player, bucfanjoe (in <a href="https://steamcommunity.com/app/1501310/discussions/0/587307906419039915/" rel="noopener noreferrer">"Cant finish Roof quest...?"</a>, Aug 3), reports that their own build moved past the roof step even with a hole in the middle, <strong>as long as the exterior edges had a roof tile</strong> — but notes being unsure whether Lvl 2 caps count, and adds that having actual doors and windows placed in the wall cutouts may matter. Treat this as a single unverified report: if Symptom A's fixes fail, completing the wall openings and edging the roof is a reasonable next test, not a proven fix.</p>
 
+      <h2 id="symptom-e">Symptom E: exterior-wall objective does not update</h2>
+      <p><span class="evidence-badge evidence-reported">Recent player report</span> <em>Needs reproduction</em></p>
+      <p>In a September 18–26 Steam thread, a player reported building nine exterior walls plus a door and windows while the objective stayed incomplete. Staff suggested sleeping a day, reloading, or abandoning and retaking the quest; later replies indicate the tracker can remain stale even while the next quest becomes available. These are reported checks, not a guaranteed fix. <a href="https://steamcommunity.com/app/1501310/discussions/0/574927238287539891/" rel="noopener noreferrer">Open the discussion</a>.</p>
+
       <h2 id="flow">Troubleshooting flow (our consolidated checklist)</h2>
       <p>Work through these in order — each step rules out one of the symptoms above:</p>
       <ol>
         <li><strong>Can you find the blueprint at all?</strong> If no roof/door/bed plan appears at the workbench, fix the UI first: slow mouse-wheel scroll, left-mouse drag, avoid the top arrows hiding plans behind the side panel (<a href="#symptom-b">Symptom B</a>).</li>
         <li><strong>Is the building actually complete?</strong> Walls placed, wall with a door opening for the door, exterior and interior door types distinguished (<a href="#symptom-c">Symptom C</a>), roof tiles on all exterior edges (<a href="#symptom-d">Symptom D</a>).</li>
+        <li><strong>Is only the wall objective stale?</strong> Check whether the next quest is already available before rebuilding; then try sleep/reload or abandon and retake while recording the exact count (<a href="#symptom-e">Symptom E</a>).</li>
         <li><strong>Is the tracker stuck?</strong> Building done but the quest will not advance → press T and check the phone quest journal, sleep to the next day, then restart the client (<a href="#symptom-a">Symptom A</a>, officially confirmed known issue).</li>
         <li><strong>Still stuck after all three?</strong> Report it on the Steam discussion board with your build version and screenshots — the developers are actively investigating the tracker issue.</li>
       </ol>
@@ -134,7 +140,7 @@
           <strong>Niki</strong>
           <span>Site editor, The Ranchers Guide</span>
         </div>
-        <p>Research and editing by Niki, site editor. Gameplay evidence collected from public videos, official updates and community reports. Last reviewed: August 2026. Game version coverage: 0.8.10.x. <a href="/methodology">How we verify →</a></p>
+        <p>Research and editing by Niki, site editor. Gameplay evidence collected from public videos, official updates and community reports. Last reviewed: September 27, 2026. Game version coverage: 0.8.10.x. <a href="/methodology">How we verify →</a></p>
       </aside>
 </article>
   </main>
@@ -173,6 +179,7 @@
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>
             <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
             <li><a href="/methodology">Methodology</a></li>
           </ul>
         </nav>

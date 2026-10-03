@@ -25,7 +25,7 @@
     <nav class="nav-inner" aria-label="Main navigation">
       <a class="logo" href="/">
         <span class="logo-mark"><img src="../assets/img/logo.png" alt="" width="34" height="34"></span>
-        <span>The Ranchers Guide<small>Unofficial fan resource</small></span>
+        <span>The Ranchers Guide</span>
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
       <ul class="nav-links">
@@ -44,18 +44,35 @@
     <article class="article">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Guides / Multiplayer & Co-op</nav>
       <h1>The Ranchers Multiplayer & Co-op Guide: Hosting, Roles, and Shared-Ranch Discipline</h1>
-      <p class="meta">Updated for Early Access 0.8.10.842 · August 11, 2026 · Reading time: ~13 min</p>
+      <p class="meta">Updated for Early Access 0.8.10.858 · September 12, 2026 · Reading time: ~13 min</p>
       <div class="evidence-status">
-        <strong>Evidence status:</strong> 9 official co-op facts · reviewed Aug 6, 2026 — <a href="/methodology">How we verify →</a>
+        <strong>Evidence status:</strong> official co-op facts from the September 2026 developer FAQ, Steam moderator answers and the 0.8.10.858 notes · reviewed Sep 12, 2026 — <a href="/methodology">How we verify →</a>
       </div>
-      <section class="answer-box"><h2>Answer first</h2><p>Update every player to 0.8.10.842 or later, sign into Steam, and choose one deliberate session owner before spending shared resources. Once everyone is inside the same ranch, split work by complete domains—fields, livestock, building, or purchasing—instead of duplicating the same chore.</p></section>
+      <section class="answer-box"><h2>Answer first</h2><p>Update every player to 0.8.10.858 or later, sign into Steam, and choose one deliberate session owner before spending shared resources. Once everyone is inside the same ranch, split work by complete domains—fields, livestock, building, or purchasing—instead of duplicating the same chore.</p></section>
 
 
       <figure class="page-banner"><img src="../assets/img/card-coop.webp" width="800" height="450" alt="The Ranchers gameplay screenshot: players hanging out together at the town sushi bar in co-op mode"></figure>
 
       <div class="notice">
-        <strong>Launch requirement:</strong> Online co-op supports 1–4 players and requires Steam sign-in plus internet. Update every player to version 0.8.10.842 or later; launch-era hotfixes fixed some failed friend-session joins.
+        <strong>Launch requirement:</strong> Online co-op supports 1–4 players and requires Steam sign-in plus internet. Update every player to version 0.8.10.858 or later; 0.8.10.858 also improves tolerance for brief connection drops, while launch-era hotfixes fixed some failed friend-session joins. When starting or loading a save, choose <strong>PLAY SOLO</strong> for offline or handheld sleep-friendly play; choose <strong>OPEN TO FRIENDS</strong> only when guests need to join.
       </div>
+      <div class="notice" data-evidence="official-faq">
+        <strong>Official FAQ boundary (September 2026):</strong> every player owns a separate ranch and world progression. A guest can earn money and Skill Points (XP), keep collected items and blueprints, and bring those items home; quest and world progress stays with the host. The host must be online, and joining also depends on the same server region and multiplayer being unlocked through the introduction. This does not establish a shared wallet or permanent shared ranch.
+        <a href="https://steamcommunity.com/app/1501310/discussions/0/3203744999892138506/" rel="noopener noreferrer">Read the developer FAQ</a>.
+      </div>
+
+      <section class="answer-box" id="cashin-coop" data-search-entry data-search-title="Co-op CashIn payout ownership" data-search-tags="co-op CashIn payout host guest money ownership shared wallet test">
+        <h2>Co-op CashIn: who gets paid?</h2>
+        <p><strong>Short answer:</strong> the current FAQ does not specify who receives a CashIn settlement when a guest deposits an item in the host's world. It only says that guests keep their own money, Skill Points, collected items and blueprints; do not treat that as proof of CashIn ownership.</p>
+        <p>Use this low-risk check before selling a valuable harvest:</p>
+        <ol>
+          <li>Have the host and guest record their wallet balances, who owns the test item, and which player will place it in the CashIn chest.</li>
+          <li>Use one disposable, low-value item. Do not use a full crop shipment or spend shared funds on the test.</li>
+          <li>Let the host advance to the next settlement screen/day rollover allowed by the save, then compare both wallets and the Farming line.</li>
+          <li>Repeat with the other player placing the item if the result is unclear. Record the build, host, item owner, depositor and before/after balances.</li>
+        </ol>
+        <p>Until that result is reproduced on the current build, keep the quartermaster and the host's budget separate from guest earnings. Send a screenshot and the exact steps through the <a href="/contact">corrections page</a> if you want the result added to the public record. The documented CashIn controls and next-day timing are in the <a href="/guides/money-making#cashin">money-making guide</a>.</p>
+      </section>
 
       <nav class="toc" aria-label="Table of contents">
         <strong>In this guide</strong>
@@ -74,7 +91,7 @@
 
       <h3>Before anyone hosts</h3>
       <ol>
-        <li><strong>Update together.</strong> Confirm every player is on 0.8.10.842 or later before diagnosing invitations.</li>
+        <li><strong>Update together.</strong> Confirm every player is on 0.8.10.858 or later before diagnosing invitations.</li>
         <li><strong>Sign into Steam.</strong> Offline solo works, but co-op and other online features require an active Steam connection.</li>
         <li><strong>Pick a session owner deliberately.</strong> Save ownership and transfer behavior should be tested in your build before the group commits to a long shared world.</li>
         <li><strong>Decide the ranch's identity first.</strong> Crop-focused? Animal-heavy? A builder's paradise? Five minutes of alignment before the world is created saves a week of pulling in different directions.</li>
@@ -87,7 +104,7 @@
         <li>Confirm all players enter the same ranch before spending shared resources or advancing quests.</li>
         <li>Run one save-and-rejoin test early to learn how the current build preserves guest and world progress.</li>
       </ol>
-      <p>Do not publish assumptions about save ownership, guest inventory, or wallet sharing as facts. Test each behavior in the current build and keep the session owner consistent until the result is clear.</p>
+      <p>Do not publish a shared-wallet or permanent shared-ranch assumption: the official FAQ says the guest keeps their own money, XP, collected items and blueprints, while world and quest progress remain attached to the host. Keep the session owner consistent and test anything the FAQ does not specify.</p>
 
       <h2 id="roles">Role splits for 1–4 players</h2>
       <p>The number one co-op failure mode in farming games isn't conflict — it's <em>duplication</em>: two players watering the same field while the animals go unfed. The fix is <strong>zones of ownership</strong>. Each player owns a domain end-to-end; within an in-game week, nobody touches someone else's domain without asking.</p>
@@ -105,7 +122,7 @@
       <ul>
         <li><strong>Fields lead:</strong> the entire crop pipeline.</li>
         <li><strong>Barn lead:</strong> all livestock — feeding, collecting, care, housing repairs, feed stockpiling.</li>
-        <li><strong>Road lead:</strong> selling, buying, quests, fishing and other active work for filler income, scouting prices.</li>
+        <li><strong>Road lead:</strong> selling, buying, quests and other currently available active work for filler income and price scouting. Fishing is not included: the official moderator answer says it was not yet available in the reviewed Early Access build.</li>
       </ul>
 
       <h3>Full crew (4 players)</h3>
@@ -134,7 +151,7 @@
 
       <h2 id="rules">Shared-resource rules that prevent co-op chaos</h2>
       <ol>
-        <li><strong>One wallet, one spender.</strong> Whether all sales revenue lands in one shared wallet still needs verification in the current build — test it early in your session. Either way, only the quartermaster makes purchases above an agreed threshold. Duplicate machine purchases are the classic co-op money bonfire.</li>
+        <li><strong>One budget, one spender.</strong> The official FAQ describes guest earnings and carried items, not a shared wallet. Treat the host's world budget as the spending record and let the quartermaster approve purchases above an agreed threshold. Duplicate machine purchases are the classic co-op money bonfire.</li>
         <li><strong>Chests have purposes, not owners.</strong> Label storage by function — seeds, harvest-to-sell, building materials, animal feed — and everyone returns items to their labeled home. Twenty seconds of discipline, zero lost items.</li>
         <li><strong>Never harvest someone else's ready crop without a word</strong> — not out of greed, but because the fields lead may be timing a sale or a quest turn-in.</li>
         <li><strong>Feed stock is sacred.</strong> The barn lead sets a minimum feed reserve; dipping below it is a crew-level emergency announced immediately.</li>
@@ -145,8 +162,9 @@
       <h2 id="troubleshooting">Troubleshooting: lag, saves, permissions</h2>
       <p>Use this order before changing saves, reinstalling, or abandoning a world:</p>
       <ul>
-        <li><strong>Version:</strong> every player must update to 0.8.10.842 or later.</li>
+        <li><strong>Version:</strong> every player must update to 0.8.10.858 or later.</li>
         <li><strong>Steam status:</strong> every player must be signed in and online; Offline Mode supports solo, not co-op.</li>
+        <li><strong>FAQ gates:</strong> use the same server region and finish the introductory multiplayer unlock before treating a missing join option as a bug.</li>
         <li><strong>Invitation:</strong> close the failed invitation, reopen the session, and send a fresh Steam friend invite.</li>
         <li><strong>World check:</strong> confirm the intended ranch was loaded before deciding progress is missing.</li>
         <li><strong>Bug report:</strong> capture the build, session size, host steps, guest steps, and error screen for the official Steam Bug Reports forum.</li>
@@ -158,19 +176,23 @@
       <h2 id="faq">Co-op FAQ</h2>
       <details class="faq-item">
         <summary>How many players does The Ranchers support?</summary>
-        <div class="faq-body"><p>1–4 players online, including the host, on one shared ranch. Solo play is fully supported — co-op is a multiplier, not a requirement.</p></div>
+        <div class="faq-body"><p>1–4 players online, including the host, in one host world at a time. Each player still owns a separate ranch and save. Solo play is fully supported — co-op is a multiplier, not a requirement.</p></div>
       </details>
       <details class="faq-item">
         <summary>Who should host our co-op world?</summary>
-        <div class="faq-body"><p>Choose one consistent session owner while your group tests save and guest-progress behavior. The official launch notes do not document save transfer, so do not assume the world is portable.</p></div>
+        <div class="faq-body"><p>Choose one consistent session owner: the official FAQ says each player keeps a separate ranch, while the host owns the world and quest progress. Do not assume a visited world can be transferred or permanently shared.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Can a guest use the ranch like the host?</summary>
+        <div class="faq-body"><p>Guests can perform the same ranch activities as the host while the host is online. The developer FAQ adds that guest money and Skill Points (XP) reward the guest, and collected items and blueprints can be taken back to the guest's own ranch; world and quest progress stays with the host. <a href="https://steamcommunity.com/app/1501310/discussions/0/3203744999892138506/" rel="noopener noreferrer">Official FAQ</a> · <a href="https://steamcommunity.com/app/1501310/discussions/0/586181625695443847/" rel="noopener noreferrer">Moderator answer</a>.</p></div>
       </details>
       <details class="faq-item">
         <summary>Do joining players keep their own ranch?</summary>
-        <div class="faq-body"><p>The official material reviewed here does not define guest inventory or ranch-import behavior. Test with a short session and rejoin before committing a long-running group save.</p></div>
+        <div class="faq-body"><p>Yes. The official FAQ says each player owns a separate ranch; guests keep their own money and XP and can carry collected items and blueprints home. World and quest progress remains with the host, so test only the details the FAQ does not specify before committing to a long session.</p></div>
       </details>
       <details class="faq-item">
         <summary>How do we split work between 4 players?</summary>
-        <div class="faq-body"><p>Zones of ownership: a fields lead, a barn lead, a builder, and a quartermaster who tracks the crew's spending (whether the wallet is literally shared is still unverified in the current build). See the timetables above — and converge everyone on tomorrow's bottleneck each evening.</p></div>
+        <div class="faq-body"><p>Zones of ownership: a fields lead, a barn lead, a builder, and a quartermaster who tracks the host world's spending. The guest keeps their own money, XP, collected items and blueprints; the FAQ does not say that wallets are shared. See the timetables above — and converge everyone on tomorrow's bottleneck each evening.</p></div>
       </details>
       <details class="faq-item">
         <summary>Is there crossplay between PC and console?</summary>
@@ -195,8 +217,10 @@
 
       <h2>Official sources</h2>
       <ul>
-        <li><a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">Official Steam news</a> — launch hotfix 0.8.10.455 and multiplayer-ready quest notes.</li>
+        <li><a href="https://steamcommunity.com/app/1501310/allnews/" rel="noopener noreferrer">Official Steam news</a> — current 0.8.10.858 connection/building changes plus the earlier 0.8.10.455 join hotfix.</li>
         <li><a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">Official Steam store page</a> — 1–4 player online co-op and platform features.</li>
+        <li><a href="https://steamcommunity.com/app/1501310/discussions/0/3203744999892138506/" rel="noopener noreferrer">Official Early Access FAQ (September 2026)</a> — separate ranch/world progress, guest rewards, and items/blueprints carried home.</li>
+        <li><a href="https://steamcommunity.com/app/1501310/discussions/0/586181625695443847/" rel="noopener noreferrer">Official moderator answer</a> — guests can use the same ranch activities as the host; the host must be online.</li>
       </ul>
 
 
@@ -247,6 +271,7 @@
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>
             <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
             <li><a href="/methodology">Methodology</a></li>
           </ul>
         </nav>

@@ -90,4 +90,15 @@ for (const locale of ['en', 'zh']) {
   }
 }
 
+const chickenProducts = data.species.find(entry => entry.id === 'chicken').fields.find(field => field.key === 'products').facts.map(fact => fact.text).join(' ');
+const englishAnimalHtml = fs.readFileSync(path.join(root, 'database/animals.html'), 'utf8');
+const chineseAnimalHtml = fs.readFileSync(path.join(root, 'zh/database/animals.html'), 'utf8');
+assert.doesNotMatch(chickenProducts, /confirming the meat path for culled chickens/i, 'shop-shelf observation must not be written as a slaughter conclusion');
+assert.match(englishAnimalHtml, /Chicken Breast and Chicken Leg appear as current-build shop shelf items\.[\s\S]*does not by itself prove a slaughter action/, 'English chicken page must preserve the shelf-only boundary');
+assert.match(chineseAnimalHtml, /Chicken Breast 和 Chicken Leg，只能确认录像中存在这些商品；不能单独证明处理鸡只的操作/, 'Chinese chicken page must preserve the shelf-only boundary');
+assert.match(englishAnimalHtml, /id="cow-diet-config"[^>]*data-search-entry[\s\S]*Configured food[^<]*<\/dt><dd>Hay/, 'English cow profile must expose configured food');
+assert.match(chineseAnimalHtml, /id="cow-diet-config"[^>]*data-search-entry[\s\S]*配置食物<\/dt><dd>干草/, 'Chinese cow profile must expose configured food');
+assert.match(englishAnimalHtml, /id="sheep-diet-config"[^>]*data-search-entry[\s\S]*Ram definition only[\s\S]*not a current-save gameplay test/, 'English sheep profile must preserve the Ram-only and not-tested boundary');
+assert.match(chineseAnimalHtml, /id="sheep-diet-config"[^>]*data-search-entry[\s\S]*只匹配公绵羊（Ram）定义[\s\S]*不是当前存档实测/, 'Chinese sheep profile must preserve the Ram-only and not-tested boundary');
+
 console.log('PASS: current-build animal diets and small-animal delivery route are source-bounded and visible in both locales.');

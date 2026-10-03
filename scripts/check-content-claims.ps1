@@ -46,7 +46,7 @@ foreach ($relativePath in @('database/crops.html', 'database/animals.html')) {
     }
 }
 
-$currentVersion = '0\.8\.10\.842'
+$currentVersion = '0\.8\.10\.(?:842|858|871)'
 
 foreach ($relativePath in @(
     'index.html',

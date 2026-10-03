@@ -13,8 +13,8 @@ const privateToolRoutes = new Set([
   "/zh/tools/update-impact-tracker",
 ]);
 
-assert.equal(data.meta.currentBuild, "0.8.10.842");
-assert.equal(data.updates.length, 4);
+assert.equal(data.meta.currentBuild, "0.8.10.858");
+assert.equal(data.updates.length, 5);
 assert.ok(data.updates.every((update) => update.id && update.version && update.title && update.summary));
 assert.ok(data.updates.every((update) => update.changes.length > 0 && update.actions.length > 0));
 assert.ok(data.updates.every((update) => update.source && update.source.url));

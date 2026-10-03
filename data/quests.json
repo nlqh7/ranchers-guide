@@ -1,6 +1,7 @@
 {
   "meta": {
     "build": "0.8.10.842",
+    "liveBuild": "0.8.10.858",
     "lastUpdated": "2026-08-31"
   },
   "sources": {
@@ -46,6 +47,14 @@
       "url": null,
       "author": "Multiple players",
       "date": "2026-08-08",
+      "build": "0.8.10.x"
+    },
+    "windows-objective-thread": {
+      "kind": "steam-thread",
+      "title": "Steam thread: window objective counts the window object",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/590686595450993737/",
+      "author": "Jennoula · official moderator reply",
+      "date": "2026-08-12",
       "build": "0.8.10.x"
     },
     "gigi-quest-thread": {
@@ -1404,7 +1413,11 @@
       "category": "transport",
       "zhCategory": "交通",
       "nameConfidence": "exact-observed",
-      "searchTags": "rust rumbling victor old car 3000 bykii vehicle quest",
+      "searchTags": "rust rumbling victor victor's old car 3000 bykii vehicle quest",
+      "searchAliases": [
+        "Victor's Old Car",
+        "维克多老爷车"
+      ],
       "zhSearchTags": "Rust to Rumbling Victor 旧车 3000 Bykii 汽车 任务",
       "summary": "A current-build four-objective vehicle quest observed in the tracker on Day 5.",
       "zhSummary": "当前版本第 5 天任务追踪器中观测到的四目标车辆任务。",
@@ -1761,16 +1774,26 @@
             "roof-official-thread"
           ]
         },
-        {
-          "text": "Separate community cases involve hidden workbench rows, missing door/window placement or a Roof Cap opening; use the decision guide instead of treating every symptom as the tracker bug.",
-          "zhText": "另一些社区案例来自工作台列表未滚动、门窗未放置或 Roof Cap 中央开口；应使用分类流程，而不是把所有症状都当成追踪器故障。",
-          "evidenceLevel": "community-confirmed",
-          "build": "0.8.10.x",
-          "validity": "current",
-          "sourceIds": [
-            "roof-community-scan"
-          ]
-        }
+      {
+        "text": "Separate community cases involve hidden workbench rows, missing door/window placement or a Roof Cap opening; use the decision guide instead of treating every symptom as the tracker bug.",
+        "zhText": "另一些社区案例来自工作台列表未滚动、门窗未放置或 Roof Cap 中央开口；应使用分类流程，而不是把所有症状都当成追踪器故障。",
+        "evidenceLevel": "community-confirmed",
+        "build": "0.8.10.x",
+        "validity": "current",
+        "sourceIds": [
+          "roof-community-scan"
+        ]
+      },
+      {
+        "text": "The official troubleshooting reply distinguishes a window-wall section from the separate window object: the objective counts the installed windows themselves, not only walls that contain a window opening.",
+        "zhText": "官方排查答复区分了窗墙和独立窗户：任务统计的是实际安装的窗户本体，只有带窗开口的墙体不能代替窗户。",
+        "evidenceLevel": "official",
+        "build": "0.8.10.x",
+        "validity": "current",
+        "sourceIds": [
+          "windows-objective-thread"
+        ]
+      }
       ],
       "relations": [],
       "buildGuide": {

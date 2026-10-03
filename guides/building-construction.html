@@ -26,7 +26,7 @@
     <nav class="nav-inner" aria-label="Main navigation">
       <a class="logo" href="/">
         <span class="logo-mark"><img src="../assets/img/logo.png" alt="" width="34" height="34"></span>
-        <span>The Ranchers Guide<small>Unofficial fan resource</small></span>
+        <span>The Ranchers Guide</span>
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
       <ul class="nav-links">
@@ -46,6 +46,9 @@
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Guides / Building & Placement</nav>
       <h1>Building materials & placement</h1>
 <p class="building-lead">Look up materials by building. Follow an ingredient for supply information, or continue below for placement help.</p>
+<div class="notice hotfix-notice" data-hotfix="0.8.10.858"><strong>Current building boundary — live patch 0.8.10.858 (September 8, 2026).</strong> The official update fixes several blueprint-placement cases, improves roof snapping and floor visibility, and allows foundations (including garage foundations) to be built over rivers — so bridges are now possible. This confirms the feature boundary, not a recipe, bridge location or universal placement rule. <a href="https://steamcommunity.com/app/1501310/announcements/detail/1842846814456746" rel="noopener noreferrer">Read the official update</a>.</div>
+<div class="notice" data-hotfix="0.8.10.871"><strong>New in 0.8.10.871:</strong> the first roof placement now opens a “How to Build Roofs” tutorial that explains support requirements and placement constraints. It improves onboarding, but it does not prove that every roof or quest-tracker case is fixed. <a href="https://steamcommunity.com/app/1501310/announcements/" rel="noopener noreferrer">Read the official announcements</a>.</div>
+<section class="answer-box" id="floor-visibility-current"><h2>Current-floor controls that are actually confirmed</h2><p>The 0.8.10.858 notes describe a floor-visibility UI and automatic visibility changes. When building, use the current-floor indicator to switch which level is shown; equipping a roof or ceiling piece selects the appropriate floor automatically, and leaving Building Mode restores visibility for the floor you are standing on. This is a camera/occlusion aid, not a promise that every placement collision is fixed.</p></section>
 <h2 class="visually-hidden" id="building-materials">Building materials</h2>
 <!-- BEGIN SHOP REFERENCE -->
 <section class="crafting-reference shop-reference" aria-label="Building-store material requirements">
@@ -156,7 +159,7 @@
 <tr id="building-deluxe-barn"><th scope="row">Deluxe Barn</th><td><ul class="building-ingredients"><li data-ingredient="wood-log" data-quantity="70"><a href="/database/materials#wood-log"><span>Wood</span><strong>× 70</strong></a></li><li data-ingredient="stone" data-quantity="50"><a href="/database/materials#stone"><span>Rock</span><strong>× 50</strong></a></li><li data-ingredient="hay" data-quantity="15"><a href="/database/materials#hay"><img src="/assets/img/items/ressource_straw-b24847725.png" alt="" width="28" height="28" decoding="async"><span>Hay</span><strong>× 15</strong></a></li></ul></td></tr></tbody>
     </table>
   </div>
-  <details class="building-sources"><summary>Recipe sources and older names</summary><p>Current official version: 0.8.10.842. Footage: July 30, 2026 Early Access build (launch/video baseline <strong>0.8.10.455</strong>); it does not establish current recipes.</p><p>Alpha entries use Wood / Rock. These original names are retained; links to present material entries do not establish current recipe validity.</p><ul><li>Games Station gameplay footage at 71:40 · 0.8.10.455</li><li><a href="https://wiki.ranchers.game/Buildings/WaterTower" rel="noopener noreferrer">Official Wiki: Water Tower</a> · alpha-2023</li><li><a href="https://wiki.ranchers.game/Buildings/Silo" rel="noopener noreferrer">Official Wiki: Silo</a> · alpha-2023</li><li><a href="https://wiki.ranchers.game/Ranching/Coop" rel="noopener noreferrer">Official Wiki: Coop</a> · alpha-2023</li><li><a href="https://wiki.ranchers.game/Ranching/Barn" rel="noopener noreferrer">Official Wiki: Barn</a> · alpha-2023</li></ul></details>
+  <details class="building-sources"><summary>Recipe sources and older names</summary><p>Current official version: 0.8.10.858. Footage: July 30, 2026 Early Access build (launch/video baseline <strong>0.8.10.455</strong>); it does not establish current recipes.</p><p>Official Wiki audit on September 12, 2026: the Coop, Barn, Silo and Water Tower pages still expose capacity, trough, build-step, energy or grid-coverage fields, but no single Early Access build boundary; these fields remain recheck leads and do not override current-build data.</p><p>Alpha entries use Wood / Rock. These original names are retained; links to present material entries do not establish current recipe validity.</p><ul><li>Games Station gameplay footage at 71:40 · 0.8.10.455</li><li><a href="https://wiki.ranchers.game/Buildings/WaterTower" rel="noopener noreferrer">Official Wiki: Water Tower</a> · alpha-2023</li><li><a href="https://wiki.ranchers.game/Buildings/Silo" rel="noopener noreferrer">Official Wiki: Silo</a> · alpha-2023</li><li><a href="https://wiki.ranchers.game/Ranching/Coop" rel="noopener noreferrer">Official Wiki: Coop</a> · alpha-2023</li><li><a href="https://wiki.ranchers.game/Ranching/Barn" rel="noopener noreferrer">Official Wiki: Barn</a> · alpha-2023</li></ul></details>
 </div>
 <!-- END BUILDING REQUIREMENTS -->
 </details>
@@ -175,6 +178,7 @@
           <li><a href="#placement-reports">Placement reports that still need a test</a></li>
           <li><a href="#test-protocol">What to record before placing</a></li>
           <li><a href="#faq">Building FAQ</a></li>
+          <li><a href="#blueprint-building">Blueprint building steps</a></li>
         </ul>
       </nav>
 
@@ -184,6 +188,7 @@
       <p>Broader ranch construction is also confirmed in the official feature overview: house construction, animal facilities, fences, sprinklers, greenhouses and utility systems are all named as buildable ranch infrastructure.</p>
       <p><strong>What is not confirmed:</strong> whether placement uses a grid, which specific part satisfies each objective, and how the parts system behaves when an objective fails. None of that is published in the official material we can cite, so this guide keeps it as <em>TBD pending a versioned in-game observation</em>.</p>
       <p><span class="evidence-badge evidence-official">Official</span> <strong>Accidental demolition refunds half the materials.</strong> The pre-EA Ranching v2 update notes state that all crafted buildings give <strong>50% of their resources back when destroyed accidentally</strong> — a quality-of-life safety net, not a free redesign: you still lose the other half, so demolish deliberately. This is <strong>pre-EA official documentation</strong>; the exact refund behavior has not yet been independently rechecked in the current EA build.</p>
+      <p class="data-conflict"><span class="evidence-badge evidence-reported">Reported / staff explanation</span> A September 18–26 Steam thread reports that removing a roof carrying a solar panel destroyed the house, garage and stored resources; staff explained that attached electrical equipment can explode when its supporting object is destroyed. Treat this as a demolition-risk warning, not a complete official rule. <a href="https://steamcommunity.com/app/1501310/discussions/0/574927238287540371/" rel="noopener noreferrer">Open the report</a>.</p>
 
       <h2 id="workbench-menu">Workbench crafting menu (video-observed)</h2>
       <p>The workbench crafting menu was read on screen in launch-build footage (Games Station, V0.8.10.455) <span class="evidence-badge evidence-video">Video-observed</span> <span title="Observed in Games Station gameplay footage (V0.8.10.455) at 70:50–71:40">at 70:50–71:40</span>. The menu is organized into four tabs: <strong>Others / Farming / Shelters / Furniture</strong>. Recipes visible on screen:</p>
@@ -203,10 +208,11 @@
 
       <p><span class="evidence-badge evidence-official">Official</span> Bulk crafting is supported both at workbenches and in the Craft App, per the official community-update notes (pre-EA); recheck against the current EA build.</p>
 
-      <section id="find-windows" data-search-entry data-search-title="Where to find the Window blueprint" data-search-tags="window windows workbench red blinds horizontal scroll house blueprint" data-search-status="Official answer">
+      <section id="find-windows" data-search-entry data-search-title="Where to find the Window or Door blueprint" data-search-tags="window windows door workbench red blinds horizontal scroll arrow keys house blueprint" data-search-status="Official answer + player navigation tip">
         <h3>Can't find windows? Scroll across the workbench</h3>
         <p><span class="evidence-badge evidence-official">Official moderator answer · August 15, 2026</span> Open the workbench and scroll horizontally across its blueprint list. The window entry can be recognized by its red blinds. This resolves where to look when the visible first group does not show a window.</p>
-        <p>The source confirms discovery of the listing only. It does not confirm its unlock timing, quest recognition, or placement behavior. For the source-matched current-build materials, open the <a href="#recipe-House_Window_01">Window recipe: 2 Stone and 3 Wood Logs</a>.</p>
+        <p>A separate player thread reports the same discovery pattern for doors: use the workbench arrows or drag the horizontal pages; the left panel can cover entries even when the blueprint is present. This is a navigation tip, not an unlock rule. <a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364406835/" rel="noopener noreferrer">Read the door-menu report</a>.</p>
+        <p>These sources confirm discovery of the listing only. They do not confirm its unlock timing, quest recognition, or placement behavior. For the source-matched current-build materials, open the <a href="#recipe-House_Window_01">Window recipe: 2 Stone and 3 Wood Logs</a>.</p>
       </section>
 
       <h2 id="materials">Materials: Stone, Wood, Hay, Charcoal and Zirconite</h2>
@@ -288,7 +294,7 @@
       </details>
       <details class="faq-item">
         <summary>Is construction in the launch build?</summary>
-        <div class="faq-body"><p>Yes — building and ranch infrastructure are confirmed systems in Early Access 0.8.10.842, not roadmap features.</p></div>
+        <div class="faq-body"><p>Yes — building and ranch infrastructure are confirmed systems in Early Access 0.8.10.858, not roadmap features.</p></div>
       </details>
 
       <h2>Sources</h2>
@@ -318,6 +324,19 @@
         </div>
         <p>Research and editing by Niki, site editor. Gameplay evidence collected from public videos, official updates and community reports. Last reviewed: August 2026. Game version coverage: 0.8.10.x. <a href="/methodology">How we verify →</a></p>
       </aside>
+<!-- BEGIN BLUEPRINT TUTORIAL REFERENCE -->
+<section class="answer-box tutorial-reference" id="blueprint-building" aria-labelledby="blueprint-building-title" data-search-entry data-search-title="Blueprint building: place, build and edit" data-search-tags="how to build blueprint place move rotate confirm hammer aim controller hold selection repeat build edit demolish energy build steps hammer quality" data-search-status="Game-build guidance">
+  <h2 id="blueprint-building-title">Blueprint building: place, build and edit</h2>
+  <p><strong>Short answer: </strong>Position and rotate the blueprint, confirm placement, then equip the hammer and press the build control until every step is complete. Use the hammer edit control on a built piece for options such as demolish.</p>
+  <ol>
+    <li><strong>Place the blueprint:</strong> Move the build cursor to the location you want, adjust its position and rotation, then confirm placement.</li>
+    <li><strong>Equip the hammer and aim:</strong> Equip the hammer and aim at the placed blueprint. With controller controls, hold the selection button while aiming.</li>
+    <li><strong>Complete every build step:</strong> Press the build control repeatedly until all of the blueprint steps are complete.</li>
+    <li><strong>Edit a built piece:</strong> Aim at the completed piece and use the hammer edit control to open options such as demolish. Building and editing consume energy; the number of steps and hammer quality affect energy use and build speed.</li>
+  </ol>
+  <p class="recipe-boundary"><span class="evidence-badge evidence-build">Game files</span> The source does not provide an exact energy cost, build-step count for each object, material requirements, key bindings, the complete edit-option list, a demolition refund, or current unlock and availability rules. Checked against 0.8.10.842.</p>
+</section>
+<!-- END BLUEPRINT TUTORIAL REFERENCE -->
 </article>
   </main>
 
@@ -357,6 +376,7 @@
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>
             <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
             <li><a href="/methodology">Methodology</a></li>
           </ul>
         </nav>

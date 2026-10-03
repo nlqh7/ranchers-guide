@@ -1,12 +1,13 @@
 {
-  "meta": { "build": "0.8.10.842", "lastUpdated": "2026-08-22" },
+  "meta": { "build": "0.8.10.858", "lastUpdated": "2026-09-12" },
   "sources": {
     "launch-video": { "kind": "local-video", "title": "Games Station current-build gameplay archive", "url": null, "author": "Games Station", "date": "2026-08-07", "build": "0.8.10.455" },
     "chicken-coop-thread": { "kind": "steam-thread", "title": "Steam thread: Chicken coop mission", "url": "https://steamcommunity.com/app/1501310/discussions/0/587307906418973975/", "author": "DJM / Yakiwi", "date": "2026-08-02", "build": "0.8.10.x" },
     "animal-support-scan": { "kind": "local-archive", "title": "August 2026 animal support answers and community scan", "url": null, "author": "Jennoula / players", "date": "2026-08-08", "build": "0.8.10.x" },
     "gigi-quest-thread": { "kind": "steam-thread", "title": "Steam thread: Real Eggs, Real Evidence quest route", "url": "https://steamcommunity.com/app/1501310/discussions/0/587308167364362187/", "author": "DJM / players", "date": "2026-08-04", "build": "0.8.10.x" },
     "gigi-end-thread": { "kind": "steam-thread", "title": "Steam threads: current quest line after Gigi", "url": "https://steamcommunity.com/app/1501310/discussions/0/587307627624791770/", "author": "Multiple players", "date": "2026-08-01", "build": "0.8.10.x" },
-    "gigi-official-end-thread": { "kind": "steam-thread", "title": "Steam thread: official reply on the current main quest endpoint", "url": "https://steamcommunity.com/app/1501310/discussions/0/590686908802417907/", "author": "Official moderator reply", "date": "2026-08-17", "build": null }
+    "gigi-official-end-thread": { "kind": "steam-thread", "title": "Steam thread: official reply on the current main quest endpoint", "url": "https://steamcommunity.com/app/1501310/discussions/0/590686908802417907/", "author": "Official moderator reply", "date": "2026-08-17", "build": null },
+    "romance-system-thread": { "kind": "steam-thread", "title": "Steam thread: current relationship and gifting answer", "url": "https://steamcommunity.com/app/1501310/discussions/0/590687864233361730/", "author": "Jennoula, official moderator", "date": "2026-08-28", "build": "0.8.10.x" }
   },
   "npcs": [
     {

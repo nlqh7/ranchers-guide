@@ -118,8 +118,8 @@ ${parts.join("\n")}`;
           </div>
           <span class="tag">Updated ${escapeHtml(entry.lastUpdated)}</span>
         </div>
-        <p class="lead">${escapeHtml(entry.summary)}</p>
 ${renderCropFacts(data, entry.id, 'en')}
+        <p class="lead">${escapeHtml(entry.summary)}</p>
 ${entry.decision ? `        <div class="entity-decision"><strong>When to use this entry</strong><p>${escapeHtml(entry.decision)}</p><div class="button-stack"><a class="btn btn-outline btn-compact" href="/guides/farming-fields">Farming guide</a><a class="btn btn-outline btn-compact" href="/guides/money-making#cashin">CashIn selling</a>${entry.videoRow ? '<a class="btn btn-outline btn-compact" href="/map#leafy-market">Leafy Market</a>' : ""}</div></div>` : ""}
 ${fields}
       </section>`;
@@ -246,7 +246,7 @@ let html = `<!DOCTYPE html>
     <nav class="nav-inner" aria-label="Main navigation">
       <a class="logo" href="/">
         <span class="logo-mark"><img src="../assets/img/logo.png" alt="" width="34" height="34"></span>
-        <span>The Ranchers Guide<small>Unofficial fan resource</small></span>
+        <span>The Ranchers Guide</span>
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
       <ul class="nav-links">
@@ -265,7 +265,7 @@ let html = `<!DOCTYPE html>
     <article class="article" style="max-width: 980px;">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Database / Crops</nav>
       <h1>The Ranchers Crop Database</h1>
-      <p class="meta">Current page baseline ${escapeHtml(data.meta.build)} · Video evidence recorded on ${escapeHtml(data.meta.videoBuild)} · Data last updated ${escapeHtml(data.meta.lastUpdated)} · Historical values are labeled</p>
+      <p class="meta">Steam live patch ${escapeHtml(data.meta.liveBuild || data.meta.build)} · Local file baseline ${escapeHtml(data.meta.build)} · Video evidence recorded on ${escapeHtml(data.meta.videoBuild)} · Data last updated ${escapeHtml(data.meta.lastUpdated)} · Historical values are labeled</p>
       <div class="evidence-status">
         <strong>Evidence status:</strong> ${data.buildRoster.entries.length} current-build crop profiles · ${confirmedCount} confirmed systems · ${videoCount} video-observed shop values · ${historicalCount} historical leads · ${pendingCount} pending rows · every fact carries its own evidence label — <a href="/methodology">How we verify →</a>
       </div>
@@ -480,6 +480,7 @@ ${renderRoster(data.confirmedSystems)}
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>
             <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
             <li><a href="/methodology">Methodology</a></li>
           </ul>
         </nav>
@@ -535,7 +536,7 @@ function renderZhEntry(entry) {
   const decision = zh.decision ? `<div class="entity-decision"><strong>什么时候查</strong><p>${escapeHtml(zh.decision)}</p><div class="button-stack"><a class="btn btn-outline btn-compact" href="/zh/guides/farming-fields">种地实战攻略</a><a class="btn btn-outline btn-compact" href="/zh/guides/money-making#cashin">CashIn 出售</a>${entry.videoRow ? '<a class="btn btn-outline btn-compact" href="/zh/map#leafy-market">Leafy Market</a>' : ""}</div></div>` : "";
   if (entry.buildInput) return renderFertilizerProfile(entry, 'zh', groups);
   const seedAliases = cropSearchAliases(entry.id);
-  return `    <section class="evidence-ledger animal-profile" id="${entry.id}" data-search-entry data-search-title="${escapeHtml(zh.searchTitle)}"${seedAliases} data-search-tags="${escapeHtml(zh.searchTags)}">${head}${summary}${renderCropFacts(data, entry.id, 'zh')}${decision}${groups}</section>`;
+  return `    <section class="evidence-ledger animal-profile" id="${entry.id}" data-search-entry data-search-title="${escapeHtml(zh.searchTitle)}"${seedAliases} data-search-tags="${escapeHtml(zh.searchTags)}">${head}${renderCropFacts(data, entry.id, 'zh')}${summary}${decision}${groups}</section>`;
 }
 
 function renderZhExtraSection(s) {
@@ -575,9 +576,9 @@ let zhHtml = `<!DOCTYPE html>
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20260902-ui2"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
-  <header class="site-header"><nav class="nav-inner" aria-label="主导航"><a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide<small>非官方中文玩家指南</small></span></a><button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button><ul class="nav-links"><li><a href="/zh/guides/beginners-guide">新手</a></li><li><a class="active" href="/zh/database">知识库</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li><li><a href="/zh/search">搜索</a></li><li><a class="nav-cta" href="/contribute">投稿</a></li></ul></nav></header>
+  <header class="site-header"><nav class="nav-inner" aria-label="主导航"><a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide</span></a><button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button><ul class="nav-links"><li><a href="/zh/guides/beginners-guide">新手</a></li><li><a class="active" href="/zh/database">知识库</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li><li><a href="/zh/search">搜索</a></li><li><a class="nav-cta" href="/contribute">投稿</a></li></ul></nav></header>
   <main><article class="article" style="max-width:980px">
-    <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / <a href="/zh/database">知识库</a> / 作物</nav><h1>The Ranchers 中文作物数据库</h1><p class="meta">页面基线 ${escapeHtml(data.meta.build)} · 视频证据录制于 ${escapeHtml(data.meta.videoBuild)} · ${escapeHtml(data.meta.lastUpdated)} 更新 · 玩家单颗出售价仍未知</p>
+    <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / <a href="/zh/database">知识库</a> / 作物</nav><h1>The Ranchers 中文作物数据库</h1><p class="meta">Steam 当前补丁 ${escapeHtml(data.meta.liveBuild || data.meta.build)} · 本地文件基线 ${escapeHtml(data.meta.build)} · 视频证据录制于 ${escapeHtml(data.meta.videoBuild)} · ${escapeHtml(data.meta.lastUpdated)} 更新 · 玩家单颗出售价仍未知</p>
     <div class="evidence-status"><strong>口径：</strong>${data.buildRoster.entries.length} 个当前构建作物配置来自本地构建数据；48C、144C 等是视频中看到的种子购买价；31C 是大蒜成品的商店零售价；它们都不能直接当作玩家出售收入。</div>
     <figure class="page-banner"><img src="/assets/img/db-crops.webp" width="800" height="450" alt="The Ranchers 温室和整齐的菜地"></figure>
 ${renderBuildRoster("zh")}

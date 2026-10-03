@@ -1,8 +1,9 @@
 {
   "meta": {
     "page": "database/animals.html",
-    "lastUpdated": "2026-09-01",
+    "lastUpdated": "2026-09-12",
     "build": "0.8.10.842",
+    "liveBuild": "0.8.10.858",
     "videoBuild": "0.8.10.455",
     "evidenceLevels": [
       "official",
@@ -87,6 +88,14 @@
       "author": "RedPilz Studio",
       "date": "2026-08-21",
       "build": "0.8.10.842"
+    },
+    "hotfix-0-8-10-858": {
+      "kind": "official-news",
+      "title": "Major Ranching, Multiplayer & Building Update 0.8.10.858 — official Steam announcement",
+      "url": "https://steamcommunity.com/app/1501310/announcements/detail/1842846814456746",
+      "author": "RedPilz Studio",
+      "date": "2026-09-08",
+      "build": "0.8.10.858"
     },
     "ranching-v2-notes": {
       "kind": "official-news",
@@ -188,10 +197,10 @@
     "thread-cant-sell-roosters": {
       "kind": "steam-thread",
       "title": "Steam thread \"Can't sell roosters\" (Jennoula, official)",
-      "url": null,
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587307906419013076/",
       "author": "Jennoula",
-      "date": "2026-08",
-      "build": "0.8.10.x"
+      "date": "2026-08-04",
+      "build": "Early Access; build not stated"
     },
     "thread-heater-mount": {
       "kind": "steam-thread",
@@ -236,18 +245,18 @@
     "thread-silos": {
       "kind": "steam-thread",
       "title": "Steam thread \"Silos\" (maxitubby, Jennoula)",
-      "url": null,
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587308167364408897/",
       "author": "maxitubby / Jennoula",
-      "date": "2026-08",
-      "build": "0.8.10.x"
+      "date": "2026-08-04",
+      "build": "Early Access; build not stated"
     },
     "thread-watertower": {
       "kind": "steam-thread",
       "title": "Steam thread \"Watertower problem\" (Akhenatom, Mancer, Jennoula)",
-      "url": null,
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587307906418969824/",
       "author": "Akhenatom / Mancer / Jennoula",
-      "date": "2026-08",
-      "build": "0.8.10.x"
+      "date": "2026-08-03",
+      "build": "Early Access; build not stated"
     },
     "thread-livestock-profit": {
       "kind": "steam-thread",
@@ -279,6 +288,14 @@
       "url": null,
       "author": "LittleGhost et al.",
       "date": "2026-08",
+      "build": "0.8.10.x"
+    },
+    "thread-animal-heater-doors": {
+      "kind": "steam-thread",
+      "title": "Steam moderator answer: one heater per coop or barn; closed doors are safe",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/590686595451098443/",
+      "author": "Jennoula · official moderator reply",
+      "date": "2026-08-14",
       "build": "0.8.10.x"
     },
     "thread-beginner-questions": {
@@ -921,7 +938,7 @@
               ]
             },
             {
-              "text": "Chicken Breast and Chicken Leg exist as current-build shop items, confirming the meat path for culled chickens.",
+              "text": "Chicken Breast and Chicken Leg appear as current-build shop shelf items. This confirms that the items existed in the recorded footage; it does not by itself prove a slaughter action, a chicken drop, or current runtime availability.",
               "evidenceLevel": "video-observed",
               "build": "0.8.10.455",
               "validity": "current",
@@ -980,6 +997,15 @@
               ]
             },
             {
+              "text": "The moderator's current guidance is one heating unit per coop or barn; animals can remain safely inside with the doors closed while the animal-vanishing issue is being fixed. The heater prevents thermal sickness but is not a cure for an animal that is already sick.",
+              "evidenceLevel": "official",
+              "build": "0.8.10.x",
+              "validity": "current",
+              "sourceIds": [
+                "thread-animal-heater-doors"
+              ]
+            },
+            {
               "text": "Take sick chickens to the veterinarian. The vet only treats animals that are actually sick — a famished (starving) animal is turned away.",
               "evidenceLevel": "unverified-lead",
               "build": "0.8.10.x",
@@ -1007,12 +1033,21 @@
               ]
             },
             {
-              "text": "There is no sickness notification system; check animals manually each day.",
+              "text": "Before 0.8.10.858, player reports described no sickness notification; treat that report as historical because the current patch adds an end-of-day sickness alert.",
               "evidenceLevel": "unverified-lead",
-              "build": "0.8.10.x",
-              "validity": "current",
+              "build": "0.8.10.842-or-earlier",
+              "validity": "historical",
               "sourceIds": [
                 "community-scan-archive"
+              ]
+            },
+            {
+              "text": "The 0.8.10.858 update adds an end-of-day sickness alert and rebalances sickness duration: 4 days for chickens, 7 for cows, 8 for goats and 5 for rabbits.",
+              "evidenceLevel": "official",
+              "build": "0.8.10.858",
+              "validity": "current",
+              "sourceIds": [
+                "hotfix-0-8-10-858"
               ]
             }
           ]
@@ -1246,7 +1281,7 @@
       "zh": {
         "tocLabel": "鸡",
         "kicker": "当前资料最完整",
-        "headerTag": "0.8.10.842",
+        "headerTag": "0.8.10.858",
         "name": "鸡 Chicken",
         "searchTitle": "鸡的完整照料",
         "searchTags": "鸡 母鸡 公鸡 鸡舍 干草 食槽 水 温控 蛋 大鸡蛋",
@@ -1319,6 +1354,13 @@
                 "badge": "video"
               },
               {
+                "text": "Leafy Market 货架出现 Chicken Breast 和 Chicken Leg，只能确认录像中存在这些商品；不能单独证明处理鸡只的操作、掉落或当前版本运行时可用。",
+                "badge": "video",
+                "sourceIds": [
+                  "games-station-video"
+                ]
+              },
+              {
                 "text": "当前不能出售活体动物；官方建议把多余成鸡放到地上后处理，并出售肉类。玩家报告的具体肉价差异较大，本站不把它当统一售价。",
                 "badge": "official"
               }
@@ -1326,15 +1368,18 @@
           },
           {
             "heading": "生病与兽医",
-            "id": null,
+            "id": "chicken-sickness",
             "facts": [
               {
                 "text": "真正生病的鸡可送往兽医；仅处于饥饿状态的动物会被拒绝治疗，应先恢复食物和水。",
                 "badge": "lead"
               },
               {
-                "text": "目前没有可靠的生病通知，建议每天查看动物状态。",
-                "badge": "lead"
+                "text": "从 0.8.10.858 开始，日终界面会提示动物生病；排查时仍建议查看动物状态卡片。该补丁还调整了生病持续时间：鸡 4 天、牛 7 天、山羊 8 天、兔 5 天。",
+                "badge": "official",
+                "sourceIds": [
+                  "hotfix-0-8-10-858"
+                ]
               }
             ]
           },
@@ -1603,13 +1648,13 @@
           "label": "Feeding",
           "facts": [
             {
-              "text": "Each species has its own unique diet under the livestock feeding system; the cow diet has not been confirmed in the current build.",
-              "evidenceLevel": "official",
-              "build": "alpha-2023",
-              "validity": "historical",
-              "sourceIds": [
-                "ranching-v2-notes"
-              ]
+                "text": "The owned .842 build serializes Hay in the Cow food definition. This is a configured food choice, not a current-save gameplay test; quantity, feeding frequency, runtime availability and output remain unverified.",
+                "evidenceLevel": "build-observed",
+                "build": "0.8.10.842",
+                "validity": "unknown",
+                "sourceIds": [
+                  "owned-build-animal-diets"
+                ]
             }
           ]
         },
@@ -2007,7 +2052,7 @@
       "name": "Sheep",
       "category": "mammal",
       "housingType": "Unverified",
-      "summary": "The owned current build contains separate Ram and Sheep definitions. Those records establish names, stage and sex only; seller, housing, feed, breeding, products and runtime availability remain unverified.",
+      "summary": "The owned current build contains separate Ram and Sheep definitions. The Ram food definition also lists Hay and Water, but that is configuration rather than a current-save care test; seller, housing, ewe diet, breeding, products and runtime availability remain unverified.",
       "whenNeeded": "Use this profile to identify the two source-defined sheep entries without treating file membership as a complete husbandry guide.",
       "searchTags": "sheep ram ewe mammal animal livestock adult male female 公绵羊 母绵羊 绵羊",
       "fields": [
@@ -2016,7 +2061,7 @@
           "label": "Availability and care",
           "facts": [
             {
-              "text": "The current-build definitions do not establish a seller, purchase route, housing, feed, breeding, products or current save availability.",
+        "text": "The current-build definitions do not establish a seller, purchase route, housing, breeding, products or current save availability. The separate Ram food definition lists Hay and Water for the Ram entry; that configuration is not a current-save care test and does not establish the ewe diet.",
               "evidenceLevel": "unverified-lead",
               "build": "0.8.10.842",
               "validity": "unknown",
@@ -2037,7 +2082,7 @@
         "name": "绵羊 Sheep",
         "searchTitle": "绵羊与公绵羊",
         "searchTags": "绵羊 公绵羊 母绵羊 Ram Sheep 动物 牲畜",
-        "summary": "自有当前构建包含公绵羊和母绵羊两个独立定义；这些记录只能确认名称、阶段和性别，不能证明当前存档可购买、住所、饲料、繁殖或产物。",
+        "summary": "自有当前构建包含公绵羊和母绵羊两个独立定义；公绵羊饲料配置列出干草和水，但这只是文件配置，不是当前存档照料实测；购买、住所、母绵羊食谱、繁殖和产物仍未形成可执行结论。",
         "whenNeeded": "需要核对原生名称和来源 ID 时查这里；当前还不能当作完整饲养指南。",
         "groups": [
           {
@@ -2045,7 +2090,7 @@
             "id": "sheep-availability",
             "facts": [
               {
-                "text": "当前构建文件保留公绵羊与母绵羊名称，但没有由此得到可执行的购买、住所、饲料、繁殖、产物或售价结论。",
+        "text": "当前构建文件保留公绵羊与母绵羊名称；另有公绵羊（Ram）配置列出干草和水，但这只是文件配置，不是当前存档实测，也不能据此推定母绵羊食谱。购买、住所、繁殖、产物和售价仍未形成可执行结论。",
                 "badge": "unknown",
                 "sourceIds": [
                   "owned-build-animals",
@@ -2363,18 +2408,18 @@
         "searchTags": "鸡消失 动物不见 失踪 围栏 温控 link 鸡舍",
         "heading": "鸡或动物突然消失怎么排查",
         "paragraphs": [
-          "官方 0.8.10.562 热修已修复多条动物消失路径：夜间进入鸡舍/畜棚、雏鸡长大、新生哺乳动物生成、读档后动物不显示，以及动物卡在建筑和门之间。0.8.10.842 又补充了关联、成长和同帧消失等边界；下面的旧规避法只保留作历史背景。"
+          "官方 0.8.10.562 热修已修复多条动物消失路径：夜间进入鸡舍/畜棚、雏鸡长大、新生哺乳动物生成、读档后动物不显示，以及动物卡在建筑和门之间。0.8.10.842 又补充了关联、成长和同帧消失等边界；0.8.10.858 继续处理当前已知的动物消失案例，并新增日终生病提示。下面的旧规避法只保留作历史背景。"
         ],
         "badge": null,
         "steps": [
-          "Steam 通常会自动更新；只有仍在复现问题时才确认标题画面为 0.8.10.842 或更高版本。",
+          "Steam 通常会自动更新；只有仍在复现问题时才确认标题画面为 0.8.10.858 或更高版本。",
           "确认购买后是否完成任务提示要求的交付或关联步骤。",
           "检查动物是否仍关联正确鸡舍/谷仓，门和围栏是否完整。",
           "检查室内食槽、饮水和专用温控设备。",
           "记录日切前后、退出重进前后以及地图图标是否变化。",
-          "如果 0.8.10.842 或更高版本仍会消失，保留版本号、存档模式、日切前后状态和截图；这才是当前残留问题的有效线索。"
+          "如果 0.8.10.858 或更高版本仍会消失，保留版本号、存档模式、日切前后状态和截图；这才是当前残留问题的有效线索。"
         ],
-        "notice": "不要继续把 0.8.10.455 及更早版本的临时规避法当成当前修复；先确认新版本是否仍能复现。"
+        "notice": "不要继续把 0.8.10.455 及更早版本的临时规避法当成当前修复；先确认 0.8.10.858 或更高版本是否仍能复现。"
       }
     ],
     "related": [
