@@ -36,4 +36,21 @@ for (const file of sharedNavPages) {
   );
 }
 
-console.log(`PASS: ${cases.length} routes and ${sharedNavPages.length} pages use the current navigation behavior.`);
+const cjsFiles = (directory) => fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+  const target = path.join(directory, entry.name);
+  if (entry.isDirectory() && !entry.name.startsWith(".")) return cjsFiles(target);
+  return entry.isFile() && entry.name.endsWith(".cjs") ? [target] : [];
+});
+const styleReferenceFiles = [...htmlFiles(root), ...cjsFiles(root)]
+  .filter((file) => !path.basename(file).startsWith("check-"))
+  .filter((file) => fs.readFileSync(file, "utf8").includes("style.css?v="));
+assert.ok(styleReferenceFiles.length > 100, "style.css should be referenced by the site surfaces");
+for (const file of styleReferenceFiles) {
+  assert.match(
+    fs.readFileSync(file, "utf8"),
+    /style\.css\?v=20261003-r15/,
+    `${path.relative(root, file)} must use the current stylesheet cache token`,
+  );
+}
+
+console.log(`PASS: ${cases.length} routes, ${sharedNavPages.length} navigation pages and ${styleReferenceFiles.length} stylesheet references use current behavior.`);
