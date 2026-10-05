@@ -10,8 +10,10 @@ const materialsData = require('../data/materials.json');
 const resourceData = require('../data/build-resources.json');
 const buildingEntries = require('../data/building-entries.json');
 const shops = require('../data/build-shops.json');
+const miscItems = require('../data/build-misc-items.json');
 const materials = materialsData.materials;
 const quests = questsData.quests;
+const routeContract = questsData.routeContract?.entries || [];
 const materialRoutes = {
   ressource_wood: 'wood-log',
   ressource_rock_simple: 'stone',
@@ -47,6 +49,25 @@ function evidenceClass(fact) {
 
 function evidenceLabel(fact, locale) {
   const labels = {
+    '/guides/beginners-guide': ['Beginner route', '新手路线'],
+    '/guides/money-making#cashin': ['Cash-In route', 'Cash-In 路线'],
+    '/guides/money-making': ['Money-making guide', '收入指南'],
+    '/guides/electricity-power#two-paths': ['Electricity guide', '电力攻略'],
+    '/guides/electricity-power#solar-quest': ['Solar objective', '太阳能板目标'],
+    '/guides/building-construction': ['Building guide', '建造指南'],
+    '/guides/crafting-guide#recipe-red_tent': ['Red Tent recipe', '红色帐篷配方'],
+    '/guides/crafting-guide#recipes-tools': ['Tool recipes', '工具配方'],
+    '/problems/vehicle-recovery': ['Vehicle recovery', '车辆找回'],
+    '/guides/roof-quest-stuck#flow': ['Roof objective flow', '屋顶目标排查'],
+    '/problems/failed-quest-replay': ['Quest recovery', '任务恢复'],
+    '/guides/vehicles-transport': ['Vehicles & transport', '交通与车辆'],
+    '/guides/animal-guide#getting': ['Animal guide', '动物攻略'],
+    '/tools/chicken-troubleshooter': ['Chicken troubleshooter', '鸡排查器'],
+    '/guides/gigi-large-egg-quest': ['Large-egg route', '大鸡蛋路线'],
+    '/guides/police-wanted-levels': ['Wanted-level guide', '警星攻略'],
+    '/database/materials#charcoal': ['Charcoal details', '木炭资料'],
+    '/database/animals#chicken': ['Chicken evidence', '鸡的证据条目'],
+    '/database/animals#cow': ['Cow evidence', '牛的证据条目'],
     official: ['Official', '官方'],
     'video-observed': ['Video-observed', '视频观测'],
     'community-confirmed': ['Community-confirmed', '社区互证'],
@@ -79,6 +100,25 @@ function shell(locale, route, title, description, body) {
 
 function relatedLinks(routes, locale) {
   const labels = {
+    '/guides/beginners-guide': ['Beginner route', '新手路线'],
+    '/guides/money-making#cashin': ['Cash-In route', 'Cash-In 路线'],
+    '/guides/money-making': ['Money-making guide', '收入指南'],
+    '/guides/electricity-power#two-paths': ['Electricity guide', '电力攻略'],
+    '/guides/electricity-power#solar-quest': ['Solar objective', '太阳能板目标'],
+    '/guides/building-construction': ['Building guide', '建造指南'],
+    '/guides/crafting-guide#recipe-red_tent': ['Red Tent recipe', '红色帐篷配方'],
+    '/guides/crafting-guide#recipes-tools': ['Tool recipes', '工具配方'],
+    '/problems/vehicle-recovery': ['Vehicle recovery', '车辆找回'],
+    '/guides/roof-quest-stuck#flow': ['Roof objective flow', '屋顶目标排查'],
+    '/problems/failed-quest-replay': ['Failed quest recovery', '失败任务恢复'],
+    '/guides/vehicles-transport': ['Vehicles & transport', '交通与车辆'],
+    '/guides/animal-guide#getting': ['Animal guide', '动物攻略'],
+    '/tools/chicken-troubleshooter': ['Chicken troubleshooter', '鸡排查器'],
+    '/guides/gigi-large-egg-quest': ['Gigi large-egg route', 'Gigi 大鸡蛋路线'],
+    '/guides/police-wanted-levels': ['Wanted-level guide', '警星攻略'],
+    '/database/materials#charcoal': ['Charcoal details', '木炭资料'],
+    '/database/animals#chicken': ['Chicken evidence', '鸡的证据条目'],
+    '/database/animals#cow': ['Cow evidence', '牛的证据条目'],
     '/guides/farming-fields': ['Planting & watering', '播种与浇水'],
     '/guides/crafting-guide#recipe-prop_Scarecrow_00': ['Scarecrow materials', '稻草人材料'],
     '/guides/crafting-guide': ['Crafting guide', '制作指南'],
@@ -94,6 +134,49 @@ function relatedLinks(routes, locale) {
   }).join('');
 }
 
+function routePositionHtml(record, locale) {
+  const zh = locale === 'zh';
+  const position = routeContract.find(entry => entry.questId === record.id);
+  if (!position) throw new Error(`Missing route contract for ${record.id}`);
+  const label = id => {
+    const target = quests.find(item => item.id === id);
+    return target ? (zh ? target.zhName : target.name) : id;
+  };
+  const before = position.before?.length ? position.before.map(id => `<a href="${zh ? '/zh' : ''}/database/quests/${id}">${esc(label(id))}</a>`).join(zh ? '、' : ', ') : (zh ? '尚未记录上游任务（可能未知）' : 'Not recorded; predecessor unknown');
+  const followUp = position.followUp
+    ? (zh ? (position.type === 'dialogue-defined' ? '触发与可用性仍未知。' : '配置了后续动作，但未保留具名后续任务。') : position.followUp)
+    : (zh ? '尚未记录具名后续任务。' : 'No named successor is recorded.');
+  const after = position.after?.length ? position.after.map(id => `<a href="${zh ? '/zh' : ''}/database/quests/${id}">${esc(label(id))}</a>`).join(zh ? '、' : ', ') : followUp;
+  return `<section class="quest-route-position" data-quest-route-position="${esc(record.id)}"><h2>${zh ? '任务路线位置' : 'Route position'}</h2><dl><div><dt>${zh ? '之前' : 'Before'}</dt><dd>${before}</dd></div><div><dt>${zh ? '之后' : 'After'}</dt><dd>${after}</dd></div></dl><p>${esc(zh ? position.zhRelation : position.relation)} · <a href="${zh ? '/zh' : ''}/database/quests#${record.id}">${zh ? '返回任务目录记录' : 'Back to the quest directory record'}</a></p></section>`;
+}
+
+function questFlowHtml(record, locale) {
+  const zh = locale === 'zh';
+  const flow = record.buildGuide?.flow;
+  if (!flow) return '';
+  const labels = {
+    'player-death': zh ? '玩家死亡' : 'Player death',
+    'player-imprisonment': zh ? '玩家入狱' : 'Player imprisonment',
+    'quest-actor-death': zh ? '任务 NPC 死亡' : 'Quest actor death',
+    'quest-vehicle-destroyed': zh ? '任务车辆损坏' : 'Quest vehicle destroyed',
+    'game-time-threshold': zh ? `游戏时间达到配置阈值 ${flow.gameTimeThreshold}` : `Game time reaches configured threshold ${flow.gameTimeThreshold}`,
+  };
+  const failures = flow.failureTriggers?.length ? flow.failureTriggers.map(item => labels[item] || item).join(zh ? '、' : ', ') : (zh ? '未记录任务级失败触发' : 'No quest-level failure trigger recorded');
+  const afterFailure = flow.failureContinuation === 'restart-current'
+    ? (zh ? '重新启动当前任务' : 'Restarts the current quest')
+    : flow.failureContinuation === 'follow-up-call'
+      ? (zh ? '启动配置的后续电话；不是新的已命名任务' : 'Starts a configured follow-up call; not a named quest')
+      : (zh ? '未记录自动恢复动作' : 'No automatic recovery action recorded');
+  const success = flow.successContinuation?.type === 'next-quest'
+    ? `${zh ? '接续配置任务 ID' : 'Starts configured quest ID'} ${esc(flow.successContinuation.targetQuestId)}`
+    : flow.successContinuation?.type === 'message'
+      ? (zh ? '发送配置的后续消息' : 'Sends a configured follow-up message')
+      : flow.successContinuation?.type === 'follow-up-call'
+        ? (zh ? '启动配置的后续电话' : 'Starts a configured follow-up call')
+        : (zh ? '未记录自动后续动作' : 'No automatic success action recorded');
+  return `<details class="quest-route-flow" data-quest-route-flow="${esc(record.id)}"><summary>${zh ? '失败条件、恢复与后续' : 'Failure conditions, recovery & continuation'}</summary><dl><div><dt>${zh ? '失败触发' : 'Failure trigger'}</dt><dd>${esc(failures)}</dd></div><div><dt>${zh ? '失败后' : 'After failure'}</dt><dd>${esc(afterFailure)}</dd></div><div><dt>${zh ? '成功后' : 'After success'}</dt><dd>${success}</dd></div></dl><p class="database-browse-note">${zh ? '这些是构建字段的路线关系，不代表每个分支都已在当前版本实测。' : 'These route relations come from retained build fields; each branch is not runtime-tested.'}</p></details>`;
+}
+
 function questPage(locale, record) {
   const zh = locale === 'zh';
   const prefix = prefixFor(locale);
@@ -102,11 +185,13 @@ function questPage(locale, record) {
   const steps = guide.steps.map(step => `<li>${esc(zh ? step.zhText : step.text)}</li>`).join('');
   const notes = (guide.notes || []).map(note => `<li>${esc(zh ? note.zhText : note.text)}</li>`).join('');
   const facts = record.facts.map(fact => `<li><p>${esc(zh ? fact.zhText : fact.text)} <span class="tag ${evidenceClass(fact)}">${evidenceLabel(fact, locale)}</span></p><p class="fact-source"><strong>${zh ? '来源' : 'Source'}:</strong> ${sourceHtml(questsData, fact.sourceIds, locale)} · <strong>${zh ? '版本' : 'Build'}:</strong> ${esc(fact.build || 'not specified')}</p></li>`).join('');
+  const questVehicle = miscItems.questItems?.find(item => item.relatedQuestId === record.id);
+  const questVehicleHtml = questVehicle ? `<aside class="recipe-note" id="quest-vehicle-victor-old-car" data-quest-vehicle-id="${esc(questVehicle.id)}"><strong>${zh ? '任务车辆：' : 'Quest vehicle: '}${esc(zh ? questVehicle.zhName : questVehicle.name)}</strong><p>${zh ? '该名称来自独立 Misc 构建定义，不属于通用车辆目录。I2 说明栏为空，物品标志也不证明当前可驾驶、性能、修理价格或任务奖励。' : 'This name comes from a separate Misc build definition and is not one of the general vehicle catalogue records. Its I2 description slot is empty, and its item flags do not establish current drivability, performance, a repair price or a quest reward.'}</p><a href="${prefix}/guides/vehicles-transport#quest-vehicle-victor-old-car">${zh ? '在车辆指南中查看' : 'Open the vehicle guide'} →</a></aside>` : '';
   const body = `<nav class="breadcrumb" aria-label="${zh ? '面包屑' : 'Breadcrumb'}"><a href="${prefix}/">${zh ? '首页' : 'Home'}</a> / <a href="${prefix}/database">${zh ? '资料库' : 'Database'}</a> / <a href="${prefix}/database/quests">${zh ? '任务' : 'Quests'}</a> / ${esc(name)}</nav>
 <h1>${esc(name)}</h1><section class="evidence-ledger entity-profile" id="${record.id}" data-search-entry data-search-title="${esc(name)}" data-search-aliases="${esc(`${record.name}|${record.zhName}`)}" data-search-status="${zh ? '任务独立词条' : 'Standalone quest entry'}" data-search-tags="${esc(`${record.searchTags} ${record.zhSearchTags}`)}"><a class="database-back" href="${prefix}/database/quests">${zh ? '返回任务目录' : 'Back to quest database'}</a>
 <p class="lead">${esc(zh ? record.zhSummary : record.summary)}</p><div class="database-config"><p><strong>${zh ? '已记录版本' : 'Recorded build reference'}</strong> · ${esc(guide.build)} · ${zh ? '配置记录，未逐项实测' : 'configuration record, not individually play-tested'}</p></div>
-<h2>${zh ? '按目标操作' : 'Work through the objectives'}</h2><ol class="evidence-list">${steps}</ol>${notes ? `<h2>${zh ? '容易卡住的判定' : 'Checks that can cause a stop'}</h2><ul class="evidence-list">${notes}</ul>` : ''}
-<h2>${zh ? '来源与边界' : 'Sources and boundary'}</h2><ul class="evidence-list">${facts}</ul><p class="database-browse-note">${zh ? '这些步骤来自已记录的游戏构建和公开来源；缺失的奖励、前置条件和解锁时机不会在此补写。' : 'These steps come from the recorded game build and public sources; missing rewards, prerequisites and unlock timing are not filled in.'}</p>
+<h2>${zh ? '按目标操作' : 'Work through the objectives'}</h2><ol class="evidence-list">${steps}</ol>${notes ? `<h2>${zh ? '容易卡住的判定' : 'Checks that can cause a stop'}</h2><ul class="evidence-list">${notes}</ul>` : ''}${questFlowHtml(record, locale)}
+${questVehicleHtml}${routePositionHtml(record, locale)}<h2>${zh ? '来源与边界' : 'Sources and boundary'}</h2><ul class="evidence-list">${facts}</ul><p class="database-browse-note">${zh ? '这些步骤来自已记录的游戏构建和公开来源；缺失的奖励、前置条件和解锁时机不会在此补写。' : 'These steps come from the recorded game build and public sources; missing rewards, prerequisites and unlock timing are not filled in.'}</p>
 <div class="entity-related"><strong>${zh ? '继续查找' : 'Continue with'}</strong><div>${relatedLinks(record.relatedRoutes || [], locale)}<a class="btn btn-outline btn-compact" href="${prefix}/database/quests#${record.id}">${zh ? '任务数据库原始记录' : 'Original quest record'}</a></div></div></section>`;
   return shell(locale, `${prefix}/database/quests/${record.id}`, `The Ranchers ${name}`, copy(locale, `${name}: objectives, checks & sources`, `${name}：目标、判定与来源`), body);
 }

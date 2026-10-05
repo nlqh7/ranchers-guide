@@ -894,6 +894,16 @@
               ]
             },
             {
+              "text": "To separate a visual change from a feeding problem, check the food and water reserves after the next morning cycle. If they have not refilled, inspect the indoor trough and its water source before using the sickness branch; this check alone does not identify the cause.",
+              "evidenceLevel": "official",
+              "build": "0.8.10.x",
+              "validity": "current",
+              "sourceIds": [
+                "thread-food-water-reserves",
+                "thread-about-chickens"
+              ]
+            },
+            {
               "text": "Official 2023 Alpha update notes say wild grass produces Hay at any growth stage. This is pre-Early Access documentation and does not by itself confirm current-build behavior.",
               "evidenceLevel": "official",
               "build": "alpha-2023",
@@ -1301,11 +1311,19 @@
                 "text": "鸡吃干草。可以手持干草靠近动物喂食，也可以把干草放进食槽；动物每天早晨会自行进食并覆盖当天需求。",
                 "badge": "official"
               },
-              {
-                "text": "日常只需要补鸡舍内的食槽。室外食槽不是 Gigi 任务要求；室外围栏活动区影响的是出现大鸡蛋的机会。",
-                "badge": "official"
-              },
-              {
+        {
+          "text": "日常只需要补鸡舍内的食槽。室外食槽不是 Gigi 任务要求；室外围栏活动区影响的是出现大鸡蛋的机会。",
+          "badge": "official"
+        },
+        {
+          "text": "要区分视觉变化和确实没有进食，可在下一次早晨周期后查看食物与饮水储备。储备没有恢复时，先检查鸡舍内食槽及其供水，再进入生病排查；这一观察本身不能确定具体原因。",
+          "badge": "official",
+          "sourceIds": [
+            "thread-food-water-reserves",
+            "thread-about-chickens"
+          ]
+        },
+        {
                 "text": "水只能通过食槽补充，手持喂食不能恢复饮水储备。水塔还需要在市政厅签水务合同后才能自动补水。",
                 "badge": "community"
               },

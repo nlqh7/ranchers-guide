@@ -3,6 +3,30 @@
     "build": "0.8.10.842",
     "lastUpdated": "2026-08-31"
   },
+  "routeContract": {
+    "schemaVersion": 1,
+    "source": "buildGuide.flow and retained dialogue relations; route labels are editorial links, not new quest facts.",
+    "entries": [
+      { "questId": "meet-meriem", "type": "chain", "before": [], "after": ["a-new-beginning"], "relation": "The airport introduction starts the recorded opening chain.", "zhRelation": "机场引导开启已记录的开场任务链。" },
+      { "questId": "a-new-beginning", "type": "chain", "before": ["meet-meriem"], "after": ["from-blueprint-to-bed"], "relation": "The drive-to-ranch handover leads into the first shelter objective.", "zhRelation": "开车回牧场并完成交接后进入第一个住所目标。" },
+      { "questId": "from-blueprint-to-bed", "type": "chain", "before": ["a-new-beginning"], "after": [], "followUp": "Configured follow-up call; no named quest retained.", "zhRelation": "配置为后续电话；没有保留具名后续任务。", "relation": "Configured follow-up call; no named quest retained." },
+      { "questId": "axe-pick-and-welcome", "type": "chain", "before": [], "after": [], "followUp": "Configured follow-up call; this side of the opening chain has no named predecessor in the retained table.", "relation": "Opening-chain tool handover with no named predecessor retained.", "zhRelation": "开场工具交接；保留表中没有具名上游任务。" },
+      { "questId": "drop-and-earn", "type": "chain", "before": [], "after": ["next-door-neighbors"], "relation": "The drop-and-earn objective leads to the nearby-neighbors route.", "zhRelation": "交付并获得收益后进入邻里路线。" },
+      { "questId": "next-door-neighbors", "type": "chain", "before": ["drop-and-earn"], "after": ["seeds-of-success"], "relation": "The neighbors objective precedes the seed route.", "zhRelation": "邻里目标位于种子路线之前。" },
+      { "questId": "seeds-of-success", "type": "chain", "before": ["next-door-neighbors"], "after": [], "followUp": "Configured follow-up message; no named quest retained.", "relation": "Seed objective with a configured message rather than a named successor.", "zhRelation": "种子目标配置了后续消息，但没有具名后续任务。" },
+      { "questId": "feathered-foes", "type": "side", "before": [], "after": [], "followUp": "Configured follow-up call; no named successor retained.", "relation": "Chicken-related side route; no named predecessor or successor retained.", "zhRelation": "养鸡支线；没有保留具名前置或后续任务。" },
+      { "questId": "rust-to-rumbling", "type": "chain", "before": [], "after": [], "followUp": "Configured follow-up call; no named successor retained.", "relation": "Vehicle route with an unlabelled follow-up call.", "zhRelation": "车辆路线配置了未具名的后续电话。" },
+      { "questId": "power-to-the-bench", "type": "chain", "before": [], "after": [], "followUp": "Configured follow-up call; no named successor retained.", "relation": "Electricity-to-workbench route with no named successor retained.", "zhRelation": "电力到工作台路线没有保留具名后续任务。" },
+      { "questId": "roof-building", "type": "chain", "before": [], "after": [], "followUp": "Configured follow-up call; no named successor retained.", "relation": "Roof objective with no named predecessor or successor retained.", "zhRelation": "屋顶目标没有保留具名前置或后续任务。" },
+      { "questId": "a-ride-and-a-revelation", "type": "chain", "before": [], "after": ["seed-capital"], "relation": "The ride-and-revelation objective points to the seed-capital route.", "zhRelation": "搭车与发现目标衔接到种子资本路线。" },
+      { "questId": "seed-capital", "type": "chain", "before": ["a-ride-and-a-revelation"], "after": [], "followUp": "Configured follow-up call; no named successor retained.", "relation": "Seed-capital objective with an unlabelled follow-up call.", "zhRelation": "种子资本目标配置了未具名的后续电话。" },
+      { "questId": "chicken-coop-mission", "type": "side", "before": [], "after": [], "followUp": "Configured follow-up call; no named successor retained.", "relation": "Coop mission route; no named predecessor or successor retained.", "zhRelation": "鸡舍任务路线没有保留具名前置或后续任务。" },
+      { "questId": "solar-panel-objective", "type": "side", "before": [], "after": [], "followUp": "Configured follow-up call; no named successor retained.", "relation": "Solar objective route; no named predecessor or successor retained.", "zhRelation": "太阳能板目标没有保留具名前置或后续任务。" },
+      { "questId": "real-eggs-real-evidence", "type": "story-endpoint", "before": [], "after": [], "followUp": "Current documented endpoint; no implemented follow-up is retained.", "relation": "Current documented story endpoint, not a claim that all optional content is catalogued.", "zhRelation": "当前已记录的剧情终点，不表示所有可选内容都已编目。" },
+      { "questId": "coal-delivery-dialogue", "type": "dialogue-defined", "before": [], "after": [], "followUp": "Configured message; runtime availability and trigger remain unknown.", "relation": "Dialogue-defined lead, not a static quest-table entry.", "zhRelation": "对话配置线索，不是静态任务表中的任务。" },
+      { "questId": "farm-products-dialogue", "type": "dialogue-defined", "before": [], "after": [], "followUp": "Configured message; runtime availability and trigger remain unknown.", "relation": "Dialogue-defined farm-product order, not a static quest-table entry.", "zhRelation": "对话配置的农产品订单，不是静态任务表中的任务。" }
+    ]
+  },
   "sources": {
     "owned-build-dialogue": {
       "kind": "local-build",

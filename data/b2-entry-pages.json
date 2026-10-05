@@ -1,5 +1,24 @@
 {
   "schemaVersion": 1,
-  "quests": ["seeds-of-success", "feathered-foes"],
+  "quests": [
+    "meet-meriem",
+    "a-new-beginning",
+    "from-blueprint-to-bed",
+    "axe-pick-and-welcome",
+    "drop-and-earn",
+    "next-door-neighbors",
+    "seeds-of-success",
+    "feathered-foes",
+    "rust-to-rumbling",
+    "power-to-the-bench",
+    "roof-building",
+    "a-ride-and-a-revelation",
+    "seed-capital",
+    "chicken-coop-mission",
+    "solar-panel-objective",
+    "real-eggs-real-evidence",
+    "coal-delivery-dialogue",
+    "farm-products-dialogue"
+  ],
   "materials": ["stone", "wood-log", "hay"]
 }

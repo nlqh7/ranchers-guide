@@ -32,11 +32,28 @@
         <p class="quest-tracker-overview" data-quest-overview role="status" aria-live="polite"></p>
       </section>
       <section class="quest-tracker-list" data-quest-list aria-live="polite"></section>
+      <section class="quest-tracker-controls" data-reading-tracker aria-labelledby="reading-progress-title">
+        <h2 id="reading-progress-title">NPC &amp; story reading progress</h2>
+        <p class="notice info quest-tracker-note"><strong>Reading marks are local and independent.</strong> They stay on this device under their own storage key, separate from the quest checklist above, and only record which pages you have read — they never complete an in-game quest.</p>
+        <p class="quest-tracker-overview" data-reading-status role="status" aria-live="polite">Open an entry below to read it; JavaScript adds the &ldquo;mark as read&rdquo; checkboxes, the links work without it.</p>
+        <ul class="quest-tracker-items" data-reading-list>
+          <li class="quest-tracker-item" data-reading-entry="npc:victor"><a class="quest-tracker-link" href="/database/npcs/victor">Victor</a><span class="quest-tracker-fact-meta"><small>NPC profile</small></span></li>
+          <li class="quest-tracker-item" data-reading-entry="npc:angela"><a class="quest-tracker-link" href="/database/npcs/angela">Angela</a><span class="quest-tracker-fact-meta"><small>NPC profile</small></span></li>
+          <li class="quest-tracker-item" data-reading-entry="npc:gigi"><a class="quest-tracker-link" href="/database/npcs/gigi">Gigi</a><span class="quest-tracker-fact-meta"><small>NPC profile</small></span></li>
+          <li class="quest-tracker-item" data-reading-entry="npc:meriam"><a class="quest-tracker-link" href="/database/npcs/meriam">Meriam</a><span class="quest-tracker-fact-meta"><small>NPC profile</small></span></li>
+          <li class="quest-tracker-item" data-reading-entry="npc:malcolm"><a class="quest-tracker-link" href="/database/npcs#malcolm">Malcolm</a><span class="quest-tracker-fact-meta"><small>NPC database section</small></span></li>
+          <li class="quest-tracker-item" data-reading-entry="npc:country-mechanic"><a class="quest-tracker-link" href="/database/npcs#country-mechanic">Country mechanic</a><span class="quest-tracker-fact-meta"><small>NPC database section</small></span></li>
+          <li class="quest-tracker-item" data-reading-entry="npc:susan"><a class="quest-tracker-link" href="/database/npcs#susan">Susan</a><span class="quest-tracker-fact-meta"><small>NPC database section</small></span></li>
+          <li class="quest-tracker-item" data-reading-entry="arc:arrival-to-ranch"><a class="quest-tracker-link" href="/guides/story#arrival-to-ranch">Arrival to a working ranch</a><span class="quest-tracker-fact-meta"><small>Story guide section</small></span></li>
+          <li class="quest-tracker-item" data-reading-entry="arc:coop-to-egg-evidence"><a class="quest-tracker-link" href="/guides/story#coop-to-egg-evidence">From coop setup to egg evidence</a><span class="quest-tracker-fact-meta"><small>Story guide section</small></span></li>
+        </ul>
+        <div class="quest-tracker-card-foot"><button class="btn btn-outline btn-compact" type="button" data-reading-reset hidden>Clear reading marks</button></div>
+      </section>
       <p class="article-next"><a href="/database/quests">Open the quest database</a><span>Need a missing step checked? <a href="/contribute">Send the question for review.</a></span></p>
     </div>
   </main>
   <footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>The Ranchers Guide</h4><p>Independent, fan-made Early Access help with versioned evidence.</p><p class="disclaimer">Not affiliated with RedPilz Studio or Trophy Games.</p></div><nav aria-label="Footer guides"><h4>Help</h4><ul><li><a href="/guides/beginners-guide">Guides</a></li><li><a href="/map">Map</a></li><li><a href="/problems">Problems</a></li></ul></nav><nav aria-label="Footer data"><h4>Data</h4><ul><li><a href="/database">Knowledge Base</a></li><li><a href="/database/quests">Quests</a></li><li><a href="/database/animals">Animals</a></li></ul></nav><nav aria-label="Footer site"><h4>Site</h4><ul><li><a href="/search">Search</a></li><li><a href="/contribute">Contribute</a></li><li><a href="/about">About</a></li><li><a href="/privacy">Privacy</a></li>
             <li><a href="/terms">Terms of Service</a></li></ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>Local notes stay local.</span></div></div></footer>
-  <script src="/assets/js/main.js?v=20261003-r15" defer></script><script src="/assets/js/quest-tracker.js?v=20260908-filter2" defer></script>
+  <script src="/assets/js/main.js?v=20261003-r15" defer></script><script src="/assets/js/quest-tracker.js?v=20260908-filter2" defer></script><script src="/assets/js/quest-tracker-reading.js?v=20261004-r27" defer></script>
 </body>
 </html>

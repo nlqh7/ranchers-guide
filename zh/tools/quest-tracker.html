@@ -32,10 +32,27 @@
         <p class="quest-tracker-overview" data-quest-overview role="status" aria-live="polite"></p>
       </section>
       <section class="quest-tracker-list" data-quest-list aria-live="polite"></section>
+      <section class="quest-tracker-controls" data-reading-tracker aria-labelledby="reading-progress-title">
+        <h2 id="reading-progress-title">NPC 与剧情阅读进度</h2>
+        <p class="notice info quest-tracker-note"><strong>阅读标记只保存在本地，并且相互独立。</strong> 记录存放在本设备独立的存储键下，与上方任务清单互不影响，只表示你读过哪些页面——不会完成任何游戏内任务。</p>
+        <p class="quest-tracker-overview" data-reading-status role="status" aria-live="polite">打开下面的条目即可阅读；JavaScript 只负责添加“标记为已读”复选框，链接本身无需脚本即可使用。</p>
+        <ul class="quest-tracker-items" data-reading-list>
+          <li class="quest-tracker-item" data-reading-entry="npc:victor"><a class="quest-tracker-link" href="/zh/database/npcs/victor">Victor 维克托</a><span class="quest-tracker-fact-meta"><small>NPC 资料页</small></span></li>
+          <li class="quest-tracker-item" data-reading-entry="npc:angela"><a class="quest-tracker-link" href="/zh/database/npcs/angela">Angela 安吉拉</a><span class="quest-tracker-fact-meta"><small>NPC 资料页</small></span></li>
+          <li class="quest-tracker-item" data-reading-entry="npc:gigi"><a class="quest-tracker-link" href="/zh/database/npcs/gigi">Gigi 吉吉</a><span class="quest-tracker-fact-meta"><small>NPC 资料页</small></span></li>
+          <li class="quest-tracker-item" data-reading-entry="npc:meriam"><a class="quest-tracker-link" href="/zh/database/npcs/meriam">Meriam 米里亚姆</a><span class="quest-tracker-fact-meta"><small>NPC 资料页</small></span></li>
+          <li class="quest-tracker-item" data-reading-entry="npc:malcolm"><a class="quest-tracker-link" href="/zh/database/npcs#malcolm">Malcolm 马尔科姆</a><span class="quest-tracker-fact-meta"><small>NPC 数据库小节</small></span></li>
+          <li class="quest-tracker-item" data-reading-entry="npc:country-mechanic"><a class="quest-tracker-link" href="/zh/database/npcs#country-mechanic">乡村维修商</a><span class="quest-tracker-fact-meta"><small>NPC 数据库小节</small></span></li>
+          <li class="quest-tracker-item" data-reading-entry="npc:susan"><a class="quest-tracker-link" href="/zh/database/npcs#susan">Susan 苏珊</a><span class="quest-tracker-fact-meta"><small>NPC 数据库小节</small></span></li>
+          <li class="quest-tracker-item" data-reading-entry="arc:arrival-to-ranch"><a class="quest-tracker-link" href="/zh/guides/story#arrival-to-ranch">从抵达走到可运转的牧场</a><span class="quest-tracker-fact-meta"><small>剧情攻略小节</small></span></li>
+          <li class="quest-tracker-item" data-reading-entry="arc:coop-to-egg-evidence"><a class="quest-tracker-link" href="/zh/guides/story#coop-to-egg-evidence">从鸡舍准备到鸡蛋证据</a><span class="quest-tracker-fact-meta"><small>剧情攻略小节</small></span></li>
+        </ul>
+        <div class="quest-tracker-card-foot"><button class="btn btn-outline btn-compact" type="button" data-reading-reset hidden>清除阅读标记</button></div>
+      </section>
       <p class="article-next"><a href="/zh/database/quests">打开任务数据库</a><span>缺少某个步骤？<a href="/contribute">提交问题供审核。</a></span></p>
     </div>
   </main>
   <footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>The Ranchers Guide</h4><p>按版本和证据整理的非官方中文玩家资料。</p><p class="disclaimer">与 RedPilz Studio 或 Trophy Games 无关联。</p></div><nav aria-label="页脚帮助"><h4>帮助</h4><ul><li><a href="/zh/guides/beginners-guide">新手</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li></ul></nav><nav aria-label="页脚数据"><h4>数据</h4><ul><li><a href="/zh/database">知识库</a></li><li><a href="/zh/database/quests">任务</a></li><li><a href="/zh/database/animals">动物</a></li></ul></nav><nav aria-label="页脚站点"><h4>站点</h4><ul><li><a href="/zh/search">搜索</a></li><li><a href="/contribute">投稿</a></li><li><a href="/zh/about">关于</a></li><li><a href="/zh/privacy">隐私</a></li><li><a href="/zh/terms">服务条款</a></li></ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>本地记录只保存在当前设备。</span></div></div></footer>
-  <script src="/assets/js/main.js?v=20261003-r15" defer></script><script src="/assets/js/quest-tracker.js?v=20260908-filter2" defer></script>
+  <script src="/assets/js/main.js?v=20261003-r15" defer></script><script src="/assets/js/quest-tracker.js?v=20260908-filter2" defer></script><script src="/assets/js/quest-tracker-reading.js?v=20261004-r27" defer></script>
 </body>
 </html>

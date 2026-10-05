@@ -37,7 +37,7 @@ const levels = {
 };
 const enGroups = [
   { title: 'Get a chicken home', keys: ['acquisition'], omit: [2] },
-  { title: 'Housing, feeding & water', keys: ['housing', 'feed', 'water'], omit: { housing: [3], feed: [3, 4] } },
+  { title: 'Housing, feeding & water', keys: ['housing', 'feed', 'water'], omit: { housing: [3], feed: [4, 5] } },
   { title: 'Eggs, products & the Gigi route', keys: ['products', 'quests'], omit: { products: [3], quests: [2] } },
   { title: 'If a chicken is sick or missing', keys: ['sickness', 'bugs'], omit: { sickness: [2, 3], bugs: [0, 2, 5, 6] } },
 ];

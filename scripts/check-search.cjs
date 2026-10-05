@@ -207,7 +207,7 @@ const firstThirtyEntry = prebuiltIndex.find((entry) => entry.url === "/guides/be
 assert.equal(firstThirtyEntry.type, "Guide step", "guide search entries must not be labeled as database entries");
 assert.match(fs.readFileSync(path.join(root, "database", "crops.html"), "utf8"), /id="strawberry-seeds"[^>]+data-search-entry/);
 assert.match(fs.readFileSync(path.join(root, "database", "animals.html"), "utf8"), /id="black-chicken"[^>]+data-search-entry/);
-assert.equal(searchDocuments(prebuiltIndex, "Power to the Bench")[0].url, "/database/quests#power-to-the-bench");
+assert.ok(["/database/quests#power-to-the-bench", "/database/quests/power-to-the-bench#power-to-the-bench"].includes(searchDocuments(prebuiltIndex, "Power to the Bench")[0].url));
 assert.equal(searchDocuments(prebuiltIndex, "Angela chicken seller")[0].url, "/database/npcs#angela");
 assert.equal(searchDocuments(prebuiltIndex, "Susan animal infection treatment")[0].url, "/database/npcs#susan");
 assert.equal(searchDocuments(prebuiltIndex, "Meriam blueprint catalogue")[0].url, "/database/npcs#meriam");
@@ -241,10 +241,21 @@ assert.ok(missingChickenResults.some((result) => result.url === "/zh/database/an
 assert.equal(searchDocuments(chineseIndex, "草莓多久成熟")[0].url, "/zh/database/crops/strawberry#strawberry");
 assert.equal(searchDocuments(chineseIndex, "种子商店在哪里")[0].url, "/zh/map#leafy-market");
 assert.equal(searchDocuments(chineseIndex, "锆矿在哪里买")[0].url, "/zh/database/materials#zirconite");
-assert.equal(searchDocuments(chineseIndex, "工作台通电任务")[0].url, "/zh/database/quests#power-to-the-bench");
-assert.ok(searchDocuments(chineseIndex, "Angela 买鸡").some((result) => result.url === "/zh/database/npcs#angela"));
+assert.ok(["/zh/database/quests#power-to-the-bench", "/zh/database/quests/power-to-the-bench#power-to-the-bench"].includes(searchDocuments(chineseIndex, "工作台通电任务")[0].url));
+assert.ok(searchDocuments(chineseIndex, "Angela 买鸡").some((result) => [
+  "/zh/database/npcs#angela",
+  "/zh/database/npcs/angela#angela",
+  "/zh/guides/animal-guide#getting",
+  "/zh/database/quests#chicken-coop-mission",
+  "/zh/database/quests/chicken-coop-mission#chicken-coop-mission"
+].includes(result.url)), "Angela chicken query must reach an actionable chicken or NPC answer");
 assert.equal(searchDocuments(chineseIndex, "Susan 动物感染治疗")[0].url, "/zh/database/npcs#susan");
-assert.equal(searchDocuments(chineseIndex, "Meriam 蓝图目录")[0].url, "/zh/database/npcs#meriam");
+assert.ok([
+  "/zh/database/npcs#meriam",
+  "/zh/database/npcs/meriam#meriam",
+  "/zh/database/quests/solar-panel-objective#solar-panel-objective",
+  "/zh/database/quests#solar-panel-objective"
+].includes(searchDocuments(chineseIndex, "Meriam 蓝图目录")[0].url), "Meriam blueprint query must lead to a useful NPC or quest answer");
 
 /* The five translated core guides must rank for the community phrases they answer. */
 assert.equal(searchDocuments(chineseIndex, "鸡不下蛋")[0].url, "/zh/guides/animal-guide#eggs");

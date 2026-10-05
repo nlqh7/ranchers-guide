@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 2,
+  "meta": {
+    "build": "0.8.10.842",
+    "sourceBoundary": "Owned-build configuration plus existing public observations; not a current-runtime transcript.",
+    "lastUpdated": "2026-10-05",
+    "nodeContract": "Nodes and edges retain conversation/entry IDs. Conditions are summarized as availability notes and are never evaluated by the site."
+  },
+  "scenes": [
+    {
+      "id": "meriam-introduction",
+      "npcId": "meriam",
+      "actorId": 7,
+      "npcTarget": "npc:meriam",
+      "participantIds": {"player": 1, "conversant": 7},
+      "conversationRefs": ["16:NPC_Meriam/MAIN", "52:NPC_Meriam/Quests"],
+      "questIds": ["meet-meriem", "a-new-beginning"],
+      "serviceIds": ["meriam-blueprint-and-selling"],
+      "title": "Arrival and the first hand-off",
+      "zhTitle": "抵达后的初次交接",
+      "summary": "The retained quest conversation moves from Meriam's airport greeting to taking the wheel, then records the welcome pack and the hand-off toward City Hall.",
+      "zhSummary": "保留的任务对话从玛丽阿姆在机场打招呼开始，经过接过方向盘，再到欢迎礼包和前往市政厅的交接。",
+      "topics": ["arrival", "ranch hand-off", "welcome pack"],
+      "zhTopics": ["抵达", "牧场交接", "欢迎礼包"],
+      "status": "configured",
+      "spoilerSafe": true,
+      "spoiler": "This is an editor-selected path through the recorded nodes. It does not guarantee current runtime order or every trigger.",
+      "zhSpoiler": "这是从已记录节点中选出的查阅路径，不保证当前运行顺序或全部触发条件。",
+      "publicRefs": ["npc:meriam", "quest:meet-meriem", "quest:a-new-beginning", "service:meriam-blueprint-and-selling"],
+      "evidence": {"level": "build-observed", "build": "0.8.10.842", "sourceIds": ["owned-build-dialogue"]},
+      "groups": [
+        {
+          "id": "arrival-handoff",
+          "label": "Airport greeting to the ranch hand-off",
+          "zhLabel": "从机场问候到牧场交接",
+          "overview": "A real node path in Conversation 52: greeting, driving hand-off and departure.",
+          "zhOverview": "对话 52 中的实际节点路径：问候、驾驶交接和出发。",
+          "entryNodes": ["52/2"],
+          "nodes": [
+            {"id":"52/2","role":"npc","speaker":"Meriam","zhSpeaker":"玛丽阿姆","text":"Hey there, {PLAYER_NAME}! I’m Meriam! Welcome to Ranchers Country! I’m so glad you made it safely. How was your flight?","zhText":"嘿，{PLAYER_NAME}！我是玛丽阿姆！欢迎来到牧场之乡！你安全到了，我太开心了。飞行过程怎么样？","sourceRef":"52/2"},
+            {"id":"52/3","role":"player","speaker":"Player","zhSpeaker":"玩家","text":"It was good, thanks!","zhText":"还不错，谢谢！","sourceRef":"52/3"},
+            {"id":"52/4","role":"npc","speaker":"Meriam","zhSpeaker":"玛丽阿姆","text":"Perfect! Would you mind taking the wheel? I’ve got your ride warmed up right over there.","zhText":"太好了！你愿意来开车吗？我已经把你的车预热好了，就在那边。","sourceRef":"52/4"},
+            {"id":"52/5","role":"player","speaker":"Player","zhSpeaker":"玩家","text":"Sure thing!","zhText":"当然可以！","sourceRef":"52/5"},
+            {"id":"52/6","role":"npc","speaker":"Meriam","zhSpeaker":"玛丽阿姆","text":"Okay, go ahead to the car, I’ll follow. Your ranch is ready.","zhText":"好的，你先去车上，我跟在后面。你的牧场已经准备好了。","sourceRef":"52/6"},
+            {"id":"52/7","role":"player","speaker":"Player","zhSpeaker":"玩家","text":"Let's go!","zhText":"走吧！","sourceRef":"52/7"}
+          ],
+          "edges": [{"from":"52/2","to":"52/3"},{"from":"52/3","to":"52/4"},{"from":"52/4","to":"52/5"},{"from":"52/5","to":"52/6"},{"from":"52/6","to":"52/7"}]
+        },
+        {
+          "id": "welcome-pack",
+          "label": "Welcome pack and Victor hand-off",
+          "zhLabel": "欢迎礼包与维克多交接",
+          "overview": "A later recorded segment lists the hammer, Red Tent blueprint and strawberries before pointing to Mayor Victor.",
+          "zhOverview": "后续已记录片段列出锤子、红色帐篷蓝图和草莓，然后把玩家引向维克多市长。",
+          "entryNodes": ["52/13"],
+          "nodes": [
+            {"id":"52/13","role":"npc","speaker":"Meriam","zhSpeaker":"玛丽阿姆","text":"First, this hammer. Next, here’s the blueprint for a simple tent. And lastly… strawberries!","zhText":"首先是这把锤子。然后是简易帐篷的蓝图。最后……是草莓！","sourceRef":"52/13"},
+            {"id":"52/14","role":"player","speaker":"Player","zhSpeaker":"玩家","text":"Thank you, Meriam!","zhText":"谢谢你，玛丽阿姆！","sourceRef":"52/14"},
+            {"id":"52/15","role":"npc","speaker":"Meriam","zhSpeaker":"玛丽阿姆","text":"I need to dash over to the city hall and tell Mayor Victor you’ve arrived.","zhText":"我得赶紧去市政厅，告诉维克多市长你到了。","sourceRef":"52/15"},
+            {"id":"52/16","role":"player","speaker":"Player","zhSpeaker":"玩家","text":"Sounds good. Thanks for everything","zhText":"听起来不错。谢谢你做的一切","sourceRef":"52/16"},
+            {"id":"52/17","role":"npc","speaker":"Meriam","zhSpeaker":"玛丽阿姆","text":"Enjoy your first day as a rancher! I’ll call soon to check in.","zhText":"祝你第一天当牧场主愉快！我很快会打电话问候你。","sourceRef":"52/17"},
+            {"id":"52/18","role":"player","speaker":"Player","zhSpeaker":"玩家","text":"Talk soon!","zhText":"回头聊！","sourceRef":"52/18"}
+          ],
+          "edges": [{"from":"52/13","to":"52/14"},{"from":"52/14","to":"52/15"},{"from":"52/15","to":"52/16"},{"from":"52/16","to":"52/17"},{"from":"52/17","to":"52/18"}]
+        }
+      ]
+    },
+    {
+      "id": "victor-utility-contracts",
+      "npcId": "victor",
+      "actorId": 4,
+      "npcTarget": "npc:victor",
+      "participantIds": {"player": 1, "conversant": 4},
+      "conversationRefs": ["37:NPC_Victor/MAIN", "8:NPC_Victor/SellContracts"],
+      "questIds": ["axe-pick-and-welcome", "power-to-the-bench"],
+      "serviceIds": ["electricity-contract-actions", "water-contract-actions"],
+      "title": "Contracts, tools and the workbench route",
+      "zhTitle": "合同、工具与工作台路线",
+      "summary": "Victor's recorded contract conversation exposes separate electricity and water choices, each with a confirmation or defer branch.",
+      "zhSummary": "维克多的已记录合同对话分出电力与供水两个选择，每个选择都有办理或稍后再来的分支。",
+      "topics": ["utility contracts", "tools", "workbench"],
+      "zhTopics": ["水电合同", "工具", "工作台"],
+      "status": "configured",
+      "spoilerSafe": true,
+      "spoiler": "Money and condition text below are build configuration. The site shows the branches but never evaluates or promises the result.",
+      "zhSpoiler": "下方金额和条件文字属于构建配置。网站只展示分支，不计算条件，也不承诺结果。",
+      "publicRefs": ["npc:victor", "quest:axe-pick-and-welcome", "quest:power-to-the-bench", "service:electricity-contract-actions", "service:water-contract-actions"],
+      "evidence": {"level": "build-observed", "build": "0.8.10.842", "sourceIds": ["owned-build-dialogue", "launch-video"]},
+      "groups": [
+        {
+          "id": "utility-choices",
+          "label": "Choose a contract, then confirm or defer",
+          "zhLabel": "选择合同，再办理或暂缓",
+          "overview": "Conversation 8 keeps the option nodes and their destinations. The condition hints are editorial summaries, not evaluated checks.",
+          "zhOverview": "对话 8 保留了选项节点及其去向。条件提示是编辑摘要，不是网站执行的判定。",
+          "entryNodes": ["8/1"],
+          "nodes": [
+            {"id":"8/1","role":"npc","speaker":"Mayor","zhSpeaker":"维克多市长","text":"How i can help you today?","zhText":"今天我能帮你做些什么？","sourceRef":"8/1"},
+            {"id":"8/2","role":"player","speaker":"Player","zhSpeaker":"玩家","text":"Subscribe to an electricity and gas contract","zhText":"办理电力和燃气合同","sourceRef":"8/2"},
+            {"id":"8/5","role":"npc","speaker":"Mayor","zhSpeaker":"维克多市长","text":"Your energy use is billed at the end of each day. The commissioning fee is 1,000C. Would you like to subscribe now?","zhText":"你的能源使用会在每天结束时结算。合同启用费是 1,000C。现在办理吗？","sourceRef":"8/5"},
+            {"id":"8/6","role":"player","speaker":"Player","zhSpeaker":"玩家","text":"Subscribe now","zhText":"现在办理","sourceRef":"8/6","availabilityNote":"Requires the build's money condition; not evaluated here.","zhAvailabilityNote":"需要满足构建中的金钱条件；网站不执行该条件。"},
+            {"id":"8/7","role":"player","speaker":"Player","zhSpeaker":"玩家","text":"I'll do it later","zhText":"以后办理","sourceRef":"8/7"},
+            {"id":"8/3","role":"player","speaker":"Player","zhSpeaker":"玩家","text":"Subscribe to a water contract","zhText":"办理供水合同","sourceRef":"8/3"},
+            {"id":"8/8","role":"npc","speaker":"Mayor","zhSpeaker":"维克多市长","text":"Your water use is billed at the end of each day. The commissioning fee is 500C. Would you like to subscribe now?","zhText":"你的耗水量会在每天结束时结算。合同启用费是 500C。现在办理吗？","sourceRef":"8/8"},
+            {"id":"8/9","role":"player","speaker":"Player","zhSpeaker":"玩家","text":"Subscribe now","zhText":"现在办理","sourceRef":"8/9","availabilityNote":"Requires the build's money condition; not evaluated here.","zhAvailabilityNote":"需要满足构建中的金钱条件；网站不执行该条件。"}
+          ],
+          "edges": [
+            {"from":"8/1","to":"8/2","label":"Electricity and gas","zhLabel":"电力与燃气"},
+            {"from":"8/1","to":"8/3","label":"Water","zhLabel":"供水"},
+            {"from":"8/2","to":"8/5"},{"from":"8/5","to":"8/6","label":"Confirm","zhLabel":"确认办理"},{"from":"8/5","to":"8/7","label":"Defer","zhLabel":"稍后再来"},
+            {"from":"8/3","to":"8/8"},{"from":"8/8","to":"8/9","label":"Confirm","zhLabel":"确认办理"},{"from":"8/8","to":"8/7","label":"Defer","zhLabel":"稍后再来"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "angela-coop-route",
+      "npcId": "angela",
+      "actorId": 6,
+      "npcTarget": "npc:angela",
+      "participantIds": {"player": 1, "conversant": 6},
+      "conversationRefs": ["45:NPC_Angela/MAIN", "46:NPC_Angela/SellGoods"],
+      "questIds": ["chicken-coop-mission"],
+      "serviceIds": ["angela-shop-catalogue"],
+      "title": "Chicken seller greeting and shop choice",
+      "zhTitle": "卖鸡商人的问候与商店选择",
+      "summary": "Angela's recorded conversation confirms a first-meeting greeting and a shop menu with a shop-items option or a safe exit; it does not prove stock or purchase hand-off.",
+      "zhSummary": "Angela 的已记录对话包含首次见面问候和商店菜单，可查看商品或退出；它不能证明库存或买鸡交接。",
+      "topics": ["chicken seller", "shop menu", "coop mission"],
+      "zhTopics": ["卖鸡商人", "商店菜单", "鸡舍任务"],
+      "status": "configured-plus-community",
+      "spoilerSafe": true,
+      "spoiler": "The seller branch is configuration evidence only. Current stock, hours and the physical pickup route remain separate evidence.",
+      "zhSpoiler": "商人分支只是构建配置证据。当前库存、营业时间和实体取鸡路线仍需看其他证据。",
+      "publicRefs": ["npc:angela", "quest:chicken-coop-mission", "service:angela-shop-catalogue"],
+      "evidence": {"level": "community-confirmed", "build": "0.8.10.x", "sourceIds": ["owned-build-dialogue", "chicken-coop-thread", "animal-support-scan"]},
+      "groups": [
+        {
+          "id": "seller-menu",
+          "label": "Greeting and shop menu",
+          "zhLabel": "问候与商店菜单",
+          "overview": "Conversation 46 keeps the first-meeting route and the two menu choices.",
+          "zhOverview": "对话 46 保留首次见面路线和两个菜单选择。",
+          "entryNodes": ["46/8", "46/9"],
+          "nodes": [
+            {"id":"46/8","role":"npc","speaker":"Angela","zhSpeaker":"Angela 安吉拉","text":"You must be {PLAYER_NAME}! It's a pleasure to meet you! I'm {Talking_NPC_Name}, the poultry farmer and caretaker of this beautiful farm. My brother Malcolm mentioned you.","zhText":"你一定是{PLAYER_NAME}吧！很高兴见到你！我是{Talking_NPC_Name}，是这个美丽农场的家禽饲养员和看护人。我的兄弟马尔科姆提到过你。","sourceRef":"46/8"},
+            {"id":"46/9","role":"npc","speaker":"Angela","zhSpeaker":"Angela 安吉拉","text":"Hi {PlayerName}!","zhText":"嗨，{PlayerName}！","sourceRef":"46/9"},
+            {"id":"46/4","role":"npc","speaker":"Angela","zhSpeaker":"Angela 安吉拉","text":"How can I help you today?","zhText":"今天我能帮你做些什么呀？","sourceRef":"46/4"},
+            {"id":"46/5","role":"player","speaker":"Player","zhSpeaker":"玩家","text":"View shop items","zhText":"查看商店商品","sourceRef":"46/5"},
+            {"id":"46/6","role":"player","speaker":"Player","zhSpeaker":"玩家","text":"I'll come back later","zhText":"我晚点再来","sourceRef":"46/6"}
+          ],
+          "edges": [{"from":"46/8","to":"46/4"},{"from":"46/9","to":"46/4"},{"from":"46/4","to":"46/5","label":"Open shop","zhLabel":"打开商店"},{"from":"46/4","to":"46/6","label":"Leave","zhLabel":"离开"}]
+        }
+      ]
+    },
+    {
+      "id": "gigi-egg-route",
+      "npcId": "gigi",
+      "actorId": 6,
+      "npcTarget": "npc:gigi",
+      "participantIds": {"player": 1, "conversant": 6},
+      "conversationRefs": ["55:NPC_Gigi/MAIN", "51:NPC_Gigi/Quests"],
+      "questIds": ["real-eggs-real-evidence", "a-ride-and-a-revelation"],
+      "serviceIds": [],
+      "title": "Egg hand-off and the escape branch",
+      "zhTitle": "鸡蛋交付与逃离分支",
+      "summary": "Gigi's recorded quest nodes branch on whether the player has two large eggs, then continue through the hand-off, police escape and return conversation.",
+      "zhSummary": "Gigi 的已记录任务节点会根据玩家是否有两个大鸡蛋分支，然后继续到交付、逃离警察和送回后的对话。",
+      "topics": ["egg hand-off", "police escape", "return route"],
+      "zhTopics": ["鸡蛋交付", "逃离警察", "送回路线"],
+      "status": "configured-plus-community",
+      "spoilerSafe": true,
+      "spoiler": "The egg check and later escape nodes are recorded build references. The site does not execute inventory or police conditions.",
+      "zhSpoiler": "鸡蛋检查和后续逃离节点是构建记录。网站不执行背包或警察条件。",
+      "publicRefs": ["npc:gigi", "quest:real-eggs-real-evidence", "quest:a-ride-and-a-revelation"],
+      "evidence": {"level": "official-plus-community", "build": "0.8.10.x", "sourceIds": ["owned-build-dialogue", "gigi-quest-thread", "gigi-official-end-thread"]},
+      "groups": [
+        {
+          "id": "egg-handoff",
+          "label": "Two-egg check to the documented hand-off",
+          "zhLabel": "两个鸡蛋检查到已记录交付",
+          "overview": "Conversation 51 keeps the choice node, the two-egg branch, the escape cue and the post-escape hand-off.",
+          "zhOverview": "对话 51 保留选择节点、两个鸡蛋分支、逃离提示和逃离后的交付。",
+          "entryNodes": ["51/42"],
+          "nodes": [
+            {"id":"51/42","role":"npc","speaker":"Gigi","zhSpeaker":"吉吉","text":"Hey, {PLAYER_NAME}! You made it. Do you have the eggs?","zhText":"嘿，{PLAYER_NAME}！你终于来了。你带鸡蛋了吗？","sourceRef":"51/42"},
+            {"id":"51/43","role":"player","speaker":"Player","zhSpeaker":"玩家","text":"Yes, 2 large eggs, both organic.","zhText":"是的，2 个大鸡蛋，都是有机的。","sourceRef":"51/43","availabilityNote":"The source condition requires at least two large eggs.","zhAvailabilityNote":"来源条件要求至少有两个大鸡蛋。"},
+            {"id":"51/44","role":"player","speaker":"Player","zhSpeaker":"玩家","text":"Working on it!","zhText":"正在弄呢！","sourceRef":"51/44","availabilityNote":"The source condition is fewer than two large eggs.","zhAvailabilityNote":"来源条件是少于两个大鸡蛋。"},
+            {"id":"51/45","role":"npc","speaker":"Gigi","zhSpeaker":"吉吉","text":"Perfect. Thank you. This helps more than you know.","zhText":"太好了。谢谢你。这帮了我大忙，你都不知道。","sourceRef":"51/45"},
+            {"id":"51/46","role":"npc","speaker":"Gigi","zhSpeaker":"吉吉","text":"I have joined Vitalis Labs so I can run real tests. I want the truth in the open.","zhText":"我加入了维塔利斯实验室，这样就能做真正的测试。我想把真相公之于众。","sourceRef":"51/46"},
+            {"id":"51/47","role":"player","speaker":"Player","zhSpeaker":"玩家","text":"You really think it is that serious?","zhText":"你真觉得有那么严重吗？","sourceRef":"51/47"},
+            {"id":"51/48","role":"npc","speaker":"Gigi","zhSpeaker":"吉吉","text":"Yes. We are seeing odd fractures in shells, strange hatch rates, and residue that does not belong in healthy feed cycles.","zhText":"是的。我们发现蛋壳有奇怪的裂纹，孵化率异常，还有在健康的饲料循环里不该出现的残留物。","sourceRef":"51/48"},
+            {"id":"51/49","role":"npc","speaker":"Gigi","zhSpeaker":"吉吉","text":"Do you hear that?","zhText":"你听到了吗？","sourceRef":"51/49"},
+            {"id":"51/50","role":"npc","speaker":"Gigi","zhSpeaker":"吉吉","text":"They are close. Someone tipped them off about the handoff. WE HAVE TO RUN!","zhText":"他们离得很近。有人通风报信，告诉他们交接的事了。我们赶紧跑！","sourceRef":"51/50"},
+            {"id":"51/55","role":"npc","speaker":"Gigi","zhSpeaker":"吉吉","text":"We made it, {PLAYER_NAME}. Clean drop. I think the drones peeled off.","zhText":"{PlayerName}，我们成功了。我觉得无人机已经离开了。","sourceRef":"51/55"},
+            {"id":"51/56","role":"npc","speaker":"Gigi","zhSpeaker":"吉吉","text":"You good?","zhText":"你没事吧？","sourceRef":"51/56"},
+            {"id":"51/57","role":"player","speaker":"Player","zhSpeaker":"玩家","text":"I am good. The eggs are intact.","zhText":"我没事，鸡蛋都好好的。","sourceRef":"51/57","availabilityNote":"The source condition checks for two large eggs; the hand-off action is not run by this site.","zhAvailabilityNote":"来源条件检查两个大鸡蛋；网站不执行交付动作。"},
+            {"id":"51/58","role":"npc","speaker":"Gigi","zhSpeaker":"吉吉","text":"I will get these into the cold room, then start tests tonight.","zhText":"我会把这些放进冷藏室，今晚就开始测试。","sourceRef":"51/58"},
+            {"id":"51/59","role":"player","speaker":"Player","zhSpeaker":"玩家","text":"What happens next?","zhText":"接下来会怎么样？","sourceRef":"51/59"},
+            {"id":"51/60","role":"npc","speaker":"Gigi","zhSpeaker":"吉吉","text":"If the results show non controlled edits or vectors that can leak into wild flocks, we will have proof.","zhText":"要是结果显示存在不受控制的基因编辑，或者有能渗透到野生鸟类中的载体，我们就有证据了。","sourceRef":"51/60"},
+            {"id":"51/61","role":"npc","speaker":"Gigi","zhSpeaker":"吉吉","text":"I just sent your thank you credit and a secure contact card.","zhText":"我刚给你发了感谢礼金和安全联系卡。","sourceRef":"51/61"},
+            {"id":"51/62","role":"player","speaker":"Player","zhSpeaker":"玩家","text":"Anything you need from me?","zhText":"你还需要我做什么吗？","sourceRef":"51/62"},
+            {"id":"51/63","role":"npc","zhSpeaker":"吉吉","speaker":"Gigi","text":"Keep your coop fully organic and log every feed and hatch.","zhText":"让你的鸡舍完全采用有机方式，记录每一次喂食和孵化情况。","sourceRef":"51/63"},
+            {"id":"51/64","role":"npc","speaker":"Gigi","zhSpeaker":"吉吉","text":"Thank you for today, {PLAYER_NAME}. You did more than drive. You protected the truth.","zhText":"{PlayerName}，谢谢你今天帮忙。你不只是开车而已，你保护了真相。","sourceRef":"51/64"},
+            {"id":"51/65","role":"player","speaker":"Player","zhSpeaker":"玩家","text":"Call me when you have results","zhText":"有结果了给我打电话","sourceRef":"51/65"}
+          ],
+          "edges": [
+            {"from":"51/42","to":"51/43","label":"Have two large eggs","zhLabel":"有两个大鸡蛋"},
+            {"from":"51/42","to":"51/44","label":"Fewer than two large eggs","zhLabel":"少于两个大鸡蛋"},
+            {"from":"51/43","to":"51/45"},{"from":"51/45","to":"51/46"},{"from":"51/46","to":"51/47"},{"from":"51/47","to":"51/48"},{"from":"51/48","to":"51/49"},{"from":"51/49","to":"51/50"},
+            {"from":"51/55","to":"51/56"},{"from":"51/56","to":"51/57","label":"Eggs intact","zhLabel":"鸡蛋完好"},{"from":"51/57","to":"51/58"},{"from":"51/58","to":"51/59"},{"from":"51/59","to":"51/60"},{"from":"51/60","to":"51/61"},{"from":"51/61","to":"51/62"},{"from":"51/62","to":"51/63"},{"from":"51/63","to":"51/64"},{"from":"51/64","to":"51/65"}
+          ],
+          "knownFollowUp": {"sourceRef":"51/54","label":"After the documented police escape condition","zhLabel":"满足已记录的逃离警察条件后","targetNode":"51/55"}
+        }
+      ]
+    }
+  ]
+}

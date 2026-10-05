@@ -194,41 +194,25 @@ assert.match(zhNpcHtml, /Meriam 蓝图目录与出售/);
 assert.match(zhNpcHtml, /动物感染治疗/);
 for (const html of [questHtml, zhQuestHtml]) {
   assert.equal((html.match(/data-quest-build-guide=/g) || []).length, 18, "all task records must remain reachable from the directory");
-  assert.equal((html.match(/<div class="quest-build-guide" data-quest-build-guide=/g) || []).length, 16, "only non-migrated quest entries keep full inline steps");
-  assert.equal((html.match(/data-quest-directory-summary=/g) || []).length, 2, "migrated quest entries must keep compact directory summaries");
-  assert.equal((html.match(/data-quest-flow/g) || []).length, 16, "full inline quest guides must render failure and continuation data");
-  assert.equal((html.match(/data-dialogue-defined-quest/g) || []).length, 2, "dialogue-defined leads need a distinct visible boundary");
-  assert.equal((html.match(/data-configured-reward-action=/g) || []).length, 5, "five source-matched static quest reward actions must render");
-  assert.equal((html.match(/data-quest-objective=/g) || []).length, 66, "full inline guides must retain their configured objectives");
-  assert.match(html, /database\/quests\/(?:seeds-of-success|feathered-foes)/, "migrated quests must link to standalone detail entries");
+  assert.equal((html.match(/<div class="quest-directory-answer" data-quest-build-guide=/g) || []).length, 18, "directory keeps compact summaries for every standalone quest");
+  assert.equal((html.match(/data-quest-directory-summary=/g) || []).length, 18, "all standalone quests must be represented as compact directory summaries");
+  assert.equal((html.match(/data-quest-flow/g) || []).length, 0, "full quest flows belong on standalone pages, not the aggregate directory");
+  assert.equal((html.match(/data-quest-objective=/g) || []).length, 0, "configured objectives belong on standalone pages, not the aggregate directory");
+  assert.match(html, /database\/quests\/(?:meet-meriem|seeds-of-success|feathered-foes)/, "directory entries must link to standalone detail pages");
   assert.match(html, /quest-guide\.css\?v=20260830-1/);
   assert.doesNotMatch(html, /State_HasMoney|InventoryGetItemCount|Quest_Concrd|F_Quest_/);
 }
-assert.match(questHtml, /Hammer × 1 · Bronze/);
-assert.match(questHtml, /Garlic Seed × 8 · Silver/);
-assert.match(questHtml, /After handing over 2 Chicken Egg - Large/);
-assert.match(zhQuestHtml, /锤子 × 1 · 铜级/);
-assert.match(zhQuestHtml, /大蒜种子 × 8 · 银级/);
-assert.match(zhQuestHtml, /交付 2 个大号鸡蛋后/);
-assert.doesNotMatch(questHtml + zhQuestHtml, /Inventory_AddItem|State_SetMoney\(20000\)/);
-assert.match(questHtml, /Quest-level failure configuration/);
-assert.match(questHtml, /Player death/);
-assert.match(questHtml, /Starts <a href="#from-blueprint-to-bed">From Blueprint to Bed<\/a>/);
-assert.match(zhQuestHtml, /任务级失败配置/);
-assert.match(zhQuestHtml, /玩家死亡/);
-assert.match(zhQuestHtml, /接续 <a href="#from-blueprint-to-bed">从蓝图到床铺<\/a>/);
-assert.match(questHtml, /Configured dialogue reward: 300,000 C/);
-assert.match(questHtml, /Ask for money: 100,000 C/);
-assert.match(questHtml, /Decline money: 200,000 C/);
-assert.match(zhQuestHtml, /对话配置奖励：300,000 C/);
-assert.match(zhQuestHtml, /选择要钱：100,000 C/);
-assert.match(zhQuestHtml, /选择不要钱：200,000 C/);
-assert.match(questHtml, /Coop Dreams/);
-assert.match(zhQuestHtml, /鸡舍梦想计划/);
-assert.match(zhQuestHtml, /站长收集/);
-assert.match(zhQuestHtml, /证据版本: 0\.8\.10\.455/, "older gameplay observations must retain their own build");
-assert.match(zhQuestHtml, /href="\/zh\/map#city-hall"/);
-assert.match(zhQuestHtml, /href="\/zh\/map#bykii-terminal"/);
+const standaloneHtml = quests.quests.flatMap((quest) => [
+  read(`database/quests/${quest.id}.html`),
+  read(`zh/database/quests/${quest.id}.html`),
+]).join('\n');
+assert.equal((standaloneHtml.match(/data-quest-route-flow=/g) || []).length, 36, "all bilingual standalone quest pages must render failure and continuation data");
+assert.equal((standaloneHtml.match(/data-quest-route-position=/g) || []).length, 36, "all bilingual standalone quest pages must render route position");
+assert.doesNotMatch(questHtml + zhQuestHtml + standaloneHtml, /Inventory_AddItem|State_SetMoney\(20000\)/);
+assert.match(standaloneHtml, /Failure conditions, recovery & continuation/);
+assert.match(standaloneHtml, /失败条件、恢复与后续/);
+assert.match(standaloneHtml, /Coop Dreams/);
+assert.match(standaloneHtml, /鸡舍梦想计划/);
 for (const relative of ["knowledge-index.json", "zh/knowledge-index.json"]) {
   const index = readJson(relative);
   for (const quest of quests.quests) {

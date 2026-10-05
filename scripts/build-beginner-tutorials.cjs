@@ -92,7 +92,7 @@ function renderPolicePursuit(zh) {
     ? '警方追捕 怎么触发 偷车 农场动物 攻击 杀死角色 HUD 通缉等级 一星 1星 交罚款 自首 逃跑 拘留 警车 无人机'
     : 'police pursuit how starts trigger steal vehicle farm animal kill character HUD wanted level one star 1 star pay fine surrender escape custody police car drone';
   return `<!-- BEGIN POLICE PURSUIT TUTORIAL REFERENCE -->
-<section class="answer-box tutorial-reference" id="police-pursuit-current-build" aria-labelledby="police-pursuit-current-build-title" data-search-entry data-search-title="${esc(copy.title)}" data-search-tags="${esc(tags)}" data-search-status="${zh ? '游戏构建提示' : 'Game-build guidance'}">
+<section class="answer-box tutorial-reference" id="police-pursuit-current-build" aria-labelledby="police-pursuit-current-build-title" data-search-entry data-search-title="${esc(copy.title)}" data-search-aliases="${esc(zh ? '一星怎么交罚款|警方追捕 自首 逃跑' : 'pay fine at one star|police pursuit surrender or escape')}" data-search-tags="${esc(tags)}" data-search-status="${zh ? '游戏构建提示' : 'Game-build guidance'}">
   <h2 id="police-pursuit-current-build-title">${esc(copy.title)}</h2>
   <p><strong>${zh ? '直接答案：' : 'Short answer: '}</strong>${esc(copy.summary)}</p>
   <ol>

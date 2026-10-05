@@ -2,13 +2,16 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { decorateReferencePage } = require('./render-database-browser.cjs');
 const { renderSiteFooter } = require('./render-site-footer.cjs');
+const { storyReferenceAssets } = require('./render-npc-story.cjs');
 const miscItems = require('../data/build-misc-items.json');
 const dialogueServices = require('../data/dialogue-services.json');
+const dialogueScenes = require('../data/dialogue-scenes.json');
 
 const root = path.resolve(__dirname, "..");
 const checkOnly = process.argv.includes("--check");
 const b2Entries = require('../data/b2-entry-pages.json');
 const standaloneQuestIds = new Set(b2Entries.quests);
+const questRecordsForLinks = require('../data/quests.json').quests;
 
 function esc(value) {
   return String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
@@ -97,6 +100,15 @@ const relatedRouteLabels = {
   "/database/animals#cow": { en: "Cow products", zh: "牛与产品" },
 };
 
+function standaloneQuestLinks(locale) {
+  const prefix = locale === 'zh' ? '/zh' : '';
+  return [...standaloneQuestIds].map(id => {
+    const record = questRecordsForLinks.find(item => item.id === id);
+    if (!record) return '';
+    return `<a href="${prefix}/database/quests/${id}">${esc(locale === 'zh' ? record.zhName : record.name)}</a>`;
+  }).filter(Boolean).join(locale === 'zh' ? '、' : ' · ');
+}
+
 function entityRecord(target, locale) {
   const record = entityCatalog.get(`${target.type}:${target.id}`);
   if (!record) throw new Error(`Unknown entity relation target ${target.type}:${target.id}`);
@@ -131,16 +143,16 @@ function backlinksHtml(recordsKey, record, locale) {
 
 function npcLookupGuide(locale) {
   if (locale === "zh") {
-    return `<section class="answer-box npc-lookup-guide"><h2>先按你的目标找 NPC</h2><p>不要只按人物名字浏览。先确定你要办理的事情，再沿着已记录的地图、任务和攻略入口继续。</p><ul><li><strong>水电合同或额外土地：</strong>查 Victor，再打开 <a href="/zh/map#city-hall">市政厅地图</a> 和<a href="/zh/guides/electricity-power#two-paths">水电指南</a>。</li><li><strong>买鸡或鸡舍设备：</strong>查 Angela；动物感染治疗则查 Susan。</li><li><strong>蓝图、商店或出售：</strong>查 Meriam、Malcolm；车辆目录或修理查乡村维修商。</li><li><strong>大鸡蛋任务或警察追逐：</strong>查 Gigi，再打开<a href="/zh/guides/gigi-large-egg-quest">大鸡蛋路线</a>和<a href="/zh/guides/police-wanted-levels">警星指南</a>。</li></ul></section>`;
+    return `<section class="answer-box npc-lookup-guide"><h2>先按你的目标找 NPC</h2><p>不要只按人物名字浏览。先确定你要办理的事情，再沿着已记录的地图、任务和攻略入口继续。<a href="/zh/guides/story">也可以按人物与任务查看剧情索引。</a></p><ul><li><strong>水电合同或额外土地：</strong>查 Victor，再打开 <a href="/zh/map#city-hall">市政厅地图</a> 和<a href="/zh/guides/electricity-power#two-paths">水电指南</a>。</li><li><strong>买鸡或鸡舍设备：</strong>查 Angela；动物感染治疗则查 Susan。</li><li><strong>蓝图、商店或出售：</strong>查 Meriam、Malcolm；车辆目录或修理查乡村维修商。</li><li><strong>大鸡蛋任务或警察追逐：</strong>查 Gigi，再打开<a href="/zh/guides/gigi-large-egg-quest">大鸡蛋路线</a>和<a href="/zh/guides/police-wanted-levels">警星指南</a>。</li></ul></section>`;
   }
-  return `<section class="answer-box npc-lookup-guide"><h2>Start from the task, not only the name</h2><p>Choose the service or problem you are trying to solve, then follow the recorded map, quest and guide links for that NPC.</p><ul><li><strong>Utility contracts or extra land:</strong> start with Victor, then open the <a href="/map#city-hall">City Hall map</a> and <a href="/guides/electricity-power#two-paths">electricity guide</a>.</li><li><strong>Chickens and animal care:</strong> start with Angela for buying and housing, or Susan for the build-defined infection-treatment path.</li><li><strong>Blueprints, shops or selling:</strong> check Meriam or Malcolm; use the country mechanic for its catalogue and vehicle-repair path.</li><li><strong>Large eggs or the police chase:</strong> start with Gigi, then open the <a href="/guides/gigi-large-egg-quest">large-egg route</a> and <a href="/guides/police-wanted-levels">wanted-level guide</a>.</li></ul></section>`;
+  return `<section class="answer-box npc-lookup-guide"><h2>Start from the task, not only the name</h2><p>Choose the service or problem you are trying to solve, then follow the recorded map, quest and guide links for that NPC. <a href="/guides/story">You can also browse the NPC &amp; quest story index.</a></p><ul><li><strong>Utility contracts or extra land:</strong> start with Victor, then open the <a href="/map#city-hall">City Hall map</a> and <a href="/guides/electricity-power#two-paths">electricity guide</a>.</li><li><strong>Chickens and animal care:</strong> start with Angela for buying and housing, or Susan for the build-defined infection-treatment path.</li><li><strong>Blueprints, shops or selling:</strong> check Meriam or Malcolm; use the country mechanic for its catalogue and vehicle-repair path.</li><li><strong>Large eggs or the police chase:</strong> start with Gigi, then open the <a href="/guides/gigi-large-egg-quest">large-egg route</a> and <a href="/guides/police-wanted-levels">wanted-level guide</a>.</li></ul></section>`;
 }
 
 function questLookupGuide(locale) {
   if (locale === "zh") {
-    return `<section class="answer-box quest-lookup-guide"><strong>从你正在完成的任务开始：</strong>车辆路线查看<a href="#rust-to-rumbling">Rust to Rumbling!</a>，电力和工作台查看<a href="#power-to-the-bench">Power to the Bench</a>，买鸡后带回家查看<a href="#chicken-coop-mission">养鸡场记录</a>，任务追踪器卡在屋顶时查看<a href="#roof-building">屋顶目标</a>。每张卡都会连接下一步攻略或地图；没有证据的奖励和前置条件继续留空。<br><strong>独立词条：</strong><a href="/zh/database/quests/seeds-of-success">成功的种子</a>、<a href="/zh/database/quests/feathered-foes">长着羽毛的敌人</a>。</section>`;
+    return `<section class="answer-box quest-lookup-guide"><strong>从你正在完成的任务开始：</strong>车辆路线查看<a href="#rust-to-rumbling">Rust to Rumbling!</a>，电力和工作台查看<a href="#power-to-the-bench">Power to the Bench</a>，买鸡后带回家查看<a href="#chicken-coop-mission">养鸡场记录</a>，任务追踪器卡在屋顶时查看<a href="#roof-building">屋顶目标</a>。每张卡都会连接下一步攻略或地图；没有证据的奖励和前置条件继续留空。<br><strong>独立词条（${standaloneQuestIds.size} 条）：</strong>${standaloneQuestLinks(locale)}。</section>`;
   }
-  return `<section class="answer-box quest-lookup-guide"><strong>Start from the task you are trying to finish:</strong> use <a href="#rust-to-rumbling">Rust to Rumbling!</a> for the observed vehicle route, <a href="#power-to-the-bench">Power to the Bench</a> for electricity and workbench steps, <a href="#chicken-coop-mission">the chicken-coop record</a> for bringing a purchase home, or <a href="#roof-building">the roof objective</a> when the tracker is stuck. Each card links to the next guide or map route; missing rewards and prerequisites stay unfilled.<br><strong>Standalone entries:</strong> <a href="/database/quests/seeds-of-success">Seeds of Success</a> and <a href="/database/quests/feathered-foes">Feathered Foes</a>.</section>`;
+  return `<section class="answer-box quest-lookup-guide"><strong>Start from the task you are trying to finish:</strong> use <a href="#rust-to-rumbling">Rust to Rumbling!</a> for the observed vehicle route, <a href="#power-to-the-bench">Power to the Bench</a> for electricity and workbench steps, <a href="#chicken-coop-mission">the chicken-coop record</a> for bringing a purchase home, or <a href="#roof-building">the roof objective</a> when the tracker is stuck. Each card links to the next guide or map route; missing rewards and prerequisites stay unfilled.<br><strong>Standalone entries (${standaloneQuestIds.size}):</strong> ${standaloneQuestLinks(locale)}.</section>`;
 }
 
 function badge(fact, locale) {
@@ -180,7 +192,7 @@ function questGuideHtml(dataset, record, locale) {
     return `<section class="entity-profile quest-directory-summary" id="${record.id}" data-quest-directory-summary="${record.id}" data-search-entry data-search-title="${esc(title)}" data-search-tags="${esc([guide.name, guide.zhName, record.name, record.zhName, zh ? record.zhSearchTags : record.searchTags].join(' '))}" data-search-status="${zh ? '任务目录摘要' : 'Quest directory summary'}">
 <h2>${esc(title)}</h2>
 <div class="quest-directory-answer" data-quest-build-guide="${record.id}"><p class="quest-guide-origin">${zh ? '已迁移独立词条；此处只保留目录摘要。' : 'Migrated standalone entry; this directory keeps a compact answer only.'}</p><p class="lead"><strong>${zh ? '简答：' : 'Quick answer: '}</strong>${esc(zh ? record.zhSummary : record.summary)}</p><h3>${zh ? '关键差异与卡点' : 'Key differences and stop points'}</h3><ul class="evidence-list">${differences}</ul><p class="database-browse-note">${zh ? '配置版本' : 'Recorded build'}: ${esc(guide.build)} · ${zh ? '完整步骤、来源与边界见独立词条。' : 'Open the standalone entry for full steps, sources and boundaries.'}</p><p><a class="btn btn-primary btn-compact" href="${detailHref}">${zh ? '打开独立任务词条' : 'Open standalone quest entry'} →</a></p></div>
-<div class="entity-related"><strong>${zh ? '继续查找' : 'Continue with'}</strong><div>${links}</div></div></section>`;
+${relationsHtml(record, locale)}<div class="entity-related"><strong>${zh ? '继续查找' : 'Continue with'}</strong><div>${links}</div></div></section>`;
   }
   const steps = guide.steps.map(step => `<li data-quest-objective="${step.entry}">${esc(zh ? step.zhText : step.text)}</li>`).join("");
   const notes = guide.notes.map(note => `<li>${esc(zh ? note.zhText : note.text)}</li>`).join("");
@@ -244,8 +256,8 @@ ${questVehicleHtml}${relationsHtml(record, locale)}<div class="entity-related"><
 function questPage(html, locale) {
   const zh = locale === "zh";
   const independent = zh
-    ? '<p class="database-browse-note"><strong>独立任务词条：</strong><a href="/zh/database/quests/seeds-of-success">成功的种子</a> · <a href="/zh/database/quests/feathered-foes">长着羽毛的敌人</a></p>'
-    : '<p class="database-browse-note"><strong>Standalone quest entries:</strong> <a href="/database/quests/seeds-of-success">Seeds of Success</a> · <a href="/database/quests/feathered-foes">Feathered Foes</a></p>';
+    ? `<p class="database-browse-note"><strong>独立任务词条（${standaloneQuestIds.size} 条）：</strong>${standaloneQuestLinks(locale)}</p>`
+    : `<p class="database-browse-note"><strong>Standalone quest entries (${standaloneQuestIds.size}):</strong> ${standaloneQuestLinks(locale)}</p>`;
   return html.replace("</head>", '<link rel="stylesheet" href="/assets/css/quest-guide.css?v=20260830-1"></head>')
     .replace('class="article entity-directory"', 'class="article entity-directory quest-directory"')
     .replace(/<p class="lead">[\s\S]*?<\/p>/, `<p class="lead">${zh ? "按游戏里的任务名查步骤、准备物品和卡关处理。原有的社区称呼仍可搜索。" : "Find your in-game quest, check what to prepare, and follow the steps or stuck-point guide. Earlier community names remain searchable."}</p>`)
@@ -262,12 +274,15 @@ const serviceProfileTargets = {
   "country-mechanic-catalogue": "country-mechanic",
   "angela-shop-catalogue": "angela",
 };
+const standaloneNpcIds = new Set(dialogueScenes.scenes.map(scene => scene.npcId));
 
 function serviceDirectory(locale) {
   const zh = locale === "zh";
   const entries = dialogueServices.services.map((service) => {
     const profileId = serviceProfileTargets[service.id];
-    const href = profileId ? `${zh ? "/zh" : ""}/database/npcs#${profileId}` : (zh ? localizeRoute(service.relatedRoute) : service.relatedRoute);
+    const href = profileId
+      ? `${zh ? "/zh" : ""}/database/npcs${standaloneNpcIds.has(profileId) ? `/${profileId}` : `#${profileId}`}`
+      : (zh ? localizeRoute(service.relatedRoute) : service.relatedRoute);
     const searchAttributes = profileId ? "" : ` data-search-entry data-search-title="${esc(zh ? service.zhName : service.name)}" data-search-aliases="${esc(`${service.name}|${service.zhName}`)}" data-search-tags="${esc(zh ? service.zhSummary : service.summary)}" data-search-status="${zh ? '游戏构建对话' : 'Game-build dialogue'}"`;
     const action = profileId ? (zh ? "查看人物资料" : "Open NPC profile") : (zh ? "查看相关资料" : "Open related guide");
     return `<li id="dialogue-service-${esc(service.id)}" data-dialogue-service="${esc(service.id)}"${searchAttributes}><p><strong>${esc(zh ? service.zhName : service.name)}</strong> ${badge(service, locale)}</p><p>${esc(zh ? service.zhSummary : service.summary)}</p><p><a class="btn btn-outline btn-compact" href="${esc(href)}">${action} →</a></p></li>`;
@@ -293,12 +308,16 @@ function render(dataset, recordsKey, locale) {
       if (!labels) throw new Error(`Missing related route label for ${relatedRoute}`);
       return `<a class="btn btn-outline btn-compact" href="${esc(href)}">${esc(labels[locale])}</a>`;
     }).join("");
-    const related = `<div class="entity-related"><strong>${zh ? "继续查找" : "Continue with"}</strong><div>${relatedLinks}</div></div>`;
-    return `<section class="evidence-ledger entity-profile" id="${record.id}" data-search-entry data-search-title="${esc(zh ? record.zhName : record.name)}" data-search-tags="${esc(zh ? record.zhSearchTags : record.searchTags)}" data-search-status="${zh ? "结构化资料" : "Structured record"}"><div class="section-heading-row"><h2>${esc(zh ? record.zhName : record.name)}</h2>${confidence}</div><p class="lead">${esc(zh ? record.zhSummary : record.summary)}</p><ul class="evidence-list">${facts}</ul>${relationsHtml(record, locale)}${backlinksHtml(recordsKey, record, locale)}${related}</section>`;
+    const standalone = recordsKey === "npcs" && standaloneNpcIds.has(record.id);
+    const coverageNote = recordsKey === "npcs"
+      ? `<p class="database-browse-note" data-story-coverage="${standalone ? 'standalone-scene' : 'aggregate-service'}">${standalone ? (zh ? '剧情覆盖：已复核的独立场景词条。' : 'Story coverage: reviewed standalone scene entry.') : (zh ? '剧情覆盖：聚合服务资料；目前没有已复核的公开对话节点契约，不把缺少独立场景写成“没有剧情”。' : 'Story coverage: aggregate service record; no reviewed public dialogue-node contract is published yet. This is not a claim that the character has no story.')}</p>`
+      : '';
+    const related = `<div class="entity-related"><strong>${zh ? "继续查找" : "Continue with"}</strong><div>${relatedLinks}${standalone ? `<a class="btn btn-primary btn-compact" href="${zh ? "/zh" : ""}/database/npcs/${esc(record.id)}">${zh ? "打开人物独立词条" : "Open standalone NPC entry"} →</a>` : ""}</div></div>`;
+    return `<section class="evidence-ledger entity-profile" id="${record.id}" data-search-entry data-search-title="${esc(zh ? record.zhName : record.name)}" data-search-tags="${esc(zh ? record.zhSearchTags : record.searchTags)}" data-search-status="${zh ? "结构化资料" : "Structured record"}"><div class="section-heading-row"><h2>${esc(zh ? record.zhName : record.name)}</h2>${confidence}</div><p class="lead">${esc(zh ? record.zhSummary : record.summary)}</p>${coverageNote}<ul class="evidence-list">${facts}</ul>${relationsHtml(record, locale)}${backlinksHtml(recordsKey, record, locale)}${related}</section>`;
   }).join("\n");
   const lookupGuide = recordsKey === "npcs" ? npcLookupGuide(locale) : recordsKey === "quests" ? questLookupGuide(locale) : "";
   const services = recordsKey === "npcs" ? serviceDirectory(locale) : "";
-return `<!DOCTYPE html>\n<!-- GENERATED by scripts/build-knowledge-entities.cjs from data/${recordsKey}.json — do not edit directly. -->\n<html lang="${zh ? "zh-CN" : "en"}"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${c.title}</title><meta name="description" content="${c.description}"><link rel="canonical" href="${zh ? zhUrl : enUrl}"><link rel="alternate" hreflang="en" href="${enUrl}"><link rel="alternate" hreflang="zh-CN" href="${zhUrl}"><link rel="alternate" hreflang="x-default" href="${enUrl}"><meta property="og:type" content="website"><meta property="og:site_name" content="The Ranchers Guide"><meta property="og:title" content="${c.title}"><meta property="og:description" content="${c.description}"><meta property="og:url" content="${zh ? zhUrl : enUrl}"><meta property="og:image" content="https://theranchersguide.com/assets/img/guide-barn.webp"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20261003-r15"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script></head><body><header class="site-header"><nav class="nav-inner" aria-label="${zh ? "主导航" : "Main navigation"}"><a class="logo" href="${zh ? "/zh/" : "/"}"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><button class="nav-toggle" aria-expanded="false" aria-label="${zh ? "展开导航" : "Toggle navigation"}">☰</button><ul class="nav-links">${nav(locale)}</ul></nav></header><main><article class="article entity-directory"><nav class="breadcrumb" aria-label="${zh ? "面包屑" : "Breadcrumb"}"><a href="${zh ? "/zh/" : "/"}">${zh ? "首页" : "Home"}</a> / <a href="${zh ? "/zh/database" : "/database"}">${zh ? "知识库" : "Database"}</a> / ${c.noun}</nav><h1>${c.heading}</h1><p class="meta">${zh ? "页面基线" : "Page baseline"}: ${dataset.meta.build} · ${zh ? "更新" : "Updated"} ${dataset.meta.lastUpdated}</p><p class="lead">${c.lead}</p><div class="notice info"><strong>${zh ? "发布边界：" : "Publication boundary:"}</strong> ${c.boundary}</div>${lookupGuide}${services}<nav class="toc" aria-label="${c.noun}"><strong>${c.noun}</strong><ul>${toc}</ul></nav>${sections}</article></main>${renderSiteFooter(locale, { en: 'Evidence gates prevent thin entity pages', zh: '证据不足的实体不会自动发布' })}<script src="/assets/js/main.js?v=20261003-r15" defer></script></body></html>`;
+return `<!DOCTYPE html>\n<!-- GENERATED by scripts/build-knowledge-entities.cjs from data/${recordsKey}.json — do not edit directly. -->\n<html lang="${zh ? "zh-CN" : "en"}"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${c.title}</title><meta name="description" content="${c.description}"><link rel="canonical" href="${zh ? zhUrl : enUrl}"><link rel="alternate" hreflang="en" href="${enUrl}"><link rel="alternate" hreflang="zh-CN" href="${zhUrl}"><link rel="alternate" hreflang="x-default" href="${enUrl}"><meta property="og:type" content="website"><meta property="og:site_name" content="The Ranchers Guide"><meta property="og:title" content="${c.title}"><meta property="og:description" content="${c.description}"><meta property="og:url" content="${zh ? zhUrl : enUrl}"><meta property="og:image" content="https://theranchersguide.com/assets/img/guide-barn.webp"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20261003-r15">${recordsKey === "npcs" ? storyReferenceAssets('20261005-r21') : ''}<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script></head><body><header class="site-header"><nav class="nav-inner" aria-label="${zh ? "主导航" : "Main navigation"}"><a class="logo" href="${zh ? "/zh/" : "/"}"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><button class="nav-toggle" aria-expanded="false" aria-label="${zh ? "展开导航" : "Toggle navigation"}">☰</button><ul class="nav-links">${nav(locale)}</ul></nav></header><main><article class="article entity-directory"><nav class="breadcrumb" aria-label="${zh ? "面包屑" : "Breadcrumb"}"><a href="${zh ? "/zh/" : "/"}">${zh ? "首页" : "Home"}</a> / <a href="${zh ? "/zh/database" : "/database"}">${zh ? "知识库" : "Database"}</a> / ${c.noun}</nav><h1>${c.heading}</h1><p class="meta">${zh ? "页面基线" : "Page baseline"}: ${dataset.meta.build} · ${zh ? "更新" : "Updated"} ${dataset.meta.lastUpdated}</p><p class="lead">${c.lead}</p><div class="notice info"><strong>${zh ? "发布边界：" : "Publication boundary:"}</strong> ${c.boundary}</div>${lookupGuide}${services}<nav class="toc" aria-label="${c.noun}"><strong>${c.noun}</strong><ul>${toc}</ul></nav>${sections}</article></main>${renderSiteFooter(locale, { en: 'Evidence gates prevent thin entity pages', zh: '证据不足的实体不会自动发布' })}<script src="/assets/js/main.js?v=20261003-r15" defer></script></body></html>`;
 }
 
 const npcData = JSON.parse(fs.readFileSync(path.join(root, "data", "npcs.json"), "utf8"));

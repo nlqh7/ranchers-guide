@@ -10,9 +10,11 @@ for (const prefix of ['', 'zh/']) {
     const html = fs.readFileSync(file, 'utf8');
     assert.match(html, /data-search-entry/);
     assert.match(html, /Recorded build reference|已记录版本/);
+    assert.match(html, /data-quest-route-position/);
+    assert.match(html, /data-quest-route-flow/);
     assert.match(html, /database\/quests(?:%2F|\/)/);
     assert.match(html, /Source:|来源/);
-    assert.match(html, /database\/quests#(seeds-of-success|feathered-foes)/);
+    assert.match(html, new RegExp(`database/quests#${id}`));
   }
   for (const id of config.materials) {
     const file = path.join(root, prefix, 'database/materials', `${id}.html`);

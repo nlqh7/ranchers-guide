@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "meta": {
+    "build": "0.8.10.842",
+    "lastUpdated": "2026-10-05",
+    "boundary": "Editorial route assembled from public NPC/quest records and reviewed dialogue scenes; not an official chapter list.",
+    "zhBoundary": "本站根据公开人物/任务记录与已复核的对话场景整理查阅路线；不是官方章节列表。"
+  },
+  "arcs": [
+    {
+      "id": "arrival-to-ranch",
+      "title": "Arrival to a working ranch",
+      "zhTitle": "从抵达走到可运转的牧场",
+      "summary": "Follow the useful junctions from meeting Meriam through the first shelter, tools and utility decisions. The route is a reading order, not a promise that every player sees the same trigger sequence.",
+      "zhSummary": "从与玛丽阿姆见面开始，串起初次遮蔽所、工具和水电选择。这里是查阅顺序，不保证每位玩家都按同一触发顺序进行。",
+      "sceneIds": ["meriam-introduction", "victor-utility-contracts"],
+      "questIds": ["meet-meriem", "a-new-beginning", "from-blueprint-to-bed", "axe-pick-and-welcome", "power-to-the-bench"],
+      "eventRefs": ["52/2", "52/4", "52/13", "52/15", "8/1", "8/2", "8/5"],
+      "eventSummary": "Recorded events move from the airport greeting and driving hand-off to the welcome pack, Victor's contract menu and the electricity/workbench branch. The listed sequence is a source-node reading order, not a runtime trigger claim.",
+      "zhEventSummary": "已记录事件从机场问候、驾驶交接推进到欢迎礼包、维克多合同菜单和电力/工作台分支。这里列的是源节点查阅顺序，不是运行时触发顺序的保证。",
+      "spoiler": "Later utility and construction context is grouped here to help a stuck player find the next relevant record; it does not establish a hidden main-quest order.",
+      "zhSpoiler": "这里把后续水电和建造资料放在一起，方便卡关时找到下一条记录；它不证明存在隐藏主线顺序。",
+      "sourceIds": ["owned-build-dialogue", "launch-video"]
+    },
+    {
+      "id": "coop-to-egg-evidence",
+      "title": "From coop setup to egg evidence",
+      "zhTitle": "从鸡舍准备到鸡蛋证据",
+      "summary": "Use Angela for the purchase and housing context, then use Gigi's task records for the documented egg hand-off and return route. Keep the task pages open for quantities and checks.",
+      "zhSummary": "先通过 Angela 查买鸡和鸡舍上下文，再通过 Gigi 的任务记录查已记录的鸡蛋交付和送回路线。数量与判定仍以任务页为准。",
+      "sceneIds": ["angela-coop-route", "gigi-egg-route"],
+      "questIds": ["chicken-coop-mission", "a-ride-and-a-revelation", "real-eggs-real-evidence"],
+      "eventRefs": ["46/8", "46/4", "46/5", "51/42", "51/43", "51/50", "51/55", "51/65"],
+      "eventSummary": "Recorded events cover Angela's coop purchase context, the egg hand-off choices, Gigi's two-egg delivery, the escape sequence and return-home endpoint.",
+      "zhEventSummary": "已记录事件覆盖安吉拉的鸡舍购买上下文、鸡蛋交付选项、Gigi 的两枚鸡蛋交付、逃离流程和送回家终点。",
+      "spoiler": "The current evidence treats the documented Gigi hand-off as the present endpoint; future or unrelated content is outside this arc.",
+      "zhSpoiler": "现有证据把已记录的 Gigi 交付流程视为当前端点；未来或无关内容不在本篇章内。",
+      "sourceIds": ["owned-build-dialogue", "chicken-coop-thread", "gigi-quest-thread", "gigi-official-end-thread"]
+    }
+  ]
+}
