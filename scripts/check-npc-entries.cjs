@@ -60,7 +60,7 @@ for (const id of sceneNpcIds) {
     assert.match(html, /data-dialogue-node|data-dialogue-branch|data-dialogue-edge/);
     assert.doesNotMatch(html, /data-dialogue-line[^>]*>[^<]*(arrival|airport|contract|鸡蛋|机场)/i, `${file}: scene summary must not be a speaker line`);
     assert.match(html, /story-reference\.css\?v=20261005-r21/);
-    assert.match(html, /dialogue-explorer\.js\?v=20261005-r21/);
+    assert.match(html, /dialogue-explorer\.js\?v=20261008-r21\.6/);
     assert.doesNotMatch(html, /D:\\尝试盈利产品|C:\\Users\\asus|raw\\b24847725|LUA_OnCondition/);
   }
 }

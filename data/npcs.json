@@ -45,18 +45,21 @@
       "relatedRoutes": ["/guides/gigi-large-egg-quest", "/guides/police-wanted-levels"]
     },
     {
-      "id": "malcolm", "name": "Malcolm", "zhName": "Malcolm 马尔科姆", "searchTags": "malcolm shop catalogue merchant vendor items", "zhSearchTags": "Malcolm 马尔科姆 商店 商品 目录 商人",
-      "summary": "A build-defined merchant contact whose dialogue can open a shop catalogue after an availability check.", "zhSummary": "构建内记录的商人联系人；其对话会先检查商人可用性，再提供打开商店目录的路线。",
+      "id": "malcolm", "name": "Malcolm", "zhName": "Malcolm 马尔科姆", "searchTags": "malcolm shop catalogue merchant vendor items livestock trader ranch manager Alicia", "zhSearchTags": "Malcolm 马尔科姆 商店 商品 目录 商人 牲畜 牧场 管理者 艾丽西亚",
+      "searchAliases": ["Malcolm shop catalogue"],
+      "summary": "A build-defined livestock trader and ranch manager whose dialogue can open a shop catalogue after an availability check.", "zhSummary": "构建内记录的牲畜商人与牧场管理者；其对话会先检查商人可用性，再提供打开商店目录的路线。",
       "whenNeeded": "Check Malcolm when a quest or conversation sends you to his shop; the retained build does not identify the catalogue contents or opening hours.", "zhWhenNeeded": "任务或对话要求前往 Malcolm 的商店时查找此条目；保留构建没有列出目录内容或营业时间。",
       "facts": [
         { "text": "A Malcolm-named conversation exposes a View shop items action.", "zhText": "以 Malcolm 命名的对话提供“查看商店商品”操作。", "evidenceLevel": "build-observed", "build": "0.8.10.842", "validity": "unknown", "sourceIds": ["owned-build-dialogue"] },
         { "text": "The shop branch is preceded by a merchant-availability condition rather than an unconditional catalogue action.", "zhText": "商店分支前存在商人可用性条件，并不是无条件打开目录。", "evidenceLevel": "build-observed", "build": "0.8.10.842", "validity": "unknown", "sourceIds": ["owned-build-dialogue"] },
+        { "text": "A first-meeting branch identifies Malcolm as the livestock trader and manager of the ranch, and says his daughter Alicia told him the player had moved in.", "zhText": "首次见面分支称 Malcolm 是牲畜商人和牧场管理者，并说他的女儿艾丽西亚告诉他玩家已经搬来。", "evidenceLevel": "build-observed", "build": "0.8.10.842", "validity": "unknown", "sourceIds": ["owned-build-dialogue"] },
         { "text": "The retained nodes do not identify inventory, prices, hours or a guaranteed current runtime location.", "zhText": "保留节点没有确认库存、价格、营业时间或当前运行时必定出现的位置。", "evidenceLevel": "build-observed", "build": "0.8.10.842", "validity": "unknown", "sourceIds": ["owned-build-dialogue"] }
       ],
       "relatedRoutes": ["/guides/resources-and-materials"]
     },
     {
       "id": "meriam", "name": "Meriam", "zhName": "Meriam 米里亚姆", "searchTags": "meriam blueprint catalogue sell inventory merchant shop", "zhSearchTags": "Meriam 米里亚姆 蓝图 目录 出售 背包 商店",
+      "searchAliases": ["Meriam blueprint catalogue", "Meriam shop catalogue", "Meriam 蓝图目录"],
       "summary": "A build-defined merchant contact connected to a blueprint catalogue and selling items from the player's inventory.", "zhSummary": "构建内记录的商人联系人，关联蓝图目录以及从玩家背包出售物品的操作。",
       "whenNeeded": "Check Meriam when you need the dialogue path for blueprints or selling carried items; contents and prices remain unverified.", "zhWhenNeeded": "需要通过对话寻找蓝图或出售随身物品时查找 Meriam；目录内容和价格仍未验证。",
       "facts": [
@@ -78,12 +81,13 @@
       "relatedRoutes": ["/guides/vehicles-transport", "/problems/vehicle-recovery"]
     },
     {
-      "id": "susan", "name": "Susan", "zhName": "Susan 苏珊", "searchTags": "susan animal infection treatment antibiotics rest veterinarian funds", "zhSearchTags": "Susan 苏珊 动物 感染 治疗 抗生素 休息 资金",
-      "summary": "A build-defined animal-treatment contact whose dialogue describes infection care and a runtime-priced treatment path.", "zhSummary": "构建内记录的动物治疗联系人；其对话描述感染护理和运行时计价的治疗路线。",
+      "id": "susan", "name": "Susan", "zhName": "Susan 苏珊", "searchTags": "susan Susan Clark animal infection treatment antibiotics rest veterinarian clinic Harvest Hills funds", "zhSearchTags": "Susan 苏珊 克拉克 动物 感染 治疗 抗生素 休息 兽医 诊所 丰收山 资金",
+      "summary": "Susan Clark is the build-defined animal-treatment contact; her dialogue places her in Harvest Hills and describes infection care and a runtime-priced treatment path.", "zhSummary": "构建内记录的动物治疗联系人 Susan Clark；对话将她放在丰收山，并描述感染护理和运行时计价的治疗路线。",
       "whenNeeded": "Check Susan when an animal is infected and the treatment dialogue asks for antibiotics, rest or payment.", "zhWhenNeeded": "动物感染、治疗对话提到抗生素、休息或付款时查找 Susan。",
       "facts": [
         { "text": "Susan's treatment path describes an animal infection that needs antibiotics and rest.", "zhText": "Susan 的治疗路线描述动物感染后需要抗生素和休息。", "evidenceLevel": "build-observed", "build": "0.8.10.842", "validity": "unknown", "sourceIds": ["owned-build-dialogue"] },
         { "text": "The dialogue checks a runtime-filled treatment total and whether the player has enough funds.", "zhText": "对话会检查运行时填入的治疗总价以及玩家资金是否足够。", "evidenceLevel": "build-observed", "build": "0.8.10.842", "validity": "unknown", "sourceIds": ["owned-build-dialogue"] },
+        { "text": "A first-meeting branch names Susan Clark, says she grew up in Harvest Hills, spent her life caring for animals and ran the Harvest Hills vet clinic.", "zhText": "首次见面分支称她为 Susan Clark，并说她在丰收山长大、一生照料动物，还经营过丰收山兽医诊所。", "evidenceLevel": "build-observed", "build": "0.8.10.842", "validity": "unknown", "sourceIds": ["owned-build-dialogue"] },
         { "text": "The path invokes a shared repair-all action; the retained build does not provide one fixed treatment price or prove the outcome was runtime-tested.", "zhText": "该路线会调用共用的全部修复操作；保留构建没有提供统一固定治疗价格，也不能证明结果已经运行时实测。", "evidenceLevel": "build-observed", "build": "0.8.10.842", "validity": "unknown", "sourceIds": ["owned-build-dialogue"] }
       ],
       "relatedRoutes": ["/database/animals#chicken", "/guides/animal-guide"]

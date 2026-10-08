@@ -295,9 +295,10 @@ function storySearchText(npc, locale) {
 }
 
 /* Head assets the embedding page must include (with the release cache token). */
-function storyReferenceAssets(version) {
-  const v = version ? `?v=${escapeHtml(`${version}.5`)}` : '';
-  return `<link rel="stylesheet" href="/assets/css/story-reference.css${v}"><script src="/assets/js/dialogue-explorer.js${v}" defer></script>`;
+function storyReferenceAssets(version, jsVersion = '20261008-r21.6') {
+  const cssToken = version ? `?v=${escapeHtml(`${version}.5`)}` : '';
+  const jsToken = jsVersion ? `?v=${escapeHtml(jsVersion)}` : '';
+  return `<link rel="stylesheet" href="/assets/css/story-reference.css${cssToken}"><script src="/assets/js/dialogue-explorer.js${jsToken}" defer></script>`;
 }
 
 module.exports = { renderNpcStory, renderDialoguePreview, storySearchText, storyReferenceAssets, safeNpcSummary, safeNpcWhenNeeded };

@@ -90,6 +90,7 @@ const relatedLabels = {
   "/guides/crafting-guide": { en: "Crafting guide", zh: "制作指南" },
   "/guides/animal-guide#feeding": { en: "Animal feeding", zh: "动物喂养" },
   "/database/animals#chicken": { en: "Chicken evidence", zh: "鸡的证据条目" },
+  "/database/quests#coal-delivery-dialogue": { en: "Coal delivery dialogue", zh: "木炭交付对话" },
   "/community": { en: "Community Radar", zh: "社区雷达" },
   "/map#city-hall": { en: "City Hall map", zh: "市政厅地图" }
 };

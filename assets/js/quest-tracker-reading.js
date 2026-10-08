@@ -17,30 +17,44 @@
     var raw = localStorage.getItem(storageKey);
     if (raw) {
       try {
-        state = JSON.parse(raw);
-        if (!state || typeof state !== "object" || Array.isArray(state)) {
-          state = {};
+        var parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+          state = parsed;
+        } else {
+          /* Valid JSON but not a mark map: treat as a damaged record. */
           storageStatus = "repaired";
         }
       } catch (_) {
-        /* A malformed value is recoverable storage, not a browser policy block.
-         * Reset only this reading key so the user can mark entries again. */
-        state = {};
+        /* Malformed JSON is a damaged record, not a browser policy block.
+         * Keep the original value untouched during initial load; the first
+         * explicit user change re-saves and recovers it. */
         storageStatus = "repaired";
       }
     }
-    localStorage.setItem(storageKey, JSON.stringify(state));
   } catch (_) {
-    // Disabled or private storage: keep marks in memory for this session only.
+    // Storage could not be read: keep marks in memory for this session only.
     state = {};
     storageAvailable = false;
     storageStatus = "unavailable";
+  }
+  if (storageAvailable && storageStatus !== "repaired") {
+    /* Probe writability with the exact value just read. A write failure must
+     * not discard readable marks: disable persistence only and keep the marks
+     * for this session. Never probe over a damaged record — that would
+     * overwrite the original data before the user chooses to re-mark. */
+    try { localStorage.setItem(storageKey, JSON.stringify(state)); }
+    catch (_) { storageAvailable = false; storageStatus = "unavailable"; }
   }
   if (!state || typeof state !== "object" || Array.isArray(state)) state = {};
 
   function save() {
     if (!storageAvailable) return;
-    try { localStorage.setItem(storageKey, JSON.stringify(state)); }
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(state));
+      /* The damaged record has been replaced by a valid save: clear the
+       * repair warning so the status returns to the plain count. */
+      if (storageStatus === "repaired") storageStatus = "ok";
+    }
     catch (_) { storageAvailable = false; updateStatus(); }
   }
 
@@ -55,10 +69,12 @@
     var base = isChinese
       ? "已读 " + readCount() + " / " + items.length + " 条 NPC 与剧情资料"
       : readCount() + " of " + items.length + " NPC and story entries marked as read";
-    if (storageStatus === "repaired") {
-      status.textContent = base + (isChinese ? "（已修复损坏的旧阅读标记）" : " (a damaged reading record was reset)");
-    } else if (!storageAvailable) {
-      status.textContent = base + (isChinese ? "（此浏览器禁止本地存储，标记仅本次会话有效）" : " (this browser blocks local storage; marks last for this session only)");
+    if (!storageAvailable) {
+      /* Describes the observed read/write failure only; the cause (policy,
+       * quota, or something else) is not proven, so do not claim one. */
+      status.textContent = base + (isChinese ? "（本地阅读标记无法读取或保存，标记仅本次会话有效）" : " (reading marks could not be read or saved to local storage; marks last for this session only)");
+    } else if (storageStatus === "repaired") {
+      status.textContent = base + (isChinese ? "（旧的阅读标记已损坏无法读取，重新标记后将覆盖保存）" : " (a damaged saved reading record could not be read; marking entries again will replace it)");
     } else {
       status.textContent = base;
     }

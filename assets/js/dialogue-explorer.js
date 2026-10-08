@@ -7,6 +7,8 @@
  * - Default view, deep links and refreshes NEVER auto-expand the preview. A
  *   location-driven open first reveals the spoiler gate; only an explicit
  *   confirm (gate button or a direct summary click) opens and locates the node.
+ *   Confirmation is tracked separately from history state, so a load event
+ *   arriving after an early confirmation cannot close or re-gate the preview.
  * - Branch choices advance to the target node; the in-component back button
  *   returns to the previous node (per-details stack) and closes the preview
  *   when no previous node remains. Edge loops and missing targets are safe.
@@ -71,7 +73,8 @@
         copyField: details.querySelector('[data-dialogue-copy-field]'),
         stack: [],      /* previously visited line elements, oldest first */
         current: null,  /* currently located line element */
-        historyPushed: false
+        historyPushed: false,
+        confirmed: false /* explicit spoiler confirmation given for this details */
       };
     });
 
@@ -152,6 +155,7 @@
       var target = targetForHash();
       var linked = target && target.exp === exp;
       exp.details.open = true;
+      exp.confirmed = true;
       hideGate(exp);
       setCurrent(exp, (linked && target.line) || exp.lines[0] || null, Boolean(scroll && linked));
       if (canHistory) {
@@ -216,6 +220,7 @@
         }
         exp.details.open = false;
         exp.historyPushed = false;
+        exp.confirmed = false;
         resetTrail(exp);
         hideGate(exp);
       });
@@ -339,15 +344,19 @@
     explorers.forEach(function (exp) {
       exp.details.open = false;
       exp.historyPushed = false;
+      exp.confirmed = false;
       resetTrail(exp);
     });
     syncFromLocation();
     /* Some browsers apply fragment-to-details expansion after deferred
      * scripts run. Re-apply the gate on the next task so a direct hash cannot
-     * bypass the explicit spoiler confirmation. */
+     * bypass the explicit spoiler confirmation. An explorer the user already
+     * confirmed is excluded: a late load must never close or re-gate it
+     * (confirmation is tracked separately from historyPushed, which stays
+     * false for in-place deep-link marking). */
     function forceInitialGate() {
       explorers.forEach(function (exp) {
-        if (!exp.historyPushed) exp.details.open = false;
+        if (!exp.historyPushed && !exp.confirmed) exp.details.open = false;
       });
       syncFromLocation();
     }

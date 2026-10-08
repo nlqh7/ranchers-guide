@@ -242,7 +242,7 @@
       "zhSummary": "社区工作人员明确说明木炭由燃烧木材获得，不是去商店购买。具体操作、燃烧时间和产量仍未验证。",
       "whenNeeded": "Check your recipe's Charcoal requirement, keep construction logs separate and test a small amount before scaling up.",
       "zhWhenNeeded": "先查配方所需木炭数量，留好建造原木，小量确认结果后再扩大制作。",
-      "relatedRoutes": ["/guides/crafting-guide", "/community"],
+      "relatedRoutes": ["/guides/crafting-guide", "/community", "/database/quests#coal-delivery-dialogue"],
       "facts": [
         {
           "text": "In the September 23 General Store discussion, community staff say Charcoal is made by burning wood rather than bought. The reply does not specify controls, weather, timing or yield.",

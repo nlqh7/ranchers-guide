@@ -213,6 +213,54 @@ assert.match(standaloneHtml, /Failure conditions, recovery & continuation/);
 assert.match(standaloneHtml, /失败条件、恢复与后续/);
 assert.match(standaloneHtml, /Coop Dreams/);
 assert.match(standaloneHtml, /鸡舍梦想计划/);
+const newBeginning = read('database/quests/a-new-beginning.html');
+const newBeginningZh = read('zh/database/quests/a-new-beginning.html');
+assert.match(newBeginning, /Player death/);
+assert.match(newBeginning, /from-blueprint-to-bed/);
+assert.match(newBeginningZh, /玩家死亡/);
+assert.match(newBeginningZh, /from-blueprint-to-bed/);
+const blueprint = read('database/quests/from-blueprint-to-bed.html');
+assert.match(blueprint, /After failure/);
+assert.match(blueprint, /configured follow-up call/);
+const eggs = read('database/quests/real-eggs-real-evidence.html');
+assert.match(eggs, /2 Chicken Egg - Large/);
+assert.match(eggs, /20,000 C/);
+const firstQuest = read('database/quests/a-new-beginning.html');
+assert.match(firstQuest, /Hammer/);
+assert.match(firstQuest, /Bronze/);
+const garlicQuest = read('database/quests/next-door-neighbors.html');
+assert.match(garlicQuest, /Garlic Seed/);
+assert.match(garlicQuest, /8.*Silver|Silver.*8/);
+for (const [id, amount] of [['coal-delivery-dialogue', '300,000 C'], ['farm-products-dialogue', '100,000 C'], ['farm-products-dialogue', '200,000 C']]) {
+  assert.ok(read(`database/quests/${id}.html`).includes(amount), `${id}: configured currency amount must remain on standalone output`);
+}
+const vehicleQuest = read('database/quests/rust-to-rumbling.html');
+assert.match(vehicleQuest, /0\.8\.10\.455/);
+assert.match(vehicleQuest, /Bykii terminal/);
+assert.match(vehicleQuest, /href="\/map#bykii-terminal"/);
+assert.match(read('zh/database/quests/rust-to-rumbling.html'), /href="\/zh\/map#bykii-terminal"/);
+for (const quest of quests.quests) {
+  const guide = quest.buildGuide || {};
+  const configuredCount = (guide.configuredRewardActions || []).length;
+  const currencyCount = (guide.configuredRewards || []).length;
+  if (!configuredCount && !currencyCount) continue;
+  const en = read(`database/quests/${quest.id}.html`);
+  const zh = read(`zh/database/quests/${quest.id}.html`);
+  assert.ok((en.match(/data-configured-reward-action=/g) || []).length >= configuredCount, `${quest.id}: configured rewards must remain on standalone English output`);
+  if (currencyCount) assert.match(en, /C<\/li>/, `${quest.id}: configured currency must remain on standalone English output`);
+  assert.ok((zh.match(/data-configured-reward-action=/g) || []).length >= configuredCount, `${quest.id}: configured rewards must remain on standalone Chinese output`);
+  if (currencyCount) assert.match(zh, /C<\/li>/, `${quest.id}: configured currency must remain on standalone Chinese output`);
+  assert.match(en, /data-quest-route-flow=/);
+  assert.match(zh, /data-quest-route-flow=/);
+}
+for (const [file, npcRoute, mapRoute] of [
+  ['database/quests/power-to-the-bench.html', '/database/npcs#victor', '/map#city-hall'],
+  ['zh/database/quests/power-to-the-bench.html', '/zh/database/npcs#victor', '/zh/map#city-hall'],
+]) {
+  const html = read(file);
+  assert.ok(html.includes(`href="${npcRoute}"`), `${file}: NPC relation link must remain on standalone output`);
+  assert.ok(html.includes(`href="${mapRoute}"`), `${file}: map relation link must remain on standalone output`);
+}
 for (const relative of ["knowledge-index.json", "zh/knowledge-index.json"]) {
   const index = readJson(relative);
   for (const quest of quests.quests) {
@@ -223,6 +271,8 @@ for (const relative of ["knowledge-index.json", "zh/knowledge-index.json"]) {
 }
 assert.match(zhQuestHtml, />水电合同与供电<\/a>/);
 assert.match(zhQuestHtml, /href="\/zh\/guides\/electricity-power#two-paths"/);
+assert.match(zhQuestHtml, /href="\/zh\/database\/materials#charcoal"/);
+assert.match(read('zh/database/quests/coal-delivery-dialogue.html'), /href="\/zh\/database\/materials#charcoal"/);
 assert.match(zhNpcHtml, /href="\/zh\/guides\/electricity-power#two-paths"/);
 assert.doesNotMatch(zhQuestHtml, /href="\/guides\/(?:electricity-power|building-construction)/);
 assert.doesNotMatch(zhNpcHtml, /href="\/guides\/electricity-power/);

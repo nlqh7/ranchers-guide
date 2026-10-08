@@ -31,6 +31,7 @@ function localizeRoute(route) {
     "/database/animals": "/zh/database/animals",
     "/database/animals/chicken": "/zh/database/animals/chicken",
     "/database/customization": "/zh/database/customization",
+    "/database/materials": "/zh/database/materials",
   };
   const base = route.split(/[?#]/)[0];
   const suffix = route.slice(base.length);
@@ -313,7 +314,7 @@ function render(dataset, recordsKey, locale) {
       ? `<p class="database-browse-note" data-story-coverage="${standalone ? 'standalone-scene' : 'aggregate-service'}">${standalone ? (zh ? '剧情覆盖：已复核的独立场景词条。' : 'Story coverage: reviewed standalone scene entry.') : (zh ? '剧情覆盖：聚合服务资料；目前没有已复核的公开对话节点契约，不把缺少独立场景写成“没有剧情”。' : 'Story coverage: aggregate service record; no reviewed public dialogue-node contract is published yet. This is not a claim that the character has no story.')}</p>`
       : '';
     const related = `<div class="entity-related"><strong>${zh ? "继续查找" : "Continue with"}</strong><div>${relatedLinks}${standalone ? `<a class="btn btn-primary btn-compact" href="${zh ? "/zh" : ""}/database/npcs/${esc(record.id)}">${zh ? "打开人物独立词条" : "Open standalone NPC entry"} →</a>` : ""}</div></div>`;
-    return `<section class="evidence-ledger entity-profile" id="${record.id}" data-search-entry data-search-title="${esc(zh ? record.zhName : record.name)}" data-search-tags="${esc(zh ? record.zhSearchTags : record.searchTags)}" data-search-status="${zh ? "结构化资料" : "Structured record"}"><div class="section-heading-row"><h2>${esc(zh ? record.zhName : record.name)}</h2>${confidence}</div><p class="lead">${esc(zh ? record.zhSummary : record.summary)}</p>${coverageNote}<ul class="evidence-list">${facts}</ul>${relationsHtml(record, locale)}${backlinksHtml(recordsKey, record, locale)}${related}</section>`;
+    return `<section class="evidence-ledger entity-profile" id="${record.id}" data-search-entry data-search-title="${esc(zh ? record.zhName : record.name)}" data-search-aliases="${esc((record.searchAliases || []).join('|'))}" data-search-tags="${esc(zh ? record.zhSearchTags : record.searchTags)}" data-search-status="${zh ? "结构化资料" : "Structured record"}"><div class="section-heading-row"><h2>${esc(zh ? record.zhName : record.name)}</h2>${confidence}</div><p class="lead">${esc(zh ? record.zhSummary : record.summary)}</p>${coverageNote}<ul class="evidence-list">${facts}</ul>${relationsHtml(record, locale)}${backlinksHtml(recordsKey, record, locale)}${related}</section>`;
   }).join("\n");
   const lookupGuide = recordsKey === "npcs" ? npcLookupGuide(locale) : recordsKey === "quests" ? questLookupGuide(locale) : "";
   const services = recordsKey === "npcs" ? serviceDirectory(locale) : "";

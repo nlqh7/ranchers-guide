@@ -144,10 +144,45 @@ function routePositionHtml(record, locale) {
   };
   const before = position.before?.length ? position.before.map(id => `<a href="${zh ? '/zh' : ''}/database/quests/${id}">${esc(label(id))}</a>`).join(zh ? '、' : ', ') : (zh ? '尚未记录上游任务（可能未知）' : 'Not recorded; predecessor unknown');
   const followUp = position.followUp
-    ? (zh ? (position.type === 'dialogue-defined' ? '触发与可用性仍未知。' : '配置了后续动作，但未保留具名后续任务。') : position.followUp)
+    ? (zh
+      ? position.type === 'story-endpoint'
+        ? '这是当前已记录的剧情终点；未保留已实现的后续任务。'
+        : position.type === 'dialogue-defined'
+          ? '触发与可用性仍未知。'
+          : /follow-up call/i.test(position.followUp)
+            ? '已配置后续电话，但没有保留具名后续任务。'
+            : /follow-up message/i.test(position.followUp)
+              ? '已配置后续消息，但没有保留具名后续任务。'
+              : (position.zhRelation || '后续动作的具体语义仍未知。')
+      : position.followUp)
     : (zh ? '尚未记录具名后续任务。' : 'No named successor is recorded.');
   const after = position.after?.length ? position.after.map(id => `<a href="${zh ? '/zh' : ''}/database/quests/${id}">${esc(label(id))}</a>`).join(zh ? '、' : ', ') : followUp;
   return `<section class="quest-route-position" data-quest-route-position="${esc(record.id)}"><h2>${zh ? '任务路线位置' : 'Route position'}</h2><dl><div><dt>${zh ? '之前' : 'Before'}</dt><dd>${before}</dd></div><div><dt>${zh ? '之后' : 'After'}</dt><dd>${after}</dd></div></dl><p>${esc(zh ? position.zhRelation : position.relation)} · <a href="${zh ? '/zh' : ''}/database/quests#${record.id}">${zh ? '返回任务目录记录' : 'Back to the quest directory record'}</a></p></section>`;
+}
+
+function questRelationsHtml(record, locale) {
+  const zh = locale === 'zh';
+  const links = (record.relations || []).map(relation => {
+    const target = relation.target || {};
+    const prefix = zh ? '/zh' : '';
+    const href = target.type === 'npc'
+      ? `${prefix}/database/npcs#${esc(target.id)}`
+      : target.type === 'location'
+        ? `${prefix}/map#${esc(target.id)}`
+        : null;
+    if (!href) return '';
+    const labels = {
+      victor: ['Victor', 'Victor'],
+      'city-hall': ['City Hall', '市政厅'],
+      'bykii-terminal': ['Bykii terminal', 'Bykii 终端'],
+    };
+    const label = labels[target.id]?.[zh ? 1 : 0] || target.id;
+    const relationLabel = relation.predicate === 'involves-npc'
+      ? (zh ? '关联人物' : 'NPC')
+      : (zh ? '地图位置' : 'Map location');
+    return `<a class="btn btn-outline btn-compact" href="${href}">${relationLabel}: ${esc(label)}</a>`;
+  }).filter(Boolean).join('');
+  return links ? `<div class="entity-related quest-entity-relations"><strong>${zh ? '关联人物与地图' : 'People and map links'}</strong><div>${links}</div></div>` : '';
 }
 
 function questFlowHtml(record, locale) {
@@ -185,13 +220,26 @@ function questPage(locale, record) {
   const steps = guide.steps.map(step => `<li>${esc(zh ? step.zhText : step.text)}</li>`).join('');
   const notes = (guide.notes || []).map(note => `<li>${esc(zh ? note.zhText : note.text)}</li>`).join('');
   const facts = record.facts.map(fact => `<li><p>${esc(zh ? fact.zhText : fact.text)} <span class="tag ${evidenceClass(fact)}">${evidenceLabel(fact, locale)}</span></p><p class="fact-source"><strong>${zh ? '来源' : 'Source'}:</strong> ${sourceHtml(questsData, fact.sourceIds, locale)} · <strong>${zh ? '版本' : 'Build'}:</strong> ${esc(fact.build || 'not specified')}</p></li>`).join('');
+  const configuredRewardActions = guide.configuredRewardActions || [];
+  const configuredRewards = guide.configuredRewards || [];
+  const rarityLabels = { Bronze: zh ? '铜级' : 'Bronze', Silver: zh ? '银级' : 'Silver', Gold: zh ? '金级' : 'Gold' };
+  const rewardActionItems = configuredRewardActions.map((action, index) => {
+    const grants = action.grants.map(grant => grant.currency
+      ? `${Number(grant.currency).toLocaleString('en-US')} C`
+      : `${esc(zh ? grant.zhName : grant.name)} × ${grant.quantity}${grant.rarity ? ` · ${esc(rarityLabels[grant.rarity] || grant.rarity)}` : ''}`).join(zh ? '；' : '; ');
+    return `<li data-configured-reward-action="${esc(action.sourceNode || index + 1)}"><strong>${esc(zh ? action.zhTriggerText : action.triggerText)}：</strong> ${grants}</li>`;
+  }).join('');
+  const currencyItems = configuredRewards.map(reward => `<li><strong>${esc(reward.choice || (zh ? '完成' : 'Completion'))}：</strong> ${Number(reward.currency).toLocaleString('en-US')} C</li>`).join('');
+  const rewardHtml = configuredRewardActions.length || configuredRewards.length
+    ? `<details class="quest-configured-rewards"><summary>${zh ? '构建中记录的奖励动作' : 'Recorded reward actions'}</summary><ul class="evidence-list">${rewardActionItems || currencyItems}</ul><p class="database-browse-note">${zh ? '这些动作来自已记录的对话或任务配置，尚未逐项运行时实测，不保证实际到账。' : 'These actions come from retained dialogue or quest configuration; they are not individually runtime-tested and do not guarantee delivery.'}</p></details>`
+    : '';
   const questVehicle = miscItems.questItems?.find(item => item.relatedQuestId === record.id);
   const questVehicleHtml = questVehicle ? `<aside class="recipe-note" id="quest-vehicle-victor-old-car" data-quest-vehicle-id="${esc(questVehicle.id)}"><strong>${zh ? '任务车辆：' : 'Quest vehicle: '}${esc(zh ? questVehicle.zhName : questVehicle.name)}</strong><p>${zh ? '该名称来自独立 Misc 构建定义，不属于通用车辆目录。I2 说明栏为空，物品标志也不证明当前可驾驶、性能、修理价格或任务奖励。' : 'This name comes from a separate Misc build definition and is not one of the general vehicle catalogue records. Its I2 description slot is empty, and its item flags do not establish current drivability, performance, a repair price or a quest reward.'}</p><a href="${prefix}/guides/vehicles-transport#quest-vehicle-victor-old-car">${zh ? '在车辆指南中查看' : 'Open the vehicle guide'} →</a></aside>` : '';
   const body = `<nav class="breadcrumb" aria-label="${zh ? '面包屑' : 'Breadcrumb'}"><a href="${prefix}/">${zh ? '首页' : 'Home'}</a> / <a href="${prefix}/database">${zh ? '资料库' : 'Database'}</a> / <a href="${prefix}/database/quests">${zh ? '任务' : 'Quests'}</a> / ${esc(name)}</nav>
 <h1>${esc(name)}</h1><section class="evidence-ledger entity-profile" id="${record.id}" data-search-entry data-search-title="${esc(name)}" data-search-aliases="${esc(`${record.name}|${record.zhName}`)}" data-search-status="${zh ? '任务独立词条' : 'Standalone quest entry'}" data-search-tags="${esc(`${record.searchTags} ${record.zhSearchTags}`)}"><a class="database-back" href="${prefix}/database/quests">${zh ? '返回任务目录' : 'Back to quest database'}</a>
 <p class="lead">${esc(zh ? record.zhSummary : record.summary)}</p><div class="database-config"><p><strong>${zh ? '已记录版本' : 'Recorded build reference'}</strong> · ${esc(guide.build)} · ${zh ? '配置记录，未逐项实测' : 'configuration record, not individually play-tested'}</p></div>
-<h2>${zh ? '按目标操作' : 'Work through the objectives'}</h2><ol class="evidence-list">${steps}</ol>${notes ? `<h2>${zh ? '容易卡住的判定' : 'Checks that can cause a stop'}</h2><ul class="evidence-list">${notes}</ul>` : ''}${questFlowHtml(record, locale)}
-${questVehicleHtml}${routePositionHtml(record, locale)}<h2>${zh ? '来源与边界' : 'Sources and boundary'}</h2><ul class="evidence-list">${facts}</ul><p class="database-browse-note">${zh ? '这些步骤来自已记录的游戏构建和公开来源；缺失的奖励、前置条件和解锁时机不会在此补写。' : 'These steps come from the recorded game build and public sources; missing rewards, prerequisites and unlock timing are not filled in.'}</p>
+<h2>${zh ? '按目标操作' : 'Work through the objectives'}</h2><ol class="evidence-list">${steps}</ol>${notes ? `<h2>${zh ? '容易卡住的判定' : 'Checks that can cause a stop'}</h2><ul class="evidence-list">${notes}</ul>` : ''}${questFlowHtml(record, locale)}${rewardHtml}
+${questVehicleHtml}${questRelationsHtml(record, locale)}${routePositionHtml(record, locale)}<h2>${zh ? '来源与边界' : 'Sources and boundary'}</h2><ul class="evidence-list">${facts}</ul><p class="database-browse-note">${zh ? '这些步骤来自已记录的游戏构建和公开来源；缺失的奖励、前置条件和解锁时机不会在此补写。' : 'These steps come from the recorded game build and public sources; missing rewards, prerequisites and unlock timing are not filled in.'}</p>
 <div class="entity-related"><strong>${zh ? '继续查找' : 'Continue with'}</strong><div>${relatedLinks(record.relatedRoutes || [], locale)}<a class="btn btn-outline btn-compact" href="${prefix}/database/quests#${record.id}">${zh ? '任务数据库原始记录' : 'Original quest record'}</a></div></div></section>`;
   return shell(locale, `${prefix}/database/quests/${record.id}`, `The Ranchers ${name}`, copy(locale, `${name}: objectives, checks & sources`, `${name}：目标、判定与来源`), body);
 }

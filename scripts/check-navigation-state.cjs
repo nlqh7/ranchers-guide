@@ -48,7 +48,7 @@ assert.ok(styleReferenceFiles.length > 100, "style.css should be referenced by t
 for (const file of styleReferenceFiles) {
   assert.match(
     fs.readFileSync(file, "utf8"),
-    /style\.css\?v=(?:20261003-r15|20260928-map45)/,
+    /style\.css\?v=20261003-r15/,
     `${path.relative(root, file)} must use the current stylesheet cache token`,
   );
 }

@@ -252,10 +252,8 @@ assert.ok(searchDocuments(chineseIndex, "Angela 买鸡").some((result) => [
 assert.equal(searchDocuments(chineseIndex, "Susan 动物感染治疗")[0].url, "/zh/database/npcs#susan");
 assert.ok([
   "/zh/database/npcs#meriam",
-  "/zh/database/npcs/meriam#meriam",
-  "/zh/database/quests/solar-panel-objective#solar-panel-objective",
-  "/zh/database/quests#solar-panel-objective"
-].includes(searchDocuments(chineseIndex, "Meriam 蓝图目录")[0].url), "Meriam blueprint query must lead to a useful NPC or quest answer");
+  "/zh/database/npcs/meriam#meriam"
+].includes(searchDocuments(chineseIndex, "Meriam 蓝图目录")[0].url), "Meriam blueprint query must lead to the Meriam NPC answer");
 
 /* The five translated core guides must rank for the community phrases they answer. */
 assert.equal(searchDocuments(chineseIndex, "鸡不下蛋")[0].url, "/zh/guides/animal-guide#eggs");

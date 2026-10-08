@@ -51,6 +51,7 @@ const nodeChecks = [
   ["build-knowledge-entities.cjs", "--check"],
   ["build-npc-entries.cjs", "--check"],
   ["check-npc-entries.cjs"],
+  ["check-dialogue-coverage.cjs"],
   ["build-story-reference.cjs", "--check"],
   ["check-story-reference.cjs"],
   ["build-knowledge-index.cjs", "--check"],

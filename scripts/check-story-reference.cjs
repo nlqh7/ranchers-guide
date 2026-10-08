@@ -25,6 +25,7 @@ for (const locale of ['', 'zh/']) {
   assert.match(html, /data-story-event-sequence/);
   assert.match(html, /Source nodes|源节点/);
   assert.match(html, /story-reference\.css\?v=20261005-r21/);
+  assert.match(html, /dialogue-explorer\.js\?v=20261008-r21\.6/);
   assert.doesNotMatch(html, /D:\\尝试盈利产品|C:\\Users\\asus|LUA_OnCondition|raw\\b24847725/);
   if (locale === 'zh/') {
     assert.match(html, /本站根据公开人物\/任务记录与已复核的对话场景整理查阅路线；不是官方章节列表。/);

@@ -38,4 +38,12 @@ for (const [file, routes] of [
   const html = fs.readFileSync(path.join(root, file), 'utf8');
   for (const route of routes) assert.ok(html.includes(`href="${route}"`), `${file} missing ${route}`);
 }
+for (const [file, endpointText, forbiddenText] of [
+  ['database/quests/real-eggs-real-evidence.html', 'Current documented story endpoint', 'configured follow-up action'],
+  ['zh/database/quests/real-eggs-real-evidence.html', '当前已记录的剧情终点', '配置了后续动作'],
+]) {
+  const html = fs.readFileSync(path.join(root, file), 'utf8');
+  assert.match(html, new RegExp(endpointText));
+  assert.doesNotMatch(html, new RegExp(forbiddenText));
+}
 console.log('PASS: B2 independent quest/material entries have bilingual routes, source boundaries and directory links.');
