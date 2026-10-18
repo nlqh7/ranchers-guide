@@ -1,4 +1,5 @@
 const { spawnSync } = require("node:child_process");
+const fs = require("node:fs");
 const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
@@ -59,6 +60,10 @@ const nodeChecks = [
   ["build-creator-notes.cjs", "--check"],
   ["build-player-report.cjs", "--check"],
   ["build-search-index.cjs", "--check"],
+  ["build-fs25.cjs", "--check"],
+  ["check-fs25-planner.cjs"],
+  ["check-fs25-v1.cjs"],
+  ["check-adsense-sprint.cjs"],
   ["check-site-audit.cjs"],
   ["check-content-quality.cjs"],
   ["check-review-currentness.cjs"],
@@ -97,6 +102,10 @@ const nodeChecks = [
   ["check-player-report.cjs"],
   ["check-ranch-checklist.cjs"],
   ["check-quest-tracker.cjs"],
+  ["check-quest-tracker-r29.cjs"],
+  ["check-quest-tracker-behavior.cjs"],
+  ["check-r31-material-quest-links.cjs"],
+  ["check-r32-player-queries.cjs"],
   ["check-scarecrow-workbench-answer.cjs"],
   ["check-update-impact-tracker.cjs"],
   ["check-entity-journeys.cjs"],
@@ -127,6 +136,25 @@ const nodeChecks = [
 
 const powershellChecks = ["check-internal-links.ps1", "check-content-claims.ps1"];
 let completed = 0;
+
+const fs25PreviewFiles = [
+  "games/fs25/index.html",
+  "games/fs25/tools/production-planner/index.html",
+  "zh/games/fs25/index.html",
+  "zh/games/fs25/tools/production-planner/index.html",
+].map((relative) => path.join(root, relative));
+const fs25Present = fs25PreviewFiles.filter((file) => fs.existsSync(file));
+if (fs25Present.length > 0 && fs25Present.length !== fs25PreviewFiles.length) {
+  console.error(`FAIL: FS25 preview scope is incomplete (${fs25Present.length}/${fs25PreviewFiles.length} files present).`);
+  process.exit(1);
+}
+if (fs25Present.length === 0) {
+  const optionalFs25 = new Set(["build-fs25.cjs", "check-fs25-planner.cjs", "check-fs25-v1.cjs"]);
+  for (let i = nodeChecks.length - 1; i >= 0; i -= 1) {
+    if (optionalFs25.has(nodeChecks[i][0])) nodeChecks.splice(i, 1);
+  }
+  console.log("INFO: public-only scope; local FS25 preview checks are not required because no FS25 preview files are present.");
+}
 
 function run(command, args, label) {
   const result = spawnSync(command, args, {

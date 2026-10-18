@@ -90,8 +90,8 @@ for (const route of [
 ]) {
   assert.match(searchScript, new RegExp(`"${route.replaceAll("/", "\\/")}"`));
 }
-assert.match(searchScript, /ranchers-search-index-v43/);
-assert.match(searchScript, /ranchers-search-index-zh-v29/);
+assert.match(searchScript, /ranchers-search-index-v45/);
+assert.match(searchScript, /ranchers-search-index-zh-v31/);
 
 const chineseProblems = read("zh/problems.html");
 const englishProblemMeta = hub.match(/<p class="knowledge-hero-meta">([\s\S]*?)<\/p>/)?.[1] || "";

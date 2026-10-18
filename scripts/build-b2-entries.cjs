@@ -10,7 +10,9 @@ const materialsData = require('../data/materials.json');
 const resourceData = require('../data/build-resources.json');
 const buildingEntries = require('../data/building-entries.json');
 const shops = require('../data/build-shops.json');
+const recipeData = require('../data/build-recipes.json');
 const miscItems = require('../data/build-misc-items.json');
+const dialogueScenes = require('../data/dialogue-scenes.json');
 const materials = materialsData.materials;
 const quests = questsData.quests;
 const routeContract = questsData.routeContract?.entries || [];
@@ -19,6 +21,8 @@ const materialRoutes = {
   ressource_rock_simple: 'stone',
   ressource_straw: 'hay',
 };
+const recipes = recipeData.recipes || [];
+const sceneNpcIds = new Set((dialogueScenes.scenes || []).map(scene => scene && scene.npcId).filter(Boolean));
 const esc = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 const prefixFor = locale => locale === 'zh' ? '/zh' : '';
 const copy = (locale, en, zh) => locale === 'zh' ? zh : en;
@@ -134,6 +138,31 @@ function relatedLinks(routes, locale) {
   }).join('');
 }
 
+function recipeIdsFor(record) {
+  return (record.relatedRoutes || []).map(route => {
+    const match = route.match(/\/guides\/crafting-guide#recipe-(.+)$/);
+    return match ? match[1] : null;
+  }).filter(Boolean);
+}
+
+function questMaterialLinks(record, locale) {
+  const zh = locale === 'zh';
+  const prefix = prefixFor(locale);
+  const rows = [];
+  for (const recipeId of recipeIdsFor(record)) {
+    const recipe = recipes.find(item => item.id === recipeId);
+    if (!recipe) continue;
+    for (const line of recipe.materials || []) {
+      const route = materialRoutes[line.id];
+      const material = route && materials.find(item => item.id === route);
+      if (!material) continue;
+      rows.push(`<li><a href="${prefix}/database/materials/${route}#${route}">${esc(zh ? material.zhName.replace(` ${material.name}`, '') : material.name)}</a> × ${line.quantity} <span class="database-browse-note">(${esc(zh ? recipe.zhName : recipe.name)})</span></li>`);
+    }
+  }
+  if (!rows.length) return '';
+  return `<section class="entity-related quest-material-links"><h2>${zh ? '关联配方材料' : 'Materials in the linked recipe'}</h2><ul class="evidence-list">${rows.join('')}</ul><p class="database-browse-note">${zh ? '这是现有配方的材料清单，不等同于任务交付数量。' : 'This is the existing recipe material list, not a quest delivery quantity.'}</p></section>`;
+}
+
 function routePositionHtml(record, locale) {
   const zh = locale === 'zh';
   const position = routeContract.find(entry => entry.questId === record.id);
@@ -166,7 +195,7 @@ function questRelationsHtml(record, locale) {
     const target = relation.target || {};
     const prefix = zh ? '/zh' : '';
     const href = target.type === 'npc'
-      ? `${prefix}/database/npcs#${esc(target.id)}`
+      ? `${prefix}/database/npcs${sceneNpcIds.has(target.id) ? `/${esc(target.id)}` : `#${esc(target.id)}`}`
       : target.type === 'location'
         ? `${prefix}/map#${esc(target.id)}`
         : null;
@@ -239,7 +268,7 @@ function questPage(locale, record) {
 <h1>${esc(name)}</h1><section class="evidence-ledger entity-profile" id="${record.id}" data-search-entry data-search-title="${esc(name)}" data-search-aliases="${esc(`${record.name}|${record.zhName}`)}" data-search-status="${zh ? '任务独立词条' : 'Standalone quest entry'}" data-search-tags="${esc(`${record.searchTags} ${record.zhSearchTags}`)}"><a class="database-back" href="${prefix}/database/quests">${zh ? '返回任务目录' : 'Back to quest database'}</a>
 <p class="lead">${esc(zh ? record.zhSummary : record.summary)}</p><div class="database-config"><p><strong>${zh ? '已记录版本' : 'Recorded build reference'}</strong> · ${esc(guide.build)} · ${zh ? '配置记录，未逐项实测' : 'configuration record, not individually play-tested'}</p></div>
 <h2>${zh ? '按目标操作' : 'Work through the objectives'}</h2><ol class="evidence-list">${steps}</ol>${notes ? `<h2>${zh ? '容易卡住的判定' : 'Checks that can cause a stop'}</h2><ul class="evidence-list">${notes}</ul>` : ''}${questFlowHtml(record, locale)}${rewardHtml}
-${questVehicleHtml}${questRelationsHtml(record, locale)}${routePositionHtml(record, locale)}<h2>${zh ? '来源与边界' : 'Sources and boundary'}</h2><ul class="evidence-list">${facts}</ul><p class="database-browse-note">${zh ? '这些步骤来自已记录的游戏构建和公开来源；缺失的奖励、前置条件和解锁时机不会在此补写。' : 'These steps come from the recorded game build and public sources; missing rewards, prerequisites and unlock timing are not filled in.'}</p>
+${questVehicleHtml}${questRelationsHtml(record, locale)}${questMaterialLinks(record, locale)}${routePositionHtml(record, locale)}<h2>${zh ? '来源与边界' : 'Sources and boundary'}</h2><ul class="evidence-list">${facts}</ul><p class="database-browse-note">${zh ? '这些步骤来自已记录的游戏构建和公开来源；缺失的奖励、前置条件和解锁时机不会在此补写。' : 'These steps come from the recorded game build and public sources; missing rewards, prerequisites and unlock timing are not filled in.'}</p>
 <div class="entity-related"><strong>${zh ? '继续查找' : 'Continue with'}</strong><div>${relatedLinks(record.relatedRoutes || [], locale)}<a class="btn btn-outline btn-compact" href="${prefix}/database/quests#${record.id}">${zh ? '任务数据库原始记录' : 'Original quest record'}</a></div></div></section>`;
   return shell(locale, `${prefix}/database/quests/${record.id}`, `The Ranchers ${name}`, copy(locale, `${name}: objectives, checks & sources`, `${name}：目标、判定与来源`), body);
 }
@@ -257,10 +286,18 @@ function materialPage(locale, material) {
     const line = offer?.materials.find(item => materialRoutes[item.id] === material.id);
     if (line) uses.push(`<li><a href="${prefix}/database/buildings/${entry.id}">${zh ? '鸡舍 · Coop' : 'Coop'}</a> × ${line.quantity} ${zh ? '（商店商品记录）' : '(recorded shop offer)'}</li>`);
   }
+  const questUses = [];
+  for (const record of questRecords) {
+    for (const recipeId of recipeIdsFor(record)) {
+      const recipe = recipes.find(item => item.id === recipeId);
+      const line = recipe?.materials.find(item => materialRoutes[item.id] === material.id);
+      if (line) questUses.push(`<li><a href="${prefix}/database/quests/${record.id}">${esc(zh ? record.zhName : record.name)}</a> · ${esc(zh ? recipe.zhName : recipe.name)} × ${line.quantity}</li>`);
+    }
+  }
   const related = relatedLinks(material.relatedRoutes || [], locale);
   const body = `<nav class="breadcrumb" aria-label="${zh ? '面包屑' : 'Breadcrumb'}"><a href="${prefix}/">${zh ? '首页' : 'Home'}</a> / <a href="${prefix}/database">${zh ? '资料库' : 'Database'}</a> / <a href="${prefix}/database/materials">${zh ? '材料' : 'Materials'}</a> / ${esc(nativeName)}</nav>
 <h1>${esc(nativeName)}</h1><section class="evidence-ledger material-profile" id="${material.id}" data-search-entry data-search-title="${esc(nativeName)}" data-search-aliases="${esc(aliases)}" data-search-status="${zh ? '材料独立词条' : 'Standalone material entry'}" data-search-tags="${esc(`${material.searchTags} ${material.zhSearchTags}`)}"><a class="database-back" href="${prefix}/database/materials">${zh ? '返回材料目录' : 'Back to materials database'}</a>
-<p class="lead">${esc(zh ? material.zhSummary : material.summary)}</p><h2>${zh ? '需要时先看这里' : 'When you need it'}</h2><p>${esc(zh ? material.zhWhenNeeded : material.whenNeeded)}</p><h2>${zh ? '获取与证据' : 'Sources and evidence'}</h2><ul class="evidence-list">${facts}</ul>${uses.length ? `<h2>${zh ? '当前词条中的用途' : 'Uses in current entries'}</h2><ul class="evidence-list">${uses.join('')}</ul>` : ''}<div class="entity-related"><strong>${zh ? '继续查找' : 'Continue with'}</strong><div>${related}<a class="btn btn-outline btn-compact" href="${prefix}/database/materials#${material.id}">${zh ? '材料数据库原始记录' : 'Original material record'}</a></div></div></section>`;
+<p class="lead">${esc(zh ? material.zhSummary : material.summary)}</p><h2>${zh ? '需要时先看这里' : 'When you need it'}</h2><p>${esc(zh ? material.zhWhenNeeded : material.whenNeeded)}</p><h2>${zh ? '获取与证据' : 'Sources and evidence'}</h2><ul class="evidence-list">${facts}</ul>${questUses.length ? `<h2>${zh ? '相关任务与配方' : 'Related quests and recipes'}</h2><ul class="evidence-list">${questUses.join('')}</ul><p class="database-browse-note">${zh ? '链接来自任务词条已登记的现有配方；数量是配方记录，不是任务交付量。' : 'These links come from existing recipes registered on quest entries; quantities are recipe records, not quest delivery amounts.'}</p>` : ''}${uses.length ? `<h2>${zh ? '当前建筑词条中的用途' : 'Uses in current building entries'}</h2><ul class="evidence-list">${uses.join('')}</ul>` : ''}<div class="entity-related"><strong>${zh ? '继续查找' : 'Continue with'}</strong><div>${related}<a class="btn btn-outline btn-compact" href="${prefix}/database/materials#${material.id}">${zh ? '材料数据库原始记录' : 'Original material record'}</a></div></div></section>`;
   return shell(locale, `${prefix}/database/materials/${material.id}`, `The Ranchers ${nativeName}`, copy(locale, `${nativeName}: sources, uses & evidence`, `${nativeName}：获取、用途与证据`), body);
 }
 

@@ -254,8 +254,8 @@ for (const quest of quests.quests) {
   assert.match(zh, /data-quest-route-flow=/);
 }
 for (const [file, npcRoute, mapRoute] of [
-  ['database/quests/power-to-the-bench.html', '/database/npcs#victor', '/map#city-hall'],
-  ['zh/database/quests/power-to-the-bench.html', '/zh/database/npcs#victor', '/zh/map#city-hall'],
+  ['database/quests/power-to-the-bench.html', '/database/npcs/victor', '/map#city-hall'],
+  ['zh/database/quests/power-to-the-bench.html', '/zh/database/npcs/victor', '/zh/map#city-hall'],
 ]) {
   const html = read(file);
   assert.ok(html.includes(`href="${npcRoute}"`), `${file}: NPC relation link must remain on standalone output`);

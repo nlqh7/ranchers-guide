@@ -575,6 +575,18 @@
             ]
           }
         ],
+        "trackerHints": [
+          {
+            "entries": [1, 2, 3],
+            "text": "Equipping the blueprint, placing it, and finishing the build with the hammer are separate checks. This recorded route checks the ordinary Red Tent ID, not the four-person tent.",
+            "zhText": "装备蓝图、放下蓝图和用锤子完成建造是分开的检查。这条记录路线检查普通红色帐篷的物品 ID，不是四人款。",
+            "sourceFields": [
+              "Entry 1 LUA_OnCondition",
+              "Entry 2 LUA_OnCondition",
+              "Entry 3 LUA_OnCondition"
+            ]
+          }
+        ],
         "flow": {
           "failureTriggers": [],
           "gameTimeThreshold": null,
@@ -1090,8 +1102,8 @@
       "category": "farming",
       "zhCategory": "种植",
       "nameConfidence": "exact-build",
-      "searchTags": "Seeds of Success",
-      "zhSearchTags": "成功的种子",
+      "searchTags": "Seeds of Success 10 plots 16 plots planted plots task stuck final target 10 plots not completing ten plots quest incomplete won't finish",
+      "zhSearchTags": "成功的种子 10块 16块 播种地块 任务卡住 最终目标 种了10块任务没完成 播种10块不完成任务 地块不足",
       "summary": "Till, sow and water a field, then reach the configured planted-plot target.",
       "zhSummary": "翻地、播种、浇水，并达到配置中的播种地块目标。",
       "facts": [
@@ -1227,6 +1239,20 @@
             ]
           }
         ],
+        "trackerHints": [
+          {
+            "entries": [
+              6
+            ],
+            "text": "The introduction says ten plots, but the final objective and configured condition use 16. If the task still waits, check the final planted-plot target instead of stopping at ten.",
+            "zhText": "任务简介写10块地，但最后目标和配置判定使用16块。如果任务仍未完成，请检查最终播种地块目标，不要在10块时停下。",
+            "sourceFields": [
+              "Description en",
+              "Description zh-CN",
+              "Entry 6 LUA_OnCondition"
+            ]
+          }
+        ],
         "flow": {
           "failureTriggers": [],
           "gameTimeThreshold": null,
@@ -1252,8 +1278,8 @@
       "category": "farming",
       "zhCategory": "种植",
       "nameConfidence": "exact-build",
-      "searchTags": "Feathered Foes scarecrow workbench locked lower tier Bob",
-      "zhSearchTags": "长着羽毛的敌人 稻草人 工作台 未解锁 普通款 鲍勃",
+      "searchTags": "Feathered Foes scarecrow workbench locked lower tier Bob stuck choose ordinary recipe",
+      "zhSearchTags": "长着羽毛的敌人 稻草人 工作台 未解锁 普通款 鲍勃 卡住 选择普通配方",
       "summary": "Craft and build a scarecrow, checking which variant the placement objective accepts.",
       "zhSummary": "制作并建造稻草人，注意放置目标接受的具体款式。",
       "facts": [
@@ -1399,6 +1425,22 @@
             "sourceFields": [
               "Description en",
               "Description zh-CN"
+            ]
+          }
+        ],
+        "trackerHints": [
+          {
+            "entries": [
+              1,
+              2
+            ],
+            "text": "If the Workbench is locked, use the ordinary Scarecrow route: its current-build recipe does not require a workbench, while Bob's does. The final build condition names the ordinary variant.",
+            "zhText": "如果工作台未解锁，走普通稻草人路线：当前构建的普通款配方不要求工作台，而鲍勃款需要；最后的建造判定写的是普通款。",
+            "sourceFields": [
+              "Official moderator reply",
+              "Plantations_Recipes prop_Scarecrow_00 workbench",
+              "Plantations_Recipes prop_Scarecrow_01 workbench",
+              "Entry 2 LUA_OnCondition"
             ]
           }
         ],
@@ -1709,6 +1751,27 @@
             "text": "The last objective checks whether the energy app is open; building the workbench alone does not satisfy that step.",
             "zhText": "最后一步检查的是电表应用是否打开，不是工作台是否建成。",
             "sourceFields": [
+              "Entry 5 LUA_OnCondition"
+            ]
+          }
+        ],
+        "trackerHints": [
+          {
+            "entries": [2, 3],
+            "text": "The electricity contract and the workbench build are separate objectives: complete the City Hall/Victor contract step before treating the workbench step as complete.",
+            "zhText": "电力合同和工作台建造是两个不同目标：先完成市政厅找 Victor 签合同的步骤，再把工作台目标视为完成。",
+            "sourceFields": [
+              "Entry 2 LUA_OnCondition",
+              "Entry 3 LUA_OnCondition",
+              "Entry 4 LUA_OnCondition"
+            ]
+          },
+          {
+            "entries": [4, 5],
+            "text": "Building the workbench does not satisfy the final check by itself; after the build step, open the phone's energy-meter app.",
+            "zhText": "建好工作台本身不会满足最后一项；完成建造后，还要打开手机的电表应用。",
+            "sourceFields": [
+              "Entry 4 LUA_OnCondition",
               "Entry 5 LUA_OnCondition"
             ]
           }

@@ -520,8 +520,8 @@ assert.equal(mapCore.buildQueryString("", "all"), "");
 
 const search = read("assets/js/search.js");
 assert.match(search, /"\/map"/);
-assert.match(search, /ranchers-search-index-v43/);
-assert.match(search, /ranchers-search-index-zh-v29/);
+assert.match(search, /ranchers-search-index-v45/);
+assert.match(search, /ranchers-search-index-zh-v31/);
 assert.match(search, /node\.querySelector\("h2, h3"\)/);
 
 const sitemap = read("sitemap.xml");

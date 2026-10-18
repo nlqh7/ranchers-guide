@@ -181,8 +181,8 @@ for (const listName of ["EN_PAGE_PATHS", "ZH_PAGE_PATHS"]) {
   const routes = [...block[1].matchAll(/"([^"]+)"/g)].map((match) => match[1]);
   assert.equal(new Set(routes).size, routes.length, `${listName} must not contain duplicate routes`);
 }
-assert.match(searchSource, /ranchers-search-index-zh-v29/, "Chinese search cache must invalidate the previous page set");
-assert.match(searchSource, /ranchers-search-index-v43/, "English search cache must invalidate the previous page set");
+assert.match(searchSource, /ranchers-search-index-zh-v31/, "Chinese search cache must invalidate the previous page set");
+assert.match(searchSource, /ranchers-search-index-v45/, "English search cache must invalidate the previous page set");
 assert.match(searchPage, /data-knowledge-dossier/, "Search page must provide an entity dossier surface");
 assert.match(searchPage, /data-entity-filters/, "Search page must provide entity answer filters");
 const chineseSearchPage = fs.readFileSync(path.join(root, "zh", "search.html"), "utf8");

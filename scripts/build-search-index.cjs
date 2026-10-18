@@ -26,6 +26,7 @@ function routeToFile(route) {
   if (route === "/") return "index.html";
   if (route === "/zh/") return "zh/index.html";
   if (route === "/database") return "database.html";
+  if (route.endsWith("/")) return `${route.replace(/^\//, "")}index.html`;
   return `${route.replace(/^\//, "")}.html`;
 }
 
@@ -51,6 +52,8 @@ function cleanTitle(title) {
 }
 
 function pageType(route) {
+  if (route === "/games/fs25/" || route === "/zh/games/fs25/") return "FS25 hub";
+  if (route === "/games/fs25/tools/production-planner/" || route === "/zh/games/fs25/tools/production-planner/") return "FS25 tool";
   if (route.indexOf("/zh/") === 0) {
     if (route.indexOf("/zh/guides/") === 0) return "攻略";
     if (route === "/zh/database") return "知识库";
