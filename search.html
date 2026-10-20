@@ -15,6 +15,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon-180.png">
   <link rel="stylesheet" href="assets/css/style.css?v=20261003-r15">
+  <link rel="stylesheet" href="/assets/css/search-game-scope.css?v=20261020-scope1">
 </head>
 <body>
   <header class="site-header">
@@ -41,6 +42,7 @@
       <div class="container search-shell">
         <span class="kicker">Site Search</span>
         <h1>Search the Guide</h1>
+        <div class="search-game-scope"><label for="search-game">Game</label><select id="search-game" data-search-game><option value="all">All games</option><option value="ranchers">The Ranchers</option><option value="fs25">Farming Simulator 25</option></select></div>
 
         <form class="site-search-form" data-search-form role="search">
           <label for="site-search">Search guides, data and tools</label>
@@ -119,6 +121,7 @@
 
   <script src="assets/js/main.js?v=20261003-r15" defer></script>
   <script src="assets/js/search-core.js?v=20260928-answer-alias1" defer></script>
-  <script src="assets/js/search.js?v=20260920-entity1" defer></script>
+  <script src="assets/js/search-game-scope.js?v=20261020-scope1" defer></script>
+  <script src="assets/js/search.js?v=20261020-scope2" defer></script>
 </body>
 </html>

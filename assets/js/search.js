@@ -3,6 +3,8 @@
 
   var EN_PAGE_PATHS = [
     "/",
+    "/games/fs25/",
+    "/games/fs25/tools/production-planner/",
     "/guides/release-time-checklist",
     "/guides/beginner-mistakes",
     "/guides/beginners-guide",
@@ -82,6 +84,8 @@
   ];
   var ZH_PAGE_PATHS = [
     "/zh/",
+    "/zh/games/fs25/",
+    "/zh/games/fs25/tools/production-planner/",
     "/zh/guides/beginners-guide",
     "/zh/guides/story",
     "/zh/guides/animal-guide",
@@ -150,7 +154,7 @@
   var IS_ZH = document.documentElement.lang.toLowerCase() === "zh-cn";
   var PAGE_PATHS = IS_ZH ? ZH_PAGE_PATHS : EN_PAGE_PATHS;
   var SEARCH_ROUTE = IS_ZH ? "/zh/search" : "/search";
-  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v31" : "ranchers-search-index-v45";
+  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v32" : "ranchers-search-index-v46";
   var documents = [];
   var form = document.querySelector("[data-search-form]");
   var input = document.querySelector("[data-search-input]");
@@ -162,12 +166,38 @@
   var entityFilterButtons = Array.from(document.querySelectorAll("[data-entity-filter]"));
   var knowledgeEntities = [];
   var activeEntityFilter = "all";
+  var gameScope = window.RanchersSearchScope;
+  var gameSelect = document.querySelector("[data-search-game]");
+  var activeGame = gameScope ? gameScope.normalize(new URLSearchParams(location.search).get("game")) : "all";
+
+  function currentSearchUrl(query) {
+    return gameScope ? gameScope.searchUrl(SEARCH_ROUTE, query, activeGame)
+      : SEARCH_ROUTE + (query.trim() ? "?q=" + encodeURIComponent(query.trim()) : "");
+  }
+  function syncSearchLanguage(query) {
+    var counterpart = document.querySelector('.nav-language-link');
+    if (!gameScope || !counterpart) return;
+    // Search owns the new game context; keep this scoped to search pages,
+    // after shared navigation's history synchronization has run.
+    var base = counterpart.href.split(/[?#]/)[0];
+    counterpart.href = gameScope.searchUrl(base, query, activeGame);
+  }
+  function syncGameScope() {
+    if (gameSelect) {
+      gameSelect.value = activeGame;
+      gameSelect.disabled = !gameScope;
+    }
+    [document.querySelector("[data-entity-filters]"), document.querySelector(".search-suggestions")].forEach(function (node) {
+      if (node) node.hidden = activeGame === "fs25";
+    });
+  }
 
   function cleanTitle(title) {
     return String(title || "").replace(/\s*[|—]\s*(?:The Ranchers Guide|牧场主指南)\s*$/i, "").trim();
   }
 
   function pageType(path) {
+    if (/^\/(?:zh\/)?games\/fs25\//.test(path)) return IS_ZH ? "FS25 工具" : "FS25 tool";
     if (path.indexOf("/zh/") === 0) {
       if (path.indexOf("/zh/guides/") === 0) return "攻略";
       if (path === "/zh/database") return "知识库";
@@ -418,24 +448,30 @@
     }
     if (!trimmed) {
       setStatus(IS_ZH ? "输入物品、任务、地点或问题。" : "Enter a topic to search the guide.");
-      if (updateUrl) history.replaceState(null, "", SEARCH_ROUTE);
+      if (updateUrl) history.replaceState(null, "", currentSearchUrl(""));
+      syncSearchLanguage("");
       return;
     }
 
-    var matches = RanchersSearch.searchDocuments(documents, trimmed, 12);
-    renderDossier(trimmed, matches);
+    var scopedDocuments = gameScope ? gameScope.filterDocuments(documents, activeGame) : documents;
+    var matches = RanchersSearch.searchDocuments(scopedDocuments, trimmed, 12);
+    if (!gameScope || gameScope.allowsDossier(activeGame)) renderDossier(trimmed, matches);
     setStatus(IS_ZH ? matches.length + " 条结果" : (matches.length === 1 ? "1 result" : matches.length + " results"));
     matches.forEach(function (item) { results.appendChild(resultElement(item)); });
 
     if (!matches.length) {
       var empty = document.createElement("div");
       empty.className = "search-empty";
-      empty.innerHTML = IS_ZH
+      empty.innerHTML = activeGame === "fs25"
+        ? (IS_ZH ? '<h2>未找到匹配的 FS25 工具</h2><p>当前只提供面包生产规划；试试“面包”或“磨坊”。</p>'
+          : '<h2>No matching FS25 tool</h2><p>This section currently covers bread production planning. Try “bread” or “mill”.</p>')
+        : IS_ZH
         ? '<h2>暂时没有匹配答案</h2><p>试试只输入物品名或任务名，也可以<a href="/zh/database">浏览知识库</a>，或<a href="/zh/community">查看社区雷达</a>寻找正在调查的问题。</p>'
         : '<h2>No matching answer yet</h2><p>Try the item or quest name on its own, <a href="/database">browse the knowledge base</a>, or <a href="/contribute">send the missing question</a>.</p>';
       results.appendChild(empty);
     }
-    if (updateUrl) history.replaceState(null, "", SEARCH_ROUTE + "?q=" + encodeURIComponent(trimmed));
+    if (updateUrl) history.replaceState(null, "", currentSearchUrl(trimmed));
+    syncSearchLanguage(trimmed);
   }
 
   function setEntityFilter(value) {
@@ -487,6 +523,24 @@
       setEntityFilter(button.dataset.entityFilter || "all");
     });
   });
+
+  if (gameSelect) gameSelect.addEventListener("change", function () {
+    activeGame = gameScope.normalize(gameSelect.value);
+    syncGameScope();
+    setEntityFilter("all");
+    runSearch(input.value, false);
+    history.pushState(null, "", currentSearchUrl(input.value));
+    syncSearchLanguage(input.value);
+  });
+  window.addEventListener("popstate", function () {
+    var params = new URLSearchParams(location.search);
+    activeGame = gameScope ? gameScope.normalize(params.get("game")) : "all";
+    input.value = params.get("q") || "";
+    syncGameScope();
+    syncClearButton();
+    runSearch(input.value, false);
+  });
+  syncGameScope();
 
   setStatus(IS_ZH ? "正在加载中文索引..." : "Loading guide index...");
   Promise.all([loadIndex(), loadKnowledgeIndex().catch(function () { return []; })]).then(function (loaded) {

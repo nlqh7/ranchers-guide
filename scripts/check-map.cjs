@@ -520,8 +520,7 @@ assert.equal(mapCore.buildQueryString("", "all"), "");
 
 const search = read("assets/js/search.js");
 assert.match(search, /"\/map"/);
-assert.match(search, /ranchers-search-index-v45/);
-assert.match(search, /ranchers-search-index-zh-v31/);
+require('./search-cache-contract.cjs')(search);
 assert.match(search, /node\.querySelector\("h2, h3"\)/);
 
 const sitemap = read("sitemap.xml");
@@ -541,6 +540,11 @@ function htmlFiles(directory) {
 
 for (const file of htmlFiles(root)) {
   const relative = path.relative(root, file);
+  if (require('./check-public-release.cjs').FS25_PUBLIC_FILES.includes(relative.split(path.sep).join('/'))) {
+    const scopedSearch = relative.startsWith(`zh${path.sep}`) ? 'href="/zh/search?game=fs25"' : 'href="/search?game=fs25"';
+    assert.ok(fs.readFileSync(file, 'utf8').includes(scopedSearch), `${relative} needs same-game search, not a Ranchers-only map`);
+    continue;
+  }
   const expectedMapRoute = relative.startsWith(`zh${path.sep}`) ? /href="\/zh\/map"/ : /href="\/map"/;
   assert.match(fs.readFileSync(file, "utf8"), expectedMapRoute, `${relative} needs a locale-matched Map link`);
 }

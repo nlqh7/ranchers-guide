@@ -1,0 +1,191 @@
+/* game-tools.css — scoped styles for the multi-game picker, game hubs and game tools.
+   Loaded only on pages that opt in; never replaces or rewrites style.css.
+   Theme: reuses the site's cream / brown / green custom properties. */
+
+/* ---------- Choose your game (home) ---------- */
+.gt-game-grid { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 720px) { .gt-game-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.gt-game-card {
+  background: #fff;
+  border: 2px solid var(--cream-300);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.gt-game-card h3 { margin: 0; font-family: var(--font-display); color: var(--brown-900); }
+.gt-game-card p { margin: 0; color: var(--brown-700); flex: 1; }
+.gt-game-card .btn { align-self: flex-start; min-height: 44px; display: inline-flex; align-items: center; }
+
+/* ---------- Game page gutter & compact first screen ---------- */
+/* style.css's later .section rule resets horizontal padding; restore the
+   container gutter on game pages so breadcrumb and body never touch edges. */
+.gt-page.container { padding-left: 20px; padding-right: 20px; }
+@media (max-width: 620px) {
+  .gt-page.section { padding-top: 28px; padding-bottom: 40px; }
+}
+.gt-boundary-hint { margin: 10px 0 0; }
+
+/* ---------- Game hub identity ---------- */
+.gt-game-id {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--green-700);
+  margin: 0 0 6px;
+}
+
+/* ---------- FS25 planner (scoped under .gt-tool) ---------- */
+.gt-tool input, .gt-tool select { min-height: 44px; font-size: 1rem; box-sizing: border-box; }
+.gt-tool details > summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 800;
+  color: var(--brown-900);
+}
+.gt-tool .btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+.gt-tool a:focus-visible,
+.gt-tool button:focus-visible,
+.gt-tool input:focus-visible,
+.gt-tool select:focus-visible,
+.gt-tool summary:focus-visible,
+.gt-tool textarea:focus-visible {
+  outline: 3px solid var(--green-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Mobile order is the DOM order: target → results → advanced → meta.
+   Desktop switches to a compact two-column grid. */
+.fp-layout {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "target" "results" "advanced" "meta";
+  margin-top: 20px;
+}
+@media (min-width: 920px) {
+  .fp-layout {
+    grid-template-columns: minmax(0, 400px) minmax(0, 1fr);
+    grid-template-areas:
+      "target results"
+      "advanced results"
+      "meta meta";
+    align-items: start;
+  }
+}
+.fp-target { grid-area: target; }
+.fp-results { grid-area: results; }
+.fp-advanced { grid-area: advanced; }
+.fp-meta { grid-area: meta; display: grid; gap: 12px; }
+
+.fp-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 14px 0 4px; }
+.fp-generate { font-size: 1.05rem; padding-left: 24px; padding-right: 24px; }
+.fp-status { font-size: 0.85rem; color: var(--brown-500); margin: 6px 0 0; }
+.fp-field-hint, .fp-field-error { font-size: 0.85rem; margin: 6px 0 0; }
+.fp-field-hint { color: var(--brown-500); }
+.fp-field-error { color: #b3402e; font-weight: 700; }
+.fp-invalid { border-color: #b3402e !important; outline: 2px solid rgba(179, 64, 46, 0.35); }
+
+.fp-results-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; justify-content: space-between; }
+.fp-results-head h3 { margin: 0; }
+.fp-boundary {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #fdf3e3;
+  color: var(--accent, #c8862a);
+}
+.fp-stale-banner {
+  background: #fdf3e3;
+  border-left: 4px solid var(--accent, #c8862a);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-weight: 700;
+}
+.fp-stale #fp-results { opacity: 0.55; }
+
+.fp-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 16px 0; }
+.fp-card { background: var(--cream-100); border: 1px solid var(--cream-300); border-radius: 12px; padding: 16px; text-align: center; }
+.fp-num { display: block; font-family: var(--font-display); font-size: 1.5rem; color: var(--green-700); overflow-wrap: anywhere; }
+.fp-label { font-size: 0.85rem; color: var(--brown-500); }
+.fp-card-blocked { background: #fdf3e3; }
+.fp-blocked { color: #b3402e; font-weight: 700; font-size: 0.85rem; margin: 6px 0 0; }
+.fp-gap { background: #fdf3e3; border-left: 4px solid var(--accent, #c8862a); border-radius: 8px; padding: 10px 14px; }
+.fp-ok { color: var(--green-700); font-weight: 700; }
+.fp-src-note { font-size: 0.82rem; color: var(--brown-500); }
+.fp-empty { color: var(--brown-500); }
+.fp-facilities > h4 { margin: 10px 0 6px; }
+.fp-facility h4 { margin: 12px 0 6px; }
+.fp-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-top: 12px; }
+.fp-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: #fdf3e3;
+  color: var(--accent, #c8862a);
+  white-space: nowrap;
+}
+.fp-copy-manual {
+  width: 100%;
+  min-height: 130px;
+  margin-top: 10px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 10px 12px;
+  border: 2px solid var(--cream-300);
+  border-radius: var(--radius-sm);
+  background: var(--cream-100);
+  box-sizing: border-box;
+}
+
+/* ---------- FS25 planner: existing facilities & per-facility stats (F2) ---------- */
+.gt-tool .fp-existing {
+  border: 0;
+  border-top: 1px solid var(--cream-300);
+  margin: 18px 0 0;
+  padding: 14px 0 0;
+  min-width: 0;
+}
+.gt-tool .fp-existing legend {
+  padding: 0;
+  font-weight: 800;
+  color: var(--brown-900);
+}
+.gt-tool .fp-existing legend .fp-tag { margin-left: 8px; }
+.fp-existing-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin-top: 10px;
+}
+.fp-stats {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  font-size: 0.9rem;
+  color: var(--brown-700);
+}
+.fp-stats strong { color: var(--brown-900); }
+.fp-stats .fp-ok { font-weight: 700; }
+.fp-stats-add { font-weight: 800; color: var(--green-700); }
+.fp-stats-warn { font-weight: 800; color: var(--accent, #c8862a); }
+.fp-stats-note { font-size: 0.82rem; color: var(--brown-500); }
+.fp-card-skipped p, .fp-card-blocked p { text-align: left; }
+.fp-skipped-note { font-size: 0.82rem; color: var(--brown-500); margin: 6px 0 0; }
+.fp-meta details { background: #fff; border: 2px solid var(--cream-300); border-radius: var(--radius); padding: 0 16px; }
+.fp-meta details > summary { padding: 10px 0; }
+.fp-meta details > div { padding-bottom: 16px; }
+
+/* Keep search deep links and the return-to-planner action below the sticky header. */
+#fs25-planner, #mill-supply { scroll-margin-top: 110px; }

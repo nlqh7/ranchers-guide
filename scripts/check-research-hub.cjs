@@ -90,8 +90,7 @@ for (const route of [
 ]) {
   assert.match(searchScript, new RegExp(`"${route.replaceAll("/", "\\/")}"`));
 }
-assert.match(searchScript, /ranchers-search-index-v45/);
-assert.match(searchScript, /ranchers-search-index-zh-v31/);
+require('./search-cache-contract.cjs')(searchScript);
 
 const chineseProblems = read("zh/problems.html");
 const englishProblemMeta = hub.match(/<p class="knowledge-hero-meta">([\s\S]*?)<\/p>/)?.[1] || "";
@@ -103,7 +102,7 @@ assert.doesNotMatch(chineseProblems, /当前基线：0\.8\.10\.842|最近复核�
 assert.match(chineseProblems, /data-problem-search/);
 assert.match(chineseProblems, /data-problem-filter-value="solved"/);
 assert.match(chineseProblems, /data-problem-filter-value="reported"/);
-assert.equal((chineseProblems.match(/data-problem-entry/g) || []).length, 9, "Chinese problem finder must cover all nine published records");
+assert.equal((chineseProblems.match(/data-problem-entry/g) || []).length, 10, "Chinese problem finder must retain the existing nine records plus the new missing-quest-NPC report");
 assert.match(chineseProblems, /assets\/js\/problems\.js/);
 
 const sitemap = read("sitemap.xml");
@@ -124,6 +123,11 @@ for (const file of htmlFiles(root)) {
   const html = fs.readFileSync(file, "utf8");
   const relative = path.relative(root, file);
   const isChinese = relative.startsWith(`zh${path.sep}`);
+  if (require('./check-public-release.cjs').FS25_PUBLIC_FILES.includes(relative.split(path.sep).join('/'))) {
+    assert.ok(html.includes(isChinese ? 'href="/zh/search?game=fs25"' : 'href="/search?game=fs25"'), `${relative} needs scoped FS25 search`);
+    assert.ok(html.includes(isChinese ? 'href="/zh/contact"' : 'href="/contact"'), `${relative} must retain a feedback/contact path`);
+    continue;
+  }
   assert.match(html, isChinese ? /href="\/zh\/problems"/ : /href="\/problems"/, `${relative} needs a locale-matched Problems link`);
   if (!isChinese) assert.match(html, /href="\/research"/, `${relative} needs a Research link`);
   assert.match(html, /href="\/contribute(?:"|\?)/, `${relative} needs a Contribute link`);

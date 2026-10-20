@@ -83,6 +83,7 @@ const nodeChecks = [
   ["check-smartphone-app-reference.cjs"],
   ["check-vehicle-operation-guide.cjs"],
   ["check-vehicle-recovery-guide.cjs"],
+  ["check-missing-quest-npc.cjs"],
   ["check-ui-system.cjs"],
   ["check-animals.cjs"],
   ["check-animal-build-reference.cjs"],
@@ -130,6 +131,8 @@ const nodeChecks = [
   ["check-profit-calculator.cjs"],
   ["check-research-hub.cjs"],
   ["check-search.cjs"],
+  ["check-search-game-scope.cjs"],
+  ["check-public-release-profiles.cjs"],
   ["check-version-semantics.cjs"],
   ["check-phase2-tools.cjs"],
 ];

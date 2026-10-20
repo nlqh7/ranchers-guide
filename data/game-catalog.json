@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "game-catalog-v1",
+  "releaseProfile": "fs25-bread-v1",
+  "games": [
+    {
+      "id": "the-ranchers",
+      "name": "The Ranchers",
+      "zhName": "牧场主",
+      "status": "existing",
+      "hubRoute": "/",
+      "zhHubRoute": "/zh/",
+      "summary": "Guides, map, database and planning tools for The Ranchers.",
+      "zhSummary": "《牧场主》的攻略、地图、资料库和规划工具。"
+    },
+    {
+      "id": "fs25",
+      "name": "Farming Simulator 25",
+      "zhName": "模拟农场25",
+      "status": "pilot",
+      "hubRoute": "/games/fs25/",
+      "zhHubRoute": "/zh/games/fs25/",
+      "summary": "A focused bread-production planner for Farming Simulator 25.",
+      "zhSummary": "面向《模拟农场25》的面包生产规划工具。"
+    }
+  ]
+}

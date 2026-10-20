@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FS25 Bread Production Planner — Work Backwards From a Monthly Target</title>
+  <meta name="description" content="Farming Simulator 25 bread production planner: enter a monthly bread target and get flour and wheat needs, field area and facility counts — with capacity gaps flagged before you buy buildings.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://theranchersguide.com/games/fs25/tools/production-planner/">
+  <link rel="alternate" hreflang="en" href="https://theranchersguide.com/games/fs25/tools/production-planner/">
+  <link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/games/fs25/tools/production-planner/">
+  <link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/games/fs25/tools/production-planner/">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon-180.png">
+  <link rel="stylesheet" href="/assets/css/style.css?v=20261003-r15">
+  <link rel="stylesheet" href="/assets/css/game-tools.css?v=20261020-fs25n1">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a class="logo" href="/">
+        <span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span>
+        <span>The Ranchers Guide</span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+      <ul class="nav-links"><li><a href="/games/fs25/">FS25 tools</a></li><li><a href="/games/fs25/tools/production-planner/">Bread planner</a></li><li><a href="/search?game=fs25">Search FS25</a></li><li><a href="/">The Ranchers</a></li></ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container section gt-tool gt-page">
+      <nav class="breadcrumb" aria-label="Breadcrumb" style="font-size:0.82rem;color:var(--brown-500);"><a href="/">Home</a> / Games / <a href="/games/fs25/">Farming Simulator 25</a> / Bread Production Planner</nav>
+      <p class="gt-game-id">Farming Simulator 25 · bread chain pilot</p>
+      <h1>Bread Production Planner</h1>
+
+      <p class="lead" style="max-width:720px;">Set a monthly bread target and work backwards to flour and wheat needs, field area, and <strong>whether one facility can actually keep up</strong>.</p>
+
+      <p class="fp-src-note gt-boundary-hint"><strong>Data boundary:</strong> illustrative sample values and community references · not yet runtime-confirmed · not every value is independently sourced · adjust per facility in “Advanced”. Full explanation in “Sources &amp; data status” below.</p>
+
+      <form id="fp-form" novalidate>
+        <div class="fp-layout" id="fs25-planner">
+          <section class="calc-panel fp-target" aria-labelledby="fp-target-title">
+            <h3 id="fp-target-title">Your monthly target</h3>
+            <div class="calc-field">
+              <label for="fp-target">Bread target per month (L)</label>
+              <input id="fp-target" type="number" min="0" step="100" inputmode="numeric">
+              <p class="fp-field-hint" id="fp-target-hint" hidden>Enter your monthly target (litres) here first.</p>
+            </div>
+            <fieldset class="fp-existing" aria-describedby="fp-existing-note">
+              <legend>Facilities you already own <span class="fp-tag">optional</span></legend>
+              <div class="fp-existing-grid">
+                <div class="calc-field">
+                  <label for="fp-have-bakery">Bakeries owned (whole number)</label>
+                  <input id="fp-have-bakery" type="number" min="0" step="1" inputmode="numeric">
+                </div>
+                <div class="calc-field">
+                  <label for="fp-have-mill">Grain Mills owned (whole number)</label>
+                  <input id="fp-have-mill" type="number" min="0" step="1" inputmode="numeric">
+                </div>
+              </div>
+              <p class="fp-src-note" id="fp-existing-note">Blank is <strong>not</strong> zero: leave these blank and the plan shows only the total facilities needed — it cannot show your current shortfall or how many additional facilities to buy. Enter how many you already own (0 if none) to add those figures.</p>
+            </fieldset>
+            <div class="fp-actions">
+              <button type="submit" class="btn fp-generate">Generate plan</button>
+              <button type="button" class="btn btn-outline" id="fp-save" disabled>Save settings</button>
+            </div>
+            <p class="fp-status" id="fp-save-status" role="status"></p>
+            <p class="fp-src-note">Press Enter in any field to generate. “Save settings” is available once every required value is valid and optional fields are blank or valid; settings are stored only on this device.</p>
+          </section>
+
+          <section class="calc-panel fp-results" aria-labelledby="fp-results-title">
+            <div class="fp-results-head">
+              <h3 id="fp-results-title">Your plan</h3>
+              <span class="fp-boundary">Illustrative sample values · not yet runtime-confirmed · verify against your own save</span>
+            </div>
+            <p class="fp-stale-banner" id="fp-stale" hidden role="alert">Inputs changed — the plan below has not been updated. Press “Generate plan” again.</p>
+            <div id="fp-results" aria-live="polite"><p class="fp-empty">Enter a monthly target and press “Generate plan”.</p></div>
+            <div class="fp-actions">
+              <button type="button" class="btn btn-outline" id="fp-copy" disabled>Copy plan</button>
+              <span class="fp-status" id="fp-copy-status" role="status"></span>
+            </div>
+            <textarea id="fp-copy-manual" class="fp-copy-manual" hidden readonly aria-label="Plan text for manual copy"></textarea>
+          </section>
+
+          <details class="calc-panel fp-advanced" id="fp-parameters">
+            <summary>Advanced: capacity, ratios &amp; area assumptions <span class="fp-tag">sample data</span></summary>
+            <div class="fp-grid">
+              <div class="calc-field">
+                <label for="fp-months">Production run months per year</label>
+                <input id="fp-months" type="number" min="1" max="12" step="1" inputmode="numeric">
+              </div>
+              <div class="calc-field">
+                <label for="fp-harvests">Wheat harvests per year</label>
+                <input id="fp-harvests" type="number" min="1" max="12" step="1" inputmode="numeric">
+              </div>
+              <div class="calc-field">
+                <label for="fp-ratio-bakery">Flour per 1 L bread</label>
+                <input id="fp-ratio-bakery" type="number" min="0" step="0.1" inputmode="decimal">
+              </div>
+              <div class="calc-field">
+                <label for="fp-ratio-mill">Wheat per 1 L flour</label>
+                <input id="fp-ratio-mill" type="number" min="0" step="0.05" inputmode="decimal">
+              </div>
+              <div class="calc-field">
+                <label for="fp-cap-bakery">Bakery output / month (L)</label>
+                <input id="fp-cap-bakery" type="number" min="0" step="10" inputmode="numeric">
+              </div>
+              <div class="calc-field">
+                <label for="fp-rule-bakery">Bakery line rule</label>
+                <select id="fp-rule-bakery">
+                  <option value="divided">Lines share one monthly budget</option>
+                  <option value="independent">Each line runs at full capacity</option>
+                </select>
+              </div>
+              <div class="calc-field">
+                <label for="fp-share-bakery">Lines in one Bakery</label>
+                <input id="fp-share-bakery" type="number" min="1" max="8" step="1" value="1" inputmode="numeric">
+              </div>
+              <div class="calc-field">
+                <label for="fp-cap-mill">Grain Mill flour / month (L)</label>
+                <input id="fp-cap-mill" type="number" min="0" step="10" inputmode="numeric">
+              </div>
+              <div class="calc-field">
+                <label for="fp-rule-mill">Grain Mill line rule</label>
+                <select id="fp-rule-mill">
+                  <option value="divided">Lines share one monthly budget</option>
+                  <option value="independent">Each line runs at full capacity</option>
+                </select>
+              </div>
+              <div class="calc-field">
+                <label for="fp-share-mill">Lines in one Mill</label>
+                <input id="fp-share-mill" type="number" min="1" max="8" step="1" value="1" inputmode="numeric">
+              </div>
+              <div class="calc-field">
+                <label for="fp-yield">Wheat yield (L / ha / harvest)</label>
+                <input id="fp-yield" type="number" min="0" step="100" inputmode="numeric">
+              </div>
+            </div>
+            <div class="fp-actions">
+              <button type="button" class="btn btn-outline" id="fp-reset">Load sample data</button>
+              <span class="fp-status" id="fp-load-status" role="status"></span>
+            </div>
+            <p class="fp-src-note">These fields start blank so that no reference value is mistaken for confirmed data. Press “Load sample data” to fill every field from the sample values shipped with the data file — they stay illustrative sample values: not runtime-confirmed, and not independently sourced value by value. An invalid value (0, negative, non-numeric or out of range) blocks only the results that depend on it; independent outputs remain visible instead of silently substituting defaults. Field area assumes production runs for the stated months per year with the stated number of wheat harvests per year; it does not change what facilities demand per running month. Leaving run months, harvests or yield blank leaves only the field-area estimate uncalculated; everything else still renders. Line rules can differ per facility in FS25 — set them per building, not globally.</p>
+          </details>
+
+          <div class="fp-meta">
+            <details>
+              <summary>How the plan is calculated</summary>
+              <div>
+                <p>The reference uses standard Bakery and Grain Mill entries in <a href="https://docs.google.com/spreadsheets/d/1KBP3QLKgKboofOCFQnM2gedq75pu7ugzm960FQDb3EM/edit#gid=363485587" rel="noopener noreferrer">MrSNoopy1611's v1.4.3 sheet</a>, not its separate shed variants. These are historical community records with no stated game build; compare your own facilities before planning a purchase.</p>
+                <p>The planner multiplies your monthly bread target by the flour ratio, then by the wheat ratio. Each facility's monthly capacity is divided between its lines only when the “share one monthly budget” rule is selected; with independent lines the recipe keeps its full capacity and the line count does not multiply it. Wheat demand becomes field area using your production run months per year, wheat harvests per year and yield per hectare per harvest.</p>
+                <p>To plan from your own save: enter the monthly output you want and the recipe's input per output, plus each facility's monthly output as observed or selected in your save. Then enter how many of each facility you already own — the plan compares the total facilities needed against what you have and shows the additional purchase gap.</p>
+              </div>
+            </details>
+            <details>
+              <summary>Sources &amp; data status</summary>
+              <div>
+                <ul id="fp-sources-list"></ul>
+                <p class="fp-src-note">Values on this page mix community references and illustrative sample assumptions; all of them remain labelled “not yet runtime-confirmed” until verified against the current build, and not every value has an independent source. Unconfirmed values are never shown as confirmed. Open “Advanced” above to check or replace any number before you trust a plan. No prices on purpose — this tool plans throughput, not profit.</p>
+              </div>
+            </details>
+            <details>
+              <summary>Feedback</summary>
+              <div>
+                <p>Seeing a different value in your own save? Send the number, your game version and what you observed via the <a href="/contact">contact page</a> or the <a href="/contribute">contribute page</a> — reported values are verified before they replace a reference.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </form>
+          <section class="calc-panel" id="mill-supply" data-search-entry data-search-title="Can one Grain Mill supply a Bakery?" data-search-aliases="bread supply|flour shortage|FS25 mill" data-search-status="Historical community reference"><h2>Check the flour gap before buying a mill</h2><p>In the standard-facility reference from the author’s v1.4.3 sheet, a 5,400 L monthly bread target needs 10,800 L flour. One wheat mill supplies 10,080 L: a 720 L gap. This target needs 2 identical mills in total; if you own 1, add 1.</p><p>This is not a universal or current-build guarantee and excludes the sheet’s separate shed variants. <a href="#fs25-planner">Recalculate using your facilities</a> and <a href="https://docs.google.com/spreadsheets/d/1KBP3QLKgKboofOCFQnM2gedq75pu7ugzm960FQDb3EM/edit#gid=363485587" rel="noopener noreferrer">check the original author’s data</a>.</p></section>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>Farming Simulator 25 pilot</h4><p>An unofficial fan-made pilot corner for Farming Simulator 25, hosted on The Ranchers Guide. Bread-chain values are community references and illustrative defaults, not yet runtime-confirmed.</p><p class="disclaimer">Unofficial fan-made pilot. Not affiliated with or endorsed by any game developer or publisher.</p></div><nav aria-label="FS25 pilot links"><h4>FS25 pilot</h4><ul><li><a href="/games/fs25/">FS25 corner home</a></li><li><a href="/games/fs25/tools/production-planner/">Bread Production Planner</a></li></ul></nav><nav aria-label="The Ranchers Guide links"><h4>The Ranchers Guide</h4><ul><li><a href="/">The Ranchers home</a></li><li><a href="/guides/beginners-guide">Ranchers guides</a></li><li><a href="/search">Ranchers search</a></li></ul></nav><nav aria-label="Site links"><h4>Site</h4><ul><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms of Service</a></li><li><a href="/methodology">Methodology</a></li></ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>Farming Simulator 25 pilot corner · community references and illustrative defaults, not yet runtime-confirmed</span></div></div></footer>
+
+  <script src="/assets/js/main.js?v=20261003-r15" defer></script>
+  <script src="/assets/js/fs25-planner-data.js?v=20261020-fs25n1" defer></script>
+  <script src="/assets/js/fs25-planner.js?v=20261020-fs25n1" defer></script>
+</body>
+</html>
