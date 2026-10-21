@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Ranchers 资源与物品查阅：商店、食物与材料</title>
-  <meta name="description" content="查询 The Ranchers 商店商品、建筑材料条件，以及奶、蛋、肉类等消耗品的能量和生命恢复配置。保留原版双语名称、配置与实测边界，并提供石头、原木、干草等材料的采集路线与相关资料入口。">
+  <title>The Ranchers 材料获取：锆矿、木炭与工具购买</title>
+  <meta name="description" content="查询 The Ranchers 锆矿（Zerkonite）到市政厅找谁买、木炭如何获取，以及锄头等工具丢失后的补买路线。直达材料用途、商店商品与采集说明；木炭操作与产量仍待验证，库存和价格以存档为准。">
   <link rel="canonical" href="https://theranchersguide.com/zh/guides/resources-and-materials">
   <link rel="alternate" hreflang="en" href="https://theranchersguide.com/guides/resources-and-materials">
   <link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/guides/resources-and-materials">
   <link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/guides/resources-and-materials">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="The Ranchers Guide">
-  <meta property="og:title" content="The Ranchers 资源指南">
-  <meta property="og:description" content="石头、原木、干草、木炭和锆矿的当前获取路线与证据边界。">
+  <meta property="og:title" content="The Ranchers 材料获取：锆矿、木炭与工具购买">
+  <meta property="og:description" content="查询 The Ranchers 锆矿（Zerkonite）到市政厅找谁买、木炭如何获取，以及锄头等工具丢失后的补买路线。直达材料用途、商店商品与采集说明；木炭操作与产量仍待验证，库存和价格以存档为准。">
   <meta property="og:url" content="https://theranchersguide.com/zh/guides/resources-and-materials">
   <meta property="og:image" content="https://theranchersguide.com/assets/img/guide-barn.webp">
   <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon-32.png">
@@ -26,9 +26,13 @@
   <header class="site-header"><nav class="nav-inner" aria-label="主导航"><a class="logo" href="/zh/"><span class="logo-mark"><img src="../../assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide</span></a><button class="nav-toggle" aria-expanded="false" aria-label="打开导航">☰</button><ul class="nav-links"><li><a href="/zh/guides/beginners-guide">攻略</a></li><li><a href="/zh/database">数据库</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题排查</a></li><li><a href="/zh/search">搜索</a></li><li><a class="nav-cta" href="/contribute">投稿</a></li></ul></nav></header>
   <main><article class="article crafting-guide">
     <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / <a href="/zh/database">数据库</a> / 资源</nav>
-    <h1>资源与物品查阅</h1>
-    <p class="recipe-lead">查找材料、商店商品与消耗品配置。</p>
-    <section class="answer-box"><h2>先看：这些资源现在该怎么找？</h2><p><strong>石头：</strong>先收集自己牧场的散落石头。<strong>原木：</strong>当前报告指向砍树。<strong>干草：</strong>先小范围试割野草；旧官方 Alpha 资料称任何生长阶段都能产出干草，但早于抢先体验，先查背包再扩大采集。灌木/木箱仍只是当前玩家线索。<strong>木炭：</strong>工作人员说明由燃烧木材获得，不是购买；具体操作、计时和产量仍未验证。<strong>锆矿：</strong>先购买；官方回答说明当前版本不应先去寻找矿洞。</p></section>
+    <h1>材料获取与工具购买</h1>
+    <p class="recipe-lead">矿石去哪买、木炭怎么做、工具丢了去哪补。</p>
+    <section class="answer-box"><h2>先去哪里找？</h2>
+      <p><strong>锆矿（Zerkonite / Zirconite）：</strong>去市政厅查看 Meriam 的材料列表。<strong>木炭：</strong>工作人员说明由燃烧木材获得，不是购买；具体操作和产量仍未验证。</p>
+      <div class="resource-links"><a href="#zirconite">购买锆矿</a><a href="#charcoal">制作木炭</a><a href="#missing-tools">补买遗失工具</a></div>
+      <details class="resource-details"><summary>石头、原木与干草</summary><p><strong>石头：</strong>先收集自己牧场的散落石头。<strong>原木：</strong>当前报告指向砍树。<strong>干草：</strong>先小范围试割野草；旧官方 Alpha 资料称任何生长阶段都能产出干草，但早于抢先体验，先查背包再扩大采集。灌木/木箱仍只是当前玩家线索。</p><div class="resource-links"><a href="#stone">石头路线</a><a href="#wood">原木路线</a><a href="#hay">干草路线</a></div></details>
+    </section>
     <nav class="resource-nav" aria-label="资源查阅"><a href="#shops">商店商品</a><a href="#consumables">食物与消耗品</a><a href="#resource-definitions">水、能源与燃料</a><a href="#decision">资源采集路线</a></nav>
     <details id="missing-tools" class="resource-details" data-search-entry data-search-title="锄头或工具不见了？去市政厅补买" data-search-aliases="锄头丢了|锄头不见了|工具丢了|工具不见了" data-search-tags="工具丢了 工具不见 锄头丢失 斧头 锤子 镐头 洒水壶 补买 市政厅">
       <summary>锄头或其他工具不见了？</summary>
@@ -256,10 +260,12 @@
     <p>8 月的玩家报告还提到火把、干燥天气和灭火后收集。这些额外步骤仍只是未验证线索，不能说都被 9 月答复确认了。<a href="/zh/database/materials#charcoal">木炭条目</a>分别保留两类来源。</p>
     <p><a class="btn btn-outline btn-compact" href="/zh/database/materials#charcoal">打开木炭条目</a> <a class="btn btn-outline btn-compact" href="/contribute">提交可复现结果</a></p>
     </section>
-    <h2 id="zirconite">锆矿：先买，不要先找矿洞</h2>
+    <section id="zirconite" data-search-entry data-search-title="锆矿 Zerkonite / Zirconite 去哪买：市政厅 Meriam" data-search-aliases="锆矿在哪买|锆矿哪里买|Zerkonite 哪里买" data-search-tags="锆矿 矿石 购买 商店 Zerkonite Zirconite Meriam 市政厅">
+    <h2>锆矿 Zerkonite / Zirconite：先买，不要先找矿洞</h2>
     <p>官方版主回答说明，在矿洞实装前，购买锆矿是当前唯一途径。多条当前社区回答把<strong>市政厅的 Meriam</strong>指认为卖家，但现有记录不足以发布稳定的当前价格。</p>
     <ol><li>打开<a href="/zh/map#city-hall">市政厅地图位置</a>。</li><li>找到 Meriam，查看当前材料或蓝图相关购买列表。</li><li>以自己存档中看到的价格为准，不要套用 Alpha 时代价格表。</li></ol>
     <p><a class="btn btn-outline btn-compact" href="/zh/database/materials#zirconite">打开锆矿条目</a> <a class="btn btn-outline btn-compact" href="/zh/database/materials">查看材料数据库</a></p>
+    </section>
     <h2 id="verification">如何记录一条有用的资源测试</h2>
     <p>一条有价值的资源报告不只是“我找到了”。请记录游戏版本、平台、土地是否属于自己、季节或天数、具体搜索对象、前后数量，以及背包或商店界面截图。只有在相近条件下有第二条可复现记录时，本站才会把线索升级为相互印证的结论。</p>
     <h2 id="faq">资源常见问题</h2>

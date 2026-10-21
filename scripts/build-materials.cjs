@@ -124,7 +124,9 @@ function render(locale) {
         <p class="database-browse-note" id="${material.id}-build-note">${zh ? "历史配方参考；采集前请核对当前游戏配方。" : "Historical recipe references; check the current in-game recipe before gathering."}</p>
         <div class="data-table-wrap" role="region" tabindex="0" aria-label="${zh ? '建造材料数量' : 'Building material quantities'}"><table class="data-table material-uses" aria-describedby="${material.id}-build-note"><thead><tr><th scope="col">${zh ? '建筑' : 'Building'}</th><th scope="col">${zh ? '数量' : 'Quantity'}</th><th scope="col">${l.build}</th><th scope="col">${l.source}</th></tr></thead><tbody>${documentedUses.map(({ target, requirement }) => `<tr><th scope="row"><a href="${prefix}/tools/ranch-checklist#build-goal">${esc(zh ? target.zhName : target.name)}</a></th><td>${requirement.required}</td><td>${esc(target.build)}</td><td>${buildingSourceHtml(target, locale)}</td></tr>`).join('')}</tbody></table></div>` : "";
     const relatedLinks = `<div class="database-guide-links">${related}</div>`;
-    const searchAliases = standaloneMaterialIds.has(material.id) ? (zh ? material.zhSearchTitle : material.searchTitle) : `${material.name}|${material.zhName.replace(' '+material.name,'')}`;
+    const searchAliases = standaloneMaterialIds.has(material.id)
+      ? (zh ? material.zhSearchTitle : material.searchTitle)
+      : [...new Set([material.name, material.zhName.replace(' '+material.name,''), native?.name, native?.zhName].filter(Boolean))].join('|');
     const isStandalone = standaloneMaterialIds.has(material.id);
     const standaloneEntry = `${prefix}/database/materials/${material.id}`;
     const compactFact = isStandalone

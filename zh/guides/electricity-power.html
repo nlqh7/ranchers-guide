@@ -85,13 +85,23 @@
     </ul>
     <p>这是仪表 UI 结构（设备列表、单设备消耗、总量、效率摘要）的第一个观测实例。现在有一个计费数据点：同一个牧场当天结算为 Energy −15C（见上面的合同部分）。仍未观测到的：单价，以及发电设备如何把数字推向正值。</p>
 
-    <h2 id="selling-surplus" data-search-entry data-search-title="多余电力怎么卖" data-search-tags="卖电 多余电 自动 结算 Energy 正收入 不付钱">卖多余电力</h2>
-    <p><strong>快速回答：</strong>你不用手动把电卖给谁——一旦<strong>签了电力合同</strong>，你的牧场发的多余电会在<strong>每天结算时自动转换</strong>：Energy 行从负扣费翻成正收入。如果你的结算没有多余收入，通常只是因为还没签合同。<small>多名玩家报告；合同对话确认镇子买多余电。EA 0.8.10.455 观测。</small></p>
+    <section id="selling-surplus" data-search-entry data-search-title="卖电没收到钱？核对合同、电表与当天结算" data-search-aliases="卖电没收到钱|太阳能板不赚钱|卖多余电力" data-search-tags="卖电 多余电 太阳能板 不付钱 没收入 Energy 扣费 仪表 合同 结算" data-search-status="历史合同观测与玩家报告">
+    <h2>卖多余电力：没到账时先核对什么</h2>
+    <p><strong>快速回答：</strong>镇子可以通过水电合同购买多余电力。先核对合同状态、手机仪表和日终 Energy 行；签了合同本身不保证收益。</p>
+    <p>玩家报告过自动结算，但“显示盈余仍被扣费”的案例尚未解决。仅凭没收入，不能判断是合同、用量、结算时点还是游戏问题。</p>
+    <ol>
+      <li><strong>合同：</strong>先看<a href="#meter-ui">手机仪表</a>里的状态。未激活再按<a href="#two-paths">Victor 签约步骤</a>核对，不要只为测试而取消已有合同。</li>
+      <li><strong>电表：</strong>记录设备列表、总消耗与效率读数。某一刻为正，不等于全天都有可出售盈余。</li>
+      <li><strong>结算：</strong>对照<strong>同一个游戏日</strong>的 Energy 项；把一次性开通费与每日用量收费分开。</li>
+      <li><strong>仍对不上：</strong>保留两张画面、版本与当天改动，对照<a href="#known-reports">未解水电报告</a>。不要按假定回购价继续购买发电设备。</li>
+    </ol>
+    <p class="source-note">合同与仪表观测来自 <strong>0.8.10.455</strong>，不是当前版本的售电实测。官方说明支持出售盈余，但没有保证固定回购价或收益。</p>
     <ul>
       <li><strong>报告中的费率：</strong>一名玩家报告买入 2C/单位、多余电卖回 1C（他的存档后来变成买 3C / 卖 1C）。<strong>单一来源数字</strong>——可能随版本或补丁变化。</li>
       <li><strong>一个未解案例：</strong>有玩家报告一个 +5 多余日却仍被扣 33C——可能是阈值或 bug；社区暂时没有结论。如果你碰到了，记下仪表和结算画面并上报。</li>
     </ul>
     <p>水的多余出售遵循同样的官方宣传逻辑，但观测实况里没签水合同，所以水出售行为仍未知。</p>
+    </section>
 
 <!-- BEGIN EQUIPMENT REFERENCE -->
 <section class="equipment-reference" aria-label="设备季节配置表">
@@ -175,7 +185,7 @@
     </details>
     <details class="faq-item">
       <summary>怎么卖多余电？</summary>
-      <div class="faq-body"><p>在市政厅找 Victor 签电力合同，然后发的比用的多——多余部分在每天结算自动转换（Energy 行变正）。不涉及任何 NPC 访问或物品出售。有一份未解的玩家报告说多余日仍被扣费，所以如果你靠这笔收入，自己留好截图。</p></div>
+      <div class="faq-body"><p>镇子可以通过电力合同购买盈余；玩家报告过日终结算，但本站没有核实当前回购价，也没有解决“盈余仍扣费”的案例。</p><p>先<a href="#selling-surplus">核对合同、电表和当天结算</a>，再决定是否依赖这笔收入或购买更多发电设备。</p></div>
     </details>
     <details class="faq-item">
       <summary>水电账单什么时候扣？</summary>

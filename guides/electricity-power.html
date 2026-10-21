@@ -119,13 +119,23 @@
       </ul>
       <p>This is the first observed instance of the meter UI structure (device list, per-device consumption, total, efficiency summary). One billing data point now exists: the same ranch settled that day at Energy −15C (see the contract section above). What remains unobserved: the per-unit rate and how generation equipment moves the number positive.</p>
 
-      <h2 id="selling-surplus">Selling surplus energy</h2>
-      <p><strong>Quick answer:</strong> you do not sell power to anyone by hand — once you have <strong>signed the electricity contract</strong>, any surplus your ranch generates is <strong>automatically converted in the end-of-day settlement</strong>: the Energy line flips from a negative charge to a positive income. If your settlement shows no surplus income, the usual cause is simply that no contract is signed yet. <small>Multiple player reports; contract dialogue confirms the city buys surplus. Observed in EA 0.8.10.455.</small></p>
+      <section id="selling-surplus" data-search-entry data-search-title="Selling surplus electricity: why is there no payout?" data-search-aliases="electricity surplus not paid|solar panels not paying" data-search-tags="selling electricity surplus no money energy charge meter contract solar panels payout" data-search-status="Historical contract and player reports">
+      <h2>Selling surplus energy: check a missing payout</h2>
+      <p><strong>Quick answer:</strong> the city can buy surplus electricity under the utility contract. Check your contract, phone meter and end-of-day Energy line. A signed contract alone does not guarantee income.</p>
+      <p>Players report automatic settlement, but a retained surplus-charge case remains unresolved. No payout by itself does not tell you whether the contract, consumption, timing or a game issue caused it.</p>
+      <ol>
+        <li><strong>Contract:</strong> read its state in the <a href="#meter-ui">phone meter</a>. If inactive, follow the <a href="#two-paths">Victor contract steps</a>; do not cancel an active contract just to test this.</li>
+        <li><strong>Meter:</strong> record the device list, total usage and efficiency reading. A positive snapshot is not proof of a full day's surplus.</li>
+        <li><strong>Settlement:</strong> compare the Energy line for the <strong>same in-game day</strong>. Keep the one-time commissioning fee separate from daily usage charges.</li>
+        <li><strong>Still inconsistent?</strong> keep both screens, the build and any changes that day; compare the <a href="#known-reports">unresolved utility reports</a>. Do not buy more generators on an assumed payout rate.</li>
+      </ol>
+      <p class="source-note">Contract and meter observations use <strong>0.8.10.455</strong>; they are not current-build payout tests. Official copy supports surplus sales, not a guaranteed tariff or return.</p>
       <ul>
         <li><strong>Reported rates:</strong> one player reports buying at 2C per unit and surplus selling back at 1C (buy 3C / sell 1C later in their save). <strong>Single-source numbers</strong> — they may vary or change with patches.</li>
         <li><strong>One unresolved case:</strong> a player reports a +5 surplus day that still charged 33C — possibly a threshold or a bug; the community has no conclusion yet. If this hits you, record the meter and settlement screens and report it.</li>
       </ul>
       <p>Water surplus follows the same officially advertised idea, but the water contract was not signed in the observed playthrough, so water-sale behavior stays unknown.</p>
+      </section>
 
 <!-- BEGIN EQUIPMENT REFERENCE -->
 <section class="equipment-reference" aria-label="Seasonal equipment reference">
@@ -209,7 +219,7 @@
       </details>
       <details class="faq-item">
         <summary>How do I sell surplus electricity?</summary>
-        <div class="faq-body"><p>Sign the electricity contract with Victor at City Hall, then generate more than you consume — surplus converts automatically in the end-of-day settlement (the Energy line turns positive). No NPC visit or item sale is involved. One unresolved player report shows a surplus day still being charged, so keep your own screenshots if you rely on this income.</p></div>
+        <div class="faq-body"><p>The city can buy surplus under the electricity contract. Players report end-of-day settlement, but the current payout rate and the unresolved charge case are not verified here.</p><p><a href="#selling-surplus">Check the contract, meter and same-day settlement</a> before relying on this income or buying more generation.</p></div>
       </details>
       <details class="faq-item">
         <summary>When are utility bills charged?</summary>
