@@ -14,8 +14,8 @@ const FS25_PUBLIC_ROUTES = FS25_PUBLIC_FILES.filter(file => file.endsWith('index
 function inspectPublicRelease(root, profile = 'ranchers') {
   const failures = [];
   const files = [];
-  if (!['ranchers', 'fs25-bread-v1'].includes(profile)) failures.push(`Unknown release profile: ${profile}`);
-  const breadProfile = profile === 'fs25-bread-v1';
+  if (!['ranchers', 'fs25-bread-v1', 'fs25-production-v2', 'fs25-production-v3'].includes(profile)) failures.push(`Unknown release profile: ${profile}`);
+  const breadProfile = ['fs25-bread-v1', 'fs25-production-v2', 'fs25-production-v3'].includes(profile);
   const allowedFiles = new Set(breadProfile ? FS25_PUBLIC_FILES : []);
   const allowedReferences = new Set(breadProfile ? FS25_PUBLIC_FILES.concat(FS25_PUBLIC_ROUTES.map(route => route.slice(1))) : []);
   function walk(directory, prefix = '') {
@@ -85,7 +85,7 @@ function inspectPublicRelease(root, profile = 'ranchers') {
   }
   if (breadProfile) {
     for (const file of FS25_PUBLIC_FILES.concat(['assets/js/search-game-scope.js', 'assets/css/search-game-scope.css', 'search.html', 'zh/search.html'])) {
-      if (!files.includes(file)) failures.push(`${file}: missing required fs25-bread-v1 file`);
+      if (!files.includes(file)) failures.push(`${file}: missing required ${profile} file`);
     }
     function read(file) { return files.includes(file) ? fs.readFileSync(path.join(root, file), 'utf8') : ''; }
     for (const file of ['search.html', 'zh/search.html']) {
@@ -98,6 +98,9 @@ function inspectPublicRelease(root, profile = 'ranchers') {
       if (data.game?.id !== 'fs25' || data.chain?.id !== 'bread' || data.chain.steps?.map(step => step.id).join(',') !== 'bakery,mill') {
         failures.push('production.json: only the agreed bakery/mill bread chain is public');
       }
+      if (profile === 'fs25-bread-v1' && (data.additionalChains?.length || data.chains)) failures.push('production.json: bread-only profile rejects additional chains');
+      if (profile === 'fs25-production-v2' && (data.schemaVersion !== 'fs25-production-v2' || data.additionalChains?.length !== 1 || data.additionalChains[0].id !== 'canola-oil' || data.additionalChains[0].steps?.map(step => step.id).join(',') !== 'oil-mill' || data.chains)) failures.push('production.json: v2 permits exactly bread and canola oil');
+      if (profile === 'fs25-production-v3' && (data.schemaVersion !== 'fs25-production-v3' || data.additionalChains?.map(c => c.id).join(',') !== 'canola-oil,greenhouse-lettuce' || data.additionalChains[0].steps?.map(s => s.id).join(',') !== 'oil-mill' || data.additionalChains[1].steps?.map(s => s.id).join(',') !== 'greenhouse' || data.additionalChains[1].variants?.map(v => v.id).join(',') !== 'small,medium,large' || data.chains)) failures.push('production.json: v3 permits exactly bread, canola oil and scoped greenhouse lettuce');
     } catch (_) { failures.push('FS25 public data must be valid JSON'); }
     for (const route of FS25_PUBLIC_ROUTES) {
       const html = read(route.slice(1) + 'index.html');
@@ -121,7 +124,7 @@ if (require.main === module) {
     const args = process.argv.slice(2);
     const options = {};
     for (let i = 0; i < args.length; i += 2) {
-      if (!['--root', '--profile'].includes(args[i]) || !args[i + 1] || options[args[i]]) throw new Error('Usage: node scripts/check-public-release.cjs --root <candidate> [--profile ranchers|fs25-bread-v1]');
+      if (!['--root', '--profile'].includes(args[i]) || !args[i + 1] || options[args[i]]) throw new Error('Usage: node scripts/check-public-release.cjs --root <candidate> [--profile ranchers|fs25-bread-v1|fs25-production-v2|fs25-production-v3]');
       options[args[i]] = args[i + 1];
     }
     if (!options['--root']) throw new Error('An explicit candidate --root is required');

@@ -189,3 +189,13 @@
 
 /* Keep search deep links and the return-to-planner action below the sticky header. */
 #fs25-planner, #mill-supply { scroll-margin-top: 110px; }
+
+/* One visible product workflow; hidden forms must not override the UA rule. */
+.gt-tool form[hidden] { display: none !important; }
+.gt-tool [data-search-entry][hidden] { display: none !important; }
+.fp-product-picker { max-width: 620px; margin: 20px 0; scroll-margin-top: 110px; }
+.fp-product-picker select { width: 100%; min-height: 44px; }
+.fp-stale-result { opacity: 0.55; }
+#fo-form, #oil-supply { scroll-margin-top: 110px; }
+#fg-form, #greenhouse-water, #fg-stock { scroll-margin-top: 110px; }
+.fp-stock-link { display: inline-flex; align-items: center; min-height: 44px; }

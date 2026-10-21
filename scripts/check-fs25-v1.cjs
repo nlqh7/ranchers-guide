@@ -12,17 +12,17 @@ const assert = (condition, message) => {
 
 const routes = [
   { route: "/games/fs25/", file: "games/fs25/index.html", lang: "en", title: "Farming Simulator 25" },
-  { route: "/games/fs25/tools/production-planner/", file: "games/fs25/tools/production-planner/index.html", lang: "en", title: "FS25 Bread Production Planner" },
+  { route: "/games/fs25/tools/production-planner/", file: "games/fs25/tools/production-planner/index.html", lang: "en", title: "FS25 Production Planner" },
   { route: "/zh/games/fs25/", file: "zh/games/fs25/index.html", lang: "zh-CN", title: "Farming Simulator 25" },
-  { route: "/zh/games/fs25/tools/production-planner/", file: "zh/games/fs25/tools/production-planner/index.html", lang: "zh-CN", title: "FS25 面包生产规划器" },
+  { route: "/zh/games/fs25/tools/production-planner/", file: "zh/games/fs25/tools/production-planner/index.html", lang: "zh-CN", title: "FS25 生产规划器" },
 ];
 
 const source = JSON.parse(read("data/fs25/production.json"));
 const catalog = JSON.parse(read("data/game-catalog.json"));
-assert(source.schemaVersion === "fs25-bread-v1", "unexpected FS25 source schema");
+assert(source.schemaVersion === "fs25-production-v3", "unexpected FS25 source schema");
 assert(source.game.id === "fs25" && source.game.status === "pilot", "FS25 catalog identity is not pilot-scoped");
 const fs25Catalog = catalog.games.find((game) => game.id === "fs25");
-const publicCandidate = catalog.releaseProfile === "fs25-bread-v1";
+const publicCandidate = ['fs25-bread-v1', 'fs25-production-v2', 'fs25-production-v3'].includes(catalog.releaseProfile);
 assert(fs25Catalog && fs25Catalog.hubRoute === "/games/fs25/" && fs25Catalog.zhHubRoute === "/zh/games/fs25/", "FS25 game catalog routes are incomplete");
 
 for (const item of routes) {
@@ -51,7 +51,7 @@ const searchJs = read("assets/js/search.js");
 for (const route of routes.map((item) => item.route)) {
   assert(searchJs.includes(`"${route}"`) === publicCandidate, `FS25 page list must match its release profile: ${route}`);
 }
-assert(searchJs.includes(publicCandidate ? "ranchers-search-index-v46" : "ranchers-search-index-v45") && searchJs.includes(publicCandidate ? "ranchers-search-index-zh-v32" : "ranchers-search-index-zh-v31"), "search cache keys must match the selected indexed scope");
+require('./search-cache-contract.cjs')(searchJs, publicCandidate ? { en: 48, zh: 34 } : { en: 45, zh: 31 });
 for (const file of ["search-index.json", "zh/search-index.json"]) {
   const index = JSON.parse(read(file));
   assert(index.some((entry) => entry.url.includes("games/fs25")) === publicCandidate, `${file} FS25 entries must match its release profile`);
@@ -67,11 +67,12 @@ if (publicCandidate) {
   assert(read("sitemap.xml").includes("/games/fs25/"), "public tool scope must be discoverable in sitemap");
   const search = require('../assets/js/search-core.js');
   const scope = require('../assets/js/search-game-scope.js');
-  for (const [file, queries] of [['search-index.json', ['flour shortage', 'one grain mill supply bakery']], ['zh/search-index.json', ['面粉不够', '一个磨坊够吗']]]) {
+  for (const [file, queries] of [['search-index.json', ['flour shortage', 'one grain mill supply bakery', 'canola oil shortage', 'oil mill capacity', 'greenhouse water needed', 'water tanker trips']], ['zh/search-index.json', ['面粉不够', '一个磨坊够吗', '菜籽油不够', '油坊产能', '温室缺水', '水车几趟']]]) {
     const docs = scope.filterDocuments(JSON.parse(read(file)), 'fs25');
     for (const query of queries) {
       const matches = search.searchDocuments(docs, query, 8);
-      assert(matches.some(item => item.url.includes('production-planner/#mill-supply')), `${file}: ${query} must reach the actual conditional mill-capacity answer`);
+      const anchor = /greenhouse|tanker|温室|水车/.test(query) ? 'greenhouse-water' : /oil|canola|菜籽|油坊/.test(query) ? 'oil-supply' : 'mill-supply';
+      assert(matches.some(item => item.url.includes('production-planner/#' + anchor)), `${file}: ${query} must reach the actual conditional capacity answer`);
     }
   }
 } else {
@@ -81,4 +82,4 @@ if (publicCandidate) {
 const gameCss = read("assets/css/game-tools.css");
 assert(gameCss.includes("min-height: 44px") && gameCss.includes("grid-template-columns: minmax(0, 1fr)"), "FS25 mobile control/grid contract is missing");
 
-console.log(`PASS: FS25 V1 routes, bilingual metadata, shared footers and ${publicCandidate ? 'explicit bread candidate' : 'private noindex'} discovery boundary are consistent.`);
+console.log(`PASS: FS25 routes, bilingual metadata, shared footers and ${publicCandidate ? catalog.releaseProfile : 'private noindex'} discovery boundary are consistent.`);

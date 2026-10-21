@@ -655,3 +655,241 @@
   renderSources();
   updateActions();
 })();
+
+/* Single-step crop/oil chains share validation and storage behavior.
+   Bread keeps its original DOM and storage contract. */
+(function () {
+  "use strict";
+  if (typeof document === "undefined") return;
+  var D = window.FS25PlannerData;
+  var picker = document.getElementById("fp-product");
+  if (!D || !picker) return;
+  var oil = D.SOURCE_DATA.additionalChains.find(function (c) { return c.id === "canola-oil"; });
+  var zh = (document.documentElement.lang || "").indexOf("zh") === 0;
+  var t = function (en, cn) { return zh ? cn : en; };
+  var selectedKey = "fs25-production-selected-chain-v1";
+  function mountSingleStep(chain, prefix, key, green) {
+  var step = chain.steps[0];
+  var el = function (id) { return document.getElementById(prefix + id); };
+  var form = el("form");
+  var fields = [
+    { id: "target", min: 0, positive: true },
+    { id: "ratio", min: 0, positive: true },
+    { id: "capacity", min: 0, positive: true },
+    { id: "lines", min: 1, max: 8, integer: true },
+    { id: "owned", min: 0, integer: true, optional: true },
+    { id: "months", min: 1, max: 12, integer: true, optional: true },
+    { id: "harvests", min: 1, max: 12, integer: true, optional: true },
+    { id: "yield", min: 0, positive: true, optional: true }
+  ];
+  if (green) fields = fields.filter(function (f) { return !["months", "harvests", "yield"].includes(f.id); }).concat([{ id: "tanker", min: 0, positive: true, optional: true }, { id: "stock", min: 0, optional: true }]);
+  if (green) el("variant").value = chain.defaultVariant;
+  var planText = "";
+  var displayed = false;
+  var fmt = function (n, digits) {
+    if (n > 0 && n < 0.000001) return n.toExponential(3);
+    return n.toLocaleString(zh ? "zh-CN" : "en-US", { maximumFractionDigits: digits == null ? 6 : digits });
+  };
+  function numeric(spec, raw) {
+    if (raw == null || String(raw).trim() === "") return spec.optional ? { value: null } : { error: true };
+    var n = Number(raw);
+    return !Number.isFinite(n) || n < spec.min || (spec.positive && n <= 0) ||
+      (spec.max != null && n > spec.max) || (spec.integer && !Number.isInteger(n))
+      ? { error: true } : { value: n };
+  }
+  function read(show) {
+    var values = {}, invalid = [], coreInvalid = [];
+    fields.forEach(function (spec) {
+      var input = el("" + spec.id);
+      var parsed = numeric(spec, input.value);
+      values[spec.id] = parsed.value;
+      if (parsed.error) { invalid.push(input); if (!spec.optional) coreInvalid.push(input); }
+      if (show) {
+        var error = input.parentElement.querySelector(".fp-field-error");
+        if (parsed.error) {
+          input.setAttribute("aria-invalid", "true");
+          input.classList.add("fp-invalid");
+          if (!error) { error = document.createElement("p"); error.className = "fp-field-error"; input.parentElement.appendChild(error); }
+          error.id = prefix + spec.id + "-error";
+          input.setAttribute("aria-describedby", error.id);
+          error.textContent = t("Enter a valid " + (spec.integer ? "whole " : "") + "number " + (spec.positive ? "greater than 0" : "from " + spec.min) + (spec.max ? " to " + spec.max : "") + ".", "请填写" + (spec.integer ? "整数，" : "数值，") + (spec.positive ? "必须大于 0" : "不得小于 " + spec.min) + (spec.max ? "，不得大于 " + spec.max : "") + "。");
+          error.hidden = false;
+        } else {
+          input.removeAttribute("aria-invalid"); input.removeAttribute("aria-describedby"); input.classList.remove("fp-invalid");
+          if (error) error.hidden = true;
+        }
+      }
+    });
+    values.rule = el("rule").value;
+    if (green) values.variant = el("variant").value;
+    if (!["divided", "independent"].includes(values.rule)) { invalid.push(el("rule")); coreInvalid.push(el("rule")); }
+    if (green && !chain.variants.some(function (v) { return v.id === values.variant; })) { invalid.push(el("variant")); coreInvalid.push(el("variant")); }
+    var areaReady = !green && !invalid.length && values.months != null && values.harvests != null && values.yield != null;
+    var plan = !coreInvalid.length ? D.singleStepPlan({ target: values.target, ratio: values.ratio, capacity: values.capacity,
+      lines: values.lines, rule: values.rule, owned: values.owned == null ? null : values.owned,
+      months: areaReady ? values.months : null, harvests: areaReady ? values.harvests : null, yieldHa: areaReady ? values.yield : null }) : null;
+    // Invalid optional owned count cannot turn into a fictitious known count.
+    var delivery = green && plan ? D.waterDeliveryPlan(plan.inputPerMonth, values.stock, values.tanker) : null;
+    var trips = delivery ? delivery.trips : null;
+    var transportOverflow = green && plan && values.tanker != null && !invalid.length && trips === null;
+    return { values: values, invalid: invalid, coreInvalid: coreInvalid, plan: plan, areaReady: areaReady, trips: trips, delivery: delivery, transportOverflow: transportOverflow };
+  }
+  function actions() { var r = read(false); el("save").disabled = !r.plan || r.invalid.length > 0 || r.transportOverflow; }
+  function edit() {
+    planText = "";
+    el("copy").disabled = true;
+    el("manual").hidden = true;
+    el("copy-status").textContent = "";
+    el("status").textContent = displayed ? t("Inputs changed — generate the plan again.", "输入已修改，请重新生成计划。") : "";
+    if (displayed) el("results").classList.add("fp-stale-result");
+    actions();
+  }
+  function generate() {
+    var r = read(true), p = r.plan, v = r.values;
+    planText = "";
+    el("copy").disabled = true;
+    el("manual").hidden = true;
+    el("copy-status").textContent = "";
+    el("results").classList.remove("fp-stale-result");
+    displayed = true;
+    if (!p) {
+      el("results").innerHTML = '<p class="fp-blocked" role="alert">' + (r.coreInvalid.length
+        ? t("Complete the highlighted recipe and capacity fields first.", "请先补全或修正标红的配比与产能字段。")
+        : t("Result exceeds the supported number range. Reduce the target or check your inputs.", "结果超出数值范围，请调小目标或核对输入。")) + '</p>';
+      if (r.coreInvalid.length) { el("parameters").open = true; r.coreInvalid[0].focus(); }
+      actions(); return;
+    }
+    var f = p.facility;
+    var effectiveText = (green ? t("Lettuce output per greenhouse: ", "每座温室生菜有效产能：") : t("Oil Mill effective output: ", "油坊有效产能：")) + fmt(f.effective) + " L/" + t("month", "月");
+    var unknownText = t("Owned count unknown — total only, not an assumed zero.", "现有数量未知——只算总需求，空白不视为 0。");
+    var ownedLines = [];
+    var areaText = null;
+    var lines = [green ? t("Greenhouse lettuce plan — historical reference / your inputs", "温室生菜计划——历史参考／自填参数") : t("Canola oil plan — historical standard Oil Mill reference / your inputs", "菜籽油计划——历史普通油坊参考／自填参数"),
+      (green ? t("Lettuce target: ", "生菜目标：") : t("Oil target: ", "菜籽油目标：")) + fmt(v.target) + " L/" + t("month", "月"),
+      (green ? t("Water needed for target: ", "目标需水量：") : t("Canola needed: ", "菜籽需求：")) + fmt(p.inputPerMonth) + " L/" + t("month", "月"),
+      effectiveText,
+      (green ? t("Greenhouses needed in total: ", "温室总需求：") : t("Oil Mills needed in total: ", "油坊总需求：")) + fmt(f.totalNeeded)];
+    if (green) lines.push(t("Reference greenhouse size: ", "参考温室型号：") + (zh ? chain.variants.find(function (x) { return x.id === v.variant; }).zhName : v.variant));
+    if (f.existingCount !== null) {
+      ownedLines.push(t("Already owned: ", "已拥有：") + fmt(f.existingCount));
+      ownedLines.push((green ? t("Current lettuce shortfall: ", "当前生菜产能缺口：") : t("Current oil shortfall: ", "当前油产能缺口：")) + fmt(f.shortfall) + " L/" + t("month", "月"));
+      ownedLines.push((green ? t("Additional greenhouses to buy: ", "还需新增温室：") : t("Additional Oil Mills to buy: ", "还需新增油坊：")) + fmt(f.additionalNeeded));
+      lines = lines.concat(ownedLines);
+    } else lines.push(unknownText);
+    if (p.areaHa !== null) {
+      areaText = t("Canola field area: ", "菜籽耕作面积：") + fmt(p.areaHa, 2) + t(" ha; ", " 公顷；") + v.months + t(" production months/year, ", " 生产月/年，") + v.harvests + t(" harvest(s)/year", " 次收获/年");
+      lines.push(areaText);
+    }
+    var card = function (value, label) { return '<div class="fp-card"><span class="fp-num">' + value + '</span><span class="fp-label">' + label + '</span></div>'; };
+    var html = '<div class="fp-cards">' + card(fmt(p.inputPerMonth) + " L", green ? t("water for target / month", "目标需水量 / 月") : t("canola / month", "菜籽 / 月")) + card(fmt(f.totalNeeded), green ? t("greenhouses in total", "温室总需求") : t("Oil Mills in total", "油坊总需求")) + '</div>';
+    if (f.existingCount !== null) html += '<p class="' + (f.shortfall > 0 ? 'fp-gap' : 'fp-ok') + '">' + ownedLines.join('<br>') + '</p>';
+    else html += '<p class="fp-src-note">' + unknownText + '</p>';
+    html += '<p>' + effectiveText + '</p>';
+    if (green) {
+      var deliveryText = r.delivery && r.delivery.stockCredited
+        ? t("Available water credited: ", "已抵扣可用存水：") + fmt(r.delivery.availableStock) + " L; " + t("still to deliver: ", "本轮还需运水：") + fmt(r.delivery.litresToDeliver) + " L"
+        : t("Available stock unknown — deliveries have not been reduced by stored water.", "可用存水未填——运输量尚未抵扣存水。");
+      lines.push(deliveryText);
+      html += '<p>' + deliveryText + ' <a class="fp-stock-link" href="#fg-stock">' + t("Adjust stored water", "填写／调整存水") + '</a></p>';
+      var waterText = r.transportOverflow ? t("Delivery count is outside the supported range. Check tanker capacity.", "运输趟数超出可表示范围，请核对水车容量。") : r.trips !== null ? t("Minimum tanker deliveries: ", "最低运输趟数：") + fmt(r.trips) + t(" / this production month", " / 本生产月") : t("Enter your tanker capacity to calculate delivery trips.", "填写自己的水车容量，即可计算最低运输趟数。");
+      lines.push(waterText);
+      html += '<p class="fp-stats-add">' + waterText + '</p>';
+      var waterBoundary = t("Stock is credited only for this planning month, not as a recurring supply. Other crops are excluded; full-speed production may need more water.", "存水仅抵扣本轮计划，不是每月自动补给。不含其他作物；全部设施全速生产的耗水可能更多。");
+      lines.push(waterBoundary);
+      html += '<p class="fp-src-note">' + waterBoundary + '</p>';
+    } else html += areaText !== null ? '<p>' + areaText + '</p>' : '<p class="fp-src-note">' + t("Field area not calculated. Enter your yield, production run months and harvests in the parameters below.", "未计算耕地面积；可在下方参数中填写自己的单产、生产运行月数与收获次数。") + '</p>';
+    if (r.invalid.length) html += '<p class="fp-blocked" role="alert">' + t("An optional input is invalid. Materials and facility totals are shown; fix it before saving or copying.", "有可选输入无效；原料与设施总量仍显示，请修正后再保存或复制。") + '</p>';
+    el("results").innerHTML = html;
+    el("status").textContent = "";
+    if (!r.invalid.length && !r.transportOverflow) { planText = lines.join("\n"); el("copy").disabled = false; }
+    actions();
+  }
+  form.addEventListener("submit", function (e) { e.preventDefault(); generate(); });
+  form.addEventListener("input", edit);
+  form.addEventListener("change", edit);
+  function loadReference() {
+    var variant = green ? chain.variants.find(function (v) { return v.id === el("variant").value; }) : null;
+    if (green && !variant) return;
+    el("ratio").value = String(variant ? variant.inputPerOutput : step.inputPerOutput.value);
+    el("capacity").value = String(variant ? variant.outputCapacityPerMonth : step.outputCapacityPerMonth.value);
+    el("rule").value = step.sharingRule.default;
+    el("lines").value = "1";
+    if (!green) {
+      el("months").value = String(D.SOURCE_DATA.assumptions.productionRunMonthsPerYear.default);
+      el("harvests").value = String(D.SOURCE_DATA.assumptions.harvestsPerYear.default);
+    }
+    read(true); edit();
+    el("status").textContent = green ? t("Greenhouse reference loaded. Your target, owned count and tanker capacity were kept.", "温室参考值已载入；目标、现有数量和水车容量保持不变。") : t("Historical standard Oil Mill reference loaded. Your target, owned count and crop yield were kept.", "已载入历史普通油坊参考；目标、现有数量和自填单产保持不变。");
+  }
+  el("reference").addEventListener("click", loadReference);
+  if (green) el("variant").addEventListener("change", loadReference);
+  el("save").addEventListener("click", function () {
+    var r = read(true);
+    if (!r.plan || r.invalid.length || r.transportOverflow) return;
+    try { localStorage.setItem(key, JSON.stringify({ v: 1, values: r.values })); el("status").textContent = green ? t("Greenhouse settings saved on this device.", "温室设置已保存到本机。") : t("Oil settings saved on this device.", "菜籽油设置已保存到本机。"); }
+    catch (_) { el("status").textContent = t("Browser storage is unavailable.", "浏览器拒绝了本地存储。"); }
+  });
+  el("copy").addEventListener("click", function () {
+    if (!planText || el("copy").disabled) return;
+    var text = planText;
+    function manual() { el("manual").value = text; el("manual").hidden = false; el("manual").focus(); el("manual").select(); el("copy-status").textContent = t("Select the text below to copy manually.", "请手动选择下方文本复制。"); }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { el("copy-status").textContent = t("Plan copied.", "计划已复制。"); }, manual);
+    else manual();
+  });
+  // Validate the whole chain record before applying any of it. Never rewrite bad storage.
+  try {
+    var record = JSON.parse(localStorage.getItem(key) || "null");
+    if (record && record.v === 1 && record.values && fields.every(function (s) { return !numeric(s, record.values[s.id]).error; }) && ["divided", "independent"].includes(record.values.rule) && (!green || chain.variants.some(function (v) { return v.id === record.values.variant; }))) {
+      var s = record.values;
+      var check = D.singleStepPlan({ target: s.target, ratio: s.ratio, capacity: s.capacity, lines: s.lines, rule: s.rule, owned: s.owned,
+        months: s.months, harvests: s.harvests, yieldHa: s.yield });
+      var savedDelivery = green && check ? D.waterDeliveryPlan(check.inputPerMonth, s.stock, s.tanker) : null;
+      if (check && (!green || (savedDelivery && (s.tanker == null || savedDelivery.trips !== null)))) {
+        fields.forEach(function (f) { el("" + f.id).value = s[f.id] == null ? "" : String(s[f.id]); });
+        el("rule").value = s.rule;
+        if (green) el("variant").value = s.variant;
+        el("status").textContent = green ? t("Greenhouse settings restored — generate to see the plan.", "已恢复温室设置，生成后查看计划。") : t("Oil settings restored — generate to see the plan.", "已恢复菜籽油设置，生成后查看计划。");
+      }
+    }
+  } catch (_) { /* malformed records remain untouched */ }
+  actions();
+  }
+  mountSingleStep(oil, "fo-", "fs25-canola-oil-planner-settings-v1", false);
+  mountSingleStep(D.SOURCE_DATA.additionalChains.find(function (c) { return c.id === "greenhouse-lettuce"; }), "fg-", "fs25-greenhouse-lettuce-planner-settings-v1", true);
+  function selectProduct(remember) {
+    var selected = ["bread", "canola-oil", "greenhouse-lettuce"].includes(picker.value) ? picker.value : "bread";
+    picker.value = selected;
+    document.getElementById("fp-form").hidden = selected !== "bread";
+    document.getElementById("fo-form").hidden = selected !== "canola-oil";
+    document.getElementById("fg-form").hidden = selected !== "greenhouse-lettuce";
+    document.getElementById("mill-supply").hidden = selected !== "bread";
+    document.getElementById("oil-supply").hidden = selected !== "canola-oil";
+    document.getElementById("greenhouse-water").hidden = selected !== "greenhouse-lettuce";
+    // main.js creates the locale link first. Preserve this tool's selected
+    // product after its shared hash handler, without changing other routes.
+    var localeLink = document.querySelector && document.querySelector('.nav-language-link');
+    if (localeLink) {
+      var counterpart = new URL(localeLink.href);
+      var targets = { bread: ["#fs25-planner", "#mill-supply"], "canola-oil": ["#fo-form", "#oil-supply"], "greenhouse-lettuce": ["#fg-form", "#greenhouse-water", "#fg-stock"] }[selected];
+      counterpart.hash = window.location && targets.includes(window.location.hash) ? window.location.hash : targets[0];
+      localeLink.href = counterpart.href;
+    }
+    if (remember) { try { localStorage.setItem(selectedKey, selected); } catch (_) { /* selection still works */ } }
+  }
+  picker.addEventListener("change", function () { selectProduct(true); });
+  // Plain links are usable without JS; with JS they also select the right form.
+  if (document.querySelectorAll) document.querySelectorAll('[data-fs25-product]').forEach(function (a) {
+    a.addEventListener("click", function () { picker.value = a.getAttribute("data-fs25-product"); selectProduct(true); });
+  });
+  try { picker.value = localStorage.getItem(selectedKey) || "bread"; } catch (_) { picker.value = "bread"; }
+  function followHash() {
+    if (!window.location) return;
+    if (["#fg-form", "#greenhouse-water", "#fg-stock"].includes(window.location.hash)) picker.value = "greenhouse-lettuce";
+    if (window.location.hash === "#fo-form" || window.location.hash === "#oil-supply") picker.value = "canola-oil";
+    if (window.location.hash === "#fs25-planner" || window.location.hash === "#mill-supply") picker.value = "bread";
+    selectProduct(false);
+  }
+  if (window.addEventListener) window.addEventListener("hashchange", followHash);
+  followHash();
+  selectProduct(false);
+})();

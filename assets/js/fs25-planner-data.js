@@ -2,7 +2,7 @@
 (function () {
   "use strict";
   var SOURCE_DATA = {
-  "schemaVersion": "fs25-bread-v1",
+  "schemaVersion": "fs25-production-v3",
   "game": {
     "id": "fs25",
     "name": "Farming Simulator 25",
@@ -128,6 +128,173 @@
       }
     }
   },
+  "additionalChains": [
+    {
+      "id": "canola-oil",
+      "name": "Canola oil",
+      "zhName": "菜籽油",
+      "unit": "L",
+      "sampleTarget": 6000,
+      "steps": [
+        {
+          "id": "oil-mill",
+          "facility": "Oil Mill",
+          "zhFacility": "油坊",
+          "inputId": "canola",
+          "inputPerOutput": {
+            "value": 2,
+            "status": "community-reference",
+            "sourceId": "productions-guide-v143",
+            "runtimeConfirmed": false,
+            "evidence": {
+              "sourceRow": 40,
+              "facilityVariant": "standard-not-shed",
+              "gameBuild": null,
+              "inputPerCycle": 20,
+              "outputPerCycle": 10
+            }
+          },
+          "outputCapacityPerMonth": {
+            "value": 4800,
+            "status": "community-reference",
+            "sourceId": "productions-guide-v143",
+            "runtimeConfirmed": false,
+            "evidence": {
+              "sourceRow": 40,
+              "facilityVariant": "standard-not-shed",
+              "gameBuild": null,
+              "cyclesPerMonth": 480,
+              "outputPerCycle": 10
+            }
+          },
+          "sharingRule": {
+            "default": "divided",
+            "status": "sample-assumption",
+            "editable": true
+          }
+        }
+      ],
+      "crop": {
+        "id": "canola",
+        "name": "Canola",
+        "zhName": "菜籽",
+        "yieldPerHaPerHarvest": {
+          "value": null,
+          "status": "user-input",
+          "runtimeConfirmed": false,
+          "sourceId": null
+        }
+      }
+    },
+    {
+      "id": "greenhouse-lettuce",
+      "name": "Greenhouse lettuce",
+      "zhName": "温室生菜",
+      "unit": "L",
+      "sampleTarget": 6000,
+      "steps": [
+        {
+          "id": "greenhouse",
+          "facility": "Greenhouse",
+          "zhFacility": "温室",
+          "inputId": "water",
+          "inputPerOutput": {
+            "value": 2,
+            "status": "community-reference",
+            "sourceId": "greenhouses-guide-v143",
+            "runtimeConfirmed": false,
+            "evidence": {
+              "sourceRow": 24,
+              "facilityVariant": "large-greenhouse",
+              "gameBuild": null,
+              "inputPerCycle": 8,
+              "outputPerCycle": 4
+            }
+          },
+          "outputCapacityPerMonth": {
+            "value": 4032,
+            "status": "community-reference",
+            "sourceId": "greenhouses-guide-v143",
+            "runtimeConfirmed": false,
+            "evidence": {
+              "sourceRow": 24,
+              "facilityVariant": "large-greenhouse",
+              "gameBuild": null,
+              "cyclesPerMonth": 1008,
+              "outputPerCycle": 4
+            }
+          },
+          "sharingRule": {
+            "default": "divided",
+            "status": "sample-assumption",
+            "editable": true
+          }
+        }
+      ],
+      "defaultVariant": "large",
+      "variants": [
+        {
+          "id": "small",
+          "name": "Small",
+          "zhName": "小型",
+          "outputCapacityPerMonth": 1008,
+          "inputPerOutput": 2,
+          "status": "community-reference",
+          "sourceId": "greenhouses-guide-v143",
+          "runtimeConfirmed": false,
+          "evidence": {
+            "sourceRow": 6,
+            "facilityVariant": "small-greenhouse",
+            "gameBuild": null,
+            "inputPerCycle": 2,
+            "outputPerCycle": 1,
+            "cyclesPerMonth": 1008
+          }
+        },
+        {
+          "id": "medium",
+          "name": "Medium",
+          "zhName": "中型",
+          "outputCapacityPerMonth": 2016,
+          "inputPerOutput": 2,
+          "status": "community-reference",
+          "sourceId": "greenhouses-guide-v143",
+          "runtimeConfirmed": false,
+          "evidence": {
+            "sourceRow": 15,
+            "facilityVariant": "medium-greenhouse",
+            "gameBuild": null,
+            "inputPerCycle": 4,
+            "outputPerCycle": 2,
+            "cyclesPerMonth": 1008
+          }
+        },
+        {
+          "id": "large",
+          "name": "Large",
+          "zhName": "大型",
+          "outputCapacityPerMonth": 4032,
+          "inputPerOutput": 2,
+          "status": "community-reference",
+          "sourceId": "greenhouses-guide-v143",
+          "runtimeConfirmed": false,
+          "evidence": {
+            "sourceRow": 24,
+            "facilityVariant": "large-greenhouse",
+            "gameBuild": null,
+            "inputPerCycle": 8,
+            "outputPerCycle": 4,
+            "cyclesPerMonth": 1008
+          }
+        }
+      ],
+      "transport": {
+        "capacityDefault": null,
+        "status": "user-input",
+        "sourceId": null
+      }
+    }
+  ],
   "assumptions": {
     "productionRunMonthsPerYear": {
       "default": 12,
@@ -150,16 +317,27 @@
   },
   "sources": [
     {
+      "id": "greenhouses-guide-v143",
+      "label": "MrSNoopy1611: Greenhouses tab, lettuce in small / medium / large facilities",
+      "zhLabel": "MrSNoopy1611：Greenhouses表，小／中／大温室生菜",
+      "url": "https://docs.google.com/spreadsheets/d/1KBP3QLKgKboofOCFQnM2gedq75pu7ugzm960FQDb3EM/edit#gid=621594547",
+      "edition": "1.4.3",
+      "checkedAt": "2026-10-21",
+      "role": "reference",
+      "note": "Exact C6:K6, C15:K15 and C24:K24. Historical author sheet, game build unspecified; not ModHub/hydroponic recipes. Water purchase/free columns are scenarios, not a universal free-water claim.",
+      "zhNote": "精确范围C6:K6、C15:K15、C24:K24。历史原表，游戏build未注明；不混用模组／水培配方。买水／免费水栏只是作者情景，不代表水源必然免费。"
+    },
+    {
       "id": "productions-guide-v143",
-      "label": "MrSNoopy1611: FS 25 Productions Guide v1.4.3 — standard Bakery / Grain Mill",
-      "zhLabel": "MrSNoopy1611：生产表 v1.4.3——普通面包房／谷物磨坊",
+      "label": "MrSNoopy1611: FS 25 Productions Guide v1.4.3 — standard Bakery / Grain Mill / Oil Mill",
+      "zhLabel": "MrSNoopy1611：生产表 v1.4.3——普通面包房／谷物磨坊／油坊",
       "url": "https://docs.google.com/spreadsheets/d/1KBP3QLKgKboofOCFQnM2gedq75pu7ugzm960FQDb3EM/edit#gid=363485587",
       "authorPostUrl": "https://www.reddit.com/r/farmingsimulator/comments/1h7h7nw/fs25_production_profitability_v14_finally_here/",
       "edition": "1.4.3",
       "checkedAt": "2026-10-20",
       "role": "reference",
-      "note": "Productions (easy), rows 3 and 24, left-hand standard facilities; excludes shed columns. Historical, game build unspecified.",
-      "zhNote": "Productions (easy) 第3、24行左侧普通设施，不含右侧棚屋版；历史参考，游戏版本未注明。"
+      "note": "Productions (easy), rows 3, 24 and 40, left-hand standard facilities; excludes shed columns. Historical, game build unspecified.",
+      "zhNote": "Productions (easy) 第3、24、40行左侧普通设施，不含右侧棚屋版；历史参考，游戏版本未注明。"
     },
     {
       "id": "grain-mill-community-thread",
@@ -305,6 +483,34 @@
     return Number.isFinite(area) ? area : null;
   }
 
+  function singleStepPlan(input) {
+    var required = [input.target, input.ratio, input.capacity];
+    if (!required.every(function (n) { return Number.isFinite(n) && n > 0; })) return null;
+    var demand = finiteProduct(input.target, input.ratio);
+    var facility = facilityPlan(input.target, input.capacity, input.lines, input.rule, input.owned);
+    if (demand === null || !facility) return null;
+    var area = null;
+    if (input.yieldHa != null && input.months != null && input.harvests != null) {
+      if (![input.yieldHa, input.months, input.harvests].every(function (n) { return Number.isFinite(n) && n > 0; })) return null;
+      area = areaHa(demand, input.months, input.yieldHa, input.harvests);
+      if (area === null) return null;
+    }
+    return { inputPerMonth: demand, facility: facility, areaHa: area };
+  }
+
+  function transportLoads(requiredLitres, capacityLitres) {
+    if (!Number.isFinite(requiredLitres) || requiredLitres < 0 || !Number.isFinite(capacityLitres) || capacityLitres <= 0) return null;
+    var loads = Math.ceil(requiredLitres / capacityLitres);
+    return Number.isSafeInteger(loads) ? loads : null;
+  }
+  function waterDeliveryPlan(requiredLitres, availableStock, tankerCapacity) {
+    if (!Number.isFinite(requiredLitres) || requiredLitres < 0) return null;
+    var knownStock = availableStock !== null && availableStock !== undefined;
+    if (knownStock && (!Number.isFinite(availableStock) || availableStock < 0)) return null;
+    var toDeliver = knownStock ? Math.max(0, requiredLitres - availableStock) : requiredLitres;
+    return { requiredLitres: requiredLitres, availableStock: knownStock ? availableStock : null,
+      stockCredited: knownStock, litresToDeliver: toDeliver, trips: transportLoads(toDeliver, tankerCapacity) };
+  }
   var api = {
     SOURCE_DATA: SOURCE_DATA,
     CHAIN: CHAIN,
@@ -313,7 +519,10 @@
     effectiveCapacity: effectiveCapacity,
     facilitiesNeeded: facilitiesNeeded,
     facilityPlan: facilityPlan,
-    areaHa: areaHa
+    areaHa: areaHa,
+    singleStepPlan: singleStepPlan,
+    transportLoads: transportLoads,
+    waterDeliveryPlan: waterDeliveryPlan
   };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   if (typeof window !== "undefined") window.FS25PlannerData = api;

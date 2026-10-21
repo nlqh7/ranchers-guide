@@ -9,7 +9,7 @@ const source = JSON.parse(fs.readFileSync(sourcePath, 'utf8'));
 const planner = require(dataPath);
 
 assert.equal(planner.SOURCE_DATA.schemaVersion, source.schemaVersion, 'planner data must be generated from production.json');
-assert.equal(source.schemaVersion, 'fs25-bread-v1');
+assert.equal(source.schemaVersion, 'fs25-production-v3');
 assert.equal(source.game.id, 'fs25');
 assert.deepEqual(source.chain.steps.map(step => step.id), ['bakery', 'mill']);
 assert.equal(source.chain.steps[0].inputPerOutput.runtimeConfirmed, false);
@@ -76,5 +76,50 @@ assert.equal(fixture.expected.flourPerMonth, need.flourPerMonth);
 assert.equal(fixture.expected.wheatPerMonth, need.wheatPerMonth);
 assert.equal(fixture.expected.millCount, divided.count - 1, 'fixture should document the one-line default, not the two-line override');
 
-console.log('PASS: FS25 bread-chain source contract and pure planner calculations are consistent.');
+const oil = source.additionalChains?.find(chain => chain.id === 'canola-oil');
+assert.ok(oil, 'canola oil has its own source-backed chain, not bread parameters');
+assert.equal(oil.steps[0].inputPerOutput.value, 2);
+assert.equal(oil.steps[0].outputCapacityPerMonth.value, 4800);
+assert.equal(oil.crop.yieldPerHaPerHarvest.value, null);
+for (const name of ['inputPerOutput', 'outputCapacityPerMonth']) {
+  const fact = oil.steps[0][name], basis = fact.evidence;
+  assert.equal(fact.sourceId, 'productions-guide-v143');
+  assert.equal(fact.runtimeConfirmed, false);
+  assert.equal(basis.sourceRow, 40, 'actual sheet row, not compact CSV line number');
+  assert.equal(basis.facilityVariant, 'standard-not-shed');
+  assert.equal(fact.value, name === 'inputPerOutput' ? basis.inputPerCycle / basis.outputPerCycle : basis.cyclesPerMonth * basis.outputPerCycle);
+}
+const oilPlan = planner.singleStepPlan({ target: 6000, ratio: 2, capacity: 4800, lines: 1, rule: 'divided', owned: 1 });
+assert.equal(oilPlan.inputPerMonth, 12000);
+assert.equal(oilPlan.facility.totalNeeded, 2);
+assert.equal(oilPlan.facility.additionalNeeded, 1);
+assert.equal(oilPlan.facility.shortfall, 1200);
+assert.equal(oilPlan.areaHa, null, 'unknown canola yield must not borrow the wheat sample');
+const greenhouse = source.additionalChains.find(chain => chain.id === 'greenhouse-lettuce');
+assert.ok(greenhouse, 'a greenhouse chain uses its own sourced capacity and water recipe');
+const lettucePlan = planner.singleStepPlan({ target: 6000, ratio: greenhouse.steps[0].inputPerOutput.value, capacity: greenhouse.steps[0].outputCapacityPerMonth.value, lines: 1, rule: 'divided', owned: 1 });
+assert.equal(lettucePlan.inputPerMonth, 12000);
+assert.equal(lettucePlan.facility.totalNeeded, 2);
+assert.equal(lettucePlan.facility.shortfall, 1968);
+assert.equal(lettucePlan.facility.additionalNeeded, 1);
+assert.deepEqual(greenhouse.variants.map(v => [v.id, v.evidence.sourceRow, v.outputCapacityPerMonth]), [['small', 6, 1008], ['medium', 15, 2016], ['large', 24, 4032]]);
+for (const variant of greenhouse.variants) {
+  assert.equal(variant.sourceId, 'greenhouses-guide-v143');
+  assert.equal(variant.runtimeConfirmed, false);
+  assert.equal(variant.evidence.gameBuild, null);
+  assert.equal(variant.inputPerOutput, variant.evidence.inputPerCycle / variant.evidence.outputPerCycle);
+  assert.equal(variant.outputCapacityPerMonth, variant.evidence.cyclesPerMonth * variant.evidence.outputPerCycle);
+}
+assert.equal(planner.transportLoads(12000, 5000), 3, 'partial water-tanker load still requires a whole trip');
+assert.equal(planner.transportLoads(12000, null), null, 'unknown tanker capacity never creates an invented trip count');
+assert.equal(planner.transportLoads(12000, 0), null, 'zero tanker capacity is invalid, not a fallback');
+const delivery = planner.waterDeliveryPlan(12000, 3000, 5000);
+assert.equal(delivery.litresToDeliver, 9000);
+assert.equal(delivery.trips, 2, 'existing water reduces actual required deliveries');
+assert.equal(planner.waterDeliveryPlan(12000, 12000, 5000).trips, 0);
+assert.equal(planner.waterDeliveryPlan(12000, 15000, 5000).litresToDeliver, 0, 'surplus stock is not negative delivery');
+assert.equal(planner.waterDeliveryPlan(12000, null, 5000).stockCredited, false);
+assert.equal(planner.waterDeliveryPlan(12000, 0, 5000).stockCredited, true, 'known zero differs from unknown stock');
+assert.equal(planner.waterDeliveryPlan(12000, -1, 5000), null);
+console.log('PASS: FS25 source contracts and pure planner calculations are consistent.');
 require('./check-fs25-planner-ui.cjs');

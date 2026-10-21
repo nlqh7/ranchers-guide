@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FS25 Bread Production Planner — Work Backwards From a Monthly Target</title>
-  <meta name="description" content="Farming Simulator 25 bread production planner: enter a monthly bread target and get flour and wheat needs, field area and facility counts — with capacity gaps flagged before you buy buildings.">
+  <title>FS25 Production Planner — Work Backwards From a Monthly Target</title>
+  <meta name="description" content="FS25 bread, oil and greenhouse planner: calculate materials, extra facilities, lettuce water demand and tanker deliveries from monthly targets.">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://theranchersguide.com/games/fs25/tools/production-planner/">
   <link rel="alternate" hreflang="en" href="https://theranchersguide.com/games/fs25/tools/production-planner/">
@@ -13,7 +13,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon-180.png">
   <link rel="stylesheet" href="/assets/css/style.css?v=20261003-r15">
-  <link rel="stylesheet" href="/assets/css/game-tools.css?v=20261020-fs25n1">
+  <link rel="stylesheet" href="/assets/css/game-tools.css?v=20261021-waterstock">
 </head>
 <body>
   <header class="site-header">
@@ -23,20 +23,21 @@
         <span>The Ranchers Guide</span>
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
-      <ul class="nav-links"><li><a href="/games/fs25/">FS25 tools</a></li><li><a href="/games/fs25/tools/production-planner/">Bread planner</a></li><li><a href="/search?game=fs25">Search FS25</a></li><li><a href="/">The Ranchers</a></li></ul>
+      <ul class="nav-links"><li><a href="/games/fs25/">FS25 tools</a></li><li><a href="/games/fs25/tools/production-planner/">Production planner</a></li><li><a href="/search?game=fs25">Search FS25</a></li><li><a href="/">The Ranchers</a></li></ul>
     </nav>
   </header>
 
   <main>
     <div class="container section gt-tool gt-page">
-      <nav class="breadcrumb" aria-label="Breadcrumb" style="font-size:0.82rem;color:var(--brown-500);"><a href="/">Home</a> / Games / <a href="/games/fs25/">Farming Simulator 25</a> / Bread Production Planner</nav>
-      <p class="gt-game-id">Farming Simulator 25 · bread chain pilot</p>
-      <h1>Bread Production Planner</h1>
+      <nav class="breadcrumb" aria-label="Breadcrumb" style="font-size:0.82rem;color:var(--brown-500);"><a href="/">Home</a> / Games / <a href="/games/fs25/">Farming Simulator 25</a> / Production Planner</nav>
+      <p class="gt-game-id">Farming Simulator 25 · bread · canola oil · greenhouse lettuce</p>
+      <h1>Production Planner</h1>
 
-      <p class="lead" style="max-width:720px;">Set a monthly bread target and work backwards to flour and wheat needs, field area, and <strong>whether one facility can actually keep up</strong>.</p>
+      <p class="lead" style="max-width:720px;">Choose bread, canola oil or greenhouse lettuce. Set a monthly target to find the raw materials, <strong>facilities needed and what you still need to buy</strong>.</p>
 
-      <p class="fp-src-note gt-boundary-hint"><strong>Data boundary:</strong> illustrative sample values and community references · not yet runtime-confirmed · not every value is independently sourced · adjust per facility in “Advanced”. Full explanation in “Sources &amp; data status” below.</p>
+      <p class="fp-src-note gt-boundary-hint">Recipes and capacities use a historical standard-facility reference. Adjust them for your building; sources are in the parameters.</p>
 
+      <!-- FS25-PRODUCT:START --><div class="calc-field fp-product-picker"><label for="fp-product">Choose your target product</label><select id="fp-product"><option value="bread">Bread: wheat → flour → bread</option><option value="canola-oil">Canola oil: canola → oil</option><option value="greenhouse-lettuce">Greenhouse lettuce: water → lettuce</option></select></div><!-- FS25-PRODUCT:END -->
       <form id="fp-form" novalidate>
         <div class="fp-layout" id="fs25-planner">
           <section class="calc-panel fp-target" aria-labelledby="fp-target-title">
@@ -168,14 +169,86 @@
           </div>
         </div>
       </form>
-          <section class="calc-panel" id="mill-supply" data-search-entry data-search-title="Can one Grain Mill supply a Bakery?" data-search-aliases="bread supply|flour shortage|FS25 mill" data-search-status="Historical community reference"><h2>Check the flour gap before buying a mill</h2><p>In the standard-facility reference from the author’s v1.4.3 sheet, a 5,400 L monthly bread target needs 10,800 L flour. One wheat mill supplies 10,080 L: a 720 L gap. This target needs 2 identical mills in total; if you own 1, add 1.</p><p>This is not a universal or current-build guarantee and excludes the sheet’s separate shed variants. <a href="#fs25-planner">Recalculate using your facilities</a> and <a href="https://docs.google.com/spreadsheets/d/1KBP3QLKgKboofOCFQnM2gedq75pu7ugzm960FQDb3EM/edit#gid=363485587" rel="noopener noreferrer">check the original author’s data</a>.</p></section>
+      <!-- FS25-OIL:START -->
+      <form id="fo-form" hidden novalidate>
+        <div class="fp-layout">
+          <section class="calc-panel fp-target" aria-labelledby="fo-title">
+            <h3 id="fo-title">Your monthly canola oil target</h3>
+            <div class="calc-field"><label for="fo-target">Canola oil per month (L)</label><input id="fo-target" type="number" min="0" step="any" inputmode="decimal" placeholder="6000"></div>
+            <div class="calc-field"><label for="fo-owned">Oil Mills you already own (optional)</label><input id="fo-owned" type="number" min="0"  inputmode="decimal" step="1"></div>
+            <p class="fp-src-note">Leave owned count blank for total need only; enter 0 if you have none.</p>
+            <div class="fp-actions"><button class="btn" type="submit">Generate plan</button><button class="btn btn-outline" id="fo-reference" type="button">Load Oil Mill reference</button><button class="btn btn-outline" id="fo-save" type="button" disabled>Save settings</button></div>
+            <p id="fo-status" class="fp-status" role="status"></p>
+          </section>
+          <section class="calc-panel fp-results" aria-labelledby="fo-results-title">
+            <h3 id="fo-results-title">Your oil plan</h3>
+            <div id="fo-results" aria-live="polite"><p class="fp-empty">Enter a target, then enter your facility values or load the Oil Mill reference.</p></div>
+            <div class="fp-actions"><button class="btn btn-outline" id="fo-copy" type="button" disabled>Copy plan</button></div>
+            <p id="fo-copy-status" class="fp-status" role="status"></p>
+            <textarea id="fo-manual" class="fp-copy-manual" hidden readonly aria-label="Plan text for manual copy"></textarea>
+          </section>
+          <details class="calc-panel fp-advanced" id="fo-parameters">
+            <summary>Oil Mill capacity, recipe & optional field area</summary>
+            <p class="fp-src-note">Historical author sheet v1.4.3, row 40, standard Oil Mill (not shed). Recipe and capacity are references, not a current-build test. Sharing rule is an editable assumption; canola yield is your own input.</p>
+            <div class="fp-grid">
+              <div class="calc-field"><label for="fo-ratio">Canola per 1 L oil</label><input id="fo-ratio" type="number" min="0" step="any" inputmode="decimal" ></div>
+              <div class="calc-field"><label for="fo-capacity">Oil output per production month (L)</label><input id="fo-capacity" type="number" min="0" step="any" inputmode="decimal" ></div>
+              <div class="calc-field"><label for="fo-rule">Recipe capacity rule</label><select id="fo-rule"><option value="divided">Active recipes share capacity</option><option value="independent">Other recipes do not reduce this recipe</option></select></div>
+              <div class="calc-field"><label for="fo-lines">Active recipes in each Oil Mill</label><input id="fo-lines" type="number"   inputmode="decimal" min="1" max="8" step="1" value="1"></div>
+              <div class="calc-field"><label for="fo-months">Production run months per year (area only)</label><input id="fo-months" type="number"   inputmode="decimal" min="1" max="12" step="1"></div>
+              <div class="calc-field"><label for="fo-harvests">Canola harvests per year (area only)</label><input id="fo-harvests" type="number"   inputmode="decimal" min="1" max="12" step="1"></div>
+              <div class="calc-field"><label for="fo-yield">Your canola yield (L / ha / harvest, optional)</label><input id="fo-yield" type="number" min="0" step="any" inputmode="decimal" ></div>
+            </div>
+            <p class="fp-src-note">No assumed crop yield. Without your yield, materials and facilities still calculate. Independent recipes keep the selected recipe’s capacity; selecting two recipes never doubles it.</p>
+          </details>
+        </div>
+      </form>
+      <section class="calc-panel" id="oil-supply" data-search-entry data-search-title="FS25 canola oil: how many Oil Mills do I need?" data-search-aliases="canola oil shortage|oil mill capacity|canola needed|canola oil production" data-search-status="Historical community reference">
+        <h2>Plan canola supply and the extra Oil Mills you need</h2>
+        <p>Using the standard Oil Mill reference, 20 L canola makes 10 L oil, with 480 cycles per month: 4,800 L oil/month. A 6,000 L oil target needs 12,000 L canola and 2 Oil Mills in total. If you own 1, its monthly shortfall is 1,200 L oil: add 1 identical mill.</p>
+        <p>If two recipes share that budget, each gets 2,400 L/month and this target needs 3 mills. If they run independently, this recipe stays at 4,800 L/month and needs 2 mills—not one. Set the rule to match your building. The sheet’s shed variant is 480 L/month and is not the reference used here.</p>
+        <p><a href="#fo-form" data-fs25-product="canola-oil">Calculate with your Oil Mill</a> · <a href="https://docs.google.com/spreadsheets/d/1KBP3QLKgKboofOCFQnM2gedq75pu7ugzm960FQDb3EM/edit#gid=363485587" rel="noopener noreferrer">Original author sheet, row 40</a></p>
+      </section>
+      <!-- FS25-OIL:END -->
+      <!-- FS25-GREENHOUSE:START -->
+      <form id="fg-form" hidden novalidate>
+        <div class="fp-layout">
+          <section class="calc-panel fp-target" aria-labelledby="fg-title">
+            <h3 id="fg-title">Your greenhouse lettuce target</h3>
+            <div class="calc-field"><label for="fg-variant">Reference size — changing size loads its recipe</label><select id="fg-variant"><option value="small">Small · 1,008 L/month</option><option value="medium">Medium · 2,016 L/month</option><option value="large" selected>Large · 4,032 L/month</option></select></div>
+            <div class="calc-field"><label for="fg-target">Lettuce target per month (L)</label><input id="fg-target" type="number" inputmode="decimal" min="0" step="any" placeholder="6000"></div>
+            <div class="calc-field"><label for="fg-owned">Matching greenhouses already owned (optional)</label><input id="fg-owned" type="number" inputmode="decimal" min="0"  step="1"></div>
+            <div class="calc-field"><label for="fg-tanker">Your water tanker capacity (L, optional)</label><input id="fg-tanker" type="number" inputmode="decimal" min="0" step="any" ></div>
+            <p class="fp-src-note">Blank owned count is unknown, not zero. Tanker capacity adds minimum delivery trips for this target; it is not water-storage capacity.</p>
+            <div class="fp-actions"><button class="btn" type="submit">Generate plan</button><button id="fg-reference" class="btn btn-outline" type="button">Load greenhouse reference</button><button id="fg-save" class="btn btn-outline" type="button" disabled>Save settings</button></div>
+            <p id="fg-status" class="fp-status" role="status"></p>
+          </section>
+          <section class="calc-panel fp-results" aria-labelledby="fg-results-title"><h3 id="fg-results-title">Water & greenhouse plan</h3><div id="fg-results" aria-live="polite"><p class="fp-empty">Enter your target and facility values, or load a reference size.</p></div><div class="fp-actions"><button id="fg-copy" class="btn btn-outline" type="button" disabled>Copy plan</button></div><p id="fg-copy-status" class="fp-status" role="status"></p><textarea id="fg-manual" class="fp-copy-manual" hidden readonly aria-label="Plan text for manual copy"></textarea></section>
+          <details id="fg-parameters" class="calc-panel fp-advanced"><summary>Greenhouse recipe & capacity</summary>
+            <p class="fp-src-note">Historical author sheet v1.4.3, Greenhouses tab, rows 6 / 15 / 24. Size changes output per cycle; these are not hydroponic or modded facilities. Replace the values if your save differs.</p>
+            <div class="fp-grid"><div class="calc-field"><label for="fg-stock">Water already available for this production month (L, optional)</label><input id="fg-stock" type="number" inputmode="decimal" min="0" step="any" ></div><div class="calc-field"><label for="fg-ratio">Water per 1 L lettuce (L)</label><input id="fg-ratio" type="number" inputmode="decimal" min="0" step="any" ></div><div class="calc-field"><label for="fg-capacity">Lettuce output per production month (L)</label><input id="fg-capacity" type="number" inputmode="decimal" min="0" step="any" ></div>
+            <div class="calc-field"><label for="fg-rule">Capacity rule</label><select id="fg-rule"><option value="divided">Active recipes share capacity</option><option value="independent">Other recipes do not reduce this recipe</option></select></div>
+            <div class="calc-field"><label for="fg-lines">Active recipes per greenhouse</label><input id="fg-lines" type="number" inputmode="decimal"   min="1" max="8" step="1" value="1"></div></div>
+            <p class="fp-src-note">Water demand is for your lettuce target, not every crop or full-speed production. Enter available water to subtract it for this one month; blank means no stock has been credited, while 0 means you have none. Trips round upward. Water is not assumed free or automatically supplied.</p>
+            <p><a href="https://docs.google.com/spreadsheets/d/1KBP3QLKgKboofOCFQnM2gedq75pu7ugzm960FQDb3EM/edit#gid=621594547" rel="noopener noreferrer">Check the original greenhouse data</a></p>
+          </details>
+        </div>
+      </form>
+      <section class="calc-panel" id="greenhouse-water" data-search-entry data-search-title="FS25 greenhouse water calculator: lettuce and tanker trips" data-search-aliases="greenhouse water needed|lettuce production|greenhouse capacity|water tanker trips" data-search-status="Historical community reference">
+        <h2>Size the greenhouse and the water deliveries together</h2>
+        <p>The author sheet records lettuce at 1,008 / 2,016 / 4,032 L per month in small / medium / large greenhouses, at 2 L water per 1 L lettuce. A 6,000 L lettuce target needs 12,000 L water and 2 large greenhouses in total. With one large greenhouse owned, the lettuce capacity gap is 1,968 L/month: add one matching building.</p>
+        <p>For an explicitly entered 5,000 L tanker with no water credited, that target takes at least 3 deliveries. With 3,000 L already available for this month, only 9,000 L remains to deliver: 2 trips. These are transport examples, not default vehicle or storage sizes. Two large greenhouses running the lettuce recipe at full speed instead produce 8,064 L lettuce and use 16,128 L water. Other active recipes are not included.</p>
+        <p><a href="#fg-form" data-fs25-product="greenhouse-lettuce">Plan your water deliveries</a> · <a href="https://docs.google.com/spreadsheets/d/1KBP3QLKgKboofOCFQnM2gedq75pu7ugzm960FQDb3EM/edit#gid=621594547" rel="noopener noreferrer">Author source: Greenhouses tab</a></p>
+      </section>
+      <!-- FS25-GREENHOUSE:END -->
+          <section class="calc-panel" id="mill-supply" data-search-entry data-search-title="Can one Grain Mill supply a Bakery?" data-search-aliases="bread supply|flour shortage|FS25 mill" data-search-status="Historical community reference"><h2>Check the flour gap before buying a mill</h2><p>In the standard-facility reference from the author’s v1.4.3 sheet, a 5,400 L monthly bread target needs 10,800 L flour. One wheat mill supplies 10,080 L: a 720 L gap. This target needs 2 identical mills in total; if you own 1, add 1.</p><p>This is not a universal or current-build guarantee and excludes the sheet’s separate shed variants. <a href="#fs25-planner" data-fs25-product="bread">Recalculate using your facilities</a> and <a href="https://docs.google.com/spreadsheets/d/1KBP3QLKgKboofOCFQnM2gedq75pu7ugzm960FQDb3EM/edit#gid=363485587" rel="noopener noreferrer">check the original author’s data</a>.</p></section>
     </div>
   </main>
 
-  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>Farming Simulator 25 pilot</h4><p>An unofficial fan-made pilot corner for Farming Simulator 25, hosted on The Ranchers Guide. Bread-chain values are community references and illustrative defaults, not yet runtime-confirmed.</p><p class="disclaimer">Unofficial fan-made pilot. Not affiliated with or endorsed by any game developer or publisher.</p></div><nav aria-label="FS25 pilot links"><h4>FS25 pilot</h4><ul><li><a href="/games/fs25/">FS25 corner home</a></li><li><a href="/games/fs25/tools/production-planner/">Bread Production Planner</a></li></ul></nav><nav aria-label="The Ranchers Guide links"><h4>The Ranchers Guide</h4><ul><li><a href="/">The Ranchers home</a></li><li><a href="/guides/beginners-guide">Ranchers guides</a></li><li><a href="/search">Ranchers search</a></li></ul></nav><nav aria-label="Site links"><h4>Site</h4><ul><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms of Service</a></li><li><a href="/methodology">Methodology</a></li></ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>Farming Simulator 25 pilot corner · community references and illustrative defaults, not yet runtime-confirmed</span></div></div></footer>
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>Farming Simulator 25 pilot</h4><p>An unofficial fan-made pilot corner for Farming Simulator 25, hosted on The Ranchers Guide. Recipe values are community references and illustrative defaults, not yet runtime-confirmed.</p><p class="disclaimer">Unofficial fan-made pilot. Not affiliated with or endorsed by any game developer or publisher.</p></div><nav aria-label="FS25 pilot links"><h4>FS25 pilot</h4><ul><li><a href="/games/fs25/">FS25 corner home</a></li><li><a href="/games/fs25/tools/production-planner/">Production Planner</a></li></ul></nav><nav aria-label="The Ranchers Guide links"><h4>The Ranchers Guide</h4><ul><li><a href="/">The Ranchers home</a></li><li><a href="/guides/beginners-guide">Ranchers guides</a></li><li><a href="/search">Ranchers search</a></li></ul></nav><nav aria-label="Site links"><h4>Site</h4><ul><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms of Service</a></li><li><a href="/methodology">Methodology</a></li></ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>Farming Simulator 25 pilot corner · community references and illustrative defaults, not yet runtime-confirmed</span></div></div></footer>
 
   <script src="/assets/js/main.js?v=20261003-r15" defer></script>
-  <script src="/assets/js/fs25-planner-data.js?v=20261020-fs25n1" defer></script>
-  <script src="/assets/js/fs25-planner.js?v=20261020-fs25n1" defer></script>
+  <script src="/assets/js/fs25-planner-data.js?v=20261021-waterstock" defer></script>
+  <script src="/assets/js/fs25-planner.js?v=20261021-waterstock" defer></script>
 </body>
 </html>

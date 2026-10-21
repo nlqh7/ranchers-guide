@@ -1,6 +1,6 @@
 {
   "schemaVersion": "game-catalog-v1",
-  "releaseProfile": "fs25-bread-v1",
+  "releaseProfile": "fs25-production-v3",
   "games": [
     {
       "id": "the-ranchers",
@@ -19,8 +19,8 @@
       "status": "pilot",
       "hubRoute": "/games/fs25/",
       "zhHubRoute": "/zh/games/fs25/",
-      "summary": "A focused bread-production planner for Farming Simulator 25.",
-      "zhSummary": "面向《模拟农场25》的面包生产规划工具。"
+      "summary": "Bread, canola oil and greenhouse water planning for Farming Simulator 25.",
+      "zhSummary": "面向《模拟农场25》的面包、菜籽油与温室供水规划工具。"
     }
   ]
 }

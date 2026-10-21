@@ -4,7 +4,7 @@ const path = require("node:path");
 const root = path.resolve(__dirname, "..");
 const publicOnly = process.argv.includes("--public-only");
 const catalogPath = path.join(root, 'data/game-catalog.json');
-const breadCandidate = !publicOnly && fs.existsSync(catalogPath) && JSON.parse(fs.readFileSync(catalogPath, 'utf8')).releaseProfile === 'fs25-bread-v1';
+const breadCandidate = !publicOnly && fs.existsSync(catalogPath) && ['fs25-bread-v1', 'fs25-production-v2', 'fs25-production-v3'].includes(JSON.parse(fs.readFileSync(catalogPath, 'utf8')).releaseProfile);
 const read = (relative) => fs.readFileSync(path.join(root, relative), "utf8");
 const fail = (message) => { throw new Error(`FAIL: ${message}`); };
 const assert = (condition, message) => {
@@ -45,7 +45,7 @@ if (presentFs25Files.length === fs25PreviewFiles.length) {
   for (const file of fs25PreviewFiles) {
     assert(read(file).includes(`<meta name="robots" content="${breadCandidate ? 'index' : 'noindex'},follow">`), `${file} indexability is inconsistent with its explicit profile`);
   }
-  console.log(`PASS: FS25 files match the ${breadCandidate ? 'explicit bread candidate' : 'private noindex'} scope.`);
+  console.log(`PASS: FS25 files match the ${breadCandidate ? 'explicit production candidate' : 'private noindex'} scope.`);
 } else {
   console.log("PASS: no local FS25 preview files present; public Ranchers scope remains valid without them.");
 }
