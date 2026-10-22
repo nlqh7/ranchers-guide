@@ -7,7 +7,7 @@
   <link rel="canonical" href="https://theranchersguide.com/zh/guides/animal-guide">
   <link rel="alternate" hreflang="en" href="https://theranchersguide.com/guides/animal-guide"><link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/guides/animal-guide"><link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/guides/animal-guide">
   <meta property="og:type" content="article"><meta property="og:title" content="The Ranchers 中文养鸡指南"><meta property="og:description" content="从 Angela 家后院抓鸡到自动喂食、大鸡蛋和卖肉，逐步标注证据强度。"><meta property="og:url" content="https://theranchersguide.com/zh/guides/animal-guide"><meta property="og:image" content="https://theranchersguide.com/assets/img/db-animals.jpg">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20261003-r15"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20261003-r15"><link rel="stylesheet" href="/assets/css/animal-quick-actions.css?v=20261022-animal1"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
   <header class="site-header"><nav class="nav-inner" aria-label="主导航"><a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide</span></a><button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button><ul class="nav-links"><li><a class="active" href="/zh/guides/beginners-guide">新手</a></li><li><a href="/zh/database">知识库</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li><li><a href="/zh/search">搜索</a></li><li><a class="nav-cta" href="/contribute">投稿</a></li></ul></nav></header>
@@ -15,9 +15,18 @@
     <nav class="breadcrumb" aria-label="面包屑"><a href="/zh/">首页</a> / 攻略 / 养鸡指南</nav><h1>The Ranchers 养鸡指南：从买鸡到收益，一步一步来</h1><p class="meta">照料更新复核：2026-09-19 · 官方补丁至 0.8.10.871</p>
     <div class="evidence-status"><strong>证据状态：</strong>官方客服回复（Steam 管理员 Jennoula）· 多名玩家印证 · 单人报告逐条标注 · 2026-09-19 更新复核 — <a href="/zh/methodology">我们如何验证 →</a></div>
 
-    <figure class="page-banner"><img src="/assets/img/db-animals.webp" width="800" height="450" alt="The Ranchers 红色谷仓外吃草的牛"></figure>
+    <section class="animal-quick-actions" aria-labelledby="animal-quick-actions-heading">
+      <h2 id="animal-quick-actions-heading">鸡出问题？先选症状</h2>
+      <p>选择鸡舍里正在发生的情况——排障工具会带着该症状打开，并在生成任何排查清单之前请你先选择游戏版本。</p>
+      <ul class="animal-quick-actions-list">
+        <li><a class="animal-quick-action" href="/zh/tools/chicken-troubleshooter?symptom=missing#chicken-case">鸡不见了</a></li>
+        <li><a class="animal-quick-action" href="/zh/tools/chicken-troubleshooter?symptom=food-water#chicken-case">不吃不喝</a></li>
+        <li><a class="animal-quick-action" href="/zh/tools/chicken-troubleshooter?symptom=sick#chicken-case">鸡生病了</a></li>
+        <li><a class="animal-quick-action" href="/zh/tools/chicken-troubleshooter?symptom=automation#chicken-case">自动喂食器出问题</a></li>
+      </ul>
+    </section>
 
-    <div class="notice">先看<a href="#sickness-alerts">生病提醒与病程</a>；找不到动物时按<a href="#troubleshooting">排查清单</a>确认。9 月更新处理了当时已知的消失问题，但不代表之后所有异常都已排除。</div>
+    <figure class="page-banner"><img src="/assets/img/db-animals.webp" width="800" height="450" alt="The Ranchers 红色谷仓外吃草的牛"></figure>
 
     <section class="answer-box">
       <h2>先说结论</h2>
@@ -29,6 +38,7 @@
       <li><a href="#getting">把鸡运回家</a></li>
       <li><a href="#feeding">喂食与饮水</a></li>
       <li><a href="#heater">温控、生病与兽医</a></li>
+      <li><a href="#sickness-alerts">生病提醒与病程</a></li>
       <li><a href="#eggs">鸡蛋与大鸡蛋</a></li>
       <li><a href="#automation">鸡舍自动化：筒仓、水塔、喂食器</a></li>
       <li><a href="#troubleshooting">鸡消失或不吃东西：排查清单</a></li>
@@ -87,7 +97,7 @@
     </section>
 
     <section id="troubleshooting" data-search-entry data-search-title="鸡消失或不吃东西排查清单" data-search-tags="鸡消失 鸡不见 鸡没了 不吃东西 排查 鸡舍关联 围栏"><h2>鸡消失或不吃东西：排查清单</h2>
-      <div class="notice hotfix-notice" data-hotfix="0.8.10.858"><strong>先更新，再排查。</strong><a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1842846814456746" rel="noopener noreferrer">9 月 8 日更新</a>处理了当时已知的动物消失问题。下面保留较早修复的具体触发点，方便记录仍能复现的情况。</div>
+      <div class="notice hotfix-notice" data-hotfix="0.8.10.858"><strong>先更新，再排查。</strong><a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1842846814456746" rel="noopener noreferrer">9 月 8 日更新</a>处理了当时已知的动物消失问题，但不代表之后所有异常都已排除。下面保留较早修复的具体触发点，方便记录仍能复现的情况。</div>
       <ul class="hotfix-fixed-list">
         <li><span class="evidence-badge evidence-official">0.8.10.562 已修复 · 官方</span> 夜间进入鸡舍/畜棚时动物消失。</li>
         <li><span class="evidence-badge evidence-official">0.8.10.562 已修复 · 官方</span> 雏鸡长到下一阶段时消失。</li>
@@ -149,7 +159,13 @@
     <ul>
       <li><a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1840310314352719" rel="noopener noreferrer">官方 0.8.10.562 热修公告</a>——夜间进建筑、雏鸡长大、新生动物、读档、门缝和牵绳动物运输修复（2026-08-10）。</li>
       <li><a href="https://steamcommunity.com/app/1501310/discussions/0/587307906418973975/" rel="noopener noreferrer">Steam 讨论："Chicken coop mission"</a>——鸡刷在卖家房后、汽车后备箱运输（2026 年 8 月）。</li>
-      <li><a href="https://steamcommunity.com/app/1501310/discussions/" rel="noopener noreferrer">Steam 讨论区</a>——官方客服（管理员 Jennoula）关于鸡饲料、室内食槽、温控与装饰版区别、蛋尺寸/受精随机、围栏活动出大鸡蛋、自动喂食链路和处理多余公鸡的回答（2026 年 8 月）。<a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364408897/" rel="noopener noreferrer">Silos 原帖</a>单独回答了水务合同和食槽设置疑惑：在市政厅签合同、把食槽设为干草后会自动连接；帖子未说明容量或通用连接距离。</li>
+      <li><a href="https://steamcommunity.com/app/1501310/discussions/0/587307906419077616/" rel="noopener noreferrer">食物与饮水储备——版主回复 #1</a></li>
+      <li><a href="https://steamcommunity.com/app/1501310/discussions/0/587307906419025921/" rel="noopener noreferrer">关于鸡的照料——版主回复 #2、#4、#6、#8</a></li>
+      <li><a href="https://steamcommunity.com/app/1501310/discussions/0/587307627624740721/" rel="noopener noreferrer">大鸡蛋讨论——版主对放养与温控设备的答复</a></li>
+      <li><a href="https://steamcommunity.com/app/1501310/discussions/0/587307906419087524/" rel="noopener noreferrer">自动喂食套件——版主回复 #1</a></li>
+      <li><a href="https://steamcommunity.com/app/1501310/discussions/0/587307906418969824/" rel="noopener noreferrer">水塔问题——版主回复 #1、#4</a></li>
+      <li><a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364408897/" rel="noopener noreferrer">Silos</a> — 保留的早期出处；本次未重新核实该帖正文。</li>
+      <li>其他照料答复仍保留在证据库中，部分原始链接尚未找回。</li>
       <li><a href="https://steamcommunity.com/app/1501310/discussions/0/587308261888256098/" rel="noopener noreferrer">Steam 讨论："Livestock profit"</a>——Numinex 与 BeBeForever16 的鸡肉、鸡蛋收益报告；具体数字按单人来源处理。</li>
       <li><a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364381340/" rel="noopener noreferrer">Steam 讨论："A temp chicken issue fix!"</a>——鸡舍门口交付 bug 与走进鸡舍放下的规避法（2026-08-04）。</li>
       <li><a href="https://steamcommunity.com/games/1501310/announcements/detail/3716073126083415742" rel="noopener noreferrer">官方 Steam 新闻：Ranching v2（2023 年 3 月 31 日）</a>——EA 前说明野草任何生长阶段都能产出干草；它不能单独证明当前抢先体验行为。</li>

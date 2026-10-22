@@ -18,6 +18,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
   <link rel="stylesheet" href="../assets/css/style.css?v=20261003-r15">
+  <link rel="stylesheet" href="../assets/css/animal-quick-actions.css?v=20261022-animal1">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -50,9 +51,18 @@
       </div>
 
 
-      <figure class="page-banner"><img src="../assets/img/db-animals.webp" width="800" height="450" alt="The Ranchers gameplay screenshot: cows grazing outside the red barn"></figure>
+      <section class="animal-quick-actions" aria-labelledby="animal-quick-actions-heading">
+        <h2 id="animal-quick-actions-heading">Chicken trouble? Start from the symptom</h2>
+        <p>Pick what is happening in your coop — the troubleshooter opens with that symptom selected, then asks you to choose your game version before it builds any checklist.</p>
+        <ul class="animal-quick-actions-list">
+          <li><a class="animal-quick-action" href="/tools/chicken-troubleshooter?symptom=missing#chicken-case">A chicken went missing</a></li>
+          <li><a class="animal-quick-action" href="/tools/chicken-troubleshooter?symptom=food-water#chicken-case">Not eating or drinking</a></li>
+          <li><a class="animal-quick-action" href="/tools/chicken-troubleshooter?symptom=sick#chicken-case">A chicken is sick</a></li>
+          <li><a class="animal-quick-action" href="/tools/chicken-troubleshooter?symptom=automation#chicken-case">Automatic feeder problem</a></li>
+        </ul>
+      </section>
 
-      <div class="notice">Start with <a href="#sickness-alerts">sickness alerts and treatment timing</a>, or use the <a href="#troubleshooting">missing-animal checklist</a>. The September update addressed known disappearance cases, not every possible future report.</div>
+      <figure class="page-banner"><img src="../assets/img/db-animals.webp" width="800" height="450" alt="The Ranchers gameplay screenshot: cows grazing outside the red barn"></figure>
 
       <section class="answer-box">
         <h2>Answer first</h2>
@@ -66,6 +76,7 @@
           <li><a href="#getting">Getting your chickens home</a></li>
           <li><a href="#feeding">Feeding &amp; water</a></li>
           <li><a href="#heater">Heater, sickness &amp; the vet</a></li>
+          <li><a href="#sickness-alerts">Sick animals: alerts and days before death</a></li>
           <li><a href="#eggs">Eggs &amp; large eggs</a></li>
           <li><a href="#automation">Automating the coop: silo, water tower, feeder</a></li>
           <li><a href="#troubleshooting">Chickens disappearing or not eating: checklist</a></li>
@@ -120,7 +131,7 @@
       <p>The Air Conditioning Kit (prevents illness through winter/summer temperature control) follows the same linkage logic. Kit prices and exact ranges are not published; verify placement with the hammer view in your own save. More detail: <a href="/database/animals#barn-automation">barn automation in the animal database</a>.</p>
 
       <h2 id="troubleshooting">Chickens disappearing or not eating: the checklist</h2>
-      <div class="notice hotfix-notice" data-hotfix="0.8.10.858"><strong>Update before diagnosing.</strong> The <a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1842846814456746" rel="noopener noreferrer">September 8 update</a> addressed known animal-disappearance cases. The older fix list below helps identify which transition still fails in your save.</div>
+      <div class="notice hotfix-notice" data-hotfix="0.8.10.858"><strong>Update before diagnosing.</strong> The <a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1842846814456746" rel="noopener noreferrer">September 8 update</a> addressed known animal-disappearance cases, not every possible future report. The older fix list below helps identify which transition still fails in your save.</div>
       <ul class="hotfix-fixed-list">
         <li><span class="evidence-badge evidence-official">Fixed in 0.8.10.562 · Official</span> Animals disappearing when entering a barn or coop at night.</li>
         <li><span class="evidence-badge evidence-official">Fixed in 0.8.10.562 · Official</span> Chicks disappearing while progressing to their next growth stage.</li>
@@ -179,7 +190,13 @@
       <ul>
         <li><a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1840310314352719" rel="noopener noreferrer">Official hotfix 0.8.10.562 announcement</a> — fixes for night entry, chick growth, newborn spawning, load-time appearance, door gaps and roped-animal travel (August 10, 2026).</li>
         <li><a href="https://steamcommunity.com/app/1501310/discussions/0/587307906418973975/" rel="noopener noreferrer">Steam discussion: "Chicken coop mission"</a> — chickens spawn behind the seller's house, car boot transport (Aug 2026).</li>
-        <li><a href="https://steamcommunity.com/app/1501310/discussions/" rel="noopener noreferrer">Steam discussion board</a> — official support answers (moderator Jennoula) on chicken feed, interior troughs, heater vs. decoration versions, egg size/fertility RNG, enclosed-roaming large eggs, the auto-feeding chain and dispatching excess birds (Aug 2026). The <a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364408897/" rel="noopener noreferrer">Silos thread</a> specifically answers the water-contract and trough-setting confusion: sign the contract at City Hall, set the troughs to hay, then the connection is automatic; no capacity or universal range is stated.</li>
+        <li><a href="https://steamcommunity.com/app/1501310/discussions/0/587307906419077616/" rel="noopener noreferrer">Food and water reserves — moderator reply #1</a></li>
+        <li><a href="https://steamcommunity.com/app/1501310/discussions/0/587307906419025921/" rel="noopener noreferrer">About the chickens — moderator replies #2, #4, #6 and #8</a></li>
+        <li><a href="https://steamcommunity.com/app/1501310/discussions/0/587307627624740721/" rel="noopener noreferrer">Big Chicken Eggs — moderator replies on roaming and temperature kits</a></li>
+        <li><a href="https://steamcommunity.com/app/1501310/discussions/0/587307906419087524/" rel="noopener noreferrer">Automatic barn feeding kit — moderator reply #1</a></li>
+        <li><a href="https://steamcommunity.com/app/1501310/discussions/0/587307906418969824/" rel="noopener noreferrer">Watertower problem — moderator replies #1 and #4</a></li>
+        <li><a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364408897/" rel="noopener noreferrer">Silos</a> — retained earlier reference; not re-verified in this source pass.</li>
+        <li>Other care replies remain in the retained evidence ledger; some original links have not been recovered.</li>
         <li><a href="https://steamcommunity.com/app/1501310/discussions/0/587308261888256098/" rel="noopener noreferrer">Steam discussion: "Livestock profit"</a> — chicken meat and egg returns reported by Numinex and BeBeForever16; each exact figure remains single-source.</li>
         <li><a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364381340/" rel="noopener noreferrer">Steam discussion: "A temp chicken issue fix!"</a> — coop-door delivery bug and the walk-inside deposit workaround (Aug 4, 2026).</li>
         <li><a href="https://steamcommunity.com/games/1501310/announcements/detail/3716073126083415742" rel="noopener noreferrer">Official Steam news: Ranching v2 (March 31, 2023)</a> — pre-EA note that wild grass yields hay at any growth stage; this does not independently confirm current Early Access behavior.</li>

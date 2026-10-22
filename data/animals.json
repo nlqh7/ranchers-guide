@@ -164,18 +164,20 @@
     "thread-food-water-reserves": {
       "kind": "steam-thread",
       "title": "Steam thread \"Food and water reserves\" (Mancer, Jennoula)",
-      "url": null,
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587307906419077616/",
       "author": "Mancer / Jennoula",
       "date": "2026-08",
-      "build": "0.8.10.x"
+      "build": "not stated in reply",
+      "reviewedAt": "2026-10-22"
     },
     "thread-about-chickens": {
       "kind": "steam-thread",
       "title": "Steam thread \"About the chickens\" (Jennoula, official)",
-      "url": null,
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587307906419025921/",
       "author": "Jennoula",
       "date": "2026-08",
-      "build": "0.8.10.x"
+      "build": "not stated in reply",
+      "reviewedAt": "2026-10-22"
     },
     "thread-egg-hatching": {
       "kind": "steam-thread",
@@ -227,11 +229,12 @@
     },
     "thread-auto-feeding-kit": {
       "kind": "steam-thread",
-      "title": "Steam thread \"Does the automatic barn feeding kit work?\" (gamingmarcel20, Jennoula)",
-      "url": null,
-      "author": "gamingmarcel20 / Jennoula",
+      "title": "Steam thread \"Does the automatic barn feeding kit work?\" (Akhenatom, Jennoula)",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587307906419087524/",
+      "author": "Akhenatom / Jennoula",
       "date": "2026-08",
-      "build": "0.8.10.x"
+      "build": "not stated in reply",
+      "reviewedAt": "2026-10-22"
     },
     "thread-silos": {
       "kind": "steam-thread",
@@ -243,11 +246,12 @@
     },
     "thread-watertower": {
       "kind": "steam-thread",
-      "title": "Steam thread \"Watertower problem\" (Akhenatom, Mancer, Jennoula)",
-      "url": null,
-      "author": "Akhenatom / Mancer / Jennoula",
+      "title": "Steam thread \"Watertower problem\" (maxitubby, Mancer, Jennoula)",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587307906418969824/",
+      "author": "maxitubby / Mancer / Jennoula",
       "date": "2026-08",
-      "build": "0.8.10.x"
+      "build": "not stated in reply",
+      "reviewedAt": "2026-10-22"
     },
     "thread-livestock-profit": {
       "kind": "steam-thread",

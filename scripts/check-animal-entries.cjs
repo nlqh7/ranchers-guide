@@ -21,6 +21,26 @@ const animalData = require('../data/animals.json');
 const silosUrl = 'https://steamcommunity.com/app/1501310/discussions/0/587308167364408897/';
 
 assert.equal(animalData.sources['thread-silos']?.url, silosUrl, 'Silos source must point to the original discussion');
+const recoveredCareSources = {
+  'thread-food-water-reserves': 'https://steamcommunity.com/app/1501310/discussions/0/587307906419077616/',
+  'thread-about-chickens': 'https://steamcommunity.com/app/1501310/discussions/0/587307906419025921/',
+  'thread-auto-feeding-kit': 'https://steamcommunity.com/app/1501310/discussions/0/587307906419087524/',
+  'thread-watertower': 'https://steamcommunity.com/app/1501310/discussions/0/587307906418969824/',
+};
+for (const [sourceId, url] of Object.entries(recoveredCareSources)) {
+  assert.equal(animalData.sources[sourceId].url, url, sourceId + ' must retain the recovered original topic in the shared animal data');
+  assert.ok(enDirectory.includes('href="' + url + '"'), 'EN directory must expose a clickable ' + sourceId + ' reference after generation');
+  assert.equal(animalData.sources[sourceId].build, 'not stated in reply', 'Recovering a source URL must not imply a verified gameplay build');
+}
+// The focused chicken profile omits the directory's full automation group.
+for (const sourceId of ['thread-food-water-reserves', 'thread-about-chickens', 'thread-watertower']) {
+  assert.ok(en.includes('href="' + recoveredCareSources[sourceId] + '"'), 'EN chicken must link the source actually used by its selected care facts');
+}
+for (const url of [recoveredCareSources['thread-food-water-reserves'], recoveredCareSources['thread-about-chickens']]) {
+  for (const [label, html] of [['ZH directory', zhDirectory], ['ZH chicken', zh]]) {
+    assert.ok(html.includes('href="' + url + '"'), label + ' must expose the care sources referenced by its existing Chinese facts');
+  }
+}
 assert.ok(read('guides/animal-guide.html').includes(silosUrl), 'English care guide must link the direct Silos source');
 assert.ok(read('zh/guides/animal-guide.html').includes(silosUrl), 'Chinese care guide must link the direct Silos source');
 

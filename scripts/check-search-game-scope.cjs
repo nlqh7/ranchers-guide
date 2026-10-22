@@ -37,8 +37,8 @@ for (const prefix of ['', 'zh/']) {
   assert.match(page, /search-game-scope\.css\?v=20261022-touch1/, `${prefix || 'en/'} loads the updated filter touch-target stylesheet`);
 }
 const assertCache = require('./search-cache-contract.cjs');
-assert.doesNotThrow(() => assertCache('var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v40" : "ranchers-search-index-v54";'));
-assert.throws(() => assertCache('var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v39" : "ranchers-search-index-v53";'), /cache must invalidate/);
+assert.doesNotThrow(() => assertCache('var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v41" : "ranchers-search-index-v55";'));
+assert.throws(() => assertCache('var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v40" : "ranchers-search-index-v54";'), /cache must invalidate/);
 function node() {
   return { value: '', textContent: '', innerHTML: '', hidden: false, disabled: false, children: [], listeners: {}, dataset: {},
     classList: { toggle() {} }, setAttribute() {}, focus() {},
@@ -73,8 +73,8 @@ async function pageController(lang) {
   const docs = Array.from({ length: 200 }, (_, i) => ({ title: 'Bread guide', url: '/guides/bread-' + i, type: 'Guide', description: 'bread', sections: [] }));
   const fs25Url = (lang === 'en' ? '' : '/zh') + '/games/fs25/tools/production-planner/';
   docs.push({ title: 'FS25 Bread planner', url: fs25Url, type: 'FS25 tool', description: 'bread', sections: [] });
-  const previousCacheKey = lang === 'en' ? 'ranchers-search-index-v53' : 'ranchers-search-index-zh-v39';
-  const freshCacheKey = lang === 'en' ? 'ranchers-search-index-v54' : 'ranchers-search-index-zh-v40';
+  const previousCacheKey = lang === 'en' ? 'ranchers-search-index-v54' : 'ranchers-search-index-zh-v40';
+  const freshCacheKey = lang === 'en' ? 'ranchers-search-index-v55' : 'ranchers-search-index-zh-v41';
   const staleUrl = (lang === 'en' ? '' : '/zh') + '/games/fs25/tools/stale-planner/';
   const staleIndex = docs.map(doc => ({ ...doc, title: 'STALE CACHED INDEX', url: staleUrl }));
   const cacheStore = { [previousCacheKey]: JSON.stringify(staleIndex) };

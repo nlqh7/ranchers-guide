@@ -192,7 +192,7 @@
 
   function loadData() {
     renderLoading();
-    fetch("/data/chicken-troubleshooter.json", { headers: { Accept: "application/json" } })
+    fetch("/data/chicken-troubleshooter.json?v=20261022-sources1", { headers: { Accept: "application/json" } })
       .then(function (response) {
         if (!response.ok) throw new Error("Unable to load troubleshooter data");
         return response.json();

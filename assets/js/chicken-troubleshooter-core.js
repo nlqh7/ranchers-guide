@@ -34,7 +34,8 @@
     var path = data.paths[answers.symptom];
     if (!path) throw new Error("Unknown chicken symptom: " + answers.symptom);
     var rawSteps = [];
-    if (answers.build !== "current") rawSteps.push(data.shared.updateFirst);
+    // This shared step describes disappearance hotfixes, not a general care remedy.
+    if (answers.symptom === "missing" && answers.build !== "current") rawSteps.push(data.shared.updateFirst);
     rawSteps = rawSteps.concat(path.steps);
     var sourceIds = [];
     var steps = rawSteps.map(function (step) {
