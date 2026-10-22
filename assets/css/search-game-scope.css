@@ -2,4 +2,5 @@
 .search-game-scope { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem 1rem; margin: 0 0 1rem; }
 .search-game-scope label { font-weight: 700; }
 .search-game-scope select { min-height: 44px; min-width: 0; max-width: 100%; padding: .5rem 1rem; font: inherit; color: var(--color-text); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; }
+[data-entity-filters] button { min-height: 44px; min-width: 44px; }
 [data-entity-filters][hidden], .search-suggestions[hidden] { display: none; }

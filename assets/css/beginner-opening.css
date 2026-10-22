@@ -1,0 +1,12 @@
+/* Opening-route slice on the EN/ZH beginner guides only (cream/brown/green theme). */
+.opening-route .opening-route-stages { margin: 10px 0 0; padding-left: 24px; }
+.opening-route .opening-route-stages > li { margin: 0 0 12px; }
+.opening-route .opening-route-stages p { margin: 4px 0; }
+.opening-route-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 700;
+  color: var(--green-700);
+}
+.opening-route .fact-source { margin: 10px 0 0; font-size: 0.9rem; color: var(--brown-700); }

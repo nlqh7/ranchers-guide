@@ -158,26 +158,51 @@
     var title = document.title || "";
     var titles = [title].concat(Array.isArray(document.aliases) ? document.aliases : []);
     var parentTitle = document.parentTitle || "";
+    var contextTitle = document.contextTitle || parentTitle;
     var description = document.description || "";
     var sections = document.sections || [];
     var total = 0;
+    var hasOwnMatch = false;
+    var ownMatches = {};
+    // Only a leading title context (for example the game name) may fill missing
+    // query terms. Later topics in a page title must match the answer itself.
+    var contextTerms = new Set();
+    var parentTerms = tokens(contextTitle);
+    var rawQueryTerms = tokens(query);
+    for (var p = 0; p < parentTerms.length; p += 1) {
+      if (rawQueryTerms.indexOf(parentTerms[p]) === -1) break;
+      contextTerms.add(parentTerms[p]);
+    }
+    if (!Array.from(contextTerms).some(function (term) { return !QUERY_STOP_WORDS.has(term); })) contextTerms.clear();
 
     for (var i = 0; i < queryTerms.length; i += 1) {
       var term = queryTerms[i];
       var sectionScore = sections.reduce(function (best, section) {
         return Math.max(best, fieldScore(sectionText(section), term, 26));
       }, 0);
-      var termScore = Math.max(
+      var ownScore = Math.max(
         fieldScore(titles.join(" "), term, 70),
-        fieldScore(parentTitle, term, 54),
         fieldScore(description, term, 42),
         sectionScore
       );
+      if (ownScore) hasOwnMatch = true;
+      ownMatches[term] = ownScore;
+      if (!ownScore && !contextTerms.has(term)) return 0;
+      var termScore = Math.max(ownScore, fieldScore(parentTitle, term, 54));
+      if (!termScore && contextTerms.has(term)) termScore = fieldScore(contextTitle, term, 54);
       if (!termScore) return 0;
       total += termScore;
     }
+    // Parent titles provide context (such as a game name), not an answer by themselves.
+    if (!hasOwnMatch) return 0;
 
     var normalizedQuery = normalize(query);
+    // Discount only context terms the document itself does not answer. A
+    // leading parent token that also matches the document's own fields (for
+    // example an entity name shared with the page title) stays part of the
+    // answer instead of being stripped as context.
+    var answerQuery = normalizedQuery.split(/\s+/).filter(function (term) { return !contextTerms.has(term) || ownMatches[term]; }).join(" ");
+    if (answerQuery) normalizedQuery = answerQuery;
     if (titles.some(function (name) { return normalize(name) === normalizedQuery; })) total += 140;
     else if (titles.some(function (name) { return normalize(name).indexOf(normalizedQuery) !== -1; })) total += 90;
     else if (normalize(description).indexOf(normalizedQuery) !== -1) total += 50;
@@ -251,6 +276,7 @@
       var text = [status, entry.text || ""].filter(Boolean).join(": ");
       return {
         title: entry.title || document.title,
+        contextTitle: document.title,
         aliases: entry.aliases || [],
         url: document.url + "#" + entry.id,
         type: entryType(document.url),
@@ -296,7 +322,25 @@
     return new RegExp("(?:^|[^a-z0-9])" + name + "(?:$|[^a-z0-9])").test(query);
   }
 
-  function entityScore(entity, query) {
+  function entityLabelTokens(entity) {
+    return normalizeEntityQuery(entity.label).split(/\s+/).filter(function (token) {
+      return token.length >= 2 && !QUERY_STOP_WORDS.has(token);
+    });
+  }
+
+  // Tokens that appear in several entity labels (for example a shared game or
+  // category name) carry no specificity, so they must not alone promote a card.
+  function sharedEntityLabelTokens(entities) {
+    var counts = {};
+    (entities || []).forEach(function (entity) {
+      Array.from(new Set(entityLabelTokens(entity))).forEach(function (token) {
+        counts[token] = (counts[token] || 0) + 1;
+      });
+    });
+    return new Set(Object.keys(counts).filter(function (token) { return counts[token] > 1; }));
+  }
+
+  function entityScore(entity, query, sharedTokens) {
     var normalized = normalizeEntityQuery(query);
     var queryTokens = normalized.split(/\s+/).filter(Boolean);
     var label = normalizeEntityQuery(entity.label);
@@ -307,7 +351,8 @@
     if (label === normalized || aliases.some(function (alias) { return alias === normalized; })) return 100;
     if (containsEntityName(normalized, label)) return 92;
     if (labelTokens.some(function (token) {
-      return token.length >= 2 && !QUERY_STOP_WORDS.has(token) && queryTokens.indexOf(token) !== -1;
+      return token.length >= 2 && !QUERY_STOP_WORDS.has(token) && queryTokens.indexOf(token) !== -1
+        && !(sharedTokens && sharedTokens.has(token));
     })) return 88;
     if (label.split(/\s+/).filter(Boolean).every(function (token) { return queryTokens.indexOf(token) !== -1; })) return 88;
     if (aliases.some(function (alias) {
@@ -315,6 +360,23 @@
     })) return 78;
     var matchedKeyword = keywords.some(function (keyword) { return queryTokens.indexOf(keyword) !== -1; });
     return matchedKeyword ? 52 : 0;
+  }
+
+  // Keyword-only matches (52) are a weak fallback. When at least one entity
+  // matches the query by name or alias (every named score is above 52), the
+  // remaining card slots must not be filled with unrelated keyword-only
+  // entities; without any named match the useful fallback stays.
+  var ENTITY_KEYWORD_FALLBACK_SCORE = 52;
+  function selectDossierEntities(entities, query, sharedTokens) {
+    var scored = (entities || []).map(function (entity) {
+      return { entity: entity, score: entityScore(entity, query, sharedTokens) };
+    }).filter(function (item) { return item.score >= ENTITY_KEYWORD_FALLBACK_SCORE; }).sort(function (a, b) {
+      return b.score - a.score;
+    });
+    if (scored.some(function (item) { return item.score > ENTITY_KEYWORD_FALLBACK_SCORE; })) {
+      scored = scored.filter(function (item) { return item.score > ENTITY_KEYWORD_FALLBACK_SCORE; });
+    }
+    return scored;
   }
 
   function dossierSupportsExactAnswer(entity, query, matches) {
@@ -352,5 +414,7 @@
     sectionDocuments: sectionDocuments,
     expandEntryDocuments: expandEntryDocuments,
     searchDocuments: searchDocuments,
+    selectDossierEntities: selectDossierEntities,
+    sharedEntityLabelTokens: sharedEntityLabelTokens,
   };
 });

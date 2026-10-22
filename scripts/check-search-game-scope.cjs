@@ -28,9 +28,17 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const root = path.resolve(__dirname, '..');
+const scopeStyles = fs.readFileSync(path.join(root, 'assets/css/search-game-scope.css'), 'utf8');
+const entityButtonStyles = scopeStyles.match(/\[data-entity-filters\]\s+button\s*\{([^}]+)\}/)?.[1] || '';
+assert.match(entityButtonStyles, /min-height:\s*44px/, 'entity answer filters need a 44px-high touch target');
+assert.match(entityButtonStyles, /min-width:\s*44px/, 'short filter labels also need a 44px-wide touch target');
+for (const prefix of ['', 'zh/']) {
+  const page = fs.readFileSync(path.join(root, prefix, 'search.html'), 'utf8');
+  assert.match(page, /search-game-scope\.css\?v=20261022-touch1/, `${prefix || 'en/'} loads the updated filter touch-target stylesheet`);
+}
 const assertCache = require('./search-cache-contract.cjs');
-assert.doesNotThrow(() => assertCache('var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v32" : "ranchers-search-index-v46";'));
-assert.throws(() => assertCache('var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v30" : "ranchers-search-index-v44";'), /cache must invalidate/);
+assert.doesNotThrow(() => assertCache('var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v40" : "ranchers-search-index-v54";'));
+assert.throws(() => assertCache('var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v39" : "ranchers-search-index-v53";'), /cache must invalidate/);
 function node() {
   return { value: '', textContent: '', innerHTML: '', hidden: false, disabled: false, children: [], listeners: {}, dataset: {},
     classList: { toggle() {} }, setAttribute() {}, focus() {},
@@ -44,6 +52,8 @@ async function pageController(lang) {
   const selectors = ['[data-search-form]', '[data-search-input]', '[data-search-clear]', '[data-search-results]',
     '[data-knowledge-dossier]', '[data-search-status]', '[data-search-game]', '[data-entity-filters]', '.search-suggestions'];
   const nodes = Object.fromEntries(selectors.map(selector => [selector, node()]));
+  const entityFilters = [node()];
+  entityFilters[0].dataset.entityFilter = 'location';
   const alternate = 'https://theranchersguide.com' + (lang === 'en' ? '/zh/search' : '/search');
   const languageLink = { href: alternate + '?q=bread', getAttribute() { return alternate; } };
   nodes['.nav-language-link'] = languageLink;
@@ -63,13 +73,18 @@ async function pageController(lang) {
   const docs = Array.from({ length: 200 }, (_, i) => ({ title: 'Bread guide', url: '/guides/bread-' + i, type: 'Guide', description: 'bread', sections: [] }));
   const fs25Url = (lang === 'en' ? '' : '/zh') + '/games/fs25/tools/production-planner/';
   docs.push({ title: 'FS25 Bread planner', url: fs25Url, type: 'FS25 tool', description: 'bread', sections: [] });
+  const previousCacheKey = lang === 'en' ? 'ranchers-search-index-v53' : 'ranchers-search-index-zh-v39';
+  const freshCacheKey = lang === 'en' ? 'ranchers-search-index-v54' : 'ranchers-search-index-zh-v40';
+  const staleUrl = (lang === 'en' ? '' : '/zh') + '/games/fs25/tools/stale-planner/';
+  const staleIndex = docs.map(doc => ({ ...doc, title: 'STALE CACHED INDEX', url: staleUrl }));
+  const cacheStore = { [previousCacheKey]: JSON.stringify(staleIndex) };
   const knowledge = JSON.parse(fs.readFileSync(path.join(root, 'knowledge-index.json'), 'utf8'));
   const context = vm.createContext({
     window, RanchersSearch: search, URL, URLSearchParams, location,
     document: { documentElement: { lang }, querySelector: selector => nodes[selector] || null,
-      querySelectorAll: () => [], createElement: () => node() },
+      querySelectorAll: selector => selector === '[data-entity-filter]' ? entityFilters : [], createElement: () => node() },
     history: { replaceState(_a, _b, url) { historyWrite(url); }, pushState(_a, _b, url) { historyWrite(url); } },
-    sessionStorage: { getItem: () => null, setItem() {} },
+    sessionStorage: { getItem: key => (key in cacheStore ? cacheStore[key] : null), setItem(key, value) { cacheStore[key] = String(value); } },
     fetch: async url => ({ ok: true, json: async () => url.includes('knowledge') ? knowledge : docs }),
     setTimeout: fn => { fn(); return 1; }, clearTimeout() {}
   });
@@ -81,12 +96,20 @@ async function pageController(lang) {
   assert.equal(game.value, 'fs25');
   assert.equal(languageLink.href, alternate + '?q=bread&game=fs25', 'switching locale keeps the initial query and game');
   assert.deepEqual(links(), [fs25Url], 'the shipped controller filters out Ranchers documents before ranking');
+  assert.ok(!links().includes(staleUrl), 'the controller never serves documents from a previous cache key');
+  assert.ok(cacheStore[previousCacheKey], 'a pre-seeded previous cache entry stays untouched, never migrated or deleted');
+  assert.equal(JSON.parse(cacheStore[freshCacheKey] || 'null')?.length, docs.length, 'the controller persists the fresh index under the new cache key');
   assert.equal(scoredKnowledge, 0, 'FS25 never even scores the Ranchers dossier');
   assert.equal(nodes['[data-entity-filters]'].hidden, true);
   game.value = 'ranchers'; game.fire('change');
   assert.ok(links().length > 0 && links().every(url => !url.includes('/games/fs25/')));
   assert.equal(new URL(lastUrl, 'https://theranchersguide.com').searchParams.get('game'), 'ranchers');
   assert.equal(new URL(languageLink.href).searchParams.get('game'), 'ranchers', 'explicit scope changes also update the counterpart after shared history sync');
+  if (lang === 'en') {
+    nodes['[data-search-input]'].value = 'zirconite';
+    entityFilters[0].fire('click');
+    assert.match(nodes['[data-knowledge-dossier]'].innerHTML, /href="\/map#city-hall"/, 'the location filter keeps its keyword fallback even when another type has a named match');
+  }
   nodes['[data-search-clear]'].fire('click');
   assert.ok(lastUrl.endsWith('?game=ranchers'), 'clear preserves scope in the real page URL');
   assert.equal(languageLink.href, alternate + '?game=ranchers', 'clear retains the game in the language switch');

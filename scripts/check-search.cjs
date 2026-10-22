@@ -37,6 +37,46 @@ assert.equal(searchDocuments(documents, "coop save")[0].url, "/guides/multiplaye
 assert.equal(searchDocuments(documents, "seed yield")[0].url, "/database/crops");
 assert.deepEqual(searchDocuments(documents, "spaceship laser"), []);
 
+// Page context may support a game prefix, but must not manufacture an answer.
+const inheritedTopicDocuments = RanchersSearch.sectionDocuments({
+  title: "The Ranchers Materials: Zerkonite, Charcoal & Tool Shops",
+  url: "/guides/materials",
+  type: "Guide",
+  sections: [
+    { id: "ore", heading: "Buy Zerkonite", text: "Visit Meriam at City Hall for this ore." },
+    { id: "hay", heading: "Hay", text: "Cut wild grass and check your inventory." }
+  ]
+});
+assert.deepEqual(searchDocuments(inheritedTopicDocuments, "where to buy zerkonite").map(result => result.url), ["/guides/materials#ore"], "A parent title alone must not turn unrelated hay into an ore answer");
+const inheritedChineseTopics = RanchersSearch.sectionDocuments({
+  title: "The Ranchers 材料获取：锆矿、木炭与工具购买",
+  url: "/zh/guides/materials",
+  type: "攻略",
+  sections: [
+    { id: "ore", heading: "锆矿去哪买", text: "到市政厅找 Meriam。" },
+    { id: "food", heading: "其他消耗品", text: "可以购买食物或饮料。" }
+  ]
+});
+assert.deepEqual(searchDocuments(inheritedChineseTopics, "锆矿在哪买").map(result => result.url), ["/zh/guides/materials#ore"], "A generic purchase word must not let food borrow the parent's ore topic");
+for (const query of ["The Ranchers zerkonite", "zerkonite The Ranchers"]) {
+  assert.deepEqual(searchDocuments(inheritedTopicDocuments, query).map(result => result.url), ["/guides/materials#ore"], "Keep a game's leading page context without borrowing an unrelated topic");
+}
+assert.deepEqual(searchDocuments(inheritedChineseTopics, "The Ranchers 锆矿在哪买").map(result => result.url), ["/zh/guides/materials#ore"]);
+const fs25Section = RanchersSearch.sectionDocuments({
+  title: "Farming Simulator 25 Production",
+  url: "/games/fs25/",
+  sections: [{ id: "flour", heading: "Flour supply", text: "Match the grain mill output to the bakery demand." }]
+});
+assert.equal(searchDocuments(fs25Section, "Farming Simulator 25 flour")[0]?.url, "/games/fs25/#flour");
+assert.deepEqual(searchDocuments(inheritedTopicDocuments, "The Ranchers"), [], "Game context alone does not make every section an answer");
+const contextualEntryDocuments = RanchersSearch.expandEntryDocuments({
+  title: "The Ranchers Materials: Zerkonite, Charcoal & Tool Shops",
+  url: "/guides/materials",
+  description: "The Ranchers material and Zerkonite lookup.",
+  entries: [{ id: "ore", title: "Where to buy Zerkonite", aliases: ["where to buy zerkonite"], text: "Visit Meriam at City Hall." }]
+});
+assert.equal(searchDocuments(contextualEntryDocuments, "The Ranchers where to buy zerkonite")[0]?.url, "/guides/materials#ore", "An explicit answer must retain game context and outrank its broad parent for the same question");
+
 const chineseDocuments = [
   {
     title: "动物数据库",
@@ -231,6 +271,11 @@ assert.ok(chineseKnowledgeIndex.entities.some((entity) => entity.id === "materia
 assert.ok(knowledgeIndex.entities.some((entity) => entity.id === "quest:power-to-the-bench" && entity.relatedRoutes.some((link) => link.href === "/database/npcs#victor")));
 
 const chineseIndex = JSON.parse(fs.readFileSync(path.join(root, "zh", "search-index.json"), "utf8"));
+const oreQuestionResults = searchDocuments(chineseIndex, "锆矿在哪买", chineseIndex.length);
+assert.equal(oreQuestionResults[0]?.url, "/zh/guides/resources-and-materials#zirconite");
+for (const unrelatedId of ["hay", "consumables-other", "verification", "resource-definitions"]) {
+  assert.ok(!oreQuestionResults.some(result => result.url === "/zh/guides/resources-and-materials#" + unrelatedId), "Ore questions must not retrieve an unrelated inherited section: " + unrelatedId);
+}
 assert.ok(chineseIndex.every((entry) => entry.type !== "Database entry"), "Chinese search result types must be localized");
 assert.ok(chineseIndex.every((entry) => !String(entry.description || "").startsWith("Community data:")), "Chinese search snippets must not expose English status defaults");
 const missingChickenResults = searchDocuments(chineseIndex, "鸡消失");

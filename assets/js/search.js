@@ -154,7 +154,7 @@
   var IS_ZH = document.documentElement.lang.toLowerCase() === "zh-cn";
   var PAGE_PATHS = IS_ZH ? ZH_PAGE_PATHS : EN_PAGE_PATHS;
   var SEARCH_ROUTE = IS_ZH ? "/zh/search" : "/search";
-  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v37" : "ranchers-search-index-v51";
+  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v40" : "ranchers-search-index-v54";
   var documents = [];
   var form = document.querySelector("[data-search-form]");
   var input = document.querySelector("[data-search-input]");
@@ -376,13 +376,11 @@
   }
 
   function dossierEntity(query) {
-    return knowledgeEntities.map(function (entity) {
-      return { entity: entity, score: RanchersSearch.entityScore(entity, query) };
-    }).filter(function (item) { return item.score >= 52; }).sort(function (a, b) {
-      return b.score - a.score;
-    }).filter(function (item) {
-      return activeEntityFilter === "all" || item.entity.type === activeEntityFilter;
-    }).slice(0, 3).map(function (item) { return item.entity; });
+    var sharedTokens = RanchersSearch.sharedEntityLabelTokens(knowledgeEntities);
+    var eligibleEntities = activeEntityFilter === "all" ? knowledgeEntities : knowledgeEntities.filter(function (entity) {
+      return entity.type === activeEntityFilter;
+    });
+    return RanchersSearch.selectDossierEntities(eligibleEntities, query, sharedTokens).slice(0, 3).map(function (item) { return item.entity; });
   }
 
   function dossierRelated(entity, matches) {

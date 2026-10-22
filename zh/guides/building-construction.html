@@ -160,12 +160,20 @@
 </details>
 
     <section class="answer-box"><h2>先说结论</h2><p>先按<a href="/zh/guides/resources-and-materials">资源路线</a>准备材料，再在工作台确认蓝图名称和任务目标。想从任务一路完成鸡舍，可直接走<a href="/zh/database/buildings/coop#first-coop-route">首个鸡舍路线</a>。放置失败时不要先猜是 bug：记录准确任务文字、使用的蓝图、地块状态和版本，才能判断是材料、权限、碰撞还是目标识别问题。</p><p><strong>建造需要锆矿，或你看到的“Zerkonite”吗？</strong> 当前有来源支持的路径是<a href="/zh/database/materials#zirconite">锆矿答案</a>：去市政厅找 Meriam 购买；在当前复核版本中不要把矿洞当成可用来源。</p></section>
-    <nav class="toc" aria-label="页面目录"><strong>本指南内容</strong><ul><li><a href="#building-materials">建筑材料一览</a></li><li><a href="#confirmed">官方确认了什么</a></li><li><a href="#workbench">工作台菜单与已观测蓝图</a></li><li><a href="#find-windows">找到窗户蓝图</a></li><li><a href="#materials">石头、木材、干草、木炭与锆矿</a></li><li><a href="#reports">仍需复核的放置报告</a></li><li><a href="#record">遇到问题要记录什么</a></li><li><a href="#faq">建造常见问题</a></li>
+    <section class="answer-box" id="roof-wall-answers" data-search-entry data-search-title="屋顶与屋顶延伸、告别尼龙帐篷的墙体目标" data-search-tags="屋顶 放置在墙体正上方 屋顶延伸 带大窗户 再见尼龙帐篷 首次屋顶教程 目标不计数" data-search-status="官方更新">
+      <h2>哪种屋顶或墙才算数？</h2>
+      <p><span class="evidence-badge evidence-official">官方 · 0.8.10.868</span> 屋顶放置在墙体正上方；屋顶延伸（Roof Extension）用于扩展现有屋顶结构。先核对你正在放置哪种蓝图，再检查支撑与位置。</p>
+      <p>同一更新只点名一个任务例外：“再见，尼龙帐篷”（Farewell, Nylon and Palace）的外墙目标现在接受带大窗户室外墙，此前该目标仅计入普通外墙。其他窗墙或门墙是否同样计入，没有官方记录。</p>
+      <p><span class="evidence-badge evidence-official">官方 · 0.8.10.871</span> 第一次放置屋顶时会出现“How to Build Roofs”教程，可用来核对支撑与放置限制。</p>
+      <p>别急着判定追踪器坏了：先看手机日志当前目标和你实际完成的部件，再按<a href="/zh/guides/roof-quest-stuck">屋顶任务清单</a>逐项核对；任务是失败而非卡住时，见<a href="/problems/failed-quest-replay">重接失败的任务</a>。</p>
+      <p>网格行为与其他部件的兼容性仍未确认。来源：<a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1843481262701719" rel="noopener noreferrer">.868 公告</a> · <a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1844115010489002" rel="noopener noreferrer">.871 公告</a></p>
+    </section>
+    <nav class="toc" aria-label="页面目录"><strong>本指南内容</strong><ul><li><a href="#building-materials">建筑材料一览</a></li><li><a href="#confirmed">官方确认了什么</a></li><li><a href="#roof-wall-answers">哪种屋顶或墙算数</a></li><li><a href="#workbench">工作台菜单与已观测蓝图</a></li><li><a href="#find-windows">找到窗户蓝图</a></li><li><a href="#materials">石头、木材、干草、木炭与锆矿</a></li><li><a href="#reports">仍需复核的放置报告</a></li><li><a href="#record">遇到问题要记录什么</a></li><li><a href="#faq">建造常见问题</a></li>
           <li><a href="#blueprint-building">蓝图建造步骤</a></li></ul></nav>
     <h2 id="confirmed">官方确认了什么</h2>
     <p>官方 Kickstarter 和 Steam 资料把建造描述为自由度较高的系统：房屋可以进行室内外设计，玩家还可以使用大量地基、窗户、屋顶和其他结构部件。官方资料提到超过 200 个建造物品，但没有给出当前版本每个部件的完整配方。</p>
     <p>官方还把房屋、动物设施、围栏、洒水器、温室和公用设施列入牧场基础设施。每个物件可以与天气和水、火、空气等系统互动的描述，说明的是系统愿景，不等于已经确认了每种蓝图的放置规则。</p>
-    <div class="data-conflict"><strong>仍未知：</strong>是否强制网格、哪个具体部件满足某个屋顶或外墙目标、任务失败后部件系统如何判定，都没有足够的当前版本证据。这里不把社区猜测写成答案。</div>
+    <div class="data-conflict"><strong>仍未知：</strong>是否强制网格、任务失败后部件系统如何判定，以及点名例外之外的部件兼容性，都没有足够的当前版本证据；屋顶放置与“再见，尼龙帐篷”外墙目标已有官方答案，见上方小节。这里不把社区猜测写成答案。</div>
     <h2 id="workbench">工作台菜单与已观测蓝图</h2>
     <p>在 0.8.10.455 的公开视频中，工作台菜单出现 <strong>Others / Farming / Shelters / Furniture</strong> 四个页签。当前只打开并读到了 Red Tent 的配方，其他条目的材料数量保持未知。</p>
     <table><thead><tr><th>蓝图</th><th>当前记录</th><th>状态</th></tr></thead><tbody><tr><td>四人 Red Tent</td><td>只确认列表出现，材料未记录</td><td><span class="evidence-badge evidence-video">未完整观测</span></td></tr><tr><td>Scarecrow、洒水器、Water Well、地基与家具</td><td>只确认列表或系统类型，材料未记录</td><td><span class="evidence-badge evidence-video">未完整观测</span></td></tr></tbody></table>
@@ -186,7 +194,7 @@
     <ol class="plain-steps"><li><strong>原样记录任务文字。</strong>不要只写“盖屋顶”，把目标数量和用词一起截图。</li><li><strong>记录蓝图名称和顺序。</strong>哪些部件被接受、哪些被拒绝都写清楚。</li><li><strong>记录地块状态。</strong>包括是否购买地块、是否在允许建造的区域。</li><li><strong>写明版本。</strong>抢先体验更新会改变判定，版本缺失的报告不能用于当前结论。</li></ol>
     <h2 id="faq">建造常见问题</h2>
     <details class="faq-item"><summary>可以从零建造房屋吗？</summary><div class="faq-body"><p>可以。官方资料确认室内外房屋建造和大型部件目录，但每个结构的配方与解锁条件需要以当前版本界面为准。</p></div></details>
-    <details class="faq-item"><summary>为什么屋顶不计入任务？</summary><div class="faq-body"><p>当前还不能确认是蓝图类型还是放置规则。先记录任务文字和部件名称，再查看<a href="/zh/guides/roof-quest-stuck">屋顶任务排查</a>，不要把某个玩家的猜测当成通用修复。</p></div></details>
+    <details class="faq-item"><summary>为什么屋顶不计入任务？</summary><div class="faq-body"><p>先核对蓝图类型：0.8.10.868 确认屋顶放置在墙体正上方、屋顶延伸只扩展现有屋顶。再对照手机日志当前目标与<a href="/zh/guides/roof-quest-stuck">屋顶任务排查</a>，不要把某个玩家的猜测当成通用修复。</p></div></details>
     <details class="faq-item"><summary>建造一定使用网格吗？</summary><div class="faq-body"><p>尚未被官方或当前版本实测确认。自由放置和网格吸附都应视为待验证信息。</p></div></details>
     <details class="faq-item"><summary>建造在当前版本可用吗？</summary><div class="faq-body"><p>可用。房屋和牧场基础设施是当前抢先体验功能，不是路线图中的纯计划功能。</p></div></details>
     <h2 id="sources">来源</h2><ul class="evidence-list"><li><a href="https://steamcommunity.com/app/1501310/discussions/0/590686908802160454/" rel="noopener noreferrer">Steam 官方讨论：在工作台查找窗户</a>——管理员说明横向滚动与红色百叶窗识别线索。</li><li><a href="https://www.kickstarter.com/projects/redpilzstudio/the-ranchers" rel="noopener noreferrer">官方 Kickstarter 项目页</a>——房屋、部件目录和 Systemic Engine 说明。</li><li><a href="https://store.steampowered.com/app/1501310/The_Ranchers/" rel="noopener noreferrer">Steam 官方商店页</a>——牧场建造、围栏、洒水器、温室和公用设施。</li><li><a href="https://steamcommunity.com/app/1501310" rel="noopener noreferrer">Steam 社区中心</a>——屋顶、家具和外墙报告。</li><li><a href="https://www.youtube.com/watch?v=GrFiYqWcBK0" rel="noopener noreferrer">Games Station 0.8.10.455 视频</a>——工作台菜单观测。</li></ul>

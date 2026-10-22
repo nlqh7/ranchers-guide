@@ -68,3 +68,12 @@ for (const locale of ['en','zh']) {
   assert.equal(search.dossierSupportsExactAnswer({route:matches[0].url},query,matches),true,'The exact answer itself can keep its dossier');
   assert.equal(search.dossierSupportsExactAnswer(animal,query,[]),true,'Absent exact answers must not hide useful fallback dossiers');
 }
+
+const sharedLabelTokens = search.sharedEntityLabelTokens(englishKnowledge.entities);
+const brandedCards = search.selectDossierEntities(englishKnowledge.entities, 'The Ranchers where to buy zerkonite', sharedLabelTokens);
+assert.deepEqual(brandedCards.map(item => item.entity.id), ['material:zirconite'], 'An explicit named match must not share dossier slots with unrelated keyword-only fallback cards');
+const fallbackCards = search.selectDossierEntities(englishKnowledge.entities, 'clothing store', sharedLabelTokens);
+assert.deepEqual(fallbackCards.map(item => item.entity.id), ['location:youssefs-stand'], 'Keep the useful keyword fallback card when no name or alias matches');
+const namedPair = search.selectDossierEntities(englishKnowledge.entities, 'zirconite stone', sharedLabelTokens);
+assert.deepEqual(namedPair.map(item => item.entity.id), ['material:stone', 'material:zirconite'], 'Multiple named matches all keep their cards');
+console.log('PASS: named dossier matches suppress unrelated keyword-only fallback cards.');

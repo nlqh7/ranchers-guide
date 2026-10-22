@@ -30,8 +30,39 @@ for (const prefix of ['', 'zh/']) {
   assert.match(beginner, prefix ? /(?:首次|第一次).{0,120}(?:屋顶|屋顶板).{0,100}(?:教程|支持|放置)/ : /first.*roof.{0,150}(?:tutorial|support|placement)/i, `${prefix || 'en/'} building FAQ must explain the first-roof tutorial`);
   assert.match(beginner, /href="\/(?:zh\/)?database\/buildings\/coop#first-coop-route"/, `${prefix || 'en/'} quest milestones must link directly to the first-Coop walkthrough`);
   assert.match(beginner, /1844115010489002/, `${prefix || 'en/'} new roof/camera guidance must link to the official 0.8.10.871 announcement`);
+
+  /* Opening-route slice: current quest name → check now → recorded steps → next goal. */
+  const openIdx = beginner.indexOf('id="opening-route"');
+  assert.ok(openIdx !== -1, `${prefix || 'en/'} must include the opening-route section`);
+  assert.ok(openIdx < beginner.indexOf('class="page-banner"'), `${prefix || 'en/'} opening route must appear before the decorative banner`);
+  const first30 = beginner.slice(beginner.indexOf('id="first-30-minutes"'), openIdx);
+  assert.ok(first30.includes('href="#opening-route"'), `${prefix || 'en/'} generic opening-quest bullet must link the opening-route section`);
+  const openSection = beginner.slice(openIdx, beginner.indexOf('</section>', openIdx));
+  assert.equal((openSection.match(/data-search-entry/g) || []).length, 1, `${prefix || 'en/'} opening route keeps exactly one search-entry boundary`);
+  const stageUrls = ['meet-meriem', 'a-new-beginning', 'from-blueprint-to-bed']
+    .map(slug => openSection.indexOf(`href="/${prefix}database/quests/${slug}"`));
+  assert.ok(stageUrls.every(idx => idx !== -1), `${prefix || 'en/'} opening route must link all three existing quest profiles`);
+  assert.ok(stageUrls[0] < stageUrls[1] && stageUrls[1] < stageUrls[2], `${prefix || 'en/'} opening route stages must follow the recorded quest order`);
+  assert.ok(openSection.includes('class="opening-route-link"'), `${prefix || 'en/'} stage links need the 44px tap-target class`);
+  assert.match(openSection, prefix ? /与玛丽阿姆见面/ : /Meet Meriem/, `${prefix || 'en/'} stage names match the existing profiles`);
+  assert.match(openSection, prefix ? /新的开始！/ : /A new begining!/, `${prefix || 'en/'} stage names keep the exact recorded quest name, typo included`);
+  assert.match(openSection, prefix ? /从蓝图到床铺/ : /From Blueprint to Bed/);
+  assert.match(openSection, prefix ? /下车/ : /leave the quest car/i, `${prefix || 'en/'} ranch-drive check must mention both leaving the quest car`);
+  assert.match(openSection, prefix ? /完成条件，不是/ : /completion condition, not/i, `${prefix || 'en/'} inventory check stays a recorded condition, not a reward or shopping list`);
+  assert.match(openSection, /0\.8\.10\.842/, `${prefix || 'en/'} section must attribute steps to the recorded build`);
+  assert.match(openSection, /0\.8\.10\.871/, `${prefix || 'en/'} section must keep the current-runtime distinction`);
+  assert.doesNotMatch(openSection, prefix ? /取消任务|重新读档|必买|保证修复/ : /cancel the quest|reload your save|guaranteed fix|must buy/i, `${prefix || 'en/'} no guaranteed workarounds or shopping instructions`);
+  for (const paragraph of openSection.match(/<p>[\s\S]*?<\/p>/g) || []) {
+    const text = paragraph.replace(/<[^>]+>/g, '');
+    assert.ok(text.length <= 240, `${prefix || 'en/'} opening-route paragraphs stay within 240 characters: ${text.slice(0, 60)}…`);
+  }
   assert.doesNotMatch(beginner, /profit per day for every known crop|Scarecrow recipes live in the workbench|稻草人配方在工地制作菜单/);
+  assert.match(beginner, /href="[^"]*assets\/css\/beginner-opening\.css\?v=20261022-opening1"/, `${prefix || 'en/'} page must load the small opening-route stylesheet`);
+  if (!prefix) assert.match(openSection, /data-search-tags="[^"]*\ba new beginning\b/i, 'en/ correct-spelling alias is allowed without renaming the raw quest');
 }
+
+const openingCss = fs.readFileSync(path.join(root, 'assets/css/beginner-opening.css'), 'utf8');
+assert.match(openingCss, /\.opening-route-link\s*\{[^}]*min-height:\s*44px/, 'stage links keep a 44px tap target');
 
 const beginnerZh = fs.readFileSync(path.join(root, 'zh/guides/beginners-guide.html'), 'utf8');
 assert.match(beginnerZh, /href="\/zh\/guides\/building-construction"/);

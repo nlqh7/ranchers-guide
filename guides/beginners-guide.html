@@ -20,6 +20,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
   <link rel="stylesheet" href="../assets/css/style.css?v=20261003-r15">
+  <link rel="stylesheet" href="../assets/css/beginner-opening.css?v=20261022-opening1">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -51,12 +52,41 @@
       <section class="answer-box" id="first-30-minutes" aria-labelledby="first-30-minutes-title" data-search-entry data-search-title="What to do in the first 30 minutes" data-search-tags="first 30 minutes start beginner opening quest seeds leafy market cashin parking">
         <h2 id="first-30-minutes-title">Your first 30 minutes</h2>
         <ol>
-          <li><strong>Follow the opening quest and answer tutorial phone calls.</strong> They introduce the ranch, driving, shops, crafting and fields; use the <a href="#smartphone-apps">smartphone guide below</a> when the phone opens.</li>
+          <li><strong>Follow the opening quest and answer tutorial phone calls.</strong> Match your current objective in the <a href="#opening-route">opening quest route</a> below. They introduce the ranch, driving, shops, crafting and fields; use the <a href="#smartphone-apps">smartphone guide below</a> when the phone opens.</li>
           <li><strong>Mark three places:</strong> <a href="/map#leafy-market">Leafy Market</a> for seeds, <a href="/map#cash-in-box">CashIn</a> for crop settlement, and the nearest legal overnight parking spot for your vehicle.</li>
           <li><strong>Plant a small test plot.</strong> Record seed cost and planting day instead of spending all your cash on an unmeasured crop.</li>
           <li><strong>Use the CashIn chest, then collect the payment next day.</strong> Deposits do not pay immediately; the current-build tutorial explicitly says payment arrives the next day.</li>
           <li><strong>Stop and use a focused fix when blocked:</strong> <a href="/guides/roof-quest-stuck">roof quest</a>, <a href="/problems/vehicle-recovery">missing vehicle</a>, <a href="/guides/animal-guide">chicken care</a>, or <a href="/guides/gigi-large-egg-quest">Gigi's large egg</a>.</li>
         </ol>
+      </section>
+
+      <section class="answer-box opening-route" id="opening-route" aria-labelledby="opening-route-title" data-search-entry data-search-title="Opening quest route: Meet Meriem to the first tent" data-search-tags="opening quest route meet meriem meriam a new beginning a new begining airport ranch drive handover red tent blueprint hammer sleep first shelter">
+        <h2 id="opening-route-title">Opening quest route: match your current objective</h2>
+        <p>Find your current objective below, do its check, then open the linked profile for every recorded step and source.</p>
+        <ol class="opening-route-stages">
+          <li>
+            <a class="opening-route-link" href="/database/quests/meet-meriem">Meet Meriem</a>
+            <p><strong>Check now:</strong> meet Meriem at the airport entrance; this objective is configured for the farm owner.</p>
+            <p><strong>Next goal:</strong> finishing it starts the ranch drive, A new begining! — stay with the quest instead of walking off.</p>
+          </li>
+          <li>
+            <a class="opening-route-link" href="/database/quests/a-new-beginning">A new begining!</a>
+            <p><strong>Check now:</strong> take the driver's seat of Meriam's car, let her board and drive to the ranch. Both of you must leave the quest car before the ranch conversation counts.</p>
+            <p>The closing talk runs an inventory check for a Bronze hammer, a Red Tent and a strawberry (at least one each) — a recorded completion condition, not a promised reward or a shopping list.</p>
+            <p><strong>Next goal:</strong> success starts From Blueprint to Bed, your first shelter.</p>
+          </li>
+          <li>
+            <a class="opening-route-link" href="/database/quests/from-blueprint-to-bed">From Blueprint to Bed</a>
+            <p><strong>Check now:</strong> equip and place the Red Tent blueprint, finish the build with the hammer, then sleep while the tent stands on the ranch. Placement alone is not "built".</p>
+            <p>The recorded route checks the ordinary Red Tent, not the four-person tent.</p>
+            <p><strong>Next goal:</strong> after the follow-up phone call, start your first field with the <a href="#roadmap">7-day roadmap</a> below.</p>
+          </li>
+        </ol>
+        <p class="fact-source">Checks and order come from the recorded 0.8.10.842 build configuration; the live 0.8.10.871 runtime can play differently.</p>
+        <details class="faq-item">
+          <summary>Recorded build reference (0.8.10.842)</summary>
+          <div class="faq-body"><p>Quest IDs F_Quest_01 → F_Quest_02 → F_Quest_03, from the owned-build-dialogue source fields (Description, Entry LUA_OnCondition, Quest_OnSuccess_StartQuest). These are configuration records, not a verified live schedule.</p></div>
+        </details>
       </section>
 
       <figure class="page-banner"><img src="../assets/img/card-beginner.webp" width="800" height="450" alt="The Ranchers gameplay screenshot: a new rancher standing at the start of their farm"></figure>
@@ -69,6 +99,7 @@
         <strong>In this guide</strong>
         <ul>
           <li><a href="#first-30-minutes">Your first 30 minutes</a></li>
+          <li><a href="#opening-route">Opening quest route</a></li>
           <li><a href="#smartphone-apps">Smartphone apps and navigation</a></li>
           <li><a href="#setup">Before starting: mode and transport</a></li>
           <li><a href="#roadmap">Your first 7 days: a day-by-day roadmap</a></li>
