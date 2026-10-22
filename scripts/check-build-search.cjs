@@ -76,4 +76,32 @@ const fallbackCards = search.selectDossierEntities(englishKnowledge.entities, 'c
 assert.deepEqual(fallbackCards.map(item => item.entity.id), ['location:youssefs-stand'], 'Keep the useful keyword fallback card when no name or alias matches');
 const namedPair = search.selectDossierEntities(englishKnowledge.entities, 'zirconite stone', sharedLabelTokens);
 assert.deepEqual(namedPair.map(item => item.entity.id), ['material:stone', 'material:zirconite'], 'Multiple named matches all keep their cards');
+for (const locale of ['en', 'zh']) {
+  const index = JSON.parse(fs.readFileSync(path.join(root, locale === 'zh' ? 'zh/knowledge-index.json' : 'knowledge-index.json'), 'utf8'));
+  const shared = search.sharedEntityLabelTokens(index.entities);
+  for (const query of ['锆矿', '锆矿怎么获得', 'The Ranchers 锆矿在哪买']) {
+    assert.deepEqual(search.selectDossierEntities(index.entities, query, shared).map(item => item.entity.id), ['material:zirconite'], locale + ' must recognize the actual Chinese material name inside a question');
+  }
+  for (const material of require('../data/materials.json').materials) {
+    const name = material.zhName.split(/\s+/).find(part => /^[\u3400-\u9fff]+$/.test(part));
+    assert.deepEqual(search.selectDossierEntities(index.entities, name + '怎么获得', shared).map(item => item.entity.id), ['material:' + material.id], locale + ' localized material names must work without spaces around the question');
+  }
+  for (const entity of index.entities) {
+    for (const link of entity.relatedRoutes || []) {
+      assert.ok(!link.label.startsWith('/'), locale + ': ' + entity.id + ' related links must name their destination, not expose a raw path');
+      if (locale === 'zh') assert.notEqual(link.kind, 'Related answer', 'Chinese related-answer labels must be localized');
+      const url = new URL(link.href, 'https://theranchersguide.com');
+      if (url.origin === 'https://theranchersguide.com') {
+        const base = path.join(root, decodeURIComponent(url.pathname));
+        const target = [base + '.html', path.join(base, 'index.html')].find(file => fs.existsSync(file));
+        assert.ok(target, locale + ': ' + entity.id + ' must not invent a translated related page: ' + link.href);
+        if (url.hash) {
+          const id = decodeURIComponent(url.hash.slice(1));
+          const html = fs.readFileSync(target, 'utf8');
+          assert.ok(html.includes('id="' + id + '"') || html.includes("id='" + id + "'"), 'Related destinations must retain their actual anchor: ' + link.href);
+        }
+      }
+    }
+  }
+}
 console.log('PASS: named dossier matches suppress unrelated keyword-only fallback cards.');

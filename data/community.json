@@ -198,6 +198,24 @@
     },
     {
       "id": "charcoal-current-lead",
+      "answer": {
+        "title": "Charcoal: known method, missing controls and yield",
+        "titleZh": "木炭：已知制作方向，具体操作与产量待核实",
+        "summary": "Community staff says Charcoal comes from burning wood rather than buying it. Use the existing guide for the answer and its source; the reply does not give exact controls, timing or output.",
+        "summaryZh": "社区工作人员说明木炭由燃烧木材获得，不是去商店购买。先看现有指南的答复与出处；原回复没有给出精确按键、计时或产量。",
+        "unresolved": "Do not turn the older Alpha yield or fire-spread discussion into current instructions. The September staff reply does not verify those details or name a gameplay build.",
+        "unresolvedZh": "不要把旧 Alpha 的产量或火势蔓延讨论当成当前操作步骤。9 月的工作人员答复没有确认这些细节，也未注明游戏版本。",
+        "historyNote": "The August record below was a title-only research lead. The separately linked September staff answer now supplies the method direction; exact reproduction is still missing.",
+        "historyNoteZh": "下方 8 月记录原本只是标题级研究线索；另行列出的 9 月工作人员答复已补上制作方向，精确复现仍未完成。",
+        "reviewedAt": "2026-10-23",
+        "searchTags": "materials charcoal wood 木炭 木材 制作",
+        "statusLabel": "Staff answer available",
+        "statusLabelZh": "已有工作人员答复",
+        "evidenceSourceId": "general-store-charcoal-reply",
+        "links": [
+          { "route": "/guides/resources-and-materials#charcoal", "label": "Charcoal answer and source", "labelZh": "木炭答复与出处" }
+        ]
+      },
       "topic": "materials",
       "status": "reported",
       "platform": "Steam Discussions",
@@ -280,6 +298,21 @@
     },
     {
       "id": "coal-zirconite",
+      "answer": {
+        "title": "Coal, Charcoal or Zirconite? Start with the item name",
+        "titleZh": "煤、木炭还是锆矿？先对照物品名称",
+        "summary": "For Zirconite (Zerkonite), use the Meriam / City Hall purchase route. For Charcoal, use the existing wood-burning answer. Choose the name shown by the game before following a route.",
+        "summaryZh": "需要锆矿 Zirconite / Zerkonite 时，先看市政厅 Meriam 的购买路线；需要木炭 Charcoal 时，查看燃烧木材的已有答复。先对照游戏里显示的物品名，再选路线。",
+        "unresolved": "If the item is labelled Coal rather than Charcoal, its identity and acquisition route are not confirmed by these title-only scans. They do not establish a separate mine or drop source.",
+        "unresolvedZh": "如果游戏里显示的是 Coal 而非 Charcoal，这两份标题级记录还不能确认它的物品身份或获取路线，也不能证明存在另一条矿洞或掉落路线。",
+        "historyNote": "These are two saved discussion-list scans, not two independently verified original posts. Neither record retains a direct thread URL or a named gameplay build.",
+        "historyNoteZh": "这里保留的是两次讨论列表收录，不是两个已独立核实的原帖；两份记录都没有直达原帖链接，也没有明确游戏版本。",
+        "reviewedAt": "2026-10-23",
+        "links": [
+          { "route": "/database/materials#zirconite", "label": "Zirconite purchase route", "labelZh": "锆矿购买路线" },
+          { "route": "/guides/resources-and-materials#charcoal", "label": "Charcoal: existing answer and limits", "labelZh": "木炭制作答复与限制" }
+        ]
+      },
       "topic": "materials",
       "status": "question",
       "platform": "Steam Discussions",
@@ -483,6 +516,7 @@
   },
   {
     "id": "coal-zerkonite-question",
+    "mergedInto": "coal-zirconite",
     "topic": "materials",
     "status": "question",
     "platform": "Steam Discussions",

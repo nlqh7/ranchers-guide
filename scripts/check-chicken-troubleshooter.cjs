@@ -41,7 +41,36 @@ assert.equal(data.sources["moderator-care-answers"].url, null, "Do not fabricate
 assert.match(currentAutomation.steps.map((step) => step.text).join(" "), /water contract/i);
 assert.match(currentAutomation.steps.map((step) => step.text).join(" "), /green light/i);
 
+for (const locale of ["en", "zh"]) {
+  const plan = core.buildPlan(data, { build: "current", symptom: "automation" }, locale);
+  const supply = plan.steps.find(step => step.id === "water-supply");
+  assert.ok(supply, "Automation must check pump supply, not treat a contract alone as sufficient");
+  assert.match(supply.text, locale === "en" ? /pump.*water tower/i : /水泵.*水塔/);
+  assert.ok(supply.sourceIds.includes("care-silo-water-supply"));
+  const source = data.sources["care-silo-water-supply"];
+  assert.equal(source.authorRole, "moderator");
+  assert.equal(source.build, "not stated");
+  assert.equal(source.url, "https://steamcommunity.com/app/1501310/discussions/0/587308167364408897/#c592942202593756081");
+  const guide = read((locale === "zh" ? "zh/" : "") + "guides/animal-guide.html");
+  assert.match(guide, locale === "en" ? /water pumps.*water tower/i : /水泵.*水塔/);
+  assert.ok(guide.includes(source.url), "The guide must expose the actual pump-supply reply");
+}
+
 const unknownSickness = core.buildPlan(data, { build: "unknown", symptom: "sick" }, "en");
+for (const locale of ["en", "zh"]) {
+  const plan = core.buildPlan(data, { build: "current", symptom: "automation" }, locale);
+  const timing = plan.steps.find(step => step.id === "next-day-check");
+  assert.ok(timing, "A green light is not evidence that the next feeding cycle has already run");
+  assert.match(timing.text, locale === "en" ? /next (day|morning)/i : /次日|第二天/);
+  assert.match(timing.text, locale === "en" ? /sick.*(now|immediately)/i : /生病.*立即/);
+  assert.ok(timing.sourceIds.includes("care-silo-operation"));
+  assert.equal(data.sources["care-silo-operation"].url, "https://steamcommunity.com/app/1501310/discussions/0/587308167364408897/#c587308167364429876");
+  assert.equal(data.sources["care-silo-operation"].build, "not stated");
+  const sickPlan = core.buildPlan(data, { build: "unknown", symptom: "sick" }, locale);
+  assert.ok(!sickPlan.steps.some(step => step.id === "next-day-check"), "Do not apply automation waiting advice to sickness plans");
+  const guide = read((locale === "zh" ? "zh/" : "") + "guides/animal-guide.html");
+  assert.ok(guide.includes(data.sources["care-silo-operation"].url));
+}
 assert.equal(unknownSickness.steps[0].id, data.paths.sick.steps[0].id, "Sickness checks must start with their own relevant care step, not a disappearance hotfix");
 
 for (const locale of ["en", "zh"]) {
@@ -68,7 +97,7 @@ for (const relativePath of ["tools/chicken-troubleshooter.html", "zh/tools/chick
   assert.match(html, /chicken-troubleshooter-core\.js/);
   assert.match(html, /chicken-troubleshooter-core\.js\?v=20261022-animal-scope1/, "Both localized tools must load the updated symptom-scoped core");
   assert.match(html, /chicken-troubleshooter\.js/);
-  assert.match(html, /chicken-troubleshooter\.js\?v=20261022-animal-sources1/, "Both localized tools must load the controller with refreshed source-data request");
+  assert.match(html, /chicken-troubleshooter\.js\?v=20261022-automation1/, "Both localized tools must load the controller with refreshed automation-data request");
   assert.match(html, /data-chicken-results/);
   const formStart = html.indexOf('id="chicken-case"');
   const notesStart = html.indexOf('class="content-checkpoint"');
@@ -209,7 +238,7 @@ assert.equal(hostileState.symptom, null);
 assert.deepEqual(hostileState.invalid.sort(), ["build", "symptom"]);
 
 const validFixture = createUiFixture("?build=older&symptom=missing", [data]);
-assert.deepEqual(validFixture.fetchUrls, ["/data/chicken-troubleshooter.json?v=20261022-sources1"], "The shipped controller must request fresh source data, not a potentially cached previous JSON");
+assert.deepEqual(validFixture.fetchUrls, ["/data/chicken-troubleshooter.json?v=20261022-automation1"], "The shipped controller must request fresh automation data, not a potentially cached previous JSON");
 for (const guidePath of ["guides/animal-guide.html", "zh/guides/animal-guide.html"]) {
   for (const sourceId of ["care-food-water-reserves", "care-about-chickens", "care-big-eggs-temperature", "care-auto-feeding", "care-water-contract-range"]) {
     assert.ok(read(guidePath).includes(data.sources[sourceId].url), guidePath + " must expose the recovered topic, not merely the forum homepage");
@@ -228,6 +257,16 @@ for (const locale of ["en", "zh"]) {
   assert.ok(!text.includes(data.shared.updateFirst.text[locale]), locale + " controller does not inject disappearance advice into sickness");
   assert.equal(sickFixture.form.elements.build.value, "unknown");
   assert.equal(sickFixture.form.elements.symptom.value, "sick");
+}
+for (const locale of ["en", "zh"]) {
+  const automationFixture = createUiFixture("?build=current&symptom=automation", [data], locale);
+  const text = fixtureText(automationFixture.results);
+  const links = automationFixture.find(node => node.tagName === "a");
+  for (const stepId of ["water-supply", "next-day-check"]) {
+    const step = data.paths.automation.steps.find(step => step.id === stepId);
+    assert.ok(text.includes(step.text[locale]), locale + " actual controller renders " + stepId);
+    assert.ok(links.some(link => link.href === data.sources[step.sourceIds[0]].url), locale + " actual result exposes its precise reply");
+  }
 }
 assert.equal(validFixture.form.elements.build.value, "older");
 assert.equal(validFixture.form.elements.symptom.value, "missing");

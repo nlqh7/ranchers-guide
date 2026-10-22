@@ -238,11 +238,15 @@
     },
     "thread-silos": {
       "kind": "steam-thread",
-      "title": "Steam thread \"Silos\" (maxitubby, Jennoula)",
+      "title": "Steam thread \"Silos\" — Jennoula replies #3 and #5",
       "url": "https://steamcommunity.com/app/1501310/discussions/0/587308167364408897/",
-      "author": "maxitubby / Jennoula",
-      "date": "2026-08",
-      "build": "0.8.10.x"
+      "author": "Crissiya / Jennoula",
+      "date": "2026-08 to 2026-09",
+      "build": "not stated in reply",
+      "reviewedAt": "2026-10-22",
+      "replyNumbers": [3, 5],
+      "supports": ["green light confirms setup", "feeding begins next day", "check trough settings and water pumps supplying the tower"],
+      "excludes": ["numeric pump-to-tower ratio", "current-build reproduction"]
     },
     "thread-watertower": {
       "kind": "steam-thread",
@@ -941,13 +945,13 @@
               ]
             },
             {
-              "text": "For automated water, a water tower alone is not enough — you must sign a water contract with the mayor at City Hall, then the tower refills on its own.",
+              "text": "For automated water, sign the City Hall water contract and check the water pumps supplying the water tower. A contract alone does not establish that the supply is ready.",
               "evidenceLevel": "community-confirmed",
-              "build": "0.8.10.x",
-              "validity": "current",
+              "build": null,
+              "validity": "unknown",
               "sourceIds": [
                 "thread-watertower",
-                "games-station-video"
+                "thread-silos"
               ]
             }
           ]
@@ -1105,13 +1109,23 @@
               ]
             },
             {
-              "text": "Most \"auto feeder does nothing\" reports trace back to a missing water contract or the water tower sitting outside link radius.",
+              "text": "Check the trough settings and enough water pumps to supply the water tower. The moderator's reply gives no pump count; a signed contract is not the whole supply check.",
               "evidenceLevel": "community-confirmed",
-              "build": "0.8.10.x",
-              "validity": "current",
+              "build": null,
+              "validity": "unknown",
               "sourceIds": [
-                "thread-auto-feeding-kit",
-                "community-scan-archive"
+                "thread-silos"
+              ]
+            },
+            {
+              "text": "The moderator describes automatic feeding from the next day: a green light confirms setup, not a completed feeding cycle. Check reserves after that cycle; treat an already sick animal immediately.",
+              "evidenceLevel": "official",
+              "build": null,
+              "validity": "unknown",
+              "sourceIds": [
+                "thread-silos",
+                "thread-food-water-reserves",
+                "thread-about-chickens"
               ]
             }
           ]
@@ -1328,8 +1342,9 @@
           ]
         },
         {
-                "text": "水只能通过食槽补充，手持喂食不能恢复饮水储备。水塔还需要在市政厅签水务合同后才能自动补水。",
-                "badge": "community"
+                "text": "水只能通过食槽补充，手持喂食不能恢复饮水储备。水塔需要供水合同，还要检查水泵是否足够供给水塔；签好合同并不代表水源就绪。",
+                "badge": "community",
+                "sourceIds": ["thread-watertower", "thread-silos"]
               },
               {
                 "text": "历史官方资料：2023 年 Alpha 更新说明称野草无论生长阶段都能产出干草；这早于抢先体验，不能单独证明当前版本行为。可先小范围试割并检查背包。",
@@ -2432,10 +2447,10 @@
       ]
     },
     {
-      "text": "In the current build the water contract with the mayor is required before a water tower fills, and the tower's link radius is smaller than a silo's.",
+      "text": "Moderator replies require the mayor's water contract, describe a shorter tower link radius than the silo's, and ask players to check water pumps supplying the tower; no pump count or exact build is given.",
       "evidenceLevel": "community-confirmed",
-      "build": "0.8.10.x",
-      "validity": "current",
+      "build": null,
+      "validity": "unknown",
       "sourceIds": [
         "thread-watertower",
         "thread-silos"

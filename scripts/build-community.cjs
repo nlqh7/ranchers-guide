@@ -2,7 +2,12 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
-const data = JSON.parse(fs.readFileSync(path.join(root, "data", "community.json"), "utf8"));
+const sourceData = JSON.parse(fs.readFileSync(path.join(root, "data", "community.json"), "utf8"));
+const materialSources = JSON.parse(fs.readFileSync(path.join(root, "data", "materials.json"), "utf8")).sources;
+for (const entry of sourceData.sources) {
+  if (entry.mergedInto && !sourceData.sources.some(target => target.id === entry.mergedInto && !target.mergedInto)) throw new Error(`Invalid community merge target: ${entry.id}`);
+}
+const data = { ...sourceData, sources: sourceData.sources.filter(entry => !entry.mergedInto) };
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -69,6 +74,9 @@ function statusClass(entry) {
 }
 
 function renderCard(entry, zh) {
+  const merged = sourceData.sources.filter(record => record.mergedInto === entry.id);
+  const aliases = merged.map(record => `<span class="community-legacy-anchor" id="${escapeHtml(record.id)}" aria-hidden="true"></span>`).join("");
+  if (entry.answer) return renderAnswerCard(entry, merged, aliases, zh);
   const title = zh ? entry.titleZh : entry.title;
   const summary = zh ? entry.summaryZh : entry.summary;
   const why = zh ? entry.whyZh : entry.why;
@@ -82,7 +90,7 @@ function renderCard(entry, zh) {
     : (zh ? "最后报告" : "Last reported");
   const additionalSources = (entry.sourceLinks || []).map((source) => externalLink(source.url, zh ? source.labelZh : source.label)).join("");
   return `<article class="community-radar-card" data-community-card data-topic="${escapeHtml(entry.topic)}" data-search-entry data-search-title="${escapeHtml(title)}" data-search-tags="${escapeHtml(entry.topic)} ${escapeHtml(entry.platform)} ${escapeHtml(statusLabel(entry, zh))}" id="${escapeHtml(entry.id)}">
-        <div class="community-card-top"><span class="evidence-badge ${statusClass(entry)}">${escapeHtml(statusLabel(entry, zh))}</span><span class="community-card-meta">${escapeHtml(entry.platform)} · ${escapeHtml(dateLabel)}: ${escapeHtml(entry.date)}</span></div>
+        ${aliases}<div class="community-card-top"><span class="evidence-badge ${statusClass(entry)}">${escapeHtml(statusLabel(entry, zh))}</span><span class="community-card-meta">${escapeHtml(entry.platform)} · ${escapeHtml(dateLabel)}: ${escapeHtml([entry, ...merged].map(record => record.date).sort().at(-1))}</span></div>
         <h3>${escapeHtml(title)}</h3>
         <p>${escapeHtml(summary)}</p>
         <p class="community-card-why"><strong>${zh ? "为什么值得看" : "Why it matters"}:</strong> ${escapeHtml(why)}</p>
@@ -90,6 +98,33 @@ function renderCard(entry, zh) {
         <p class="community-card-entity"><strong>${zh ? "关联实体" : "Related entity"}:</strong> ${entry.relatedEntityRoute ? `<a href="${escapeHtml(routeFor(entry.relatedEntityRoute, zh))}">${escapeHtml(relatedEntity)}</a>` : escapeHtml(relatedEntity)}</p>
         <div class="community-card-actions">${externalLink(entry.url, sourceAction(entry, zh))}${additionalSources}${externalLink(routeFor(entry.relatedRoute, zh), relatedLabel)}</div>
         <p class="source-note">${escapeHtml(sourceLabel)} · ${escapeHtml(build)}</p>
+      </article>`;
+}
+
+function renderAnswerCard(entry, merged, aliases, zh) {
+  const answer = entry.answer;
+  const records = [entry, ...merged];
+  const title = zh ? answer.titleZh : answer.title;
+  const oldTitles = records.map(record => zh ? record.titleZh : record.title);
+  const history = records.map(record => `<li>${escapeHtml(record.date)} — ${escapeHtml(zh ? record.titleZh : record.title)}</li>`).join("");
+  const actions = answer.links.map(link => externalLink(routeFor(link.route, zh), zh ? link.labelZh : link.label)).join("");
+  const evidence = answer.evidenceSourceId ? materialSources[answer.evidenceSourceId] : null;
+  if (answer.evidenceSourceId && !evidence?.url) throw new Error(`Missing material answer source: ${answer.evidenceSourceId}`);
+  const evidenceLink = evidence ? externalLink(evidence.url, zh ? "工作人员原答复（未注明版本）" : "Staff answer (build not stated)") : "";
+  const originalLinks = (entry.sourceLinks || []).map(source => externalLink(source.url, zh ? source.labelZh : source.label)).join("");
+  const status = (zh ? answer.statusLabelZh : answer.statusLabel) || (zh ? "部分已有答案" : "Known routes available");
+  return `<article class="community-radar-card community-answer-card" data-community-card data-topic="${escapeHtml(entry.topic)}" data-search-entry data-search-title="${escapeHtml(title)}" data-search-aliases="${escapeHtml(oldTitles.join("|"))}" data-search-text="${escapeHtml((zh ? answer.summaryZh : answer.summary) + " " + (zh ? answer.unresolvedZh : answer.unresolved))}" data-search-status="${escapeHtml(status)}" data-search-tags="${escapeHtml(answer.searchTags || "materials coal charcoal zirconite zerkonite 煤 木炭 锆矿")}" id="${escapeHtml(entry.id)}">
+        ${aliases}<div class="community-card-top"><span class="evidence-badge ${statusClass(entry)}">${escapeHtml(status)}</span><span class="community-card-meta">${zh ? "收录日期" : "Scan dates"}: ${records.map(record => escapeHtml(record.date)).join(" / ")}</span></div>
+        <h3>${escapeHtml(title)}</h3>
+        <p>${escapeHtml(zh ? answer.summaryZh : answer.summary)}</p>
+        <div class="community-card-actions">${actions}</div>
+        <p>${escapeHtml(zh ? answer.unresolvedZh : answer.unresolved)}</p>
+        <details><summary>${zh ? "收录记录与来源限制" : "Scan history and source limits"}</summary>
+          <p>${escapeHtml(zh ? answer.historyNoteZh : answer.historyNote)}</p>
+          <ul>${history}</ul>
+          <div class="community-card-actions">${evidenceLink}${externalLink(entry.url, sourceAction(entry, zh))}${originalLinks}</div>
+          <p class="source-note">${zh ? "本条答案整理" : "Answer reviewed"}: ${escapeHtml(answer.reviewedAt)}</p>
+        </details>
       </article>`;
 }
 
@@ -146,7 +181,7 @@ function renderPage(zh) {
   <link rel="canonical" href="https://theranchersguide.com${route}">
   <link rel="alternate" hreflang="en" href="https://theranchersguide.com/community"><link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/community"><link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/community">
   <meta property="og:type" content="website"><meta property="og:site_name" content="The Ranchers Guide"><meta property="og:title" content="${escapeHtml(title)}"><meta property="og:description" content="${escapeHtml(description)}"><meta property="og:url" content="https://theranchersguide.com${route}"><meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20261003-r15">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20261003-r15"><link rel="stylesheet" href="/assets/css/community-answer.css?v=20261023-material1">
 
   <script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "CollectionPage", name: title, description, url: `https://theranchersguide.com${route}`, inLanguage: lang })}</script>
 </head>

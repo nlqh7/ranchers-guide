@@ -37,8 +37,8 @@ for (const prefix of ['', 'zh/']) {
   assert.match(page, /search-game-scope\.css\?v=20261022-touch1/, `${prefix || 'en/'} loads the updated filter touch-target stylesheet`);
 }
 const assertCache = require('./search-cache-contract.cjs');
-assert.doesNotThrow(() => assertCache('var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v41" : "ranchers-search-index-v55";'));
-assert.throws(() => assertCache('var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v40" : "ranchers-search-index-v54";'), /cache must invalidate/);
+assert.doesNotThrow(() => assertCache('var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v42" : "ranchers-search-index-v56";'));
+assert.throws(() => assertCache('var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v41" : "ranchers-search-index-v55";'), /cache must invalidate/);
 function node() {
   return { value: '', textContent: '', innerHTML: '', hidden: false, disabled: false, children: [], listeners: {}, dataset: {},
     classList: { toggle() {} }, setAttribute() {}, focus() {},
@@ -73,23 +73,25 @@ async function pageController(lang) {
   const docs = Array.from({ length: 200 }, (_, i) => ({ title: 'Bread guide', url: '/guides/bread-' + i, type: 'Guide', description: 'bread', sections: [] }));
   const fs25Url = (lang === 'en' ? '' : '/zh') + '/games/fs25/tools/production-planner/';
   docs.push({ title: 'FS25 Bread planner', url: fs25Url, type: 'FS25 tool', description: 'bread', sections: [] });
-  const previousCacheKey = lang === 'en' ? 'ranchers-search-index-v54' : 'ranchers-search-index-zh-v40';
-  const freshCacheKey = lang === 'en' ? 'ranchers-search-index-v55' : 'ranchers-search-index-zh-v41';
+  const previousCacheKey = lang === 'en' ? 'ranchers-search-index-v55' : 'ranchers-search-index-zh-v41';
+  const freshCacheKey = lang === 'en' ? 'ranchers-search-index-v56' : 'ranchers-search-index-zh-v42';
   const staleUrl = (lang === 'en' ? '' : '/zh') + '/games/fs25/tools/stale-planner/';
   const staleIndex = docs.map(doc => ({ ...doc, title: 'STALE CACHED INDEX', url: staleUrl }));
   const cacheStore = { [previousCacheKey]: JSON.stringify(staleIndex) };
   const knowledge = JSON.parse(fs.readFileSync(path.join(root, 'knowledge-index.json'), 'utf8'));
+  const fetchCalls = [];
   const context = vm.createContext({
     window, RanchersSearch: search, URL, URLSearchParams, location,
     document: { documentElement: { lang }, querySelector: selector => nodes[selector] || null,
       querySelectorAll: selector => selector === '[data-entity-filter]' ? entityFilters : [], createElement: () => node() },
     history: { replaceState(_a, _b, url) { historyWrite(url); }, pushState(_a, _b, url) { historyWrite(url); } },
     sessionStorage: { getItem: key => (key in cacheStore ? cacheStore[key] : null), setItem(key, value) { cacheStore[key] = String(value); } },
-    fetch: async url => ({ ok: true, json: async () => url.includes('knowledge') ? knowledge : docs }),
+    fetch: async (url, options) => { fetchCalls.push({ url, options }); return { ok: true, json: async () => url.includes('knowledge') ? knowledge : docs }; },
     setTimeout: fn => { fn(); return 1; }, clearTimeout() {}
   });
   vm.runInContext(fs.readFileSync(path.join(root, 'assets/js/search.js'), 'utf8'), context);
   await new Promise(resolve => setImmediate(resolve));
+  assert.equal(fetchCalls.find(call => call.url.includes('knowledge-index'))?.options?.cache, 'no-cache', 'Knowledge updates must be revalidated rather than silently using an old HTTP cache entry');
   const game = nodes['[data-search-game]'];
   const results = nodes['[data-search-results]'];
   const links = () => results.children.map(article => article.children[1]?.children[0]?.href).filter(Boolean);

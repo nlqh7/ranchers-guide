@@ -85,6 +85,30 @@
       "supports": ["water tower has a shorter feeder-link radius than a silo", "water contract is required"],
       "excludes": ["numeric range", "refill speed or guaranteed current-build recovery"]
     },
+    "care-silo-operation": {
+      "title": { "en": "Silos — moderator reply #3 on setup and next-day feeding", "zh": "筒仓讨论——版主回复 #3：设置与次日喂食" },
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587308167364408897/#c587308167364429876",
+      "kind": "steam-thread",
+      "authorRole": "moderator",
+      "replyNumbers": [3],
+      "replyDateDisplayed": "5 Aug (browser display)",
+      "build": "not stated",
+      "reviewedAt": "2026-10-22",
+      "supports": ["connection count refers to auto feeders", "fill silo and select food in interior troughs", "green light confirms setup", "feeding starts from the next day"],
+      "excludes": ["instant feeding", "current-build runtime verification", "delaying veterinary care"]
+    },
+    "care-silo-water-supply": {
+      "title": { "en": "Silos — moderator reply #5 on water supply", "zh": "筒仓讨论——版主回复 #5：水泵供水" },
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587308167364408897/#c592942202593756081",
+      "kind": "steam-thread",
+      "authorRole": "moderator",
+      "replyNumbers": [5],
+      "replyDateDisplayed": "23 Sep (browser display)",
+      "build": "not stated",
+      "reviewedAt": "2026-10-22",
+      "supports": ["check trough settings and enough water pumps to supply the water tower"],
+      "excludes": ["numeric pump-to-tower ratio", "sprinkler connection rules", "current-build runtime verification"]
+    },
     "moderator-care-answers": {
       "title": { "en": "Steam moderator care answers retained in the animal evidence ledger", "zh": "动物证据库中留存的 Steam 管理员照料答复" },
       "url": null,
@@ -261,10 +285,22 @@
           "text": { "en": "Place the water tower within its shorter link radius and sign the water contract with the mayor at City Hall. A tower alone does not refill.", "zh": "把水塔放在较短的关联半径内，并在市政厅与市长签水务合同。只有水塔不会自动补水。" }
         },
         {
+          "id": "water-supply",
+          "evidenceLevel": "official",
+          "sourceIds": ["care-silo-water-supply"],
+          "text": { "en": "Check that enough water pumps supply the water tower, as well as the trough settings. Do not treat a signed contract as proof that the supply is ready; the moderator did not give a pump count.", "zh": "除食槽设置外，检查水泵是否足够供给水塔。签好合同不代表供水已经就绪；版主没有给出所需水泵数量。" }
+        },
+        {
           "id": "trough-settings",
           "evidenceLevel": "official",
-          "sourceIds": ["care-auto-feeding", "moderator-care-answers"],
+          "sourceIds": ["care-auto-feeding", "care-silo-operation"],
           "text": { "en": "Choose the food and water types on the coop trough, turn the system on, and look for the green light that confirms a complete setup.", "zh": "在鸡舍食槽上选择食物和水的类型，打开系统，并确认出现代表链路完整的绿灯。" }
+        },
+        {
+          "id": "next-day-check",
+          "evidenceLevel": "official",
+          "sourceIds": ["care-silo-operation", "care-food-water-reserves", "care-about-chickens"],
+          "text": { "en": "A green light confirms setup, not a completed feed. The moderator describes feeding from the next day. Check reserves after that cycle; if the animal is sick, act now instead of waiting.", "zh": "绿灯表示设置正确，不代表已经喂过。版主描述自动喂食从次日开始，再核对该周期后的储备；动物已生病时立即处理，不要等自动化测试。" }
         }
       ]
     }

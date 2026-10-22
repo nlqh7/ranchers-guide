@@ -13,6 +13,7 @@ function routeWithLocale(route, locale) {
   const base = route.split(/[?#]/)[0];
   const suffix = route.slice(base.length);
   if (locale !== "zh") return route;
+  if (base === "/problems/failed-quest-replay") return route;
   if (base === "/map") return `/zh/map${suffix}`;
   if (base === "/tools/chicken-troubleshooter") return `/zh/tools/chicken-troubleshooter${suffix}`;
   if (base === "/tools/ranch-checklist") return `/zh/tools/ranch-checklist${suffix}`;
@@ -34,6 +35,24 @@ function routeForType(type, id, locale) {
 }
 
 const routeLabels = {
+  "/guides/building-construction#materials": { en: "Building material checklist", zh: "建造材料清单" },
+  "/guides/animal-guide#feeding": { en: "Feeding and water checks", zh: "喂食与饮水检查" },
+  "/database/animals#chicken": { en: "Chicken records", zh: "鸡的资料" },
+  "/community": { en: "Community reports", zh: "社区反馈" },
+  "/database/quests#coal-delivery-dialogue": { en: "Coal delivery dialogue record", zh: "交付木炭对话记录" },
+  "/map#city-hall": { en: "City Hall on the map", zh: "市政厅地图" },
+  "/database/materials#stone": { en: "Stone material entry", zh: "石头材料词条" },
+  "/database/materials#wood-log": { en: "Wood Log material entry", zh: "原木材料词条" },
+  "/guides/electricity-power": { en: "Electricity and water contracts", zh: "供电与水电合同" },
+  "/guides/animal-guide": { en: "Animal care guide", zh: "动物照料指南" },
+  "/database/materials#hay": { en: "Hay material entry", zh: "干草材料词条" },
+  "/database/animals#cow": { en: "Cow records", zh: "牛的资料" },
+  "/guides/beginners-guide": { en: "Beginner route", zh: "新手路线" },
+  "/guides/crafting-guide#recipe-red_tent": { en: "Red Tent recipe", zh: "红色帐篷配方" },
+  "/guides/crafting-guide#recipes-tools": { en: "Tool and equipment recipes", zh: "工具与装备配方" },
+  "/guides/crafting-guide#recipe-prop_Scarecrow_00": { en: "Scarecrow recipe", zh: "稻草人配方" },
+  "/guides/money-making": { en: "Money-making guide", zh: "赚钱指南" },
+  "/database/materials#charcoal": { en: "Charcoal material entry", zh: "木炭材料词条" },
   "/database/crops/red-lettuce": { en: "Red Lettuce crop entry", zh: "红生菜词条" },
   "/database/crops/garlic": { en: "Garlic crop entry", zh: "大蒜词条" },
   "/database/crops/strawberry": { en: "Strawberry crop entry", zh: "草莓词条" },
@@ -47,7 +66,7 @@ const routeLabels = {
   "/guides/roof-quest-stuck#flow": { en: "Roof objective decision flow", zh: "屋顶目标分类排查" },
   "/guides/building-construction": { en: "Building guide", zh: "建造指南" },
   "/tools/ranch-checklist#build-goal": { en: "Local building checklist", zh: "本地建造清单" },
-  "/problems/failed-quest-replay": { en: "Failed quest recovery", zh: "失败任务恢复" },
+  "/problems/failed-quest-replay": { en: "Failed quest recovery", zh: "失败任务恢复（英文）" },
   "/problems/vehicle-recovery": { en: "Vehicle recovery", zh: "车辆找回" },
   "/guides/gigi-large-egg-quest": { en: "Gigi large-egg route", zh: "Gigi 大鸡蛋路线" },
   "/guides/police-wanted-levels": { en: "Police chase and wanted levels", zh: "警察追捕与警星" },
@@ -353,7 +372,7 @@ function baseRecord({ type, record, dataset, route, locale, title }) {
 }
 
 function addRoute(record, route, locale, label, kind) {
-  return { href: routeWithLocale(route, locale), label: routeLabels[route]?.[locale] || label, kind };
+  return { href: routeWithLocale(route, locale), label: routeLabels[route]?.[locale] || label, kind: locale === "zh" && kind === "Related answer" ? "相关答案" : kind };
 }
 
 const materials = readJson("materials.json");
@@ -363,7 +382,8 @@ for (const record of materials.materials) {
   const item = resources.items.find(i => i.materialId === record.id);
   if (!item) continue;
   const slot = {TwoHandHolder:['both hands','双手'],Right_Hand_Weapon:['right hand','右手'],NONE:['none','无']}[item.bodySlot];
-  record.lookupAliases = [item.name, item.zhName];
+  const chineseDisplayNames = String(record.zhName || "").split(/\s+/).filter(name => /^[\u3400-\u9fff]+$/.test(name));
+  record.lookupAliases = [item.name, item.zhName, ...chineseDisplayNames];
   record.sourceIds = [...(record.sourceIds || []), item.sourceId, 'localization'];
   record.lookupFacts = [{
     text: `Game-file settings: stackable ${item.stackable ? 'yes' : 'no'}; held slot ${slot[0]}. Recipe quantities are listed in the material profile; runtime inventory behavior is not tested.`,

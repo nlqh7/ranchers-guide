@@ -1,0 +1,20 @@
+.community-legacy-anchor {
+  display: block;
+  scroll-margin-top: 120px;
+}
+
+.community-answer-card,
+.community-answer-card:target {
+  scroll-margin-top: 120px;
+}
+
+.community-answer-card .btn-compact {
+  min-height: 44px;
+}
+
+.community-answer-card > details > summary {
+  display: list-item;
+  min-height: 44px;
+  padding-block: 10px;
+  cursor: pointer;
+}

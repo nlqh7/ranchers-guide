@@ -154,7 +154,7 @@
   var IS_ZH = document.documentElement.lang.toLowerCase() === "zh-cn";
   var PAGE_PATHS = IS_ZH ? ZH_PAGE_PATHS : EN_PAGE_PATHS;
   var SEARCH_ROUTE = IS_ZH ? "/zh/search" : "/search";
-  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v41" : "ranchers-search-index-v55";
+  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v42" : "ranchers-search-index-v56";
   var documents = [];
   var form = document.querySelector("[data-search-form]");
   var input = document.querySelector("[data-search-input]");
@@ -326,7 +326,7 @@
 
   function loadKnowledgeIndex() {
     var indexPath = IS_ZH ? "/zh/knowledge-index.json" : "/knowledge-index.json";
-    return fetch(indexPath, { credentials: "same-origin" }).then(function (response) {
+    return fetch(indexPath, { credentials: "same-origin", cache: "no-cache" }).then(function (response) {
       if (!response.ok) throw new Error(indexPath + " returned " + response.status);
       return response.json();
     }).then(function (payload) {

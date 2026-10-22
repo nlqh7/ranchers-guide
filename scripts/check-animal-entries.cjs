@@ -21,6 +21,14 @@ const animalData = require('../data/animals.json');
 const silosUrl = 'https://steamcommunity.com/app/1501310/discussions/0/587308167364408897/';
 
 assert.equal(animalData.sources['thread-silos']?.url, silosUrl, 'Silos source must point to the original discussion');
+for (const [label, html] of [['EN directory', enDirectory], ['EN chicken', en]]) {
+  assert.ok(/water pumps/i.test(html), label + ' must not imply a contract alone guarantees water supply');
+  assert.ok(!/then the tower refills on its own|Most &quot;auto feeder does nothing&quot; reports/.test(html), label + ' must not repeat unsupported refill or majority claims');
+}
+assert.ok(/next day/i.test(enDirectory), 'The automation directory must explain when the feeding cycle begins');
+for (const [label, html] of [['ZH directory', zhDirectory], ['ZH chicken', zh]]) {
+  assert.ok(/水泵/.test(html), label + ' must carry the same water-supply condition');
+}
 const recoveredCareSources = {
   'thread-food-water-reserves': 'https://steamcommunity.com/app/1501310/discussions/0/587307906419077616/',
   'thread-about-chickens': 'https://steamcommunity.com/app/1501310/discussions/0/587307906419025921/',
