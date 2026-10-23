@@ -8,6 +8,9 @@
   <link rel="alternate" hreflang="en" href="https://theranchersguide.com/guides/roof-quest-stuck"><link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/guides/roof-quest-stuck"><link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/guides/roof-quest-stuck">
   <meta property="og:type" content="article"><meta property="og:title" content="The Ranchers 屋顶任务卡住修复指南"><meta property="og:description" content="官方确认的追踪器问题与玩家验证的解法。"><meta property="og:url" content="https://theranchersguide.com/zh/guides/roof-quest-stuck"><meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20261003-r15"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
+  <style>
+    #symptom-b > details > summary, #symptom-c > details > summary { min-height: 44px; padding: 8px 0; cursor: pointer; }
+  </style>
 </head>
 <body>
   <header class="site-header"><nav class="nav-inner" aria-label="主导航"><a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide</span></a><button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button><ul class="nav-links"><li><a class="active" href="/zh/guides/beginners-guide">新手</a></li><li><a href="/zh/database">知识库</a></li><li><a href="/zh/map">地图</a></li><li><a href="/zh/problems">问题</a></li><li><a href="/zh/search">搜索</a></li><li><a class="nav-cta" href="/contribute">投稿</a></li></ul></nav></header>
@@ -67,16 +70,33 @@
       <p>两名独立玩家在 <a href="https://steamcommunity.com/app/1501310/discussions/0/587307906419039915/" rel="noopener noreferrer">"Cant finish Roof quest...?"</a>（08-03）印证了重启/重登路线：X-C0brA-X 存档后重启游戏，重启后任务显示完成；KnottyBoy 通过手机日志做任务步骤，然后完全退出再登录，屏幕上的任务就过了。</p>
     </section>
 
-    <section id="symptom-b" data-search-entry data-search-title="工作台找不到屋顶门床图纸" data-search-tags="图纸 蓝图 工作台 找不到 滚动 屋顶 床 门"><h2>症状 B：工作台没有屋顶、门、床图纸（滚动 UI 坑）</h2>
-      <p><span class="evidence-badge evidence-corroborated">多人印证</span></p>
-      <p>先别认定游戏坏了，看看你滚到哪了。在 <a href="https://steamcommunity.com/app/1501310/discussions/0/587307906419002181/" rel="noopener noreferrer">"Missing roof"</a>（08-02）里，SUwUMaBUwU 指出屋顶和床在建筑页签列表很靠右的位置——用鼠标滚轮慢慢滚，滚过头会翻到家具页签。Minay 之前重启过、甚至开了新档都没用，确认慢慢滚滚轮后看到了屋顶和床。</p>
-      <p>另一组独立玩家在 <a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364406835/" rel="noopener noreferrer">"No door plan at workbench"</a>（08-04）报告了同类问题：rllewis3 发现工作台页面可以用鼠标左键来回拖动，拖出了看似消失的图纸；帖子作者 jw62157 意识到点顶部箭头键会滑动选项，但经常把一些图纸藏在一直展开的左侧面板后面。</p>
-      <p><strong>实用结论：</strong>用慢速滚轮或左键拖动来翻工作台列表，慎点顶部箭头按钮——它们可能让图纸藏在侧面板后面。</p>
+    <section id="symptom-b" data-search-entry data-search-title="工作台找不到门蓝图" data-search-tags="图纸 蓝图 工作台 找不到 滚动 拖动 侧栏 屋顶 床 门" data-search-status="玩家报告：列表查找">
+      <h2>症状 B：工作台列表里找不到蓝图</h2>
+      <ol>
+        <li>用鼠标左键左右拖动工作台蓝图列表，查看第一组可见选项之外的条目。</li>
+        <li>顶部箭头移动了选项时，检查展开的左侧栏是否挡住了一部分蓝图。不要把第一屏当作完整列表。</li>
+        <li>已经看得到蓝图，但门装不上时，转到<a href="#symptom-c">门与门墙的单独检查</a>。</li>
+      </ol>
+      <p>这是来自玩家报告的列表检查，不证明所有缺失配方都已解锁，也不保证滚动能修复每个存档。</p>
+      <details><summary>玩家原帖与适用范围</summary>
+        <p>在<a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364406835/" rel="noopener noreferrer">No door plan at workbench</a>中，rllewis3 报告用左键拖动找回条目；作者随后发现，顶部箭头移动后的部分选项被左侧栏挡住。</p>
+        <p>另一篇<a href="https://steamcommunity.com/app/1501310/discussions/0/587307906419002181/" rel="noopener noreferrer">Missing roof</a>提到，慢慢滚动鼠标滚轮能找到屋顶和床；滚过头可能切到家具页签。</p>
+        <p>两帖分别始于8月4日与8月2日。它们是保留的玩家经验，不是当前版本实机复现，也没有确认配方解锁条件。</p>
+      </details>
     </section>
 
-    <section id="symptom-c" data-search-entry data-search-title="门造不了" data-search-tags="门 外门 内门 墙洞 造门"><h2>症状 C：门造不了</h2>
-      <p><span class="evidence-badge evidence-reported">单一线索</span></p>
-      <p>玩家 Earth Hunter（在 <a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364406835/" rel="noopener noreferrer">"No door plan at workbench"</a>，08-04）报告：图纸列表里有<strong>两种门——外门和内门</strong>，而且还需要<strong>一堵带门洞的墙</strong>门才装得上。这是单一社区报告，未经官方确认，但符合建造系统的墙体开洞逻辑，报 bug 之前值得先查一下。</p>
+    <section id="symptom-c" data-search-entry data-search-title="区分门与门墙：蓝图可见但装不上" data-search-tags="门 外门 内门 墙洞 门墙 放置 安装 任务" data-search-status="玩家报告与配置步骤">
+      <h2>症状 C：门蓝图看得到，但门装不上</h2>
+      <p>门本体与带门洞的墙是不同部件。先对照任务原文和以下两份独立配方记录：</p>
+      <ul>
+        <li><a href="/zh/guides/crafting-guide#recipe-house_door_exterior_01">室外门 Door - Exterior</a>：门本体。</li>
+        <li><a href="/zh/guides/crafting-guide#recipe-house_wall_exterior_Door_01">带门室外墙 Wall with door - Exterior</a>：门墙部件。</li>
+      </ul>
+      <p>留存的房屋任务配置把门墙与安装门本体分开检查。用<a href="#building-checks">完整建造清单</a>核对缺少哪一步。</p>
+      <details><summary>放置报告与配置限制</summary>
+        <p>Earth Hunter 在<a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364406835/" rel="noopener noreferrer">门蓝图原帖</a>里提到外门、内门以及门洞墙的配合；这是单个玩家的放置经验。</p>
+        <p>配方链接和任务分步来自留存配置，不能证明当前存档的解锁时点、精确放置操作，也不保证能修复所有无法安装的门。</p>
+      </details>
     </section>
 
     <section id="symptom-d" data-search-entry data-search-title="屋顶中间有洞" data-search-tags="屋顶 洞 Roof Cap 边缘 瓦片"><h2>症状 D：屋顶中间有洞（Roof Cap Lvl 2）</h2>

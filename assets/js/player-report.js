@@ -15,6 +15,13 @@
   var prompt = output.querySelector("[data-report-prompt]");
   var checklist = output.querySelector("[data-report-checklist]");
   var status = output.querySelector("[data-report-status]");
+  var topicField = form.elements.namedItem("topic");
+  var caseLink = document.querySelector("[data-report-case]");
+  var activeCase = "";
+  var copyRequest = 0;
+  var languageLinks = Array.from(document.querySelectorAll(".nav-language-link, [data-report-language]")).map(function (node) {
+    return {node: node, base: node.href.split(/[?#]/)[0]};
+  });
 
   function clean(value) { return String(value || "").replace(/\r\n?/g, "\n").trim(); }
   function values() {
@@ -25,10 +32,36 @@
       expected: clean(data.get("expected")), screenshot: clean(data.get("screenshot")),
     };
   }
-  function selected(values) { return topics.find(function (topic) { return topic.id === values.topic; }) || topics[0]; }
+  function selected(values) {
+    var topic = topics.find(function (item) { return item.id === values.topic; }) || topics[0];
+    var context = (topic.contexts || []).find(function (item) { return item.id === activeCase; });
+    return context ? Object.assign({}, topic, context, {id: topic.id}) : topic;
+  }
+  function readContext() {
+    var params = new URLSearchParams(window.location.search);
+    var topic = topics.find(function (item) { return item.id === params.get("topic"); });
+    if (topic) topicField.value = topic.id;
+    activeCase = topic && (topic.contexts || []).some(function (item) { return item.id === params.get("case"); }) ? params.get("case") : "";
+  }
+  function syncLanguage() {
+    languageLinks.forEach(function (link) {
+      var url = new URL(link.base, window.location.href);
+      url.searchParams.set("topic", topicField.value);
+      if (activeCase) url.searchParams.set("case", activeCase);
+      link.node.href = url.href;
+    });
+  }
+  function writeContext() {
+    var url = new URL(window.location.href);
+    url.search = "";
+    url.searchParams.set("topic", topicField.value);
+    if (activeCase) url.searchParams.set("case", activeCase);
+    window.history.replaceState(window.history.state, "", url.href);
+    syncLanguage();
+  }
   function buildText(data, topic) {
     var labels = isZh ? { heading: "The Ranchers 玩家问题报告", topic: "主题", build: "版本", platform: "平台", context: "场景", observation: "现象", steps: "步骤", expected: "期待", screenshot: "截图", ask: "有人能在当前版本复现或确认吗？" } : { heading: "The Ranchers player report", topic: "Topic", build: "Build", platform: "Platform", context: "Context", observation: "What happened", steps: "Steps tried", expected: "Expected", screenshot: "Screenshot", ask: "Can anyone reproduce or confirm this on the current build?" };
-    var lines = [labels.heading, "", labels.topic + ": " + (isZh ? topic.labelZh : topic.label), labels.build + ": " + data.build, labels.platform + ": " + data.platform];
+    var lines = [labels.heading, "", labels.topic + ": " + (isZh ? topic.labelZh : topic.label), labels.build + ": " + (data.build || (isZh ? "未填写" : "Not provided")), labels.platform + ": " + data.platform];
     if (data.context) lines.push(labels.context + ": " + data.context);
     lines.push("", labels.observation + ": " + data.observation, "", labels.steps + ": " + data.steps);
     if (data.expected) lines.push("", labels.expected + ": " + data.expected);
@@ -38,12 +71,19 @@
   }
   function setStatus(message) { if (status) status.textContent = message; }
   function render() {
+    copyRequest += 1;
+    setStatus("");
     var data = values();
     var topic = selected(data);
+    if (caseLink) {
+      caseLink.hidden = !activeCase;
+      caseLink.href = isZh ? topic.routeZh : topic.route;
+      caseLink.textContent = isZh ? topic.routeLabelZh : topic.routeLabel;
+    }
     var hasMinimum = data.observation.length >= 10 && data.steps.length >= 10;
     empty.hidden = hasMinimum;
     output.hidden = !hasMinimum;
-    if (!hasMinimum) return;
+    if (!hasMinimum) { preview.value = ""; return; }
     routeLabel.textContent = isZh ? topic.routeLabelZh : topic.routeLabel;
     prompt.textContent = isZh ? topic.promptZh : topic.prompt;
     route.href = isZh ? topic.routeZh : topic.route;
@@ -51,15 +91,37 @@
     preview.value = buildText(data, topic);
   }
   form.addEventListener("input", render);
-  form.addEventListener("change", render);
+  form.addEventListener("change", function (event) {
+    if (event.target === topicField) { activeCase = ""; writeContext(); }
+    render();
+  });
+  // History may restore form values after its navigation events. Refresh at
+  // the end of that turn as well; never clear or persist the player's fields.
+  window.addEventListener("pageshow", function () { window.setTimeout(render, 0); });
+  window.addEventListener("popstate", function () {
+    readContext(); syncLanguage(); render();
+    window.setTimeout(render, 0);
+  });
   form.addEventListener("submit", function (event) { event.preventDefault(); render(); });
   var copy = output.querySelector("[data-report-copy]");
+  function manualCopy() {
+    preview.focus(); preview.select();
+    setStatus(isZh ? "自动复制未完成，请按 Ctrl+C 或设备的复制菜单手动复制。" : "Automatic copy did not complete. Use Ctrl+C or your device's Copy menu.");
+  }
   if (copy) copy.addEventListener("click", function () {
+    render();
     if (!preview.value) return;
+    var request = ++copyRequest;
+    function failed() { if (request === copyRequest) manualCopy(); }
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(preview.value).then(function () { setStatus(isZh ? "报告已复制。" : "Report copied."); }).catch(function () { preview.focus(); preview.select(); setStatus(isZh ? "请按 Ctrl+C 复制。" : "Press Ctrl+C to copy."); });
+      setStatus(isZh ? "正在复制报告…" : "Copying report…");
+      try {
+        Promise.resolve(navigator.clipboard.writeText(preview.value)).then(function () {
+          if (request === copyRequest) setStatus(isZh ? "报告已复制。" : "Report copied.");
+        }, failed);
+      } catch (_) { failed(); }
     } else {
-      preview.focus(); preview.select(); setStatus(isZh ? "请按 Ctrl+C 复制。" : "Press Ctrl+C to copy.");
+      failed();
     }
   });
   var steam = output.querySelector("[data-report-steam]");
@@ -73,5 +135,7 @@
     var body = preview.value + (isZh ? "\n\n我知道这是一条待审核报告，不代表已确认事实。" : "\n\nI understand this is a report for review, not a confirmed game fact.");
     window.location.href = "mailto:contribute@theranchersguide.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
   });
+  readContext();
+  syncLanguage();
   render();
 })();

@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Ranchers Building & Placement Guide — Construction, Parts & Placement Issues</title>
-  <meta name="description" content="How building and placement work in The Ranchers Early Access: the confirmed construction scope, the parts system, and the placement reports that still need a current-build test.">
+  <meta name="description" content="Find building materials and recipes, finish blueprints, check roof and wall placement, and inspect electrical equipment before demolition in The Ranchers.">
   <link rel="canonical" href="https://theranchersguide.com/guides/building-construction">
   <link rel="alternate" hreflang="en" href="https://theranchersguide.com/guides/building-construction"><link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/guides/building-construction"><link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/guides/building-construction">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="The Ranchers Guide">
   <meta property="og:title" content="The Ranchers Building & Placement Guide">
-  <meta property="og:description" content="The confirmed construction scope, how parts and objectives work, and the roof, furniture and wall placement reports that remain unverified.">
+  <meta property="og:description" content="Building materials, blueprint steps, roof and wall answers, and what to check before demolition.">
   <meta property="og:url" content="https://theranchersguide.com/guides/building-construction">
   <meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
 
@@ -59,6 +59,7 @@
   <p class="recipe-boundary"><span class="evidence-badge evidence-build">Game files</span> The source does not provide an exact energy cost, build-step count for each object, material requirements, key bindings, the complete edit-option list, a demolition refund, or current unlock and availability rules. Checked against 0.8.10.842.</p>
 </section>
 <!-- END BLUEPRINT TUTORIAL REFERENCE -->
+<aside class="notice remodelling-entry"><strong>Remodelling?</strong><a class="shop-recipe-link" href="#remodelling-safety">Check attached equipment before removing a roof →</a></aside>
 <h2 class="visually-hidden" id="building-materials">Building materials</h2>
 <!-- BEGIN SHOP REFERENCE -->
 <section class="crafting-reference shop-reference" aria-label="Building-store material requirements">
@@ -190,6 +191,20 @@
 
       <section class="answer-box"><h2>Answer first</h2><p>Construction is live in Early Access. Start with the <a href="/guides/resources-and-materials">resource guide</a>, confirm the blueprint name at the workbench, and record the exact quest text if placement fails. Grid behavior remains unverified, but two frequent roof and wall questions now have official update answers — see <a href="#roof-wall-answers">which roof or wall counts</a> below.</p><p><strong>Looking for Zirconite or “Zerkonite” for a build?</strong> The current source-backed route is the <a href="/database/materials#zirconite">Zirconite answer</a>: buy it from Meriam at City Hall; do not treat mines as available in the reviewed build.</p></section>
 
+      <section class="answer-box" id="remodelling-safety" data-search-entry data-search-title="House exploded after removing a roof: solar panels and demolition" data-search-tags="remodel demolish roof solar panel electrical equipment attached support house explosion resources lost garage destroyed" data-search-status="Staff explanation; build unstated">
+        <h2>Roof removal and house explosions: what to check</h2>
+        <p><strong>Check attached equipment before demolishing its support.</strong> A staff explanation links explosions to electrical items, including solar panels, whose supporting object is destroyed.</p>
+        <ol>
+          <li><strong>Inspect the piece first.</strong> Look for solar panels or other electrical equipment attached to the roof or wall you intend to remove.</li>
+          <li><strong>If equipment is attached, stop.</strong> Keep the supporting piece intact if you cannot move the equipment separately. Do not assume switching power off makes demolition safe.</li>
+          <li><strong>Keep cars out of the work area.</strong> Review the separate <a href="/problems/vehicle-recovery#explosion">vehicle-demolition warning</a> before dismantling objects near a vehicle.</li>
+        </ol>
+        <h3>Already lost a building or vehicle?</h3>
+        <p>Stop further demolition. Record the removed piece, attached equipment and losses. The discussion does not establish a way to restore the building or materials; do not assume a guaranteed rollback.</p>
+        <a class="shop-recipe-link" href="/problems/vehicle-recovery#decision">Missing car: follow the My Garage / impound checks →</a>
+        <a class="shop-recipe-link" href="/tools/player-report?topic=building&amp;case=demolition">Prepare a report with your build and what was attached →</a>
+        <details><summary style="min-height:44px;padding-block:8px">Source and limits</summary><p><a href="https://steamcommunity.com/app/1501310/discussions/0/574927238287540371/" rel="noopener noreferrer">Jennoula, staff reply #2, 26 September</a>. It does not state a game build or a tested safe-removal sequence. The checks above are precautionary, not a reproduced fix.</p></details>
+      </section>
       <section class="answer-box" id="roof-wall-answers" data-search-entry data-search-title="Roof vs Roof Extension and the Farewell wall objective" data-search-tags="roof placed above walls roof extension wall with big window farewell nylon palace first roof tutorial objective not counting" data-search-status="Official update">
         <h2>Which roof or wall actually counts?</h2>
         <p><span class="evidence-badge evidence-official">Official · 0.8.10.868</span> Roofs are placed directly above walls; Roof Extensions extend an existing roof structure. Check which blueprint you are trying to place.</p>
@@ -205,6 +220,7 @@
           <li><a href="#building-materials">Building materials</a></li>
           <li><a href="#confirmed-scope">What official material confirms</a></li>
           <li><a href="#roof-wall-answers">Which roof or wall counts</a></li>
+          <li><a href="#remodelling-safety">Before demolishing a roof or wall</a></li>
           <li><a href="#workbench-menu">Workbench crafting menu (video-observed)</a></li>
           <li><a href="#find-windows">Find the window blueprint</a></li>
           <li><a href="#materials">Materials: charcoal, coal, zirconite</a></li>
@@ -276,8 +292,8 @@
           <tr>
             <td>Roof objective is not recognized</td>
             <td><span class="evidence-badge evidence-corroborated">Multiple reports</span></td>
-            <td>Steam discussion reports show players placing several roof variants without the house objective completing. The accepted piece and placement rule are unverified.</td>
-            <td><a href="/research#roof-quest">Open study</a></td>
+            <td>Older players described roof tracker stalls. Check the complete house objectives and the matching tracker symptom before assuming that another roof piece will solve it.</td>
+            <td><a href="/guides/roof-quest-stuck#building-checks">Check task steps and symptoms</a></td>
           </tr>
           <tr>
             <td>Furniture placement is blocked</td>
@@ -288,8 +304,8 @@
           <tr>
             <td>Window pieces do not count as exterior walls</td>
             <td><span class="evidence-badge evidence-reported">Reported</span></td>
-            <td>A launch-week report says window pieces did not advance a nine-exterior-wall objective. The expected piece types are unconfirmed.</td>
-            <td><a href="/research#exterior-walls">Open study</a></td>
+            <td>The older report predates the named 0.8.10.868 exception: Farewell, Nylon and Palace accepts a Wall with Big Window instead of an Exterior Wall. Do not extend that exception to every window or doorway piece.</td>
+            <td><a href="#roof-wall-answers">Read the named wall condition</a></td>
           </tr>
           <tr>
             <td>Grid building can cause accidental destruction</td>

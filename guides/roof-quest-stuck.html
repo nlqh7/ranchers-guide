@@ -19,6 +19,9 @@
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon-180.png">
   <link rel="stylesheet" href="../assets/css/style.css?v=20261003-r15">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
+  <style>
+    #symptom-b > details > summary, #symptom-c > details > summary { min-height: 44px; padding: 8px 0; cursor: pointer; }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -55,7 +58,7 @@
           <li><strong>Sleep to the next day.</strong></li>
           <li><strong>Restart the game client</strong> (save first, then fully quit and relaunch).</li>
         </ol>
-        <p>If the real problem is that you cannot <em>find</em> the roof, door or bed blueprints at the workbench, that is a different issue — a scrolling UI quirk — covered in <a href="#symptom-b">Symptom B</a> below.</p>
+        <p>If you cannot <em>find</em> the roof, door or bed blueprints, try the <a href="#symptom-b">player-reported list-browsing checks</a> first. A missing visible entry is not, by itself, proof of a quest-tracker bug or a particular unlock condition.</p>
         <p>The checklist below records older configuration. Read the <a href="#official-roof-updates">updated roof and wall checks</a> before buying replacement parts.</p>
       </section>
 
@@ -101,15 +104,34 @@
       <p>This support advice dates to August 4, 2026. It does not establish that every current stuck objective has the same cause or that a restart will fix it.</p>
       <p>Two independent players corroborate the restart/logout route in <a href="https://steamcommunity.com/app/1501310/discussions/0/587307906419039915/" rel="noopener noreferrer">"Cant finish Roof quest...?"</a> (Aug 3): X-C0brA-X saved, restarted the game, and the quest showed as finished after the restart; KnottyBoy did the quest steps via the phone journal, then logged totally out and back in, after which the on-screen quest passed.</p>
 
-      <h2 id="symptom-b">Symptom B: no roof, door or bed blueprint at the workbench (UI scrolling)</h2>
-      <p><span class="evidence-badge evidence-corroborated">Corroborated by players</span></p>
-      <p>Before assuming your game is broken, check how far you scrolled. In <a href="https://steamcommunity.com/app/1501310/discussions/0/587307906419002181/" rel="noopener noreferrer">"Missing roof"</a> (Aug 2), SUwUMaBUwU pointed out that roofs and beds sit far to the right in the building tab list — scroll slowly with the mouse wheel, because scrolling too far flips you over to the furniture tab. Minay, who had restarted and even started a new save without success, confirmed that scrolling slowly with the mouse wheel revealed the roofs and beds.</p>
-      <p>A second, independent group reported the same class of problem for door blueprints in <a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364406835/" rel="noopener noreferrer">"No door plan at workbench"</a> (Aug 4): rllewis3 found that workbench pages can be dragged back and forth with the left mouse button, which revealed plans that seemed missing; jw62157 (the thread author) realized that clicking the arrow keys at the top slides the choices over but often hides some blueprints behind the left panel that keeps opening.</p>
-      <p><strong>Practical takeaway:</strong> use slow mouse-wheel scrolling or left-mouse dragging to page the workbench list, and be careful with the top arrow buttons — they can leave blueprints hidden behind the side panel.</p>
+      <section id="symptom-b" data-search-entry data-search-title="Missing door blueprint at the workbench" data-search-tags="door roof bed blueprint missing workbench list dragging side panel" data-search-status="Player-reported list check">
+        <h2>Symptom B: a blueprint is missing from the workbench list</h2>
+        <ol>
+          <li>Drag the workbench blueprint list left and right with the left mouse button to inspect entries beyond the first visible group.</li>
+          <li>If the top arrow buttons move the choices, check whether the open left panel is covering some of them. Do not treat the first visible group as the complete list.</li>
+          <li>If you can see the blueprint but the door will not place, move to <a href="#symptom-c">the separate door and doorway-wall check</a>.</li>
+        </ol>
+        <p>This list-browsing check comes from player reports. It does not prove that every missing recipe is unlocked or that scrolling fixes every save.</p>
+        <details><summary>Player reports and source limits</summary>
+          <p>In <a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364406835/" rel="noopener noreferrer">No door plan at workbench</a>, rllewis3 reported finding entries by left-dragging. The author then identified choices obscured by the left panel after using the top arrows.</p>
+          <p>A separate <a href="https://steamcommunity.com/app/1501310/discussions/0/587307906419002181/" rel="noopener noreferrer">Missing roof</a> thread reports slowly using the mouse wheel to reach roof and bed entries; scrolling too far could switch to the furniture tab.</p>
+          <p>The threads began on August 4 and August 2 respectively. They are retained player reports, not a current-build reproduction or a confirmed recipe-unlock rule.</p>
+        </details>
+      </section>
 
-      <h2 id="symptom-c">Symptom C: cannot build a door</h2>
-      <p><span class="evidence-badge evidence-reported">Single report</span></p>
-      <p>One player, Earth Hunter (in <a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364406835/" rel="noopener noreferrer">"No door plan at workbench"</a>, Aug 4), reports that the blueprint list contains <strong>two door types — an exterior door and an interior door</strong> — and that you also need <strong>a wall with a door opening</strong> for the door to fit. This is a single community report, not officially confirmed, but it matches the building system's wall-cutout logic and is worth checking before reporting a bug.</p>
+      <section id="symptom-c" data-search-entry data-search-title="Door versus doorway wall" data-search-tags="door exterior interior doorway wall opening placement building quest" data-search-status="Player report and configured quest steps">
+        <h2>Symptom C: the door blueprint is visible, but the door will not place</h2>
+        <p>A door and a wall with a doorway are different pieces. Compare the exact name in your objective with these separate recipe records:</p>
+        <ul>
+          <li><a href="/guides/crafting-guide#recipe-house_door_exterior_01">Door - Exterior</a>: the door itself.</li>
+          <li><a href="/guides/crafting-guide#recipe-house_wall_exterior_Door_01">Wall with door - Exterior</a>: the doorway-wall piece.</li>
+        </ul>
+        <p>The recorded house quest checks the doorway wall and the installed door separately. Use the <a href="#building-checks">full building checklist</a> to see which stage is missing.</p>
+        <details><summary>Placement report and configuration limits</summary>
+          <p>Earth Hunter describes exterior and interior door choices plus the need for a doorway wall in <a href="https://steamcommunity.com/app/1501310/discussions/0/587308167364406835/" rel="noopener noreferrer">the original door thread</a>. This is one player's placement report.</p>
+          <p>The recipe links and separate quest steps come from the retained configuration snapshot. They do not establish live unlock timing, exact placement controls or a guaranteed fix for a blocked door.</p>
+        </details>
+      </section>
 
       <h2 id="symptom-d">Symptom D: hole in the middle of the roof (Roof Cap Lvl 2)</h2>
       <p><span class="evidence-badge evidence-reported">Single report</span> <em>unverified</em></p>

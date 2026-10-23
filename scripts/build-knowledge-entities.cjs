@@ -88,6 +88,7 @@ const relatedRouteLabels = {
   "/guides/electricity-power#two-paths": { en: "Electricity contracts & power", zh: "水电合同与供电" },
   "/guides/electricity-power#solar-quest": { en: "Solar objective checklist", zh: "太阳能目标检查清单" },
   "/guides/animal-guide#getting": { en: "Bring chickens home", zh: "把鸡运回家" },
+  "/guides/animal-guide#shop-locked": { en: "Animal shop locked: hearts & gifts", zh: "动物商店拒售：心形与送礼" },
   "/guides/animal-guide": { en: "Animal care guide", zh: "动物照料指南" },
   "/tools/chicken-troubleshooter": { en: "Chicken troubleshooter", zh: "养鸡排查工具" },
   "/guides/roof-quest-stuck#flow": { en: "Roof objective decision flow", zh: "屋顶目标分类排查" },

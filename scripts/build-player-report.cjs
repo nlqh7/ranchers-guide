@@ -45,6 +45,7 @@ function renderPage(zh) {
   <link rel="alternate" hreflang="en" href="https://theranchersguide.com/tools/player-report"><link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/tools/player-report"><link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/tools/player-report">
   <meta property="og:type" content="website"><meta property="og:site_name" content="The Ranchers Guide"><meta property="og:title" content="${escapeHtml(title)}"><meta property="og:description" content="${escapeHtml(description)}"><meta property="og:url" content="https://theranchersguide.com${route}"><meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20261003-r15">
+  <link rel="stylesheet" href="/assets/css/player-report.css?v=20261023-report1">
   <script type="application/ld+json">${jsonScript({ "@context": "https://schema.org", "@type": "SoftwareApplication", name: title, applicationCategory: "UtilitiesApplication", operatingSystem: "Any web browser", isAccessibleForFree: true, url: `https://theranchersguide.com${route}`, description })}</script>
 </head>
 <body>
@@ -58,7 +59,8 @@ function renderPage(zh) {
         <form class="calc-panel report-builder" data-player-report-form novalidate>
           <div class="form-heading"><div><span class="kicker">01</span><h2>${copy.report}</h2></div></div>
           <div class="calc-field"><label for="report-topic">${copy.topic}</label><select id="report-topic" name="topic">${renderTopicOptions(zh)}</select></div>
-          <div class="form-grid cols-2"><div class="calc-field"><label for="report-build">${copy.build}</label><input id="report-build" name="build" value="0.8.10.842" maxlength="30"></div><div class="calc-field"><label for="report-platform">${copy.platform}</label><select id="report-platform" name="platform"><option>Windows</option><option>Steam Deck</option><option>${zh ? "其他 PC 配置" : "Other PC setup"}</option></select></div></div>
+          <a class="btn btn-outline" href="#report-topic" data-report-case hidden></a>
+          <div class="form-grid cols-2"><div class="calc-field"><label for="report-build">${copy.build} <span class="optional">${copy.optional}</span></label><input id="report-build" name="build" value="" maxlength="30" placeholder="${zh ? "不清楚可留空" : "Leave blank if unknown"}"></div><div class="calc-field"><label for="report-platform">${copy.platform}</label><select id="report-platform" name="platform"><option>Windows</option><option>Steam Deck</option><option>${zh ? "其他 PC 配置" : "Other PC setup"}</option></select></div></div>
           <div class="calc-field"><label for="report-context">${copy.context} <span class="optional">${copy.optional}</span></label><input id="report-context" name="context" maxlength="120" placeholder="${zh ? "例如：第 12 天，City Hall 附近" : "e.g. Day 12, near City Hall"}"></div>
           <div class="calc-field"><label for="report-observation">${copy.observation}</label><textarea id="report-observation" name="observation" rows="4" maxlength="900" minlength="10" required placeholder="${zh ? "只写你看到的现象，不先猜原因。" : "Describe what you saw without guessing the cause first."}"></textarea></div>
           <div class="calc-field"><label for="report-steps">${copy.steps}</label><textarea id="report-steps" name="steps" rows="4" maxlength="900" minlength="10" required placeholder="${zh ? "按时间顺序写操作、地点、重载或联机情况。" : "List the actions, place, reloads or co-op conditions in order."}"></textarea></div>
@@ -67,7 +69,7 @@ function renderPage(zh) {
           <button class="btn" type="submit">${copy.report}</button>
         </form>
         <section class="report-result" aria-labelledby="report-result-title" data-player-report-result>
-          <div class="report-result-empty" data-report-empty><span class="kicker">02</span><h2 id="report-result-title">${copy.result}</h2><p>${copy.empty}</p></div>
+          <div class="report-result-empty" data-report-empty><span class="kicker">02</span><h2 id="report-result-title">${copy.result}</h2><p>${zh ? "现象和尝试步骤各填写至少10个字符后，这里会生成报告。" : "Add at least 10 characters for both what happened and the steps tried to generate a report."}</p></div>
           <div data-report-output hidden>
             <span class="kicker">02</span><h2>${copy.result}</h2>
             <div class="report-next-step"><span class="kicker">${copy.start}</span><h3 data-report-route-label></h3><p data-report-prompt></p><a class="btn btn-outline" data-report-route href="#">${copy.start}</a></div>
@@ -78,12 +80,12 @@ function renderPage(zh) {
           </div>
         </section>
       </div>
-      <article class="article report-builder-guide"><h2>${zh ? "为什么先整理再发帖？" : "Why structure the report first?"}</h2><p>${zh ? "版本、复现步骤和截图上下文越完整，其他玩家越容易区分设置问题、已知修复和真正的新问题。这个工具只整理你提供的观察，不会替你判断结论。" : "A build, reproduction steps and screenshot context help other players separate a setup issue, a known fix and a genuinely new problem. This tool structures your observations; it does not decide the conclusion for you."}</p><p><a href="${zh ? "/zh/community" : "/community"}">${zh ? "返回社区雷达" : "Return to Community Radar"}</a> · <a href="${counterpart}">${zh ? "English" : "中文"}</a></p></article>
+      <article class="article report-builder-guide"><h2>${zh ? "为什么先整理再发帖？" : "Why structure the report first?"}</h2><p>${zh ? "版本、复现步骤和截图上下文越完整，其他玩家越容易区分设置问题、已知修复和真正的新问题。这个工具只整理你提供的观察，不会替你判断结论。" : "A build, reproduction steps and screenshot context help other players separate a setup issue, a known fix and a genuinely new problem. This tool structures your observations; it does not decide the conclusion for you."}</p><p><a href="${zh ? "/zh/community" : "/community"}">${zh ? "返回社区雷达" : "Return to Community Radar"}</a> · <a data-report-language href="${counterpart}">${zh ? "English" : "中文"}</a></p></article>
     </div>
   </main>
   <footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>The Ranchers Guide</h4><p>${zh ? "按版本和证据整理的非官方玩家资料。" : "Independent, fan-made Early Access help with versioned evidence."}</p><p class="disclaimer">${zh ? "不隶属于 RedPilz Studio 或 Trophy Games。" : "Not affiliated with RedPilz Studio or Trophy Games."}</p></div><nav aria-label="Footer site"><h4>${zh ? "站点" : "Site"}</h4><ul><li><a href="${zh ? "/zh/community" : "/community"}">${zh ? "社区雷达" : "Community Radar"}</a></li><li><a href="/contribute">${zh ? "投稿" : "Contribute"}</a></li><li><a href="/research">${zh ? "研究队列" : "Research"}</a></li><li><a href="${zh ? "/zh/about" : "/about"}">${zh ? "关于" : "About"}</a></li><li><a href="${zh ? "/zh/contact" : "/contact"}">${zh ? "联系" : "Contact"}</a></li><li><a href="${zh ? "/zh/privacy" : "/privacy"}">${zh ? "隐私" : "Privacy"}</a></li>${zh ? '<li><a href="/zh/terms">服务条款</a></li>' : '<li><a href="/terms">Terms</a></li>'}</ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>${zh ? "先记录，再判断；原帖真实，结论有证据。" : "Record first, conclude later; original threads, evidence-gated answers."}</span></div></div></footer>
   <script type="application/json" id="player-report-config">${jsonScript(topics)}</script>
-  <script src="/assets/js/main.js?v=20261003-r15" defer></script><script src="/assets/js/player-report.js?v=20260821-report1" defer></script>
+  <script src="/assets/js/main.js?v=20261003-r15" defer></script><script src="/assets/js/player-report.js?v=20261023-report1" defer></script>
 </body></html>`;
 }
 

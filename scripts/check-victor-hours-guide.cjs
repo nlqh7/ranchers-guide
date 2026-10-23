@@ -15,6 +15,15 @@ for (const locale of ["en", "zh"]) {
   const checklist = guide.match(/<section class="answer-box" id="start-power">[\s\S]*?<\/section>/)?.[0] ?? "";
   assert.match(`${lead}${checklist}`, /href="#finding-victor"/, `${locale}: players sent to Victor must have a direct link to the hours answer before the long reference section`);
   assert.match(answer, /data-search-entry/, `${locale}: Victor troubleshooting answer must be indexed`);
+  const bench=guide.match(/<section\b[^>]*id="built-bench-tracker"[\s\S]*?<\/section>/)?.[0];
+  assert.ok(bench,`${locale}: a built-bench question needs its own precise answer rather than an office-hours snippet`);
+  assert.ok(bench.includes('data-search-entry')&&bench.includes('590686908802292555'),`${locale}: retain an independent searchable moderator-sourced bench answer`);
+  const steps=bench.match(/<li>[\s\S]*?<\/li>/g)||[];
+  assert.equal(steps.length,3,`${locale}: keep this recovery path at three steps`);
+  assert.ok((locale==='zh'?/T[\s\S]*手机任务日志/:/T[\s\S]*phone quest journal/i).test(steps[0]),`${locale}: inspect actual journal before suggesting another build or restart`);
+  assert.ok(!/sleep|睡到|demolish|拆除|cancel the contract|取消合同/i.test(bench),`${locale}: do not import another symptom's workaround`);
+  const benchResults=searchCore.searchDocuments(index,locale==='zh'?'工作台建好了任务还让建':'workbench built but quest still says build',5);
+  assert.equal(benchResults[0]?.url,`/${prefix}guides/electricity-power#built-bench-tracker`,`${locale}: the natural bench question must lead to the phone-journal path`);
   assert.match(answer, /steamcommunity\.com\/app\/1501310\/discussions\/0\/590686595451177771/, `${locale}: City Hall hours must link to its source thread`);
   const authorCard = guide.match(/<aside class="author-card"[\s\S]*?<\/aside>/)?.[0];
   assert.ok(authorCard, `${locale}: guide author/review information must be present`);

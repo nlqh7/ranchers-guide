@@ -12,6 +12,21 @@ const npcIds = new Set(npcs.map(item => item.id));
 const questIds = new Set(quests.map(item => item.id));
 const serviceIds = new Set(services.map(item => item.id));
 const sceneNpcIds = new Set();
+for(const locale of ['', 'zh/']){
+ const guidePath=`/${locale}guides/animal-guide#shop-locked`;
+ const knowledge=JSON.parse(fs.readFileSync(path.join(root,locale,'knowledge-index.json'),'utf8'));
+ for(const id of ['npc:angela','npc:malcolm']){
+   const related=knowledge.entities.find(entry=>entry.id===id).relatedRoutes.find(link=>link.href===guidePath);
+   assert.ok(related&&!related.label.startsWith('/'),`${locale}${id}: the search-card shop action needs a readable label,not a raw path`);
+ }
+ const directory=fs.readFileSync(path.join(root,locale,'database/npcs.html'),'utf8');
+ for(const id of ['angela','malcolm']){
+   const section=directory.match(new RegExp(`<section\\b[^>]*id="${id}"[^>]*>[\\s\\S]*?<\\/section>`))?.[0];
+   assert.ok(section?.includes(`href="${guidePath}"`),`${locale}${id}: give the exact locked-shop checks, not another directory top`);
+ }
+ const angela=fs.readFileSync(path.join(root,locale,'database/npcs/angela.html'),'utf8');
+ assert.ok(angela.includes(`href="${guidePath}"`),`${locale}Angela standalone entry must also connect the shop check`);
+}
 const expectedActorIds = { meriam: 7, victor: 4, angela: 6, gigi: 6 };
 const expectedSceneIds = new Set(['meriam-introduction', 'victor-utility-contracts', 'angela-coop-route', 'gigi-egg-route']);
 

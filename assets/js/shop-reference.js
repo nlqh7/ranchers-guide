@@ -5,6 +5,18 @@
     const category = root.querySelector('[data-shop-category]');
     const season = root.querySelector('[data-shop-season]');
     const groups = Array.from(root.querySelectorAll('[data-shop-group]'));
+    const languageLinks = Array.from(document.querySelectorAll('.nav-language-link')).map(node => ({node,base:node.href.split(/[?#]/)[0]}));
+    function syncLanguage() {
+      let target;
+      try { target = document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch (_) {}
+      languageLinks.forEach(link => {
+        const url = new URL(link.base,location.href);
+        const values = {q:query.value.trim(),shop:category.value==='all'?'':category.value,season:season.value==='all'?'':season.value};
+        Object.entries(values).forEach(([key,value])=>{if(value)url.searchParams.set(key,value);});
+        if(target && root.contains(target))url.hash=location.hash;
+        link.node.href=url.href;
+      });
+    }
     function saveUrl(clearAnchor) {
       const url = new URL(location.href);
       const values = { q: query.value.trim(), shop: category.value === 'all' ? '' : category.value, season: season.value === 'all' ? '' : season.value };
@@ -12,9 +24,10 @@
       if (clearAnchor) {
         let target;
         try { target = document.getElementById(decodeURIComponent(url.hash.slice(1))); } catch (_) {}
-        if (target && root.contains(target)) url.hash = '';
+        if (target && groups.some(group => group === target || group.contains(target))) url.hash = '';
       }
       history.replaceState(history.state, '', url.href);
+      syncLanguage();
     }
     function restoreUrl() {
       const params = new URL(location.href).searchParams;
@@ -25,6 +38,7 @@
       season.value = Array.from(season.options).some(option => option.value === selectedSeason) ? selectedSeason : 'all';
       filter();
       revealAnchor();
+      syncLanguage();
     }
     function filter() {
       const term = query.value.trim().toLocaleLowerCase();
@@ -51,18 +65,21 @@
       try { id = decodeURIComponent(location.hash.slice(1)); } catch (_) { return; }
       const target = document.getElementById(id);
       if(!target || !root.contains(target)) return;
-      query.value = '';
-      category.value = 'all';
-      season.value = 'all';
-      filter();
-      saveUrl(false);
+      // Catalogue headings preserve copied filters; item/group anchors reveal their target.
+      if (groups.some(group => group === target || group.contains(target))) {
+        query.value = '';
+        category.value = 'all';
+        season.value = 'all';
+        filter();
+        saveUrl(false);
+      }
       for(let node=target;node && node!==root;node=node.parentElement) if(node.tagName==='DETAILS') node.open=true;
       target.scrollIntoView({block:'start',behavior:'instant'});
     }
     query.addEventListener('input',function () { filter(); saveUrl(true); });
     category.addEventListener('change',function () { filter(); saveUrl(true); });
     season.addEventListener('change',function () { filter(); saveUrl(true); });
-    window.addEventListener('hashchange',revealAnchor);
+    window.addEventListener('hashchange',function () { revealAnchor(); syncLanguage(); });
     window.addEventListener('popstate',restoreUrl);
     restoreUrl();
   });

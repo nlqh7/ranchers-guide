@@ -33,6 +33,14 @@ assert.equal(search.dossierSupportsExactAnswer({route:'/map#youssefs-stand'},'Ge
 assert.equal(search.dossierSupportsExactAnswer({route:storeAnswer.url},'General Store',[storeAnswer]),true,'The matching answer route may keep its card');
 assert.equal(search.dossierSupportsExactAnswer({route:'/map#youssefs-stand'},'clothing store',[storeAnswer]),true,'Keep fallback cards when no exact title or alias answers the question');
 const englishKnowledge = require('../knowledge-index.json');
+const roofDossier=englishKnowledge.entities.find(entity=>entity.id==='quest:roof-building');
+assert.ok(roofDossier,'Use the actual roof quest dossier from the public knowledge index');
+const demolitionQuestion='house exploded after removing roof';
+const demolitionMatches=search.searchDocuments(require('../search-index.json'),demolitionQuestion,12);
+assert.equal(search.dossierSupportsExactAnswer(roofDossier,demolitionQuestion,demolitionMatches),false,'A partial roof-name dossier must not precede the complete demolition question answer');
+assert.equal(search.dossierSupportsExactAnswer({route:demolitionMatches[0].url},demolitionQuestion,demolitionMatches),true,'The matching answer route remains eligible');
+assert.equal(search.dossierSupportsExactAnswer({route:'/device-overview'},'device stops after standby',[{title:'Device stops after standby: checks',url:'/standby-checks'}]),false,'Full-question title coverage is not a roof/game keyword exception');
+assert.equal(search.dossierSupportsExactAnswer(roofDossier,'roof repair',[]),true,'Without a complete answer retain the useful entity fallback');
 const soloDossiers = englishKnowledge.entities.filter(entity => search.entityScore(entity, 'PLAY SOLO') >= 52);
 assert.deepEqual(soloDossiers.map(entity => entity.id), [], 'PLAY SOLO must not promote unrelated quests or possessive shop names through a single letter');
 assert.equal(search.searchDocuments(require('../search-index.json'), 'PLAY SOLO')[0].url, '/guides/multiplayer-coop#session-mode');

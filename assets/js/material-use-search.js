@@ -8,6 +8,22 @@
   if (typeof document === 'undefined') return;
   const zh = document.documentElement.lang.toLowerCase().startsWith('zh');
   const controls = [];
+  const languageLinks = Array.from(document.querySelectorAll('.nav-language-link'), node => ({node, base: node.href.split(/[?#]/)[0]}));
+  function syncLanguage() {
+    const params = new URL(location.href).searchParams;
+    const selected = controls.find(control => control.id === params.get('material'));
+    let anchor = '';
+    try { anchor = decodeURIComponent(location.hash.slice(1)); } catch (_) {}
+    languageLinks.forEach(link => {
+      const url = new URL(link.base, location.href);
+      if (selected && selected.input.value.trim()) {
+        url.searchParams.set('material', selected.id);
+        url.searchParams.set('use', selected.input.value);
+      }
+      if (controls.some(control => control.id === anchor)) url.hash = anchor;
+      link.node.href = url.href;
+    });
+  }
   document.querySelectorAll('[data-material-uses]').forEach(root => {
     const input = root.querySelector('[data-use-search]');
     const clear = root.querySelector('[data-use-clear]');
@@ -42,6 +58,7 @@
         url.searchParams.delete('use');
       }
       history.replaceState(history.state, '', url);
+      syncLanguage();
     }
     input.addEventListener('input', () => { apply(); updateUrl(); });
     clear.addEventListener('click', () => { input.value = ''; apply(); updateUrl(); input.focus(); });
@@ -55,7 +72,9 @@
       control.input.value = control.id === params.get('material') ? (params.get('use') || '') : '';
       control.apply();
     });
+    syncLanguage();
   }
   window.addEventListener('popstate', restore);
+  window.addEventListener('hashchange', syncLanguage);
   restore();
 })();

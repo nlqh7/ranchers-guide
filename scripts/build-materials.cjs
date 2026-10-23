@@ -138,9 +138,10 @@ function render(locale) {
     return `      <section class="evidence-ledger material-profile" id="${material.id}" data-search-entry data-search-title="${esc(zh ? material.zhSearchTitle : material.searchTitle)}" data-search-aliases="${esc(searchAliases)}" data-search-status="${zh?'游戏配置与观测':'Game configuration & observations'}" data-search-tags="${esc(`${material.searchTitle} ${material.zhSearchTitle} ${material.name} ${material.zhName} ${native?.name || ''} ${native?.zhName || ''} ${zh ? material.zhSearchTags : material.searchTags}`)}">
         <h2>${esc(native ? (zh ? `${native.zhName} ${native.name}` : native.name) : (zh ? material.zhName : material.name))}</h2>
         <p class="lead">${esc(zh ? material.zhSummary : material.summary)}</p>
+        ${isStandalone ? '' : relatedLinks}
         ${directoryAnswer}
         ${buildUse ? `<details class="resource-details"><summary>${zh?'历史建筑配方':'Historical building recipes'}</summary>${buildUse}</details>` : ''}
-        ${relatedLinks}
+        ${isStandalone ? relatedLinks : ''}
       </section>`;
   }).join("\n\n");
   const toc = data.materials.map((material) => `<li><a href="#${material.id}">${esc(zh ? material.zhName : material.name)}</a></li>`).join("");
@@ -165,7 +166,7 @@ function render(locale) {
 ${sections}
     <p class="database-browse-note">${l.unknownCopy}</p>
 </article></main>${renderSiteFooter(locale, { en: l.footer, zh: l.footer })}<script src="/assets/js/main.js?v=20261003-r15" defer></script>
-<script src="/assets/js/material-use-search.js?v=20260913-use1" defer></script></body></html>`;
+<script src="/assets/js/material-use-search.js?v=20261023-use2" defer></script></body></html>`;
 }
 
 const outputs = [

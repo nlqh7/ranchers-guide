@@ -17,8 +17,13 @@ for (const page of [english, chinese]) {
   assert.match(page, /data-report-copy/);
   assert.match(page, /data-report-steam/);
   assert.match(page, /data-report-email/);
+  const caseAnchor = page.match(/<a\b[^>]*data-report-case[^>]*>/)?.[0] || '';
+  const caseHref = caseAnchor.match(/href="([^"]+)"/)?.[1];
+  assert.ok(caseHref?.startsWith('#') && page.includes(`id="${caseHref.slice(1)}"`), 'The initially hidden case action needs a valid form fallback before the controller sets its specific route');
+  assert.ok(page.includes('/assets/css/player-report.css?'),'Report fields need their scoped responsive stylesheet');
   assert.doesNotMatch(page, /pagead2\.googlesyndication\.com/);
 }
 assert.match(script, /Nothing is uploaded|not sent to a server|contribute@theranchersguide\.com/);
 assert.match(script, /steamcommunity\.com\/app\/1501310\/discussions/);
 console.log(`PASS: player report builder covers ${data.length} topics with local-only export actions.`);
+require("./check-player-report-behavior.cjs")().catch(error=>{console.error(error.message);process.exitCode=1;});

@@ -20,6 +20,17 @@ const knowledgeBase = fs.readFileSync(path.join(root, "database.html"), "utf8");
 const chineseKnowledgeBase = fs.readFileSync(path.join(root, "zh", "database.html"), "utf8");
 const sitemap = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
 const sourceIds = new Set(Object.keys(data.sources));
+for (const [prefix, page] of [['', en], ['zh/', zh]]) {
+  for (const id of ['charcoal', 'zirconite']) {
+    const section = page.match(new RegExp(`<section\\b[^>]*id="${id}"[^>]*>[\\s\\S]*?<\\/section>`))?.[0];
+    assert.ok(section, `${prefix}${id}: retained material answer must exist`);
+    const actions = section.indexOf('class="database-guide-links"');
+    const evidence = section.indexOf('class="evidence-list"');
+    const uses = section.indexOf('data-material-uses=');
+    assert.ok(actions >= 0 && actions < evidence && actions < uses,
+      `${prefix}${id}: player next steps must appear before long source and recipe references`);
+  }
+}
 const required = ["stone", "wood-log", "hay", "charcoal", "zirconite"];
 
 assert.deepEqual(data.materials.map((item) => item.id), required, "materials must use the approved high-demand order");
@@ -47,6 +58,21 @@ for (const material of data.materials) {
 }
 
 const publicCopy = data.materials.flatMap((material) => material.facts.flatMap((fact) => [fact.text, fact.zhText])).join("\n");
+for (const id of ['stone', 'wood-log']) {
+  const material = data.materials.find(item => item.id === id);
+  const gathering = material.facts.find(fact => fact.evidenceLevel === 'official' && fact.sourceIds.includes('official-stone-wood-gathering-868'));
+  assert.ok(gathering && !gathering.sourceIds.includes('official-stone-wood-gathering-871'), 'Gathering must cite the .868 Trees & Rocks statement, not the .871 camera announcement');
+  assert.ok(!/0\.8\.10\.871/.test(gathering.text + gathering.zhText + gathering.build), 'Do not attribute the gathering statement to an unrelated camera update');
+}
+for (const file of ['database/materials.html','zh/database/materials.html','database/materials/stone.html','zh/database/materials/stone.html','database/materials/wood-log.html','zh/database/materials/wood-log.html','database/buildings/coop.html','zh/database/buildings/coop.html','guides/resources-and-materials.html','zh/guides/resources-and-materials.html']) {
+  const html=fs.readFileSync(path.join(root,file),'utf8');
+  assert.ok(!/Official 0\.8\.10\.871 notes say|official 0\.8\.10\.871 gathering rule|官方 0\.8\.10\.871 (?:公告说明|采集规则)/.test(html),file+': repeated gathering answer still cites the unrelated camera update');
+  if (/database\/materials\/|guides\//.test(file)) {
+    assert.ok(html.includes('1843481262701719'),file+': missing applicable .868 gathering source');
+  } else {
+    assert.ok(html.includes('/database/materials/stone'),file+': summary must retain the full sourced Stone entry');
+  }
+}
 assert.doesNotMatch(publicCopy, /press Q|按 Q|1[–-]2 minutes|1[–-]2 分钟|watering can.*extinguish|浇水壶.*灭火/i, "charcoal controls, timing and watering-can behavior are not retained current facts");
 assert.doesNotMatch(publicCopy, /mine is open|mines are open|矿洞已开放|矿场已开放/i, "mines must not be presented as currently available");
 assert.doesNotMatch(publicCopy, /stone (?:costs|is sold for) 29C|石头.*29C/i, "single-source stone price must not be published as confirmed");

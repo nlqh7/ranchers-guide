@@ -1,0 +1,32 @@
+/* Report-only form polish; keep shared site and calculator styles unchanged. */
+.report-builder textarea,
+.report-result textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 2px solid var(--cream-300);
+  border-radius: var(--radius-sm);
+  background: var(--cream-100);
+  color: inherit;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  resize: vertical;
+}
+.report-builder textarea { min-height: 128px; }
+.report-result .report-preview {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.report-builder input,
+.report-builder select { min-height: 44px; font-size: 1rem; }
+.report-builder textarea:focus,
+.report-result textarea:focus {
+  border-color: var(--green-500);
+  outline: 2px solid var(--green-500);
+  outline-offset: 2px;
+}

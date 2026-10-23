@@ -2,6 +2,10 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
+for(const locale of ['', 'zh/']){
+ const page=fs.readFileSync(path.join(root,locale,'guides/resources-and-materials.html'),'utf8');
+ assert.ok(/<script\b[^>]*src="[^"]*shop-reference\.js\?v=20261023-shop2"[^>]*\bdefer\b/.test(page),'Shop initialization must follow deferred shared navigation,so the language link exists');
+}
 // Search survives copied links and browser return without adding history per keystroke.
 {
   const location = new URL('https://example.test/guides/resources-and-materials?q=Coop&shop=building&keep=1');
@@ -15,7 +19,7 @@ const root = path.resolve(__dirname, '..');
   const surface = { querySelector(s) { return ({ '[data-shop-query]': query, '[data-shop-category]': category, '[data-shop-season]': season, '[data-shop-empty]': empty })[s]; }, querySelectorAll() { return [group]; }, contains() { return false; } };
   const events = {};
   require('node:vm').runInNewContext(fs.readFileSync(path.join(root, 'assets/js/shop-reference.js'), 'utf8'), {
-    document: { querySelectorAll() { return [surface]; }, getElementById() { return null; } },
+    document: { querySelectorAll(selector) { return selector==='[data-shop-reference]' ? [surface] : []; }, getElementById() { return null; } },
     location, URL, window: { addEventListener(e, fn) { events[e] = fn; } },
     history: { state: null, replaceState(_, title, href) { location.href = href; } }
   });
@@ -46,9 +50,65 @@ const root = path.resolve(__dirname, '..');
   assert.equal(season.value, 'all');
   assert.deepEqual(rows.map(row => row.hidden), [false, false, false, false]);
 }
+// A catalogue heading is not an item reveal: copied filters must survive #shops.
+{
+  const location = new URL('https://example.test/guides/resources-and-materials?q=Strawberry&shop=seed-store&season=Spring#shops');
+  const control = value => ({value,addEventListener(event,fn){this[event]=fn;}});
+  const query=control('');
+  const category=Object.assign(control('all'),{options:['all','seed-store','building-store'].map(value=>({value}))});
+  const season=Object.assign(control('all'),{options:['all','Spring','Summer'].map(value=>({value}))});
+  const empty={};
+  const rootNode={};
+  const groups=['seed-store','building-store'].map(id=>({tagName:'DETAILS',dataset:{shopGroup:id},parentElement:rootNode,querySelector(){return null;}}));
+  const rows=[{tagName:'TR',dataset:{query:'Strawberry seed',shopListingSeason:'Spring'},parentElement:groups[0]},
+    {tagName:'TR',dataset:{query:'Coop',shopListingSeason:'AllTheTime'},parentElement:groups[1]}];
+  groups.forEach(group=>{group.querySelectorAll=()=>rows.filter(row=>row.parentElement===group);group.contains=node=>group.querySelectorAll().includes(node);});
+  const heading={tagName:'H2',parentElement:rootNode};
+  [heading,...rows].forEach(node=>{node.scrollIntoView=options=>{assert.equal(options.behavior,'instant');};});
+  Object.assign(rootNode,{contains:node=>node===heading||rows.includes(node)||groups.includes(node),querySelectorAll:()=>groups,
+    querySelector:selector=>({'[data-shop-query]':query,'[data-shop-category]':category,'[data-shop-season]':season,'[data-shop-empty]':empty})[selector]});
+  const targets={shops:heading,'shop-offer-coop':rows[1]};
+  const languageBase='https://example.test/zh/guides/resources-and-materials';
+  const languageLink={href:languageBase};
+  const events={};
+  require('node:vm').runInNewContext(fs.readFileSync(path.join(root,'assets/js/shop-reference.js'),'utf8'),{
+    document:{querySelectorAll:selector=>selector==='[data-shop-reference]'?[rootNode]:selector==='.nav-language-link'?[languageLink]:[],getElementById:id=>targets[id]},location,URL,
+    window:{addEventListener:(event,fn)=>{events[event]=fn;}},history:{state:null,replaceState:(_,title,href)=>{location.href=href;languageLink.href=languageBase;}}
+  });
+  assert.equal(category.value,'seed-store','The #shops heading must retain the selected shop instead of clearing every filter');
+  assert.equal(query.value,'Strawberry');
+  assert.equal(season.value,'Spring');
+  assert.equal(location.searchParams.get('shop'),'seed-store');
+  assert.equal(new URL(languageLink.href).searchParams.get('shop'),'seed-store','The initial language action must retain the chosen shop');
+  assert.deepEqual(rows.map(row=>row.hidden),[false,true]);
+  query.value='Strawberry seed';query.input();
+  assert.equal(new URL(languageLink.href).searchParams.get('q'),'Strawberry seed','Language sync must run after the real shared history wrapper');
+  assert.equal(location.hash,'#shops','Typing at the catalogue heading must keep the shared link anchored to the lookup');
+  location.hash='#shop-offer-coop';events.hashchange();
+  assert.equal(category.value,'all','An explicit item anchor still reveals an item hidden by filters');
+  assert.equal(rows[1].hidden,false);
+  assert.equal(groups[1].open,true);
+  query.value='Coop';query.input();
+  assert.equal(location.hash,'','Changing filters after a specific item reveal clears only that item anchor');
+  location.href='https://example.test/guides/resources-and-materials?shop=seed-store&season=Spring#shops';events.popstate();
+  assert.equal(category.value,'seed-store','Browser return to the catalogue restores its own filter state');
+  assert.equal(season.value,'Spring');
+}
+
 const file = path.join(root, 'data/build-shops.json');
 assert.ok(fs.existsSync(file), 'Shop configuration must be applied to public lookup data');
 const data = JSON.parse(fs.readFileSync(file));
+const greenhouseOffer=data.offers.find(offer=>offer.itemId==='Custum_GreenHouse_01');
+for(const prefix of ['', 'zh/']){
+ const farm=fs.readFileSync(path.join(root,prefix,'guides/farming-fields.html'),'utf8');
+ const plan=farm.match(/<section\b[^>]*id="greenhouse-materials"[^>]*>[\s\S]*?<\/section>/)?.[0];
+ assert.ok(plan,prefix+': existing greenhouse material configuration must be usable in the guide,not called wholly unknown');
+ for(const material of greenhouseOffer.materials){
+   const row=plan.split(`data-greenhouse-material="${material.id}"`)[1]?.split('</li>')[0];
+   assert.ok(row?.includes(`× ${material.quantity}`),prefix+': each greenhouse material must keep its own source quantity');
+ }
+ assert.ok(plan.includes(`/${prefix}tools/ranch-checklist?building=${greenhouseOffer.id}#recipe-material-plan`),prefix+': pass the exact building to the existing material planner');
+}
 const seeds = require('../data/build-seeds.json').items;
 const produce = require('../data/build-produce.json').items;
 const placeables = require('../data/build-placeables.json').items;

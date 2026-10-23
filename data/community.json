@@ -90,7 +90,26 @@
       "relatedRoute": "/guides/farming-fields",
       "relatedLabel": "Farming field guide",
       "relatedLabelZh": "种田实战指南",
-      "url": "https://steamcommunity.com/app/1501310/discussions/0/590686908802202078/"
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/590686908802202078/",
+      "answer": {
+        "title": "Greenhouse: winter checks, materials and unlock limits",
+        "titleZh": "温室：冬季使用、材料准备与解锁边界",
+        "statusLabel": "Use rules and planning record",
+        "statusLabelZh": "使用答复与材料记录",
+        "summary": "Already have a greenhouse? The August 16 moderator reply says no greenhouse heating is needed, indoor snow is visual, and seasonal seed buying differs from out-of-season greenhouse planting. If you are planning one instead, open the retained material list before the unverified unlock notes.",
+        "summaryZh": "已有温室时，8月16日版主答复说明无需供暖、积雪是画面问题，并区分按季节买种子与温室内跨季种植。还在准备建温室时，先看保留的材料清单，再看尚未确认的解锁说明。",
+        "unresolved": "The material list is .842 shop configuration, not a full price or verified current purchase route. A dated no-heating answer is not a promise that plants cannot disappear; check watering, weeds and plantation warnings.",
+        "unresolvedZh": "材料来自.842商店配置，不是完整报价或已实测的当前购买路线。不需供暖的旧答复也不保证作物不会消失，仍要查浇水、杂草与田块警告。",
+        "historyNote": "Keep the August 19 scan separate from the August 16 replies #3, #4, #7 and #9. The thread gives winter-use guidance without a game-build number. November 2022 unlock notes do not establish an Early Access vendor; the existing retained shop record supplies planning materials, not runtime availability.",
+        "historyNoteZh": "8月19日是收录日期，原答复为8月16日 #3、#4、#7、#9，未注明游戏版本。2022年11月解锁资料不能证明抢先体验商人；现有商店记录只提供材料准备，不证明当前可购买。",
+        "reviewedAt": "2026-10-23",
+        "searchTags": "greenhouse winter heating snow seeds materials unlock 温室 冬季 加热 积雪 种子 材料 解锁",
+        "links": [
+          { "route": "/guides/farming-fields#greenhouse-winter", "label": "Already built: winter checks", "labelZh": "已有温室：冬季使用检查" },
+          { "route": "/guides/farming-fields#greenhouse-materials", "label": "Planning: materials and shortages", "labelZh": "准备建造：材料与缺料" },
+          { "route": "/guides/farming-fields#unverified", "label": "Unlock: what is still unknown", "labelZh": "解锁：哪些仍未确认" }
+        ]
+      }
     },
     {
       "id": "crop-square",
@@ -113,7 +132,26 @@
       "relatedRoute": "/guides/farming-fields",
       "relatedLabel": "Remove a crop tile",
       "relatedLabelZh": "移除农田格",
-      "url": "https://steamcommunity.com/app/1501310/discussions/0/587307627624745847/"
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587307627624745847/",
+      "answer": {
+        "title": "Remove a crop plot with the Hoe",
+        "titleZh": "用锄头移除农田格",
+        "summary": "Equip the Hoe and use its plantation-removal action on the plot you want to remove. The 14 September update 0.8.10.868 added this option; each removal costs 2 Nature Skill Points.",
+        "summaryZh": "装备锄头，对准准备移除的田块，使用移除种植地的操作。9月14日的0.8.10.868更新加入此功能，每次扣2点自然技能点。",
+        "unresolved": "The dry-day workaround below is a July reply, not the only removal method after that update. If you want to keep the crop, follow planting and daily care rather than removing its plot.",
+        "unresolvedZh": "下方等待干燥日的办法来自7月旧回复，不是该更新后唯一的移除方法。想保留作物时，应查看种植与日常照料，而不是移除田块。",
+        "historyNote": "The 20 August collection recorded a 31 July moderator reply about empty plots drying away. It predates Hoe removal. That historical advice is not a watering schedule for planted crops.",
+        "historyNoteZh": "8月20日的收录记录保存了7月31日版主关于空田自然消失的答复，早于锄头移除功能。旧等待办法不能当作已种作物的浇水计划。",
+        "reviewedAt": "2026-10-23",
+        "searchTags": "farming hoe remove empty crop plot plantation dry days 锄头 移除 农田格 种植地",
+        "statusLabel": "Official update · 0.8.10.868",
+        "statusLabelZh": "官方更新 · 0.8.10.868",
+        "officialUpdateId": "update-0-8-10-868",
+        "links": [
+          {"route":"/guides/farming-fields#watering","label":"Plot-removal steps and source","labelZh":"田块移除步骤与出处"},
+          {"route":"/guides/farming-fields#start-farming","label":"Keep a crop: planting and daily care","labelZh":"保留作物：种植与日常照料"}
+        ]
+      }
     },
     {
       "id": "fertility-prerequisites",
@@ -137,7 +175,28 @@
       "relatedRoute": "/guides/animal-guide",
       "relatedLabel": "Chicken care and fertility",
       "relatedLabelZh": "养鸡与受精",
-      "url": "https://steamcommunity.com/app/1501310/discussions/0/590686908802381288/"
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/590686908802381288/",
+      "answer": {
+        "title": "Infertile eggs: check breeding prerequisites, not egg size",
+        "titleZh": "鸡蛋显示未受精：先查繁殖条件，别与大鸡蛋混淆",
+        "statusLabel": "Moderator prerequisites available",
+        "statusLabelZh": "已有版主前置检查",
+        "summary": "For an Infertile egg, first check breeding age and all needs and satisfaction, as the moderator recommends. This is a breeding question; a missing Large Egg for Gigi belongs to the separate egg-size route.",
+        "summaryZh": "鸡蛋显示 Infertile（未受精）时，按版主答复先查繁殖年龄、全部需求与满意度。这是繁殖问题；Gigi 任务迟迟不出大鸡蛋，应走另一条尺寸与掉落排查。",
+        "unresolved": "No exact breeding age, success rate or recovery deadline is given. A rooster relocation helped one player with an inconsistent coop count; it is not a universal next-day fix.",
+        "unresolvedZh": "原答复没有具体繁殖年龄、成功概率或恢复天数。迁舍只帮助过一名报告鸡舍计数异常的玩家，不是保证第二天恢复的通用修复法。",
+        "historyNote": "The original August 17 record is preserved. Reply #1 is the moderator's prerequisite check. Reply #2 is Britto's relocation report; its initial and follow-up flock descriptions differ, so it does not establish a capacity rule or controlled recovery test. No game build is stated.",
+        "historyNoteZh": "保留8月17日原收录。#1是版主前置条件，#2是Britto的迁舍报告；首帖与后续的鸡群描述不一致，不能据此推出鸡舍容量规则或当作受控复现。原帖未注明游戏版本。",
+        "reviewedAt": "2026-10-23",
+        "animalSourceId": "thread-eggs-not-fertile",
+        "evidenceLabel": "August 17 moderator reply and separate player follow-up",
+        "evidenceLabelZh": "8月17日版主答复与独立标注的玩家后续",
+        "searchTags": "infertile fertile eggs breeding age satisfaction rooster chicken 未受精 受精蛋 繁殖年龄 公鸡 满意度",
+        "links": [
+          { "route": "/guides/animal-guide#fertility", "label": "Check Infertile eggs", "labelZh": "未受精蛋检查步骤" },
+          { "route": "/guides/gigi-large-egg-quest#eggs", "label": "Need a Large Egg for Gigi instead?", "labelZh": "其实是Gigi任务缺大鸡蛋？" }
+        ]
+      }
     },
     {
       "id": "animal-store-embargo",
@@ -161,7 +220,29 @@
       "relatedRoute": "/database/npcs",
       "relatedLabel": "NPC database",
       "relatedLabelZh": "NPC 数据库",
-      "url": "https://steamcommunity.com/app/1501310/discussions/0/590686595451166128/"
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/590686595451166128/",
+      "answer": {
+        "title": "Animal shop locked? Check heart colour before gifting again",
+        "titleZh": "动物商店打不开？先看心形颜色，别连续刷礼物",
+        "statusLabel": "Moderator checks available",
+        "statusLabelZh": "已有版主排查依据",
+        "summary": "For Angela or Malcolm's missing purchase tab, check whether the hearts are purple, not red. The moderator connects purple hearts with a shop embargo, and says only the first gift of a day improves the relationship. Do not treat more purple hearts as progress.",
+        "summaryZh": "Angela 或 Malcolm 的购买选项消失时，先看心形是紫色还是红色。版主把紫心与商店拒售联系起来，并说明每天只有第一份礼物能提升关系；紫心变多不是好感提升，别靠同一天连续送礼来刷关系。",
+        "unresolved": "No favourite item or recovery deadline is confirmed here. Plant gifts restored access for one player, not every NPC. If the shop is still unavailable, record the NPC, heart colour, working context and your game version.",
+        "unresolvedZh": "这里没有已确认的万能礼物或恢复天数。植物礼物恢复商店只是一名玩家的报告；仍无法购买时，记下NPC、心形颜色、是否在工作和游戏版本。",
+        "historyNote": "The August 19 scan is retained. Moderator replies #1 and #3 were posted August 15; the plant-gift recovery is Mancer's August 16 report #4. The thread names no game build, and does not establish a complete gift list, stock rule or relationship reward table.",
+        "historyNoteZh": "保留8月19日收录。版主#1、#3发表于8月15日；植物礼物恢复来自Mancer的8月16日#4。原帖未注明游戏版本，也没有证明完整喜好表、补货规则或关系奖励表。",
+        "reviewedAt": "2026-10-23",
+        "npcSourceId": "shop-embargo-thread",
+        "evidenceLabel": "August 15 moderator checks (build unstated)",
+        "evidenceLabelZh": "8月15日版主排查答复（未注明版本）",
+        "searchTags": "animal shop locked purchase tab missing Angela Malcolm purple hearts gifts embargo 动物商店 打不开 购买选项 紫心 红心 送礼 拒售",
+        "links": [
+          { "route": "/guides/animal-guide#shop-locked", "label": "Check hearts and gifts", "labelZh": "检查心形与送礼记录" },
+          { "route": "/database/npcs#angela", "label": "Angela's animal-care supplies", "labelZh": "Angela 的动物照料用品" },
+          { "route": "/database/npcs#malcolm", "label": "Malcolm's merchant record", "labelZh": "Malcolm 商人资料" }
+        ]
+      }
     },
     {
       "id": "npc-relationship-recovery",
@@ -271,7 +352,28 @@
       "relatedRoute": "/database/animals#chicken-selling",
       "relatedLabel": "Chicken selling answer",
       "relatedLabelZh": "养鸡出售答案",
-      "url": "https://steamcommunity.com/app/1501310/discussions/"
+      "url": "https://steamcommunity.com/app/1501310/discussions/",
+      "answer": {
+        "title": "Extra roosters: the recorded meat-sale route",
+        "titleZh": "多余的公鸡：先留种，再按记录处理卖肉",
+        "statusLabel": "Moderator route recovered",
+        "statusLabelZh": "已找到版主操作答复",
+        "summary": "Keep any birds you want for breeding. For a surplus chicken, the moderator's route is to put it on the ground, use an axe or pickaxe, then sell the meat. Processing removes that bird; check the steps before choosing it.",
+        "summaryZh": "先留好繁殖用的鸡。对确实多余的鸡，版主给出的路线是放到地上，用斧头或镐处理，再卖肉；处理会失去这只鸡，选定前先看步骤。",
+        "unresolved": "The reply does not explicitly establish live-animal sale support. No build is stated; poultry instructions do not establish how cows or goats are sold. No fixed payout or egg-versus-meat profit is guaranteed.",
+        "unresolvedZh": "原答复没有明确确认活体出售功能，也未注明版本；鸡的处理方式不能推广到牛或山羊，不保证固定售价或比留鸡卖蛋更赚钱。",
+        "historyNote": "The August 21 scan is retained below. Its old summary overstated the reply as proof that live sales were unimplemented. Replies #1, #3 and #6 in the recovered August 2–3 thread support the poultry meat route, not that blanket denial.",
+        "historyNoteZh": "保留下方8月21日收录记录。旧摘要把答复扩大成了“活体出售未实装”的证明；本次找到8月2–3日原帖 #1、#3、#6，支持的是鸡的处理卖肉路线，而非这个笼统结论。",
+        "reviewedAt": "2026-10-23",
+        "animalSourceId": "thread-cant-sell-roosters",
+        "evidenceLabel": "August 2–3 moderator replies (build unstated)",
+        "evidenceLabelZh": "8月2–3日版主原答复（未注明版本）",
+        "searchTags": "chicken rooster surplus sell meat live sale poultry 多余公鸡 卖鸡 卖肉 活体出售",
+        "links": [
+          { "route": "/guides/animal-guide#profit", "label": "Surplus chicken steps", "labelZh": "多余鸡只处理步骤" },
+          { "route": "/guides/money-making#cashin", "label": "Check CashIn settlement", "labelZh": "检查 CashIn 出售结算" }
+        ]
+      }
     },
     {
       "id": "missing-seed",
@@ -294,7 +396,27 @@
       "relatedRoute": "/contribute?topic=crop",
       "relatedLabel": "Send a crop report",
       "relatedLabelZh": "提交作物报告",
-      "url": "https://steamcommunity.com/app/1501310/discussions/"
+      "url": "https://steamcommunity.com/app/1501310/discussions/",
+      "answer": {
+        "title": "Missing seed: check purchase, inventory or planted plot",
+        "titleZh": "种子不见了：先区分购买、背包与田块",
+        "statusLabel": "Checks available; cause unknown",
+        "statusLabelZh": "可先排查，原因未确认",
+        "summary": "Choose where the seed is missing. For a shop listing, open the seed-store filter and start with Any season. For a purchased item, record the name and inventory screen. For a planted seed, check the daily report and plantation warning before replanting.",
+        "summaryZh": "先分清在哪一步缺失：商店找不到时打开种子商店筛选，先用不限季节查名称；已买的种子找不到时保留名称与背包画面；种下后消失时先看日终报告和田块警告，再决定补种。",
+        "unresolved": "The old report names no seed or exact thread, so its cause remains unknown. Listing season is not growing season; configuration entries are not guaranteed current stock. These checks are not an inventory-recovery promise.",
+        "unresolvedZh": "旧收录没有具体种子名和原帖直链，原因仍未知。商品季节不等于种植季节，配置条目不保证当前有货；这条检查路径也不承诺找回背包物品。",
+        "historyNote": "The August 20 scan remains an unresolved lead. The links below provide existing lookup and warning-based checks, not proof that a particular player's seed was found. The .868 official source applies to plantation warnings, not shop stock or inventory recovery.",
+        "historyNoteZh": "8月20日原始收录继续作为未解决线索保留。这里只接入已有查询和警告排查，不表示已找到某位玩家的种子。.868官方来源针对田块警告，不证明商店库存或背包恢复。",
+        "reviewedAt": "2026-10-23",
+        "officialUpdateId": "update-0-8-10-868",
+        "searchTags": "missing seeds shop inventory planted lost buy seed season 种子不见 找不到种子 商店 背包 田块",
+        "links": [
+          { "route": "/guides/farming-fields#missing-seed", "label": "Choose the affected screen", "labelZh": "按缺失画面选择排查" },
+          { "route": "/guides/resources-and-materials?shop=seed-store#shops", "label": "Open seed-store listings", "labelZh": "查种子商店商品" },
+          { "route": "/contribute?topic=crop", "label": "Still unexplained? Send a crop report", "labelZh": "仍不明原因？提交作物报告" }
+        ]
+      }
     },
     {
       "id": "coal-zirconite",
@@ -359,7 +481,29 @@
       "relatedRoute": "/database/quests",
       "relatedLabel": "Quest database",
       "relatedLabelZh": "任务数据库",
-      "url": "https://steamcommunity.com/app/1501310/discussions/0/590686908802417907/"
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/590686908802417907/",
+      "answer": {
+        "title": "After Gigi: finish the egg route before seeking a follow-up",
+        "titleZh": "Gigi交蛋后没后续？先确认追捕与结束对话已完成",
+        "statusLabel": "Completion checks and dated endpoint",
+        "statusLabelZh": "收尾检查与有日期的主线边界",
+        "summary": "Handing over the eggs or reaching Gigi's home is not the whole recorded route. If the objective is still active, check the escape and final conversation first. Once the quest is complete, distinguish the August 17 main-story endpoint reply from current optional content.",
+        "summaryZh": "只交蛋或只到Gigi家，都不是已记录流程的全部。目标仍未完成时，先查脱离追捕和结束对话；任务确已完成后，再区分8月17日主线终点答复与当前可选内容。",
+        "unresolved": "The moderator included the events after hand-in, not merely the hand-in. No build is stated, and the reply does not prove that all game content is finished or give a hidden follow-up trigger.",
+        "unresolvedZh": "版主明确包括交付后的事件，不是只交蛋就结束。原帖未注明版本，也不能证明所有游戏内容已结束，或提供隐藏后续触发法。",
+        "historyNote": "The August 17 scan and source are preserved. The earlier summary shortened the answer too far: the moderator referred to the two-egg quest and its aftermath. The .842 objective record supplies the completion checks; no objective, failure rule or reward has been changed.",
+        "historyNoteZh": "保留8月17日收录与原帖。旧摘要压缩过度：版主说的是两枚鸡蛋任务及交付后的事件。.842目标记录提供具体收尾检查，本轮没有改目标、失败条件或奖励。",
+        "reviewedAt": "2026-10-23",
+        "npcSourceId": "gigi-official-end-thread",
+        "evidenceLabel": "August 17 moderator: full quest and aftermath",
+        "evidenceLabelZh": "8月17日版主：完整任务与交付后事件",
+        "searchTags": "Gigi after eggs hand-in home next quest completed final conversation police Gigi交蛋后 没后续 结束对话 送回家 追捕",
+        "links": [
+          { "route": "/guides/gigi-large-egg-quest#after", "label": "Check unfinished vs completed quest", "labelZh": "区分未完成与已完成任务" },
+          { "route": "/database/quests/real-eggs-real-evidence", "label": "Compare the five recorded objectives", "labelZh": "对照五个已记录目标" },
+          { "route": "/database/quests", "label": "Look up another recorded quest", "labelZh": "查其他已记录任务" }
+        ]
+      }
     },
     {
       "id": "content-boundary-review-lead",
@@ -437,7 +581,29 @@
     "relatedRoute": "/guides/electricity-power",
     "relatedLabel": "Electricity guide",
     "relatedLabelZh": "电力指南",
-    "url": "https://steamcommunity.com/app/1501310/discussions/"
+    "url": "https://steamcommunity.com/app/1501310/discussions/",
+    "answer": {
+      "title": "Can't find Victor? Check office access and quest progress",
+      "titleZh": "找不到 Victor？分清办公时间与任务进度",
+      "summary": "Read the opening days and hours posted at City Hall's door. An August moderator reply says Victor arrives a little after the building opens; it does not promise around-the-clock availability.",
+      "summaryZh": "先看市政厅门口公布的开放日期与时间。8月版主答复说明，Victor 会比市政厅开门时间稍晚到；“门总开着”不代表全天在办公室。",
+      "unresolved": "Bench already built, but the screen still says to build it? Press T and read the phone quest journal. If that does not help, the moderator suggests restarting the client—not a guaranteed fix.",
+      "unresolvedZh": "工作台已经建好，屏幕却仍提示建造？按 T 查看手机任务日志。日志检查没有帮助时，版主才建议重启客户端；这不是保证有效的通用修复。",
+      "historyNote": "The August scan kept only a list-page question. The recovered moderator replies discuss office access and one built-workbench tracker case. Neither states a game build or guarantees a fixed NPC timetable.",
+      "historyNoteZh": "8月收录只保留了讨论列表里的问题。找回的版主答复分别处理办公时间和已建工作台的追踪器显示问题，均未注明游戏版本，也没有保证 NPC 的固定作息。",
+      "reviewedAt": "2026-10-23",
+      "searchTags": "Victor City Hall Town Hall mayor office hours electricity workbench already built stuck tracker phone quest journal 市政厅 市长 Victor 维克多 不在 找不到 营业时间 开放 工作台 建好 任务 追踪器 手机 日志",
+      "statusLabel": "August moderator answers",
+      "statusLabelZh": "8月版主答复",
+      "links": [
+        {"route": "/guides/electricity-power#finding-victor", "label": "Check Victor's office hours", "labelZh": "查 Victor 的办公时间"},
+        {"route": "/guides/electricity-power#built-bench-tracker", "label": "Bench built, but tracker stuck?", "labelZh": "已建工作台的任务检查"}
+      ],
+      "sourceLinks": [
+        {"url": "https://steamcommunity.com/app/1501310/discussions/0/590686595451177771/", "label": "Moderator: City Hall hours (August 15)", "labelZh": "版主：市政厅时间（8月15日）"},
+        {"url": "https://steamcommunity.com/app/1501310/discussions/0/590686908802292555/", "label": "Moderator: built-bench tracker (August 16)", "labelZh": "版主：工作台已建好的追踪器（8月16日）"}
+      ]
+    }
   },
   {
     "id": "workbench-door-plan-question",
@@ -463,7 +629,28 @@
     "relatedRoute": "/guides/building-construction",
     "relatedLabel": "Building guide",
     "relatedLabelZh": "建造指南",
-    "url": "https://steamcommunity.com/app/1501310/discussions/"
+    "url": "https://steamcommunity.com/app/1501310/discussions/",
+    "answer": {
+      "title": "Missing door blueprint? Check the workbench list",
+      "titleZh": "工作台没有门蓝图？先检查列表",
+      "summary": "Try dragging the workbench list left and right with the left mouse button. In the retained player thread, the top arrow buttons left some blueprints hidden behind the side panel.",
+      "summaryZh": "先用鼠标左键左右拖动工作台的蓝图列表。原帖玩家发现，顶部箭头按钮移动选项时，会把一些蓝图藏在展开的侧栏后面。",
+      "unresolved": "If the blueprint is visible but the door will not place, check the doorway wall and door as separate pieces. These are player-reported checks, not a verified unlock or placement fix for every save.",
+      "unresolvedZh": "看得到蓝图却装不上？把“门墙”和“门本体”分开核对。这些排查来自玩家报告，不保证适用于所有存档，也没有确认蓝图何时解锁。",
+      "historyNote": "The August scan kept only the discussion-list question. The recovered original thread contains rllewis3's left-drag report and the author's side-panel explanation; Earth Hunter separately discusses door types and doorway walls. The replies do not state a game build.",
+      "historyNoteZh": "8月收录只保留了讨论列表里的问题。找回的原帖包含 rllewis3 的左键拖动经验、作者对侧栏遮挡的解释，以及 Earth Hunter 对门与门墙的单独提醒。回复未注明游戏版本。",
+      "reviewedAt": "2026-10-23",
+      "searchTags": "door blueprint missing workbench list side panel dragging exterior interior doorway wall 门 蓝图 图纸 工作台 找不到 列表 拖动 侧栏 门墙",
+      "statusLabel": "Player-reported list check",
+      "statusLabelZh": "玩家报告：列表查找",
+      "links": [
+        {"route": "/guides/roof-quest-stuck#symptom-b", "label": "Find the missing blueprint", "labelZh": "找回被藏住的蓝图"},
+        {"route": "/guides/roof-quest-stuck#symptom-c", "label": "Door versus doorway wall", "labelZh": "区分门与门墙"}
+      ],
+      "sourceLinks": [
+        {"url": "https://steamcommunity.com/app/1501310/discussions/0/587308167364406835/", "label": "Original door-blueprint player reports", "labelZh": "门蓝图玩家原帖"}
+      ]
+    }
   },
   {
     "id": "community-hub",
@@ -512,7 +699,29 @@
     "relatedRoute": "/guides/resources-and-materials",
     "relatedLabel": "Resources guide",
     "relatedLabelZh": "资源指南",
-    "url": "https://steamcommunity.com/app/1501310/discussions/"
+    "url": "https://steamcommunity.com/app/1501310/discussions/",
+    "answer": {
+      "title": "Need Stone? Start with the available gathering routes",
+      "titleZh": "缺石头？先查已有获取路线",
+      "summary": "Check the Stone still available on your ranch first (player reports). The .868 update says breaking rocks outside the ranch no longer triggers a police chase.",
+      "summaryZh": "先检查自己牧场上还可采集的石头（玩家报告）。官方 .868 更新说明，牧场外正常敲石不再触发警察追逐。",
+      "unresolved": "For construction, check your building's Stone requirements before spending the remaining supply. Deposit locations and respawn timing are not verified; the update does not establish rules for taking loose items.",
+      "unresolvedZh": "建造前先核对目标建筑需要多少石头，再分配剩余储量。具体矿点与刷新时间未确认；公告没有说明拾取散落物的所有权规则。",
+      "historyNote": "The August scan retained only a discussion-list question. The July Crime system reports describe collecting ranch Stone and running out; they are not a respawn test. Its older police warnings predate the .868 gathering change. Do not treat a player's drone-escape trick as a safe gathering method.",
+      "historyNoteZh": "8月收录只保留了讨论列表里的问题。7月 Crime system 帖有玩家提到采完牧场石头，但没有测试刷新；其中警察追逐提醒早于 .868 采集调整。不要把玩家躲无人机的技巧当作安全采集方法。",
+      "reviewedAt": "2026-10-23",
+      "searchTags": "stone rock rocks ranch gathering materials construction no stone available 石头 岩石 采集 牧场 建造 缺石头 找不到石头",
+      "statusLabel": "Gathering rule + player reports",
+      "statusLabelZh": "官方采集调整＋玩家报告",
+      "officialUpdateId": "update-0-8-10-868",
+      "evidenceSourceId": "current-stone-thread",
+      "evidenceLabel": "July Stone reports (not a respawn test)",
+      "evidenceLabelZh": "7月石头玩家报告（未测刷新）",
+      "links": [
+        {"route": "/database/materials/stone", "label": "Stone: gathering and supply limits", "labelZh": "石头获取与储量限制"},
+        {"route": "/guides/building-construction#materials", "label": "Plan Stone for construction", "labelZh": "建造前核对石头用量"}
+      ]
+    }
   },
   {
     "id": "coal-zerkonite-question",

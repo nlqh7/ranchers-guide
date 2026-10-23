@@ -90,6 +90,7 @@ function related(locale) {
     ['/zh/database/buildings/coop', '查看鸡舍材料'],
     ['/zh/database/quests#chicken-coop-mission', '鸡舍任务记录'],
     ['/zh/guides/gigi-large-egg-quest', '大鸡蛋任务路线'],
+    ['/zh/guides/animal-guide#fertility', '未受精蛋：繁殖条件检查'],
     ['/zh/tools/chicken-troubleshooter', '鸡消失或生病排查'],
     ['/zh/database/npcs#angela', 'Angela 商人条目'],
   ] : [
@@ -98,6 +99,7 @@ function related(locale) {
     ['/database/buildings/coop', 'Coop material list'],
     ['/database/quests#chicken-coop-mission', 'Chicken Coop Mission record'],
     ['/guides/gigi-large-egg-quest', 'Large-egg quest route'],
+    ['/guides/animal-guide#fertility', 'Infertile eggs: breeding checks'],
     ['/tools/chicken-troubleshooter', 'Missing or sick chicken checklist'],
     ['/database/npcs#angela', 'Angela seller profile'],
   ];

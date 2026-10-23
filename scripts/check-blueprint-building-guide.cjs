@@ -62,3 +62,28 @@ for (const locale of ['en', 'zh']) {
 }
 
 console.log('PASS: current-build blueprint placement, hammer building and edit guidance is source-bounded and directly searchable.');
+
+for (const locale of ['en','zh']) {
+  const prefix=locale==='zh'?'zh/':'';
+  const guide=fs.readFileSync(path.join(root,prefix,'guides/building-construction.html'),'utf8');
+  const safety=guide.match(/<section\b[^>]*id="remodelling-safety"[\s\S]*?<\/section>/)?.[0];
+  assert.ok(safety,`${locale}: remodelling needs a usable demolition-safety answer`);
+  assert.ok(safety.includes('data-search-entry'),`${locale}: players must be able to deep-link to the answer`);
+  assert.ok(safety.includes('574927238287540371'),`${locale}: retain the actual staff explanation, not a discussion index`);
+  assert.ok((locale==='zh'?/太阳能板[\s\S]*电气设备/:/solar panels[\s\S]*electrical/i).test(safety),`${locale}: inspect attached equipment before its supporting piece`);
+  assert.ok((locale==='zh'?/未注明.*版本/:/does not state.*build/i).test(safety),`${locale}: staff reply is not current-build reproduction`);
+  assert.ok(safety.includes(`href="/${prefix}problems/vehicle-recovery#decision"`),`${locale}: missing vehicle needs the existing recovery path`);
+  const reportHref=[...safety.matchAll(/href="([^"]+)"/g)].map(match=>new URL(match[1].replace(/&amp;/g,'&'),'https://theranchersguide.com')).find(url=>url.pathname===`/${prefix}tools/player-report`);
+  assert.ok(reportHref,`${locale}: retain a concrete reporting next step`);
+  assert.equal(reportHref.searchParams.get('topic'),'building',`${locale}: report must start in the building topic`);
+  assert.equal(reportHref.searchParams.get('case'),'demolition',`${locale}: report must keep the demolition answer context`);
+  const entry=guide.indexOf('href="#remodelling-safety"');
+  assert.ok(entry>guide.indexOf('END BLUEPRINT TUTORIAL REFERENCE')&&entry<guide.indexOf('BEGIN SHOP REFERENCE'),`${locale}: prevention must be reachable before large materials tables`);
+  for(const p of safety.match(/<p>[\s\S]*?<\/p>/g)||[])assert.ok(p.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().length<=240,`${locale}: keep safety paragraphs scannable`);
+  const index=JSON.parse(fs.readFileSync(path.join(root,prefix,'search-index.json'),'utf8'));
+  const destination=`/${prefix}guides/building-construction#remodelling-safety`;
+  assert.equal(index.filter(entry=>entry.url===destination).length,1,`${locale}: one canonical demolition answer in search`);
+  const questions=locale==='zh'?['拆屋顶 房子爆炸','太阳能板 拆除','房屋爆炸 资源丢失']:['house exploded after removing roof','solar panels demolition','building lost after removing roof'];
+  for(const question of questions)assert.equal(searchCore.searchDocuments(index,question,5)[0]?.url,destination,`${locale}: ${question} must open the safety/recovery decision path`);
+}
+console.log('PASS: remodelling prevention links to source-bounded recovery/reporting without replacing generated building instructions.');

@@ -73,7 +73,10 @@ function render(locale, npc) {
   }).join('\n');
   const safeSummary = safeNpcSummary(npc, locale);
   const safeWhenNeeded = safeNpcWhenNeeded(npc, locale);
-  return `<nav class="breadcrumb" aria-label="${zh ? '面包屑' : 'Breadcrumb'}"><a href="${prefix}/">${zh ? '首页' : 'Home'}</a> / <a href="${prefix}/database/npcs">${zh ? '人物' : 'NPCs'}</a> / ${esc(zh ? npc.zhName : npc.name)}</nav><a class="database-back" href="${prefix}/database/npcs">${zh ? '返回人物目录' : 'Back to NPC directory'}</a><h1>${esc(zh ? npc.zhName : npc.name)}</h1><p class="meta">${zh ? '人物条目 · 来源与版本边界可展开查看' : 'NPC entry · expand source and version boundaries as needed'}</p><p class="lead">${esc(safeSummary)}</p><p class="npc-when-needed"><strong>${zh ? '什么时候查找：' : 'When to look here: '}</strong>${esc(safeWhenNeeded)}</p>${story}<div class="story-scenes"><h2>${zh ? '对话主题与任务连接' : 'Conversation topics and quest links'}</h2>${sceneCards}</div>`;
+  const shopCheck = npc.relatedRoutes?.includes('/guides/animal-guide#shop-locked')
+    ? `<p><a class="btn btn-outline btn-compact" href="${prefix}/guides/animal-guide#shop-locked">${zh ? '购买选项消失？检查心形与送礼' : 'Purchase option missing? Check hearts and gifts'}</a></p>`
+    : '';
+  return `<nav class="breadcrumb" aria-label="${zh ? '面包屑' : 'Breadcrumb'}"><a href="${prefix}/">${zh ? '首页' : 'Home'}</a> / <a href="${prefix}/database/npcs">${zh ? '人物' : 'NPCs'}</a> / ${esc(zh ? npc.zhName : npc.name)}</nav><a class="database-back" href="${prefix}/database/npcs">${zh ? '返回人物目录' : 'Back to NPC directory'}</a><h1>${esc(zh ? npc.zhName : npc.name)}</h1><p class="meta">${zh ? '人物条目 · 来源与版本边界可展开查看' : 'NPC entry · expand source and version boundaries as needed'}</p><p class="lead">${esc(safeSummary)}</p><p class="npc-when-needed"><strong>${zh ? '什么时候查找：' : 'When to look here: '}</strong>${esc(safeWhenNeeded)}</p>${shopCheck}${story}<div class="story-scenes"><h2>${zh ? '对话主题与任务连接' : 'Conversation topics and quest links'}</h2>${sceneCards}</div>`;
 }
 
 function searchTags(locale, npc) {

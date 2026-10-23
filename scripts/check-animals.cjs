@@ -17,6 +17,35 @@ const LEVELS = new Set(data.meta.evidenceLevels);
 const VALIDITY = new Set(data.meta.validityValues);
 const SOURCE_KINDS = new Set(["official-news", "steam-thread", "local-video", "wiki", "local-archive", "community-scan", "store-page", "first-hand-build-resource"]);
 const SOURCE_IDS = new Set(Object.keys(data.sources));
+const poultrySource=data.sources['thread-cant-sell-roosters'];
+assert.equal(poultrySource.url,'https://steamcommunity.com/app/1501310/discussions/0/587307906419013076/','Selling advice needs its recovered exact moderator thread');
+assert.equal(poultrySource.build,'not stated in reply','A dated thread is not a named runtime build');
+const chickenSelling=data.species.find(x=>x.id==='chicken').fields.find(x=>x.key==='selling');
+const liveSaleDenial=/selling live animals is not implemented|cannot sell live animals|live-animal selling is not in the game|当前不能出售活体|不能出售活体动物|不能活卖|没有活体出售/i;
+assert.ok(!liveSaleDenial.test(chickenSelling.facts.map(x=>x.text).join(' ')),'A suggested meat route does not establish universal live-animal sale absence');
+for(const prefix of ['', 'zh/']){
+ const guide=fs.readFileSync(path.join(root,prefix,'guides/animal-guide.html'),'utf8');
+ const fertility=guide.match(/<section\b[^>]*id="fertility"[^>]*>[\s\S]*?<\/section>/)?.[0];
+ assert.ok(fertility,prefix+': Infertile eggs need a distinct searchable breeding check');
+ assert.ok(fertility.includes('590686908802381288'),prefix+': cite the exact breeding prerequisite reply');
+ assert.ok(fertility.includes(`/${prefix}guides/gigi-large-egg-quest#eggs`),prefix+': separate a missing large egg from a breeding problem');
+ const gigi=fs.readFileSync(path.join(root,prefix,'guides/gigi-large-egg-quest.html'),'utf8');
+ assert.ok(gigi.includes(`/${prefix}guides/animal-guide#fertility`),prefix+': large-egg readers need the reverse link to breeding checks');
+ const chickenEntry=fs.readFileSync(path.join(root,prefix,'database/animals/chicken.html'),'utf8');
+ assert.ok(chickenEntry.includes(`/${prefix}guides/animal-guide#fertility`),prefix+': the chicken profile must expose a distinct fertility action');
+ const shopSection=guide.match(/<section\b[^>]*id="shop-locked"[^>]*>[\s\S]*?<\/section>/)?.[0];
+ assert.ok(shopSection,prefix+': shop purchase failures need directly searchable steps');
+ assert.ok((prefix?/紫[\s\S]*第一份/:/purple[\s\S]*first gift/i).test(shopSection),prefix+': distinguish negative hearts and the daily first-gift limit');
+ assert.ok(shopSection.includes('590686595451166128'),prefix+': expose the actual shop-embargo reply');
+ assert.ok(!liveSaleDenial.test(guide),prefix+': repeated quick answers must not preserve the unsupported live-sale denial');
+ assert.ok(!/5,000\+|5,000\+C|普通成年鸡约\s*5,000/.test(guide),prefix+': the cited profit thread contains no ordinary5000 example');
+ assert.ok(guide.includes('587307906419013076'),prefix+': give the exact meat-route source, not only a forum index');
+ for(const file of ['database/animals.html','database/animals/chicken.html']){
+   const generated=fs.readFileSync(path.join(root,prefix,file),'utf8');
+   assert.ok(!liveSaleDenial.test(generated),prefix+file+': generated facts must not retain the unsupported live-sale denial');
+   if(file==='database/animals.html' || prefix==='zh/') assert.ok(generated.includes('587307906419013076'),prefix+file+': displayed selling advice needs the recovered exact source');
+ }
+}
 // Newly sourced care facts must retain the same version in both languages.
 for (const animal of data.species) {
   for (const fact of animal.zh?.groups.flatMap(group => group.facts) || []) {

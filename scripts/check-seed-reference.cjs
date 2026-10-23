@@ -42,7 +42,13 @@ for (const item of data.items.filter(item => item.rosterStatus === 'not-included
 }
 
 for (const prefix of ['', 'zh/']) {
+  const guide=fs.readFileSync(path.join(root,prefix,'guides/farming-fields.html'),'utf8');
+  const missing=guide.match(/<section\b[^>]*id="missing-seed"[^>]*>[\s\S]*?<\/section>/)?.[0];
+  assert.ok(missing,prefix+': seed questions need a separate purchase/inventory/plantation decision');
+  assert.ok(missing.includes(`/${prefix}guides/resources-and-materials?shop=seed-store#shops`),prefix+': open the actual seed-store filter,not the whole catalogue');
+  assert.ok(missing.includes('#crop-loss'),prefix+': planted seeds need the existing warning-based path');
   const html = fs.readFileSync(path.join(root, prefix, 'database/crops.html'), 'utf8');
+  assert.ok(missing.includes(`/${prefix}database/crops#browse-entries`) && html.includes('id="browse-entries"'), prefix+': a missing inventory item must reach the actual bilingual crop catalogue,not a nonexistent or legacy-only search anchor');
   for (const item of data.items.filter(item => item.rosterStatus === 'current-roster')) {
     assert.ok(html.includes(`data-seed-id="${item.id}"`), `${prefix}: current crop profile must expose ${item.id}`);
     assert.ok(html.includes(prefix ? item.zhName : item.name), `${prefix}: exact localized seed name must be visible`);

@@ -19,6 +19,28 @@ const materialRoutes = {ressource_wood:'wood-log',ressource_rock_simple:'stone',
 const sections = {supplies:['Supplies','物资'],generators:['Power generation','发电设备'],equipment:['Equipment','设备'],buildings:['Buildings','建筑'],animals:['Animals','动物'],'two-wheel':['Two-wheel vehicles','两轮车辆'],'four-wheel':['Four-wheel vehicles','四轮车辆'],vip:['Special vehicles','特殊车辆'],cars:['Cars','汽车'],vehicles:['Vehicles','车辆'],seeds:['Seeds & fertilizer','种子与肥料'],produce:['Produce','农产品'],groceries:['Groceries','杂货']};
 const seasons = {AllTheTime:['All seasons','全年'],Spring:['Spring','春季'],Summer:['Summer','夏季'],Autumn:['Autumn','秋季'],Winter:['Winter','冬季']};
 
+function renderGreenhousePlan(locale) {
+  const zh=locale==='zh',prefix=zh?'/zh':'';
+  const offer=data.offers.find(row=>row.itemId==='Custum_GreenHouse_01');
+  if(!offer?.materials.length)throw new Error('Missing greenhouse planning source');
+  const rows=offer.materials.map(material=>{
+    const item=data.items.find(row=>row.id===material.id);
+    const target=materialRoutes[material.id];
+    if(!item||!target)throw new Error(`Missing greenhouse material route: ${material.id}`);
+    const icon=icons.find(row=>row.sourceItemId===material.id);
+    return `<li data-greenhouse-material="${esc(material.id)}"><a href="${prefix}/database/materials/${target}">${icon?`<img src="${esc(icon.src)}" width="28" height="28" alt="" loading="lazy" decoding="async">`:''}<span>${esc(zh?item.zhName:item.name)}</span><strong>× ${material.quantity}</strong></a></li>`;
+  }).join('');
+  return `<!-- BEGIN GREENHOUSE PLAN REFERENCE -->
+<section id="greenhouse-materials" data-search-entry data-search-title="${zh?'1型温室材料：按构建清单核对缺料':'Green House Type 1 materials: check the configured list'}" data-search-tags="greenhouse building materials stone wood 温室 石头 原木 材料" data-search-status="${zh?'游戏构建配置，不是解锁实测':'Game-build configuration, not unlock verification'}">
+<h2>${zh?'1型温室：先核对配置材料':'Green House Type 1: check materials first'}</h2>
+<p>${zh?'已有材料记录可用于准备，但不是完整报价或当前解锁路线。先在游戏菜单确认同一建筑，再核对库存。':'The retained material list can help planning; it is not the full price or a current unlock route. Confirm the same building in your game menu before using your stock.'}</p>
+<ul class="farm-materials">${rows}</ul>
+<p><a class="btn btn-outline btn-compact" href="${prefix}/tools/ranch-checklist?building=${encodeURIComponent(offer.id)}#recipe-material-plan">${zh?'核对已有材料与缺料':'Check owned materials and shortages'}</a> <a class="btn btn-outline btn-compact" href="${prefix}/guides/building-construction#shop-plan-${offer.itemId}">${zh?'查看建造材料记录':'Open the building material record'}</a></p>
+<p class="source-note">${zh?'来源：保留的商店配置':'Source: retained shop configuration'} ${esc(data.build)} · ${zh?'此处不证明当前商人、库存、现金费用或解锁条件。':'This does not establish the current vendor, stock, cash cost or unlock requirements.'}</p>
+</section>
+<!-- END GREENHOUSE PLAN REFERENCE -->`;
+}
+
 function render(locale, buildingOnly=false, showHomeChoice=false) {
   const zh = locale === 'zh', prefix = zh ? '/zh' : '';
   const name = item => zh ? item.zhName : item.name;
@@ -92,9 +114,22 @@ for(const locale of ['en','zh']) for(const route of ['guides/resources-and-mater
   const before = fs.readFileSync(file,'utf8');
   if(!before.includes('<!-- BEGIN SHOP REFERENCE -->')) throw new Error(`Missing shop block: ${file}`);
   let after = before.replace(/<!-- BEGIN SHOP REFERENCE -->[\s\S]*?<!-- END SHOP REFERENCE -->/,render(locale,!route.includes('resources-and-materials'),route.includes('building-construction')));
-  if (route.includes('resources-and-materials')) after = after.replace(/shop-reference\.js\?v=[^"']+/g, 'shop-reference.js?v=20260911-shop1').replace(/crafting-reference\.css\?v=[^"']+/g, 'crafting-reference.css?v=20260911-shop1');
+  if (route.includes('resources-and-materials')) {
+    after = after.replace(/shop-reference\.js\?v=[^"']+/g, 'shop-reference.js?v=20261023-shop2').replace(/crafting-reference\.css\?v=[^"']+/g, 'crafting-reference.css?v=20260911-shop1');
+    after = after.replace(/(<script src="[^"]*shop-reference\.js\?v=[^"]+")>/g,'$1 defer>');
+  }
   if(before!==after) {
     if(process.argv.includes('--check')) { console.error(`STALE: ${file}`);stale=true; }
+    else fs.writeFileSync(file,after);
+  }
+}
+for(const locale of ['en','zh']) {
+  const file=path.join(root,locale==='zh'?'zh':'','guides/farming-fields.html');
+  const before=fs.readFileSync(file,'utf8');
+  if(!before.includes('<!-- BEGIN GREENHOUSE PLAN REFERENCE -->'))throw new Error(`Missing greenhouse block: ${file}`);
+  const after=before.replace(/<!-- BEGIN GREENHOUSE PLAN REFERENCE -->[\s\S]*?<!-- END GREENHOUSE PLAN REFERENCE -->/,renderGreenhousePlan(locale));
+  if(before!==after){
+    if(process.argv.includes('--check')){console.error(`STALE: ${file}`);stale=true;}
     else fs.writeFileSync(file,after);
   }
 }

@@ -88,6 +88,19 @@
     "prompt": "Record the blueprint, placement surface, nearby power source, resource cost shown and the exact placement response.",
     "promptZh": "记录蓝图、放置表面、附近电源、界面显示的材料成本，以及放置时的具体反馈。",
     "checks": ["Blueprint or building name", "Placement surface", "Nearby power source", "Exact placement response"],
-    "checksZh": ["蓝图或建筑名称", "放置表面", "附近电源", "放置时的具体反馈"]
+    "checksZh": ["蓝图或建筑名称", "放置表面", "附近电源", "放置时的具体反馈"],
+    "contexts": [{
+      "id": "demolition",
+      "label": "Building / demolition",
+      "labelZh": "建造 / 拆除",
+      "route": "/guides/building-construction#remodelling-safety",
+      "routeZh": "/zh/guides/building-construction#remodelling-safety",
+      "routeLabel": "Demolition checks before reporting",
+      "routeLabelZh": "报告前先看拆除检查",
+      "prompt": "Record the removed piece, any attached equipment and what was lost. Do not guess the cause or promise a rollback.",
+      "promptZh": "记录被拆部件、附着设备和损失，不先猜原因，也不假设一定能回档。",
+      "checks": ["Removed roof or wall piece", "Attached electrical equipment", "Missing buildings, items or vehicles", "Game build and reproduction steps"],
+      "checksZh": ["被拆除的屋顶或墙体部件", "附着的电气设备", "损失的建筑、物品或车辆", "游戏版本与操作步骤"]
+    }]
   }
 ]

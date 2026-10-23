@@ -46,7 +46,7 @@
     var observed = isZh ? "现象" : "What happened";
     var tried = isZh ? "我尝试过" : "What I tried";
     var ask = isZh ? "有人在当前版本遇到过同样的情况吗？" : "Has anyone seen the same thing on the current build?";
-    return [heading, "", topic + ": " + values.topic, build + ": " + values.build, platform + ": " + values.platform, "", observed + ": " + values.observation, "", tried + ": " + values.tried, "", ask].join("\n");
+    return [heading, "", topic + ": " + values.topic, build + ": " + (values.build || (isZh ? "未填写" : "Not provided")), platform + ": " + values.platform, "", observed + ": " + values.observation, "", tried + ": " + values.tried, "", ask].join("\n");
   }
 
   function updatePreview() {
@@ -63,17 +63,33 @@
   updateCards();
 
   if (!form) return;
+  var copyRequest = 0;
   form.addEventListener("input", updatePreview);
   form.addEventListener("submit", function (event) { event.preventDefault(); updatePreview(); });
   var copy = form.querySelector("[data-copy-question]");
+  function selectDraftForManualCopy() {
+    preview.focus();
+    preview.select();
+    setStatus(isZh ? "自动复制未完成，草稿已选中；请手动复制（Ctrl+C 或设备的复制菜单）。" : "Automatic copy did not complete. The draft is selected; copy it manually with Ctrl+C or your device's Copy menu.");
+  }
   if (copy) copy.addEventListener("click", function () {
     updatePreview();
     var text = preview.value;
+    var request = ++copyRequest;
+    function copyFailed() {
+      if (request === copyRequest) selectDraftForManualCopy();
+    }
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(function () { setStatus(isZh ? "问题草稿已复制。" : "Question draft copied."); });
+      setStatus(isZh ? "正在复制草稿…" : "Copying draft…");
+      try {
+        Promise.resolve(navigator.clipboard.writeText(text)).then(function () {
+          if (request === copyRequest) setStatus(isZh ? "问题草稿已复制。" : "Question draft copied.");
+        }, copyFailed);
+      } catch (_) {
+        copyFailed();
+      }
     } else {
-      preview.focus(); preview.select();
-      setStatus(isZh ? "请按 Ctrl+C 复制。" : "Press Ctrl+C to copy the draft.");
+      selectDraftForManualCopy();
     }
   });
   var openSteam = form.querySelector("[data-open-steam]");

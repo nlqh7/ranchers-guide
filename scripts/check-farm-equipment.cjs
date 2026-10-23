@@ -22,6 +22,11 @@ const recipes=require('../data/build-recipes.json');
 const searchCore=require('../assets/js/search-core.js');
 for(const prefix of ['','zh/']) {
   const html=fs.readFileSync(path.join(root,prefix,'guides/farming-fields.html'),'utf8');
+  const greenhouse=html.match(/<section\b[^>]*id="greenhouse-winter"[^>]*>[\s\S]*?<\/section>/)?.[0];
+  assert.ok(greenhouse,prefix+': existing-greenhouse checks must be separate from unknown unlock steps');
+  assert.ok(greenhouse.includes('590686908802202078'),prefix+': retain the actual dated greenhouse support reply');
+  assert.ok(greenhouse.includes(`/${prefix}guides/resources-and-materials?shop=seed-store#shops`),prefix+': connect seasonal seed purchase to the existing lookup');
+  assert.ok(html.includes('id="unverified"'),'Keep the old unlock anchor');
   const search=JSON.parse(fs.readFileSync(path.join(root,prefix,'search-index.json'),'utf8'));
   const crafting=fs.readFileSync(path.join(root,prefix,'guides/crafting-guide.html'),'utf8');
   for(const item of data.equipment) {

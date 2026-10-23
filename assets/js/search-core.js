@@ -384,6 +384,18 @@
     var exact = matches.filter(function (match) {
       return [match.title].concat(match.aliases || []).some(function (name) { return normalize(name) === normalized; });
     });
+    // A question may have extra explanatory words in its answer title. Prefer
+    // that top answer over an incidental entity fragment, without altering rank
+    // or removing fallback cards when no title covers the complete question.
+    if (!exact.length && matches.length) {
+      var terms = queryTokens(query);
+      var top = matches[0];
+      var coversQuestion = terms.length > 1 && [top.title].concat(top.aliases || []).some(function (name) {
+        var titleTerms = new Set(queryTokens(name));
+        return terms.every(function (term) { return titleTerms.has(term); });
+      });
+      if (coversQuestion) exact = [top];
+    }
     return !exact.length || exact.some(function (match) { return match.url === entity.route; });
   }
 

@@ -49,9 +49,22 @@
 </section>
 <!-- END HOE TUTORIAL REFERENCE -->
 
+<section id="missing-seed" data-search-entry data-search-title="种子不见了：购买、背包还是种下后消失？" data-search-aliases="种子不见了|找不到种子|买不了种子|种子买了背包找不到" data-search-status="检查路径 · 原因未确认" data-search-tags="种子 商店 背包 购买 种下 消失 季节 seed-store">
+  <h2>先分清种子在哪一步不见了</h2>
+  <p>先确定缺失发生在哪个画面，再尝试处理。商店没列出、买后背包找不到、已经种下后消失，不是同一个问题。</p>
+  <ol>
+    <li><strong>商店里找不到？</strong>打开<a href="/zh/guides/resources-and-materials?shop=seed-store#shops">种子商店商品表</a>，输入物品名称，先用“不限季节”查找。商品季节是商店条目分组，不等于作物种植季节，也不保证当前有货。</li>
+    <li><strong>已经买了，背包里找不到？</strong>用<a href="/zh/database/crops#browse-entries">作物目录</a>对照准确物品名，记下购买与背包画面。现有资料没有证明通用的背包丢失修复法。</li>
+    <li><strong>已经种下，后来消失？</strong>先看日终报告和田块信息，再按<a href="#crop-loss">田块警告对应步骤</a>排查；不要套用商店缺货的解释。</li>
+  </ol>
+  <p><strong>仍无法解释？</strong><a href="/contribute?topic=crop">提交作物报告</a>时写明种子名、游戏版本、季节、缺失发生在哪个画面，以及前后截图。先确认操作节点，再判断是否真的丢失。</p>
+  <p class="source-note">这是编辑整理的检查顺序，不是对旧匿名问题的诊断。商店表来自.842配置；田块排查关联.868官方警告，均不能证明当前背包状态或库存。</p>
+</section>
+
 <section id="crop-loss" data-search-entry data-search-status="官方更新 · 0.8.10.868" data-search-title="作物消失或品质下降：按田块提示处理" data-search-tags="种子消失 作物丢失 草莓 茄子 品质 换季 缺水 鸟 杂草"><h2>作物消失或品质下降，先查哪里？</h2><p>同时查看日终报告和出问题田块的信息弹窗，按具体提示处理，不要只凭换季猜原因，也不要先认定是存档错误。</p><div class="data-table-wrap" tabindex="0" role="region" aria-label="作物问题与处理方法"><table class="guide-answer-table"><thead><tr><th scope="col">游戏提示</th><th scope="col">下一步</th></tr></thead><tbody><tr><th scope="row">鸟吃掉了种子</th><td>放置<a href="#farm-prop_Scarecrow_00">稻草人</a>保护田块。</td></tr><tr><th scope="row">鸟吃掉了一部分产物</th><td>放置<a href="#farm-prop_Scarecrow_00">稻草人</a>保护田块。</td></tr><tr><th scope="row">换季导致田块被毁</th><td>补种前核对该作物的种植季节。</td></tr><tr><th scope="row">缺水导致田块干枯</th><td>恢复浇水，并持续保持田块有水。</td></tr><tr><th scope="row">杂草导致产物品质下降</th><td>定期清除杂草。</td></tr><tr><th scope="row">缺水导致产物品质下降</th><td>恢复浇水；这是品质下降提示，不等同于田块干枯。</td></tr></tbody></table></div><p>田块信息弹窗还会显示种子名、种植季节、生长时间和是否支持多次收获；只有产物成熟时才会显示“收获”按钮。</p><p class="source-note"><a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1843481262701719" rel="noopener noreferrer">0.8.10.868 官方更新（9 月 14 日）</a>。提示能帮助判断原因，但不保证已损失作物可以恢复。</p></section>
 
     <nav class="toc" aria-label="页面目录"><strong>本指南内容</strong><ul>
+      <li><a href="#missing-seed">种子不见：先区分发生在哪个画面</a></li>
       <li><a href="#harvest-rules">忘记收获 &amp; 种子什么时候消失</a></li>
       <li><a href="#season-change">换季清田规则</a></li>
       <li><a href="#regrow">返收作物 vs 一次性作物</a></li>
@@ -59,7 +72,9 @@
       <li><a href="#selling">出售收获</a></li>
       <li><a href="#fertilizer">肥料：官方警告仍有效</a></li>
       <li><a href="#start-farming">新存档先怎么做</a></li>
-      <li><a href="#unverified">温室解锁待核对</a></li>
+      <li><a href="#greenhouse-winter">已有温室：冬季使用检查</a></li>
+      <li><a href="#greenhouse-materials">温室材料准备</a></li>
+      <li><a href="#unverified">温室解锁：仍未确认</a></li>
       <li><a href="#limitations">已知限制</a></li>
       <li><a href="#faq">种地常见问题</a></li>
     </ul></nav>
@@ -111,13 +126,32 @@
       <p><strong>0.8.10.842 热修说明（2026-08-21）没有公布肥料修复</strong>，但补丁说明没写不能证明行为一定没变；本站尚未测量最新版本的肥料回报。在当前版本测试或官方回复确认计算已调整前，谨慎做法是<strong>不要大额投资肥料</strong>。肥料在商店里仍能看到（Leafy Market 的 Seed &amp; Fertilizer 页签，0.8.10.455 视频观测）——能买不等于回报已正常。</p>
     </section>
 
-    <section id="unverified" data-search-entry data-search-title="温室解锁待核对" data-search-tags="温室 greenhouse 解锁"><h2>温室解锁待核对</h2>
-      <p>当前构建的锄头开田流程已经在上方列出；温室的当前解锁路线仍需要直接来源。</p>
-      <h3>温室能做什么、怎么解锁？（规则已确认，路线仍挂起）</h3>
-      <p><span class="evidence-badge evidence-official">当前官方答复</span> <span class="evidence-badge evidence-historical">解锁路径为历史资料</span></p>
-      <p>开发者的<a href="https://steamcommunity.com/app/1501310/discussions/0/590686908802202078/">当前温室答复</a>说明：温室不需要供暖，温室内积雪是不会影响作物的画面问题，也没有冬季种子；温室仍可支持在种子正常季节之外种植。这已经回答了“要不要加热”，但没有证明当前商人、价格、材料清单或解锁触发条件。</p>
-      <p>一名当前版本玩家（Mancer，<a href="https://steamcommunity.com/app/1501310/discussions/0/587307906419070201/">茄子帖</a>）也报告在温室里冬季种植，可作为背景互证，不新增数值规则。唯一的解锁路径记录来自<strong>2022 年 11 月</strong>：开发者当时说温室蓝图在 Lina 处购买，需要材料加钱；这个商人、价格和条件在 Early Access 中是否保留仍未知。</p>
-      <p><strong>计划验证（尚未做）：</strong>在当前版本查看 Lina 的蓝图列表有没有温室及材料清单；如果建成，在温室内试种反季种子并记录结果。</p>
+    <section id="greenhouse-winter" data-search-entry data-search-title="温室冬天怎么用：供暖、积雪与种子" data-search-aliases="温室需要加热吗|温室积雪|冬季温室" data-search-tags="温室 冬天 冬季 加热 供暖 积雪 种子 季节 浇水 杂草" data-search-status="8月16日版主答复 · 未注明版本">
+      <h2>已经有温室？按这几项检查冬季使用</h2>
+      <ol>
+        <li><strong>不要仅因积雪就购买温室供暖。</strong>8月16日版主说明温室无需供暖，室内积雪只是画面问题；这不代表可以拆掉<a href="/zh/guides/animal-guide#heater">动物住所的温控设备</a>。</li>
+        <li><strong>买种子和种植季节分开看。</strong>同一答复说种子按季节购买，但可以在温室内跨季种植。可查<a href="/zh/guides/resources-and-materials?shop=seed-store#shops">保留的种子商店条目</a>，它不保证当前库存。</li>
+        <li><strong>植物消失或不长？</strong>先检查浇水与杂草，再看<a href="#crop-loss">日终报告和田块警告</a>，不要仅凭积雪画面判断原因。</li>
+      </ol>
+      <p>原答复称当时尚未加入冬季作物，建议留存其他季节的种子供冬天使用。这是有日期的答复，不是本站刚在当前版本实测的作物名单。</p>
+      <p>设备材料见<a href="#farm-sprinkler_ceiling_n1">温室洒水器记录</a>；配置不能证明已实测的接法、覆盖面积或耗水时间单位。</p>
+      <p class="source-note"><a href="https://steamcommunity.com/app/1501310/discussions/0/590686908802202078/" rel="noopener noreferrer">Greenhouse and winter——8月16日版主 #3、#4、#7、#9</a>。原帖未注明游戏版本。</p>
+    </section>
+
+    <!-- BEGIN GREENHOUSE PLAN REFERENCE -->
+<section id="greenhouse-materials" data-search-entry data-search-title="1型温室材料：按构建清单核对缺料" data-search-tags="greenhouse building materials stone wood 温室 石头 原木 材料" data-search-status="游戏构建配置，不是解锁实测">
+<h2>1型温室：先核对配置材料</h2>
+<p>已有材料记录可用于准备，但不是完整报价或当前解锁路线。先在游戏菜单确认同一建筑，再核对库存。</p>
+<ul class="farm-materials"><li data-greenhouse-material="ressource_rock_simple"><a href="/zh/database/materials/stone"><img src="/assets/img/items/ressource_rock_simple-b24847725.png" width="28" height="28" alt="" loading="lazy" decoding="async"><span>石头</span><strong>× 20</strong></a></li><li data-greenhouse-material="ressource_wood"><a href="/zh/database/materials/wood-log"><img src="/assets/img/items/ressource_wood-b24847725.png" width="28" height="28" alt="" loading="lazy" decoding="async"><span>木材原木</span><strong>× 30</strong></a></li></ul>
+<p><a class="btn btn-outline btn-compact" href="/zh/tools/ranch-checklist?building=building-store-allthetime-Custum_GreenHouse_01#recipe-material-plan">核对已有材料与缺料</a> <a class="btn btn-outline btn-compact" href="/zh/guides/building-construction#shop-plan-Custum_GreenHouse_01">查看建造材料记录</a></p>
+<p class="source-note">来源：保留的商店配置 0.8.10.842 · 此处不证明当前商人、库存、现金费用或解锁条件。</p>
+</section>
+<!-- END GREENHOUSE PLAN REFERENCE -->
+
+    <section id="unverified" data-search-entry data-search-title="温室解锁路线：还有哪些未知" data-search-tags="温室 greenhouse 解锁 商人 价格 蓝图 Lina"><h2>温室解锁：仍未确认</h2>
+      <p><strong>已有材料配置，不等于实测了解锁路线。</strong>当前商人、现金费用和解锁触发仍未确认。花资源前，先将当前游戏菜单中的建筑与保留记录对照。</p>
+      <p class="source-note">仅作历史：2022年11月的记录曾提到Lina出售温室蓝图，不能据此确认抢先体验版的商人或购买路线。</p>
+      <p><a href="https://steamcommunity.com/app/1501310/discussions/0/587307906419070201/" rel="noopener noreferrer">8月茄子帖</a>也有玩家报告冬季在温室种植；它是使用背景，不是解锁证据。</p>
     </section>
 
     <section id="limitations" data-search-entry data-search-title="已知限制" data-search-tags="证据 限制 版本 待测"><h2>已知限制</h2>

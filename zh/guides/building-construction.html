@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Ranchers 建造与放置指南 | 材料、蓝图与任务卡点</title>
-  <meta name="description" content="The Ranchers 中文建造指南：官方确认的建造范围、工作台蓝图、石头木材等材料、屋顶任务和放置问题的当前证据边界，并给出遇到蓝图不识别时的记录与排查步骤。">
+  <meta name="description" content="The Ranchers 建造指南：查石头、原木、干草等建筑材料与部件配方，用备料表合并需求，完成蓝图并排查屋顶和墙体目标；拆除前检查太阳能板等电气设备，发生损失后转到车辆找回与问题报告入口。">
   <link rel="canonical" href="https://theranchersguide.com/zh/guides/building-construction">
   <link rel="alternate" hreflang="en" href="https://theranchersguide.com/guides/building-construction"><link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/guides/building-construction"><link rel="alternate" hreflang="x-default" href="https://theranchersguide.com/guides/building-construction">
-  <meta property="og:type" content="article"><meta property="og:site_name" content="The Ranchers Guide"><meta property="og:title" content="The Ranchers 中文建造与放置指南"><meta property="og:description" content="从材料准备到蓝图放置，区分官方确认内容和仍需当前版本复核的任务卡点。"><meta property="og:url" content="https://theranchersguide.com/zh/guides/building-construction"><meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
+  <meta property="og:type" content="article"><meta property="og:site_name" content="The Ranchers Guide"><meta property="og:title" content="The Ranchers 中文建造与放置指南"><meta property="og:description" content="建筑材料、蓝图步骤、屋顶与墙体答案，以及拆除前的电气设备检查。"><meta property="og:url" content="https://theranchersguide.com/zh/guides/building-construction"><meta property="og:image" content="https://theranchersguide.com/assets/img/og-cover.jpg">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="stylesheet" href="/assets/css/style.css?v=20261003-r15"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4804883741146501" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/assets/css/building-requirements.css?v=20260828-1">
 <link rel="stylesheet" href="/assets/css/crafting-reference.css?v=20260914-entry1">
@@ -30,6 +30,7 @@
   <p class="recipe-boundary"><span class="evidence-badge evidence-build">游戏文件</span> 来源没有给出精确体力消耗、每个物件的建造步骤数、材料需求、具体按键绑定、完整编辑选项、拆除返还，也没有证明当前解锁与可用条件。 核对版本 0.8.10.842。</p>
 </section>
 <!-- END BLUEPRINT TUTORIAL REFERENCE -->
+<aside class="notice remodelling-entry"><strong>准备改建？</strong><a class="shop-recipe-link" href="#remodelling-safety">拆屋顶前，先检查附着的电气设备 →</a></aside>
 <h2 class="visually-hidden" id="building-materials">建筑材料一览</h2>
 <!-- BEGIN SHOP REFERENCE -->
 <section class="crafting-reference shop-reference" aria-label="建筑商店材料表">
@@ -160,6 +161,20 @@
 </details>
 
     <section class="answer-box"><h2>先说结论</h2><p>先按<a href="/zh/guides/resources-and-materials">资源路线</a>准备材料，再在工作台确认蓝图名称和任务目标。想从任务一路完成鸡舍，可直接走<a href="/zh/database/buildings/coop#first-coop-route">首个鸡舍路线</a>。放置失败时不要先猜是 bug：记录准确任务文字、使用的蓝图、地块状态和版本，才能判断是材料、权限、碰撞还是目标识别问题。</p><p><strong>建造需要锆矿，或你看到的“Zerkonite”吗？</strong> 当前有来源支持的路径是<a href="/zh/database/materials#zirconite">锆矿答案</a>：去市政厅找 Meriam 购买；在当前复核版本中不要把矿洞当成可用来源。</p></section>
+    <section class="answer-box" id="remodelling-safety" data-search-entry data-search-title="拆屋顶后房子爆炸：太阳能板与拆除前检查" data-search-tags="改建 拆除 屋顶 太阳能板 电气设备 附着 支撑 房屋爆炸 资源丢失 车库损毁" data-search-status="工作人员解释；版本未注明">
+      <h2>拆屋顶后房子爆炸？改建前先检查</h2>
+      <p><strong>先检查附着设备，不要直接拆承载它的部件。</strong>工作人员解释：太阳能板等电气设备附着的物体被摧毁时，设备会爆炸。</p>
+      <ol>
+        <li><strong>先看清准备拆哪一块。</strong>检查该屋顶或墙上是否附着太阳能板或其他电气设备。</li>
+        <li><strong>有设备就先停手。</strong>如果无法单独移开设备，先保留支撑它的部件。不要把断电当作拆除安全的证明。</li>
+        <li><strong>不要把车留在施工旁。</strong>拆车辆附近的物体前，也先看<a href="/zh/problems/vehicle-recovery#explosion">车辆拆除爆炸提醒</a>。</li>
+      </ol>
+      <h3>房子或车辆已经损失了？</h3>
+      <p>先停止继续拆除，记录拆掉的部件、附着设备和损失。原讨论没有给出房屋或材料的恢复办法，不要假设一定能回档。</p>
+      <a class="shop-recipe-link" href="/zh/problems/vehicle-recovery#decision">车不见了：按 My Garage / 扣押路径检查 →</a>
+      <a class="shop-recipe-link" href="/zh/tools/player-report?topic=building&amp;case=demolition">整理版本、附着设备与操作经过 →</a>
+      <details><summary style="min-height:44px;padding-block:8px">来源与适用范围</summary><p><a href="https://steamcommunity.com/app/1501310/discussions/0/574927238287540371/" rel="noopener noreferrer">Jennoula 9月26日工作人员回复 #2</a>未注明游戏版本，也没有提供经过测试的安全拆除顺序。上面的步骤是预防性检查，不是已复现的修复。</p></details>
+    </section>
     <section class="answer-box" id="roof-wall-answers" data-search-entry data-search-title="屋顶与屋顶延伸、告别尼龙帐篷的墙体目标" data-search-tags="屋顶 放置在墙体正上方 屋顶延伸 带大窗户 再见尼龙帐篷 首次屋顶教程 目标不计数" data-search-status="官方更新">
       <h2>哪种屋顶或墙才算数？</h2>
       <p><span class="evidence-badge evidence-official">官方 · 0.8.10.868</span> 屋顶放置在墙体正上方；屋顶延伸（Roof Extension）用于扩展现有屋顶结构。先核对你正在放置哪种蓝图，再检查支撑与位置。</p>
@@ -168,7 +183,7 @@
       <p>别急着判定追踪器坏了：先看手机日志当前目标和你实际完成的部件，再按<a href="/zh/guides/roof-quest-stuck">屋顶任务清单</a>逐项核对；任务是失败而非卡住时，见<a href="/problems/failed-quest-replay">重接失败的任务</a>。</p>
       <p>网格行为与其他部件的兼容性仍未确认。来源：<a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1843481262701719" rel="noopener noreferrer">.868 公告</a> · <a href="https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1844115010489002" rel="noopener noreferrer">.871 公告</a></p>
     </section>
-    <nav class="toc" aria-label="页面目录"><strong>本指南内容</strong><ul><li><a href="#building-materials">建筑材料一览</a></li><li><a href="#confirmed">官方确认了什么</a></li><li><a href="#roof-wall-answers">哪种屋顶或墙算数</a></li><li><a href="#workbench">工作台菜单与已观测蓝图</a></li><li><a href="#find-windows">找到窗户蓝图</a></li><li><a href="#materials">石头、木材、干草、木炭与锆矿</a></li><li><a href="#reports">仍需复核的放置报告</a></li><li><a href="#record">遇到问题要记录什么</a></li><li><a href="#faq">建造常见问题</a></li>
+    <nav class="toc" aria-label="页面目录"><strong>本指南内容</strong><ul><li><a href="#building-materials">建筑材料一览</a></li><li><a href="#confirmed">官方确认了什么</a></li><li><a href="#roof-wall-answers">哪种屋顶或墙算数</a></li><li><a href="#remodelling-safety">改建前的拆除检查</a></li><li><a href="#workbench">工作台菜单与已观测蓝图</a></li><li><a href="#find-windows">找到窗户蓝图</a></li><li><a href="#materials">石头、木材、干草、木炭与锆矿</a></li><li><a href="#reports">仍需复核的放置报告</a></li><li><a href="#record">遇到问题要记录什么</a></li><li><a href="#faq">建造常见问题</a></li>
           <li><a href="#blueprint-building">蓝图建造步骤</a></li></ul></nav>
     <h2 id="confirmed">官方确认了什么</h2>
     <p>官方 Kickstarter 和 Steam 资料把建造描述为自由度较高的系统：房屋可以进行室内外设计，玩家还可以使用大量地基、窗户、屋顶和其他结构部件。官方资料提到超过 200 个建造物品，但没有给出当前版本每个部件的完整配方。</p>

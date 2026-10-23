@@ -30,7 +30,7 @@
     },
     "official-stone-wood-gathering-871": {
       "kind": "official-news",
-      "title": "Official update 0.8.10.871: gathering wood and stone outside the ranch",
+      "title": "Official update 0.8.10.871: camera controls (not a gathering source)",
       "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1844115010489002",
       "author": "RedPilz Studio",
       "date": "2026-09-16",
@@ -125,12 +125,12 @@
           "sourceIds": ["current-stone-thread", "community-material-scan"]
         },
         {
-          "text": "Official 0.8.10.871 notes say normal wood and stone gathering outside the ranch does not trigger a police chase. The 0.8.10.868 notes describe this as temporary while dedicated gathering areas are developed; this does not establish rules for taking loose items or every ownership interaction.",
-          "zhText": "官方 0.8.10.871 公告说明，牧场外正常采集木材和石头不会触发警察追逐；0.8.10.868 将此说明为等待专门采集区域期间的临时调整。这没有说明拾取散落物或所有权交互的规则。",
+          "text": "Official 0.8.10.868 notes say cutting trees or breaking rocks outside the ranch no longer triggers a police chase, as a temporary change while dedicated gathering areas are developed. This does not establish rules for taking loose items or every ownership interaction.",
+          "zhText": "官方 0.8.10.868 公告说明，牧场外砍树或敲石不再触发警察追逐，这是等待专门采集区域期间的临时调整。这没有说明拾取散落物或所有权交互的规则。",
           "evidenceLevel": "official",
-          "build": "0.8.10.871; temporary change introduced in 0.8.10.868",
+          "build": "0.8.10.868 (temporary gathering change)",
           "validity": "current",
-          "sourceIds": ["official-stone-wood-gathering-871", "official-stone-wood-gathering-868"]
+          "sourceIds": ["official-stone-wood-gathering-868"]
         },
         {
           "text": "A July 2026 player report warned that taking stone from land you do not own could trigger fines or jail. It predates the 0.8.10.868 change and does not establish the current rule for normal rock gathering; other theft interactions remain unverified.",
@@ -158,8 +158,8 @@
       "zhSearchTitle": "原木怎么获得",
       "searchTags": "wood log timber tree chop charcoal building red tent recipe",
       "zhSearchTags": "原木 木材 木头 砍树 木炭 建造 红帐篷 配方",
-      "summary": "Cutting trees yields Wood Logs. Official 0.8.10.871 notes say normal wood gathering outside the ranch does not trigger a police chase; respawn timing is unverified.",
-      "zhSummary": "砍树可获得原木。官方 0.8.10.871 公告说明，牧场外正常采木不会触发警察追逐；树木刷新时间仍未知。",
+      "summary": "Cutting trees yields Wood Logs. Official 0.8.10.868 notes say cutting trees outside the ranch no longer triggers a police chase; respawn timing is unverified.",
+      "zhSummary": "砍树可获得原木。官方 0.8.10.868 公告说明，牧场外砍树不再触发警察追逐；树木刷新时间仍未知。",
       "whenNeeded": "Keep Wood Logs for early construction before testing the community charcoal lead; the retained evidence does not establish a universal recipe list.",
       "zhWhenNeeded": "早期建造优先保留原木，再考虑测试社区木炭线索；现有证据不能推出完整配方表。",
       "relatedRoutes": ["/guides/building-construction#materials", "/guides/crafting-guide"],
@@ -173,12 +173,12 @@
           "sourceIds": ["community-material-scan"]
         },
         {
-          "text": "Official 0.8.10.871 notes say normal wood and stone gathering outside the ranch does not trigger a police chase. The 0.8.10.868 notes describe this as temporary while dedicated gathering areas are developed; this does not establish rules for taking loose items or every ownership interaction.",
-          "zhText": "官方 0.8.10.871 公告说明，牧场外正常采集木材和石头不会触发警察追逐；0.8.10.868 将此说明为等待专门采集区域期间的临时调整。这没有说明拾取散落物或所有权交互的规则。",
+          "text": "Official 0.8.10.868 notes say cutting trees or breaking rocks outside the ranch no longer triggers a police chase, as a temporary change while dedicated gathering areas are developed. This does not establish rules for taking loose items or every ownership interaction.",
+          "zhText": "官方 0.8.10.868 公告说明，牧场外砍树或敲石不再触发警察追逐，这是等待专门采集区域期间的临时调整。这没有说明拾取散落物或所有权交互的规则。",
           "evidenceLevel": "official",
-          "build": "0.8.10.871; temporary change introduced in 0.8.10.868",
+          "build": "0.8.10.868 (temporary gathering change)",
           "validity": "current",
-          "sourceIds": ["official-stone-wood-gathering-871", "official-stone-wood-gathering-868"]
+          "sourceIds": ["official-stone-wood-gathering-868"]
         },
         {
           "text": "Launch-build footage shows a Red Tent recipe requiring 10 Wood Logs and 8 Stone; it does not prove other recipe costs.",

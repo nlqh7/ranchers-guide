@@ -187,13 +187,24 @@
       "date": "2026-08",
       "build": "0.8.10.x"
     },
+    "thread-eggs-not-fertile": {
+      "kind": "steam-thread",
+      "title": "Eggs Not Getting Fertile — moderator prerequisite reply #1",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/590686908802381288/",
+      "author": "Britto / Jennoula",
+      "date": "2026-08-17",
+      "build": "not stated in reply",
+      "reviewedAt": "2026-10-23"
+    },
     "thread-cant-sell-roosters": {
       "kind": "steam-thread",
       "title": "Steam thread \"Can't sell roosters\" (Jennoula, official)",
-      "url": null,
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/587307906419013076/",
       "author": "Jennoula",
-      "date": "2026-08",
-      "build": "0.8.10.x"
+      "date": "2026-08-02",
+      "build": "not stated in reply",
+      "reviewedAt": "2026-10-23",
+      "replyNumbers": [1, 3, 6]
     },
     "thread-heater-mount": {
       "kind": "steam-thread",
@@ -262,8 +273,9 @@
       "title": "Steam thread \"Livestock profit\" (Numinex, BeBeForever16)",
       "url": "https://steamcommunity.com/app/1501310/discussions/0/587308261888256098/",
       "author": "Numinex / BeBeForever16",
-      "date": "2026-08",
-      "build": "0.8.10.x"
+      "date": "2026-08-05",
+      "build": "not stated in posts",
+      "reviewedAt": "2026-10-23"
     },
     "thread-hay": {
       "kind": "steam-thread",
@@ -1003,6 +1015,13 @@
           "label": "Breeding & hatching",
           "facts": [
             {
+              "text": "For eggs not becoming fertile, the August 17 moderator reply asks players to check that the birds have reached breeding age and that all needs and satisfaction are met. It gives no exact age, success rate or guaranteed recovery time.",
+              "evidenceLevel": "official",
+              "build": "not stated in reply",
+              "validity": "unknown",
+              "sourceIds": ["thread-eggs-not-fertile"]
+            },
+            {
               "text": "An egg-hatching mechanic for oviparous animals is documented.",
               "evidenceLevel": "official",
               "build": "alpha-2023",
@@ -1248,22 +1267,29 @@
           "label": "Selling & profit",
           "facts": [
             {
-              "text": "Selling live animals is not implemented. The official recommendation for surplus chickens and roosters is to dispatch them with an axe, pickaxe or weapon and sell the meat. The animal must be placed on the ground first — tools do not work while carrying it (that is intended, not a bug).",
+              "text": "The August moderator reply describes a meat-sale route for surplus poultry: put the chicken on the ground, use an axe or pickaxe, then sell the meat. It does not explicitly confirm live-animal sale support.",
               "evidenceLevel": "official",
-              "build": "0.8.10.x",
-              "validity": "current",
+              "build": "not stated in reply",
+              "validity": "unknown",
               "sourceIds": [
                 "thread-cant-sell-roosters"
               ]
             },
             {
-              "text": "One detailed profit report values an adult (10+ days) Legendary chicken at roughly 24,000C in meat (1× 9,000 meat + 2× 500 legs + 8× 1,750 breasts), with Legendary eggs at S 250 / M 375 / L 590; a second player puts an ordinary mature chicken at 5,000+C of meat. Single-source numbers — meat out-earning eggs is the corroborated direction, the figures are not.",
+              "text": "Numinex reports a 10+ day Legendary chicken containing meat items valued at 24,000C: 1× 9,000 chicken, 2× 500 legs and 8× 1,750 breasts. This is one player's item-value report, not verified net profit or a current payout guarantee.",
               "evidenceLevel": "unverified-lead",
-              "build": "0.8.10.x",
-              "validity": "current",
+              "build": "not stated in posts",
+              "validity": "unknown",
               "sourceIds": [
                 "thread-livestock-profit"
               ]
+            },
+            {
+              "text": "The same report lists Legendary eggs at S 250C, M 375C and L 590C. These are dated player-reported values, not confirmed current sale prices or a cost-and-time comparison of eggs versus meat.",
+              "evidenceLevel": "unverified-lead",
+              "build": "not stated in posts",
+              "validity": "unknown",
+              "sourceIds": ["thread-livestock-profit"]
             }
           ]
         }
@@ -1391,7 +1417,13 @@
             "id": null,
             "facts": [
               {
-                "text": "成年鸡在需求和满意度较高时开始产蛋；蛋的尺寸与是否受精包含随机性。把鼠标悬停在鸡蛋上可查看是否受精。",
+              "text": "未受精时，8月17日版主要求先核对繁殖年龄，以及全部需求与满意度；原答复没有给出具体年龄、成功概率或固定恢复时间。",
+              "badge": "official",
+              "build": "原帖未注明版本",
+              "sourceIds": ["thread-eggs-not-fertile"]
+            },
+            {
+              "text": "成年鸡在需求和满意度较高时开始产蛋；蛋的尺寸与是否受精包含随机性。把鼠标悬停在鸡蛋上可查看是否受精。",
                 "badge": "official"
               },
               {
@@ -1403,8 +1435,10 @@
                 "badge": "video"
               },
               {
-                "text": "当前不能出售活体动物；官方建议把多余成鸡放到地上后处理，并出售肉类。玩家报告的具体肉价差异较大，本站不把它当统一售价。",
-                "badge": "official"
+                "text": "8月版主给出的多余鸡处理路线是：先放到地上，用斧头或镐处理，再出售肉类。该答复没有明确确认活体出售功能是否存在；也不能把单次玩家报价当成当前统一售价。",
+                "badge": "official",
+                "build": "原帖未注明版本",
+                "sourceIds": ["thread-cant-sell-roosters"]
               }
             ]
           },

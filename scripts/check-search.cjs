@@ -284,6 +284,8 @@ assert.ok(missingChickenResults.some((result) => result.url === "/zh/problems#an
 assert.ok(missingChickenResults.some((result) => result.url === "/zh/database/animals#missing"));
 assert.equal(searchDocuments(chineseIndex, "草莓多久成熟")[0].url, "/zh/database/crops/strawberry#strawberry");
 assert.equal(searchDocuments(chineseIndex, "种子商店在哪里")[0].url, "/zh/map#leafy-market");
+assert.equal(searchDocuments(chineseIndex, "种子买了背包找不到")[0].url, "/zh/guides/farming-fields#missing-seed", 'An inventory symptom must not be answered as a shop-location query');
+assert.equal(searchDocuments(JSON.parse(fs.readFileSync(path.join(root, 'search-index.json'), 'utf8')), "bought seeds missing from inventory")[0].url, "/guides/farming-fields#missing-seed", 'The English inventory symptom needs the dedicated check path');
 assert.equal(searchDocuments(chineseIndex, "锆矿在哪里买")[0].url, "/zh/database/materials#zirconite");
 assert.ok(["/zh/database/quests#power-to-the-bench", "/zh/database/quests/power-to-the-bench#power-to-the-bench"].includes(searchDocuments(chineseIndex, "工作台通电任务")[0].url));
 assert.ok(searchDocuments(chineseIndex, "Angela 买鸡").some((result) => [

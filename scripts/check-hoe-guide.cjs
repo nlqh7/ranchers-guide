@@ -48,8 +48,12 @@ for (const locale of ['en', 'zh']) {
   assert.match(guide, /0\.8\.10\.868/, `${locale}: current hoe removal patch must be named`);
   assert.match(guide, locale === 'zh' ? /2 点自然技能点/ : /2 Nature Skill Points/);
   assert.match(guide, locale === 'zh' ? /农田信息弹窗|田块信息弹窗/ : /Plantation(?: Info)? Popup|plantation's info popup/i);
-  assert.match(guide, locale === 'zh' ? /不需要供暖/ : /does not need heating/);
-  assert.match(guide, locale === 'zh' ? /没有冬季种子/ : /no winter seeds/);
+  const winter = guide.match(/<section\b[^>]*id="greenhouse-winter"[^>]*>[\s\S]*?<\/section>/)?.[0] || '';
+  assert.ok(winter, `${locale}: greenhouse use must be separate from an unknown unlock route`);
+  assert.ok((locale === 'zh' ? /(?:无需|不需要)供暖/ : /needs no heating|does not (?:need|require) heating/).test(winter), `${locale}: retain the dated no-heating guidance`);
+  assert.ok((locale === 'zh' ? /种子按季节购买[\s\S]*温室内跨季种植/ : /seeds are bought in season[\s\S]*greenhouse out of season/).test(winter), `${locale}: seed availability is not the greenhouse planting season`);
+  assert.ok((locale === 'zh' ? /当时尚未加入冬季作物/ : /no winter crops[\s\S]*at that time/).test(winter), `${locale}: do not replace a dated crop-roster statement with a claim about all winter seeds`);
+  assert.ok(winter.includes('590686908802202078') && (locale === 'zh' ? /8月16日[\s\S]*未注明游戏版本/ : /August 16[\s\S]*No game build is named/).test(winter), `${locale}: winter advice keeps its actual source date and unnamed-build boundary`);
 
   const queries = locale === 'zh'
     ? ['怎么开第一块种植地', '锄头 红色 白色', '锄头 播种 使用键 洒水壶']
