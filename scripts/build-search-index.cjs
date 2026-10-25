@@ -52,6 +52,8 @@ function cleanTitle(title) {
 }
 
 function pageType(route) {
+  if (route === '/games/' || route === '/zh/games/') return route.startsWith('/zh/') ? '游戏目录' : 'Game directory';
+  if (route === '/games/the-ranchers/' || route === '/zh/games/the-ranchers/') return route.startsWith('/zh/') ? '牧场主专区' : 'Ranchers hub';
   if (route === "/games/fs25/" || route === "/zh/games/fs25/") return "FS25 hub";
   if (route === "/games/fs25/tools/production-planner/" || route === "/zh/games/fs25/tools/production-planner/") return "FS25 tool";
   if (route.indexOf("/zh/") === 0) {

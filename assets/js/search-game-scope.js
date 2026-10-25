@@ -8,8 +8,10 @@
     var url;
     try { url = new URL(value, "https://theranchersguide.com"); } catch (_) { return null; }
     if (!["theranchersguide.com", "www.theranchersguide.com"].includes(url.hostname)) return null;
+    if (url.pathname === '/' || /^\/zh\/?$/.test(url.pathname)) return null;
     if (/^\/(?:zh\/)?games\/fs25(?:\/|$)/.test(url.pathname)) return "fs25";
-    if (/^\/(?:zh\/)?games\//.test(url.pathname)) return null;
+    if (/^\/(?:zh\/)?games\/the-ranchers(?:\/|$)/.test(url.pathname)) return "ranchers";
+    if (/^\/(?:zh\/)?games(?:\/|$)/.test(url.pathname)) return null;
     return "ranchers";
   }
   function filterDocuments(documents, game) {

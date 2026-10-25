@@ -5,6 +5,22 @@ const path = require('node:path');
 const vm = require('node:vm');
 const root = path.resolve(__dirname, '..');
 const key = 'fs25-bread-planner-settings-v1';
+const disclosureCss = fs.readFileSync(path.join(root, 'assets/css/game-tools.css'), 'utf8');
+assert.ok(/\.gt-tool details > summary::after\s*\{[^}]*content:/.test(disclosureCss), 'flex summary needs a visible expand/collapse indicator');
+assert.ok(/details\[open\] > summary::after\s*\{[^}]*transform:/.test(disclosureCss), 'open state must change the indicator');
+assert.ok(/prefers-reduced-motion:\s*reduce/.test(disclosureCss), 'indicator motion respects reduced-motion preference');
+assert.ok(/section\.calc-panel\[data-search-entry\]\s*\{[^}]*margin-top:\s*24px/.test(disclosureCss), 'answer cards must not touch disclosure groups');
+assert.ok(/section\.calc-panel\[data-search-entry\] > h2\s*\{[^}]*margin:\s*0 0/.test(disclosureCss), 'answer card heading does not inherit excessive global margin');
+for (const file of ['games/fs25/index.html','games/fs25/tools/production-planner/index.html','zh/games/fs25/index.html','zh/games/fs25/tools/production-planner/index.html']) {
+  assert.ok(fs.readFileSync(path.join(root,file),'utf8').includes('game-tools.css?v=20261025-setup1'), `${file} invalidates the previous disclosure styles`);
+}
+for (const locale of ['', 'zh/']) {
+  const html=fs.readFileSync(path.join(root,locale,'games/fs25/tools/production-planner/index.html'),'utf8');
+  for (const prefix of ['fp','fo','fg']) {
+    assert.ok(html.indexOf('id="'+prefix+'-parameters"')<html.indexOf('aria-labelledby="'+prefix+'-results-title"'),'Recipe and capacity settings precede their results in reading/mobile order');
+  }
+  assert.ok(html.indexOf('id="fp-reset"')<html.indexOf('aria-labelledby="fp-results-title"'),'Bread reference action is reachable alongside the target, before results');
+}
 
 function boot(lang = 'en', initial = {}, hash = '') {
   const html = fs.readFileSync(path.join(root, lang === 'en' ? '' : 'zh', 'games/fs25/tools/production-planner/index.html'), 'utf8');
@@ -21,7 +37,7 @@ function boot(lang = 'en', initial = {}, hash = '') {
       querySelector(selector) { return this.children.find(child => child.className === selector.slice(1)) || null; },
       addEventListener(type, fn) { (this.listeners[type] ||= []).push(fn); },
       fire(type, event = {}) { (this.listeners[type] || []).forEach(fn => fn(event)); },
-      focus() {}, select() {}
+      focus() {}, select() {}, scrollIntoView(options) { this.lastScroll = options; }
     };
   }
   const els = {};
@@ -34,6 +50,14 @@ function boot(lang = 'en', initial = {}, hash = '') {
     els[tag[1]] = node;
   }
   els['fp-rule-bakery'].value = els['fp-rule-mill'].value = 'divided';
+  // Native selects select their marked option, or the first option, even
+  // before a reference action runs. Reproduce that DOM default in cold tests.
+  for (const select of html.matchAll(/<select\b[^>]*id="([^"]+)"[^>]*>([\s\S]*?)<\/select>/g)) {
+    const choices=[...select[2].matchAll(/<option\b([^>]*)>/g)].map(match=>({
+      value:match[1].match(/value="([^"]*)"/)?.[1] || '', selected:/\bselected\b/.test(match[1])
+    }));
+    els[select[1]].value=(choices.find(option=>option.selected)||choices[0])?.value || '';
+  }
   const store = { ...initial };
   const localeLink = { href: 'https://theranchersguide.com/' + (lang === 'en' ? 'zh/' : '') + 'games/fs25/tools/production-planner/' };
   const browserWindow = { location: { hash }, listeners: {}, addEventListener(type, fn) { (this.listeners[type] ||= []).push(fn); } };
@@ -65,7 +89,11 @@ for (const lang of ['en', 'zh-CN']) {
   p.set('fp-target', 5400);
   p.generate();
   assert.equal(p.els['fp-parameters'].open, true, 'Generate reveals missing required inputs rather than hiding field errors');
+  assert.equal(p.els['fp-ratio-bakery'].lastScroll?.block,'center','Generate brings the missing input into view, not just activeElement offscreen');
+  assert.equal(p.els['fp-ratio-bakery'].getAttribute('aria-describedby'),'fp-ratio-bakery-error','The missing input is connected to its explanation for assistive technology');
+  assert.equal((p.results().match(/role="alert"/g)||[]).length,1,'An untouched recipe setup needs one next-step prompt, not five identical blocked results');
   p.click('fp-reset');
+  assert.equal(p.els['fp-ratio-bakery'].getAttribute('aria-describedby'),null,'Loading valid reference values removes the stale error description');
   p.set('fp-have-bakery', 1);
   p.set('fp-have-mill', 2);
   p.generate();
@@ -135,6 +163,9 @@ for (const lang of ['en', 'zh-CN']) {
   assert.equal(p.els['fp-form'].hidden, true);
   assert.equal(p.els['fo-form'].hidden, false);
   assert.equal(p.els['fo-ratio'].value, '', 'oil reference is not silently loaded');
+  p.els['fo-target'].value='6000';
+  p.els['fo-form'].fire('submit',{preventDefault() {}});
+  assert.equal(p.els['fo-ratio'].lastScroll?.block,'center','Oil setup errors use the same visible-field handoff');
   p.click('fo-reference');
   p.els['fo-target'].value = '6000';
   p.els['fo-owned'].value = '1';
@@ -202,6 +233,8 @@ for (const lang of ['en', 'zh-CN']) {
   p.els['fg-target'].value = '6000';
   p.els['fg-owned'].value = '1';
   p.els['fg-tanker'].value = '5000';
+  p.els['fg-form'].fire('submit',{preventDefault() {}});
+  assert.equal(p.els['fg-ratio'].lastScroll?.block,'center','Greenhouse setup errors use the same visible-field handoff');
   p.click('fg-reference');
   p.els['fg-form'].fire('submit', { preventDefault() {} });
   assert.match(p.els['fg-results'].innerHTML, /12,000/);
@@ -262,5 +295,36 @@ for (const lang of ['en', 'zh-CN']) {
   const badRestore = boot(lang, { [greenhouseKey]: badRecord });
   assert.equal(badRestore.els['fg-target'].value, '', 'unknown variants do not partially restore');
   assert.equal(badRestore.store[greenhouseKey], badRecord);
+}
+for (const lang of ['en','zh-CN']) {
+  const manual=boot(lang);
+  for (const [id,value] of Object.entries({
+    'fp-target':5400,'fp-ratio-bakery':1.8,'fp-ratio-mill':1.2,
+    'fp-cap-bakery':6000,'fp-cap-mill':9000
+  })) manual.set(id,value);
+  manual.generate();
+  manual.click('fp-copy');
+  const text=manual.els['fp-copy-manual'].value;
+  assert.ok(text.includes('9,720') && text.includes('11,664'),'The exported plan uses the supplied manual ratios without loading a reference');
+  assert.ok(!/illustrative sample|示例参考值|尚未实机确认|not runtime-confirmed/.test(text),'Manual input must not be mislabeled as the built-in example');
+  const page=fs.readFileSync(path.join(root,lang==='en'?'':'zh','games/fs25/tools/production-planner/index.html'),'utf8');
+  const badge=page.match(/<span class="fp-boundary">([^<]*)<\/span>/)?.[1] || '';
+  assert.match(badge,/current inputs|当前输入/,'The visible result badge describes the calculation basis, not presumed input provenance');
+  manual.click('fp-reset');
+  assert.ok(manual.els['fp-load-status'].textContent,'An explicit reference load is still acknowledged');
+  manual.set('fp-ratio-bakery',2.4);
+  assert.equal(manual.els['fp-load-status'].textContent,'','Editing values clears the old load notification');
+  for (const [prefix,hash] of [['fo-','#fo-form'],['fg-','#fg-form']]) {
+    const custom=boot(lang,{},hash);
+    custom.els[prefix+'target'].value='111';
+    custom.els[prefix+'ratio'].value='3';
+    custom.els[prefix+'capacity'].value='1000';
+    custom.els[prefix+'form'].fire('submit',{preventDefault() {}});
+    custom.click(prefix+'copy');
+    const exported=custom.els[prefix+'manual'].value;
+    assert.match(exported,/planner inputs|规划器输入/,'Every chain identifies the actual calculation basis');
+    assert.ok(exported.includes('333'),'Custom input values, not historical defaults, feed the exported plan');
+    assert.ok(!/historical reference|历史普通油坊参考|历史参考／自填参数/.test(exported),'Fully custom chains are not tagged as historical references');
+  }
 }
 console.log('PASS: bilingual FS25 bread/oil/greenhouse planning, storage and switching.');

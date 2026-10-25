@@ -14,10 +14,14 @@ function linkList(items) {
 function renderSiteFooter(locale, taglines = {}) {
   const zh = locale === 'zh';
   const tagline = zh ? (taglines.zh || '非官方玩家资源') : (taglines.en || 'Unofficial fan-made guide');
-  const brand = zh
+  const brand = taglines.portal
+    ? (zh ? '<p>农场与经营游戏的工具和实用攻略。先选游戏，再完成规划、查找或排查。</p>' : '<p>Tools and practical guides for farming games. Choose your game, then plan, look up or troubleshoot.</p>')
+    : zh
     ? '<p>按版本和证据整理的非官方中文玩家资料。</p><p class="disclaimer">不隶属于 RedPilz Studio 或 Trophy Games。</p>'
     : '<p>An unofficial, fan-made guide hub for The Ranchers — an open-world ranch life sim from RedPilz Studio, published by Trophy Games.</p><p class="disclaimer">Unofficial fan-made guide. Not affiliated with or endorsed by the developers.</p>';
-  const help = zh
+  const help = taglines.portal
+    ? (zh ? [['/zh/games/', '游戏目录'], ['/zh/games/the-ranchers/', 'The Ranchers 专区'], ['/zh/games/fs25/', '模拟农场 25 专区']] : [['/games/', 'Game directory'], ['/games/the-ranchers/', 'The Ranchers'], ['/games/fs25/', 'Farming Simulator 25']])
+    : zh
     ? [['/zh/guides/beginners-guide', '新手指南'], ['/zh/map', '地图'], ['/zh/problems', '问题排查'], ['/zh/community', '社区雷达']]
     : [['/guides/release-time-checklist', 'Early Access Status'], ['/guides/beginner-mistakes', 'Beginner Mistakes'], ['/guides/beginners-guide', "Beginner's Guide"], ['/guides/money-making', 'Money Making'], ['/guides/multiplayer-coop', 'Multiplayer & Co-op']];
   const data = zh
@@ -29,6 +33,14 @@ function renderSiteFooter(locale, taglines = {}) {
   const labels = zh
     ? { help: '帮助', data: '数据', site: '站点', helpAria: '中文帮助', dataAria: '中文数据', siteAria: '中文站点' }
     : { help: 'Guides', data: 'Data & Tools', site: 'Site', helpAria: 'Footer guides', dataAria: 'Footer databases and tools', siteAria: 'Footer site links' };
+  if (taglines.portal) {
+    data.push(zh ? ['/zh/map', '牧场主地图'] : ['/map', 'The Ranchers Map']);
+    data.push(zh ? ['/zh/problems', '问题排查'] : ['/problems', 'Ranchers Troubleshooting']);
+    if (!zh) site.push(['/research', 'Research Notes'], ['/contribute', 'Contribute']);
+    labels.help = zh ? '游戏' : 'Games';
+    labels.helpAria = zh ? '游戏目录页脚' : 'Footer games';
+    labels.data = zh ? '牧场主工具与资料' : 'Ranchers Data & Tools';
+  }
   return `<footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>The Ranchers Guide</h4>${brand}</div><nav aria-label="${labels.helpAria}"><h4>${labels.help}</h4><ul>${linkList(help)}</ul></nav><nav aria-label="${labels.dataAria}"><h4>${labels.data}</h4><ul>${linkList(data)}</ul></nav><nav aria-label="${labels.siteAria}"><h4>${labels.site}</h4><ul>${linkList(site)}</ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>${escapeHtml(tagline)}</span></div></div></footer>`;
 }
 

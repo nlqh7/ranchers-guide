@@ -190,8 +190,12 @@ const pages = htmlFiles(root);
 assert.ok(pages.length >= 17);
 pages.forEach((file) => {
   const html = fs.readFileSync(file, "utf8");
-  const searchHref = /<html lang="zh-CN">/.test(html) ? /href="\/zh\/search"/ : /href="\/search"/;
-  assert.match(html, searchHref, `${path.relative(root, file)} needs its locale Search link`);
+  const searchRoute = /<html lang="zh-CN">/.test(html) ? '/zh/search' : '/search';
+  const hrefs = [...html.matchAll(/\bhref="([^"]+)"/g)].map(match => match[1]);
+  assert.ok(hrefs.some(href => {
+    const target = new URL(href, 'https://theranchersguide.com');
+    return target.origin === 'https://theranchersguide.com' && target.pathname === searchRoute;
+  }), `${path.relative(root, file)} needs a real locale Search link, optionally game-scoped`);
 });
 const searchPage = fs.readFileSync(path.join(root, "search.html"), "utf8");
 const homePage = fs.readFileSync(path.join(root, "index.html"), "utf8");

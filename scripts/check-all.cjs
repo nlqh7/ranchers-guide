@@ -61,6 +61,8 @@ const nodeChecks = [
   ["build-creator-notes.cjs", "--check"],
   ["build-player-report.cjs", "--check"],
   ["build-search-index.cjs", "--check"],
+  ["build-game-directory.cjs", "--check"],
+  ["check-game-directory.cjs"],
   ["build-fs25.cjs", "--check"],
   ["check-fs25-planner.cjs"],
   ["check-fs25-v1.cjs"],

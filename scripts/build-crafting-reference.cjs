@@ -41,14 +41,20 @@ function renderRecipePlan(locale) {
       <button type="button" data-plan-mode="building" aria-pressed="false">${zh ? '建筑备料' : 'Building preparation'}</button>
     </div>
     <div data-plan-recipes>
-    <p>${zh ? '选好要制作的物品，分别填写份数，再扣除已有材料。相同材料只合计一次。' : 'Choose what to craft, set each batch count, then deduct what you already have. Shared materials are combined into one list.'}</p>
+    <p>${zh ? '添加配方和份数，自动合并用料、扣除已有材料。' : 'Add recipes and batch counts to combine materials and deduct your stock.'}</p>
     <form class="recipe-plan-picker" data-plan-picker>
-      <label>${zh ? '查找配方' : 'Find a recipe'}<input type="search" data-plan-search placeholder="${zh ? '例如：水井、栅栏、干草' : 'e.g. Well, Fence, Hay'}"></label>
-      <label>${zh ? '选择配方' : 'Choose a recipe'}<select data-plan-select aria-label="${zh ? '选择配方' : 'Choose a recipe'}"></select></label>
-      <button type="submit" data-plan-add>${zh ? '加入计划' : 'Add to plan'}</button>
+      <div class="recipe-plan-combobox" data-plan-combobox>
+        <label for="recipe-plan-query">${zh ? '找配方或材料' : 'Find a recipe or material'}</label>
+        <input id="recipe-plan-query" type="search" data-plan-search role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="recipe-plan-options" aria-describedby="recipe-plan-matches" autocomplete="off" placeholder="${zh ? '例如：水井、栅栏、干草' : 'e.g. Well, Fence, Hay'}">
+        <input type="hidden" data-plan-select>
+        <div class="recipe-plan-results" data-plan-results hidden>
+          <ul id="recipe-plan-options" role="listbox" aria-label="${zh ? '配方候选' : 'Recipe suggestions'}" data-plan-options></ul>
+          <p id="recipe-plan-matches" class="recipe-plan-note" data-plan-matches role="status" aria-live="polite"></p>
+        </div>
+      </div>
+      <button type="submit" data-plan-add disabled>${zh ? '加入计划' : 'Add to plan'}</button>
     </form>
     <p class="recipe-plan-note" data-plan-entry role="status"></p>
-    <p class="recipe-plan-note" data-plan-no-match hidden>${zh ? '没有匹配的配方。试试其他物品名或材料名；已选物品仍保留。' : 'No matching recipes. Try another item or material name; your selected items are kept.'}</p>
     <ul class="recipe-plan-selection" data-plan-selections></ul>
     <p class="recipe-plan-note" data-plan-empty>${zh ? '先添加一项配方，合计会显示在这里。' : 'Add a recipe to start your material list.'}</p>
     </div>
@@ -57,7 +63,7 @@ function renderRecipePlan(locale) {
         <option value="">${zh ? '选择鸡舍、温室或其他建筑' : 'Choose a coop, greenhouse or another building'}</option>
         ${payload.buildings.map(item => `<option value="${esc(item.id)}">${esc(zh ? item.zhName : item.name)}</option>`).join('')}
       </select></label>
-      <p class="recipe-plan-note">${zh ? '按单栋商店材料条件核对，不与配方合计。材料是否扣除及购买条件以游戏为准。' : 'Check one building’s shop material conditions separately from recipes. Confirm material consumption and purchase conditions in-game.'}</p>
+      <p class="recipe-plan-note">${zh ? '建筑单独备料，不与制作配方合并；售价另计。' : 'Plan building materials separately from crafting recipes; purchase prices are extra.'}</p>
       <div class="recipe-plan-building-info" data-building-info></div>
     </div>
     <p class="recipe-plan-error" id="recipe-plan-error" data-plan-error role="status" hidden>${zh ? '份数请填 0–999 的整数，已有材料请填 0–999999 的整数。修正后合计会恢复。' : 'Use whole numbers: 0–999 batches and 0–999999 on hand. Correct the marked fields to restore totals.'}</p>
@@ -69,17 +75,17 @@ function renderRecipePlan(locale) {
     </div>
     <details class="recipe-plan-shopping" data-purchase-plan hidden>
       <summary>${zh ? '按商店整理缺料' : 'Group missing materials by shop'}</summary>
-      <p class="recipe-plan-note">${zh ? '只列还缺的数量。同一材料有多家商店时选一家；商店名称按文件分类，不代表已核实的库存、报价或地图位置。' : 'Only missing quantities are listed. Choose one seller for materials with alternatives. Shop names describe file categories, not verified stock, prices or map locations.'}</p>
+      <p class="recipe-plan-note">${zh ? '按缺料分组，多家商店可切换。库存与价格请在游戏内确认。' : 'Group shortages by shop and choose a seller where available. Check stock and prices in-game.'}</p>
       <div class="recipe-plan-shop-choices" data-purchase-choices></div>
       <div data-purchase-groups></div>
       <p class="recipe-plan-unlisted" data-purchase-unlisted hidden></p>
     </details>
     <p class="recipe-plan-note" data-plan-status role="status"></p>
     <p class="recipe-plan-note recipe-plan-return" data-plan-return hidden><a href="#recipe-material-plan" data-plan-return-link></a></p>
-    <p class="recipe-plan-note" data-plan-save-note>${zh ? '计划保存在此浏览器；打开材料来源后返回，仍可继续。' : 'Your plan stays in this browser, including when you return from a material guide.'}</p>
+    <p class="recipe-plan-note" data-plan-save-note>${zh ? '计划自动保存在此浏览器。' : 'Plans save automatically in this browser.'}</p>
   </div>
   <noscript><p>${zh ? '启用 JavaScript 可计算合并用料；下方配方与材料表仍可直接查看。' : 'Enable JavaScript to combine materials. The recipe and material tables below remain available.'}</p></noscript>
-  <p class="recipe-plan-note" data-plan-recipe-note>${zh ? '制作模式只计算选中的配方，不包含历史建筑目标；工作台与解锁条件请按当前存档核对。' : 'Crafting mode counts only selected recipes, not historical building targets. Check workbench and unlock requirements in your save.'} <a href="${prefix}/guides/crafting-guide">${zh ? '查看配方与来源' : 'Recipes & sources'}</a></p>
+  <p class="recipe-plan-note" data-plan-recipe-note>${zh ? '工作台与解锁条件以存档为准。' : 'Check workbench and unlock requirements in your save.'} <a href="${prefix}/guides/crafting-guide">${zh ? '配方详情' : 'Recipe details'}</a></p>
   <script src="/assets/js/recipe-plan-text.js?v=20260914-copy1" defer></script>
   <script type="application/json" data-plan-data>${JSON.stringify(payload).replace(/</g, '\\u003c')}</script>
 </section>
@@ -152,7 +158,7 @@ ${checklist ? `<p id="wall-material-plan"><a class="recipe-more" href="${prefix}
 <section class="crafting-reference" data-crafting-reference data-result-label="${zh ? '{count} 个条目' : 'Results: {count}'}" aria-label="${title}">
   <label class="calc-field recipe-batch-control">${zh ? '配方份数（每份按单次材料计算）' : 'Recipe batches (repeat the listed ingredients)'}<input type="number" data-recipe-batches min="1" max="999" step="1" value="1" required></label>
   <p data-recipe-batch-error role="status" hidden>${zh ? '请输入 1–999 的整数份数。' : 'Enter a whole number from 1 to 999.'}</p>
-  <p class="recipe-boundary">${zh ? '站长整理 · 游戏文件配置。材料数量与工作台要求来自原生记录；是否已解锁、可获得仍以当前存档为准。' : 'Editor-collected game configuration. Ingredients and workbench requirements come from native records; availability and unlocks depend on your save.'}</p>
+  <p class="recipe-boundary">${zh ? '材料与工作台：游戏文件记录。解锁以存档为准。' : 'Ingredients and workbenches from game files; unlocks depend on your save.'}</p>
   <div class="recipe-controls"><label>${zh ? '查找物品或材料' : 'Find an item or material'}<input type="search" data-recipe-query placeholder="${zh ? '例如：水井、干草、木栅栏' : 'e.g. Well, Hay, Wood Fence'}"></label><label>${zh ? '分类' : 'Category'}<select data-recipe-category><option value="all">${zh ? '全部' : 'All'}</option>${selectedGroups.map(([id, labels]) => `<option value="${id}">${labels[zh ? 1 : 0]}</option>`).join('')}</select></label></div>
   <div class="recipe-filter-feedback"><span data-recipe-count role="status" aria-live="polite"></span><button type="button" data-recipe-reset hidden>${zh ? '清除筛选' : 'Clear filters'}</button></div>
   <p data-recipe-empty hidden>${zh ? '没有匹配的条目，试试其他名称或分类。' : 'No matching entries. Try another name or category.'}</p>
@@ -175,7 +181,7 @@ for (const locale of ['en', 'zh']) {
     if (checklist) {
       if (!after.includes('<!-- BEGIN RECIPE PLAN -->')) throw new Error('Missing recipe plan marker: ' + file);
       after = after.replace(/<!-- BEGIN RECIPE PLAN -->[\s\S]*?<!-- END RECIPE PLAN -->/, renderRecipePlan(locale));
-      after = after.replace(/recipe-plan\.(css|js)\?v=[^"']+/g, 'recipe-plan.$1?v=20260914-plan5');
+      after = after.replace(/recipe-plan\.(css|js)\?v=[^"']+/g, 'recipe-plan.$1?v=20261025-picker1');
     }
     if (before !== after) {
       if (process.argv.includes('--check')) { console.error(`STALE: ${file}`); stale = true; }

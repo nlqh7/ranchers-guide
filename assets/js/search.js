@@ -3,6 +3,8 @@
 
   var EN_PAGE_PATHS = [
     "/",
+    "/games/",
+    "/games/the-ranchers/",
     "/games/fs25/",
     "/games/fs25/tools/production-planner/",
     "/guides/release-time-checklist",
@@ -84,6 +86,8 @@
   ];
   var ZH_PAGE_PATHS = [
     "/zh/",
+    "/zh/games/",
+    "/zh/games/the-ranchers/",
     "/zh/games/fs25/",
     "/zh/games/fs25/tools/production-planner/",
     "/zh/guides/beginners-guide",
@@ -154,7 +158,7 @@
   var IS_ZH = document.documentElement.lang.toLowerCase() === "zh-cn";
   var PAGE_PATHS = IS_ZH ? ZH_PAGE_PATHS : EN_PAGE_PATHS;
   var SEARCH_ROUTE = IS_ZH ? "/zh/search" : "/search";
-  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v43" : "ranchers-search-index-v57";
+  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v49" : "ranchers-search-index-v63";
   var documents = [];
   var form = document.querySelector("[data-search-form]");
   var input = document.querySelector("[data-search-input]");

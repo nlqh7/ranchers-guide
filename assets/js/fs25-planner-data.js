@@ -363,8 +363,8 @@
       "zhLabel": "GIANTS Developer Network：生产点脚本参考",
       "url": "https://gdn.giants-software.com/documentation_scripting_fs25.php?category=1&class=102&version=script",
       "role": "boundary",
-      "note": "Documents the production-point concept; it does not confirm these specific bread-chain values.",
-      "zhNote": "说明生产点概念；不确认本条面包链的具体数值。"
+      "note": "Script v1.20.0.0: sharedThroughputCapacity defaults to true; monthly cycles are divided by enabled recipes unless false. Facility values remain separate references.",
+      "zhNote": "Script v1.20.0.0：sharedThroughputCapacity 缺省为 true；非 false 时月循环按启用配方数分摊。设施数值仍单独核对。"
     }
   ],
   "fixtures": [

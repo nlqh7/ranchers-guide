@@ -37,6 +37,8 @@ for (const item of routes) {
   const footer = html.match(/<footer[\s\S]*?<\/footer>/i)?.[0] || "";
   assert(/Farming Simulator 25|FS25/.test(footer), `${item.file} footer does not identify the FS25 pilot`);
   assert(/community reference|社区参考/.test(footer), `${item.file} footer is missing the reference-data boundary`);
+  assert(!/\bpilot\b|试点|not yet runtime-confirmed|尚未实机确认/.test(footer), `${item.file} footer must not repeat internal project status or field-level caveats`);
+  assert((footer.match(/community reference|社区参考/g) || []).length === 1, `${item.file} needs one concise reference cue, not repeated disclaimers`);
   assert(html.includes(item.title), `${item.file} is missing its expected title identity`);
   if (item.file.includes("production-planner")) {
     assert(html.includes('id="fs25-planner"'), `${item.file} is missing planner mount`);
@@ -44,6 +46,11 @@ for (const item of routes) {
     assert(html.includes('1KBP3QLKgKboofOCFQnM2gedq75pu7ugzm960FQDb3EM') && html.includes('1.4.3'), `${item.file} must identify the actual historical reference setup, not imply universal facilities`);
   } else {
     assert(html.includes("production-planner"), `${item.file} is missing the planner entry link`);
+    const answer = html.match(/<section\b[^>]*id="shared-capacity"[\s\S]*?<\/section>/)?.[0];
+    assert(answer && answer.includes('data-search-entry'), `${item.file} needs a directly searchable shared-capacity answer`);
+    assert(!/<details|\bhidden\b/.test(answer), `${item.file} mechanism answer must not require a particular planner mode`);
+    assert(answer.includes('sharedThroughputCapacity') && answer.includes('gdn.giants-software.com'), `${item.file} needs the actual mechanism field and official source`);
+    assert(answer.includes('production-planner/#fs25-planner') && answer.includes('6,000') && answer.includes('3,000'), `${item.file} needs a supported product handoff and explicit example`);
   }
 }
 
@@ -67,10 +74,14 @@ if (publicCandidate) {
   assert(read("sitemap.xml").includes("/games/fs25/"), "public tool scope must be discoverable in sitemap");
   const search = require('../assets/js/search-core.js');
   const scope = require('../assets/js/search-game-scope.js');
-  for (const [file, queries] of [['search-index.json', ['flour shortage', 'one grain mill supply bakery', 'canola oil shortage', 'oil mill capacity', 'greenhouse water needed', 'water tanker trips']], ['zh/search-index.json', ['面粉不够', '一个磨坊够吗', '菜籽油不够', '油坊产能', '温室缺水', '水车几趟']]]) {
+  for (const [file, queries] of [['search-index.json', ['flour shortage', 'one grain mill supply bakery', 'canola oil shortage', 'oil mill capacity', 'greenhouse water needed', 'water tanker trips', 'shared production capacity', 'enabled recipes slow down']], ['zh/search-index.json', ['面粉不够', '一个磨坊够吗', '菜籽油不够', '油坊产能', '温室缺水', '水车几趟', '多开配方产量不增加', '共享产能怎么设置']]]) {
     const docs = scope.filterDocuments(JSON.parse(read(file)), 'fs25');
     for (const query of queries) {
       const matches = search.searchDocuments(docs, query, 8);
+      if (/shared|enabled|多开|共享/.test(query)) {
+        assert(matches.some(item => /games\/fs25\/#shared-capacity$/.test(item.url)), `${file}: ${query} must reach the mechanism answer, not a bread-only example`);
+        continue;
+      }
       const anchor = /greenhouse|tanker|温室|水车/.test(query) ? 'greenhouse-water' : /oil|canola|菜籽|油坊/.test(query) ? 'oil-supply' : 'mill-supply';
       assert(matches.some(item => item.url.includes('production-planner/#' + anchor)), `${file}: ${query} must reach the actual conditional capacity answer`);
     }

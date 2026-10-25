@@ -13,31 +13,35 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon-180.png">
   <link rel="stylesheet" href="/assets/css/style.css?v=20261003-r15">
-  <link rel="stylesheet" href="/assets/css/game-tools.css?v=20261021-waterstock">
+<link rel="stylesheet" href="/assets/css/game-tools.css?v=20261025-setup1">
 </head>
 <body>
   <header class="site-header">
     <nav class="nav-inner" aria-label="主导航">
       <a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide</span></a>
       <button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button>
-      <ul class="nav-links"><li><a href="/zh/games/fs25/">FS25 工具</a></li><li><a href="/zh/games/fs25/tools/production-planner/">生产规划器</a></li><li><a href="/zh/search?game=fs25">搜索 FS25</a></li><li><a href="/zh/">The Ranchers 中文站</a></li></ul>
+      <ul class="nav-links"><li><a href="/zh/games/">游戏目录</a></li><li><a href="/zh/games/fs25/">FS25 专区</a></li><li><a href="/zh/games/fs25/tools/production-planner/">生产规划器</a></li><li><a href="/zh/search?game=fs25">搜索 FS25</a></li></ul>
     </nav>
   </header>
 
   <main>
     <div class="container section gt-tool gt-page">
-      <nav class="breadcrumb" aria-label="面包屑" style="font-size:0.82rem;color:var(--brown-500);"><a href="/zh/">首页</a> / 游戏 / <a href="/zh/games/fs25/">Farming Simulator 25</a> / 生产规划器</nav>
+      <nav class="breadcrumb" aria-label="面包屑" style="font-size:0.82rem;color:var(--brown-500);"><a href="/zh/">首页</a> / <a href="/zh/games/">游戏</a> / <a href="/zh/games/fs25/">Farming Simulator 25</a> / 生产规划器</nav>
       <p class="gt-game-id">Farming Simulator 25（模拟农场 25）· 面包 · 菜籽油 · 温室生菜</p>
       <h1>生产规划器</h1>
 
       <p class="lead" style="max-width:720px;">选择面包、菜籽油或温室生菜，填入月产量目标，直接算出<strong>需要哪些原料、总共几座设施、还差几座</strong>。</p>
 
-      <p class="fp-src-note gt-boundary-hint">配比和产能来自历史普通设施参考；建筑规格不同时可自行修改，来源见参数说明。</p>
+      <p class="fp-src-note gt-boundary-hint">填写自己的设施参数，或主动载入历史参考；来源见设置区。</p>
 
       <!-- FS25-PRODUCT:START --><div class="calc-field fp-product-picker"><label for="fp-product">选择目标产品</label><select id="fp-product"><option value="bread">面包：小麦 → 面粉 → 面包</option><option value="canola-oil">菜籽油：菜籽 → 油</option><option value="greenhouse-lettuce">温室生菜：水 → 生菜</option></select></div><!-- FS25-PRODUCT:END -->
       <form id="fp-form" novalidate>
         <div class="fp-layout" id="fs25-planner">
-          <section class="calc-panel fp-target" aria-labelledby="fp-target-title">
+
+
+
+          <div class="fp-inputs" id="fp-inputs">
+<section class="calc-panel fp-target" aria-labelledby="fp-target-title">
             <h3 id="fp-target-title">你的每月目标</h3>
             <div class="calc-field">
               <label for="fp-target">每月面包目标（升）</label>
@@ -56,41 +60,22 @@
                   <input id="fp-have-mill" type="number" min="0" step="1" inputmode="numeric">
                 </div>
               </div>
-              <p class="fp-src-note" id="fp-existing-note">空白<strong>不等于</strong> 0：留空时计划只显示设施总需求，无法显示你当前的缺口或还需新增的数量。填入你已拥有的数量（没有就填 0）即可看到这些数据。</p>
+              <p class="fp-src-note" id="fp-existing-note">留空只显示总需求；填现有数量（没有填 0）可查看还需新增几座。</p>
             </fieldset>
             <div class="fp-actions">
               <button type="submit" class="btn fp-generate">生成计划</button>
+              <button type="button" class="btn btn-outline" id="fp-reset">载入参考示例数据</button>
               <button type="button" class="btn btn-outline" id="fp-save" disabled>保存设置</button>
             </div>
             <p class="fp-status" id="fp-save-status" role="status"></p>
-            <p class="fp-src-note">在任意输入框按回车即可生成。必填值全部有效、可选字段为空或有效时即可“保存设置”，且设置仅保存在本机。</p>
+            <span class="fp-status" id="fp-load-status" role="status"></span>
+            <p class="fp-src-note">回车生成；设置仅保存在本机。</p>
           </section>
-
-          <section class="calc-panel fp-results" aria-labelledby="fp-results-title">
-            <div class="fp-results-head">
-              <h3 id="fp-results-title">你的计划</h3>
-              <span class="fp-boundary">示例参考数值 · 尚未实机确认 · 请对照你自己的存档核实</span>
-            </div>
-            <p class="fp-stale-banner" id="fp-stale" hidden role="alert">输入已修改——以下结果尚未更新。请重新点击“生成计划”。</p>
-            <div id="fp-results" aria-live="polite"><p class="fp-empty">填写每月目标后点击“生成计划”。</p></div>
-            <div class="fp-actions">
-              <button type="button" class="btn btn-outline" id="fp-copy" disabled>复制计划</button>
-              <span class="fp-status" id="fp-copy-status" role="status"></span>
-            </div>
-            <textarea id="fp-copy-manual" class="fp-copy-manual" hidden readonly aria-label="用于手动复制的计划文本"></textarea>
-          </section>
-
-          <details class="calc-panel fp-advanced" id="fp-parameters">
-            <summary>高级参数：产能、配比与面积假设 <span class="fp-tag">参考数据</span></summary>
+<details class="calc-panel fp-advanced" id="fp-parameters">
+            <summary>配比与产能设置 <span class="fp-tag">面积可选</span></summary>
             <div class="fp-grid">
-              <div class="calc-field">
-                <label for="fp-months">每年生产运行月数</label>
-                <input id="fp-months" type="number" min="1" max="12" step="1" inputmode="numeric">
-              </div>
-              <div class="calc-field">
-                <label for="fp-harvests">小麦每年收获次数</label>
-                <input id="fp-harvests" type="number" min="1" max="12" step="1" inputmode="numeric">
-              </div>
+
+
               <div class="calc-field">
                 <label for="fp-ratio-bakery">每 1 升面包所需面粉</label>
                 <input id="fp-ratio-bakery" type="number" min="0" step="0.1" inputmode="decimal">
@@ -111,7 +96,7 @@
                 </select>
               </div>
               <div class="calc-field">
-                <label for="fp-share-bakery">单座面包房产线数</label>
+                <label for="fp-share-bakery">每座面包房启用的配方数</label>
                 <input id="fp-share-bakery" type="number" min="1" max="8" step="1" value="1" inputmode="numeric">
               </div>
               <div class="calc-field">
@@ -126,20 +111,41 @@
                 </select>
               </div>
               <div class="calc-field">
-                <label for="fp-share-mill">单座磨坊产线数</label>
+                <label for="fp-share-mill">每座磨坊启用的配方数</label>
                 <input id="fp-share-mill" type="number" min="1" max="8" step="1" value="1" inputmode="numeric">
+              </div>
+              <div class="calc-field">
+                <label for="fp-months">每年生产运行月数</label>
+                <input id="fp-months" type="number" min="1" max="12" step="1" inputmode="numeric">
+              </div>
+              <div class="calc-field">
+                <label for="fp-harvests">小麦每年收获次数</label>
+                <input id="fp-harvests" type="number" min="1" max="12" step="1" inputmode="numeric">
               </div>
               <div class="calc-field">
                 <label for="fp-yield">小麦产量（升 / 公顷 / 每次收获）</label>
                 <input id="fp-yield" type="number" min="0" step="100" inputmode="numeric">
               </div>
             </div>
-            <div class="fp-actions">
-              <button type="button" class="btn btn-outline" id="fp-reset">载入参考示例数据</button>
-              <span class="fp-status" id="fp-load-status" role="status"></span>
-            </div>
-            <p class="fp-src-note">这些字段初始为空，以免把参考值误认为已确认数据。点击“载入参考示例数据”可从数据文件附带的示例值填充所有字段——它们仍是示例参考值：尚未实机确认，也并非逐项独立核实。无效输入（0、负数、非数字或超出范围）只阻断依赖它的结果，其余可独立计算的输出保持可见，绝不会静默替换成默认值。耕作面积按“每年生产运行所填月数、每年收获所填次数”计算；它不改变设施在每个运行月的产量需求。运行月数、收获次数或产量留空时，仅耕作面积不计算，其余结果照常显示。FS25 中不同设施的产线规则可能不同——请按建筑分别设置，不要全局套用。</p>
+
+            <p class="fp-src-note">填写存档数值，或载入参考示例。单产、收获次数和运行月数只用于估算面积；运行月数不改变月产能。各建筑分别设置规则。<a href="/zh/games/fs25/#shared-capacity">查看共享产能说明</a>。</p>
           </details>
+</div>
+<section class="calc-panel fp-results" aria-labelledby="fp-results-title">
+            <div class="fp-results-head">
+              <h3 id="fp-results-title">你的计划</h3>
+              <span class="fp-boundary">按当前输入计算</span>
+            </div>
+            <p class="fp-stale-banner" id="fp-stale" hidden role="alert">输入已修改——以下结果尚未更新。请重新点击“生成计划”。</p>
+            <div id="fp-results" aria-live="polite"><p class="fp-empty">填写每月目标后点击“生成计划”。</p></div>
+            <div class="fp-actions">
+              <button type="button" class="btn btn-outline" id="fp-copy" disabled>复制计划</button>
+              <span class="fp-status" id="fp-copy-status" role="status"></span>
+            </div>
+            <textarea id="fp-copy-manual" class="fp-copy-manual" hidden readonly aria-label="用于手动复制的计划文本"></textarea>
+          </section>
+
+
 
           <div class="fp-meta">
             <details>
@@ -154,7 +160,7 @@
               <summary>来源与数据状态</summary>
               <div>
                 <ul id="fp-sources-list"></ul>
-                <p class="fp-src-note">本页数值混合了社区参考资料与示例假设值；在对当前版本完成实机确认前，一律标注为“尚未实机确认”，且并非每个数值都有独立来源。未确认的数值绝不会被当作已确认数据显示。信任计划之前，请打开上方“高级参数”核对或替换任何数字。本工具刻意不含价格——它规划的是产量，不是利润。</p>
+                <p class="fp-src-note">工具内置参考值来自历史社区记录或示例，设施数值不同时请自行填写。本工具规划用料与产能，不计算利润。</p>
               </div>
             </details>
             <details>
@@ -169,7 +175,10 @@
       <!-- FS25-OIL:START -->
       <form id="fo-form" hidden novalidate>
         <div class="fp-layout">
-          <section class="calc-panel fp-target" aria-labelledby="fo-title">
+
+
+          <div class="fp-inputs" id="fo-inputs">
+<section class="calc-panel fp-target" aria-labelledby="fo-title">
             <h3 id="fo-title">每月菜籽油目标</h3>
             <div class="calc-field"><label for="fo-target">菜籽油目标（L/月）</label><input id="fo-target" type="number" min="0" step="any" inputmode="decimal" placeholder="6000"></div>
             <div class="calc-field"><label for="fo-owned">已拥有的油坊（可不填）</label><input id="fo-owned" type="number" min="0"  inputmode="decimal" step="1"></div>
@@ -177,14 +186,7 @@
             <div class="fp-actions"><button class="btn" type="submit">生成计划</button><button class="btn btn-outline" id="fo-reference" type="button">载入油坊参考值</button><button class="btn btn-outline" id="fo-save" type="button" disabled>保存设置</button></div>
             <p id="fo-status" class="fp-status" role="status"></p>
           </section>
-          <section class="calc-panel fp-results" aria-labelledby="fo-results-title">
-            <h3 id="fo-results-title">菜籽油计划</h3>
-            <div id="fo-results" aria-live="polite"><p class="fp-empty">先填写目标，再填写设施参数或载入油坊参考值。</p></div>
-            <div class="fp-actions"><button class="btn btn-outline" id="fo-copy" type="button" disabled>复制计划</button></div>
-            <p id="fo-copy-status" class="fp-status" role="status"></p>
-            <textarea id="fo-manual" class="fp-copy-manual" hidden readonly aria-label="手动复制计划文本"></textarea>
-          </section>
-          <details class="calc-panel fp-advanced" id="fo-parameters">
+<details class="calc-panel fp-advanced" id="fo-parameters">
             <summary>油坊产能、配比与可选耕地面积</summary>
             <p class="fp-src-note">原作者表 v1.4.3 第40行，普通油坊（不是棚屋）。配比和产能为历史参考，非当前实机测试。共享规则可自行调整；菜籽单产需自己填写。</p>
             <div class="fp-grid">
@@ -198,6 +200,15 @@
             </div>
             <p class="fp-src-note">不预填菜籽单产；缺少单产仍可计算原料和设施。独立配方保持本配方原产能，选两条配方不代表产能翻倍。</p>
           </details>
+</div>
+<section class="calc-panel fp-results" aria-labelledby="fo-results-title">
+            <h3 id="fo-results-title">菜籽油计划</h3>
+            <div id="fo-results" aria-live="polite"><p class="fp-empty">先填写目标，再填写设施参数或载入油坊参考值。</p></div>
+            <div class="fp-actions"><button class="btn btn-outline" id="fo-copy" type="button" disabled>复制计划</button></div>
+            <p id="fo-copy-status" class="fp-status" role="status"></p>
+            <textarea id="fo-manual" class="fp-copy-manual" hidden readonly aria-label="手动复制计划文本"></textarea>
+          </section>
+
         </div>
       </form>
       <section class="calc-panel" id="oil-supply" data-search-entry data-search-title="FS25 菜籽油需要多少油坊？" data-search-aliases="菜籽油不够|油坊产能|菜籽需求|菜籽油生产" data-search-status="历史社区参考">
@@ -210,7 +221,10 @@
       <!-- FS25-GREENHOUSE:START -->
       <form id="fg-form" hidden novalidate>
         <div class="fp-layout">
-          <section class="calc-panel fp-target" aria-labelledby="fg-title">
+
+
+          <div class="fp-inputs" id="fg-inputs">
+<section class="calc-panel fp-target" aria-labelledby="fg-title">
             <h3 id="fg-title">温室生菜目标</h3>
             <div class="calc-field"><label for="fg-variant">参考型号——切换型号会载入对应参数</label><select id="fg-variant"><option value="small">小型 · 1,008 L/月</option><option value="medium">中型 · 2,016 L/月</option><option value="large" selected>大型 · 4,032 L/月</option></select></div>
             <div class="calc-field"><label for="fg-target">每月生菜目标（L）</label><input id="fg-target" type="number" inputmode="decimal" min="0" step="any" placeholder="6000"></div>
@@ -220,8 +234,7 @@
             <div class="fp-actions"><button class="btn" type="submit">生成计划</button><button id="fg-reference" class="btn btn-outline" type="button">载入温室参考值</button><button id="fg-save" class="btn btn-outline" type="button" disabled>保存设置</button></div>
             <p id="fg-status" class="fp-status" role="status"></p>
           </section>
-          <section class="calc-panel fp-results" aria-labelledby="fg-results-title"><h3 id="fg-results-title">供水与温室计划</h3><div id="fg-results" aria-live="polite"><p class="fp-empty">填写目标与设施参数，或载入对应型号的参考值。</p></div><div class="fp-actions"><button id="fg-copy" class="btn btn-outline" type="button" disabled>复制计划</button></div><p id="fg-copy-status" class="fp-status" role="status"></p><textarea id="fg-manual" class="fp-copy-manual" hidden readonly aria-label="手动复制计划文本"></textarea></section>
-          <details id="fg-parameters" class="calc-panel fp-advanced"><summary>温室配比与产能</summary>
+<details id="fg-parameters" class="calc-panel fp-advanced"><summary>温室配比与产能</summary>
             <p class="fp-src-note">历史原作者表 v1.4.3，Greenhouses 第6／15／24行。型号改变每轮产出；不包括水培或模组温室，存档数值不同时可修改。</p>
             <div class="fp-grid"><div class="calc-field"><label for="fg-stock">本生产月可用存水（L，可不填）</label><input id="fg-stock" type="number" inputmode="decimal" min="0" step="any" ></div><div class="calc-field"><label for="fg-ratio">每 1 L 生菜需水（L）</label><input id="fg-ratio" type="number" inputmode="decimal" min="0" step="any" ></div><div class="calc-field"><label for="fg-capacity">每生产运行月的生菜产量（L）</label><input id="fg-capacity" type="number" inputmode="decimal" min="0" step="any" ></div>
             <div class="calc-field"><label for="fg-rule">产能规则</label><select id="fg-rule"><option value="divided">启用的配方平分产能</option><option value="independent">其他配方不减少本配方产能</option></select></div>
@@ -229,6 +242,9 @@
             <p class="fp-src-note">需水量按生菜目标计算，不是全部作物或全速运转总量。填写可用存水后仅抵扣本生产月；空白表示尚未抵扣，0 表示没有存水。运输趟数向上取整；不假定水源免费或自动补给。</p>
             <p><a href="https://docs.google.com/spreadsheets/d/1KBP3QLKgKboofOCFQnM2gedq75pu7ugzm960FQDb3EM/edit#gid=621594547" rel="noopener noreferrer">核对原始温室数据</a></p>
           </details>
+</div>
+<section class="calc-panel fp-results" aria-labelledby="fg-results-title"><h3 id="fg-results-title">供水与温室计划</h3><div id="fg-results" aria-live="polite"><p class="fp-empty">填写目标与设施参数，或载入对应型号的参考值。</p></div><div class="fp-actions"><button id="fg-copy" class="btn btn-outline" type="button" disabled>复制计划</button></div><p id="fg-copy-status" class="fp-status" role="status"></p><textarea id="fg-manual" class="fp-copy-manual" hidden readonly aria-label="手动复制计划文本"></textarea></section>
+
         </div>
       </form>
       <section class="calc-panel" id="greenhouse-water" data-search-entry data-search-title="FS25 温室生菜需水量与水车运输计算" data-search-aliases="温室缺水|生菜需水|温室产能|水车几趟" data-search-status="历史社区参考">
@@ -242,10 +258,10 @@
     </div>
   </main>
 
-  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>Farming Simulator 25 试点</h4><p>本站（The Ranchers Guide）托管的 Farming Simulator 25（模拟农场 25）非官方试点专区。配方数值为社区参考与示例值，尚未实机确认。</p><p class="disclaimer">非官方玩家自制内容，不隶属于任何游戏开发商或发行商。</p></div><nav aria-label="FS25 试点链接"><h4>FS25 试点</h4><ul><li><a href="/zh/games/fs25/">FS25 专区首页</a></li><li><a href="/zh/games/fs25/tools/production-planner/">生产规划器</a></li></ul></nav><nav aria-label="The Ranchers 指南链接"><h4>The Ranchers 指南</h4><ul><li><a href="/zh/">The Ranchers 中文首页</a></li><li><a href="/zh/guides/beginners-guide">Ranchers 新手指南</a></li><li><a href="/zh/search">Ranchers 搜索</a></li></ul></nav><nav aria-label="站点链接"><h4>站点</h4><ul><li><a href="/contribute">投稿</a></li><li><a href="/zh/about">关于</a></li><li><a href="/zh/contact">联系</a></li><li><a href="/zh/privacy">隐私政策</a></li><li><a href="/zh/terms">服务条款</a></li><li><a href="/zh/methodology">方法说明</a></li></ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>Farming Simulator 25 试点专区 · 社区参考与示例值，尚未实机确认</span></div></div></footer>
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>Farming Simulator 25</h4><p>规划原料、设施缺口与送水次数。</p><p class="disclaimer">独立玩家工具 · 社区参考数据。</p></div><nav aria-label="FS25 工具链接"><h4>FS25 工具</h4><ul><li><a href="/zh/games/fs25/">FS25 专区首页</a></li><li><a href="/zh/games/fs25/tools/production-planner/">生产规划器</a></li></ul></nav><nav aria-label="The Ranchers 指南链接"><h4>The Ranchers 指南</h4><ul><li><a href="/zh/games/the-ranchers/">The Ranchers 专区</a></li><li><a href="/zh/guides/beginners-guide">Ranchers 新手指南</a></li><li><a href="/zh/search?game=ranchers">Ranchers 搜索</a></li></ul></nav><nav aria-label="站点链接"><h4>站点</h4><ul><li><a href="/contribute">投稿</a></li><li><a href="/zh/about">关于</a></li><li><a href="/zh/contact">联系</a></li><li><a href="/zh/privacy">隐私政策</a></li><li><a href="/zh/terms">服务条款</a></li><li><a href="/zh/methodology">方法说明</a></li></ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>农场与经营游戏工具</span></div></div></footer>
 
   <script src="/assets/js/main.js?v=20261003-r15" defer></script>
-  <script src="/assets/js/fs25-planner-data.js?v=20261021-waterstock" defer></script>
-  <script src="/assets/js/fs25-planner.js?v=20261021-waterstock" defer></script>
+  <script src="/assets/js/fs25-planner-data.js?v=20261024-capacity1" defer></script>
+  <script src="/assets/js/fs25-planner.js?v=20261025-basis1" defer></script>
 </body>
 </html>

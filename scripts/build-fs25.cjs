@@ -294,6 +294,25 @@ function greenhouseMarkup(zh) {
       </section>
       <!-- FS25-GREENHOUSE:END -->`;
 }
+function orderSetupBeforeResults(html) {
+  for (const prefix of ['fp', 'fo', 'fg']) {
+    const settings = html.match(new RegExp('<details\\b[^>]*\\bid="'+prefix+'-parameters"[^>]*>[\\s\\S]*?<\\/details>'));
+    const results = html.match(new RegExp('<section\\b[^>]*aria-labelledby="'+prefix+'-results-title"[^>]*>[\\s\\S]*?<\\/section>'));
+    if (!settings || !results) fail(prefix+' setup/results section missing');
+    if (settings.index > results.index) {
+      html = html.replace(settings[0], '');
+      html = html.replace(results[0], settings[0]+'\n          '+results[0]);
+    }
+    if (!html.includes('id="'+prefix+'-inputs"')) {
+      const targetId = prefix === 'fp' ? 'fp-target-title' : prefix+'-title';
+      const target = html.match(new RegExp('<section\\b[^>]*aria-labelledby="'+targetId+'"[^>]*>[\\s\\S]*?<\\/section>'));
+      if (!target) fail(prefix+' target section missing');
+      html = html.replace(target[0], '').replace(settings[0], '');
+      html = html.replace(results[0], '<div class="fp-inputs" id="'+prefix+'-inputs">\n'+target[0]+'\n'+settings[0]+'\n</div>\n'+results[0]);
+    }
+  }
+  return html;
+}
 for (const locale of ['', 'zh/']) {
   const file = path.join(root, locale, 'games/fs25/tools/production-planner/index.html');
   const current = fs.readFileSync(file, 'utf8');
@@ -307,6 +326,7 @@ for (const locale of ['', 'zh/']) {
   next = /<!-- FS25-GREENHOUSE:START -->/.test(next)
     ? next.replace(/<!-- FS25-GREENHOUSE:START -->[\s\S]*?<!-- FS25-GREENHOUSE:END -->/, greenhouseMarkup(Boolean(locale)))
     : next.replace('<!-- FS25-OIL:END -->', `<!-- FS25-OIL:END -->\n      ${greenhouseMarkup(Boolean(locale))}`);
+  next = orderSetupBeforeResults(next).replace(/^[\t ]+$/gm, '');
   if (process.argv.includes('--check')) {
     if (next !== current) fail(`${locale}planner oil markup is out of sync`);
   } else fs.writeFileSync(file, next);

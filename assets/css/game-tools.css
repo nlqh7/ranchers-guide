@@ -48,7 +48,33 @@
   cursor: pointer;
   font-weight: 800;
   color: var(--brown-900);
+  list-style: none;
+  justify-content: space-between;
 }
+.gt-tool details > summary::-webkit-details-marker { display: none; }
+.gt-tool details > summary::after {
+  content: "";
+  display: block;
+  width: 9px;
+  height: 9px;
+  flex: 0 0 9px;
+  margin-left: auto;
+  margin-right: 4px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  color: var(--green-700);
+  transform: rotate(45deg);
+  transition: transform 160ms ease;
+}
+.gt-tool details[open] > summary::after { transform: rotate(225deg); }
+.gt-tool details > summary:hover { color: var(--green-700); }
+.gt-tool .fp-advanced { padding: 0; overflow: hidden; box-shadow: none; }
+.gt-tool .fp-advanced > summary { min-height: 52px; padding: 14px 20px; }
+.gt-tool .fp-advanced > :not(summary) { margin-left: 20px; margin-right: 20px; }
+.gt-tool .fp-advanced > :last-child { margin-bottom: 20px; }
+.gt-tool .fp-advanced[open] > summary { border-bottom: 1px solid var(--cream-300); background: var(--cream-100); }
+.gt-tool .fp-advanced summary .fp-tag { margin-left: auto; }
+@media (prefers-reduced-motion: reduce) { .gt-tool details > summary::after { transition: none; } }
 .gt-tool .btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
 .gt-tool a:focus-visible,
 .gt-tool button:focus-visible,
@@ -61,29 +87,27 @@
   border-radius: 4px;
 }
 
-/* Mobile order is the DOM order: target → results → advanced → meta.
+/* Mobile order is the DOM order: target → setup → results → meta.
    Desktop switches to a compact two-column grid. */
 .fp-layout {
   display: grid;
   gap: 20px;
   grid-template-columns: minmax(0, 1fr);
-  grid-template-areas: "target" "results" "advanced" "meta";
+  grid-template-areas: "inputs" "results" "meta";
   margin-top: 20px;
 }
 @media (min-width: 920px) {
   .fp-layout {
     grid-template-columns: minmax(0, 400px) minmax(0, 1fr);
     grid-template-areas:
-      "target results"
-      "advanced results"
+      "inputs results"
       "meta meta";
     align-items: start;
   }
 }
-.fp-target { grid-area: target; }
+.fp-inputs { grid-area: inputs; display: grid; gap: 20px; align-content: start; min-width: 0; }
 .fp-results { grid-area: results; }
-.fp-advanced { grid-area: advanced; }
-.fp-meta { grid-area: meta; display: grid; gap: 12px; }
+.fp-meta { grid-area: meta; display: grid; gap: 0; border: 1px solid var(--cream-300); border-radius: 12px; overflow: hidden; background: var(--cream-100); }
 
 .fp-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 14px 0 4px; }
 .fp-generate { font-size: 1.05rem; padding-left: 24px; padding-right: 24px; }
@@ -183,9 +207,14 @@
 .fp-stats-note { font-size: 0.82rem; color: var(--brown-500); }
 .fp-card-skipped p, .fp-card-blocked p { text-align: left; }
 .fp-skipped-note { font-size: 0.82rem; color: var(--brown-500); margin: 6px 0 0; }
-.fp-meta details { background: #fff; border: 2px solid var(--cream-300); border-radius: var(--radius); padding: 0 16px; }
-.fp-meta details > summary { padding: 10px 0; }
-.fp-meta details > div { padding-bottom: 16px; }
+.fp-meta details { background: transparent; border: 0; border-bottom: 1px solid var(--cream-300); border-radius: 0; padding: 0; }
+.fp-meta details:last-child { border-bottom: 0; }
+.fp-meta details > summary { min-height: 52px; padding: 14px 20px; }
+.fp-meta details[open] > summary { background: var(--cream-200); }
+.fp-meta details > div { padding: 0 20px 16px; }
+.gt-tool section.calc-panel[data-search-entry] { margin-top: 24px; padding: 24px; box-shadow: none; border-width: 1px; }
+.gt-tool section.calc-panel[data-search-entry] > h2 { margin: 0 0 12px; font-size: clamp(1.25rem, 2vw, 1.6rem); line-height: 1.3; }
+.gt-tool section.calc-panel[data-search-entry] > p:last-child { margin-bottom: 0; }
 
 /* Keep search deep links and the return-to-planner action below the sticky header. */
 #fs25-planner, #mill-supply { scroll-margin-top: 110px; }

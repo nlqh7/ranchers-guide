@@ -1,0 +1,46 @@
+/* Opt-in portal surfaces; reuse the site's established cream/brown/green tokens. */
+.portal-page { background: var(--color-canvas); }
+.ranchers-home .hero h1 { max-width: none; }
+.ranchers-home .home-games-link { margin: 10px 0 0; font-size: .9rem; }
+.ranchers-home .home-games-link a { display: inline-flex; align-items: center; min-height: 44px; }
+.ranchers-home .home-faq { max-width: 780px; }
+.portal-main { padding: 28px 20px 56px; }
+.portal-breadcrumb { color: var(--color-text-muted); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: .9rem; }
+.portal-breadcrumb a { min-height: 44px; display: inline-flex; align-items: center; }
+.portal-intro { max-width: 760px; margin: 24px 0; }
+.portal-intro h1 { font-size: clamp(2rem, 4.5vw, 3.3rem); line-height: 1.12; margin: 8px 0 16px; }
+.portal-section { padding: 36px 0; scroll-margin-top: 100px; }
+.portal-section-head { display: flex; align-items: end; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; }
+.portal-section-head h2 { margin: 4px 0 0; }
+.portal-section-head > a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; }
+.portal-game-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.portal-game-card { min-width: 0; display: flex; flex-direction: column; padding: 28px; border: 1px solid var(--color-border); border-top: 4px solid var(--color-action); border-radius: var(--radius); background: var(--color-canvas); }
+.portal-game-heading h3 { font-size: 1.65rem; line-height: 1.25; margin: 4px 0 12px; }
+.portal-game-heading h3 a { color: var(--color-text); min-height: 44px; display: inline-flex; align-items: center; }
+.portal-game-heading p:last-child { color: var(--color-text-muted); margin-bottom: 16px; }
+.portal-task-links { list-style: none; margin: auto 0 12px; padding: 0; border-top: 1px solid var(--color-border); }
+.portal-task-links li { margin: 0; }
+.portal-task-links a, .portal-hub-link { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 48px; padding: 10px 0; font-weight: 700; }
+.portal-task-links a { border-bottom: 1px solid var(--color-border); }
+.portal-hub-link { align-self: flex-start; margin-top: 4px; }
+.portal-task-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.portal-task { min-width: 0; padding: 22px; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-canvas); }
+.portal-task h3 { font-size: 1.12rem; margin: 0 0 8px; }
+.portal-task h3 a { min-height: 44px; display: inline-flex; align-items: center; gap: 8px; }
+.portal-task p:last-child { color: var(--color-text-muted); margin: 0; }
+.portal-game-label { font-size: .82rem; font-weight: 800; color: var(--color-text-muted); margin: 0 0 6px; }
+.portal-boundary { max-width: 800px; color: var(--color-text-muted); margin: 24px 0 0; font-size: .9rem; }
+.portal-search { margin: 0 0 28px; padding: 20px; border: 1px solid var(--color-border); background: var(--color-surface-muted); border-radius: var(--radius); }
+.portal-search > label { display: block; font-weight: 800; margin-bottom: 10px; }
+.portal-search-controls { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: end; }
+.portal-scope span { display: block; font-size: .82rem; font-weight: 700; margin-bottom: 4px; }
+.portal-search input, .portal-search select { width: 100%; min-width: 0; min-height: 48px; border: 1px solid var(--brown-300); background: var(--color-canvas); padding: 10px 12px; color: var(--color-text); font: inherit; border-radius: 6px; }
+.portal-search button { min-height: 48px; }
+.portal-reference-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.portal-reference-links a { display: flex; align-items: center; min-height: 48px; padding: 12px 16px; border: 1px solid var(--color-border); border-radius: 6px; font-weight: 700; }
+.portal-page a:focus-visible, .portal-section a:focus-visible, .portal-search :focus-visible { outline: 3px solid var(--color-action); outline-offset: 3px; }
+.portal-page a:hover, .portal-section a:hover { text-decoration: underline; }
+.portal-skip { position: absolute; top: -100px; left: 16px; z-index: 1000; background: var(--color-canvas); padding: 12px; }
+.portal-skip:focus { top: 8px; }
+@media (max-width: 760px) { .portal-game-grid, .portal-task-grid { grid-template-columns: 1fr; } .portal-game-card { padding: 22px; } .portal-search-controls { grid-template-columns: minmax(0, 1fr) auto; } .portal-scope { grid-column: 1 / -1; } .portal-intro { margin-top: 16px; } .portal-section { padding: 28px 0; } }
+@media (max-width: 420px) { .portal-reference-links { grid-template-columns: 1fr; } }

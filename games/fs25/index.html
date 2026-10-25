@@ -13,7 +13,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon-180.png">
   <link rel="stylesheet" href="/assets/css/style.css?v=20261003-r15">
-  <link rel="stylesheet" href="/assets/css/game-tools.css?v=20261021-waterstock">
+<link rel="stylesheet" href="/assets/css/game-tools.css?v=20261025-setup1">
 </head>
 <body>
   <header class="site-header">
@@ -23,14 +23,14 @@
         <span>The Ranchers Guide</span>
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
-      <ul class="nav-links"><li><a href="/games/fs25/">FS25 tools</a></li><li><a href="/games/fs25/tools/production-planner/">Production planner</a></li><li><a href="/search?game=fs25">Search FS25</a></li><li><a href="/">The Ranchers</a></li></ul>
+      <ul class="nav-links"><li><a href="/games/">Games</a></li><li><a href="/games/fs25/">FS25 tools</a></li><li><a href="/games/fs25/tools/production-planner/">Production planner</a></li><li><a href="/search?game=fs25">Search FS25</a></li></ul>
     </nav>
   </header>
 
   <main>
     <div class="container section gt-page">
-      <nav class="breadcrumb" aria-label="Breadcrumb" style="font-size:0.82rem;color:var(--brown-500);"><a href="/">Home</a> / Games / Farming Simulator 25</nav>
-      <p class="gt-game-id">Game corner · pilot</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb" style="font-size:0.82rem;color:var(--brown-500);"><a href="/">Home</a> / <a href="/games/">Games</a> / Farming Simulator 25</nav>
+      <p class="gt-game-id">Production tools</p>
       <h1>Farming Simulator 25</h1>
       <p class="lead" style="max-width:720px;">Plan <strong>bread, canola oil and greenhouse lettuce</strong>. Work backwards from your monthly target to raw materials, extra buildings and water deliveries.</p>
 
@@ -42,13 +42,17 @@
         </article>
       </div>
 
-      <div class="notice" style="margin-top:24px;">
-        <strong>Data boundary:</strong> chain values in the planner are community references and illustrative defaults, not yet runtime-confirmed on the current build, and they are labelled as such on the tool. Playing The Ranchers instead? <a href="/">Back to The Ranchers Guide</a>.
-      </div>
+      <section id="shared-capacity" data-search-entry data-search-title="FS25 shared production capacity: why more recipes do not double output" data-search-aliases="shared production capacity|enabled recipes slow down|split production|production not doubling" data-search-status="Official scripting reference">
+        <h2>Do more recipes mean more output?</h2>
+        <p>Not for the same recipe. With shared capacity, its monthly output is divided by the number of enabled recipes in that building. Independent recipes each retain their own capacity.</p>
+        <p><strong>Your own example:</strong> a recipe rated at 6,000 L/month gets 3,000 L with two recipes sharing capacity. A 5,000 L target then needs two buildings; with independent capacity it needs one.</p>
+        <p>On PC, check the building XML: <code>sharedThroughputCapacity="false"</code> means independent; <code>true</code> or an omitted flag uses shared capacity. If unsure, enable only the recipe you want to plan and enter 1. Count enabled recipes, not the full recipe list.</p>
+        <p><a href="/games/fs25/tools/production-planner/#fs25-planner">Set your building capacity in the planner</a> · <a href="https://gdn.giants-software.com/documentation_scripting_fs25.php?category=1&amp;class=102&amp;version=script" rel="noopener noreferrer">GIANTS production rules</a></p>
+      </section>
     </div>
   </main>
 
-  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>Farming Simulator 25 pilot</h4><p>An unofficial fan-made pilot corner for Farming Simulator 25, hosted on The Ranchers Guide. Recipe values are community references and illustrative defaults, not yet runtime-confirmed.</p><p class="disclaimer">Unofficial fan-made pilot. Not affiliated with or endorsed by any game developer or publisher.</p></div><nav aria-label="FS25 pilot links"><h4>FS25 pilot</h4><ul><li><a href="/games/fs25/">FS25 corner home</a></li><li><a href="/games/fs25/tools/production-planner/">Production Planner</a></li></ul></nav><nav aria-label="The Ranchers Guide links"><h4>The Ranchers Guide</h4><ul><li><a href="/">The Ranchers home</a></li><li><a href="/guides/beginners-guide">Ranchers guides</a></li><li><a href="/search">Ranchers search</a></li></ul></nav><nav aria-label="Site links"><h4>Site</h4><ul><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms of Service</a></li><li><a href="/methodology">Methodology</a></li></ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>Farming Simulator 25 pilot corner · community references and illustrative defaults, not yet runtime-confirmed</span></div></div></footer>
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>Farming Simulator 25</h4><p>Plan materials, facility gaps and water deliveries.</p><p class="disclaimer">Independent fan tools · community reference data.</p></div><nav aria-label="FS25 tool links"><h4>FS25 tools</h4><ul><li><a href="/games/fs25/">FS25 tools home</a></li><li><a href="/games/fs25/tools/production-planner/">Production Planner</a></li></ul></nav><nav aria-label="The Ranchers Guide links"><h4>The Ranchers Guide</h4><ul><li><a href="/games/the-ranchers/">The Ranchers hub</a></li><li><a href="/guides/beginners-guide">Ranchers guides</a></li><li><a href="/search?game=ranchers">Ranchers search</a></li></ul></nav><nav aria-label="Site links"><h4>Site</h4><ul><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms of Service</a></li><li><a href="/methodology">Methodology</a></li></ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>Tools for farming games</span></div></div></footer>
 
   <script src="/assets/js/main.js?v=20261003-r15" defer></script>
 </body>

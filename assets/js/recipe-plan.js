@@ -58,6 +58,12 @@
     });
     const query = root.querySelector('[data-plan-search]');
     const picker = root.querySelector('[data-plan-select]');
+    const combo = root.querySelector('[data-plan-combobox]');
+    const results = root.querySelector('[data-plan-results]');
+    const options = root.querySelector('[data-plan-options]');
+    const matchStatus = root.querySelector('[data-plan-matches]');
+    let matchingRecipes = [];
+    let activeOption = -1;
     const add = root.querySelector('[data-plan-add]');
     const selectionList = root.querySelector('[data-plan-selections]');
     const supplyList = root.querySelector('[data-plan-supplies]');
@@ -171,26 +177,56 @@
       update();
     }
 
+    function closeSuggestions() {
+      results.hidden = true;
+      query.setAttribute('aria-expanded', 'false');
+      query.removeAttribute('aria-activedescendant');
+    }
+    function activateOption(index, scroll = false) {
+      activeOption = matchingRecipes.length ? Math.max(0, Math.min(index, matchingRecipes.length - 1)) : -1;
+      const rows = options.querySelectorAll('[role="option"]');
+      rows.forEach((row, i) => row.setAttribute('aria-selected', String(i === activeOption)));
+      if (activeOption < 0 || results.hidden) query.removeAttribute('aria-activedescendant');
+      else {
+        query.setAttribute('aria-activedescendant', rows[activeOption].id);
+        if (scroll) rows[activeOption].scrollIntoView({ block: 'nearest', behavior: 'instant' });
+      }
+    }
+    function openSuggestions() {
+      results.hidden = false;
+      query.setAttribute('aria-expanded', 'true');
+      activateOption(activeOption < 0 ? 0 : activeOption);
+    }
+    function chooseRecipe(id, userAction = true) {
+      const recipe = data.recipes.find(item => item.id === id);
+      if (!recipe) return;
+      picker.value = id;
+      query.value = labels.get(id);
+      add.disabled = false;
+      closeSuggestions();
+      if (userAction) { clearEntry(); query.focus(); }
+    }
     function filter() {
       const previous = picker.value;
       const terms = query.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
       const matches = data.recipes.filter(recipe => {
         const materials = recipe.materials.map(item => data.ingredients.find(ingredient => ingredient.id === item.id));
-        const text = [recipe.name, recipe.zhName, ...materials.flatMap(item => [item.name, item.zhName])].join(' ').toLocaleLowerCase();
+        const text = [recipe.name, recipe.zhName, labels.get(recipe.id), ...materials.flatMap(item => [item.name, item.zhName])].join(' ').toLocaleLowerCase();
         return terms.every(term => text.includes(term));
       });
-      picker.replaceChildren();
-      Object.entries(data.groups).forEach(([id, label]) => {
-        const entries = matches.filter(recipe => recipe.category === id);
-        if (!entries.length) return;
-        const group = document.createElement('optgroup');
-        group.label = label;
-        entries.forEach(recipe => group.append(new Option(labels.get(recipe.id), recipe.id)));
-        picker.append(group);
-      });
-      if (matches.some(recipe => recipe.id === previous)) picker.value = previous;
-      picker.disabled = add.disabled = matches.length === 0;
-      root.querySelector('[data-plan-no-match]').hidden = matches.length > 0;
+      // A recipe named Wood Fence should not be buried below every item that
+      // consumes wood. Keep material matches, after direct name matches.
+      const nameMatch = recipe => {
+        const text = [recipe.name, recipe.zhName, labels.get(recipe.id)].join(' ').toLocaleLowerCase();
+        return terms.every(term => text.includes(term));
+      };
+      matches.sort((a, b) => Number(nameMatch(b)) - Number(nameMatch(a)));
+      matchingRecipes = matches;
+      options.innerHTML = matches.map((recipe, index) => `<li id="recipe-plan-option-${index}" role="option" aria-selected="false" data-plan-option="${esc(recipe.id)}"><span>${esc(labels.get(recipe.id))}</span><small>${esc(data.groups[recipe.category] || '')}</small></li>`).join('');
+      picker.value = matches.some(recipe => recipe.id === previous) ? previous : '';
+      add.disabled = !picker.value;
+      matchStatus.textContent = matches.length ? (zh ? `${matches.length} 项配方 · ↑↓ 选择，Enter 确认` : `${matches.length} recipes · ↑↓ to choose, Enter to select`) : (zh ? '没有匹配配方，试试其他名称。' : 'No matches. Try another name.');
+      activateOption(0);
     }
 
     function renderSelections() {
@@ -263,7 +299,8 @@
     root.querySelector('[data-plan-picker]').addEventListener('submit', event => {
       event.preventDefault();
       const id = picker.value;
-      if (!id) return;
+      if (!id || mode !== 'recipes') return;
+      closeSuggestions();
       clearEntry();
       if (Object.hasOwn(selections, id)) {
         root.querySelector(`[data-selected-count="${id}"]`).focus();
@@ -274,6 +311,7 @@
       renderSelections();
       save();
       status.textContent = (zh ? '已加入：' : 'Added: ') + labels.get(id);
+      root.querySelector(`[data-selected-recipe="${id}"]`)?.classList.add('is-just-added');
     });
     copy.addEventListener('click', async () => {
       const text = summaryText();
@@ -314,9 +352,39 @@
       update();
       save();
     });
-    query.addEventListener('input', () => { filter(); clearEntry(); });
-    picker.addEventListener('change', () => { add.disabled = !picker.value; clearEntry(); });
+    query.addEventListener('input', event => {
+      picker.value = '';
+      filter();
+      openSuggestions();
+      clearEntry();
+    });
+    query.addEventListener('focus', () => { filter(); openSuggestions(); });
+    query.addEventListener('click', openSuggestions);
+    query.addEventListener('keydown', event => {
+      if (event.isComposing) return;
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+        event.preventDefault();
+        const wasClosed = results.hidden;
+        openSuggestions();
+        activateOption(wasClosed ? (event.key === 'ArrowDown' ? 0 : matchingRecipes.length - 1) : activeOption + (event.key === 'ArrowDown' ? 1 : -1), true);
+      } else if (event.key === 'Enter' && !results.hidden) {
+        event.preventDefault();
+        if (activeOption >= 0) chooseRecipe(matchingRecipes[activeOption].id);
+      } else if (event.key === 'Escape') {
+        event.preventDefault();
+        closeSuggestions();
+      } else if (event.key === 'Tab') closeSuggestions();
+    });
+    options.addEventListener('mousedown', event => event.preventDefault());
+    options.addEventListener('click', event => {
+      const row = event.target.closest('[data-plan-option]');
+      if (row) chooseRecipe(row.dataset.planOption);
+    });
+    combo.addEventListener('focusout', event => { if (!combo.contains(event.relatedTarget)) closeSuggestions(); });
+    document.addEventListener('pointerdown', event => { if (!combo.contains(event.target)) closeSuggestions(); });
     root.querySelectorAll('[data-plan-mode]').forEach(button => button.addEventListener('click', () => {
+      if (mode === button.dataset.planMode) return;
+      closeSuggestions();
       mode = button.dataset.planMode;
       invalidBuildingLink = false;
       renderMode();
@@ -344,7 +412,8 @@
       mode = 'recipes';
       const conflict = linkedBuilding !== null;
       const valid = !conflict && data.recipes.some(recipe => recipe.id === linkedRecipe);
-      picker.value = valid ? linkedRecipe : '';
+      if (valid) chooseRecipe(linkedRecipe, false);
+      else picker.value = '';
       add.disabled = !valid;
       if (conflict) {
         entryNote.textContent = zh ? '链接同时指定了配方和建筑。请选择一种备料方式重新选择，已有计划未改动。' : 'This link specifies both a recipe and a building. Choose a preparation type and target; your existing plan is unchanged.';

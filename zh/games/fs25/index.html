@@ -13,21 +13,21 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon-180.png">
   <link rel="stylesheet" href="/assets/css/style.css?v=20261003-r15">
-  <link rel="stylesheet" href="/assets/css/game-tools.css?v=20261021-waterstock">
+<link rel="stylesheet" href="/assets/css/game-tools.css?v=20261025-setup1">
 </head>
 <body>
   <header class="site-header">
     <nav class="nav-inner" aria-label="主导航">
       <a class="logo" href="/zh/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide</span></a>
       <button class="nav-toggle" aria-expanded="false" aria-label="展开导航">☰</button>
-      <ul class="nav-links"><li><a href="/zh/games/fs25/">FS25 工具</a></li><li><a href="/zh/games/fs25/tools/production-planner/">生产规划器</a></li><li><a href="/zh/search?game=fs25">搜索 FS25</a></li><li><a href="/zh/">The Ranchers 中文站</a></li></ul>
+      <ul class="nav-links"><li><a href="/zh/games/">游戏目录</a></li><li><a href="/zh/games/fs25/">FS25 专区</a></li><li><a href="/zh/games/fs25/tools/production-planner/">生产规划器</a></li><li><a href="/zh/search?game=fs25">搜索 FS25</a></li></ul>
     </nav>
   </header>
 
   <main>
     <div class="container section gt-page">
-      <nav class="breadcrumb" aria-label="面包屑" style="font-size:0.82rem;color:var(--brown-500);"><a href="/zh/">首页</a> / 游戏 / Farming Simulator 25</nav>
-      <p class="gt-game-id">游戏专区 · 试点</p>
+      <nav class="breadcrumb" aria-label="面包屑" style="font-size:0.82rem;color:var(--brown-500);"><a href="/zh/">首页</a> / <a href="/zh/games/">游戏</a> / Farming Simulator 25</nav>
+      <p class="gt-game-id">生产规划工具</p>
       <h1>Farming Simulator 25（模拟农场 25）</h1>
       <p class="lead" style="max-width:720px;">目前支持<strong>面包、菜籽油和温室生菜</strong>。从月产量反推原料，比较现有设施，决定还要添几座；温室还可以算送水趟数。</p>
 
@@ -39,13 +39,17 @@
         </article>
       </div>
 
-      <div class="notice" style="margin-top:24px;">
-        <strong>数据边界：</strong>规划器中的链条数值是社区参考与示例值，尚未在当前版本实机确认，工具页上也如此标注。如果你在玩 The Ranchers，请<a href="/zh/">返回 The Ranchers 中文指南</a>。
-      </div>
+      <section id="shared-capacity" data-search-entry data-search-title="FS25 多开配方产量不增加：共享产能怎么设置" data-search-aliases="多开配方产量不增加|共享产能怎么设置|产线减速|配方平分产能" data-search-status="官方脚本说明">
+        <h2>多开配方，产量就会翻倍吗？</h2>
+        <p>同一条配方不会。共享产能时，它的月产量按这座建筑启用的配方数分摊；独立产能时，各配方保留自己的产能。</p>
+        <p><strong>自填示例：</strong>单配方产能 6,000 L/月，启用两条共享配方后，该配方为 3,000 L/月。目标 5,000 L/月需要两座建筑；独立产能则只需一座。</p>
+        <p>PC 可查看建筑 XML：<code>sharedThroughputCapacity="false"</code> 为独立，<code>true</code> 或未写此字段时为共享。规则不清楚时，先只启用要规划的配方，数量填 1。这里填的是启用数量，不是配方目录总数。</p>
+        <p><a href="/zh/games/fs25/tools/production-planner/#fs25-planner">进入规划器，设置自己的设施产能</a> · <a href="https://gdn.giants-software.com/documentation_scripting_fs25.php?category=1&amp;class=102&amp;version=script" rel="noopener noreferrer">GIANTS 生产机制</a></p>
+      </section>
     </div>
   </main>
 
-  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>Farming Simulator 25 试点</h4><p>本站（The Ranchers Guide）托管的 Farming Simulator 25（模拟农场 25）非官方试点专区。配方数值为社区参考与示例值，尚未实机确认。</p><p class="disclaimer">非官方玩家自制内容，不隶属于任何游戏开发商或发行商。</p></div><nav aria-label="FS25 试点链接"><h4>FS25 试点</h4><ul><li><a href="/zh/games/fs25/">FS25 专区首页</a></li><li><a href="/zh/games/fs25/tools/production-planner/">生产规划器</a></li></ul></nav><nav aria-label="The Ranchers 指南链接"><h4>The Ranchers 指南</h4><ul><li><a href="/zh/">The Ranchers 中文首页</a></li><li><a href="/zh/guides/beginners-guide">Ranchers 新手指南</a></li><li><a href="/zh/search">Ranchers 搜索</a></li></ul></nav><nav aria-label="站点链接"><h4>站点</h4><ul><li><a href="/contribute">投稿</a></li><li><a href="/zh/about">关于</a></li><li><a href="/zh/contact">联系</a></li><li><a href="/zh/privacy">隐私政策</a></li><li><a href="/zh/terms">服务条款</a></li><li><a href="/zh/methodology">方法说明</a></li></ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>Farming Simulator 25 试点专区 · 社区参考与示例值，尚未实机确认</span></div></div></footer>
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>Farming Simulator 25</h4><p>规划原料、设施缺口与送水次数。</p><p class="disclaimer">独立玩家工具 · 社区参考数据。</p></div><nav aria-label="FS25 工具链接"><h4>FS25 工具</h4><ul><li><a href="/zh/games/fs25/">FS25 专区首页</a></li><li><a href="/zh/games/fs25/tools/production-planner/">生产规划器</a></li></ul></nav><nav aria-label="The Ranchers 指南链接"><h4>The Ranchers 指南</h4><ul><li><a href="/zh/games/the-ranchers/">The Ranchers 专区</a></li><li><a href="/zh/guides/beginners-guide">Ranchers 新手指南</a></li><li><a href="/zh/search?game=ranchers">Ranchers 搜索</a></li></ul></nav><nav aria-label="站点链接"><h4>站点</h4><ul><li><a href="/contribute">投稿</a></li><li><a href="/zh/about">关于</a></li><li><a href="/zh/contact">联系</a></li><li><a href="/zh/privacy">隐私政策</a></li><li><a href="/zh/terms">服务条款</a></li><li><a href="/zh/methodology">方法说明</a></li></ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>农场与经营游戏工具</span></div></div></footer>
 
   <script src="/assets/js/main.js?v=20261003-r15" defer></script>
 </body>

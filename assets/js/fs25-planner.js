@@ -51,9 +51,10 @@
 
   var T = isZh ? {
     enterTarget: "填写每月面包目标，然后点击“生成计划”。",
+    setupNeeded: "请填写配比与产能，或载入参考示例，再生成计划。",
     targetHint: "请先在这里填写每月目标（升），再生成计划。",
     stale: "输入已修改——以下结果尚未更新。请重新点击“生成计划”。",
-    errEmpty: "此字段为空——请输入数值，或点击“载入参考示例数据”。",
+    errEmpty: "填写数值，或载入参考示例。",
     errNan: "不是有效数字。",
     errPositive: "必须大于 0。",
     errInteger: "必须是整数。",
@@ -78,10 +79,10 @@
     facilityCovered: "现有设施已覆盖该需求。",
     facilityAdditional: "还需新增：{a} 座",
     facilityAdditionalNone: "还需新增：0 座——现有数量已足够。",
-    facilityNoCount: "未填写现有数量——仅显示总需求。在上方“你已拥有的设施”中填入数量（没有就填 0），即可查看当前缺口与还需新增。空白不等于 0。",
+    facilityNoCount: "空白不等于 0；这里只显示总需求。",
     areaLabelPlain: "小麦耕作面积",
-    areaSkipped: "未计算——产量、运行月数或收获次数为空。在“高级参数”中填写（或点击“载入参考示例数据”）后即可估算面积。",
-    areaBlocked: "面积已阻断——请在“高级参数”中补全或修正产量、运行月数与收获次数。",
+    areaSkipped: "面积未计算：单产、运行月数或收获次数为空。",
+    areaBlocked: "请补全或修正单产、运行月数与收获次数。",
     ruleIndependent: "产线独立满速运行——产线数量不放大本配方产能",
     ruleShared: "{n} 条产线共享同一份月度产能（产能 ÷ {n}）",
     ruleSingle: "单条产线",
@@ -89,11 +90,12 @@
     saveInvalid: "存在无效输入，未保存——请先修正标红字段。",
     saveFail: "保存失败：浏览器拒绝了本地存储。",
     restored: "已恢复上次保存的有效设置——点击“生成计划”查看结果。",
-    sampleLoaded: "已载入示例参考值——尚未实机确认，也并非逐项独立核实。请逐项核对后再信任计划结果。",
+    sampleLoaded: "已载入历史设施参考与面积示例，请按存档修改。",
     copyOk: "计划已复制到剪贴板。",
     copyFail: "自动复制失败——请手动选择下方文本复制。",
     samplePrefix: "例如 ",
-    textHeader: "FS25 面包生产计划（示例参考值，尚未实机确认，非逐项独立核实）",
+    textHeader: "FS25 面包生产计划",
+    textBasis: "按规划器输入计算，请与实际设施核对。",
     textTarget: "每月目标：{t} L 面包",
     textFlour: "面粉需求：{v} L/月",
     textWheat: "小麦需求：{v} L/月",
@@ -102,9 +104,10 @@
     textFacilityExisting: "{name}：现有 {n} 座，当前缺口 {s} {unit}/月，还需新增 {a} 座"
   } : {
     enterTarget: "Enter a monthly bread target, then press “Generate plan”.",
+    setupNeeded: "Enter recipe ratios and capacities, or load the reference example, then generate.",
     targetHint: "Enter your monthly target (litres) here first.",
     stale: "Inputs changed — the plan below has not been updated. Press “Generate plan” again.",
-    errEmpty: "This field is empty — enter a value or press “Load sample data”.",
+    errEmpty: "Enter a value or load the reference example.",
     errNan: "Not a valid number.",
     errPositive: "Must be greater than 0.",
     errInteger: "Must be a whole number.",
@@ -129,10 +132,10 @@
     facilityCovered: "Your existing facilities cover this demand.",
     facilityAdditional: "Additional to buy: {a}",
     facilityAdditionalNone: "Additional to buy: 0 — you already have enough.",
-    facilityNoCount: "No current count entered — showing total need only. Enter how many you own in “Facilities you already own” above (0 if none) to see the current shortfall and additional needed. Blank is not zero.",
+    facilityNoCount: "Blank is not zero; showing total need only.",
     areaLabelPlain: "wheat field area",
-    areaSkipped: "Not calculated — yield, run months or harvests are blank. Fill them in “Advanced” (or press “Load sample data”) to add an area estimate.",
-    areaBlocked: "Area blocked — complete or fix yield, run months and harvests in “Advanced”.",
+    areaSkipped: "Area not calculated: yield, run months or harvest count is blank.",
+    areaBlocked: "Complete or fix yield, run months and harvest count.",
     ruleIndependent: "lines run independently at full capacity — line count does not multiply this recipe",
     ruleShared: "{n} lines share one monthly budget (capacity ÷ {n})",
     ruleSingle: "single line",
@@ -140,11 +143,12 @@
     saveInvalid: "Nothing saved — fix the highlighted fields first.",
     saveFail: "Save failed: the browser blocked local storage.",
     restored: "Restored your last valid saved settings — press “Generate plan”.",
-    sampleLoaded: "Illustrative sample values loaded — not runtime-confirmed and not independently sourced value by value. Review each number before trusting a plan.",
+    sampleLoaded: "Loaded historical facility references and area assumptions. Adjust them to your save.",
     copyOk: "Plan copied to clipboard.",
     copyFail: "Automatic copy failed — select the text below and copy it manually.",
     samplePrefix: "e.g. ",
-    textHeader: "FS25 bread production plan (illustrative sample values, not runtime-confirmed, not independently sourced)",
+    textHeader: "FS25 bread production plan",
+    textBasis: "Calculated from planner inputs. Check them against your facilities.",
     textTarget: "Monthly target: {t} L bread",
     textFlour: "Flour needed: {v} L/month",
     textWheat: "Wheat needed: {v} L/month",
@@ -230,11 +234,14 @@
       f.el.parentElement.appendChild(err);
     }
     err.textContent = errMsg(f, reason);
+    err.id = f.el.getAttribute("id") + "-error";
+    f.el.setAttribute("aria-describedby", err.id);
     err.hidden = false;
   }
   function clearError(f) {
     f.el.classList.remove("fp-invalid");
     f.el.removeAttribute("aria-invalid");
+    f.el.removeAttribute("aria-describedby");
     var err = f.el.parentElement && f.el.parentElement.querySelector(".fp-field-error");
     if (err) err.hidden = true;
   }
@@ -364,6 +371,7 @@
   function buildText(r, flour, wheat, area, bakeryName, millName, breadUnit, flourUnit) {
     var lines = [
       T.textHeader,
+      T.textBasis,
       sub(T.textTarget, { t: fmt(r.target.value) }),
       sub(T.textFlour, { v: fmt(flour) }),
       sub(T.textWheat, { v: fmt(wheat) })
@@ -432,7 +440,17 @@
       if (missingCore && parameters) {
         parameters.open = true;
         missingCore.el.focus();
+        missingCore.el.scrollIntoView({ block: "center", behavior: "instant" });
       }
+    }
+
+    if (r.target.ok && ["ratioBakery", "ratioMill", "capBakery", "capMill"].every(function (key) { return isBlank(r[key]); })) {
+      resultsEl.innerHTML = '<p class="fp-blocked" role="alert">' + T.setupNeeded + '</p>';
+      planShown = false;
+      planComplete = false;
+      lastPlanText = "";
+      updateActions();
+      return;
     }
 
     var flourOk = r.target.ok && r.ratioBakery.ok;
@@ -532,6 +550,7 @@
   }
 
   function onEdit(evt) {
+    if (evt && evt.target && loadStatus) loadStatus.textContent = "";
     if (planShown) {
       root.classList.add("fp-stale");
       staleEl.hidden = false;
@@ -756,7 +775,11 @@
       el("results").innerHTML = '<p class="fp-blocked" role="alert">' + (r.coreInvalid.length
         ? t("Complete the highlighted recipe and capacity fields first.", "请先补全或修正标红的配比与产能字段。")
         : t("Result exceeds the supported number range. Reduce the target or check your inputs.", "结果超出数值范围，请调小目标或核对输入。")) + '</p>';
-      if (r.coreInvalid.length) { el("parameters").open = true; r.coreInvalid[0].focus(); }
+      if (r.coreInvalid.length) {
+        el("parameters").open = true;
+        r.coreInvalid[0].focus();
+        r.coreInvalid[0].scrollIntoView({ block: "center", behavior: "instant" });
+      }
       actions(); return;
     }
     var f = p.facility;
@@ -764,7 +787,8 @@
     var unknownText = t("Owned count unknown — total only, not an assumed zero.", "现有数量未知——只算总需求，空白不视为 0。");
     var ownedLines = [];
     var areaText = null;
-    var lines = [green ? t("Greenhouse lettuce plan — historical reference / your inputs", "温室生菜计划——历史参考／自填参数") : t("Canola oil plan — historical standard Oil Mill reference / your inputs", "菜籽油计划——历史普通油坊参考／自填参数"),
+    var lines = [green ? t("FS25 greenhouse lettuce plan", "FS25 温室生菜计划") : t("FS25 canola oil plan", "FS25 菜籽油计划"),
+      t("Calculated from planner inputs. Check them against your facilities.", "按规划器输入计算，请与实际设施核对。"),
       (green ? t("Lettuce target: ", "生菜目标：") : t("Oil target: ", "菜籽油目标：")) + fmt(v.target) + " L/" + t("month", "月"),
       (green ? t("Water needed for target: ", "目标需水量：") : t("Canola needed: ", "菜籽需求：")) + fmt(p.inputPerMonth) + " L/" + t("month", "月"),
       effectiveText,
@@ -797,7 +821,7 @@
       var waterBoundary = t("Stock is credited only for this planning month, not as a recurring supply. Other crops are excluded; full-speed production may need more water.", "存水仅抵扣本轮计划，不是每月自动补给。不含其他作物；全部设施全速生产的耗水可能更多。");
       lines.push(waterBoundary);
       html += '<p class="fp-src-note">' + waterBoundary + '</p>';
-    } else html += areaText !== null ? '<p>' + areaText + '</p>' : '<p class="fp-src-note">' + t("Field area not calculated. Enter your yield, production run months and harvests in the parameters below.", "未计算耕地面积；可在下方参数中填写自己的单产、生产运行月数与收获次数。") + '</p>';
+    } else html += areaText !== null ? '<p>' + areaText + '</p>' : '<p class="fp-src-note">' + t("Area not calculated: enter yield, run months and harvest count in the settings.", "面积未计算：请在设置区填写单产、生产运行月数与收获次数。") + '</p>';
     if (r.invalid.length) html += '<p class="fp-blocked" role="alert">' + t("An optional input is invalid. Materials and facility totals are shown; fix it before saving or copying.", "有可选输入无效；原料与设施总量仍显示，请修正后再保存或复制。") + '</p>';
     el("results").innerHTML = html;
     el("status").textContent = "";

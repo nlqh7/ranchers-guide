@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- GAME-DIRECTORY:START -->
+<url><loc>https://theranchersguide.com/games/</loc><xhtml:link rel="alternate" hreflang="en" href="https://theranchersguide.com/games/" /><xhtml:link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/games/" /><lastmod>2026-10-24</lastmod></url>
+<url><loc>https://theranchersguide.com/zh/games/</loc><xhtml:link rel="alternate" hreflang="en" href="https://theranchersguide.com/games/" /><xhtml:link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/games/" /><lastmod>2026-10-24</lastmod></url>
+<url><loc>https://theranchersguide.com/games/the-ranchers/</loc><xhtml:link rel="alternate" hreflang="en" href="https://theranchersguide.com/games/the-ranchers/" /><xhtml:link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/games/the-ranchers/" /><lastmod>2026-10-24</lastmod></url>
+<url><loc>https://theranchersguide.com/zh/games/the-ranchers/</loc><xhtml:link rel="alternate" hreflang="en" href="https://theranchersguide.com/games/the-ranchers/" /><xhtml:link rel="alternate" hreflang="zh-CN" href="https://theranchersguide.com/zh/games/the-ranchers/" /><lastmod>2026-10-24</lastmod></url>
+<!-- GAME-DIRECTORY:END -->
   <url>
     <loc>https://theranchersguide.com/guides/resources-and-materials</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://theranchersguide.com/guides/resources-and-materials" />

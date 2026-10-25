@@ -101,7 +101,7 @@ function render(locale, buildingOnly=false, showHomeChoice=false) {
   return `<!-- BEGIN SHOP REFERENCE -->
 <section class="crafting-reference shop-reference"${buildingOnly?'':' data-shop-reference'} aria-label="${title}">
 <h2 id="${buildingOnly?'shop-building-materials':'shops'}">${title}</h2>
-<p class="recipe-boundary">${zh?'站长整理 · 游戏文件配置。这里列出商店商品与材料条件，不保证当前库存，也不代表完整售价。':'Editor-collected game configuration: shop listings and resource conditions, not guaranteed stock or the full purchase price.'}</p>
+<p class="recipe-boundary">${zh?'游戏文件记录；库存与售价请在游戏内确认。':'Game-file listings; check stock and purchase prices in-game.'}</p>
 ${homeChoice}${body}
 <details class="recipe-sources"><summary>${zh?'资料来源与可用性':'Sources & availability'}</summary><p>${zh?'非官方资料。商品名称逐项核对游戏双语文本；商店标题按源表类型描述，未推测店主、营业时间或精确地点。季节为商店配置分组，不是种植季节。':'Unofficial reference. Item names are matched to bilingual game text. Shop headings describe source categories; no owner, opening time or precise location is inferred. Seasons describe shop sections, not growing seasons.'} ${data.build} · Steam ${data.steamBuild}.</p><p>${zh?'不从 Demo 标记、内部价格或任务状态推断运行时可用性。材料条件来自商店记录，与制作配方分开；空材料条件不代表免费。':'Demo flags, internal prices and quest states do not establish runtime availability. Shop resource conditions are distinct from crafting recipes; an empty condition does not mean an item is free.'}</p><p>${zh?'来源：':'Sources: '}${Object.values(data.sources).filter(s=>!buildingOnly || ['Architect','Owned-build item localization'].includes(s.title)).map(s=>esc(s.title)).join(', ')}. <a href="${prefix}/methodology">${zh?'验证方法':'Methodology'}</a></p></details>
 </section>

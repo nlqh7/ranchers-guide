@@ -13,7 +13,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon-180.png">
   <link rel="stylesheet" href="/assets/css/style.css?v=20261003-r15">
-  <link rel="stylesheet" href="/assets/css/game-tools.css?v=20261021-waterstock">
+<link rel="stylesheet" href="/assets/css/game-tools.css?v=20261025-setup1">
 </head>
 <body>
   <header class="site-header">
@@ -23,24 +23,28 @@
         <span>The Ranchers Guide</span>
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
-      <ul class="nav-links"><li><a href="/games/fs25/">FS25 tools</a></li><li><a href="/games/fs25/tools/production-planner/">Production planner</a></li><li><a href="/search?game=fs25">Search FS25</a></li><li><a href="/">The Ranchers</a></li></ul>
+      <ul class="nav-links"><li><a href="/games/">Games</a></li><li><a href="/games/fs25/">FS25 tools</a></li><li><a href="/games/fs25/tools/production-planner/">Production planner</a></li><li><a href="/search?game=fs25">Search FS25</a></li></ul>
     </nav>
   </header>
 
   <main>
     <div class="container section gt-tool gt-page">
-      <nav class="breadcrumb" aria-label="Breadcrumb" style="font-size:0.82rem;color:var(--brown-500);"><a href="/">Home</a> / Games / <a href="/games/fs25/">Farming Simulator 25</a> / Production Planner</nav>
+      <nav class="breadcrumb" aria-label="Breadcrumb" style="font-size:0.82rem;color:var(--brown-500);"><a href="/">Home</a> / <a href="/games/">Games</a> / <a href="/games/fs25/">Farming Simulator 25</a> / Production Planner</nav>
       <p class="gt-game-id">Farming Simulator 25 · bread · canola oil · greenhouse lettuce</p>
       <h1>Production Planner</h1>
 
       <p class="lead" style="max-width:720px;">Choose bread, canola oil or greenhouse lettuce. Set a monthly target to find the raw materials, <strong>facilities needed and what you still need to buy</strong>.</p>
 
-      <p class="fp-src-note gt-boundary-hint">Recipes and capacities use a historical standard-facility reference. Adjust them for your building; sources are in the parameters.</p>
+      <p class="fp-src-note gt-boundary-hint">Enter your facility values or load a historical reference. Sources are in the settings.</p>
 
       <!-- FS25-PRODUCT:START --><div class="calc-field fp-product-picker"><label for="fp-product">Choose your target product</label><select id="fp-product"><option value="bread">Bread: wheat → flour → bread</option><option value="canola-oil">Canola oil: canola → oil</option><option value="greenhouse-lettuce">Greenhouse lettuce: water → lettuce</option></select></div><!-- FS25-PRODUCT:END -->
       <form id="fp-form" novalidate>
         <div class="fp-layout" id="fs25-planner">
-          <section class="calc-panel fp-target" aria-labelledby="fp-target-title">
+
+
+
+          <div class="fp-inputs" id="fp-inputs">
+<section class="calc-panel fp-target" aria-labelledby="fp-target-title">
             <h3 id="fp-target-title">Your monthly target</h3>
             <div class="calc-field">
               <label for="fp-target">Bread target per month (L)</label>
@@ -59,41 +63,22 @@
                   <input id="fp-have-mill" type="number" min="0" step="1" inputmode="numeric">
                 </div>
               </div>
-              <p class="fp-src-note" id="fp-existing-note">Blank is <strong>not</strong> zero: leave these blank and the plan shows only the total facilities needed — it cannot show your current shortfall or how many additional facilities to buy. Enter how many you already own (0 if none) to add those figures.</p>
+              <p class="fp-src-note" id="fp-existing-note">Leave blank for total need only; enter your count (0 if none) to see what to add.</p>
             </fieldset>
             <div class="fp-actions">
               <button type="submit" class="btn fp-generate">Generate plan</button>
+              <button type="button" class="btn btn-outline" id="fp-reset">Load sample data</button>
               <button type="button" class="btn btn-outline" id="fp-save" disabled>Save settings</button>
             </div>
             <p class="fp-status" id="fp-save-status" role="status"></p>
-            <p class="fp-src-note">Press Enter in any field to generate. “Save settings” is available once every required value is valid and optional fields are blank or valid; settings are stored only on this device.</p>
+            <span class="fp-status" id="fp-load-status" role="status"></span>
+            <p class="fp-src-note">Press Enter to generate. Settings save only on this device.</p>
           </section>
-
-          <section class="calc-panel fp-results" aria-labelledby="fp-results-title">
-            <div class="fp-results-head">
-              <h3 id="fp-results-title">Your plan</h3>
-              <span class="fp-boundary">Illustrative sample values · not yet runtime-confirmed · verify against your own save</span>
-            </div>
-            <p class="fp-stale-banner" id="fp-stale" hidden role="alert">Inputs changed — the plan below has not been updated. Press “Generate plan” again.</p>
-            <div id="fp-results" aria-live="polite"><p class="fp-empty">Enter a monthly target and press “Generate plan”.</p></div>
-            <div class="fp-actions">
-              <button type="button" class="btn btn-outline" id="fp-copy" disabled>Copy plan</button>
-              <span class="fp-status" id="fp-copy-status" role="status"></span>
-            </div>
-            <textarea id="fp-copy-manual" class="fp-copy-manual" hidden readonly aria-label="Plan text for manual copy"></textarea>
-          </section>
-
-          <details class="calc-panel fp-advanced" id="fp-parameters">
-            <summary>Advanced: capacity, ratios &amp; area assumptions <span class="fp-tag">sample data</span></summary>
+<details class="calc-panel fp-advanced" id="fp-parameters">
+            <summary>Recipe & capacity settings <span class="fp-tag">area optional</span></summary>
             <div class="fp-grid">
-              <div class="calc-field">
-                <label for="fp-months">Production run months per year</label>
-                <input id="fp-months" type="number" min="1" max="12" step="1" inputmode="numeric">
-              </div>
-              <div class="calc-field">
-                <label for="fp-harvests">Wheat harvests per year</label>
-                <input id="fp-harvests" type="number" min="1" max="12" step="1" inputmode="numeric">
-              </div>
+
+
               <div class="calc-field">
                 <label for="fp-ratio-bakery">Flour per 1 L bread</label>
                 <input id="fp-ratio-bakery" type="number" min="0" step="0.1" inputmode="decimal">
@@ -114,7 +99,7 @@
                 </select>
               </div>
               <div class="calc-field">
-                <label for="fp-share-bakery">Lines in one Bakery</label>
+                <label for="fp-share-bakery">Enabled recipes per Bakery</label>
                 <input id="fp-share-bakery" type="number" min="1" max="8" step="1" value="1" inputmode="numeric">
               </div>
               <div class="calc-field">
@@ -129,20 +114,41 @@
                 </select>
               </div>
               <div class="calc-field">
-                <label for="fp-share-mill">Lines in one Mill</label>
+                <label for="fp-share-mill">Enabled recipes per Grain Mill</label>
                 <input id="fp-share-mill" type="number" min="1" max="8" step="1" value="1" inputmode="numeric">
+              </div>
+              <div class="calc-field">
+                <label for="fp-months">Production run months per year</label>
+                <input id="fp-months" type="number" min="1" max="12" step="1" inputmode="numeric">
+              </div>
+              <div class="calc-field">
+                <label for="fp-harvests">Wheat harvests per year</label>
+                <input id="fp-harvests" type="number" min="1" max="12" step="1" inputmode="numeric">
               </div>
               <div class="calc-field">
                 <label for="fp-yield">Wheat yield (L / ha / harvest)</label>
                 <input id="fp-yield" type="number" min="0" step="100" inputmode="numeric">
               </div>
             </div>
-            <div class="fp-actions">
-              <button type="button" class="btn btn-outline" id="fp-reset">Load sample data</button>
-              <span class="fp-status" id="fp-load-status" role="status"></span>
-            </div>
-            <p class="fp-src-note">These fields start blank so that no reference value is mistaken for confirmed data. Press “Load sample data” to fill every field from the sample values shipped with the data file — they stay illustrative sample values: not runtime-confirmed, and not independently sourced value by value. An invalid value (0, negative, non-numeric or out of range) blocks only the results that depend on it; independent outputs remain visible instead of silently substituting defaults. Field area assumes production runs for the stated months per year with the stated number of wheat harvests per year; it does not change what facilities demand per running month. Leaving run months, harvests or yield blank leaves only the field-area estimate uncalculated; everything else still renders. Line rules can differ per facility in FS25 — set them per building, not globally.</p>
+
+            <p class="fp-src-note">Use your save's values or load the reference example. Yield, harvests and run months are only needed for field area; run months do not change monthly capacity. Set each building's rule separately. <a href="/games/fs25/#shared-capacity">Check shared capacity</a>.</p>
           </details>
+</div>
+<section class="calc-panel fp-results" aria-labelledby="fp-results-title">
+            <div class="fp-results-head">
+              <h3 id="fp-results-title">Your plan</h3>
+              <span class="fp-boundary">Calculated from current inputs</span>
+            </div>
+            <p class="fp-stale-banner" id="fp-stale" hidden role="alert">Inputs changed — the plan below has not been updated. Press “Generate plan” again.</p>
+            <div id="fp-results" aria-live="polite"><p class="fp-empty">Enter a monthly target and press “Generate plan”.</p></div>
+            <div class="fp-actions">
+              <button type="button" class="btn btn-outline" id="fp-copy" disabled>Copy plan</button>
+              <span class="fp-status" id="fp-copy-status" role="status"></span>
+            </div>
+            <textarea id="fp-copy-manual" class="fp-copy-manual" hidden readonly aria-label="Plan text for manual copy"></textarea>
+          </section>
+
+
 
           <div class="fp-meta">
             <details>
@@ -157,7 +163,7 @@
               <summary>Sources &amp; data status</summary>
               <div>
                 <ul id="fp-sources-list"></ul>
-                <p class="fp-src-note">Values on this page mix community references and illustrative sample assumptions; all of them remain labelled “not yet runtime-confirmed” until verified against the current build, and not every value has an independent source. Unconfirmed values are never shown as confirmed. Open “Advanced” above to check or replace any number before you trust a plan. No prices on purpose — this tool plans throughput, not profit.</p>
+                <p class="fp-src-note">Built-in references come from historical community records or examples. Enter your own facility values when they differ. This tool plans materials and capacity, not profit.</p>
               </div>
             </details>
             <details>
@@ -172,7 +178,10 @@
       <!-- FS25-OIL:START -->
       <form id="fo-form" hidden novalidate>
         <div class="fp-layout">
-          <section class="calc-panel fp-target" aria-labelledby="fo-title">
+
+
+          <div class="fp-inputs" id="fo-inputs">
+<section class="calc-panel fp-target" aria-labelledby="fo-title">
             <h3 id="fo-title">Your monthly canola oil target</h3>
             <div class="calc-field"><label for="fo-target">Canola oil per month (L)</label><input id="fo-target" type="number" min="0" step="any" inputmode="decimal" placeholder="6000"></div>
             <div class="calc-field"><label for="fo-owned">Oil Mills you already own (optional)</label><input id="fo-owned" type="number" min="0"  inputmode="decimal" step="1"></div>
@@ -180,14 +189,7 @@
             <div class="fp-actions"><button class="btn" type="submit">Generate plan</button><button class="btn btn-outline" id="fo-reference" type="button">Load Oil Mill reference</button><button class="btn btn-outline" id="fo-save" type="button" disabled>Save settings</button></div>
             <p id="fo-status" class="fp-status" role="status"></p>
           </section>
-          <section class="calc-panel fp-results" aria-labelledby="fo-results-title">
-            <h3 id="fo-results-title">Your oil plan</h3>
-            <div id="fo-results" aria-live="polite"><p class="fp-empty">Enter a target, then enter your facility values or load the Oil Mill reference.</p></div>
-            <div class="fp-actions"><button class="btn btn-outline" id="fo-copy" type="button" disabled>Copy plan</button></div>
-            <p id="fo-copy-status" class="fp-status" role="status"></p>
-            <textarea id="fo-manual" class="fp-copy-manual" hidden readonly aria-label="Plan text for manual copy"></textarea>
-          </section>
-          <details class="calc-panel fp-advanced" id="fo-parameters">
+<details class="calc-panel fp-advanced" id="fo-parameters">
             <summary>Oil Mill capacity, recipe & optional field area</summary>
             <p class="fp-src-note">Historical author sheet v1.4.3, row 40, standard Oil Mill (not shed). Recipe and capacity are references, not a current-build test. Sharing rule is an editable assumption; canola yield is your own input.</p>
             <div class="fp-grid">
@@ -201,6 +203,15 @@
             </div>
             <p class="fp-src-note">No assumed crop yield. Without your yield, materials and facilities still calculate. Independent recipes keep the selected recipe’s capacity; selecting two recipes never doubles it.</p>
           </details>
+</div>
+<section class="calc-panel fp-results" aria-labelledby="fo-results-title">
+            <h3 id="fo-results-title">Your oil plan</h3>
+            <div id="fo-results" aria-live="polite"><p class="fp-empty">Enter a target, then enter your facility values or load the Oil Mill reference.</p></div>
+            <div class="fp-actions"><button class="btn btn-outline" id="fo-copy" type="button" disabled>Copy plan</button></div>
+            <p id="fo-copy-status" class="fp-status" role="status"></p>
+            <textarea id="fo-manual" class="fp-copy-manual" hidden readonly aria-label="Plan text for manual copy"></textarea>
+          </section>
+
         </div>
       </form>
       <section class="calc-panel" id="oil-supply" data-search-entry data-search-title="FS25 canola oil: how many Oil Mills do I need?" data-search-aliases="canola oil shortage|oil mill capacity|canola needed|canola oil production" data-search-status="Historical community reference">
@@ -213,7 +224,10 @@
       <!-- FS25-GREENHOUSE:START -->
       <form id="fg-form" hidden novalidate>
         <div class="fp-layout">
-          <section class="calc-panel fp-target" aria-labelledby="fg-title">
+
+
+          <div class="fp-inputs" id="fg-inputs">
+<section class="calc-panel fp-target" aria-labelledby="fg-title">
             <h3 id="fg-title">Your greenhouse lettuce target</h3>
             <div class="calc-field"><label for="fg-variant">Reference size — changing size loads its recipe</label><select id="fg-variant"><option value="small">Small · 1,008 L/month</option><option value="medium">Medium · 2,016 L/month</option><option value="large" selected>Large · 4,032 L/month</option></select></div>
             <div class="calc-field"><label for="fg-target">Lettuce target per month (L)</label><input id="fg-target" type="number" inputmode="decimal" min="0" step="any" placeholder="6000"></div>
@@ -223,8 +237,7 @@
             <div class="fp-actions"><button class="btn" type="submit">Generate plan</button><button id="fg-reference" class="btn btn-outline" type="button">Load greenhouse reference</button><button id="fg-save" class="btn btn-outline" type="button" disabled>Save settings</button></div>
             <p id="fg-status" class="fp-status" role="status"></p>
           </section>
-          <section class="calc-panel fp-results" aria-labelledby="fg-results-title"><h3 id="fg-results-title">Water & greenhouse plan</h3><div id="fg-results" aria-live="polite"><p class="fp-empty">Enter your target and facility values, or load a reference size.</p></div><div class="fp-actions"><button id="fg-copy" class="btn btn-outline" type="button" disabled>Copy plan</button></div><p id="fg-copy-status" class="fp-status" role="status"></p><textarea id="fg-manual" class="fp-copy-manual" hidden readonly aria-label="Plan text for manual copy"></textarea></section>
-          <details id="fg-parameters" class="calc-panel fp-advanced"><summary>Greenhouse recipe & capacity</summary>
+<details id="fg-parameters" class="calc-panel fp-advanced"><summary>Greenhouse recipe & capacity</summary>
             <p class="fp-src-note">Historical author sheet v1.4.3, Greenhouses tab, rows 6 / 15 / 24. Size changes output per cycle; these are not hydroponic or modded facilities. Replace the values if your save differs.</p>
             <div class="fp-grid"><div class="calc-field"><label for="fg-stock">Water already available for this production month (L, optional)</label><input id="fg-stock" type="number" inputmode="decimal" min="0" step="any" ></div><div class="calc-field"><label for="fg-ratio">Water per 1 L lettuce (L)</label><input id="fg-ratio" type="number" inputmode="decimal" min="0" step="any" ></div><div class="calc-field"><label for="fg-capacity">Lettuce output per production month (L)</label><input id="fg-capacity" type="number" inputmode="decimal" min="0" step="any" ></div>
             <div class="calc-field"><label for="fg-rule">Capacity rule</label><select id="fg-rule"><option value="divided">Active recipes share capacity</option><option value="independent">Other recipes do not reduce this recipe</option></select></div>
@@ -232,6 +245,9 @@
             <p class="fp-src-note">Water demand is for your lettuce target, not every crop or full-speed production. Enter available water to subtract it for this one month; blank means no stock has been credited, while 0 means you have none. Trips round upward. Water is not assumed free or automatically supplied.</p>
             <p><a href="https://docs.google.com/spreadsheets/d/1KBP3QLKgKboofOCFQnM2gedq75pu7ugzm960FQDb3EM/edit#gid=621594547" rel="noopener noreferrer">Check the original greenhouse data</a></p>
           </details>
+</div>
+<section class="calc-panel fp-results" aria-labelledby="fg-results-title"><h3 id="fg-results-title">Water & greenhouse plan</h3><div id="fg-results" aria-live="polite"><p class="fp-empty">Enter your target and facility values, or load a reference size.</p></div><div class="fp-actions"><button id="fg-copy" class="btn btn-outline" type="button" disabled>Copy plan</button></div><p id="fg-copy-status" class="fp-status" role="status"></p><textarea id="fg-manual" class="fp-copy-manual" hidden readonly aria-label="Plan text for manual copy"></textarea></section>
+
         </div>
       </form>
       <section class="calc-panel" id="greenhouse-water" data-search-entry data-search-title="FS25 greenhouse water calculator: lettuce and tanker trips" data-search-aliases="greenhouse water needed|lettuce production|greenhouse capacity|water tanker trips" data-search-status="Historical community reference">
@@ -245,10 +261,10 @@
     </div>
   </main>
 
-  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>Farming Simulator 25 pilot</h4><p>An unofficial fan-made pilot corner for Farming Simulator 25, hosted on The Ranchers Guide. Recipe values are community references and illustrative defaults, not yet runtime-confirmed.</p><p class="disclaimer">Unofficial fan-made pilot. Not affiliated with or endorsed by any game developer or publisher.</p></div><nav aria-label="FS25 pilot links"><h4>FS25 pilot</h4><ul><li><a href="/games/fs25/">FS25 corner home</a></li><li><a href="/games/fs25/tools/production-planner/">Production Planner</a></li></ul></nav><nav aria-label="The Ranchers Guide links"><h4>The Ranchers Guide</h4><ul><li><a href="/">The Ranchers home</a></li><li><a href="/guides/beginners-guide">Ranchers guides</a></li><li><a href="/search">Ranchers search</a></li></ul></nav><nav aria-label="Site links"><h4>Site</h4><ul><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms of Service</a></li><li><a href="/methodology">Methodology</a></li></ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>Farming Simulator 25 pilot corner · community references and illustrative defaults, not yet runtime-confirmed</span></div></div></footer>
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><h4>Farming Simulator 25</h4><p>Plan materials, facility gaps and water deliveries.</p><p class="disclaimer">Independent fan tools · community reference data.</p></div><nav aria-label="FS25 tool links"><h4>FS25 tools</h4><ul><li><a href="/games/fs25/">FS25 tools home</a></li><li><a href="/games/fs25/tools/production-planner/">Production Planner</a></li></ul></nav><nav aria-label="The Ranchers Guide links"><h4>The Ranchers Guide</h4><ul><li><a href="/games/the-ranchers/">The Ranchers hub</a></li><li><a href="/guides/beginners-guide">Ranchers guides</a></li><li><a href="/search?game=ranchers">Ranchers search</a></li></ul></nav><nav aria-label="Site links"><h4>Site</h4><ul><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms of Service</a></li><li><a href="/methodology">Methodology</a></li></ul></nav></div><div class="footer-bottom"><span>&copy; <span data-year></span> The Ranchers Guide</span><span>Tools for farming games</span></div></div></footer>
 
   <script src="/assets/js/main.js?v=20261003-r15" defer></script>
-  <script src="/assets/js/fs25-planner-data.js?v=20261021-waterstock" defer></script>
-  <script src="/assets/js/fs25-planner.js?v=20261021-waterstock" defer></script>
+  <script src="/assets/js/fs25-planner-data.js?v=20261024-capacity1" defer></script>
+  <script src="/assets/js/fs25-planner.js?v=20261025-basis1" defer></script>
 </body>
 </html>

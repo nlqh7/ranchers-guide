@@ -12,7 +12,36 @@
 .recipe-plan [hidden], .recipe-plan [data-plan-status]:empty, .recipe-plan [data-plan-entry]:empty { display: none !important; }
 .recipe-plan a { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; color: var(--green-700); }
 .recipe-plan a:hover { text-decoration: underline; }
-.recipe-plan-picker { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) auto; align-items: end; gap: 12px; margin: 16px 0; }
+.recipe-plan-picker { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 12px; margin: 16px 0; }
+.recipe-plan-combobox { min-width: 0; }
+.recipe-plan .recipe-plan-results {
+  position: absolute; inset: calc(100% + 6px) 0 auto; z-index: 5;
+  background: var(--cream-100); border: 1px solid var(--brown-300); border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(66, 47, 27, .12); overflow: hidden;
+  animation: recipe-plan-enter 160ms ease-out;
+}
+.recipe-plan [data-plan-options] {
+  list-style: none; margin: 0; padding: 4px;
+  max-height: min(18rem, 40svh); overflow-y: auto; overscroll-behavior: contain;
+}
+.recipe-plan [data-plan-option] {
+  box-sizing: border-box; min-height: 48px; display: flex; flex-wrap: wrap;
+  align-items: center; justify-content: space-between; gap: 4px 16px;
+  margin: 0; padding: 10px 12px; border-radius: 4px; cursor: pointer;
+}
+.recipe-plan [data-plan-option] > span { overflow-wrap: anywhere; }
+.recipe-plan [data-plan-option] > small { flex-shrink: 0; }
+.recipe-plan [data-plan-option]:hover { background: var(--cream-200); }
+.recipe-plan [data-plan-option][aria-selected="true"] { background: var(--cream-200); box-shadow: inset 3px 0 var(--green-700); }
+.recipe-plan .recipe-plan-results [data-plan-matches] { padding: 8px 12px; margin: 0; border-top: 1px solid var(--cream-300); font-size: .8rem; }
+.recipe-plan [data-plan-recipes], .recipe-plan [data-plan-building] { animation: recipe-plan-enter 160ms ease-out; }
+.recipe-plan .is-just-added { animation: recipe-plan-added 600ms ease-out; }
+@keyframes recipe-plan-enter { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes recipe-plan-added { from { background: var(--cream-300); } to { background: transparent; } }
+@media (prefers-reduced-motion: reduce) {
+  .recipe-plan .recipe-plan-results, .recipe-plan [data-plan-recipes],
+  .recipe-plan [data-plan-building], .recipe-plan .is-just-added { animation: none; }
+}
 .recipe-plan label { display: grid; min-width: 0; gap: 4px; font-size: .875rem; color: var(--brown-700); }
 .recipe-plan input, .recipe-plan select, .recipe-plan button {
   box-sizing: border-box; min-width: 44px; min-height: 44px; max-width: 100%;
@@ -45,7 +74,7 @@
   .recipe-plan { padding: 16px; }
   .recipe-plan h2 { font-size: 1.25rem; }
   .recipe-plan-picker { grid-template-columns: minmax(0, 1fr) auto; gap: 10px; }
-  .recipe-plan-picker > label:first-child { grid-column: 1 / -1; }
+  .recipe-plan-picker > .recipe-plan-combobox { min-width: 0; }
   .recipe-plan-item { grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px; }
   .recipe-plan-name { grid-column: 1 / -1; }
   .recipe-plan-quantity { grid-template-columns: auto 5rem; align-items: center; justify-content: start; gap: 12px !important; }
