@@ -110,6 +110,7 @@ const nodeChecks = [
   ["check-quest-tracker-r29.cjs"],
   ["check-quest-tracker-behavior.cjs"],
   ["check-r31-material-quest-links.cjs"],
+  ["check-standalone-answer-pages.cjs"],
   ["check-r32-player-queries.cjs"],
   ["check-scarecrow-workbench-answer.cjs"],
   ["check-update-impact-tracker.cjs"],

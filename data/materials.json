@@ -114,6 +114,42 @@
       "zhSummary": "先收集牧场上的散落石头。官方当前公告也说明，牧场外正常敲石不会触发警察追逐；可靠的可重复刷新来源仍未确认。",
       "whenNeeded": "For a building requirement, use loose stone on your ranch first. If you need more, the official no-chase rule covers normal rock gathering outside the ranch; exact deposits and respawn behavior are not established.",
       "zhWhenNeeded": "建造缺石头时先收集牧场上的散落石头。需要更多时，官方说明牧场外正常敲石不会触发警察追逐；具体矿点和刷新规律仍未确认。",
+      "playerGuide": {
+        "acquisition": [
+          {
+            "text": "Start with loose stones on your ranch. Current-build reports say this visible supply can eventually be exhausted.",
+            "zhText": "先收集牧场上的散落石头。当前版本报告称，这些可见的初始石头最终会被采完。"
+          },
+          {
+            "text": "If you need more, normal rock breaking outside the ranch is covered by the official 0.8.10.868 temporary no-chase change. Exact deposits and respawning are not recorded.",
+            "zhText": "如果还不够，官方 0.8.10.868 临时调整说明牧场外正常敲石不会触发警察追逐；具体矿点与刷新情况没有记录。"
+          }
+        ],
+        "locations": [
+          {
+            "text": "Your ranch: loose stone on the ground, supported by current-build player reports.",
+            "zhText": "你的牧场：地面散落石头，有当前版本玩家报告支持。"
+          },
+          {
+            "text": "Outside the ranch: normal rock gathering is covered by the official temporary no-chase note, but no exact deposit list is retained.",
+            "zhText": "牧场以外：官方临时公告覆盖正常敲石，但没有保留具体矿点清单。"
+          },
+          {
+            "text": "Mines: not available in the reviewed Early Access build; do not treat them as a current supply route.",
+            "zhText": "矿洞：在审查的抢先体验版本中尚未开放，不能当作当前获取路线。"
+          }
+        ],
+        "nextSteps": [
+          {
+            "text": "Open the linked recipe or building entry and check its Stone quantity before gathering; recipe quantities are not quest hand-in amounts.",
+            "zhText": "先打开关联配方或建筑词条核对石头数量；配方数量不等于任务交付数量。"
+          },
+          {
+            "text": "For Axe, Pick & Welcome!, keep 15 Stones in your inventory for its configured check. If your visible ranch supply is gone, repeatable replacement supply remains unverified.",
+            "zhText": "进行“斧头、镐和欢迎礼！”时，背包需保留 15 块石头以满足配置判定。若牧场可见石头已采完，可重复补充来源仍未确认。"
+          }
+        ]
+      },
       "relatedRoutes": ["/guides/building-construction#materials", "/guides/resources-and-materials"],
       "facts": [
         {
@@ -162,6 +198,38 @@
       "zhSummary": "砍树可获得原木。官方 0.8.10.868 公告说明，牧场外砍树不再触发警察追逐；树木刷新时间仍未知。",
       "whenNeeded": "Keep Wood Logs for early construction before testing the community charcoal lead; the retained evidence does not establish a universal recipe list.",
       "zhWhenNeeded": "早期建造优先保留原木，再考虑测试社区木炭线索；现有证据不能推出完整配方表。",
+      "playerGuide": {
+        "acquisition": [
+          {
+            "text": "Cut trees to obtain Wood Logs. This is supported by current community reports; no reliable tree-respawn timer is recorded.",
+            "zhText": "通过砍树获得原木，有当前社区报告支持；可靠的树木刷新时间没有记录。"
+          },
+          {
+            "text": "For trees outside the ranch, official 0.8.10.868 notes temporarily remove the police chase for normal cutting. They do not settle every ownership or loose-item interaction.",
+            "zhText": "砍伐牧场外的树木时，官方 0.8.10.868 临时说明正常砍树不再触发警察追逐，但没有解决所有所有权或散落物交互规则。"
+          }
+        ],
+        "locations": [
+          {
+            "text": "Trees on your ranch are the first place to gather logs; the retained reports do not provide a tree-count or respawn schedule.",
+            "zhText": "先砍牧场上的树获取原木；保留资料没有给出树木数量或刷新时间表。"
+          },
+          {
+            "text": "Trees outside the ranch are covered by the official temporary no-chase note for normal cutting; no exact harvesting map is recorded here.",
+            "zhText": "牧场外的树木适用官方正常砍伐不触发追逐的临时说明；这里没有已记录的精确采集地图。"
+          }
+        ],
+        "nextSteps": [
+          {
+            "text": "Reserve logs for the linked building or recipe before trying the separate, less-certain Charcoal route.",
+            "zhText": "先为关联建筑或配方留足原木，再尝试另一条证据较弱的木炭路线。"
+          },
+          {
+            "text": "For Axe, Pick & Welcome!, keep 15 Wood Logs in your inventory; Chicken Coop Mission separately records a 20-log objective.",
+            "zhText": "“斧头、镐和欢迎礼！”要求背包保留 15 根原木；鸡舍任务另记录了 20 根原木目标。"
+          }
+        ]
+      },
       "relatedRoutes": ["/guides/building-construction#materials", "/guides/crafting-guide"],
       "facts": [
         {
@@ -202,6 +270,38 @@
       "zhSummary": "干草是鸡饲料。EA 前官方说明称任意生长阶段的野草都能产出干草；由于资料早于抢先体验，建议先在当前存档小范围验证。灌木/容器路线仍只有一条当前版本玩家线索。",
       "whenNeeded": "When chickens arrive, first try cutting a small patch of wild grass; official Alpha notes say growth stage does not matter, but this has not been reverified in the current Early Access build. If that fails, a current-build report suggests bushes and NPC-farm crates/barrels, not a guaranteed drop table.",
       "zhWhenNeeded": "鸡到家后，可先试割一小片野草；官方 Alpha 说明称生长阶段不限，但该路线尚未按当前抢先体验版本复核。若无效，再参考当前版本玩家提到的灌木和 NPC 农场木箱/桶路线；这不是保证掉落表。",
+      "playerGuide": {
+        "acquisition": [
+          {
+            "text": "Test a small patch of wild grass first. Official Alpha notes say any growth stage yields Hay, but that pre-EA method has not been reconfirmed in the current build.",
+            "zhText": "先试割一小片野草。官方 Alpha 说明称任意生长阶段都能产出干草，但这一 EA 前方法尚未在当前版本复核。"
+          },
+          {
+            "text": "If that fails, one current-build player report suggests cutting bushes or searching crates and barrels on NPC farms. This is a lead to test, not a guaranteed drop table.",
+            "zhText": "若无效，一条当前版本玩家报告建议砍灌木，或搜索 NPC 农场的木箱和桶。这是待测试线索，不是保证掉落表。"
+          }
+        ],
+        "locations": [
+          {
+            "text": "Wild grass: the official source is historical Alpha documentation, so verify it in your current save before clearing a large area.",
+            "zhText": "野草：官方来源是历史 Alpha 资料，请先在自己的当前存档验证，再大面积清理。"
+          },
+          {
+            "text": "Bushes and NPC-farm crates/barrels: a single current-build player lead, with no confirmed drop rate or exact container list.",
+            "zhText": "灌木以及 NPC 农场木箱/桶：只有一条当前版本玩家线索，没有确认掉率或精确容器清单。"
+          }
+        ],
+        "nextSteps": [
+          {
+            "text": "For chickens, put Hay in the coop's interior trough or load a connected silo for automation, as described by the official moderator answer.",
+            "zhText": "养鸡时，按官方版主答复把干草放进鸡舍内部食槽，或装入已连接的筒仓进行自动喂食。"
+          },
+          {
+            "text": "For Chicken Coop Mission, prepare 15 Hay for its configured objective; for Feathered Foes, the linked Scarecrow recipe separately uses 2 Hay.",
+            "zhText": "鸡舍任务的配置目标需要准备 15 份干草；“长着羽毛的敌人”关联的普通稻草人配方另需 2 份干草。"
+          }
+        ]
+      },
       "relatedRoutes": ["/guides/animal-guide#feeding", "/database/animals#chicken"],
       "facts": [
         {

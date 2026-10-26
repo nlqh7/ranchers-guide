@@ -22,7 +22,7 @@ for (const prefix of ['', 'zh/']) {
     const record = materialsData.materials.find(material => material.id === id);
     assert.ok(record, `missing material source record for ${id}`);
     assert.match(html, /data-search-entry/);
-    assert.match(html, /Sources and evidence|获取与证据/);
+    assert.match(html, /Acquisition evidence and source boundary|获取证据与来源边界/);
     assert.match(html, /database\/materials#/);
     for (const route of record.relatedRoutes || []) {
       assert.ok(!html.includes(`>${route}</a>`), `${file} exposes raw related route label ${route}`);

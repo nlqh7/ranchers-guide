@@ -160,7 +160,9 @@ for (const prefix of ['', 'zh/']) {
     const vehicle = vehicles.find(i => i.id === offer.itemId);
     assert.equal(indexed.includes(`#offer-${offer.id}\"`), named && !profile && !resource && !seed && !produceItem && !placeable && !miscItem && !vehicle, `Named offers without a full profile remain indexed: ${offer.id}`);
     if (resource) {
-      assert.ok(index.some(i => i.url === `/${prefix}database/materials#${resource.materialId}`));
+      const standalone = require('../data/b2-entry-pages.json').materials.includes(resource.materialId);
+      const materialRoute = standalone ? `/${prefix}database/materials/${resource.materialId}#${resource.materialId}` : `/${prefix}database/materials#${resource.materialId}`;
+      assert.ok(index.some(i => i.url === materialRoute), `${resource.materialId}: search must retain its complete material profile`);
       assert.ok(html.split(`id="offer-${offer.id}"`)[1]?.split('</tr>')[0].includes(`database/materials#${resource.materialId}`));
     }
     if (profile) {

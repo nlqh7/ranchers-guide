@@ -31,7 +31,7 @@ for (const prefix of ['', 'zh/']) {
   const quest = fs.readFileSync(path.join(root, prefix, 'database/quests/rust-to-rumbling.html'), 'utf8');
   const vehicles = fs.readFileSync(path.join(root, prefix, 'guides/vehicles-transport.html'), 'utf8');
   const index = JSON.parse(fs.readFileSync(path.join(root, prefix, 'search-index.json'), 'utf8'));
-  const questSection = quest.split('id="rust-to-rumbling"')[1]?.split('</section>')[0];
+  const questSection = quest.split('id="rust-to-rumbling"')[1]?.split('</article>')[0];
   assert.ok(questSection?.includes('data-quest-vehicle-id="CarToRepair_Cimka"'));
   assert.ok(questSection.includes(prefix ? item.zhName : 'Victor&#39;s Old Car'));
   assert.match(questSection, prefix ? /不等于已验证的修车价格或奖励/ : /not a verified repair price or reward/);
@@ -39,8 +39,8 @@ for (const prefix of ['', 'zh/']) {
   assert.ok(vehicles.includes('data-quest-vehicle-id="CarToRepair_Cimka"'));
   assert.ok(vehicles.includes(`/${prefix}database/quests#rust-to-rumbling`));
   assert.match(vehicles, prefix ? /不证明当前可驾驶/ : /does not establish current drivability/);
-  const questRoute = `/${prefix}database/quests#rust-to-rumbling`;
-  assert.ok(index.some(result => result.url === questRoute), 'vehicle search index must retain the quest directory route');
+  const questRoute = `/${prefix}database/quests/rust-to-rumbling#rust-to-rumbling`;
+  assert.ok(index.some(result => result.url === questRoute), 'vehicle search index must retain the standalone quest route');
   const searchResults = searchCore.searchDocuments(index, prefix ? '锈迹斑斑到轰鸣上路' : 'Rust to Rumbling', 12);
   assert.ok(searchResults.some(result => result.url === questRoute), 'quest title search must reach the vehicle quest directory');
   const itemResults = searchCore.searchDocuments(index, prefix ? item.zhName : item.name, 12);

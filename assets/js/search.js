@@ -242,6 +242,7 @@
     var entries = [];
 
     parsed.querySelectorAll("[data-search-entry][id]").forEach(function (node) {
+      if (node.dataset.searchSuppress === "standalone") return;
       var entryHeading = node.querySelector("h2, h3");
       entries.push({
         id: node.id,

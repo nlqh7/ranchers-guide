@@ -24,8 +24,13 @@ function routeWithLocale(route, locale) {
   return route;
 }
 
+const standaloneEntryPages = readJson("b2-entry-pages.json");
+
 function routeForType(type, id, locale) {
   const prefix = locale === "zh" ? "/zh" : "";
+  if ((type === "quest" && standaloneEntryPages.quests.includes(id)) || (type === "material" && standaloneEntryPages.materials.includes(id))) {
+    return `${prefix}/database/${type === "quest" ? "quests" : "materials"}/${id}`;
+  }
   if (type === "location") return `${prefix}/map#${id}`;
   if (type === "building") return `${prefix}/guides/building-construction#materials`;
   if (type === "animal" && id === "chicken") return `${prefix}/database/animals/chicken`;

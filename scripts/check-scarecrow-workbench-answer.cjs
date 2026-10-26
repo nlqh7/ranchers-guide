@@ -42,8 +42,8 @@ for (const [label, relative, textPattern, recipeRoute] of [
 }
 
 for (const [label, relative, route, textPattern] of [
-  ["English", "search-index.json", "/database/quests#feathered-foes", /does not require a workbench/i],
-  ["Chinese", "zh/search-index.json", "/zh/database/quests#feathered-foes", /不需要工作台/],
+  ["English", "search-index.json", "/database/quests/feathered-foes#feathered-foes", /does not require a workbench/i],
+  ["Chinese", "zh/search-index.json", "/zh/database/quests/feathered-foes#feathered-foes", /不需要工作台/],
 ]) {
   const result = readJson(relative).find((entry) => entry.url === route);
   assert.ok(result, `${label} search result for Feathered Foes is missing`);

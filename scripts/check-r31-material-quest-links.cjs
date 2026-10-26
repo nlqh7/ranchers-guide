@@ -13,12 +13,12 @@ for (const prefix of ['', 'zh/']) {
   for (const material of ['stone', 'wood-log', 'hay']) {
     const page = fs.readFileSync(path.join(root, `${prefix}database/materials/${material}.html`), 'utf8');
     assert.match(page, new RegExp(`database/quests/feathered-foes`), `${prefix || 'en/'} ${material} must link back to Feathered Foes`);
-    assert.match(page, prefix ? /相关任务与配方/ : /Related quests and recipes/);
-    const evidenceHeading = page.indexOf(prefix ? '<h2>获取与证据</h2>' : '<h2>Sources and evidence</h2>');
-    const questHeading = page.indexOf(prefix ? '<h2>相关任务与配方</h2>' : '<h2>Related quests and recipes</h2>');
+    assert.match(page, prefix ? /相关任务配方/ : /Linked quest recipes/);
+    const evidenceHeading = page.indexOf(prefix ? '<summary>获取证据与来源边界</summary>' : '<summary>Acquisition evidence and source boundary</summary>');
+    const questHeading = page.indexOf(prefix ? '<h3>相关任务配方</h3>' : '<h3>Linked quest recipes</h3>');
     assert.ok(questHeading >= 0 && evidenceHeading > questHeading,
       `${prefix || 'en/'} ${material}: actionable quest/recipe links must precede the source ledger`);
-    const buildingHeading = page.indexOf(prefix ? '<h2>当前建筑词条中的用途</h2>' : '<h2>Uses in current building entries</h2>');
+    const buildingHeading = page.indexOf(prefix ? '<h3>建筑词条中的用途</h3>' : '<h3>Uses in building entries</h3>');
     if (buildingHeading >= 0) assert.ok(buildingHeading < evidenceHeading,
       `${prefix || 'en/'} ${material}: building uses must precede the source ledger`);
   }

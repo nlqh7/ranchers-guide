@@ -97,7 +97,7 @@ function extractEntries(mainHtml, route) {
   while ((match = entryPattern.exec(mainHtml)) !== null) {
     const [, tag, rawAttrs, inner] = match;
     const attrs = parseAttributes(rawAttrs);
-    if (!attrs.id) continue;
+    if (!attrs.id || attrs["data-search-suppress"] === "standalone") continue;
     let text;
     if (tag.toLowerCase() === "tr") {
       const cells = Array.from(inner.matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/g), (cell) => stripTags(cell[1]));
