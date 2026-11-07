@@ -271,8 +271,8 @@ for (const relative of ["knowledge-index.json", "zh/knowledge-index.json"]) {
 }
 assert.match(zhQuestHtml, />水电合同与供电<\/a>/);
 assert.match(zhQuestHtml, /href="\/zh\/guides\/electricity-power#two-paths"/);
-assert.match(zhQuestHtml, /href="\/zh\/database\/materials#charcoal"/);
-assert.match(read('zh/database/quests/coal-delivery-dialogue.html'), /href="\/zh\/database\/materials#charcoal"/);
+assert.match(zhQuestHtml, /href="\/zh\/database\/materials\/charcoal"/);
+assert.match(read('zh/database/quests/coal-delivery-dialogue.html'), /href="\/zh\/database\/materials\/charcoal"/);
 assert.match(zhNpcHtml, /href="\/zh\/guides\/electricity-power#two-paths"/);
 assert.doesNotMatch(zhQuestHtml, /href="\/guides\/(?:electricity-power|building-construction)/);
 assert.doesNotMatch(zhNpcHtml, /href="\/guides\/electricity-power/);

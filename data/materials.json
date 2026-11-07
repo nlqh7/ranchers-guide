@@ -18,7 +18,7 @@
       "url": "https://steamcommunity.com/app/1501310/discussions/0/587307906418914271/",
       "author": "Jennoula",
       "date": "2026-08-02",
-      "build": "0.8.10.x"
+      "build": "Early Access (build not stated)"
     },
     "current-stone-thread": {
       "kind": "steam-thread",
@@ -342,7 +342,43 @@
       "zhSummary": "社区工作人员明确说明木炭由燃烧木材获得，不是去商店购买。具体操作、燃烧时间和产量仍未验证。",
       "whenNeeded": "Check your recipe's Charcoal requirement, keep construction logs separate and test a small amount before scaling up.",
       "zhWhenNeeded": "先查配方所需木炭数量，留好建造原木，小量确认结果后再扩大制作。",
-      "relatedRoutes": ["/guides/crafting-guide", "/community", "/database/quests#coal-delivery-dialogue"],
+      "playerGuide": {
+        "acquisition": [
+          {
+            "text": "Community staff say to make Charcoal by burning wood rather than buying it. That answer does not provide current-build controls, burn time or yield.",
+            "zhText": "社区工作人员说明木炭通过燃烧木材制作，而不是购买。该答复没有给出当前版本的操作按键、燃烧时间或产量。"
+          },
+          {
+            "text": "Whitebear's separate, unverified lead describes using a torch on felled or dropped logs in dry weather, waiting for the material to change, then extinguishing the fire before collecting. Treat this sequence as something to test, not a confirmed current recipe.",
+            "zhText": "Whitebear 另提供了一条未验证线索：干燥天气用火把点燃砍下或放下的原木，等待材料变化，灭火后再收集。请把这套步骤视为待测试线索，而不是当前版本已确认配方。"
+          },
+          {
+            "text": "A pre-Early Access moderator note identifies the fire extinguisher as the intended way to put out fires. This is historical context, not confirmation of current controls or the detailed burn sequence.",
+            "zhText": "一条抢先体验前的版主说明将灭火器列为预期的灭火方式。这只是历史背景，不能证明当前操作或上述详细燃烧步骤。"
+          }
+        ],
+        "locations": [
+          {
+            "text": "Do not start with a shop: the staff answer says Charcoal is burned from wood, not bought. No seller or stable purchase price is established by that answer.",
+            "zhText": "不要先找商店：工作人员答复说明木炭由木材烧制的，不是购买；该答复没有确认卖家或稳定购买价格。"
+          },
+          {
+            "text": "Whitebear's unverified lead refers to felled or dropped logs in dry weather. It does not establish a special map location, and no exact current gathering spot is recorded.",
+            "zhText": "Whitebear 的未验证线索提到干燥天气下砍下或放下的原木，并未确认特殊地图位置；当前版本也没有记录精确获取地点。"
+          }
+        ],
+        "nextSteps": [
+          {
+            "text": "Check the linked recipe or quest for its own Charcoal amount and keep enough Wood Logs for construction before testing the burn lead.",
+            "zhText": "先查看关联配方或任务自身的木炭数量，并在测试燃烧线索前为建造留足原木。"
+          },
+          {
+            "text": "If you test Whitebear's lead, use only a small amount and record your build, weather and result. The report warns that fire can kill the character; current controls, timing, yield and safe handling remain unverified.",
+            "zhText": "如果测试 Whitebear 的线索，只用小量木材，并记录版本、天气和结果。该报告提醒火焰可能导致角色死亡；当前操作、计时、产量与安全处理方式仍未验证。"
+          }
+        ]
+      },
+      "relatedRoutes": ["/database/materials/wood-log", "/guides/crafting-guide", "/community", "/database/quests/coal-delivery-dialogue"],
       "facts": [
         {
           "text": "In the September 23 General Store discussion, community staff say Charcoal is made by burning wood rather than bought. The reply does not specify controls, weather, timing or yield.",
@@ -383,30 +419,71 @@
       "name": "Zirconite",
       "zhName": "锆矿 Zirconite",
       "searchTitle": "Where can I buy Zirconite (Zerkonite)? Meriam at City Hall",
-      "zhSearchTitle": "锆矿在哪里买？市政厅的 Meriam",
+      "zhSearchTitle": "锆矿在哪买？市政厅的 Meriam",
       "searchTags": "zirconite zerkonite meriam city hall architect buy mine material blueprint",
-      "zhSearchTags": "锆矿 Zirconite Zerkonite Meriam 市政厅 建筑师 购买 矿洞 材料 蓝图",
-      "summary": "Buy Zirconite for now. The official moderator says purchasing is the only current route until mines are implemented.",
-      "zhSummary": "现阶段需要购买锆矿。官方版主说明，在矿洞实装前，购买是当前唯一途径。",
-      "whenNeeded": "Check Zirconite when a blueprint or advanced building asks for it. The current route points to Meriam at City Hall; a stable price and wild-ore route remain unverified.",
-      "zhWhenNeeded": "当蓝图或高级建造需要锆矿时再查。当前路线指向市政厅的 Meriam；稳定价格和野外矿石路线仍未验证。",
-      "relatedRoutes": ["/map#city-hall", "/guides/building-construction#materials", "/guides/resources-and-materials"],
+      "zhSearchTags": "锆矿 Zirconite Zerkonite Meriam 市政厅 建筑师 购买 矿洞 材料 蓝图 锆矿在哪买 锆矿在哪里买",
+      "summary": "Check Meriam at City Hall for Zirconite. Player reports point to her as the seller. Check the price in your game.",
+      "zhSummary": "需要锆矿时，先去市政厅找 Meriam。玩家报告指向她出售锆矿，价格以游戏内报价为准。",
+      "whenNeeded": "Check the required quantity when a blueprint or building asks for Zirconite, then check Meriam's offer at City Hall.",
+      "zhWhenNeeded": "蓝图或建筑需要锆矿时，先核对用量，再到市政厅查看 Meriam 的报价。",
+      "playerGuide": {
+        "acquisition": [
+          {
+            "text": "In early August 2026, a Steam moderator said buying Zirconite was the only option before mines were implemented.",
+            "zhText": "2026 年 8 月初，Steam 版主表示，当时矿洞尚未开放，只能通过购买获得锆矿。"
+          },
+          {
+            "text": "Player reports point to Meriam at City Hall. Check her offer for the price and availability in your game.",
+            "zhText": "玩家报告指向市政厅的 Meriam。请在游戏内确认她是否出售以及实际报价。"
+          }
+        ],
+        "locations": [
+          {
+            "text": "City Hall: look for Meriam, the seller named in player reports.",
+            "zhText": "市政厅：找玩家报告中提到的卖家 Meriam。"
+          },
+          {
+            "text": "A current mining or wild-ore route has not been verified.",
+            "zhText": "当前版本的采矿或野外获取路线尚未核实。"
+          }
+        ],
+        "nextSteps": [
+          {
+            "text": "Check the blueprint or building requirement first, then use the City Hall map link to continue to Meriam.",
+            "zhText": "先核对蓝图或建筑需求，再通过市政厅地图链接继续寻找 Meriam。"
+          },
+          {
+            "text": "Confirm the price and required quantity in your game before buying.",
+            "zhText": "购买前在游戏内确认报价和所需数量。"
+          }
+        ]
+      },
+      "relatedRoutes": [
+        "/map#city-hall",
+        "/database/npcs/meriam",
+        "/guides/building-construction#materials",
+        "/guides/resources-and-materials"
+      ],
       "facts": [
         {
-          "text": "The official moderator says buying Zirconite is the only current option until mines are implemented; do not search for a wild ore route in this build.",
-          "zhText": "官方版主说明，在矿洞实装前，购买锆矿是当前唯一途径；这个版本不必寻找野外矿石路线。",
+          "text": "In an early August 2026 reply, a Steam moderator identified buying Zirconite as the only option at the time, while mines were still planned.",
+          "zhText": "2026 年 8 月初的 Steam 版主答复表示，当时矿洞还在规划中，购买是获得锆矿的唯一途径。",
           "evidenceLevel": "official",
-          "build": "0.8.10.x",
-          "validity": "current",
-          "sourceIds": ["official-mines-answer"]
+          "build": "Early Access (build not stated)",
+          "validity": "historical",
+          "sourceIds": [
+            "official-mines-answer"
+          ]
         },
         {
-          "text": "Multiple current community answers identify Meriam at City Hall as the seller. The retained evidence does not support publishing a stable current price.",
-          "zhText": "多条当前社区回答把市政厅的 Meriam 指为卖家。现有证据不足以发布稳定的当前价格。",
+          "text": "Multiple community answers identify Meriam at City Hall as the seller. The retained evidence does not support publishing a stable current price.",
+          "zhText": "多条社区回答把市政厅的 Meriam 指为卖家。现有资料不足以确认当前价格。",
           "evidenceLevel": "community-confirmed",
           "build": "0.8.10.x",
           "validity": "current",
-          "sourceIds": ["community-material-scan"]
+          "sourceIds": [
+            "community-material-scan"
+          ]
         }
       ]
     }

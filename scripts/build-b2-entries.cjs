@@ -20,6 +20,8 @@ const materialRoutes = {
   ressource_wood: 'wood-log',
   ressource_rock_simple: 'stone',
   ressource_straw: 'hay',
+  ressource_coal: 'charcoal',
+  ressource_zerkonite: 'zirconite',
 };
 const recipes = recipeData.recipes || [];
 const sceneNpcIds = new Set((dialogueScenes.scenes || []).map(scene => scene && scene.npcId).filter(Boolean));
@@ -121,11 +123,17 @@ function relatedLinks(routes, locale) {
     '/guides/gigi-large-egg-quest': ['Gigi large-egg route', 'Gigi 大鸡蛋路线'],
     '/guides/police-wanted-levels': ['Wanted-level guide', '警星攻略'],
     '/database/materials#charcoal': ['Charcoal details', '木炭资料'],
+    '/database/materials/charcoal': ['Charcoal entry', '木炭词条'],
+    '/database/materials/wood-log': ['Wood Log entry', '原木词条'],
+    '/database/quests/coal-delivery-dialogue': ['Coal delivery dialogue', '木炭交付对话'],
+    '/database/npcs/meriam': ['Meriam NPC entry', 'Meriam 人物词条'],
+    '/map#city-hall': ['City Hall map', '市政厅地图'],
     '/database/animals#chicken': ['Chicken evidence', '鸡的证据条目'],
     '/database/animals#cow': ['Cow evidence', '牛的证据条目'],
     '/guides/farming-fields': ['Planting & watering', '播种与浇水'],
     '/guides/crafting-guide#recipe-prop_Scarecrow_00': ['Scarecrow materials', '稻草人材料'],
     '/guides/crafting-guide': ['Crafting guide', '制作指南'],
+    '/community': ['Community Radar', '社区雷达'],
     '/guides/building-construction#materials': ['Building materials', '建造材料'],
     '/guides/resources-and-materials': ['Resources guide', '资源材料指南'],
     '/guides/animal-guide#feeding': ['Chicken feeding', '鸡的喂养'],
@@ -282,6 +290,8 @@ function materialObjectiveLinks(material, locale) {
     stone: /\bStones?\b/i,
     'wood-log': /\bWood Logs?\b/i,
     hay: /\bHay\b/i,
+    charcoal: /\bCharcoal\b/i,
+    zirconite: /\b(?:Zirconite|Zerkonite)\b/i,
   };
   const rows = questRecords.flatMap(record => {
     const matchingSteps = record.buildGuide.steps.filter(step => patterns[material.id]?.test(step.text));

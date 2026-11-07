@@ -14,7 +14,7 @@ for (const relative of files) {
   const prefix = relative.startsWith('zh/') ? 'zh/' : '';
   const required = relative.endsWith('buildings.html')
     ? [`${prefix}database/buildings/coop`]
-    : [`${prefix}tools/ranch-checklist?building=building-store-allthetime-Custum_Barn_Weak_Small&amp;return=%2F${prefix ? 'zh%2F' : ''}database%2Fbuildings%2Fcoop#recipe-material-plan`, `${prefix}database/materials#stone`, `${prefix}database/materials#wood-log`, `${prefix}database/materials#hay`];
+    : [`${prefix}tools/ranch-checklist?building=building-store-allthetime-Custum_Barn_Weak_Small&amp;return=%2F${prefix ? 'zh%2F' : ''}database%2Fbuildings%2Fcoop#recipe-material-plan`, `${prefix}database/materials/stone`, `${prefix}database/materials/wood-log`, `${prefix}database/materials/hay`];
   for (const fragment of required) {
     if (!html.includes(fragment)) { console.error(`FAIL: ${relative} missing ${fragment}`); failed = true; }
   }

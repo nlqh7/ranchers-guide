@@ -10,6 +10,10 @@ const quests = require('../data/quests.json').quests;
 const sitemap = fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8');
 const redirects = fs.readFileSync(path.join(root, '_redirects'), 'utf8');
 const canonicalRoutes = new Set();
+const materialQueries = {
+  charcoal: { en: ['charcoal'], zh: ['charcoal', '木炭'] },
+  zirconite: { en: ['zirconite', 'zerkonite'], zh: ['zirconite', 'zerkonite', '锆矿'] },
+};
 const esc = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 
 function assertFactBoundary(html, fact, file) {
@@ -85,8 +89,11 @@ for (const locale of ['en', 'zh']) {
   for (const id of config.materials) {
     const record = materials.find(item => item.id === id);
     const expected = `${prefix}/database/materials/${id}#${id}`;
-    const results = searchDocuments(index, zh ? record.zhSearchTitle : record.searchTitle);
-    assert.equal(results[0]?.url, expected, `${locale} ${id} search must open its standalone answer`);
+    const queries = [zh ? record.zhSearchTitle : record.searchTitle, ...(materialQueries[id]?.[locale] || [])];
+    for (const query of queries) {
+      const results = searchDocuments(index, query);
+      assert.equal(results[0]?.url, expected, `${locale} ${id} search for “${query}” must open its standalone answer`);
+    }
     assert.ok(!index.some(entry => entry.url === `${prefix}/database/materials#${id}`), `${locale} ${id} directory duplicate remains indexed`);
     assert.equal(knowledge.entities.find(entity => entity.id === `material:${id}`)?.route, `${prefix}/database/materials/${id}`);
   }

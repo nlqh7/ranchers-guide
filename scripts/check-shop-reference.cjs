@@ -163,7 +163,7 @@ for (const prefix of ['', 'zh/']) {
       const standalone = require('../data/b2-entry-pages.json').materials.includes(resource.materialId);
       const materialRoute = standalone ? `/${prefix}database/materials/${resource.materialId}#${resource.materialId}` : `/${prefix}database/materials#${resource.materialId}`;
       assert.ok(index.some(i => i.url === materialRoute), `${resource.materialId}: search must retain its complete material profile`);
-      assert.ok(html.split(`id="offer-${offer.id}"`)[1]?.split('</tr>')[0].includes(`database/materials#${resource.materialId}`));
+      assert.ok(html.split(`id="offer-${offer.id}"`)[1]?.split('</tr>')[0].includes(standalone ? `database/materials/${resource.materialId}` : `database/materials#${resource.materialId}`));
     }
     if (profile) {
       assert.ok(index.some(i => i.url === `/${prefix}database/crops#${profile.id}`));

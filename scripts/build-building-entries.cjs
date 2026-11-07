@@ -114,7 +114,7 @@ function renderDetail(locale, entry) {
   const { offer, item, materialRows, quest } = entry;
   const name = zh ? `${item.zhName} · ${item.name}` : item.name;
   const planner = `${prefix}/tools/ranch-checklist?building=${encodeURIComponent(offer.id)}&amp;return=${encodeURIComponent(`${prefix}/database/buildings/${entry.id}`)}#recipe-material-plan`;
-  const materialTable = materialRows.map(row => `<tr><th scope="row"><a href="${prefix}/database/materials#${row.route}">${escapeHtml(zh ? row.profile.zhName.replace(` ${row.profile.name}`, '') : row.profile.name)}</a></th><td>${row.quantity}</td><td>${escapeHtml(zh ? row.profile.zhSummary : row.profile.summary)}</td></tr>`).join('');
+  const materialTable = materialRows.map(row => `<tr><th scope="row"><a href="${prefix}/database/materials/${row.route}">${escapeHtml(zh ? row.profile.zhName.replace(` ${row.profile.name}`, '') : row.profile.name)}</a></th><td>${row.quantity}</td><td>${escapeHtml(zh ? row.profile.zhSummary : row.profile.summary)}</td></tr>`).join('');
   const questLink = quest ? `<a href="${prefix}/database/quests#${quest.id}">${escapeHtml(zh ? (quest.buildGuide?.zhName || quest.zhName) : (quest.buildGuide?.name || quest.name))}</a>` : '';
   const body = `<nav class="breadcrumb" aria-label="${zh ? '面包屑' : 'Breadcrumb'}"><a href="${prefix}/">${zh ? '首页' : 'Home'}</a> / <a href="${prefix}/database">${zh ? '资料库' : 'Database'}</a> / <a href="${prefix}/database/buildings">${zh ? '建筑' : 'Buildings'}</a> / ${escapeHtml(name)}</nav>
     <h1>${escapeHtml(name)}</h1>${renderTabs(locale, 'buildings')}

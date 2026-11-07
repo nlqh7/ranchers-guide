@@ -74,7 +74,7 @@ async function pageController(lang) {
   const fs25Url = (lang === 'en' ? '' : '/zh') + '/games/fs25/tools/production-planner/';
   docs.push({ title: 'FS25 Bread planner', url: fs25Url, type: 'FS25 tool', description: 'bread', sections: [] });
   const previousCacheKey = lang === 'en' ? 'ranchers-search-index-v57' : 'ranchers-search-index-zh-v43';
-  const freshCacheKey = lang === 'en' ? 'ranchers-search-index-v63' : 'ranchers-search-index-zh-v49';
+  const freshCacheKey = lang === 'en' ? 'ranchers-search-index-v64' : 'ranchers-search-index-zh-v50';
   const staleUrl = (lang === 'en' ? '' : '/zh') + '/games/fs25/tools/stale-planner/';
   const staleIndex = docs.map(doc => ({ ...doc, title: 'STALE CACHED INDEX', url: staleUrl }));
   const cacheStore = { [previousCacheKey]: JSON.stringify(staleIndex) };

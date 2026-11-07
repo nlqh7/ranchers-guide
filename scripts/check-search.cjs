@@ -244,7 +244,7 @@ assert.ok(Array.isArray(prebuiltIndex) && prebuiltIndex.length >= pages.length, 
 const drift = require("node:child_process").spawnSync(process.execPath, [path.join(root, "scripts", "build-search-index.cjs"), "--check"], { cwd: root, encoding: "utf8" });
 assert.equal(drift.status, 0, `search-index.json drift detected — re-run node scripts/build-search-index.cjs\n${drift.stdout}${drift.stderr}`);
 const zirconiteHit = searchDocuments(prebuiltIndex, "where can I buy zirconite")[0];
-assert.equal(zirconiteHit.url, "/database/materials#zirconite");
+assert.equal(zirconiteHit.url, "/database/materials/zirconite#zirconite");
 assert.equal(zirconiteHit.type, "Knowledge entry");
 const firstThirtyEntry = prebuiltIndex.find((entry) => entry.url === "/guides/beginners-guide#first-30-minutes");
 assert.equal(firstThirtyEntry.type, "Guide step", "guide search entries must not be labeled as database entries");
@@ -290,7 +290,7 @@ assert.equal(searchDocuments(chineseIndex, "草莓多久成熟")[0].url, "/zh/da
 assert.equal(searchDocuments(chineseIndex, "种子商店在哪里")[0].url, "/zh/map#leafy-market");
 assert.equal(searchDocuments(chineseIndex, "种子买了背包找不到")[0].url, "/zh/guides/farming-fields#missing-seed", 'An inventory symptom must not be answered as a shop-location query');
 assert.equal(searchDocuments(JSON.parse(fs.readFileSync(path.join(root, 'search-index.json'), 'utf8')), "bought seeds missing from inventory")[0].url, "/guides/farming-fields#missing-seed", 'The English inventory symptom needs the dedicated check path');
-assert.equal(searchDocuments(chineseIndex, "锆矿在哪里买")[0].url, "/zh/database/materials#zirconite");
+assert.equal(searchDocuments(chineseIndex, "锆矿在哪里买")[0].url, "/zh/database/materials/zirconite#zirconite");
 assert.ok(["/zh/database/quests#power-to-the-bench", "/zh/database/quests/power-to-the-bench#power-to-the-bench"].includes(searchDocuments(chineseIndex, "工作台通电任务")[0].url));
 assert.ok(searchDocuments(chineseIndex, "Angela 买鸡").some((result) => [
   "/zh/database/npcs#angela",

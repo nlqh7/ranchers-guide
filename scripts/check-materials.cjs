@@ -24,11 +24,13 @@ for (const [prefix, page] of [['', en], ['zh/', zh]]) {
   for (const id of ['charcoal', 'zirconite']) {
     const section = page.match(new RegExp(`<section\\b[^>]*id="${id}"[^>]*>[\\s\\S]*?<\\/section>`))?.[0];
     assert.ok(section, `${prefix}${id}: retained material answer must exist`);
-    const actions = section.indexOf('class="database-guide-links"');
+    const answer = section.indexOf('standalone-material-answer');
+    const entryLink = section.indexOf('standalone-material-link');
     const evidence = section.indexOf('class="evidence-list"');
     const uses = section.indexOf('data-material-uses=');
-    assert.ok(actions >= 0 && actions < evidence && actions < uses,
-      `${prefix}${id}: player next steps must appear before long source and recipe references`);
+    assert.ok(answer >= 0 && entryLink > answer && entryLink < uses,
+      `${prefix}${id}: compact answer and standalone link must precede recipe references`);
+    assert.equal(evidence, -1, `${prefix}${id}: directory must not duplicate the standalone source ledger`);
   }
 }
 const required = ["stone", "wood-log", "hay", "charcoal", "zirconite"];
@@ -57,7 +59,11 @@ for (const material of data.materials) {
   }
 }
 
-const publicCopy = data.materials.flatMap((material) => material.facts.flatMap((fact) => [fact.text, fact.zhText])).join("\n");
+const publicCopy = data.materials.flatMap((material) => [
+  material.summary, material.zhSummary, material.whenNeeded, material.zhWhenNeeded,
+  ...material.facts.flatMap((fact) => [fact.text, fact.zhText]),
+  ...Object.values(material.playerGuide || {}).flat().flatMap((item) => [item.text, item.zhText]),
+]).join("\n");
 for (const id of ['stone', 'wood-log']) {
   const material = data.materials.find(item => item.id === id);
   const gathering = material.facts.find(fact => fact.evidenceLevel === 'official' && fact.sourceIds.includes('official-stone-wood-gathering-868'));
@@ -85,6 +91,15 @@ assert.match(charcoalReply.text, /burning wood/i);
 assert.match(charcoalReply.zhText, /燃烧木材/);
 assert.match(charcoal.summary, /controls[\s\S]*time[\s\S]*yield[\s\S]*unverified/i);
 assert.match(data.sources["general-store-charcoal-reply"].url, /592942202593765840/);
+const whitebearReports = charcoal.facts.filter((fact) => fact.sourceIds.includes("charcoal-player-route"));
+assert.ok(whitebearReports.length >= 2 && whitebearReports.every((fact) => fact.evidenceLevel === "unverified-lead" && fact.validity === "unknown"), "Whitebear's detailed burn route must remain an unverified lead");
+assert.ok(charcoal.facts.some((fact) => fact.sourceIds.includes("charcoal-moderator-context") && fact.validity === "historical" && fact.build === "pre-EA-2025"), "The fire-extinguisher note must remain pre-EA historical context");
+const zirconite = data.materials.find((material) => material.id === "zirconite");
+const zirconiteMinesReply = zirconite.facts.find((fact) => fact.sourceIds.includes("official-mines-answer"));
+assert.equal(zirconiteMinesReply?.evidenceLevel, "official");
+assert.equal(zirconiteMinesReply?.validity, "historical", "The August moderator reply only supports the acquisition route at the time");
+assert.match(zirconiteMinesReply.build, /build not stated/i);
+assert.ok(zirconite.facts.some((fact) => fact.sourceIds.includes("community-material-scan") && fact.evidenceLevel === "community-confirmed" && /Meriam at City Hall/i.test(fact.text) && /does not support publishing a stable current price/i.test(fact.text)), "Zirconite seller evidence must remain separate from its unknown stable price");
 assert.ok(hay.facts.some((fact) => fact.evidenceLevel === "official" && fact.validity === "historical" && fact.build === "alpha-2023" && fact.sourceIds.includes("ranching-v2-notes")), "Hay entry must preserve the official pre-EA wild-grass route with its historical boundary");
 assert.ok(hay.facts.some((fact) => fact.evidenceLevel === "unverified-lead" && fact.sourceIds.includes("current-hay-thread")), "Current-build bush/container route must remain a lead, not be promoted to fact");
 

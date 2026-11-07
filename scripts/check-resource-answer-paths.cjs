@@ -42,6 +42,6 @@ for (const [locale, query, anchor] of [
 }
 for (const locale of ['', 'zh/']) {
   const index = JSON.parse(fs.readFileSync(path.join(root, locale, 'search-index.json'), 'utf8'));
-  assert.equal(search(index, 'Zerkonite', 1)[0]?.url, '/' + locale + 'database/materials#zirconite', 'Bare native name should open its full material profile, not the new broad guide title');
+  assert.equal(search(index, 'Zerkonite', 1)[0]?.url, '/' + locale + 'database/materials/zirconite#zirconite', 'Bare native name should open its standalone material answer, not the broad guide or directory summary');
 }
 console.log('PASS: bilingual resource pages expose direct material answers and usable old destinations before tables.');

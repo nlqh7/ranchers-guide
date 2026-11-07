@@ -38,7 +38,7 @@ function localizeRoute(route) {
   if (exact[base]) return exact[base] + suffix;
   if (base === "/map") return "/zh/map" + suffix;
   if (base === "/problems/failed-quest-replay") return route;
-  if (base.startsWith("/guides/") || base.startsWith("/problems/") || base.startsWith("/tools/") || base.startsWith("/updates/")) return `/zh${route}`;
+  if (base.startsWith("/guides/") || base.startsWith("/problems/") || base.startsWith("/tools/") || base.startsWith("/updates/") || base.startsWith("/database/")) return `/zh${route}`;
   return route;
 }
 
@@ -97,6 +97,7 @@ const relatedRouteLabels = {
   "/guides/gigi-large-egg-quest": { en: "Gigi large-egg route", zh: "Gigi 大鸡蛋路线" },
   "/guides/police-wanted-levels": { en: "Police chase and wanted levels", zh: "警察追捕与警星" },
   "/database/materials#charcoal": { en: "Charcoal details", zh: "木炭资料" },
+  "/database/materials/charcoal": { en: "Charcoal entry", zh: "木炭词条" },
   "/database/animals#chicken": { en: "Chicken products", zh: "鸡与产品" },
   "/database/animals/chicken": { en: "Chicken care profile", zh: "鸡的照料词条" },
   "/database/animals#cow": { en: "Cow products", zh: "牛与产品" },

@@ -11,6 +11,8 @@ const root = path.resolve(__dirname, '..');
 const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
 const groups = {essentials:['Essentials', '基础制作'], farming:['Farming', '农场设施'], building:['Building parts', '建筑部件'], furniture:['Furniture', '家具'], decoration:['Decoration', '装饰'], tools:['Tools & equipment', '工具与装备'], native:['Source-only placeables', '仅源内可放置物']};
 const materialRoutes = {ressource_wood:'wood-log', ressource_rock_simple:'stone', ressource_straw:'hay', ressource_coal:'charcoal', ressource_zerkonite:'zirconite'};
+const standaloneMaterials = new Set(require('../data/b2-entry-pages.json').materials);
+const materialHref = (prefix, id) => `${prefix}/database/materials${standaloneMaterials.has(id) ? `/${id}` : `#${id}`}`;
 const heldSlots = {Left_Hand_Weapon:['Left hand','左手'],Right_Hand_Weapon:['Right hand','右手'],TwoHandHolder:['Two-hand holder','双手持物']};
 
 function renderRecipePlan(locale) {
@@ -27,7 +29,7 @@ function renderRecipePlan(locale) {
     recipes: data.recipes.map(({ id, name, zhName, materials, category, workbench, questRequirements }) =>
       ({ id, name, zhName, materials, category, workbench, quest: questRequirements.length > 0 })),
     ingredients: data.ingredients.filter(item => materialRoutes[item.id]).map(item => ({
-      ...item, href: prefix + '/database/materials#' + materialRoutes[item.id],
+      ...item, href: materialHref(prefix, materialRoutes[item.id]),
       icon: icons.find(icon => icon.sourceItemId === item.id)?.src || ''
     })),
     groups: Object.fromEntries(Object.entries(groups).map(([id, names]) => [id, names[zh ? 1 : 0]]))
@@ -101,7 +103,7 @@ function render(locale, compact = false, checklist = false) {
   const materials = recipe => `<ul class="recipe-ingredients">${recipe.materials.map(m => {
     const entry = data.ingredients.find(i => i.id === m.id);
     const icon = icons.find(i => i.sourceItemId === m.id);
-    return `<li><a href="${prefix}/database/materials#${materialRoutes[m.id]}">${icon ? `<img src="${icon.src}" width="28" height="28" alt="" loading="lazy" decoding="async">` : ''}<span>${esc(name(entry))}</span><strong data-recipe-base-quantity="${m.quantity}">× ${m.quantity}</strong></a></li>`;
+    return `<li><a href="${materialHref(prefix, materialRoutes[m.id])}">${icon ? `<img src="${icon.src}" width="28" height="28" alt="" loading="lazy" decoding="async">` : ''}<span>${esc(name(entry))}</span><strong data-recipe-base-quantity="${m.quantity}">× ${m.quantity}</strong></a></li>`;
   }).join('')}</ul>`;
   const placeableSettings = item => {
     if (!item) return '';
@@ -152,7 +154,7 @@ function render(locale, compact = false, checklist = false) {
   <p data-plan-stock-error role="status" hidden>${zh ? '已有材料请填写 0–999999 的整数。' : 'Enter a whole number from 0 to 999999 for materials on hand.'}</p>
   <p><strong>${zh ? '还需收集：' : 'Still to collect: '}${Array.from(planTotals, ([id, quantity]) => { const item = data.ingredients.find(i => i.id === id); return `${esc(name(item))} × <span data-plan-missing="${id}">${quantity}</span>`; }).join(' + ')}</strong></p>
   <p>${zh ? '这只是上述墙体的用料，不是完整房屋清单；不含地基、屋顶或独立门窗，也不证明能完成房屋任务。三种配方均要求工作台，并带有尚未确认解锁时机的任务条件。' : 'This covers only the listed walls, not a complete house: no foundation, roof or separate doors/windows. All three recipes require a workbench and include quest conditions with unverified unlock timing.'}</p>
-  <ol><li>${zh ? '先确认存档中这三种蓝图可用，并核对当前画面的材料数量。' : 'Check that these three plans are available in your save and compare their displayed ingredient quantities.'}</li><li>${zh ? '从合计中减去背包已有材料，再查' : 'Subtract what you already have, then check the '}<a href="${prefix}/database/materials#stone">${zh ? '石头' : 'Stone'}</a>${zh ? '和' : ' and '}<a href="${prefix}/database/materials#wood-log">${zh ? '原木获取途径' : 'Wood Log supply routes'}</a>。</li><li>${zh ? '按上方蓝图步骤放置、使用锤子完成施工，再核对任务目标；不要用材料齐全代替任务已完成的判断。' : 'Place the blueprints and finish their hammer build steps, then check the quest objectives separately. Having the materials is not the same as completing the quest.'}</li></ol></section>` : '';
+  <ol><li>${zh ? '先确认存档中这三种蓝图可用，并核对当前画面的材料数量。' : 'Check that these three plans are available in your save and compare their displayed ingredient quantities.'}</li><li>${zh ? '从合计中减去背包已有材料，再查' : 'Subtract what you already have, then check the '}<a href="${prefix}/database/materials/stone">${zh ? '石头' : 'Stone'}</a>${zh ? '和' : ' and '}<a href="${prefix}/database/materials/wood-log">${zh ? '原木获取途径' : 'Wood Log supply routes'}</a>。</li><li>${zh ? '按上方蓝图步骤放置、使用锤子完成施工，再核对任务目标；不要用材料齐全代替任务已完成的判断。' : 'Place the blueprints and finish their hammer build steps, then check the quest objectives separately. Having the materials is not the same as completing the quest.'}</li></ol></section>` : '';
   return `<!-- BEGIN CRAFTING REFERENCE -->
 ${checklist ? `<p id="wall-material-plan"><a class="recipe-more" href="${prefix}/guides/building-construction#wall-material-plan">${zh ? '查看三种墙体的备料示例（不是完整房屋清单）' : 'See the three-part wall example (not a complete house)'}</a></p>` : planExample}
 <section class="crafting-reference" data-crafting-reference data-result-label="${zh ? '{count} 个条目' : 'Results: {count}'}" aria-label="${title}">

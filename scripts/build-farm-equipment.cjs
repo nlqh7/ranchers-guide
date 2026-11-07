@@ -6,6 +6,8 @@ const icons=require('../data/item-icons.json').icons;
 const root=path.resolve(__dirname,'..');
 const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const materialRoutes={ressource_wood:'wood-log',ressource_rock_simple:'stone',ressource_straw:'hay',ressource_coal:'charcoal',ressource_zerkonite:'zirconite'};
+const standaloneMaterials=new Set(require('../data/b2-entry-pages.json').materials);
+const materialHref=(prefix,id)=>`${prefix}/database/materials${standaloneMaterials.has(id)?`/${id}`:`#${id}`}`;
 function render(zh) {
   const prefix=zh?'/zh':'';
   const name=i=>zh?i.zhName:i.name;
@@ -23,7 +25,7 @@ function render(zh) {
       const label=recipes.ingredients.find(i=>i.id===m.id);
       const icon=icons.find(i=>i.sourceItemId===m.id);
       if(!label||!materialRoutes[m.id])throw Error(`Unknown material: ${m.id}`);
-      return `<li><a href="${prefix}/database/materials#${materialRoutes[m.id]}">${icon?`<img src="${icon.src}" width="28" height="28" alt="" loading="lazy" decoding="async">`:''}<span>${esc(name(label))}</span><strong>× ${m.quantity}</strong></a></li>`;
+      return `<li><a href="${materialHref(prefix, materialRoutes[m.id])}">${icon?`<img src="${icon.src}" width="28" height="28" alt="" loading="lazy" decoding="async">`:''}<span>${esc(name(label))}</span><strong>× ${m.quantity}</strong></a></li>`;
     }).join('');
     const metrics=[['water','consumption','Water use','耗水'],['electricity','consumption','Power use','耗电'],['water','supply','Water supply','供水'],['electricity','supply','Power supply','供电']];
     const rows=item.water?metrics.filter(([r,f])=>f==='consumption'||item[r][f].some(n=>n!==0)).map(([r,f,en,cn])=>`<tr><th scope="row">${zh?cn:en}</th>${item[r][f].map(n=>`<td>${n}</td>`).join('')}</tr>`).join(''):'';

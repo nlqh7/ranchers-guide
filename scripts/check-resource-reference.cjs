@@ -22,7 +22,7 @@ assert.equal(data.items.find(i=>i.id==='ressource_straw').health.consumption,10)
 assert.equal(data.items.find(i=>i.id==='ressource_Fuel').bodySlot,'Right_Hand_Weapon');
 const recipes=require('../data/build-recipes.json').recipes;
 const search=require('../assets/js/search-core.js');
-const standaloneMaterials=new Set(['stone','wood-log','hay']);
+const standaloneMaterials=new Set(require('../data/b2-entry-pages.json').materials);
 for(const prefix of ['','zh/']) {
  const html=fs.readFileSync(path.join(root,prefix+'database/materials.html'),'utf8');
  for(const item of data.items.filter(i=>i.materialId)) {

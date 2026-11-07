@@ -35,6 +35,8 @@
     "/database/materials/stone",
     "/database/materials/wood-log",
     "/database/materials/hay",
+    "/database/materials/charcoal",
+    "/database/materials/zirconite",
     "/database/materials",
     "/database/buildings",
     "/database/buildings/coop",
@@ -112,6 +114,8 @@
     "/zh/database/materials/stone",
     "/zh/database/materials/wood-log",
     "/zh/database/materials/hay",
+    "/zh/database/materials/charcoal",
+    "/zh/database/materials/zirconite",
     "/zh/database/materials",
     "/zh/database/buildings",
     "/zh/database/buildings/coop",
@@ -158,7 +162,7 @@
   var IS_ZH = document.documentElement.lang.toLowerCase() === "zh-cn";
   var PAGE_PATHS = IS_ZH ? ZH_PAGE_PATHS : EN_PAGE_PATHS;
   var SEARCH_ROUTE = IS_ZH ? "/zh/search" : "/search";
-  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v49" : "ranchers-search-index-v63";
+  var CACHE_KEY = IS_ZH ? "ranchers-search-index-zh-v50" : "ranchers-search-index-v64";
   var documents = [];
   var form = document.querySelector("[data-search-form]");
   var input = document.querySelector("[data-search-input]");

@@ -137,7 +137,8 @@ for (const prefix of ['', 'zh/']) {
     assert.equal(recipe.quest, source.questRequirements.length > 0);
   }
   for (const ingredient of data.ingredients) {
-    const [route, id] = ingredient.href.split('#');
+    const [route, fragment] = ingredient.href.split('#');
+    const id = fragment || route.split('/').pop();
     const materialPage = fs.readFileSync(path.join(__dirname, '..', route + '.html'), 'utf8');
     assert.ok(materialPage.includes('id="' + id + '"'), 'Supply link must land on a real material');
     if (ingredient.icon) assert.ok(fs.existsSync(path.join(__dirname, '..', ingredient.icon)));

@@ -2,6 +2,7 @@
 const itemIcons = require('../data/item-icons.json').icons;
 const seedItems = require('../data/build-seeds.json').items;
 const produceItems = require('../data/build-produce.json').items;
+const standaloneEntryPages = require('../data/b2-entry-pages.json');
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
 }
@@ -119,7 +120,7 @@ function renderLookup(data, kind, locale) {
   const standalone = kind === 'quests'
     ? `<p class="database-browse-note"><strong>${zh ? '独立任务词条：' : 'Standalone quest entries:'}</strong> <a href="${zh ? '/zh' : ''}/database/quests/seeds-of-success">${zh ? '成功的种子' : 'Seeds of Success'}</a> · <a href="${zh ? '/zh' : ''}/database/quests/feathered-foes">${zh ? '长着羽毛的敌人' : 'Feathered Foes'}</a></p>`
     : kind === 'materials'
-      ? `<p class="database-browse-note"><strong>${zh ? '独立材料词条：' : 'Standalone material entries:'}</strong> <a href="${zh ? '/zh' : ''}/database/materials/stone">${zh ? '石头' : 'Stone'}</a> · <a href="${zh ? '/zh' : ''}/database/materials/wood-log">${zh ? '原木' : 'Wood Logs'}</a> · <a href="${zh ? '/zh' : ''}/database/materials/hay">${zh ? '干草' : 'Hay'}</a></p>`
+      ? `<p class="database-browse-note"><strong>${zh ? '独立材料词条：' : 'Standalone material entries:'}</strong> ${standaloneEntryPages.materials.map(id => { const item = data.materials.find(material => material.id === id); const name = zh ? item.zhName.replace(` ${item.name}`, '') : item.name; return `<a href="${zh ? '/zh' : ''}/database/materials/${id}">${escapeHtml(name)}</a>`; }).join(' · ')}</p>`
       : '';
   const notes = {
     animals: ['Look up ranch-animal care and build-defined wildlife names. Wildlife entries do not establish behavior or spawn locations.', '查看牧场动物照料与构建内野生生物名称；野生生物条目不证明行为或生成地点。'],

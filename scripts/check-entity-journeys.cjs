@@ -66,7 +66,7 @@ const requiredJourneyRoutes = {
     "/database/npcs#victor",
     "/database/quests#power-to-the-bench",
     "/guides/electricity-power#two-paths",
-    "/database/materials#zirconite",
+    "/database/materials/zirconite",
   ],
   "location:cash-in-box": [
     "/guides/money-making#cashin",

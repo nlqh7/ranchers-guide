@@ -15,7 +15,9 @@ const vehicles = require('../data/build-vehicles.json').items;
 const icons = require('../data/item-icons.json').icons;
 const root = path.resolve(__dirname, '..');
 const esc = v => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const materialRoutes = {ressource_wood:'wood-log',ressource_rock_simple:'stone',ressource_straw:'hay'};
+const materialRoutes = {ressource_wood:'wood-log',ressource_rock_simple:'stone',ressource_straw:'hay',ressource_coal:'charcoal',ressource_zerkonite:'zirconite'};
+const standaloneMaterials = new Set(require('../data/b2-entry-pages.json').materials);
+const materialHref = (prefix, id) => `${prefix}/database/materials${standaloneMaterials.has(id) ? `/${id}` : `#${id}`}`;
 const sections = {supplies:['Supplies','物资'],generators:['Power generation','发电设备'],equipment:['Equipment','设备'],buildings:['Buildings','建筑'],animals:['Animals','动物'],'two-wheel':['Two-wheel vehicles','两轮车辆'],'four-wheel':['Four-wheel vehicles','四轮车辆'],vip:['Special vehicles','特殊车辆'],cars:['Cars','汽车'],vehicles:['Vehicles','车辆'],seeds:['Seeds & fertilizer','种子与肥料'],produce:['Produce','农产品'],groceries:['Groceries','杂货']};
 const seasons = {AllTheTime:['All seasons','全年'],Spring:['Spring','春季'],Summer:['Summer','夏季'],Autumn:['Autumn','秋季'],Winter:['Winter','冬季']};
 
@@ -49,7 +51,7 @@ function render(locale, buildingOnly=false, showHomeChoice=false) {
     const icon = icons.find(i => i.sourceItemId === id);
     return icon ? `<img src="${icon.src}" width="28" height="28" alt="" loading="lazy" decoding="async">` : '';
   };
-  const materials = offer => `<ul class="recipe-ingredients">${offer.materials.map(m => `<li><a href="${prefix}/database/materials#${materialRoutes[m.id]}">${image(m.id)}<span>${esc(name(item(m.id)))}</span><strong>× ${m.quantity}</strong></a></li>`).join('')}</ul><a class="shop-recipe-link" href="${prefix}/tools/ranch-checklist?building=${encodeURIComponent(offer.id)}#recipe-material-plan">${zh ? '核对缺料' : 'Check missing materials'}</a>`;
+  const materials = offer => `<ul class="recipe-ingredients">${offer.materials.map(m => `<li><a href="${materialHref(prefix, materialRoutes[m.id])}">${image(m.id)}<span>${esc(name(item(m.id)))}</span><strong>× ${m.quantity}</strong></a></li>`).join('')}</ul><a class="shop-recipe-link" href="${prefix}/tools/ranch-checklist?building=${encodeURIComponent(offer.id)}#recipe-material-plan">${zh ? '核对缺料' : 'Check missing materials'}</a>`;
   const row = offer => {
     const entry = item(offer.itemId);
     const id = buildingOnly ? `shop-plan-${entry.id}` : `offer-${offer.id}`;
@@ -64,7 +66,7 @@ function render(locale, buildingOnly=false, showHomeChoice=false) {
     const miscItem = miscItems.find(i => i.id === entry.id);
     const placeable = placeables.find(i => i.id === entry.id);
     const vehicle = vehicles.find(i => i.id === entry.id);
-    const resourceLink = !buildingOnly && resource ? `<a class="shop-recipe-link" href="${prefix}/database/materials#${resource.materialId}">${zh?'材料资料与用途':'Material details & uses'} →</a>` : '';
+    const resourceLink = !buildingOnly && resource ? `<a class="shop-recipe-link" href="${materialHref(prefix, resource.materialId)}">${zh?'材料资料与用途':'Material details & uses'} →</a>` : '';
     const farmInputLink = !buildingOnly && farmInput ? `<a class="shop-recipe-link" href="${prefix}/database/crops#${farmInput.id}">${zh?'查看肥料资料':'Fertilizer details'} →</a>` : '';
     const seedLink = !buildingOnly && seed ? `<a class="shop-recipe-link" href="${prefix}/database/crops#${seed.cropId}">${zh?'查看种子与作物资料':'Seed & crop details'} →</a>` : '';
     const produceLink = !buildingOnly && produceItem ? `<a class="shop-recipe-link" href="${prefix}/database/crops#${produceItem.cropStatus === 'current-roster' ? produceItem.cropId : `seed-${produceItem.cropId}`}">${zh?'查看农产品配置':'Produce item settings'} →</a>` : '';

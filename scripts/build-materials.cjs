@@ -4,12 +4,13 @@ const { decorateReferencePage } = require('./render-database-browser.cjs');
 const { materialReference } = require('./build-resource-reference.cjs');
 const { renderSiteFooter } = require('./render-site-footer.cjs');
 const resourceData = require('../data/build-resources.json');
+const standaloneEntryPages = require('../data/b2-entry-pages.json');
 
 const root = path.resolve(__dirname, "..");
 const data = JSON.parse(fs.readFileSync(path.join(root, "data", "materials.json"), "utf8"));
 const buildingData = JSON.parse(fs.readFileSync(path.join(root, "data", "building-checklists.json"), "utf8"));
 const checkOnly = process.argv.includes("--check");
-const standaloneMaterialIds = new Set(['stone', 'wood-log', 'hay']);
+const standaloneMaterialIds = new Set(standaloneEntryPages.materials);
 
 function esc(value) {
   return String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
@@ -91,6 +92,9 @@ const relatedLabels = {
   "/guides/animal-guide#feeding": { en: "Animal feeding", zh: "动物喂养" },
   "/database/animals#chicken": { en: "Chicken evidence", zh: "鸡的证据条目" },
   "/database/quests#coal-delivery-dialogue": { en: "Coal delivery dialogue", zh: "木炭交付对话" },
+  "/database/quests/coal-delivery-dialogue": { en: "Coal delivery dialogue", zh: "木炭交付对话" },
+  "/database/materials/wood-log": { en: "Wood Log entry", zh: "原木词条" },
+  "/database/npcs/meriam": { en: "Meriam NPC entry", zh: "Meriam 人物词条" },
   "/community": { en: "Community Radar", zh: "社区雷达" },
   "/map#city-hall": { en: "City Hall map", zh: "市政厅地图" }
 };
@@ -161,7 +165,7 @@ function render(locale) {
   <header class="site-header"><nav class="nav-inner" aria-label="${zh ? "主导航" : "Main navigation"}"><a class="logo" href="${prefix}/"><span class="logo-mark"><img src="/assets/img/logo.png" alt="" width="34" height="34"></span><span>The Ranchers Guide</span></a><button class="nav-toggle" aria-expanded="false" aria-label="${zh ? "展开导航" : "Toggle navigation"}">☰</button><ul class="nav-links">${nav}</ul></nav></header>
   <main><article class="article" style="max-width:980px"><nav class="breadcrumb" aria-label="${zh ? "面包屑" : "Breadcrumb"}"><a href="${prefix}/">${zh ? "首页" : "Home"}</a> / <a href="${prefix}/database">${zh ? "知识库" : "Database"}</a> / ${l.breadcrumb}</nav>
     <h1>${l.heading}</h1><p class="meta">${zh ? "页面基线" : "Page baseline"}: ${data.meta.build} · ${zh ? "更新" : "Updated"} ${data.meta.lastUpdated}</p>
-    <p class="lead">${l.lead}</p><div class="notice warning"><strong>${zh ? "当前版本边界：" : "Current-build boundary:"}</strong> ${l.currentNote}</div><p class="database-browse-note"><strong>${zh ? '独立材料词条：' : 'Standalone material entries:'}</strong> <a href="${prefix}/database/materials/stone">${zh ? '石头' : 'Stone'}</a> · <a href="${prefix}/database/materials/wood-log">${zh ? '原木' : 'Wood Logs'}</a> · <a href="${prefix}/database/materials/hay">${zh ? '干草' : 'Hay'}</a></p>
+    <p class="lead">${l.lead}</p><div class="notice warning"><strong>${zh ? "当前版本边界：" : "Current-build boundary:"}</strong> ${l.currentNote}</div><p class="database-browse-note"><strong>${zh ? '独立材料词条：' : 'Standalone material entries:'}</strong> ${standaloneEntryPages.materials.map(id => { const material = data.materials.find(item => item.id === id); return `<a href="${prefix}/database/materials/${id}">${esc(zh ? material.zhName.replace(` ${material.name}`, '') : material.name)}</a>`; }).join(' · ')}</p>
     <nav class="toc" aria-label="${l.contents}"><strong>${l.contents}</strong><ul>${toc}</ul></nav>
 ${sections}
     <p class="database-browse-note">${l.unknownCopy}</p>

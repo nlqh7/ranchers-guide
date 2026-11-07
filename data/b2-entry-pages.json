@@ -20,5 +20,5 @@
     "coal-delivery-dialogue",
     "farm-products-dialogue"
   ],
-  "materials": ["stone", "wood-log", "hay"]
+  "materials": ["stone", "wood-log", "hay", "charcoal", "zirconite"]
 }
