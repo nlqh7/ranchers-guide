@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-22",
+  "updatedAt": "2026-11-22",
   "build": "0.8.10.842",
   "externalResources": [
     {
@@ -69,6 +69,166 @@
     }
   ],
   "sources": [
+    {
+      "id": "winter-update-status",
+      "topic": "general",
+      "status": "official",
+      "platform": "Steam Discussions",
+      "title": "When is the next major update?",
+      "titleZh": "下一次大更新什么时候来？",
+      "summary": "A moderator says the next major content update is planned for winter, without a specific month.",
+      "summaryZh": "版主表示下一次主要内容更新计划在冬季，暂未给出具体月份。",
+      "why": "Check release announcements before planning a new save around upcoming features.",
+      "whyZh": "准备为新功能开新档前，先查看正式发布公告。",
+      "risk": "This is a development plan, not a released patch or a confirmed date.",
+      "riskZh": "冬季是开发计划，具体日期以发布公告为准。",
+      "relatedEntity": "Early Access updates",
+      "relatedEntityZh": "抢先体验更新",
+      "sourceLabel": "Moderator reply; reviewed November 22",
+      "sourceLabelZh": "版主答复；11月22日复核",
+      "build": "Not stated",
+      "buildZh": "原帖未注明",
+      "date": "2026-11-22",
+      "relatedRoute": "/updates",
+      "relatedLabel": "Latest released updates",
+      "relatedLabelZh": "已发布更新",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/571555456253706526/",
+      "answer": {
+        "title": "Next major update: winter plan, no month announced",
+        "titleZh": "下一次大更新：计划冬季，月份未定",
+        "statusLabel": "Moderator's development update",
+        "statusLabelZh": "版主开发进度答复",
+        "summary": "In the November discussion, Jennoula says the next major content update is planned for winter and gives no specific month. The latest release announcement checked on November 22 is still 0.8.10.871 from September 16.",
+        "summaryZh": "11 月的讨论中，Jennoula 表示下一次主要内容更新计划在冬季，暂不公布具体月份。11 月 22 日核对的最新发布公告仍为 9 月 16 日的 0.8.10.871。",
+        "unresolved": "Follow the official release notes for the actual date and included features.",
+        "unresolvedZh": "实际日期和新增功能以官方发布公告为准。",
+        "historyNote": "Reviewed November 22, 2026. The thread started November 20; the moderator's reply describes a plan and states no game build. The release number comes from the separate official news feed.",
+        "historyNoteZh": "2026 年 11 月 22 日复核，原帖发于 11 月 20 日。版主答复为开发计划，未注明游戏版本；已发布版本号另据官方新闻核对。",
+        "reviewedAt": "2026-11-22",
+        "searchTags": "next update winter release date roadmap still being updated 下一次更新 冬季 更新日期 还在开发",
+        "links": [
+          {
+            "route": "/updates",
+            "label": "Read released patches",
+            "labelZh": "查看已发布补丁"
+          },
+          {
+            "route": "/guides/release-time-checklist#roadmap",
+            "label": "Check planned features",
+            "labelZh": "查看规划功能"
+          }
+        ],
+        "sourceLinks": [
+          {
+            "url": "https://steamcommunity.com/app/1501310/announcements/",
+            "label": "Official release announcements",
+            "labelZh": "官方发布公告"
+          }
+        ]
+      }
+    },
+    {
+      "id": "planned-features-questions",
+      "topic": "general",
+      "status": "official",
+      "platform": "Steam Discussions",
+      "title": "Backpacks, cooking, fishing, dogs and horses: missing features?",
+      "titleZh": "背包升级、烹饪、钓鱼、宠物狗和骑马为什么找不到？",
+      "summary": "A November player question groups five missing features; the moderator points to the roadmap because not all planned mechanics are in Early Access.",
+      "summaryZh": "11 月玩家集中询问五项功能，版主解释抢先体验尚未包含全部规划机制，并指向开发路线图。",
+      "why": "Separate a planned feature from a missed unlock or a source-defined item.",
+      "whyZh": "先区分规划功能、未找到的解锁入口和数据中已有的物品。",
+      "risk": "The reply does not give an individual availability answer for all five features.",
+      "riskZh": "版主没有逐项确认这五个功能的开放状态。",
+      "relatedEntity": "Feature availability",
+      "relatedEntityZh": "功能开放情况",
+      "sourceLabel": "November 14 moderator reply",
+      "sourceLabelZh": "11月14日版主答复",
+      "build": "Not stated",
+      "buildZh": "原帖未注明",
+      "date": "2026-11-22",
+      "relatedRoute": "/guides/release-time-checklist#roadmap",
+      "relatedLabel": "Check the roadmap context",
+      "relatedLabelZh": "查看路线图说明",
+      "url": "https://steamcommunity.com/app/1501310/discussions/0/572680444916747062/",
+      "answer": {
+        "title": "Can't find a feature? Check its roadmap status first",
+        "titleZh": "找不到功能？先查路线图，再查具体入口",
+        "statusLabel": "Availability guidance",
+        "statusLabelZh": "功能开放答复",
+        "summary": "A player asked about backpack upgrades, cooking, fishing, a pet dog and horse riding. On November 14, the moderator explained that not all planned mechanics are in Early Access and referred players to the roadmap. Check the feature's own entry before looking for an unlock.",
+        "summaryZh": "玩家询问背包升级、烹饪、钓鱼、宠物狗和骑马。11 月 14 日版主解释，抢先体验尚未包含全部规划机制，并建议查看路线图。先查该功能自身的状态，再寻找解锁入口。",
+        "unresolved": "For backpacks, the crafting guide has recorded equipment definitions. That list alone does not establish an upgrade or purchase route.",
+        "unresolvedZh": "背包可先查制作指南中的已记录装备资料；这些记录本身还不能确认升级或购买路线。",
+        "historyNote": "Reviewed November 22. The November 14 moderator reply addresses Early Access generally, not five separate availability verdicts. Keep native equipment definitions distinct from usable mechanics.",
+        "historyNoteZh": "11 月 22 日复核。11 月 14 日版主答复说明抢先体验的整体情况，没有对五个功能逐项下结论。装备配置记录与可操作功能分开。",
+        "reviewedAt": "2026-11-22",
+        "searchTags": "backpack upgrade cooking fishing dog horse riding unavailable planned 背包升级 烹饪 钓鱼 宠物狗 骑马 功能未开放",
+        "links": [
+          {
+            "route": "/guides/release-time-checklist#roadmap",
+            "label": "Current and planned features",
+            "labelZh": "当前内容与规划"
+          },
+          {
+            "route": "/guides/crafting-guide#backpack-backpack_big_simple",
+            "label": "Recorded backpack equipment",
+            "labelZh": "已记录的背包装备"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sinking-after-exiting-car",
+      "topic": "bugs",
+      "status": "reported",
+      "platform": "Steam Discussions",
+      "title": "Sinking into the ground after leaving a car",
+      "titleZh": "下车后陷入地下",
+      "summary": "A player reported falling below the grass when leaving a car. The moderator requested screenshots of the map location.",
+      "summaryZh": "玩家报告下车时陷入草地下方，版主要求提供发生位置的地图截图。",
+      "why": "The exit action and location can help narrow a terrain or vehicle interaction problem.",
+      "whyZh": "下车动作和具体位置可以帮助排查地形或车辆交互问题。",
+      "risk": "One player report does not establish a general cause or a recovery method.",
+      "riskZh": "现有记录为单名玩家报告，尚无确认的恢复办法。",
+      "relatedEntity": "Vehicle exit and terrain",
+      "relatedEntityZh": "下车与地形",
+      "sourceLabel": "November 18–19 player report and moderator response",
+      "sourceLabelZh": "11月18–19日玩家报告及版主回复",
+      "build": "Not stated",
+      "buildZh": "原帖未注明",
+      "date": "2026-11-22",
+      "relatedRoute": "/tools/player-report",
+      "relatedLabel": "Prepare a reproducible report",
+      "relatedLabelZh": "整理可复现报告",
+      "url": "https://steamcommunity.com/app/1501310/discussions/3/571555179974960124/",
+      "answer": {
+        "title": "Fell through the ground after getting out? Record the car and location",
+        "titleZh": "下车后掉进地下？记录车型、动作和地图位置",
+        "statusLabel": "Player report — investigating",
+        "statusLabelZh": "玩家报告 · 待排查",
+        "summary": "On November 18, a player said the problem happened while getting out of a car, near their ranch gate and near the motel grass by three green bins. The moderator asked for location screenshots; the player reported posting one on November 19.",
+        "summaryZh": "11 月 18 日，玩家补充问题发生在下车时，提到自家门外及旅馆附近三只绿垃圾桶旁的草地。版主要求位置截图，玩家在 11 月 19 日回复已上传。",
+        "unresolved": "Include your game version, car model, map screenshot and the exit action in a report. If the car is also stuck, check the existing vehicle-recovery guide.",
+        "unresolvedZh": "报告中附上游戏版本、车型、地图截图和下车动作。车辆也卡住时，可继续查看车辆找回指南。",
+        "historyNote": "Reviewed November 22. This is one player's report with no named build. The location descriptions have not been converted into map pins. No recovery method has been independently reproduced.",
+        "historyNoteZh": "11 月 22 日复核。原帖为一名玩家报告，未注明版本；位置描述尚未核对为地图坐标，恢复方法尚未复现。",
+        "reviewedAt": "2026-11-22",
+        "searchTags": "sinking fell through ground exit car terrain stuck 下车 陷地 掉进地下 卡地形",
+        "links": [
+          {
+            "route": "/tools/player-report",
+            "label": "Prepare a report",
+            "labelZh": "整理问题报告"
+          },
+          {
+            "route": "/problems/vehicle-recovery",
+            "label": "Find or recover the car",
+            "labelZh": "车辆找回与恢复"
+          }
+        ]
+      }
+    },
     {
       "id": "greenhouse-winter",
       "topic": "farming",
